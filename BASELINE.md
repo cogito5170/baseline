@@ -522,3 +522,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 39 회차: MS `6123dda`(180) — CMD-M15 ActionIntent shadow(DC 배선만, 원장에 decision → intent → run) · 결정 기록을 실행 직전에(720 실행 id 같음) · G5. health `bbdadd8`(사후조건 절 = MS 술어 꼴). BD-100. 다섯 저장소 초록(70 · 225 · 180 · 104 · 25).
 - 40 회차: MS `3687a08`(180) — CMD-M16(`query:` 접두 · 규칙 의도 뺌, 의도 412 → 348). DC `ce3a0bc`(105) — CMD-D15 `record.role`(규칙 의도가 빠져 MS 쪽 사용처는 없음). 초록.
 - 41 회차: health `457973f`(26, 변이 28/28, action `443f8eb` 고정) — CMD-H2 `verification-record/1` + 순수 `verify` → 계약 동결(BD-101). H3 `config.conformance` 미룸. 계약 동결 셋: `action-contract/1` · `verification-record/1` (+ Guard `GuardResult` 진행 중).
+- 42 회차: **guard 통합 브랜치 시작** — guard `0170f0a`(60, 변이 58/58, MS `arbiter.py` 대조 68,688 비교 다름 0, action `443f8eb` 고정). CMD-G1 → `guard-result/1` · `validation-result/1` 계약 동결(BD-102). 계약 동결 넷: action · verification · guard · validation. 다음: Guard F5(DC core → DCView) → MS F4(shadow 배선).
