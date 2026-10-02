@@ -35,6 +35,23 @@
 - 이 단계에서 선 것: 계약 동결 넷 — `action-contract/1`(BD-96) · `verification-record/1`(BD-101) · `guard-result/1` · `validation-result/1`(BD-102) · MS ActionIntent shadow(BD-97 · BD-100) · Guard shadow 를 MS 런타임에 배선(Arbiter 와 다름 0, BD-103 · BD-104) · Health 경계(BD-99) · F2b 판정(BD-94) · L0 실기록 고침(T12–T16).
 - 다음 단계로 넘어간 것: 실행기(BD-107) · 행동 명세의 집(BD-100 보류) · MS 도구 실행의 `action.*` 전환(BD-97 Q3) · Sensor 의 `action.result` 읽기 · Health VERIFY 배선 · Guard enforce(OQ-17 값은 BD-106) · OQ-19 · Gemini 확인 사전등록.
 
+## stage-3 — 2026-10-02 (통합 66 회차, 사용자 결정, BD-118)
+
+| 저장소 | 커밋 | 시험 |
+|---|---|---|
+| Telemetry | `89d2887768a1f230860ea6323870a747fd4323ef` | 72 |
+| Sensor | `a073e7741a33dcaaa81ba0227ad6fee71bde0d30` | 246 |
+| MS | `74a8585f77cb999f6b4c562b6b90ce3218682ae9` | 212 |
+| DC | `b55ff044c992f7ca3fb9ddeb807839be5ae8dd06` | 108 |
+| action | `2f4791e5c33df6cf19d41f139d95d74e4b86b42e` | 68 |
+| guard | `be871b9d89fe77badeef901caaa75edc1848f13c` | 93 |
+| health | `afcff3960694f58978afec2cdde62cac9e27830f` | 36 |
+
+- 일곱을 옆에 두고(통합 머리) 돌렸다. 모두 초록, 건너뜀 0. MS 는 guard 없이도 212 초록. guard MS 대조 68,688 비교 다름 0 · 모드 다름 0.
+- 고정된 의존: Sensor → Telemetry `89d2887` · MS · guard · health → action `3995fdb`(패키지 코드는 `2f4791e` 와 같다).
+- 이 단계에서 선 것: 실행기 설계(BD-108) · `action-spec/1` · `action-model/1` 동결(BD-109) · 술어 · 인자 한 벌(F1 끝) · `action.dispatch.args_sig`(T17) · Sensor S6 `action_state` · export 의 `action:` 실체(D16) · MS DC 길 실행이 실행기로(BD-113, 한 실행 한 사건) · 런타임 VERIFY(BD-115) · Guard enforce 배선(BD-116 · BD-117, 기본 shadow).
+- 다음 단계로 넘어간 것: 안전 동작을 실행기 행동으로(알릴 수단이 정해질 때, BD-114) · `$run.*` 런타임 배선(소비자가 생길 때, BD-115) · 상대 비교 술어 · `outcome_ref` · OQ-19 · Gemini 확인 사전등록.
+
 ### 태그를 달려면 (사용자 컴퓨터에서)
 
 ```
@@ -50,4 +67,12 @@ gh api repos/cogito5170/DC/git/refs        -f ref=refs/tags/stage-2 -f sha=ce3a0
 gh api repos/cogito5170/action/git/refs    -f ref=refs/tags/stage-2 -f sha=443f8eb810ce3cb9677cdc9f564ff79790f9c2ec
 gh api repos/cogito5170/guard/git/refs     -f ref=refs/tags/stage-2 -f sha=6e4ad5630996b49e9c6a5cba38423fb173b91073
 gh api repos/cogito5170/health/git/refs    -f ref=refs/tags/stage-2 -f sha=a07d833cf21a8b280a8ba939a21691a3215feab3
+
+gh api repos/cogito5170/Telemetry/git/refs -f ref=refs/tags/stage-3 -f sha=89d2887768a1f230860ea6323870a747fd4323ef
+gh api repos/cogito5170/Sensor/git/refs    -f ref=refs/tags/stage-3 -f sha=a073e7741a33dcaaa81ba0227ad6fee71bde0d30
+gh api repos/cogito5170/MS/git/refs        -f ref=refs/tags/stage-3 -f sha=74a8585f77cb999f6b4c562b6b90ce3218682ae9
+gh api repos/cogito5170/DC/git/refs        -f ref=refs/tags/stage-3 -f sha=b55ff044c992f7ca3fb9ddeb807839be5ae8dd06
+gh api repos/cogito5170/action/git/refs    -f ref=refs/tags/stage-3 -f sha=2f4791e5c33df6cf19d41f139d95d74e4b86b42e
+gh api repos/cogito5170/guard/git/refs     -f ref=refs/tags/stage-3 -f sha=be871b9d89fe77badeef901caaa75edc1848f13c
+gh api repos/cogito5170/health/git/refs    -f ref=refs/tags/stage-3 -f sha=afcff3960694f58978afec2cdde62cac9e27830f
 ```
