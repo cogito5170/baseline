@@ -546,3 +546,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 63 회차: MS `eb09ebd`(205) — CMD-M23 덧붙임: 사후조건 없는 행동은 verify 호출 0 · 예외 0 · 기록 0(1 ms 창을 지어내던 것 걷음). 변이 7 RED. BD-115 의 "고칠 것" 이 닫혔다 — M24 에서 뺀다.
 - 64 회차: guard `be871b9`(93, 변이 74/74) — CMD-G6 enforce 받음(판정 모드 무관, 모드 다름 0) · 흔적 지움. BD-116(SAFE_ACTION 가지 그대로 · E3 MS 배선 규칙). 다음 CMD-M24.
 - 65 회차: MS `d727547`(211, 변이 10/10) — CMD-M24 **Guard enforce 배선**(E3): enforce 실행 = Arbiter ALLOW ∧ Guard ALLOW, 막힘 32/32 실행 0, snapshot 실행 0/443, 실행한 것은 shadow 와 다름 0. 기본 모드 shadow. BD-117: 막히면 요청 끝 · A8 기억은 실제 실행 때만(CMD-M25).
+- 66 회차: MS `74a8585`(212, 변이 5/5) — CMD-M25: A8 기억은 실제 실행 뒤에만(enforce 에서 막힌 제안의 재요청은 A8 아님 · 실행된 것의 재요청은 A8). shadow 결정 id 720/720 · guard MS 대조 다름 0. **E3 끝 — 실행기 단계(BD-107) 닫힘.** 일곱 통합 머리 72 · 246 · 212 · 108 · 68 · 93 · 36 초록. 다음: 단계 3 마감 · 기본 모드(사용자 결정).
