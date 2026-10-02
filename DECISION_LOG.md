@@ -176,6 +176,13 @@
 | BD-57 | **집계 상태의 근거 시각 = 그 값을 정한 근거의 시각**(근거 전체 중 가장 늦은 것이 아니다). 예: `execution_health = UNRESOLVED_FAILURES` 가 7 시간 전 `tool[WebFetch]` 실패에서 나왔으면, 집계의 시각도 그 실패의 시각이다. 규칙 판본을 올린다 | baseline#5 Q4: 실제 세션에서 신선한 집계가 낡은 구성 요소 위에 서 있었다. 값을 정하지 않은 새 근거가 집계를 신선하게 보이게 하면 STALE 판정이 틀린다 | SCHEMA §2.4 `observed_at` 정의를 고쳤다. Sensor 세션의 일 |
 | BD-58 | DC 목적에 **`agent_context`**(런타임 자신의 맥락: KEEP · COMPACT(능력 `runtime_compaction`) …)를 더한다. PC-15 에 넣는다 | baseline#5 Q1: Sensor 의 `COMPACT_CONTEXT` 가 DC 어휘에 없다. MS 의 LLM 맥락(`context_policy`)과 런타임 맥락은 다른 결정이다 | DC 세션의 일 |
 
+### 사용자 결정 (2026-10-02)
+
+| # | 결정 | 결과 |
+|---|---|---|
+| BD-59 | **`claude -p` 를 세 번까지 실행해도 된다** (사용자). BD-50 의 cc_stream 표본용 | Telemetry 세션에 CMD-T8 로 전달. 세 번이 한도 · 캡처 글은 커밋하지 않음 · 비용은 보고값 |
+| BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
+
 ---
 
 ## 변경 제안 (PC) — 기준선은 승인됐다. PC 는 **아직 하나도 실행하지 않았다.** 실행은 사용자가 PC 마다(또는 묶음으로) 허가한 뒤에 한다
