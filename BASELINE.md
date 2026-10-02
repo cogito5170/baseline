@@ -516,3 +516,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - **단계 1 마감**(BD-92, `STAGES.md`): Telemetry `70b4feb` · Sensor `10bb7ad` · MS `0fc211d` · DC `1387318`, 모두 초록. Sensor L0 의존을 Telemetry 커밋 sha 에 고정. F2b 실행은 MS 세션(BD-93).
 - 34 회차: MS `4c6cfe2`(173) — **F2b 결과**(BD-94): R2 확인(있음 층 입력 −26%, 품질 비열등 · 안전 통과), R1 · R4 는 시험이 서지 않음(꺼냄 0 — 복잡도 규칙이 예산을 올려 숨긴 행이 없음). 기본 맥락은 고정 그대로, 기제 측정은 미룸.
 - 35 회차: **action 저장소 통합 브랜치 시작** — action `c29dfbc`(25 통과 · 변이 25/25, Telemetry `70b4feb` 옆에). CMD-A1 `action-contract/1` → 계약 동결(BD-96). 다음: Telemetry CMD-T16(밖의 `action_ref`) · Action CMD-A2(PC-19 차이 보고) · Guard 저장소(사용자).
+- 36 회차: Telemetry `d60d591`(70, 변이 57/57) — CMD-T16: `Recorder.action(action_ref=command_id)`(BD-96), 안 주면 지금과 같음 · 겹쳐 열기 거절. 다섯 저장소 초록(Telemetry 70 · Sensor 225 · MS 173 · DC 104 · action 25). Sensor 의 L0 의존은 단계 1 고정(`70b4feb`) 그대로 — 다음 단계 마감 때 옮긴다.
