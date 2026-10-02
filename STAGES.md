@@ -71,6 +71,29 @@
 - 이 단계에서 선 것: SDK 설계(BD-120) · `rlo.Autonomy`(MS Runtime 감싸기, DC 길만, guard · health 필수) · Claude Code 훅(PreToolUse 에서 transcript 다시 거둠, 지금 호출 빼고 평가, 목적 `agent_tool_call`, enforce 만 deny · `"allow"` 없음, BD-122 · 123 · 124) · `install-hook / uninstall-hook` · MBA-frontend 와 나란히(BD-125) · 토큰 절약 아이디어 안 들임(BD-127).
 - 다음으로 넘어간 것: 실제 Claude Code · Agent SDK 실행으로 훅 확인 · 적응 맥락 재검토 조건(BD-127) · 안전 동작 실행기 행동(BD-114) · API(OQ-19 · OQ-23) · PyPI.
 
+## stage-5 — 2026-10-02 (통합 98 회차, 사용자 결정, BD-136) — 방법론 SDK
+
+| 저장소 | 커밋 | 시험 |
+|---|---|---|
+| ga-SDK | `90aa9a54cd9065887b8804c7346646ff42542af6` (`ga` 0.1, METHOD method-1 rev 5) | 76 |
+| rlo-SDK | `c6b2f95122f4828ff341b7d140579543936cc34c` (`rlo-sdk 0.4.1`) | 65 |
+| Telemetry · Sensor · MS · DC · action · guard · health | stage-4 와 같다 | stage-4 와 같다 |
+
+- ga-SDK 는 표준 라이브러리만 쓴다. Python 3.10–3.13 에서 초록이다(GA 보고). baseline 은 3.11 에서 76 OK 를 재현했고, 빈 venv 에 설치한 뒤 `python -m ga` 가 도는 것을 확인했다. R1b 를 끈 변이는 시험 2 개가 잡았다.
+- METHOD §9 검증 1 은 stage-2–4 의 22 저장소×단계 시험 수가 모두 일치했다. 검증 2(엇갈림)와 검증 3(고정 충돌)도 섰다.
+- rlo-SDK 0.4.1 은 stage-4 뒤 K7(실제 Claude Code 훅 확인) · K8(예시 모형에 Edit · Grep)을 더한 판이다. 시험 65 · 변이 48/48 이다.
+- 이 단계에서 선 것:
+  - 방법론 명세 METHOD(BD-131–135): 형식 · 고리 · 어댑터 · Runner · 규칙 hard/soft · 게이트 일곱 · 실패 사례 F1–F8 · 교신 원칙 R1/R1b
+  - SESSION_GUIDANCE 원문 보관
+  - PROTOCOL §1a 교신 원칙(BD-133)
+  - ga 0.1 로컬판: 파일 우편함 · 수동 Runner · worktree · pre-push
+- 다음으로 넘어간 것:
+  - ga 2판: 헤드리스 Runner(CMD-GA2) → LLM Judge → Agent SDK → GitHub · 원격
+  - 기록을 허브 저장소에 커밋하는 일
+  - 로컬에서 남의 브랜치에 직접 커밋하는 것을 막는 훅
+  - Bundle (b) 시험 분리
+  - rlo 의 Glob 등 도구 측정
+
 ### 태그를 달려면 (사용자 컴퓨터에서)
 
 ```
@@ -103,4 +126,7 @@ gh api repos/cogito5170/DC/git/refs        -f ref=refs/tags/stage-4 -f sha=526f2
 gh api repos/cogito5170/action/git/refs    -f ref=refs/tags/stage-4 -f sha=c27840a299c35417ecba52967dfdfe8f861a93c9
 gh api repos/cogito5170/guard/git/refs     -f ref=refs/tags/stage-4 -f sha=be871b9d89fe77badeef901caaa75edc1848f13c
 gh api repos/cogito5170/health/git/refs    -f ref=refs/tags/stage-4 -f sha=afcff3960694f58978afec2cdde62cac9e27830f
+
+gh api repos/cogito5170/ga-SDK/git/refs     -f ref=refs/tags/stage-5 -f sha=90aa9a54cd9065887b8804c7346646ff42542af6
+gh api repos/cogito5170/rlo-SDK/git/refs    -f ref=refs/tags/stage-5 -f sha=c6b2f95122f4828ff341b7d140579543936cc34c
 ```
