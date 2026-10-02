@@ -515,3 +515,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 33 회차: Sensor `0764a75`(225, 변이 61/61) — CMD-S23: 결과를 못 본 도구 호출의 UNKNOWN 이유를 "기다리는 중 · 원천이 안 줌 · 모른다" 로 가름(기준: 그 호출의 `tool.end` 를 봤나 — `t_result_ms` 는 시각 없는 원천에서 거짓 "기다리는 중" 을 냄). SWE-agent 끝 원천 한계 288/288. 네 저장소 초록(65 · 225 · 172 · 104). **받은 지시가 모두 끝났다** — 남은 것은 사용자 결정(F2b 실행 · 단계 마감 태그).
 - **단계 1 마감**(BD-92, `STAGES.md`): Telemetry `70b4feb` · Sensor `10bb7ad` · MS `0fc211d` · DC `1387318`, 모두 초록. Sensor L0 의존을 Telemetry 커밋 sha 에 고정. F2b 실행은 MS 세션(BD-93).
 - 34 회차: MS `4c6cfe2`(173) — **F2b 결과**(BD-94): R2 확인(있음 층 입력 −26%, 품질 비열등 · 안전 통과), R1 · R4 는 시험이 서지 않음(꺼냄 0 — 복잡도 규칙이 예산을 올려 숨긴 행이 없음). 기본 맥락은 고정 그대로, 기제 측정은 미룸.
+- 35 회차: **action 저장소 통합 브랜치 시작** — action `c29dfbc`(25 통과 · 변이 25/25, Telemetry `70b4feb` 옆에). CMD-A1 `action-contract/1` → 계약 동결(BD-96). 다음: Telemetry CMD-T16(밖의 `action_ref`) · Action CMD-A2(PC-19 차이 보고) · Guard 저장소(사용자).

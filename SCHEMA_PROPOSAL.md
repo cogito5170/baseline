@@ -74,7 +74,7 @@ TTL 은 State 의 칸이 아니다 — Model(운영자 가정)에 있다. STALE 
 
 | 객체 | 소유 | 칸 (요지) | Mut | 영속 |
 |---|---|---|---|---|
-| ActionIntent | DECIDE | `intent_id` · `dc_id` · `policy@ver` · `action`(ActionSpec 이름) · `target` · `args` · `rationale` · `used_keys` · `author_kind`(rule · llm · human) | I | 원장 |
+| ActionIntent (→ 동결된 계약 `action-contract/1`, cogito5170/action `docs/CONTRACT.md`, BD-96) | DECIDE | `intent_id` · `dc_id` · `policy@ver` · `action`(ActionSpec 이름) · `target` · `args` · `rationale` · `used_keys` · `author_kind`(rule · llm · human) | I | 원장 |
 | ValidationResult | VALIDATE | `intent_id` · `ok` · `rule` · `reasons` | I | 원장 |
 | ArbitrationResult | ARBITRATE | `candidates` · `selected` · `rule@ver` · `reasons` | I | 원장 |
 | GuardResult | GUARD | `intent_id` · `verdict`(ALLOW · DENY · SAFE_ACTION) · `mode`(shadow · enforce) · `rule` · `state_refs`(본 **지금** 상태) · `reasons` | I | 원장 |
