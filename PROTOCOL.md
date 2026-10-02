@@ -38,12 +38,16 @@ MS 세션이 이 저장소의 자기 브랜치(`claude/eloquent-turing-m33zjw`, 
 ## 3. 지시 꼴 (baseline → 세션)
 
 ```
-CMD-<세션 머리글자><번호>  <할 일 한 줄>
-  근거: BD-xx / PC-xx / 보고의 어느 줄
-  범위: 손대도 되는 파일 · 손대면 안 되는 파일
-  끝난 기준: 시험 · 확인할 것
+CMD-<세션 머리글자><번호>  <목표 한 줄 — 방법은 세션이 정한다>
+  왜: 무엇을 개선하나 (근거: BD-xx / PC-xx / 보고의 어느 줄)
+  범위 · 제약: 손대도 되는 것 · 지켜야 할 interface
+  끝난 기준: 무엇이 달라지면 성공이고 어떻게 확인하나(기존 metric · 시험 우선)
   순서: 앞에 끝나야 하는 지시
 ```
+
+baseline 의 확인 댓글은 결과를 **성공 · 부분 성공 · 실패 · 막힘 · 정보 부족** 으로 가르고, 계획("하겠다")과 결과("했고 측정됐다")를 섞지 않는다.
+다음 interaction 은 continue · refine · verify · handoff · change direction · **wait** 중에서 고른다 — 할 일이 없으면 지시하지 않는다.
+참고: [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공).
 
 머리글자: T = Telemetry · S = Sensor · D = DC · M = MS. 번호는 세션마다 1 부터.
 
