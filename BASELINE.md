@@ -549,3 +549,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 66 회차: MS `74a8585`(212, 변이 5/5) — CMD-M25: A8 기억은 실제 실행 뒤에만(enforce 에서 막힌 제안의 재요청은 A8 아님 · 실행된 것의 재요청은 A8). shadow 결정 id 720/720 · guard MS 대조 다름 0. **E3 끝 — 실행기 단계(BD-107) 닫힘.** 일곱 통합 머리 72 · 246 · 212 · 108 · 68 · 93 · 36 초록. 다음: 단계 3 마감 · 기본 모드(사용자 결정).
 - 67 회차: **단계 3 마감**(BD-118, `STAGES.md` 에 일곱 sha). 기본 `guard_mode` shadow 유지(사용자 결정). 모든 세션 wait.
 - 68 회차: **SDK 단계 시작**(BD-119, 사용자 결정). S1 설계안 → CMD-A7(Action). API 는 범위 밖(OQ-19 · OQ-23 먼저).
+- 69 회차: 사용자가 SDK 저장소 `cogito5170/rlo-SDK` 를 만들었다. baseline 이 통합 브랜치 `claude/gracious-meitner-vp49xe` 를 열었다(`06d1d46`, README 만). A7 의 물음 6(집)은 이것으로 답이 정해졌다.
