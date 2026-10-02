@@ -184,6 +184,7 @@
 | BD-61 | DC 의 적용 TTL(`ttl_ms`)은 투영이 아니라 provenance 의 **입력 기록**으로 둔다 | DC 보고(baseline#4 5945541426): DC 는 소스의 Model 을 다시 읽지 않으므로 신선도를 투영하려면 그 값이 필요하다. SCHEMA §4.2 의 "파생 가능" 은 Model 을 읽을 수 있는 쪽의 이야기다 |
 | BD-62 | **BD-50 기준 충족** — sweagent 7/7 · cc_jsonl 서로 다른 기록 3 이상(Telemetry · baseline · MS 세션) · cc_stream 3/3(`claude -p`, BD-59) · `inproc:ms` 원장이 Sensor State 까지(MS `tests/test_l0.py`) · `l0-check` 시험(Sensor `tests/test_layer.py`). 다음: Sensor 의 수집기를 걷고 Telemetry 를 **필수 의존**으로 — Telemetry 세션의 일(CMD-T9) | 하류 영향: Sensor `l0.py` · Sensor 시험 셋(Telemetry 세션 소유) · Sensor `eval/health_inventory.py`(Sensor 세션) · DC `examples/sensor_session.py`(DC 세션). MS 는 직접 쓰지 않는다 |
 | BD-63 | BD-57 을 분명히 한다: 값을 정한 근거가 **여럿이면 그 가운데 가장 이른 시각**이다(결론은 가장 낡은 결정 근거만큼만 신선하다). MS 파생(모든 입력이 술어에 들어가 값을 정한다)은 지금처럼 입력 중 가장 이른 시각이 맞다. Sensor 집계(`execution_health`)는 값을 정한 구성 요소(예: 실패한 도구 결과)의 시각이다 | MS 보고(baseline#2 5945550488) 물음 2 |
+| BD-64 | `resource-state-v2` 에서 **보고가 이긴다**(BD-39 조건 2 우선). 단가표 추정만으로 선 BUDGET_EXHAUSTED 는 **영구가 아니다** — 영구는 되돌릴 수 없는 사실에만 붙는다(보고된 비용 ≥ 예산). 더 낮은 보고가 와서 추정과 모순되면 INVALIDATE + 전이로 고치고, 그 어긋남(`cost_estimate_error`)은 단가표의 건강 문제(ASSESS)로 남긴다. 추정으로 이미 내려진 보수적 결정(STOP 등)은 되돌리지 않는다 | Sensor 보고(baseline#3 5945573792)의 판단 요청: 조건 3(부분 합 → 영구 소진)은 단가가 정확하다는 전제 위의 증명이다. 그 전제가 깨지면 증명도 깨진다. 지금 데이터에서는 일어나지 않는다(두 모형 단가 정확) — 규칙의 뜻만 바로잡는다 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---
