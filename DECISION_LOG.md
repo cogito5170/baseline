@@ -228,3 +228,7 @@
 | PC-11 | **됨** · 통합됨 | MS `jolly-einstein` c0733de → 통합 43f4294 |
 | PC-20 | 설계만 — D1–D4 는 입력 계약 조건으로 넘김 | Sensor `nice-wright` 24265da |
 | 나머지 | 시작 안 함 | |
+| (4 회차) PC-03 · PC-04 · PC-12 · PC-13 | **됨** · 통합됨 | MS `39e2b59` |
+| (4 회차) PC-22 (`resource-state-v2`) | **됨** · 통합됨 | Sensor `38892cd` (nice-wright `597e74b`) |
+| (4 회차) PC-20 (D1–D4) | **됨** · 통합됨 | Telemetry `20dc8df` · Sensor `38892cd` (jolly) |
+| (4 회차) PC-08 · PC-14 | **됨** · 통합됨 | DC `c68ebfa` · Sensor `38892cd` |

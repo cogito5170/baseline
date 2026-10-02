@@ -443,3 +443,16 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - DUP-04(결정 문맥 구현 넷)가 둘로 줄었다: DC 와 MS `snapshot()`(기본값 전환을 기다림). BV-11 해소.
 - 충돌: Sensor `registry.py` · `STATE_DERIVATION.md` 의 후보 목록 한 줄 — `uncertainty_state` 설명은 nifty 쪽, `liveness DEAD · ALIVE` 줄은 통합 쪽을 남겼다.
 - Sensor 를 두 세션이 쓴다 → BD-56 으로 경계를 다시 그었다.
+
+### 13.6 통합 4 회차 (2026-10-02)
+
+| 저장소 | 통합 머리 | 새로 들어간 것 | 시험 (옆 저장소 모두 통합 머리) |
+|---|---|---|---|
+| Sensor | `38892cd` | CMD-S3 `resource-state-v2`(BD-39) · CMD-T6 수집기 결함 D1 · D2 | 152 통과 |
+| Telemetry | `20dc8df` | CMD-T6 · T5: D1–D4 · 런타임 자신의 행동 · 진행 신호 · 흡수된 입력. 실데이터: 시간 한도 초과 → 백그라운드 이동이 `tool.end` 로 | 53 통과 |
+| MS | `39e2b59` | PC-04(`role: measurement`) · PC-03(예산을 관측에서 뺌) · 과업 묶음 datacenter-tasks-2(t6) · F2 사전등록 | 146 통과 |
+| DC | `c68ebfa` | CMD-D1 정책 쓸모 재측정(483 그대로) | 72 통과 · **1 실패(예상된 것)** |
+
+- **DC 실패 1 = BV-03 이 풀렸다는 증거.** `test_known_limit_config_input_ages_derived_state` 는 "예산 입력 때문에 MS 파생 상태가 세션을 연 시각으로 늙는다" 는 알려진 한계를 붙든 시험이다. MS PC-03 뒤로 그 상태가 STALE 이 아니라 INFERRED 로 나온다. 시험을 "고쳐졌다" 쪽으로 뒤집는 일을 DC 세션에 지시했다(CMD-D9, DC 소유 파일).
+- Sensor 결과 파일 `eval/results/state_demo.txt` 충돌은 통합 코드로 다시 생성해 풀었다(6 절이 결정 문맥에서 내보내기 계약으로 바뀌어 있다 — PC-08).
+- 사용자가 `nifty-volta` 를 DC 세션으로 확정했다(DC 보고) — BD-56 과 같다.
