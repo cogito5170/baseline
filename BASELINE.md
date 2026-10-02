@@ -526,3 +526,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 43 회차: guard `20b4aab`(78, 변이 71/71) — CMD-G2 DC 문맥 → DCView 어댑터(DC 실제 빌더 문맥 8/8 이 DC 자신의 투영과 같음, DC import 없음). BD-103(목적 명세 데이터를 함께 받음 · D 의 낡은 키 범위 = 필수 ∪ used_keys). 다음: Guard G3(범위 좁히기) · MS M17(F4 shadow 배선).
 - 44 회차: guard `88be800`(80, 변이 77/77, MS 대조 다름 0) — CMD-G3 D 의 낡은 키 범위 = 필수 ∪ used_keys(BD-103).
 - 45 회차: MS `bb90625`(185) — CMD-M17 **Guard shadow 를 MS 런타임에 배선**: Arbiter 와 Guard 판정 다름 0(모의 464 · 정해 둔 제안 960), D 40 은 MS 에 없는 개념. 결정 id 그대로. BD-104(SAFE_ACTION 은 실행기 행동만). 통합 시험 주의: guard 가 PYTHONPATH 에 있으면 MS M15 시험 하나가 원장 줄(`guard`)을 세지 못해 빨강 — 환경에 기대는 시험(CMD-M18). guard 없이 185 초록, guard 80 초록.
+- 46 회차: MS `024c1a4`(185, guard 유무 모두 초록) — CMD-M18. guard `6e4ad56`(81, 변이 78/78, MS 대조 다름 0) — CMD-G4(BD-104: 기본 행동이 실행기 행동이 아니면 DENY(D)). 이 바뀜으로 MS 시험 하나(`GuardShadowWiring.test_guard_never_decides_execution`)가 SAFE_ACTION 을 기대해 빨강 — 기대한 바뀜, CMD-M19.
