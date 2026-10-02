@@ -502,3 +502,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 24 회차: DC `27bac8c`(100) — CMD-D13: `MSStateReader` 가 요청 질의를 받고 질의별 `allow_stale`(BD-65) · `prompt_policy` 기본 `FULL_INSTRUCTION` · `record.default_action`(BD-81). MS `f2fe93c`(160) — F2b 선행조사: 현상은 이미 보고됨 → BD-86(덮음 선언 칸). BD-85(표시 순서는 CR 의 일). 네 저장소 초록(58 · 186 · 160 · 100). MS M9 가 풀렸다.
 - 25 회차: Telemetry `8488808`(62) — CMD-T14 `resetsAt` → `resets_at_ms`(실기록 claude -p 3/3 값, 단위 초 확인) · 같은 함수의 stream 한도 종류 · 초과 사용 칸도 기존 칸으로 · CMD-T13 커밋(보고 대기). BD-87. 네 저장소 초록(62 · 186 · 160 · 100).
 - 26 회차: Telemetry `70b4feb`(65) — CMD-T15 새 사건 `provider.rate_limit_window`(창마다 하나, 창 이름은 원천 키 · 주된 창을 고르지 않음 · 실기록 창 2: five_hour · seven_day). MS `3034578`(162) — CMD-M9 커밋(복제 리더 걷음 · 표시 순서 `cr-3` · 기본 결정을 문맥에서), 보고 대기. 네 저장소 초록(65 · 186 · 162 · 100).
+- 26 회차(이어서): MS CMD-M9 성공 — 복제 리더 없음 · 두 길 같은 LLM 글자열(`cr-3`, 직접 길의 꺼냄도 질의 열 안에서만) · 기본 결정을 문맥에서 읽음. BD-88(품질 상태 모름에도 BD-76).
