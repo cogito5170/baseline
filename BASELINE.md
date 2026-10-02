@@ -409,3 +409,24 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 | X-3 | DC `nifty-volta` ↔ MS X-1 결과 | **확인됨**: DC 통합 시험이 `rec["policy"]["state_source"]` · `rec["policy"]["state"]` 를 읽는다(`tests/test_integration.py:189-212` on `nifty-volta`). X-1 뒤에 깨진다 | X-1 다음에 DC 통합 시험을 DecisionRecord 기준으로 |
 | X-4 | Sensor `nice-wright` S6 ↔ Telemetry `action.*` | 행동 기록 꼴이 둘 | Telemetry 꼴을 기준으로 S6 입력 계약을 고친다 |
 
+### 13.4 통합 1 회차 (2026-10-02) — 저장소마다 `claude/gracious-meitner-vp49xe`
+
+| 저장소 | 통합 머리 | 들어간 세션 브랜치 | 시험 (옆 저장소를 통합 머리로 두고) |
+|---|---|---|---|
+| MS | `43f4294` | eloquent-turing(d3b5fda) · jolly-einstein(da9abbe) · nifty-volta(ee941ae) | 129 통과 · 건너뜀 0 |
+| Sensor | `de659f5` | nifty-volta(51b825d, 안에 jolly-einstein · nice-wright 설계) · nice-wright(28c8af4) | 151 통과 |
+| DC | `8c4d0e0` | nifty-volta(4b97cea) · jolly-einstein(50b4be7) | 61 통과 · 건너뜀 0 · 시연 재생성(바뀐 것은 DC id 뿐) |
+| Telemetry | `52f354a` (브랜치 하나 — 합칠 것 없음) | jolly-einstein | (그 세션 보고: 38 통과) |
+
+- **X-1 해소**: `state_source` 를 `RunRecord.policy` 에서 `DecisionRecord.state_source` 로 옮겼다(출처가 있을 때만 결정 id 에 든다).
+- **X-2 해소**: DC 충돌 셋은 `nifty-volta` 쪽.
+- **X-3 해소**: DC 통합 시험 · 시연이 MS 결정 기록을 읽는다.
+- **X-4 남음** + 새로 찾은 중복 둘 → BD-45 · BD-47 로 지시했다:
+
+| # | 중복 | 누구 | 지시 |
+|---|---|---|---|
+| X-5 | L1 liveness 팩 | Sensor `nice-wright` 가 구현 · Telemetry 세션이 1 순위로 제안 | L1 은 Sensor 세션만 (BD-45) |
+| X-6 | liveness 입력 이름 | Sensor 의 `run.turn_open` 등 다섯 칸 대 L0 의 `heartbeat` · `run.start/end` 사건 | 이름은 L0 가, 계산은 Sensor 가 (BD-47) |
+| X-7 | Sensor → MS 경로 둘 | MS `ms/sensing.py`(판독을 MS 그래프로) 대 Sensor state-export → DC → MS | state-export 경로 하나 (BD-46) |
+
+전달 규약은 [`PROTOCOL.md`](PROTOCOL.md).

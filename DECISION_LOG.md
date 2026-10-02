@@ -147,6 +147,20 @@
 
 ---
 
+## 통합 1 회차에서 온 결정 — ADOPTED (2026-10-02, 사용자: "결과와 권고를 읽고 baseline 에 맞게 각 레포에 명령하라")
+
+| # | 결정 | 까닭 · 근거 | 결과 |
+|---|---|---|---|
+| BD-45 | **파일 하나에 소유 세션 하나**(PROTOCOL §5). L1 팩은 **전부 Sensor 세션**의 것이다. Telemetry 세션은 L0 만 맡는다 | liveness 를 Sensor 세션이 이미 구현했는데(`28c8af4`), Telemetry 세션도 "새 L1 팩 넷" 을 1 순위로 제안했다(baseline#1). 같은 것을 둘이 짓는다 | Telemetry 세션의 제안 1 은 Sensor 세션의 일로 옮긴다 |
+| BD-46 | **Sensor → MS 경로는 Sensor state-export → DC(SensorSource) → MS `state_reader` 하나다.** MS 는 Sensor 의 판독(readings) · Q · 판정을 자기 그래프에 넣지 않는다. `ms/sensing.py` 는 더 넓히지 않고, 이 경로가 확인되면 걷어 낸다. MS 가 제안한 센서 상태(`outcome_confidence` · `false_success_risk` · `loop_risk` · `cost_anomaly`)는 MS 가 짓지 않는다 — Sensor(L1 · L2)나 Health 의 일이다 | 판독(OK · SUSPECT · FAULT)은 판정이다. L0 는 판정을 받지 않는다(Telemetry 저장소 자신의 규칙). Sensor 에는 이미 바깥이 읽는 유일한 길(`llmsensor.state-export/1`)이 있고 DC 가 그것만 읽는다(`4b97cea`). MS 가 따로 해석하면 같은 상태가 두 곳에서 다른 뜻으로 생긴다 | **SUPERSEDES** BD-19 의 "Sensor 출력은 텔레메트리로만 받는다" — 그 결정 뒤에 L0 층이 따로 섰고, 판정을 받지 않기 때문이다. Verifier 의 판정 · 정책 제안을 받지 않는다는 뜻은 그대로다 |
+| BD-47 | **liveness 의 입력은 L0 사건이다.** 이름은 Telemetry 세션이 정한다. `turn_open` · 마지막 활동 시각 · 무음 길이는 Sensor 가 L0 사건에서 계산하는 **측정(MEASURE)**이다. 지금 Sensor 가 스스로 정한 `run.turn_open` 등 다섯 칸은 L0 사건이 생길 때까지 compat 투영으로만 둔다 | 같은 관측의 이름을 두 세션이 따로 정하고 있었다(Sensor run 레코드 칸 대 L0 사건 흐름). BD-28 · BD-45 | Telemetry 세션: 차례 경계 사건(입력 받음 · 차례 끝 · 흐름 닫힘)을 L0 에 더한다. Sensor 세션: S1 의 입력 계약을 그 사건 이름으로 다시 쓴다 |
+| BD-48 | 전달 규약과 통합 브랜치(PROTOCOL.md) | 보고가 이미 두 통로(이슈 · 저장소 파일)로 갈렸다 | 세션마다 baseline 이슈 하나 |
+| BD-49 | MS 측정: 후보 F2 를 ④(CR v2)의 첫 사전등록 대상으로 삼는다. 상태는 DC 를 꽂은 `state_reader` 로 읽는다. 과업 t6 은 **고친다**. 과업 묶음 판본을 올리고, 비교는 같은 판본 안에서만 한다 | F2 는 네 측정에서 같은 방향이다(증거 아님). t6 은 과업 정의의 결함이다(X4). 판본을 올리면 앞 측정을 지우지 않고 가를 수 있다 | |
+| BD-50 | Sensor 를 Telemetry 의 **필수** 의존으로 바꾸는 기준: 수집기 셋(cc_jsonl · cc_stream · sweagent)마다 **서로 다른 실데이터 기록 3 개 이상**에서 `l0-check` 가 100 % 같다 + MS `inproc:ms` 원장이 Sensor State 까지 흐른다 + `l0-check` 를 시험으로 붙인다. 그 뒤 Sensor 의 수집기를 지운다(Telemetry 세션) | 지금 대조는 이 세션 기록 하나뿐이다(Telemetry 보고). 원천마다 꼴이 다르다 | |
+| BD-51 | 세션은 PR 을 만들지 않는다. 통합은 baseline 이 저장소마다 `claude/gracious-meitner-vp49xe` 에서 한다 | 각 저장소의 기본 브랜치가 지금 다른 세션의 작업 브랜치다(Sensor = `nice-wright`, DC = `nifty-volta`, MS = `eloquent-turing`, Telemetry = `jolly-einstein`). PR 을 거기로 열면 서로의 일을 덮는다 | 기본 브랜치를 어떻게 둘지는 사용자가 정한다 |
+
+---
+
 ## 변경 제안 (PC) — 기준선은 승인됐다. PC 는 **아직 하나도 실행하지 않았다.** 실행은 사용자가 PC 마다(또는 묶음으로) 허가한 뒤에 한다
 
 | # | 변경 | 까닭 | 파일 (정확히) | 의존 | 위험 |
@@ -191,9 +205,9 @@
 
 | PC | 현황 | 어디 |
 |---|---|---|
-| PC-01 | **됨** (두 브랜치에서 따로 — 충돌 X-2) | DC `jolly-einstein` 50b4be7 · `nifty-volta` 48b9908 |
+| PC-01 | **됨** · 통합됨 (X-2 해소) | DC 통합 8c4d0e0 |
 | PC-02 | **진행 중** — L0 원장 · 출처 종류 · compat · `action.*` 사건 | Telemetry `jolly-einstein` |
-| PC-05 | **됨** (이음매 방식) — 아직 기본값은 `snapshot()` | MS `nifty-volta` ee941ae + DC `nifty-volta` 48b9908 |
-| PC-11 | **됨** | MS `jolly-einstein` c0733de |
+| PC-05 | **됨** · 통합됨 (이음매 방식, 출처는 DecisionRecord) — 아직 기본값은 `snapshot()` | MS 통합 43f4294 + DC 통합 8c4d0e0 |
+| PC-11 | **됨** · 통합됨 | MS `jolly-einstein` c0733de → 통합 43f4294 |
 | PC-20 | 설계만 — D1–D4 는 입력 계약 조건으로 넘김 | Sensor `nice-wright` 24265da |
 | 나머지 | 시작 안 함 | |
