@@ -491,3 +491,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
   - 다음: MS 는 PC-23 의 MS 쪽 → `evidence` 호환 속성 떼기(BD-73). F2 후속은 그 뒤, 사용자 결정으로.
 - 14 회차: Sensor `294683d`(170) — liveness 가 `input.removed` 를 처리하지 않은 입력 수로 센다. 실데이터에서 429 뒤 5.5 시간이 이제 AWAITING_INPUT(T11 실기록 확인). **T10 은 실기록에서 아직 0/8** — 합성으로만 맞았다; 실제 `tool_progress` 키 목록(CMD-S14 1)이 와야 고친다. BD-74(부재 주장의 근거 시각) · BD-75. 네 저장소 초록(57 · 170 · 153 · 88).
 - 15 회차: **상태 내보내기 계약 `/2`**(CMD-D7, BD-70) — Sensor `9b331cd`(171) · DC `e35fa1d`(89). `entity` 는 엔진 id 그대로(불투명) · `entity_ref` BD-32 꼴 · 상태마다 `time_base` · `reason` 뺌 · DC 는 `/2` 만 받는다. 실데이터 결정 변화 483 → 484 는 `/2` 가 아니라 Sensor CMD-S8(집계 근거 시각)의 결과 — 그 한 실행을 CMD-D11 로 확인한다. DC `examples/sensor_session.py` 는 Sensor 수집기 이음매(BD-69)로 그대로 돈다(통합 머리에서 실행 확인).
+- 16 회차: DC `113898a`(89) — CMD-D11 `eval/decision_trace.py`. 484 번째 결정 변화 = `cc_jsonl_self:self_sna` i=154: 상태는 의도대로 STALE, **결정은 BD-23 과 어긋남**(모름 → CONTINUE). BD-76 · CMD-D12 로 고친다.
