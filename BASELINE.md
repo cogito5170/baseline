@@ -574,3 +574,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 91 회차: 사용자 결정 BD-131 — 방법론 SDK ga-SDK. baseline 이 `METHOD.md` method-1 을 씀(ga-SDK `2867c25`), SESSION_GUIDANCE 원문 보관, 통로 #12 · CMD-GA1(1판 G1–G8). 짓는 세션은 사용자가 만들 때까지 wait.
 - 92 회차: ga-SDK `60c9a95`(DESIGN.md, 코드 없음) — CMD-GA1 설계 초안 받음(진행 중). 패키지 `ga`, 머리는 JSON 펜스, 정규 JSON 기록. 명세 rev 1 기준이라 엇갈림(F1, baseline 이 판을 늦게 올림) → rev 2 `2867c25` 합치고 G8 넣기. 통합은 그 뒤.
 - 93 회차: ga-SDK `f2bdeab`(DESIGN.md rev 2, 코드 없음) 통합(ff) — 성공: rev 2 맞춤 · 순서 G1 → G8 → G2 → G4 → G6 → G3 → G5 → G7 · 보고 자체를 report/1 꼴로 씀. 요청 받음: METHOD §5 제목이 baseline 편집에서 빠짐(허브 잘못) → `69ad191` 로 되살림.
+- 94 회차: 사용자 결정 BD-132 — 인프라 없는 로컬 고려. METHOD rev 3(`f6a4c36`): Runner §4c · worktree · pre-push · G9 · 2판 순서. CMD-GA1 rev 3 를 #12 로 보냄(G1 진행과 겹치지 않음).
