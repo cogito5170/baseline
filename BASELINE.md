@@ -529,3 +529,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 46 회차: MS `024c1a4`(185, guard 유무 모두 초록) — CMD-M18. guard `6e4ad56`(81, 변이 78/78, MS 대조 다름 0) — CMD-G4(BD-104: 기본 행동이 실행기 행동이 아니면 DENY(D)). 이 바뀜으로 MS 시험 하나(`GuardShadowWiring.test_guard_never_decides_execution`)가 SAFE_ACTION 을 기대해 빨강 — 기대한 바뀜, CMD-M19.
 - 47 회차: MS `2cb7e61`(185, guard `6e4ad56` 유무 모두 초록) — CMD-M19 시험이 Guard 판정 값 대신 "Guard 가 막아도 Arbiter 대로 실행" 만 본다. guard 81 · MS 대조 68,688 다름 0 · health 초록. **§10.2 Guard shadow 단계 닫힘** — 다음은 단계 마감·Executor 계획·OQ-17(사용자 결정).
 - 48 회차: **단계 2 마감**(BD-105, `STAGES.md` 에 일곱 저장소 sha) — 일곱을 옆에 두고 70 · 225 · 185 · 105 · 25 · 81 · 26 초록. OQ-17 닫음(BD-106: STOP > HOLD/WAIT > ESCALATE, enforce 때 Model 에). 다음 단계 실행기(BD-107) — CMD-A3 로 Action 이 설계안부터.
+- 49 회차: action `bef1578`(50, 변이 41/41) — CMD-A3 실행기 설계안 받음(BD-108): 행동 명세의 집 = action `action-spec/1`, 실행기 = 프로세스 안 라이브러리(shadow · execute), Q3 은 DC 길 실행으로 좁힘, `args_sig` 살림. E2 시작: CMD-A4 · CMD-T17.
