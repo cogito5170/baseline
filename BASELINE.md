@@ -545,3 +545,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 62 회차: MS `8b16895`(205, 변이 11/11) — CMD-M23 대부분 성공: 런타임이 Health VERIFY 를 부름(직후 · 창 닫힘), 원장에 VerificationRecord(decision_ref). 사후조건 없음 → 창 1 ms 지어냄은 E3 에서 고침(→ 63 회차에서 고쳐짐). `$run.*` 은 이음매까지(BD-115). **E2 끝** — 다음 E3: CMD-G6(enforce 허용 · 흔적 정리) → CMD-M24(enforce 배선).
 - 63 회차: MS `eb09ebd`(205) — CMD-M23 덧붙임: 사후조건 없는 행동은 verify 호출 0 · 예외 0 · 기록 0(1 ms 창을 지어내던 것 걷음). 변이 7 RED. BD-115 의 "고칠 것" 이 닫혔다 — M24 에서 뺀다.
 - 64 회차: guard `be871b9`(93, 변이 74/74) — CMD-G6 enforce 받음(판정 모드 무관, 모드 다름 0) · 흔적 지움. BD-116(SAFE_ACTION 가지 그대로 · E3 MS 배선 규칙). 다음 CMD-M24.
+- 65 회차: MS `d727547`(211, 변이 10/10) — CMD-M24 **Guard enforce 배선**(E3): enforce 실행 = Arbiter ALLOW ∧ Guard ALLOW, 막힘 32/32 실행 0, snapshot 실행 0/443, 실행한 것은 shadow 와 다름 0. 기본 모드 shadow. BD-117: 막히면 요청 끝 · A8 기억은 실제 실행 때만(CMD-M25).
