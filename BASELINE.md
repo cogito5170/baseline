@@ -481,3 +481,11 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 9 회차: Sensor `340ea57`(164 통과) — CMD-S8 집계 근거 시각(BD-57 · BD-63) · CMD-S6 ASSESS 표시. DC `b94035c`(88 중 87, 남은 1 = D9) — BD-58 `agent_context`. MS 153 · Telemetry 54 통과. F2 는 사용자 결정으로 진행 중(BD-67).
 - 10 회차: **Sensor 가 Telemetry 를 필수 의존으로 쓴다**(CMD-T9). Sensor 수집기는 같은 이름 · 서명의 이음매(L0 수집기 + compat)로 바뀌었고, 지우기 전 출력을 얼려 대조 기준으로 삼는다(BD-69). 의존은 통합 브랜치에 고정한다(BD-68). Sensor S9(PC-09 근거 값 복사 제거)도 들어갔다. 통합: Telemetry `a23285c`(55) · Sensor `a713f05`(166) · MS 153 · DC 88 중 87(D9).
 - 11 회차: **통합 브랜치가 네 저장소 모두 초록**(4 회차 이후 처음). Telemetry `2140d2f` 56 · Sensor `a713f05` 166 · MS `7798205` 153 · DC `74d89ce` 88, 건너뜀 0. DC CMD-D9(BV-03 풀림을 붙드는 시험) · D10(MS 새 이름 `measurements`) · Telemetry CMD-T10(cc_stream 진행 신호 → `heartbeat`). D9 가 네 회차 걸린 원인은 DC 세션이 보고 사이에 baseline 댓글을 다시 읽지 않은 것과 옆 저장소 판본이었다 — DC 세션이 "일을 시작하기 전마다 최신 댓글을 먼저 읽는다" 로 고쳤다.
+
+### 13.10 통합 12 · 13 회차 (2026-10-02)
+
+- 12 회차: Telemetry `2f9ae0c`(57) — CMD-T10(cc_stream 진행 신호 → `heartbeat`) · CMD-T11(`StopFailure` → `turn.end(api_error)`, 덧붙인 칸 `error_type`). 둘 다 합성 자료로만 확인 → 실기록 확인은 Sensor 세션 CMD-S14.
+- 13 회차: 네 저장소 모두 초록 — Telemetry `2f9ae0c` 57 · Sensor `5e59198` 167 · MS `c21abcf` 153 · DC `74d89ce` 88.
+  - Sensor: CMD-T9'(Telemetry 의존을 `@claude/gracious-meitner-vp49xe` 로 고정, BD-68 — `direct_url.json` 이 `2f9ae0c` 를 받음) · BD-64 `resource-state-v3`(추정 소진은 영구가 아니다, 보고가 뒤집는다).
+  - MS: **F2 결과**(BD-72). 적응 맥락은 지연 +2.6 s 가 재졌고 꺼냄 증가(F2)는 사전등록 읽기로 후보에서 내렸다. 이득은 재지 못했다. 기본 선택기는 고정 그대로.
+  - 다음: MS 는 PC-23 의 MS 쪽 → `evidence` 호환 속성 떼기(BD-73). F2 후속은 그 뒤, 사용자 결정으로.
