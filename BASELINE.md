@@ -563,3 +563,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 80 회차: MS `19d850e`(215) — CMD-M27: sha 없는 `ms[sensor]` extras 를 뺐다. 빈 가상환경에서 MS `19d850e` + Sensor `97961e9` 함께 설치 OK(바꾸기 전 `ms[sensor]` 는 ResolutionImpossible 재현). K3 의 MS 고정은 `19d850e`.
 - 81 회차: Telemetry `6b9dd42`(탐침만) — CMD-T19: PreToolUse 순간 지금 도구의 `tool_use` 줄은 결정적이지 않음(0/7, 1 초 뒤 7/7, 경합 2/2). BD-124: SDK 훅이 지금 호출(`tool_use_id` 같은 `tool.start`)을 빼고 평가. DC D18 기다림 → K3.
 - 82 회차: DC `526f2fb`(116) — CMD-D18: 목적 `agent_tool_call@purpose-agent-tool-call-1`(필수 `agent.execution_health` 하나, 나머지 선택, 선택지 PROCEED · HOLD · ESCALATE, 기본 HOLD — 실행기 행동이 아니라 Guard D 는 DENY 로 닫음, BD-104 · BD-114). 기록된 transcript 의 normal · after_failure 에서 완전, `execution_control` 은 불완전(대조). baseline 재현: `RLO_SDK_REPO` 를 주면 116 OK 건너뜀 0. 다음 CMD-K3.
+- 83 회차: 사용자 결정 BD-125 — MBA-frontend 는 SDK 에 넣지 않고 나란히(함께 설치 확인 CMD-K4, K3 뒤), 토큰 절약 아이디어는 조사만(CMD-K5, 보고만, 들일 조건 여섯 모두 참일 때만, 기본 = 안 들임).
