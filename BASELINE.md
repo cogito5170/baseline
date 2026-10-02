@@ -561,3 +561,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 78 회차: Sensor `97961e9`(255) — CMD-S26: pyproject 만, Telemetry 고정 `35e8119`(SDK 와 한 판). 실기록 대조 바이트까지 같음(cc 13 실행 · SWE-agent 288 실행). K2 가 이 sha 로 Sensor 를 고정한다.
 - 79 회차: rlo-SDK `253b408`(`0.2.0`, 46 시험) — CMD-K2 부분 성공: 훅 판정 길 · 설정 예 · 다시 고정. 막힘 B1(기본 목적이 transcript 로 완전해질 수 없음) · B2(실패 값 막기는 baseline 지시 잘못). BD-123: 에이전트 도구 판정 목적(CMD-D18) · 첫 호출 전제 측정(CMD-T19) · `ms[sensor]` 빼기(CMD-M27) → K3.
 - 80 회차: MS `19d850e`(215) — CMD-M27: sha 없는 `ms[sensor]` extras 를 뺐다. 빈 가상환경에서 MS `19d850e` + Sensor `97961e9` 함께 설치 OK(바꾸기 전 `ms[sensor]` 는 ResolutionImpossible 재현). K3 의 MS 고정은 `19d850e`.
+- 81 회차: Telemetry `6b9dd42`(탐침만) — CMD-T19: PreToolUse 순간 지금 도구의 `tool_use` 줄은 결정적이지 않음(0/7, 1 초 뒤 7/7, 경합 2/2). BD-124: SDK 훅이 지금 호출(`tool_use_id` 같은 `tool.start`)을 빼고 평가. DC D18 기다림 → K3.
