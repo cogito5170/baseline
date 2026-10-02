@@ -1,6 +1,6 @@
 # SCHEMA PROPOSAL — 의미 칸 · 소유 · 생애 · 최소성 (인코딩은 정하지 않는다)
 
-(baseline-0.1, 제안) **이 문서는 직렬화 형식을 고르지 않는다.** 순서: 의미 → 의존 → 생애 → 접근 → 맥락 선택 → (그다음에야) 인코딩.
+(baseline-1.0, 승인 2026-10-02 — 파일 이름은 그대로 둔다) **이 문서는 직렬화 형식을 고르지 않는다.** 순서: 의미 → 의존 → 생애 → 접근 → 맥락 선택 → (그다음에야) 인코딩.
 
 표의 약어: **R/O** 필수(Required) / 선택(Optional) · **Der** 파생 가능? (예면 무엇에서) · **Mut** 바뀜(I 불변 · A 덧붙이기 · M 소유자만 바꿈) ·
 **Life** 생애 · **Fresh** 신선도 요구 · **Prov** 출처 · **Conf** 신뢰도 · **Cost** 크기 · 비용.
@@ -15,7 +15,7 @@
 
 ## 2. 객체별 칸
 
-### 2.1 Observation (L1) — 소유: 수집기 · 쓰는 곳: Observation Log
+### 2.1 Observation (OBSERVE) — 소유: 수집기 · 쓰는 곳: Observation Log
 
 | 칸 | 뜻 | R/O | Der | Mut | Life | Prov · Conf | Cost |
 |---|---|---|---|---|---|---|---|
@@ -30,7 +30,7 @@
 
 `unobserved` 는 Observation 이 아니라 **Telemetry 레코드의 칸**이다(그 레코드에서 못 본 칸 목록).
 
-### 2.2 Telemetry 레코드 (L1 전송) — 소유: 수집기
+### 2.2 Telemetry 레코드 (OBSERVE 전송) — 소유: 수집기
 
 | 칸 | R/O | 비고 |
 |---|---|---|
@@ -42,12 +42,12 @@
 | `decision_ref` | O | 결정 **내용**은 싣지 않는다 (BV-04) |
 | `extensions.<provider>` | O | 공급자 고유 값. 상태로 펴지 않는다(MS 원칙 10) |
 
-### 2.3 Measurement (L2) — 소유: L2 · Measurement Ledger
+### 2.3 Measurement (MEASURE) — 소유: MEASURE · Measurement Ledger
 
 `metric_id` · `entity_id` · `name` · `value` · `status`(DERIVED · UNKNOWN · INVALID) · `basis` · `inputs`(obs/metric id = `derived_from`) ·
 `definition_version` · `computed_at` · `reason`(사람용). **Der: 예** — Observation Log + 정의 판본에서 언제든 다시 짓는다 → 영속은 선택.
 
-### 2.4 State (L3 · L4) — 소유: 그 상태 이름의 규칙 하나 · State Store
+### 2.4 State (ESTIMATE · ASSESS) — 소유: 그 상태 이름의 규칙 하나 · State Store
 
 | 칸 | 뜻 | R/O | Der | Mut | Fresh | 비고 |
 |---|---|---|---|---|---|---|
@@ -60,7 +60,7 @@
 | `observed_at` | 근거 중 가장 늦은 관측 시각 | O | 근거에서 | M | TTL 의 기준 | MS 는 입력 중 **가장 이른** 시각을 쓴다(설정 포함) → BV-03 과 함께 고친다 |
 | `since` · `updated_at` · `seq` | 전이 시각 · 계산 시각 · 횟수 | R | 아니오 | M | | |
 | `permanent` | 끝난 일의 사실 | R | 아니오 | M (한 번만 참) | 낡지 않음 | |
-| `confidence` | `{kind: none · ordinal · calibrated, value}` | O | — | M | | **새 칸 제안** — Q 같은 점수에만 (OQ-16) |
+| `confidence` | `{kind: none · ordinal · calibrated, value}` | O | — | M | | **새 칸 제안** — Q 같은 점수에만 (BD-36) |
 | `reason` | 사람용 한 줄 | O | — | M | | DC 에는 싣지 않는다 (§4.2) |
 
 TTL 은 State 의 칸이 아니다 — Model(운영자 가정)에 있다. STALE 은 저장하지 않고 질의 때 판정한다(Sensor 규약).
@@ -68,32 +68,32 @@ TTL 은 State 의 칸이 아니다 — Model(운영자 가정)에 있다. STALE 
 ### 2.5 Evidence (출처 연결) · Relationship
 
 - Evidence: `ref` · `level`(OBSERVATION · METRIC · STATE) · `name` · (`observed_at`). 값은 싣지 않는다(지금 Sensor `Evidence.value` 는 값을 복사한다 → 빼는 것이 PC-09).
-- Relationship: `subject` · `predicate`(SEMANTIC §4 채택 목록만) · `object` · `valid_from` · `valid_to | last_seen` · `basis` · `evidence`. 소유: L3(관측) 또는 Runtime(선언) — OQ-07.
+- Relationship: `subject` · `predicate`(SEMANTIC §4 채택 목록만) · `object` · `valid_from` · `valid_to | last_seen` · `basis` · `evidence`. 소유: ESTIMATE(관측) 또는 Runtime(선언) — BD-27.
 
-### 2.6 행동 계열 (L6–L11) — 지금 없는 꼴. 제안만
+### 2.6 행동 계열 (DECIDE–VERIFY) — 지금 없는 꼴. 제안만
 
 | 객체 | 소유 | 칸 (요지) | Mut | 영속 |
 |---|---|---|---|---|
-| ActionIntent | L6 | `intent_id` · `dc_id` · `policy@ver` · `action`(ActionSpec 이름) · `target` · `args` · `rationale` · `used_keys` · `author_kind`(rule · llm · human) | I | 원장 |
-| ValidationResult | L7 | `intent_id` · `ok` · `rule` · `reasons` | I | 원장 |
-| ArbitrationResult | L8 | `candidates` · `selected` · `rule@ver` · `reasons` | I | 원장 |
-| GuardResult | L9 | `intent_id` · `verdict`(ALLOW · DENY · SAFE_ACTION) · `mode`(shadow · enforce) · `rule` · `state_refs`(본 **지금** 상태) · `reasons` | I | 원장 |
-| ActionCommand | L9 → L10 | `command_id` · `intent_id` · `action` · `target` · `args` · `issued_at` · `deadline` | I | 원장 |
-| ActionOutcome | L10 | Telemetry `kind=action_outcome`: `command_id` · `result` 관측 칸들 · `error` | I | Observation Log |
-| Verification | L11 | State `action_state` on 실체 `action:<command_id>` · 값 VERIFIED · NOT_VERIFIED · PENDING · UNKNOWN · 근거 = 사후조건이 본 State id | M | State Store |
+| ActionIntent | DECIDE | `intent_id` · `dc_id` · `policy@ver` · `action`(ActionSpec 이름) · `target` · `args` · `rationale` · `used_keys` · `author_kind`(rule · llm · human) | I | 원장 |
+| ValidationResult | VALIDATE | `intent_id` · `ok` · `rule` · `reasons` | I | 원장 |
+| ArbitrationResult | ARBITRATE | `candidates` · `selected` · `rule@ver` · `reasons` | I | 원장 |
+| GuardResult | GUARD | `intent_id` · `verdict`(ALLOW · DENY · SAFE_ACTION) · `mode`(shadow · enforce) · `rule` · `state_refs`(본 **지금** 상태) · `reasons` | I | 원장 |
+| ActionCommand | GUARD → EXECUTE | `command_id` · `intent_id` · `action` · `target` · `args` · `issued_at` · `deadline` | I | 원장 |
+| ActionOutcome | EXECUTE | Telemetry `kind=action_outcome`: `command_id` · `result` 관측 칸들 · `error` | I | Observation Log |
+| Verification | VERIFY | State `action_state` on 실체 `action:<command_id>` · 값 VERIFIED · NOT_VERIFIED · PENDING · UNKNOWN · 근거 = 사후조건이 본 State id | M | State Store |
 | DecisionRecord | 각 단계가 자기 절 | `dc_id` · intent[] · validation[] · arbitration · guard · command · outcome_ref · verification_ref | A | **영속** |
 
 ## 3. 소유 요약 — "Data" 승인 물음
 
 | 객체 | producer | owner | consumer | mutability | lifetime | freshness | persistence | derivation | source |
 |---|---|---|---|---|---|---|---|---|---|
-| Observation | 수집기 | Observation Log | L2 · 감사 | I | 보존 정책 | 시각 그대로 | **영속 · 원본** | 없음 (raw) | 원천 |
-| Measurement | L2 | Measurement Ledger | L3 · L4 | A | 실행 | 입력을 따름 | 선택 | Obs + 정의 판본 | 관측 |
-| State | L3/L4 규칙 | State Store | L5 · L9 · L11 | M (소유 규칙) · 이력 A | 실행/세션 · permanent | TTL (Model) | 스냅숏 선택 | 재생으로 다시 짓기 | Measurement |
-| Relationship | L3 · Runtime | Relationship Store | L5 · L4 | A + 구간 닫기 | 유효 구간 | last_seen | 선택 | 관측분은 재생 | 관측 · 선언 |
+| Observation | 수집기 | Observation Log | MEASURE · 감사 | I | 보존 정책 | 시각 그대로 | **영속 · 원본** | 없음 (raw) | 원천 |
+| Measurement | MEASURE | Measurement Ledger | ESTIMATE · ASSESS | A | 실행 | 입력을 따름 | 선택 | Obs + 정의 판본 | 관측 |
+| State | ESTIMATE/ASSESS 규칙 | State Store | CONTEXTUALIZE · GUARD · VERIFY | M (소유 규칙) · 이력 A | 실행/세션 · permanent | TTL (Model) | 스냅숏 선택 | 재생으로 다시 짓기 | Measurement |
+| Relationship | ESTIMATE · Runtime | Relationship Store | CONTEXTUALIZE · ASSESS | A + 구간 닫기 | 유효 구간 | last_seen | 선택 | 관측분은 재생 | 관측 · 선언 |
 | Model 정의 | 사람 | Registry | 모두 | 판본마다 I | 배치 | — | **영속** | — | 사람 |
-| DecisionContext | L5 | DC Store | L6–L9 · 원장 | I | 원장 보존 | as_of 고정 | 원장과 함께 | State 이력 + as_of | State |
-| Decision 계열 | L6–L11 | Ledger | 재현 · 감사 | A | 원장 보존 | — | **영속** | 아니오 | — |
+| DecisionContext | CONTEXTUALIZE | DC Store | DECIDE–GUARD · 원장 | I | 원장 보존 | as_of 고정 | 원장과 함께 | State 이력 + as_of | State |
+| Decision 계열 | DECIDE–VERIFY | Ledger | 재현 · 감사 | A | 원장 보존 | — | **영속** | 아니오 | — |
 | Cache | 그 단계 | 그 단계 | 그 단계 | 버림 | 아무 때나 | — | 아니오 | 예 | — |
 
 **영속하는 것:** Observation · Model · Ledger. **만료하는 것:** State(TTL → STALE, 값은 남는다) · 캐시. **보내는 것:** Observation(텔레메트리) ·
@@ -158,7 +158,7 @@ DecisionContext
 - **같은 저장소에 두고 가리킨다:** provenance.
 - **다시 짓는다:** 투영 칸 전부. explain(사슬 전체)은 State 이력 + Evidence 에서.
 - **같은 digest 면 다시 쓴다:** 가리키는 키들의 (값, 유효성)이 그대로이고 as_of 만 바뀌면? → as_of 가 digest 에 들어가므로 digest 가 달라진다.
-  결정 재사용 열쇠는 **as_of 를 뺀 core** 의 해시로 따로 둔다 (OQ-18).
+  결정 재사용 열쇠는 **as_of 를 뺀 core** 의 해시로 따로 둔다 (BD-37).
 
 ### 4.4 잰 것 (2026-10-02, 이 세션 · 스크래치패드에서만 · 저장소 무변경)
 
@@ -203,14 +203,14 @@ DC 저장소 빌더로 Sensor §40 시연 상태 + MS 세션 상태(표본 3)에
 | 첫 조각 | `first_chunk_ms` · `run.ttft_ms` | `latency.ttft_ms` | `gen_ai.server.time_to_first_token` | |
 | 비용 | `run.cost_usd` (보고) · 지표 `cost_estimate` (단가표) | `cost.usd` + `cost.source`(provider · price_table) | — | MS 는 출처를 칸으로 가진다 → 정준 Observation 의 `basis` 로 |
 | API 오류 | `runtime.api_error_status` | — | `error.type` | |
-| 요금 한도 | `runtime.rate_limit_utilization` · `rate_limit_status` · `rate_limit_threshold` | — | — | 실체는 **계정** (OQ-12) |
+| 요금 한도 | `runtime.rate_limit_utilization` · `rate_limit_status` · `rate_limit_threshold` | — | — | 실체는 **계정** (BD-32) |
 | 도구 실패 | `tool.is_error` · `timed_out` · `interrupted` | `outcome.tool_success` (실행 합) | — | 단위가 다르다 |
 | 정책 실행기 자기 관측 | — | `interaction.llm_calls` · `retries` · `arbiter_denies` · `proposal_invalid` · `context_retrievals` · `non_progress_rounds` | — | **Sensor 에 없다** → 정준 꼴 `kind=self` 로 새로 (이름은 MS 것을 그대로) |
 | 사람 고침 | — | `outcome.user_correction` | — | `kind=self`, source=user |
 | 과업 성공 | `quality_state` 의 외부 라벨 | `outcome.task_success` (평가가 채움) | — | 둘 다 EXTERNAL_LABEL |
 | 예산 | (설정 `cost_budget_usd`) | `config.token_budget` 등 (신호로 들어옴) | — | **관측이 아니다** → 대응표에서 뺀다 (BV-03) |
 
-이 표는 **초안**이다. 정준 이름 집합을 어느 저장소가 갖는지(Telemetry 저장소 제안)는 OQ-08 이다. Sensor 쪽에서 대응표를 만든다면 이 표의 열을
+정준 이름 집합의 집은 **Telemetry 저장소**로 정했다(BD-28). 그 저장소는 이미 섰고(`jolly-einstein`), Sensor v3 로 되짓는 `compat` 을 갖는다. 이 표는 그 저장소의 이름과 MS RunRecord 를 맞대는 **초안**이다. Sensor 쪽에서 대응표를 만든다면 이 표의 열을
 그대로 쓰고, "변환" 열의 "확인할 것" 을 녹음 응답으로 확인하는 시험을 붙이는 것이 첫 일이다.
 
 ## 6. 자료 구조 최적화 전략 (인코딩은 마지막)

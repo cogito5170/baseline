@@ -1,6 +1,6 @@
 # DATA FLOW — Sensor → Telemetry → State → Model/Relationship → DC → Policy → Arbitration → Action → Verification
 
-(baseline-0.1, 제안) 낱말의 뜻은 [`SEMANTIC_MODEL.md`](SEMANTIC_MODEL.md), 칸은 [`SCHEMA_PROPOSAL.md`](SCHEMA_PROPOSAL.md) 에 있다.
+(baseline-1.0, 승인 2026-10-02) 단계 이름과 층 번호 L0–L5 의 대응은 BASELINE §10.1. 낱말의 뜻은 [`SEMANTIC_MODEL.md`](SEMANTIC_MODEL.md), 칸은 [`SCHEMA_PROPOSAL.md`](SCHEMA_PROPOSAL.md) 에 있다.
 
 ## 1. 단계 계약 — 한 표
 
@@ -8,17 +8,17 @@
 |---|---|---|---|---|---|---|
 | 1 | Sensor 수집 | 원천(API 응답 · 스트림 · JSONL · 도구 결과 · 사람 피드백 · 외부 라벨) | Observation (`unobserved` · `reported_null` 표시) | 수집기 (Sensor `telemetry/collect.py`, MS `providers/`) | 원천 사건 | 칸을 `unobserved` 로. 지어내지 않는다 |
 | 2 | Telemetry 운반 | Observation | Telemetry 레코드 (꼴 판본 · record_id) | 수집기 → Runtime ingest | — | 같은 record_id 는 버린다(멱등). 꼴 위반은 격리함 |
-| 3 | Measure | Observation (Model 의 바인딩 · 측정 정의) | Measurement (+ `derived_from`) | L2 | 관측 도착 | 입력이 모자라면 UNKNOWN |
-| 4 | Estimate | Measurement · 이전 State (Model 의 규칙) | State · 전이 · 생애 사건 | L3 (상태 이름마다 규칙 하나) | Measurement 변화 · `tick(now)` | UNKNOWN · STALE 로 표시. 지우지 않는다 |
-| 5 | Assess | State · Measurement · Model(기대값 · 고장 모드) · Relationship | 건강 · 고장 State | L4 | State 변화 · 관측 결손 | 판정 근거가 없으면 UNKNOWN |
-| 6 | Relationship 갱신 | Observation(간선 증거) · 구조 선언 | 실체 간선 + 유효 구간 | L3 / Runtime (OQ-07) | 관측 도착 · 선언 | — |
-| 7 | Contextualize | State Store · Relationship · 목적(Model) · 요청(제약 · 능력) · `now` | DecisionContext (고정 · 내용 해시) | L5 (DC) | 결정 요청 · DC 가 가리키는 키의 (값, 유효성) 변화 · TTL 만료 | 필수 상태가 못 쓰이면 `complete=False`. 빌드 자체가 실패하면 DC 없음 (§6.5) |
-| 8 | Decide | DecisionContext 만 | Decision = ActionIntent[] + 까닭 + 사용 키 + 판본 | L6 Policy | DC 도착 | 실행기 오류 → 의도 없음 + 자기 관측 (A0 처럼) |
-| 9 | Validate | ActionIntent · 그 DC · ActionSpec(Model) | 유효 의도 / 거절 + 까닭 | L7 | Decision | 거절 → 원장 + 자기 관측 |
-| 10 | Arbitrate | 유효 의도 여럿 · 우선순위 · `conflicts_with`(Model) | 선택 의도 하나 (또는 없음) | L8 | 판(round)의 마감 | 고를 것이 없으면 없음 |
-| 11 | Guard | 선택 의도 · **지금** State · 제약 · 권한 · 안전 규칙(Model) | ALLOW → ActionCommand / DENY / SAFE_ACTION | L9 | 배차 직전 · 안전 관련 상태 변화 | 예외 → DENY (enforce) |
-| 12 | Execute | ActionCommand | ActionOutcome (Observation 으로) | L10 실행기 | 허가 | 실행 오류도 Observation (`tool_error`) |
-| 13 | Verify | Command · ActionSpec 사후조건 · 그 뒤의 State | Verification (`action_state` State) | L11 | 결과 관측 도착 · 사후조건의 시간 창 만료 | 판정 못 하면 UNKNOWN |
+| 3 | Measure | Observation (Model 의 바인딩 · 측정 정의) | Measurement (+ `derived_from`) | MEASURE | 관측 도착 | 입력이 모자라면 UNKNOWN |
+| 4 | Estimate | Measurement · 이전 State (Model 의 규칙) | State · 전이 · 생애 사건 | ESTIMATE (상태 이름마다 규칙 하나) | Measurement 변화 · `tick(now)` | UNKNOWN · STALE 로 표시. 지우지 않는다 |
+| 5 | Assess | State · Measurement · Model(기대값 · 고장 모드) · Relationship | 건강 · 고장 State | ASSESS | State 변화 · 관측 결손 | 판정 근거가 없으면 UNKNOWN |
+| 6 | Relationship 갱신 | Observation(간선 증거) · 구조 선언 | 실체 간선 + 유효 구간 | ESTIMATE / Runtime (BD-27) | 관측 도착 · 선언 | — |
+| 7 | Contextualize | State Store · Relationship · 목적(Model) · 요청(제약 · 능력) · `now` | DecisionContext (고정 · 내용 해시) | CONTEXTUALIZE (DC) | 결정 요청 · DC 가 가리키는 키의 (값, 유효성) 변화 · TTL 만료 | 필수 상태가 못 쓰이면 `complete=False`. 빌드 자체가 실패하면 DC 없음 (§6.5) |
+| 8 | Decide | DecisionContext 만 | Decision = ActionIntent[] + 까닭 + 사용 키 + 판본 | DECIDE Policy | DC 도착 | 실행기 오류 → 의도 없음 + 자기 관측 (A0 처럼) |
+| 9 | Validate | ActionIntent · 그 DC · ActionSpec(Model) | 유효 의도 / 거절 + 까닭 | VALIDATE | Decision | 거절 → 원장 + 자기 관측 |
+| 10 | Arbitrate | 유효 의도 여럿 · 우선순위 · `conflicts_with`(Model) | 선택 의도 하나 (또는 없음) | ARBITRATE | 판(round)의 마감 | 고를 것이 없으면 없음 |
+| 11 | Guard | 선택 의도 · **지금** State · 제약 · 권한 · 안전 규칙(Model) | ALLOW → ActionCommand / DENY / SAFE_ACTION | GUARD | 배차 직전 · 안전 관련 상태 변화 | 예외 → DENY (enforce) |
+| 12 | Execute | ActionCommand | ActionOutcome (Observation 으로) | EXECUTE 실행기 | 허가 | 실행 오류도 Observation (`tool_error`) |
+| 13 | Verify | Command · ActionSpec 사후조건 · 그 뒤의 State | Verification (`action_state` State) | VERIFY | 결과 관측 도착 · 사후조건의 시간 창 만료 | 판정 못 하면 UNKNOWN |
 | ↺ | 되먹임 | 12 · 13 의 결과 · 모든 단계의 자기 관측 | → 1 | — | — | — |
 
 **결정 원장 (Decision Ledger).** 7–13 의 각 단계는 같은 DecisionRecord 에 **자기 절만** 덧붙인다. 텔레메트리에는 `decision_ref` 만 실린다.
@@ -33,7 +33,7 @@
 | 문맥은 어떻게 결정이 되나? | Policy(판본)가 DC 의 **usable 값**만 읽는다. 쓸 수 없으면 None(=모름)이다. 모름으로는 행동을 바꾸지 않는다 — 목적의 기본값을 쓴다 | DC `value()` · `policy_state()` · Sensor 참조 정책 |
 | 결정은 어떻게 묶이나? | Validate(꼴 · 근거) → Arbitrate(선택) → Guard(허가 · 안전, **지금** 상태 기준) | (GAP-02 · 03: 아직 MS Arbiter 하나) |
 | 행동은 어떻게 실행되나? | Guard 가 낸 ActionCommand 를 실행기가 받는다. 실행 자리는 하나다 | MS `pipeline` 의 호출 자리 하나 (시험) |
-| 행동 성공은 어떻게 검증하나? | 실행기의 "됐다" 는 관측일 뿐이다. 사후조건이 그 뒤의 상태에서 성립하는지를 L11 이 본다 | 없음 (GAP-05) |
+| 행동 성공은 어떻게 검증하나? | 실행기의 "됐다" 는 관측일 뿐이다. 사후조건이 그 뒤의 상태에서 성립하는지를 VERIFY 이 본다 | 없음 (GAP-05) |
 
 ## 3. 흐름 그림 — 실제 예 (Sensor §40 수치)
 
@@ -73,9 +73,9 @@
 | C2 텔레메트리 운반 · ingest | 중복 · 순서 뒤집힘 · 늦게 도착 | record_id 중복 · 시각 역전 | 순서는 환경(네트워크)이다 → 고장 아님. 꼴 위반만 고장 | 격리함 수(MS `quarantine`) · `ingest.rejected_rate` | 격리 레코드 | — | — | — | 격리율이 되돌아옴 |
 | C3 Provider (LLM API) | 429 · 5xx · 시간 초과 · 거절 | `api_error_status` · `rate_limit_status` · `stop_reason` | 429 · 리셋 시각은 **선언된** 환경 신호다(계정 한도). 5xx 연속은 Model 의 문턱이 있을 때만 고장 | `rate_limit_state`(계정 실체) · `runtime_reliability` | 오류 관측 id | `provider_selection`: SWITCH · WAIT | 허용 provider 제약 · 데이터 거주 | SWITCH_PROVIDER · WAIT · STOP | 다음 호출 성공 관측 |
 | C4 도구 | 실패 · 시간 초과 · 중단 · 바깥 차단(EGRESS_BLOCKED) | `is_error` · `timed_out`(구조화 칸 우선) · `interrupted` · 구조화된 오류 종류 | 구조화된 원인(EGRESS_BLOCKED · HTTP 코드)은 환경. 원인 없는 실패는 UNKNOWN 원인 | `tool_execution_health` · `execution_interruption` | 도구 호출 id | `execution_control`: RETRY · ESCALATE | retry 상한 · 되돌릴 수 없는 도구 허가 | RETRY · ESCALATE · STOP | 같은 겨냥의 다음 결과 성공 (RECOVERED_FAILURES) |
-| C5 상태 엔진 · 규칙 | 규칙 오류 · 비결정 · 시계 어긋남 | 스냅숏 비교 · `FUTURE_OBSERVATION` · 규칙 예외 | 환경과 무관한 내부 고장 | `state_engine.integrity` (새, OQ-15) | 결정성 시험 · 이슈 코드 | — | 해당 상태 INVALID → DC 강등 | HOLD | 재생 결과가 기록과 같음 |
+| C5 상태 엔진 · 규칙 | 규칙 오류 · 비결정 · 시계 어긋남 | 스냅숏 비교 · `FUTURE_OBSERVATION` · 규칙 예외 | 환경과 무관한 내부 고장 | `state_engine.integrity` (새, BD-35) | 결정성 시험 · 이슈 코드 | — | 해당 상태 INVALID → DC 강등 | HOLD | 재생 결과가 기록과 같음 |
 | C6 Model Registry | 판본 어긋남(DC ↔ MS 신호 이름이 실제로 어긋났다) | 계약 시험 실패 · 모르는 신호(unbound) 급증 | 내부 고장 | `contract.conformance` (시퀀싱 쪽 판정) | 계약 시험 결과 | 고리 밖 — 개발 절차 | 판본이 맞지 않는 소스는 DC 가 거절 | — | 계약 시험 통과 |
-| C7 DC 빌더 | 빌드 예외 · 목적 없음 · '지금' 없음 | 예외 | 내부 | DC 없음 | 원장의 빌드 실패 기록 | 목적의 안전 기본 결정 (OQ-03) | Guard 가 DC 없는 의도를 거부 | 안전 기본 · ESCALATE | 다음 빌드 성공 |
+| C7 DC 빌더 | 빌드 예외 · 목적 없음 · '지금' 없음 | 예외 | 내부 | DC 없음 | 원장의 빌드 실패 기록 | 목적의 안전 기본 결정 (BD-23) | Guard 가 DC 없는 의도를 거부 | 안전 기본 · ESCALATE | 다음 빌드 성공 |
 | C8 정책 실행기 (LLM) | 못 읽는 출력 · 지어낸 대상 · 되풀이 · 형식 신뢰도 하락 | `proposal_invalid` · `arbiter_denies` · `user_correction` | 한 번은 표본 잡음이다. **표본 3 · 사건 2 이상**일 때만 상태를 뒤집는다(MS usage-model-2, 측정으로 정함) | `answer_reliability` · `correction_rate` | 자기 관측 id | CR: 품질 우선(줄이지 않는다) | Guard 는 LLM 의 말에 영향받지 않는다 | 고정 정책 · ESCALATE | 창 안 사건이 문턱 밑으로 |
 | C9 Validate · Arbitrate | 규칙 예외 | 예외 | 내부 | `guard.health` | 예외 기록 | — | 예외면 DENY | — | — |
 | C10 Guard | 예외 · 느림 · shadow 에 머묾 | 예외 · 지연 · 모드 | 내부 | `guard.mode` · `guard.health` | — | — | enforce 에서 예외 = 거부 | 안전 동작만 | Guard 자기 시험 통과 |
@@ -89,10 +89,10 @@
 
 ```
 수집기 멈춤 → 새 Observation 없음 → 그 실체의 상태들은 값을 지킨 채 TTL 이 지나면 STALE (지우지 않는다)
-            → L4: collector.liveness = ENDED_WITHOUT_RESULT 또는 UNKNOWN. observes 간선으로 영향받는 실체를 묶는다(공통 원인)
-            → L5: 필수 상태가 STALE → complete=False, missing_required 에 적힌다
-            → L6: usable 값이 없다 → 목적의 기본 결정(바꾸지 않는다)
-            → L9: 그 상태를 사전조건으로 쓰는 행동은 거부. 안전 동작(HOLD · ESCALATE)은 허용
+            → ASSESS: collector.liveness = ENDED_WITHOUT_RESULT 또는 UNKNOWN. observes 간선으로 영향받는 실체를 묶는다(공통 원인)
+            → CONTEXTUALIZE: 필수 상태가 STALE → complete=False, missing_required 에 적힌다
+            → DECIDE: usable 값이 없다 → 목적의 기본 결정(바꾸지 않는다)
+            → GUARD: 그 상태를 사전조건으로 쓰는 행동은 거부. 안전 동작(HOLD · ESCALATE)은 허용
 ```
 
 ### 6.2 상태가 낡으면
@@ -108,7 +108,7 @@ Guard 가 이긴다. 거부는 (a) 원장의 Guard 절, (b) 정책 실행기에 
 ### 6.4 고장이 여럿이면
 
 1. 고장마다 자기 실체의 건강 상태가 따로 선다(도구마다 따로 서는 지금의 `tool_execution_health` 처럼).
-2. L4 는 `observes` · `runs_on` · `uses` 로 **공통 원인**을 먼저 찾는다. 수집기 하나가 죽어 상태 다섯이 UNKNOWN 이면 고장 다섯이 아니라 하나다.
+2. ASSESS 는 `observes` · `runs_on` · `uses` 로 **공통 원인**을 먼저 찾는다. 수집기 하나가 죽어 상태 다섯이 UNKNOWN 이면 고장 다섯이 아니라 하나다.
 3. Guard 는 모든 활성 제약의 **논리곱**을 본다. 가장 엄한 것이 이긴다. 제약끼리는 서로 풀어 주지 못한다.
 4. 안전 동작이 여럿 요구되면 Model 의 안전 동작 순서(예: STOP > HOLD > ESCALATE)로 하나를 고른다 — 순서는 OQ-17.
 5. 복구는 하나씩 검증한다. 하나의 복구 확인이 다른 고장의 확인을 대신하지 않는다.
@@ -119,17 +119,17 @@ Guard 가 이긴다. 거부는 (a) 원장의 Guard 절, (b) 정책 실행기에 
 |---|---|---|
 | 빌드 실패(모르는 목적 · '지금' 없음 · 예외) | DC 저장소: 예외. Sensor DC: `INVALID` | 결정 없음 → 목적의 **안전 기본 결정** + 원장에 빌드 실패 |
 | `complete=False` | DC: 정책에 넘긴다. Sensor DC: `DEGRADED` | 정책은 usable 값만 쓴다. 필수가 빠진 결정은 Guard 가 위험 등급 행동을 거부 |
-| 안전 기본 결정이 무엇인가 | MS: 모름 = 고정 정책. Sensor 참조 정책: 완료 상태를 모르면 ESCALATE | **미결 — OQ-03** |
+| 안전 기본 결정이 무엇인가 | MS: 모름 = 고정 정책. Sensor 참조 정책: 완료 상태를 모르면 ESCALATE | **BD-23**: context_policy = KEEP · prompt_policy = 고정 계획 · provider_selection = KEEP_PROVIDER · execution_control = ESCALATE (능력이 없으면 STOP). Model 에 판본으로 |
 
 ## 7. 행동 기록은 누가 내나 (Sensor 세션의 S6 물음에 대한 답)
 
 | 기록 | 내는 쪽 | 꼴 | 지금 |
 |---|---|---|---|
-| "무엇을 하기로 했나" (의도 · 선택 · 허가) | L6–L9 가 Decision Ledger 에 | DecisionRecord | MS Arbiter ledger · RunRecord.policy (BV-04) |
-| "무엇을 실행했나" (명령) | L10 실행기가 Ledger 에 | ActionCommand | MS 도구 실행 |
-| "무엇이 일어났나" (결과) | L10 실행기가 **Observation 으로** | Telemetry 레코드 `action_outcome` (새 종류, 제안) | MS 도구 handler 가 텔레메트리를 돌려준다 |
-| "효과가 났나" | L11 | `action_state` State | 없음 |
+| "무엇을 하기로 했나" (의도 · 선택 · 허가) | DECIDE–GUARD 가 Decision Ledger 에 | DecisionRecord | MS Arbiter ledger · RunRecord.policy (BV-04) |
+| "무엇을 실행했나" (명령) | EXECUTE 실행기가 Ledger 에 | ActionCommand | MS 도구 실행 |
+| "무엇이 일어났나" (결과) | EXECUTE 실행기가 **L0 사건으로** | Telemetry 저장소의 `action.*` 사건 (`action.dispatch {action_type, decision_ref}` 와 그 결과) — 이미 있다 | MS 도구 handler 가 텔레메트리를 돌려준다. Recorder 는 아직 어느 런타임에도 안 붙었다 |
+| "효과가 났나" | VERIFY | `action_state` State | 없음 |
 | 런타임 **자신의** 행동(압축 · 백그라운드 이동 · 권한 거부) | 런타임이 이미 원천에 남긴다 → **Sensor 수집기가 Observation 으로** | 기존 v3 꼴의 확장 | Sensor 조사: `compact_boundary` · 백그라운드 이동이 원천에 있는데 안 거둔다 (D4) |
 
 **Sensor 는 우리 정책의 행동 기록을 내지 않는다.** 실행기가 없는 지금은 그 기록이 없다. 지어내지 않는다. Sensor 가 지금 할 수 있는 것은 런타임
-자신의 행동을 거두는 일뿐이다. 우리 정책의 `action_state` 는 Action 실행기(OQ-05)가 선 뒤에 짓는다.
+자신의 행동을 거두는 일뿐이다. 우리 정책의 `action_state` 는 Action 실행기(BD-25)가 선 뒤에 짓고, 그 입력 계약은 L0 의 `action.*` 이름을 쓴다(BASELINE §13.2).
