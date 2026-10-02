@@ -571,3 +571,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 88 회차: **단계 4(SDK) 마감**(BD-128, `STAGES.md` stage-4 에 여덟 sha). 여덟 초록. 모든 세션 wait.
 - 89 회차: 사용자 결정 BD-129 — 실제 Claude Code 에서 훅 확인(CMD-K7, `claude -p` 6 번까지, 임시 설정만).
 - 90 회차: rlo-SDK `6931d92`(62) — CMD-K7 성공: 실제 Claude Code 에서 훅 불림 · 판정 16/16 일치 · enforce deny 가 실제로 막음 · 126 ms. 모델 밖 도구 A1(4/16) → CMD-K8(예시 모델에 Edit · Grep, README, 탐침 복사 시점)(BD-130).
+- 91 회차: 사용자 결정 BD-131 — 방법론 SDK ga-SDK. baseline 이 `METHOD.md` method-1 을 씀(ga-SDK `2867c25`), SESSION_GUIDANCE 원문 보관, 통로 #12 · CMD-GA1(1판 G1–G8). 짓는 세션은 사용자가 만들 때까지 wait.
