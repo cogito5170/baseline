@@ -69,7 +69,7 @@
 
 | 부품 | 고장 | 관측 | 환경과 가르기 | 상태 | 근거 | 반응 정책 | 안전 장치 | 허용 행동 | 복구 확인 |
 |---|---|---|---|---|---|---|---|---|---|
-| C1 수집기 · 센서 어댑터 | 멈춤 · 꼴 바뀜 · 칸 놓침 (Sensor 조사 D1–D4 가 실제로 났다) | 레코드 끊김 · `unobserved` 급증 · 꼴 검증 실패 | **같은 기록 안에서는 가를 수 없다**(조사 결론). 기록 밖 채널(프로세스 확인 · 합성 점검)이 있어야 한다 | `collector.liveness` (계획: ENDED · ENDED_WITHOUT_RESULT · AWAITING_INPUT · ACTIVE · UNKNOWN) | 마지막 레코드 시각 · 끝 `result` 유무 | 이 수집기가 `observes` 하는 실체의 상태를 쓰는 목적 전부: 모름 → 기본값 | 그 상태를 사전조건으로 쓰는 행동은 Guard 가 거부 | HOLD · ESCALATE | 새 레코드 도착 + 꼴 검증 통과 |
+| C1 수집기 · 센서 어댑터 | 멈춤 · 꼴 바뀜 · 칸 놓침 (Sensor 조사 D1–D4 가 실제로 났다) | 레코드 끊김 · `unobserved` 급증 · 꼴 검증 실패 | **같은 기록 안에서는 가를 수 없다**(조사 결론). 기록 밖 채널(프로세스 확인 · 합성 점검)이 있어야 한다 | `collector.liveness` (실체 `collector:*` — 실행의 `liveness_state` 와 다른 실체, BD-52. 값: ENDED · ENDED_WITHOUT_TERMINAL · AWAITING_INPUT · ACTIVE · UNKNOWN) | 마지막 레코드 시각 · 끝 `result` 유무 | 이 수집기가 `observes` 하는 실체의 상태를 쓰는 목적 전부: 모름 → 기본값 | 그 상태를 사전조건으로 쓰는 행동은 Guard 가 거부 | HOLD · ESCALATE | 새 레코드 도착 + 꼴 검증 통과 |
 | C2 텔레메트리 운반 · ingest | 중복 · 순서 뒤집힘 · 늦게 도착 | record_id 중복 · 시각 역전 | 순서는 환경(네트워크)이다 → 고장 아님. 꼴 위반만 고장 | 격리함 수(MS `quarantine`) · `ingest.rejected_rate` | 격리 레코드 | — | — | — | 격리율이 되돌아옴 |
 | C3 Provider (LLM API) | 429 · 5xx · 시간 초과 · 거절 | `api_error_status` · `rate_limit_status` · `stop_reason` | 429 · 리셋 시각은 **선언된** 환경 신호다(계정 한도). 5xx 연속은 Model 의 문턱이 있을 때만 고장 | `rate_limit_state`(계정 실체) · `runtime_reliability` | 오류 관측 id | `provider_selection`: SWITCH · WAIT | 허용 provider 제약 · 데이터 거주 | SWITCH_PROVIDER · WAIT · STOP | 다음 호출 성공 관측 |
 | C4 도구 | 실패 · 시간 초과 · 중단 · 바깥 차단(EGRESS_BLOCKED) | `is_error` · `timed_out`(구조화 칸 우선) · `interrupted` · 구조화된 오류 종류 | 구조화된 원인(EGRESS_BLOCKED · HTTP 코드)은 환경. 원인 없는 실패는 UNKNOWN 원인 | `tool_execution_health` · `execution_interruption` | 도구 호출 id | `execution_control`: RETRY · ESCALATE | retry 상한 · 되돌릴 수 없는 도구 허가 | RETRY · ESCALATE · STOP | 같은 겨냥의 다음 결과 성공 (RECOVERED_FAILURES) |
@@ -129,7 +129,7 @@ Guard 가 이긴다. 거부는 (a) 원장의 Guard 절, (b) 정책 실행기에 
 | "무엇을 실행했나" (명령) | EXECUTE 실행기가 Ledger 에 | ActionCommand | MS 도구 실행 |
 | "무엇이 일어났나" (결과) | EXECUTE 실행기가 **L0 사건으로** | Telemetry 저장소의 `action.*` 사건 (`action.dispatch {action_type, decision_ref}` 와 그 결과) — 이미 있다 | MS 도구 handler 가 텔레메트리를 돌려준다. Recorder 는 아직 어느 런타임에도 안 붙었다 |
 | "효과가 났나" | VERIFY | `action_state` State | 없음 |
-| 런타임 **자신의** 행동(압축 · 백그라운드 이동 · 권한 거부) | 런타임이 이미 원천에 남긴다 → **Sensor 수집기가 Observation 으로** | 기존 v3 꼴의 확장 | Sensor 조사: `compact_boundary` · 백그라운드 이동이 원천에 있는데 안 거둔다 (D4) |
+| 런타임 **자신의** 행동(압축 · 백그라운드 이동 · 권한 거부) | 런타임이 이미 원천에 남긴다 → **L0 수집기(Telemetry 세션)가 사건으로** (BD-53) | 기존 v3 꼴의 확장 | Sensor 조사: `compact_boundary` · 백그라운드 이동이 원천에 있는데 안 거둔다 (D4) |
 
-**Sensor 는 우리 정책의 행동 기록을 내지 않는다.** 실행기가 없는 지금은 그 기록이 없다. 지어내지 않는다. Sensor 가 지금 할 수 있는 것은 런타임
-자신의 행동을 거두는 일뿐이다. 우리 정책의 `action_state` 는 Action 실행기(BD-25)가 선 뒤에 짓고, 그 입력 계약은 L0 의 `action.*` 이름을 쓴다(BASELINE §13.2).
+**Sensor 는 우리 정책의 행동 기록을 내지 않는다.** 실행기가 없는 지금은 그 기록이 없다. 지어내지 않는다. 런타임 자신의 행동은 L0 가
+거두고(BD-53), Sensor 는 그것을 읽어 상태로 만든다. 우리 정책의 `action_state` 는 Action 실행기(BD-25)가 선 뒤에 짓고, 그 입력 계약은 L0 의 `action.*` 이름을 쓴다(BASELINE §13.2).

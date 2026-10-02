@@ -159,6 +159,15 @@
 | BD-50 | Sensor 를 Telemetry 의 **필수** 의존으로 바꾸는 기준: 수집기 셋(cc_jsonl · cc_stream · sweagent)마다 **서로 다른 실데이터 기록 3 개 이상**에서 `l0-check` 가 100 % 같다 + MS `inproc:ms` 원장이 Sensor State 까지 흐른다 + `l0-check` 를 시험으로 붙인다. 그 뒤 Sensor 의 수집기를 지운다(Telemetry 세션) | 지금 대조는 이 세션 기록 하나뿐이다(Telemetry 보고). 원천마다 꼴이 다르다 | |
 | BD-51 | 세션은 PR 을 만들지 않는다. 통합은 baseline 이 저장소마다 `claude/gracious-meitner-vp49xe` 에서 한다 | 각 저장소의 기본 브랜치가 지금 다른 세션의 작업 브랜치다(Sensor = `nice-wright`, DC = `nifty-volta`, MS = `eloquent-turing`, Telemetry = `jolly-einstein`). PR 을 거기로 열면 서로의 일을 덮는다 | 기본 브랜치를 어떻게 둘지는 사용자가 정한다 |
 
+### 통합 2 회차 (2026-10-02, Sensor 보고 `a173ca2` 에 대한 결정)
+
+| # | 결정 | 까닭 | 결과 |
+|---|---|---|---|
+| BD-52 | `liveness_state`(실행 · task 의 liveness)는 **Sensor 에 둔다.** 소유 층 표시만 ASSESS(BD-35 와 같은 방식). Health 저장소가 서면 그때 옮긴다. 수집기의 liveness(DATA_FLOW C1)는 **다른 실체**(`collector:*`)의 상태다. 값 이름은 `ENDED_WITHOUT_TERMINAL` 로 맞춘다 | Health 저장소가 아직 없다. 대상이 다른 두 liveness 를 한 상태로 합치지 않는다 | DATA_FLOW C1 의 값 이름을 고쳤다 |
+| BD-53 | 수집기 결함 D1–D4 와 런타임 자신의 행동(압축 · 백그라운드 이동 · 권한 거부) 수집은 **Telemetry 세션**의 일이다. PC-20 의 주인을 바꾼다 | 수집기는 Telemetry 저장소로 옮겨졌고, Sensor `llmsensor/telemetry/*` 는 Telemetry 세션 소유다(PROTOCOL §5). 사용자 지시("Sensor 는 센서만")와도 맞는다 | DATA_FLOW §7 · PC-20 고침 |
+| BD-54 | S3 `dependency_fault` 를 **승인한다**. 조건: 실체 id `dependency:<범위>:<이름>`(BD-32) · 런타임이 구조화한 원인만 · `NO_FAULT_DECLARED` ≠ HEALTHY · 소유 층 표시 ASSESS · 상태 수 상한을 올린다. 입력 이름은 L0 가 정한다 | BD-10(선언된 근거만) · BD-47 | |
+| BD-55 | PC-08(Sensor 의 DC 둘 · 참조 정책 걷어 내기)은 **DC 가 Sensor DC 의 장점(`allow_stale` 명시 · ContextStore/explain)을 옮긴 뒤**에 한다. Phase 8 결과 파일은 그 날짜의 기록으로 남긴다 | BD-05 가 그 둘을 옮길 후보로 적었다. 먼저 걷으면 기능이 사라진다 | DC 에 CMD-D6 |
+
 ---
 
 ## 변경 제안 (PC) — 기준선은 승인됐다. PC 는 **아직 하나도 실행하지 않았다.** 실행은 사용자가 PC 마다(또는 묶음으로) 허가한 뒤에 한다
@@ -184,7 +193,7 @@
 | PC-17 | MS `tokens.context_tokens`(추정) 이름을 가른다 | SCHEMA §5 | `MS/ms/run_telemetry.py` · `MS/ms/usage_model.py` · `MS/ms/runtime.py` | PC-02 | 낮음 |
 | PC-18 | 문서 그림에서 WALP 를 Arbiter/Guard 로 | BD-19 | `Sensor/docs/MS_SENSING.md` · `DC/README.md` · `DC/docs/DECISION_CONTEXT.md` · `DC/dc/__init__.py` (머리말) | 없음 | 없음 |
 | PC-19 | `Proposal` → ActionIntent 꼴 | BD-09 | `MS/ms/llm.py` · `MS/ms/pipeline.py` · `MS/ms/arbiter.py` · Action 저장소 (새) | OQ-05 · BD-20 | 중간 |
-| PC-20 | Sensor 수집기 결함 D1–D4 (Sensor 세션이 이미 계획) — 기준선 쪽에서는 **적합성만** 본다: 429 → 계정 실체 · `<synthetic>` 을 호출에서 뺌 · 압축 사건은 런타임 자신의 행동 관측 | Sensor `MS_HEALTH_INVENTORY.md` §1 | `Sensor/llmsensor/telemetry/collect.py` · `Sensor/schema/telemetry.schema.json` | PC-02 · OQ-12 | Sensor 세션 소관 |
+| PC-20 | 수집기 결함 D1–D4 — **주인: Telemetry 세션**(BD-53). 기준선 쪽에서는 **적합성만** 본다: 429 → 계정 실체 · `<synthetic>` 을 호출에서 뺌 · 압축 사건은 런타임 자신의 행동 관측 | Sensor `MS_HEALTH_INVENTORY.md` §1 | `Sensor/llmsensor/telemetry/collect.py` · `Sensor/schema/telemetry.schema.json` | PC-02 · OQ-12 | Sensor 세션 소관 |
 | PC-21 | MS 계획 문서를 BD-21(CR 자리) · BD-24(A0–A8 배분)에 맞춘다 | 앞선 결정을 대신했다 | `MS/docs/계획.md` · `MS/docs/역할.md` · `MS/README.md` · `MS/ms/arbiter.py` (머리말의 ⑦ 배분) | 없음 | 낮음 (문서) |
 | PC-22 | Sensor 문서의 `resource_state` 읽기를 BD-39 로 고친다. 규칙은 `resource-state-v2` | BD-39 | `Sensor/docs/MS_SENSING.md` §6 · `Sensor/docs/MS_HEALTH_INVENTORY.md` §4 · `Sensor/llmsensor/state/rules.py` · `Sensor/llmsensor/sensing/cost/__init__.py` · `Sensor/tests/test_state.py` | PC-20 (D3) · BD-13 | 중간. 예산 주인이 Model 로 옮겨 간다 |
 | PC-23 | DC 목적에 질의형 선택을 더하고, CR 은 DC 만 받는다 | BD-26 · BV-07 | `DC/dc/purpose.py` · `DC/dc/builder.py` · `DC/dc/model.py` · `MS/ms/cr.py` · `MS/ms/query.py` | PC-05 · PC-07 | 중간 |
