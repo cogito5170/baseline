@@ -489,3 +489,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
   - Sensor: CMD-T9'(Telemetry 의존을 `@claude/gracious-meitner-vp49xe` 로 고정, BD-68 — `direct_url.json` 이 `2f9ae0c` 를 받음) · BD-64 `resource-state-v3`(추정 소진은 영구가 아니다, 보고가 뒤집는다).
   - MS: **F2 결과**(BD-72). 적응 맥락은 지연 +2.6 s 가 재졌고 꺼냄 증가(F2)는 사전등록 읽기로 후보에서 내렸다. 이득은 재지 못했다. 기본 선택기는 고정 그대로.
   - 다음: MS 는 PC-23 의 MS 쪽 → `evidence` 호환 속성 떼기(BD-73). F2 후속은 그 뒤, 사용자 결정으로.
+- 14 회차: Sensor `294683d`(170) — liveness 가 `input.removed` 를 처리하지 않은 입력 수로 센다. 실데이터에서 429 뒤 5.5 시간이 이제 AWAITING_INPUT(T11 실기록 확인). **T10 은 실기록에서 아직 0/8** — 합성으로만 맞았다; 실제 `tool_progress` 키 목록(CMD-S14 1)이 와야 고친다. BD-74(부재 주장의 근거 시각) · BD-75. 네 저장소 초록(57 · 170 · 153 · 88).
