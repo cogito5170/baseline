@@ -188,6 +188,8 @@
 | BD-65 | 질의형 선택(PC-23)에서 **낡은 속성 값은 core 에 싣지 않는다(None)** — DC 기본을 따른다. LLM 에게 낡은 값을 보여야 하는 곳은 MS 가 그 질의에 `allow_stale` 을 **명시**한다. 지금 MS 가 값과 `_stale` 표시를 함께 보이는 동작은 그 명시로만 남는다 | DC 보고(baseline#4 5945599256) 요청 3. 기준선 I3(STALE 은 지금 값이 아니다) · BD-57 · 키별 `allow_stale`(CMD-D6)과 같은 규칙 |
 | BD-66 | **PC-23 의 MS 쪽(CR 이 `ctx.rows` 를 받기 · `state_reader` 에 요청 넘기기)은 F2 측정 결정이 날 때까지 미룬다.** F2 를 돌리면 F2 를 먼저(사전등록이 지금 코드에 묶여 있다), 돌리지 않으면 바로 | CR 의 입력 길이 바뀌면 LLM 이 보는 맥락이 달라진다(BD-65 로 낡은 값이 None 이 된다) — 사전등록된 F2 의 측정 대상이 바뀐다 |
 | BD-67 | **F2 측정 실행 — 사용자 결정, 진행 중**(2026-10-02, 백그라운드). BD-66 에 따라 PC-23 의 MS 쪽은 F2 보고 뒤에 한다 | 사용자: "F2 지금 백그라운드로 돌리고 있어. 추후에 보고 받아" |
+| BD-68 | Sensor 의 Telemetry 의존(`l0-telemetry @ git+…/Telemetry`)은 **통합 브랜치에 고정**한다: `@claude/gracious-meitner-vp49xe`. 단계가 끝나면 그 머리에 태그를 달고 태그로 옮긴다 | Telemetry 보고(baseline#1 5945634788): 지금은 GitHub 기본 브랜치(= 세션 작업 브랜치, BD-51)를 따라가 다른 세션의 진행 중 작업을 받을 수 있다. 통합 브랜치는 baseline 이 시험을 마친 것만 담는다 |
+| BD-69 | `l0.compare` · `llmsensor l0-check` 의 뜻이 "두 수집기 대조" 에서 **"얼린 출력 · 불변식 대조"** 로 바뀐 것을 받아들인다(반환 꼴 유지 + `against` 칸). Sensor 수집기가 사라졌으므로 비교 대상이 없다. 실기록 대조는 Telemetry `eval/l0_check.py --verify` 와 얼린 지문으로 한다 | interface change 이지만 하류(Sensor `cli.py`)는 그대로 돈다(Telemetry 확인). BD-50 의 "l0-check 시험" 은 이제 golden · 불변식 · 변이 37 로 대신한다 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---

@@ -479,3 +479,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - **반복 신호(GUIDANCE 15)**: CMD-D9 가 세 회차째 처리되지 않았다. DC 세션의 옆 MS 가 PC-03 이전이라 그 환경에서는 시험이 초록이고, DC 세션은 "PC-03 의 DC 쪽은 MS 가 고치면 맞춘다" 고 적었다 — MS 는 이미 고쳤다. 원인은 세션 환경의 옆 저장소 판본이다(통합 브랜치를 옆에 두지 않음). 지시 문구를 이 사실 중심으로 바꿨다.
 - MS PC-04 는 옛 이름 `evidence` 를 호환 속성으로 남겼다(`ms/manager.py:194`) — DC `sources.py:152` 가 아직 그 이름을 읽는다. DC 를 새 이름으로 옮기는 일은 DC 세션에.
 - 9 회차: Sensor `340ea57`(164 통과) — CMD-S8 집계 근거 시각(BD-57 · BD-63) · CMD-S6 ASSESS 표시. DC `b94035c`(88 중 87, 남은 1 = D9) — BD-58 `agent_context`. MS 153 · Telemetry 54 통과. F2 는 사용자 결정으로 진행 중(BD-67).
+- 10 회차: **Sensor 가 Telemetry 를 필수 의존으로 쓴다**(CMD-T9). Sensor 수집기는 같은 이름 · 서명의 이음매(L0 수집기 + compat)로 바뀌었고, 지우기 전 출력을 얼려 대조 기준으로 삼는다(BD-69). 의존은 통합 브랜치에 고정한다(BD-68). Sensor S9(PC-09 근거 값 복사 제거)도 들어갔다. 통합: Telemetry `a23285c`(55) · Sensor `a713f05`(166) · MS 153 · DC 88 중 87(D9).
