@@ -52,6 +52,25 @@
 - 이 단계에서 선 것: 실행기 설계(BD-108) · `action-spec/1` · `action-model/1` 동결(BD-109) · 술어 · 인자 한 벌(F1 끝) · `action.dispatch.args_sig`(T17) · Sensor S6 `action_state` · export 의 `action:` 실체(D16) · MS DC 길 실행이 실행기로(BD-113, 한 실행 한 사건) · 런타임 VERIFY(BD-115) · Guard enforce 배선(BD-116 · BD-117, 기본 shadow).
 - 다음 단계로 넘어간 것: 안전 동작을 실행기 행동으로(알릴 수단이 정해질 때, BD-114) · `$run.*` 런타임 배선(소비자가 생길 때, BD-115) · 상대 비교 술어 · `outcome_ref` · OQ-19 · Gemini 확인 사전등록.
 
+## stage-4 — 2026-10-02 (통합 88 회차, 사용자 결정, BD-128) — SDK
+
+| 저장소 | 커밋 | 시험 |
+|---|---|---|
+| rlo-SDK | `d313414429ca097b02a545da92bbef9138927844` (`rlo-sdk 0.4.0`) | 62 |
+| Telemetry | `6b9dd42aebdd4e2b49d9a0c7b42a6cb46b891d0b` | 75 |
+| Sensor | `97961e98e6e55b87ea1bbb8483bb99269e5e3900` | 255 |
+| MS | `19d850e978f83853edca3ebefdf5c362906ee44c` | 215 |
+| DC | `526f2fb487934d1d5c1a930f54ea65de493f34cb` | 116 |
+| action | `c27840a299c35417ecba52967dfdfe8f861a93c9` | 68 |
+| guard | `be871b9d89fe77badeef901caaa75edc1848f13c` | 93 |
+| health | `afcff3960694f58978afec2cdde62cac9e27830f` | 36 |
+
+- 여덟을 옆에 두고(통합 머리) 돌렸다. 모두 초록(rlo-SDK 건너뜀 2 = 설치 메타데이터 시험, 설치 환경에서 돈다).
+- **설치 한 줄**: `pip install "rlo-sdk[sensor] @ git+https://github.com/cogito5170/rlo-SDK@d313414429ca097b02a545da92bbef9138927844"` — baseline 이 빈 가상환경에서 재현: `python -m rlo.example`(shadow · enforce VERIFIED) · `python -m rlo.example_hooks` · MBA-frontend 와 함께 탐침 27/27.
+- rlo-SDK 의 고정: Telemetry `35e8119` · action `3995fdb` — 위 표의 `6b9dd42` · `c27840a` 와 **패키지 코드가 같다**(탐침 · 시험 · 문서만 다름). 한 배포는 한 판으로만 들어온다(BD-121).
+- 이 단계에서 선 것: SDK 설계(BD-120) · `rlo.Autonomy`(MS Runtime 감싸기, DC 길만, guard · health 필수) · Claude Code 훅(PreToolUse 에서 transcript 다시 거둠, 지금 호출 빼고 평가, 목적 `agent_tool_call`, enforce 만 deny · `"allow"` 없음, BD-122 · 123 · 124) · `install-hook / uninstall-hook` · MBA-frontend 와 나란히(BD-125) · 토큰 절약 아이디어 안 들임(BD-127).
+- 다음으로 넘어간 것: 실제 Claude Code · Agent SDK 실행으로 훅 확인 · 적응 맥락 재검토 조건(BD-127) · 안전 동작 실행기 행동(BD-114) · API(OQ-19 · OQ-23) · PyPI.
+
 ### 태그를 달려면 (사용자 컴퓨터에서)
 
 ```
@@ -75,4 +94,13 @@ gh api repos/cogito5170/DC/git/refs        -f ref=refs/tags/stage-3 -f sha=b55ff
 gh api repos/cogito5170/action/git/refs    -f ref=refs/tags/stage-3 -f sha=2f4791e5c33df6cf19d41f139d95d74e4b86b42e
 gh api repos/cogito5170/guard/git/refs     -f ref=refs/tags/stage-3 -f sha=be871b9d89fe77badeef901caaa75edc1848f13c
 gh api repos/cogito5170/health/git/refs    -f ref=refs/tags/stage-3 -f sha=afcff3960694f58978afec2cdde62cac9e27830f
+
+gh api repos/cogito5170/rlo-SDK/git/refs    -f ref=refs/tags/stage-4 -f sha=d313414429ca097b02a545da92bbef9138927844
+gh api repos/cogito5170/Telemetry/git/refs -f ref=refs/tags/stage-4 -f sha=6b9dd42aebdd4e2b49d9a0c7b42a6cb46b891d0b
+gh api repos/cogito5170/Sensor/git/refs    -f ref=refs/tags/stage-4 -f sha=97961e98e6e55b87ea1bbb8483bb99269e5e3900
+gh api repos/cogito5170/MS/git/refs        -f ref=refs/tags/stage-4 -f sha=19d850e978f83853edca3ebefdf5c362906ee44c
+gh api repos/cogito5170/DC/git/refs        -f ref=refs/tags/stage-4 -f sha=526f2fb487934d1d5c1a930f54ea65de493f34cb
+gh api repos/cogito5170/action/git/refs    -f ref=refs/tags/stage-4 -f sha=c27840a299c35417ecba52967dfdfe8f861a93c9
+gh api repos/cogito5170/guard/git/refs     -f ref=refs/tags/stage-4 -f sha=be871b9d89fe77badeef901caaa75edc1848f13c
+gh api repos/cogito5170/health/git/refs    -f ref=refs/tags/stage-4 -f sha=afcff3960694f58978afec2cdde62cac9e27830f
 ```
