@@ -580,3 +580,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 97 회차: ga-SDK `b3cb62f`(0.1, 76 시험, 변이 18/18 + baseline 변이 R1b 잡힘) — CMD-GA1 성공. §9 검증 1 22/22 · 2 · 3. Deviation 둘 받음(METHOD rev 5 `90aa9a5`). 단계 마감 · 2판은 사용자에게 물음. GA wait(BD-135).
 - 98 회차: 사용자 결정 BD-136 — **stage-5 마감**(ga-SDK `90aa9a5` · rlo-SDK `c6b2f95`) · ga 2판 시작 → CMD-GA2(로컬 헤드리스 Runner, `claude -p` 6 번까지).
 - 99 회차: ga-SDK `d03a335`(88, 변이 8/8, 실제 3 번 $0.206) — CMD-GA2 성공(BD-137). 허브 지시 머리가 ga 검사기에 걸림(허브 잘못) → 앞으로 검사 후 보냄. CMD-GA3(pre-receive · LLM Judge 재생 평가).
+- 100 회차: ga-SDK `cac5a4f`(97, 변이 8/8, 실제 6 번 $0.234) — CMD-GA3 성공(BD-138): pre-receive 실제로 막음 · Judge 재생 클래스 4/5 · 원인 2/3. 엇갈림은 바닥 아님(METHOD rev 6). CMD-GA4(신원 꾸미기 막기 · 남은 재생 3).
