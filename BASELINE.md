@@ -567,3 +567,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 84 회차: rlo-SDK `00afe3f`(`0.3.0`, 50 시험, 변이 35/35) — CMD-K3: 훅 기본 목적 `agent_tool_call` · 지금 호출 빼고 평가 · 다시 고정. enforce 에서 정상 · 실패 뒤 · 첫 호출은 통과, 앞 호출 기다리는 중만 deny(D). BD-126. K4 · K5 진행.
 - 85 회차: rlo-SDK `f65c7fe`(탐침 · README 만, 패키지는 `0.3.0` 그대로) — CMD-K4: MBA-frontend 와 함께 설치 · 떼기 · `Stop` 나란히 23/23 부딪힘 없음(임시 HOME, `claude -p` 없음). baseline 이 같은 탐침을 새 가상환경에서 재현 23/23, 실제 `~/.mba` 안 생김. 알 것: rlo 먼저 → MBA 면 `.bak-mba` 에 rlo 항목(MBA 백업의 뜻대로) · rlo 에 설치 명령 없음 → CMD-K6(작음, K5 뒤).
 - 86 회차: CMD-K5 보고(코드 없음) — 토큰 절약 아이디어 여덟 모두 안 들임(BD-127). 다음 CMD-K6(설치 명령).
+- 87 회차: rlo-SDK `d313414`(`0.4.0`, 변이 43/43) — CMD-K6: `python -m rlo.hooks install-hook / uninstall-hook`(남의 훅 남김, 다시 깔아도 하나). MBA 함께 탐침이 손 작업 대신 이 명령으로 27/27. baseline 재현: 새 가상환경에 rlo-sdk `d313414` + MBA, 예제 두 모드 VERIFIED · 탐침 27/27. **SDK 단계(BD-119) 지시가 모두 끝났다** — 마감은 사용자 결정.
