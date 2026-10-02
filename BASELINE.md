@@ -504,3 +504,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 26 회차: Telemetry `70b4feb`(65) — CMD-T15 새 사건 `provider.rate_limit_window`(창마다 하나, 창 이름은 원천 키 · 주된 창을 고르지 않음 · 실기록 창 2: five_hour · seven_day). MS `3034578`(162) — CMD-M9 커밋(복제 리더 걷음 · 표시 순서 `cr-3` · 기본 결정을 문맥에서), 보고 대기. 네 저장소 초록(65 · 186 · 162 · 100).
 - 26 회차(이어서): MS CMD-M9 성공 — 복제 리더 없음 · 두 길 같은 LLM 글자열(`cr-3`, 직접 길의 꺼냄도 질의 열 안에서만) · 기본 결정을 문맥에서 읽음. BD-88(품질 상태 모름에도 BD-76).
 - 27 회차: MS `e2a7a4a`(162) — CMD-M10 F2b 고침 1(칸 H 덮음 선언 · 동작점 고침: 서버 36 · 예산 4,000 · keep_max 40 · R4 · 285 실행 약 $5~7) — BD-88 과 엇갈려 선택기 판본 · 워밍업 근거를 CMD-M12 로. Sensor `8978265`(197) — CMD-S19 커밋(`NO_TOOL_RUN_YET`, 보고 대기) → DC CMD-D14. 네 저장소 초록(65 · 197 · 162 · 100).
+- 27 회차(이어서): Sensor CMD-S19 성공 — `execution-health-v3`(197, 변이 47/47). 사건 순서에서 첫 평가점 314/314 `NO_TOOL_RUN_YET`(정의에서 나옴), SWE-agent 는 그 뒤 UNKNOWN 288/288. 시각 순서에서는 "모델 호출 ≥ 1" 조건 때문에 cc 첫 평가점이 UNKNOWN → BD-89 로 조건을 "그 실행의 L0 사건 ≥ 1" 로(CMD-S22).
