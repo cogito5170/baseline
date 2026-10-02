@@ -137,7 +137,7 @@ DecisionContext
 | state `value` (쓸 수 없을 때) | 설명 | 없음 | 없음 | — | — | — | — | — | — | **provenance** (지금은 core 에 있다 — DC `StateView.value`) |
 | `freshness` | | 없음 | 없음 | **예**: age · ttl · permanent 에서 | — | | | | | 투영 (`permanent` 만 provenance 에) |
 | `age_ms` | | Guard 가 쓸 수 있다 | 없음 | **예**: as_of − observed_at | | | | | | 투영 |
-| `ttl_ms` | 적용 TTL 기록 | 없음 | 없음 | **예**: Model 판본 + 목적 판본 | | | | | | 투영 |
+| `ttl_ms` | 적용 TTL 기록 | 없음 | 없음 | 원칙상 Model 판본 + 목적 판본에서 — 그러나 DC 는 소스의 Model 을 다시 읽지 않는다 | | | | | | **provenance(입력 기록)** — BD-61 |
 | `required` | complete 계산 | 없음 | 없음 | **예**: 목적 명세 | | | | | | 투영 |
 | `basis` · `rule_id@ver` | 권위 검사 · 재현 | Validate(빌드 때) | 권위 검사 불가 | 아니오 | 판본 사전 | | ESTIMATE 거절 | 예 | 규칙 판본이 바뀔 때만 | provenance |
 | `evidence_refs` | 되짚기 (I5) | 없음 (감사) | 되짚을 수 없음 | 아니오 | id 만. 사슬 전체를 복사하지 않는다 | | | 예 | | provenance |

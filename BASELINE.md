@@ -456,3 +456,8 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - **DC 실패 1 = BV-03 이 풀렸다는 증거.** `test_known_limit_config_input_ages_derived_state` 는 "예산 입력 때문에 MS 파생 상태가 세션을 연 시각으로 늙는다" 는 알려진 한계를 붙든 시험이다. MS PC-03 뒤로 그 상태가 STALE 이 아니라 INFERRED 로 나온다. 시험을 "고쳐졌다" 쪽으로 뒤집는 일을 DC 세션에 지시했다(CMD-D9, DC 소유 파일).
 - Sensor 결과 파일 `eval/results/state_demo.txt` 충돌은 통합 코드로 다시 생성해 풀었다(6 절이 결정 문맥에서 내보내기 계약으로 바뀌어 있다 — PC-08).
 - 사용자가 `nifty-volta` 를 DC 세션으로 확정했다(DC 보고) — BD-56 과 같다.
+
+### 13.7 통합 5 회차 (2026-10-02)
+
+- DC `d3be1e7`(CMD-D2 PC-07 core/provenance 분리 · `reason` 제거 · `reuse_key` · 키별 `allow_stale`) 통합 → DC 79 중 78 통과. 남은 1 은 4 회차의 CMD-D9(BV-03 이 풀려 빨개진 시험)이고 아직 처리되지 않았다 — DC 세션의 옆 MS 가 PC-03 이전(`ca71379`)이라 그 환경에서는 초록으로 보인다(환경 차이). MS 146 통과.
+- DC 의 실데이터 회귀(결정 변화 483 · 결정론)와 크기(core 17–22 %)는 DC 세션의 측정이다. 크기 비율이 §4.4 의 ~10 % 보다 큰 까닭(core 에 subject · 제약 · 행동이 들어간다)은 보고에 설명돼 있다.

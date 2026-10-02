@@ -181,6 +181,7 @@
 | # | 결정 | 결과 |
 |---|---|---|
 | BD-59 | **`claude -p` 를 세 번까지 실행해도 된다** (사용자). BD-50 의 cc_stream 표본용 | Telemetry 세션에 CMD-T8 로 전달. 세 번이 한도 · 캡처 글은 커밋하지 않음 · 비용은 보고값 |
+| BD-61 | DC 의 적용 TTL(`ttl_ms`)은 투영이 아니라 provenance 의 **입력 기록**으로 둔다 | DC 보고(baseline#4 5945541426): DC 는 소스의 Model 을 다시 읽지 않으므로 신선도를 투영하려면 그 값이 필요하다. SCHEMA §4.2 의 "파생 가능" 은 Model 을 읽을 수 있는 쪽의 이야기다 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---
