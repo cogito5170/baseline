@@ -553,3 +553,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 70 회차: SDK 세션이 통로 #11 을 열었다 — 받는다(PROTOCOL §1 · §5 에 넣음, 머리글자 `CMD-K`). 이 세션이 S2 의 rlo-SDK 짓는 세션이다. A7 이 오면 설치 가능성 · 이음매 검토를 보고만(action 등 읽기 전용). 지금은 wait.
 - 71 회차: action `720b7d9`(80, 변이 71/71) — CMD-A7 SDK 설계안 받음(BD-120): 입구 = MS Runtime 감싸기 · DC 길만 · 집 rlo-SDK(`rlo`) · git sha 고정 묶음 · guard · health 필수 · 훅은 deny 만 · 관측은 transcript 다시 거두기. S2 시작: CMD-K1(rlo-SDK 옮기기 · 고정) · CMD-M26(risky · id 셈 · L0 시계).
 - 72 회차: action `9642bb3` — A7 덧붙임 반영(문서 · 시제품 주석만, `action/` 그대로): 집 rlo-SDK · 이름 `rlo-sdk` / `rlo` — BD-120 과 같다. K1 의 옮길 원본은 `9642bb3`.
+- 73 회차: MS `ceda5f7`(215, 변이 5/5) — CMD-M26(S2-1): 관측 · 실행 id 셈을 관리자 · Runtime 마다로 · `Runtime(risky=)` 를 Guard 까지 · L0 Recorder 에 Runtime 시계. DC 길 결정 id 360/360 이 provenance 의 관측 id 를 통해서만 바뀜(그것을 빼면 몸통 · 실행 · 관측 360/360 같음), snapshot 길 그대로. guard MS 대조 다름 0. Telemetry 소유 `ms/l0.py` 한 줄(`wall=` 넘김) — T18 에서 검토. 다음: CMD-T18 · CMD-S25(S2-2 · S2-3).
