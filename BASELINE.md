@@ -530,3 +530,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 47 회차: MS `2cb7e61`(185, guard `6e4ad56` 유무 모두 초록) — CMD-M19 시험이 Guard 판정 값 대신 "Guard 가 막아도 Arbiter 대로 실행" 만 본다. guard 81 · MS 대조 68,688 다름 0 · health 초록. **§10.2 Guard shadow 단계 닫힘** — 다음은 단계 마감·Executor 계획·OQ-17(사용자 결정).
 - 48 회차: **단계 2 마감**(BD-105, `STAGES.md` 에 일곱 저장소 sha) — 일곱을 옆에 두고 70 · 225 · 185 · 105 · 25 · 81 · 26 초록. OQ-17 닫음(BD-106: STOP > HOLD/WAIT > ESCALATE, enforce 때 Model 에). 다음 단계 실행기(BD-107) — CMD-A3 로 Action 이 설계안부터.
 - 49 회차: action `bef1578`(50, 변이 41/41) — CMD-A3 실행기 설계안 받음(BD-108): 행동 명세의 집 = action `action-spec/1`, 실행기 = 프로세스 안 라이브러리(shadow · execute), Q3 은 DC 길 실행으로 좁힘, `args_sig` 살림. E2 시작: CMD-A4 · CMD-T17.
+- 50 회차: Telemetry `89d2887`(72) · MS `53b8b6c`(186) — CMD-T17 `action.dispatch.args_sig`(measured, `tool_sig` 방식) · `NullRecorder.action`. Sensor 225 · DC 105 · guard 81 · health 26 초록. action `bef1578` 은 `test_l0map` 1 빨강 — catalog 베낀 칸 대조가 새 칸을 잡음(설계대로), CMD-A4 에 넣음.
