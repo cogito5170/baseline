@@ -430,3 +430,16 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 | X-7 | Sensor → MS 경로 둘 | MS `ms/sensing.py`(판독을 MS 그래프로) 대 Sensor state-export → DC → MS | state-export 경로 하나 (BD-46) |
 
 전달 규약은 [`PROTOCOL.md`](PROTOCOL.md).
+
+### 13.5 통합 3 회차 (2026-10-02)
+
+| 저장소 | 통합 머리 | 새로 들어간 것 | 시험 (옆 저장소 모두 통합 머리) |
+|---|---|---|---|
+| MS | `ca71379` | CMD-M2(PC-21 문서) · PC-13 · PC-12 (eloquent) · CMD-T3 시험 (jolly) | 137 통과 · 건너뜀 0 |
+| DC | `d8efadf` | PC-08 · PC-14 (nifty) — allow_stale · ContextStore · 시험 정책 refpolicy | 73 통과 · 건너뜀 0 |
+| Sensor | `92cc46b` | CMD-T3 꼴 v4 `inproc:*` (jolly) · PC-08: Sensor 안의 결정 문맥 · 참조 정책 제거 (nifty) | 138 통과 · 건너뜀 0 |
+| Telemetry | `780867b` | CMD-T2 차례 경계 사건(`input.received` · `turn.start` · `turn.end` · `turn.continued` · `source.closed`) · CMD-T4 대조 장부(sweagent 7 · cc_jsonl 1) | 47 통과 |
+
+- DUP-04(결정 문맥 구현 넷)가 둘로 줄었다: DC 와 MS `snapshot()`(기본값 전환을 기다림). BV-11 해소.
+- 충돌: Sensor `registry.py` · `STATE_DERIVATION.md` 의 후보 목록 한 줄 — `uncertainty_state` 설명은 nifty 쪽, `liveness DEAD · ALIVE` 줄은 통합 쪽을 남겼다.
+- Sensor 를 두 세션이 쓴다 → BD-56 으로 경계를 다시 그었다.

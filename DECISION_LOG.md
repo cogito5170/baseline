@@ -168,6 +168,14 @@
 | BD-54 | S3 `dependency_fault` 를 **승인한다**. 조건: 실체 id `dependency:<범위>:<이름>`(BD-32) · 런타임이 구조화한 원인만 · `NO_FAULT_DECLARED` ≠ HEALTHY · 소유 층 표시 ASSESS · 상태 수 상한을 올린다. 입력 이름은 L0 가 정한다 | BD-10(선언된 근거만) · BD-47 | |
 | BD-55 | PC-08(Sensor 의 DC 둘 · 참조 정책 걷어 내기)은 **DC 가 Sensor DC 의 장점(`allow_stale` 명시 · ContextStore/explain)을 옮긴 뒤**에 한다. Phase 8 결과 파일은 그 날짜의 기록으로 남긴다 | BD-05 가 그 둘을 옮길 후보로 적었다. 먼저 걷으면 기능이 사라진다 | DC 에 CMD-D6 |
 
+### 통합 3 회차 (2026-10-02, 보고 baseline#5 · Telemetry `e246ada` · MS `ced8186`–`ffa78c3`)
+
+| # | 결정 | 까닭 | 결과 |
+|---|---|---|---|
+| BD-56 | **Sensor 저장소를 두 세션이 쓴다 — 경계를 다시 긋는다.** Sensor `llmsensor/state/*`(규칙 · 엔진 · 모형) · `sensing/*` · `sensors/*` · `verifier.py` = **Sensor 세션(`nice-wright`)**. Sensor `llmsensor/state/export.py`(state-export 계약) = **DC 세션(`nifty-volta`)** — 그 계약을 지었고 유일한 소비자가 DC 다. PC-08 은 사용자 지시로 DC 세션이 했고, 이식(allow_stale · ContextStore)과 함께 했으므로 BD-55 의 뜻(기능을 잃지 않음)을 지켰다 — 받아들인다 | baseline#5 의 다음 할 일 일곱 가운데 넷이 다른 세션에 이미 지시한 일이었다(PC-22 = CMD-S3 · PC-20 = CMD-T6 · PC-09/Q4/PC-06 = Sensor 규칙 · 엔진) | PROTOCOL §5 고침 |
+| BD-57 | **집계 상태의 근거 시각 = 그 값을 정한 근거의 시각**(근거 전체 중 가장 늦은 것이 아니다). 예: `execution_health = UNRESOLVED_FAILURES` 가 7 시간 전 `tool[WebFetch]` 실패에서 나왔으면, 집계의 시각도 그 실패의 시각이다. 규칙 판본을 올린다 | baseline#5 Q4: 실제 세션에서 신선한 집계가 낡은 구성 요소 위에 서 있었다. 값을 정하지 않은 새 근거가 집계를 신선하게 보이게 하면 STALE 판정이 틀린다 | SCHEMA §2.4 `observed_at` 정의를 고쳤다. Sensor 세션의 일 |
+| BD-58 | DC 목적에 **`agent_context`**(런타임 자신의 맥락: KEEP · COMPACT(능력 `runtime_compaction`) …)를 더한다. PC-15 에 넣는다 | baseline#5 Q1: Sensor 의 `COMPACT_CONTEXT` 가 DC 어휘에 없다. MS 의 LLM 맥락(`context_policy`)과 런타임 맥락은 다른 결정이다 | DC 세션의 일 |
+
 ---
 
 ## 변경 제안 (PC) — 기준선은 승인됐다. PC 는 **아직 하나도 실행하지 않았다.** 실행은 사용자가 PC 마다(또는 묶음으로) 허가한 뒤에 한다
@@ -182,7 +190,7 @@
 | PC-06 | Sensor Verifier 를 ASSESS 평가 / DECIDE 수락 결정으로 가르고 설정 제안을 뺀다 | BV-01 | `Sensor/llmsensor/verifier.py` · `Sensor/llmsensor/pipeline.py` · `Sensor/llmsensor/cli.py` · `Sensor/README.md` · `Sensor/tests/test_sensors.py` | OQ-02 | 중간. `read` CLI 출력이 바뀐다 |
 | PC-07 | DC core/provenance 분리 · `reason` 을 DC 에서 뺀다 · 투영 칸 | BD-08 | `DC/dc/model.py` · `DC/dc/builder.py` · `DC/dc/snapshot.py` · `DC/dc/bridge.py` · `DC/tests/test_dc.py` · `DC/docs/DECISION_CONTEXT.md` | OQ-18 | 중간. digest 가 바뀐다 → 옛 기록은 판본으로 가른다 |
 | PC-08 | Sensor 의 DC 둘을 걷어 낸다. 참조 정책은 DC 기반 시험 정책으로 옮긴다 | DUP-04 · BV-02 · BV-11 | `Sensor/llmsensor/decision/context/__init__.py` · `Sensor/llmsensor/state/engine.py` (`decision_context`) · `Sensor/llmsensor/policy/*.py` · `Sensor/eval/ms_end_to_end.py` · `Sensor/tests/test_decision_context.py` · `Sensor/tests/test_decision.py` | BD-05 · OQ-10 | 중간. Sensor Phase 8 평가가 이것을 쓴다 |
-| PC-09 | Evidence 에서 값 복사를 뺀다 | §SCHEMA 2.5 | `Sensor/llmsensor/state/model.py` · `Sensor/llmsensor/state/engine.py` | 없음 | 낮음 |
+| PC-09 | Evidence 에서 값 복사를 뺀다 (Sensor 세션) | §SCHEMA 2.5 | `Sensor/llmsensor/state/model.py` · `Sensor/llmsensor/state/engine.py` | 없음 | 낮음 |
 | PC-10 | Arbiter 를 Validate / Arbitrate / Guard 로 가른다. 도구 좁히기를 Guard 로 | BV-05 · BV-06 | `MS/ms/arbiter.py` · `MS/ms/pipeline.py` · `MS/ms/policy.py` · `MS/ms/prompt.py` · Guard 저장소 (새) | OQ-04 · BD-20 | 높음. 안전 경로다. shadow 로 먼저 |
 | PC-11 | RunRecord 의 `policy` 칸을 원장으로 옮긴다 | BV-04 | `MS/ms/run_telemetry.py` · `MS/ms/runtime.py` · `MS/ms/policy.py` (`replay` 입력) | BD-15 | 중간. 꼴 판본이 오른다 |
 | PC-12 | 시계를 Runtime 하나로 | BV-09 | `MS/ms/telemetry.py` · `MS/ms/manager.py` | OQ-13 | 낮음 |

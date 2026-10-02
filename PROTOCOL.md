@@ -16,7 +16,8 @@
 
 | 방향 | 통로 | 꼴 |
 |---|---|---|
-| 세션 → baseline (보고 · 질문 · 다른 세션에 대한 요청) | **cogito5170/baseline 의 이슈, 세션마다 하나.** 제목 머리 `[Telemetry]` · `[Sensor]` · `[DC]` · `[MS]`. 보고 하나 = 댓글 하나 | §2 의 보고 꼴 |
+| 세션 → baseline (보고 · 질문 · 다른 세션에 대한 요청) | **cogito5170/baseline 의 이슈, 세션마다 하나.** 제목 머리 `[Telemetry]` #1 · `[MS]` #2 · `[Sensor]` #3 · `[DC]` #4. 보고 하나 = 댓글 하나. **새 이슈를 열지 않는다.** 저장소 안의 보고 파일(`inbox/` 등)은 쓰지 않는다 | §2 의 보고 꼴 |
+| **보고 뒤 깨우기** | 댓글을 올린 **바로 뒤** baseline 세션에 세션 메시지 한 줄: Claude Code Remote 의 `send_message`, `session_id = session_013GnrUQPpcfK4ea1a1Y6SuY`, 내용 = `[<세션>] 보고 <댓글 링크>`. baseline 은 그 메시지로 깨어나 판단 · 지시한다 | 놓치면 baseline 의 1 시간 안전망이 잡는다 |
 | baseline → 세션 (판단 · 지시) | 그 세션의 이슈에 **댓글** + 세션을 깨우는 **세션 메시지**(댓글을 가리키는 한 줄) | §3 의 지시 꼴 |
 | 구속력 있는 결정 | 이 저장소의 `claude/gracious-meitner-vp49xe` — DECISION_LOG(BD) · BASELINE §13 · 이 문서 | 이슈 댓글은 결정의 전달이다. 결정의 원본은 이 저장소다 |
 | 세션 ↔ 세션 | **없다.** 다른 세션의 일이 필요하면 자기 이슈에 `요청: <대상 세션> …` 으로 적는다. baseline 이 소유 세션에 지시로 옮긴다 | |
@@ -60,8 +61,8 @@ CMD-<세션 머리글자><번호>  <할 일 한 줄>
 |---|---|---|
 | Telemetry `*` | **Telemetry** (`jolly-einstein`) | L0 사건 이름 · 꼴 · 수집기의 유일한 주인 |
 | Sensor `llmsensor/telemetry/*` · `schema/*` | **Telemetry** | L0 ↔ Sensor 꼴 v3 경계(`l0.py` · compat) |
-| Sensor `llmsensor/sensing/*` · `llmsensor/state/*` (아래 제외) · `sensors/*` · `verifier.py` · 그 밖 | **Sensor** (`nice-wright`) | **L1 팩 전부**(liveness · recovery · dependency · action_outcome 포함) |
-| Sensor `llmsensor/state/export.py` (state-export/1) | **Sensor** | 바깥(DC)이 읽는 유일한 길. 바꾸려면 DC 가 baseline 을 거쳐 요청 |
+| Sensor `llmsensor/sensing/*` · `llmsensor/state/*` (아래 제외) · `sensors/*` · `verifier.py` · 그 밖 | **Sensor** (`nice-wright`) | **L1 팩 전부**(liveness · recovery · dependency · action_outcome 포함) · 규칙 · 엔진 |
+| Sensor `llmsensor/state/export.py` (state-export 계약) · `tests/test_state_export.py` | **DC** (`nifty-volta`) | 그 계약을 지었고 유일한 소비자가 DC 다 (BD-56) |
 | DC `*` | **DC** (`nifty-volta`) | |
 | MS `ms/l0.py` · `tests/test_l0.py` | **Telemetry** | MS 안의 L0 Recorder 배선 |
 | MS 그 밖 `*` | **MS** (`eloquent-turing`) | `runtime.py` 의 `state_reader` 이음매 포함 |

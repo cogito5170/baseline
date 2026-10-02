@@ -57,7 +57,7 @@
 | `basis` | 근거 종류 | R | Model 의 규칙에서 | I (규칙 판본마다) | | |
 | `rule_id` · `rule_version` · `config_version` | | R | 아니오 | M | | |
 | `evidence` | Measurement/State id 목록 | R (usable 이면) | 아니오 | M | | 참조만 |
-| `observed_at` | 근거 중 가장 늦은 관측 시각 | O | 근거에서 | M | TTL 의 기준 | MS 는 입력 중 **가장 이른** 시각을 쓴다(설정 포함) → BV-03 과 함께 고친다 |
+| `observed_at` | **값을 정한 근거**의 관측 시각(BD-57) — 값을 정하지 않은 근거의 새 시각으로 신선해지지 않는다 | O | 근거에서 | M | TTL 의 기준 | MS 는 입력 중 **가장 이른** 시각을 쓴다(설정 포함) → BV-03 과 함께 고친다 |
 | `since` · `updated_at` · `seq` | 전이 시각 · 계산 시각 · 횟수 | R | 아니오 | M | | |
 | `permanent` | 끝난 일의 사실 | R | 아니오 | M (한 번만 참) | 낡지 않음 | |
 | `confidence` | `{kind: none · ordinal · calibrated, value}` | O | — | M | | **새 칸 제안** — Q 같은 점수에만 (BD-36) |
