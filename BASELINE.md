@@ -533,3 +533,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 50 회차: Telemetry `89d2887`(72) · MS `53b8b6c`(186) — CMD-T17 `action.dispatch.args_sig`(measured, `tool_sig` 방식) · `NullRecorder.action`. Sensor 225 · DC 105 · guard 81 · health 26 초록. action `bef1578` 은 `test_l0map` 1 빨강 — catalog 베낀 칸 대조가 새 칸을 잡음(설계대로), CMD-A4 에 넣음.
 - 51 회차: action `aa46a77`(67, 변이 58/58) — CMD-A4 **`action-spec/1` · `action-model/1` 동결**(BD-109), 술어 · 인자 한 벌. 부분 성공: Telemetry `89d2887` 옆에서 `test_l0map` 1 빨강(덧붙임을 읽기 전에 끝남) → CMD-A5. E2 다음: CMD-S24(S6 `action_state`) · CMD-D16(export 가 `action:` 실체를 앎).
 - 52 회차: action `3995fdb`(68, 변이 60/60) — CMD-A4 덧붙임: L0 대응표에 `args_sig`, 실행기가 실제 T17 Recorder 로 서명을 싣는 대조 시험. 일곱 저장소 통합 머리에서 모두 초록. CMD-A5 는 이것으로 채워짐(지시와 엇갈려 먼저 끝남). guard · health 의 다음 고정 sha = `3995fdb`.
+- 53 회차: action `0071ddf`(70, 변이 60/60) — CMD-A5(엇갈려 실행됨): 시험만 더함(`tests/test_executor.py` +34, 패키지 코드는 `3995fdb` 와 같음). guard · health 고정은 `3995fdb` 그대로 유효. Action wait.
