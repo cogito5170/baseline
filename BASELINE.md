@@ -535,3 +535,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 52 회차: action `3995fdb`(68, 변이 60/60) — CMD-A4 덧붙임: L0 대응표에 `args_sig`, 실행기가 실제 T17 Recorder 로 서명을 싣는 대조 시험. 일곱 저장소 통합 머리에서 모두 초록. CMD-A5 는 이것으로 채워짐(지시와 엇갈려 먼저 끝남). guard · health 의 다음 고정 sha = `3995fdb`.
 - 53 회차: action `0071ddf`(70, 변이 60/60) — CMD-A5(엇갈려 실행됨): 시험만 더함(`tests/test_executor.py` +34, 패키지 코드는 `3995fdb` 와 같음). guard · health 고정은 `3995fdb` 그대로 유효. Action wait.
 - 54 회차: Sensor `043812d`(241, 변이 68/68) — CMD-S24 S6 `action_state` · 실행 지표가 `action.*` 를 셈(tool 대 action 대조 같음) · Telemetry `89d2887` 고정. guard `4bd7d14`(88, 변이 72/72, MS 대조 다름 0) — CMD-G5 action 한 벌. 일곱 모두 초록. BD-110. 다음: CMD-D16(export `action:` 실체) · CMD-M20(실행기 shadow) · CMD-A6(작음, guard 대조 시험 걷기).
+- 55 회차: action `2f4791e` — CMD-A6(시험만): guard 대조 셋을 걷고 "guard 가 action 한 벌을 쓴다" 확인 하나로. 흔적 모듈을 지운 guard 사본을 옆에 두고도 초록, 변이 60/60. 고정 `3995fdb` 그대로. Action wait.
