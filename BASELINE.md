@@ -577,3 +577,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 94 회차: 사용자 결정 BD-132 — 인프라 없는 로컬 고려. METHOD rev 3(`f6a4c36`): Runner §4c · worktree · pre-push · G9 · 2판 순서. CMD-GA1 rev 3 를 #12 로 보냄(G1 진행과 겹치지 않음).
 - 95 회차: rlo-SDK `c6b2f95`(0.4.1, 65 시험 · 변이 48/48 · 탐침 8/8) — CMD-K8 성공(BD-134). 작은 Deviation(기록에 칸 이름) 받음. SDK wait.
 - 96 회차: 사용자 결정 BD-133 — 세션 간 교신 원칙(기본은 baseline 하나와만, 교신은 action 이 아님, 보고 → 평가 → 각 세션에 지시). PROTOCOL §1a · METHOD rev 4 `5cfa73a`.
+- 97 회차: ga-SDK `b3cb62f`(0.1, 76 시험, 변이 18/18 + baseline 변이 R1b 잡힘) — CMD-GA1 성공. §9 검증 1 22/22 · 2 · 3. Deviation 둘 받음(METHOD rev 5 `90aa9a5`). 단계 마감 · 2판은 사용자에게 물음. GA wait(BD-135).
