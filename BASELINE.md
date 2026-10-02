@@ -472,3 +472,9 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 | DC | `a061c65` | CMD-D4 WALP → Arbiter/Guard | 78 / 79 — 남은 1 은 CMD-D9(4 회차부터) |
 
 - **BD-50 충족**(BD-62). Sensor 수집기를 걷는 일을 하류 영향 목록과 함께 Telemetry 세션에 넘겼다.
+
+### 13.9 통합 7 · 8 회차 (2026-10-02)
+
+- Sensor `53c3a4c`(158 통과): CMD-S11 닫힘 줄. Telemetry `3453434`(54 통과). DC `e28d00d`(88 중 87 — 남은 1 은 CMD-D9): CMD-D5 질의형 선택(DC 쪽).
+- **반복 신호(GUIDANCE 15)**: CMD-D9 가 세 회차째 처리되지 않았다. DC 세션의 옆 MS 가 PC-03 이전이라 그 환경에서는 시험이 초록이고, DC 세션은 "PC-03 의 DC 쪽은 MS 가 고치면 맞춘다" 고 적었다 — MS 는 이미 고쳤다. 원인은 세션 환경의 옆 저장소 판본이다(통합 브랜치를 옆에 두지 않음). 지시 문구를 이 사실 중심으로 바꿨다.
+- MS PC-04 는 옛 이름 `evidence` 를 호환 속성으로 남겼다(`ms/manager.py:194`) — DC `sources.py:152` 가 아직 그 이름을 읽는다. DC 를 새 이름으로 옮기는 일은 DC 세션에.
