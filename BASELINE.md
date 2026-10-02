@@ -527,3 +527,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 44 회차: guard `88be800`(80, 변이 77/77, MS 대조 다름 0) — CMD-G3 D 의 낡은 키 범위 = 필수 ∪ used_keys(BD-103).
 - 45 회차: MS `bb90625`(185) — CMD-M17 **Guard shadow 를 MS 런타임에 배선**: Arbiter 와 Guard 판정 다름 0(모의 464 · 정해 둔 제안 960), D 40 은 MS 에 없는 개념. 결정 id 그대로. BD-104(SAFE_ACTION 은 실행기 행동만). 통합 시험 주의: guard 가 PYTHONPATH 에 있으면 MS M15 시험 하나가 원장 줄(`guard`)을 세지 못해 빨강 — 환경에 기대는 시험(CMD-M18). guard 없이 185 초록, guard 80 초록.
 - 46 회차: MS `024c1a4`(185, guard 유무 모두 초록) — CMD-M18. guard `6e4ad56`(81, 변이 78/78, MS 대조 다름 0) — CMD-G4(BD-104: 기본 행동이 실행기 행동이 아니면 DENY(D)). 이 바뀜으로 MS 시험 하나(`GuardShadowWiring.test_guard_never_decides_execution`)가 SAFE_ACTION 을 기대해 빨강 — 기대한 바뀜, CMD-M19.
+- 47 회차: MS `2cb7e61`(185, guard `6e4ad56` 유무 모두 초록) — CMD-M19 시험이 Guard 판정 값 대신 "Guard 가 막아도 Arbiter 대로 실행" 만 본다. guard 81 · MS 대조 68,688 다름 0 · health 초록. **§10.2 Guard shadow 단계 닫힘** — 다음은 단계 마감·Executor 계획·OQ-17(사용자 결정).
