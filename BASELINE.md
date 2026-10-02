@@ -550,3 +550,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 67 회차: **단계 3 마감**(BD-118, `STAGES.md` 에 일곱 sha). 기본 `guard_mode` shadow 유지(사용자 결정). 모든 세션 wait.
 - 68 회차: **SDK 단계 시작**(BD-119, 사용자 결정). S1 설계안 → CMD-A7(Action). API 는 범위 밖(OQ-19 · OQ-23 먼저).
 - 69 회차: 사용자가 SDK 저장소 `cogito5170/rlo-SDK` 를 만들었다. baseline 이 통합 브랜치 `claude/gracious-meitner-vp49xe` 를 열었다(`06d1d46`, README 만). A7 의 물음 6(집)은 이것으로 답이 정해졌다.
+- 70 회차: SDK 세션이 통로 #11 을 열었다 — 받는다(PROTOCOL §1 · §5 에 넣음, 머리글자 `CMD-K`). 이 세션이 S2 의 rlo-SDK 짓는 세션이다. A7 이 오면 설치 가능성 · 이음매 검토를 보고만(action 등 읽기 전용). 지금은 wait.
