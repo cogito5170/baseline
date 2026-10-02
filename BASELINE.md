@@ -524,3 +524,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 41 회차: health `457973f`(26, 변이 28/28, action `443f8eb` 고정) — CMD-H2 `verification-record/1` + 순수 `verify` → 계약 동결(BD-101). H3 `config.conformance` 미룸. 계약 동결 셋: `action-contract/1` · `verification-record/1` (+ Guard `GuardResult` 진행 중).
 - 42 회차: **guard 통합 브랜치 시작** — guard `0170f0a`(60, 변이 58/58, MS `arbiter.py` 대조 68,688 비교 다름 0, action `443f8eb` 고정). CMD-G1 → `guard-result/1` · `validation-result/1` 계약 동결(BD-102). 계약 동결 넷: action · verification · guard · validation. 다음: Guard F5(DC core → DCView) → MS F4(shadow 배선).
 - 43 회차: guard `20b4aab`(78, 변이 71/71) — CMD-G2 DC 문맥 → DCView 어댑터(DC 실제 빌더 문맥 8/8 이 DC 자신의 투영과 같음, DC import 없음). BD-103(목적 명세 데이터를 함께 받음 · D 의 낡은 키 범위 = 필수 ∪ used_keys). 다음: Guard G3(범위 좁히기) · MS M17(F4 shadow 배선).
+- 44 회차: guard `88be800`(80, 변이 77/77, MS 대조 다름 0) — CMD-G3 D 의 낡은 키 범위 = 필수 ∪ used_keys(BD-103).
