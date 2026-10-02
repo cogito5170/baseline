@@ -569,3 +569,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 86 회차: CMD-K5 보고(코드 없음) — 토큰 절약 아이디어 여덟 모두 안 들임(BD-127). 다음 CMD-K6(설치 명령).
 - 87 회차: rlo-SDK `d313414`(`0.4.0`, 변이 43/43) — CMD-K6: `python -m rlo.hooks install-hook / uninstall-hook`(남의 훅 남김, 다시 깔아도 하나). MBA 함께 탐침이 손 작업 대신 이 명령으로 27/27. baseline 재현: 새 가상환경에 rlo-sdk `d313414` + MBA, 예제 두 모드 VERIFIED · 탐침 27/27. **SDK 단계(BD-119) 지시가 모두 끝났다** — 마감은 사용자 결정.
 - 88 회차: **단계 4(SDK) 마감**(BD-128, `STAGES.md` stage-4 에 여덟 sha). 여덟 초록. 모든 세션 wait.
+- 89 회차: 사용자 결정 BD-129 — 실제 Claude Code 에서 훅 확인(CMD-K7, `claude -p` 6 번까지, 임시 설정만).
