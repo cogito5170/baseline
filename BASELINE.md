@@ -461,3 +461,14 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 
 - DC `d3be1e7`(CMD-D2 PC-07 core/provenance 분리 · `reason` 제거 · `reuse_key` · 키별 `allow_stale`) 통합 → DC 79 중 78 통과. 남은 1 은 4 회차의 CMD-D9(BV-03 이 풀려 빨개진 시험)이고 아직 처리되지 않았다 — DC 세션의 옆 MS 가 PC-03 이전(`ca71379`)이라 그 환경에서는 초록으로 보인다(환경 차이). MS 146 통과.
 - DC 의 실데이터 회귀(결정 변화 483 · 결정론)와 크기(core 17–22 %)는 DC 세션의 측정이다. 크기 비율이 §4.4 의 ~10 % 보다 큰 까닭(core 에 subject · 제약 · 행동이 들어간다)은 보고에 설명돼 있다.
+
+### 13.8 통합 6 회차 (2026-10-02)
+
+| 저장소 | 통합 머리 | 새로 들어간 것 | 시험 |
+|---|---|---|---|
+| Telemetry | `0d7aa35` | CMD-T8 cc_stream 실기록 3(`claude -p`) | 54 통과 |
+| Sensor | `f6f02fc` | CMD-S2 liveness 입력을 L0 사건으로(`liveness-state-v2`) | 156 통과 |
+| MS | `7798205` | replay 가 상태 모형 판본으로 갈림 · F2 측정 준비(사전등록 고침 1, 돌리기 전) · CMD-M5 cc_jsonl 표본 631/631 | 153 통과 |
+| DC | `a061c65` | CMD-D4 WALP → Arbiter/Guard | 78 / 79 — 남은 1 은 CMD-D9(4 회차부터) |
+
+- **BD-50 충족**(BD-62). Sensor 수집기를 걷는 일을 하류 영향 목록과 함께 Telemetry 세션에 넘겼다.

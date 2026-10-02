@@ -182,6 +182,8 @@
 |---|---|---|
 | BD-59 | **`claude -p` 를 세 번까지 실행해도 된다** (사용자). BD-50 의 cc_stream 표본용 | Telemetry 세션에 CMD-T8 로 전달. 세 번이 한도 · 캡처 글은 커밋하지 않음 · 비용은 보고값 |
 | BD-61 | DC 의 적용 TTL(`ttl_ms`)은 투영이 아니라 provenance 의 **입력 기록**으로 둔다 | DC 보고(baseline#4 5945541426): DC 는 소스의 Model 을 다시 읽지 않으므로 신선도를 투영하려면 그 값이 필요하다. SCHEMA §4.2 의 "파생 가능" 은 Model 을 읽을 수 있는 쪽의 이야기다 |
+| BD-62 | **BD-50 기준 충족** — sweagent 7/7 · cc_jsonl 서로 다른 기록 3 이상(Telemetry · baseline · MS 세션) · cc_stream 3/3(`claude -p`, BD-59) · `inproc:ms` 원장이 Sensor State 까지(MS `tests/test_l0.py`) · `l0-check` 시험(Sensor `tests/test_layer.py`). 다음: Sensor 의 수집기를 걷고 Telemetry 를 **필수 의존**으로 — Telemetry 세션의 일(CMD-T9) | 하류 영향: Sensor `l0.py` · Sensor 시험 셋(Telemetry 세션 소유) · Sensor `eval/health_inventory.py`(Sensor 세션) · DC `examples/sensor_session.py`(DC 세션). MS 는 직접 쓰지 않는다 |
+| BD-63 | BD-57 을 분명히 한다: 값을 정한 근거가 **여럿이면 그 가운데 가장 이른 시각**이다(결론은 가장 낡은 결정 근거만큼만 신선하다). MS 파생(모든 입력이 술어에 들어가 값을 정한다)은 지금처럼 입력 중 가장 이른 시각이 맞다. Sensor 집계(`execution_health`)는 값을 정한 구성 요소(예: 실패한 도구 결과)의 시각이다 | MS 보고(baseline#2 5945550488) 물음 2 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---
