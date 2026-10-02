@@ -519,3 +519,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 36 회차: Telemetry `d60d591`(70, 변이 57/57) — CMD-T16: `Recorder.action(action_ref=command_id)`(BD-96), 안 주면 지금과 같음 · 겹쳐 열기 거절. 다섯 저장소 초록(Telemetry 70 · Sensor 225 · MS 173 · DC 104 · action 25). Sensor 의 L0 의존은 단계 1 고정(`70b4feb`) 그대로 — 다음 단계 마감 때 옮긴다.
 - 37 회차: action `443f8eb`(25) — CMD-A2 PC-19 조사(보고만): 칸별 대응 · 탐침 P0–P4 · 틈 G1–G5. BD-97(Q1 DC 배선일 때만 · Q2 `ms-cr@cr-3` · Q3 한 사실 한 사건). MS CMD-M15(ActionIntent 를 따로 지어 기록 — shadow).
 - 38 회차: health 통합 브랜치 시작(`0a2e70a` → `1d6cace`, 문서 · 탐침만). CMD-H1: ASSESS 표시 상태 여섯은 모두 Sensor 에 남음 → BD-99(BD-52 의 이전 거둠 · Health = 상태 + 관계 위의 새 층 · `verification-record/1` 꼴 · 사후조건은 DC ActionSpec). 다음 CMD-H2: 꼴 + 순수 판정 함수.
+- 39 회차: MS `6123dda`(180) — CMD-M15 ActionIntent shadow(DC 배선만, 원장에 decision → intent → run) · 결정 기록을 실행 직전에(720 실행 id 같음) · G5. health `bbdadd8`(사후조건 절 = MS 술어 꼴). BD-100. 다섯 저장소 초록(70 · 225 · 180 · 104 · 25).
