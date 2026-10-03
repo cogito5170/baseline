@@ -612,3 +612,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 129 회차: ga-SDK `41a248a`(GA16 merge, 210) — CMD-GA16 성공(BD-162). GA17 진행.
 - 130 회차: rlo Guard 를 코드로 확인하다 rev 4 잘못(Bash 가 A7 로 모두 막힘) 발견 → CMD-AMP1 rev 5(grant Bash 하나, BD-163).
 - 131 회차: 사용자 결정 — ga_rlo(결합층, 새 세션 GR, BD-164). `GA_RLO.md` · 통로 #15 · CMD-GR1. 세션 생성 기다림.
+- 132 회차: ga-SDK `645f8da`(GA17 merge, 220) — CMD-GA17 성공(BD-165), 실제 rlo 끝까지 확인. AMP 판 올림 · GR 고정 갱신.

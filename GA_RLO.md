@@ -39,11 +39,11 @@ rlo 판정 기록 ──► ga 턴 증거(diag) · 회차 근거 note      ← g
 | G5 | 한 입구 | `ga-rlo` 명령 하나로 `ga` 와 `rlo.hooks` 의 하위 명령을 그대로 넘긴다 |
 | G6 | 문서 | 세 환경의 빠른 시작: 로컬 CLI · 클라우드 세션 · 직접 돌리는 호스트(Agent SDK). 클라우드 세션에서는 바깥 권한 검사가 앞에 있다는 한계를 적는다 |
 
-G1 은 ga 의 `runner.guards`(CMD-GA17)가 통합된 뒤에 끝난다. 그 전에는 G2–G6 을 먼저 짓는다.
+G1 이 쓰는 ga 의 `runner.guards`(CMD-GA17)는 통합됐다(BD-165). 기록된 transcript 재생 점검(G4)에는 `--now-ms` 를 준다 — 없으면 낡은 상태로 보여 모두 D 다.
 
 ## 3. 판 고정
 
-- `ga-sdk @ git+https://github.com/cogito5170/ga-SDK@<sha>`: GA17 통합 머리. 그 전에는 `41a248a`.
+- `ga-sdk @ git+https://github.com/cogito5170/ga-SDK@645f8da97b1f0f649edc1fa70ed7dc06154632be`: GA17 통합 머리(`runner.guards`, BD-165).
 - `rlo-sdk[sensor] @ git+https://github.com/cogito5170/rlo-SDK@a152e14bc84dc282f66bb3426a12a70934fc530d`(stage-8).
 - 두 SDK 를 한 venv 에 설치했을 때 충돌이 없다(baseline 확인, 2026-10-03, `pip check` 정상).
 - 판 목록은 한 곳에 두고, 시험이 `pyproject.toml` 과 같은지 본다(rlo `test_versions` 와 같은 방식).
