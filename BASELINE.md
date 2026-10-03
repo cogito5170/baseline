@@ -620,3 +620,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 137 회차: 사용자 결정(BD-170) — Gemini 언제나 허락 · 도구로 추론 대체 · 병렬. CMD-GMG2 · CMD-AMP1 rev 6.
 - 138 회차: 사용자 결정 — W1 원격 세션(BD-171). CMD-AMP1 rev 7. W1 프롬프트 사용자에게.
 - 139 회차: 사용자 결정 — gentleMonster_gemini 는 flash-lite 전용 Gemini 확장(BD-172). CMD-GMG2 rev 2.
+- 140 회차: 사용자 결정 — 메시지 꼴을 의미 단위로(BD-173). METHOD rev 16 · PROTOCOL §3a · CMD-GA18.
