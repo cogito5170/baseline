@@ -630,3 +630,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 147 회차: AMP 08:32 보고 늦게 읽음(BD-180, 안전망 고침). rev 6 작업 = 부분 성공 · W1 기준선, amp 통합 `5e5a365`. 가드 쓰기 막힘 → 사용자에게(대신 쓰기는 사용자 결정 없이 안 함).
 - 148 회차: ga-SDK `af904fe`(265) — CMD-GA19 성공(BD-181).
 - 149 회차: gentleMonster_gemini `ff4de88` — CMD-GMG2 rev 2 성공(BD-182). H2(CLI 가 3.5-flash-lite 로 바꿈) 사용자에게.
+- 150 회차: 사용자 승인 → baseline 이 W1 가드를 지음(15 경우 확인), 그러나 amp main push 가 baseline 에서도 분류기 거부 → 막힘, 사용자에게(BD-183).
