@@ -625,3 +625,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 142 회차: 사용자 결정 — 세션 통신은 영어(BD-175, PROTOCOL §3b).
 - 143 회차: GMG2 보고 — 머리 없음으로 판정 보류(§3a), rev 1 만 처리(엇갈림), 맹검 묶음 사용자에게(BD-176).
 - 144 회차: ga-SDK `a782cab`(240) — CMD-GA18 성공, 꼴 판 2 가동. METHOD rev 17 → CMD-GA19(첫 directive/2, 영어)(BD-177). GMG rev 2 ACK.
+- 145 회차: 사용자 지시 — gentleMonster 사용자 질문을 받아 분석 → 도구 추가(BD-178). 아직 커밋 없음, 안전망에 넣음.
