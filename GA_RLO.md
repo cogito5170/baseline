@@ -80,7 +80,7 @@ ga_rlo 로 baseline–세션 구조를 **다른 프로젝트에서 처음부터*
 |---|---|---|
 | 허브(그 프로젝트의 baseline) | cogito5170/gentleMonster | ga_rlo 허브를 돌린다. 지시 · 통합 · 재현 · 판정 · 기록 |
 | 작업 세션 | cogito5170/well_used_gemini | Gemini 런타임 쪽 일. MCP 철학(런타임이 판정하는 게이트 · 원장에서만 그린 상태 · 위조 거절 · sandbox 도구)은 유지하고, 사용성을 고친다 |
-| 결과물 | cogito5170/gentleMonster_gemini | gentleMonster 작업 공간을 Gemini API 로 그대로 쓸 수 있게 한 것 |
+| 결과물 | cogito5170/gentleMonster_gemini | `gemini-3.1-flash-lite` 전용 Gemini CLI 확장(MCP 서버 · GEMINI.md · 훅). 사용자는 Gemini 에 붙여 쓴다 — 런타임 모형 의존은 Gemini 뿐. MCP 기반은 well_used_gemini(BD-172) |
 
 - 모형: `gemini-3.1-flash-lite`. 근거는 well_used_gemini README(Gemini CLI `models.js` 의 `DEFAULT_GEMINI_FLASH_LITE_MODEL`)다. 첫 실행에서 키로 모형 목록을 읽어 `generateContent` 를 받는지 확인한다(assumption 까지).
 - 작은 모형이라 판단을 모형에 맡기지 않는다. 닫힌 연산 · 코드가 판정하는 관문 · 쓰기 쉬운 입구로 사용자 쪽을 고친다.
