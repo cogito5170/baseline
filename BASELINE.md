@@ -651,3 +651,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 168 회차: ga_rlo `2f86775`(68, 변이 잡힘) — CMD-GR3 성공: rlo 0.5.1 고정 · state 줄 · upgrade-remote. amp PIN 옮기기 블록(macOS 용) 준비, push 는 사용자(BD-203).
 - 169 회차: amp main `36ca54d`(사용자) — W1 가드 rlo 0.5.1 PIN. W1 은 main 을 아직 안 받음 → AMP 에 알림(BD-204).
 - 170 회차: 사용자 결정 — 사람 몫은 HUMAN_QUEUE.md 로, 시스템은 기다리지 않는다(PROTOCOL §6, BD-205).
+- 171 회차: 사용자 결정 — 하나의 ga(rlo 고정 의존) · Autonomy 전체 배선 · ReAct 필수 → GA_UNIFIED.md(BD-206). 첫 단계 U1 턴 안 ReAct.

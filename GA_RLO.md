@@ -1,5 +1,6 @@
 # GA_RLO — ga-SDK 와 rlo-SDK 를 한 입구로 (ga_rlo-1 rev 1, 2026-10-03)
 
+> **대체됨(BD-206): 하나의 ga 설계는 [`GA_UNIFIED.md`](GA_UNIFIED.md).** 아래는 결합층 시절 기록으로 남긴다.
 > 사용자 결정(BD-164)에 따른 명세다. 소유자는 baseline 이다.
 > 무엇을 **해야 하는지**만 정한다. 어떻게 지을지는 짓는 세션(GR)이 정한다(GUIDANCE 13).
 > 근거: ga-SDK METHOD rev 15(§4c 1–7), rlo-SDK 0.5.0(stage-8), 실사용 검증(BD-145–148), AMP 권한 막힘(BD-154 · 160 · 161 · 163).

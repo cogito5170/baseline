@@ -125,6 +125,7 @@ ga-SDK METHOD rev 16 §3.6 을 우리 통로에도 그대로 쓴다.
 | baseline `AMP.md` | **baseline** | 명세. 바꿀 곳은 #14 에 `요청:` |
 | ga_rlo `*` | **GR** (세션은 사용자가 만듦) | ga-SDK · rlo-SDK 결합층. 지시 머리글자 `CMD-GR`. 통로 baseline#15 (BD-164) |
 | baseline `GA_RLO.md` | **baseline** | 명세. 바꿀 곳은 #15 에 `요청:` |
+| baseline `GA_UNIFIED.md` | **baseline** | 하나의 ga 설계(BD-206, GA_RLO.md 를 대신). 바꿀 곳은 #12 · #15 · #11 에 `요청:` |
 | gentleMonster_gemini `*` | **GMG** (`sleepy-cori`) | ga_rlo 검증 과제의 결과물. 지시 머리글자 `CMD-GMG`. 통로 baseline#16 (BD-167). gentleMonster · well_used_gemini 는 읽기만(허브 구성 때 다시 정함) |
 | baseline `*` | **baseline** (이 세션) | |
 
