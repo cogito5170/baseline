@@ -141,6 +141,8 @@
 
 ### 태그를 달려면 (사용자 컴퓨터에서)
 
+> 2026-10-03 확인(`git ls-remote`): **stage-8 태그가 ga-SDK · rlo-SDK 에 달렸다**(사용자, sha 일치). stage-1–7 태그는 어느 저장소에도 없다. 아래 명령은 아직 유효하다.
+
 ```
 gh api repos/cogito5170/Telemetry/git/refs -f ref=refs/tags/stage-1 -f sha=70b4febc47a809cb7aeeeb1e77b9e0f414efc362
 gh api repos/cogito5170/Sensor/git/refs    -f ref=refs/tags/stage-1 -f sha=10bb7addfb1605d312c5615df75765a22a980d2f
