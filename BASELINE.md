@@ -643,3 +643,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 160 회차: gm-photos 14 장 비공개 완료(sha 14/14, 머리 다시 고침 요청) · W1 가드 동작(WebFetch A1 거부, 기록 줄 +1/호출) — AMP 전달 대기(BD-193).
 - 161 회차: 배선 점검 — W1 이 가드에 ReadNotifications 를 막혀 AMP 와 서로 기다림. 가드 v2 준비(사용자 push) · 안전망에 세션 상태 점검 추가(BD-194). GR · GA · rlo-SDK 는 baseline 지시 대기.
 - 162 회차: 사용자 결정 — gentleMonster_gemini 미리보기로 먼저 써 보고 기록으로 고침(CMD-GMG6, BD-195). 새 질문 직접 작성(BD-187)은 실사용 기록으로 대신.
+- 163 회차: 가드 v2 main(`344a604`, 사용자) · W1 의 D 막힘 원인 재현(쉰 뒤 건강 낡음 → 읽기 호출 하나로 풀림) → AMP 에 순서 알림(BD-197).
