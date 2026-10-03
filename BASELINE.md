@@ -671,3 +671,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 188 회차: ga-SDK `102e48a`(GA21 rev 2 머리 병합) · Antigravity 한도 정보 → CMD-GA23(agy 감독) · W1↔AMP 교신 끊김 원인 → CMD-GA22(ga mail) · CMD-GR7(BD-234 · 235).
 - 189 회차: AMP 전달 — W1 보고가 D 에 막혀 하나도 안 닿음 · baseline 재현(0.7.0 도 통로 댓글을 D 로 막음) → CMD-K13(BD-236).
 - 190 회차: 사용자 결정 — 검증 담당 하위 세션(VERIFIER.md, BD-237) · W1 은 새로 만들지 않고 지금 rlo 의 자율 회복을 관찰(시작점 15:13, 회복 시도 없음, BD-238).
+- 191 회차: rlo `3d2e7d0`(변이 잡힘) — CMD-K12 rev 3 성공(BD-239). AMP 막힘 보고 · W1 실제 기록에서 읽기 먼저가 D 를 못 풂(합성 재현과 다름) → K13 rev 2 · GR7 rev 2(BD-240). W1 관찰: 15:13 이후 변화 없음.
