@@ -682,3 +682,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 199 회차: W1 실제 시험 = 재현(받기는 issue_read 만 · 보내기 0 · A1/D) → SDK 문제 P1–P6 확정(BD-252) · AO1 rev 2 '답함' 기준(BD-253).
 - 200 회차: ga-SDK `9831f98`(GA22 ga mail 성공, 왕복 탐침 됨) · 비밀 패턴에 Google 없음 → CMD-GA24(BD-254).
 - 201 회차(안전망 17:10): ga-SDK `d8a5bfd`(rlo 3d2e7d0 고정) · GMG7 뒤따름: agy 모델 gemini-3.8-flash-high(사용자 결정) · 주간 계열별 한도(BD-255). W1 관찰: 16:44 시험 뒤 변화 없음.
+- 202 회차: rlo `a8791e0`(0.8.0) — CMD-K13 성공: 실제 세션 수락 7/7, W1 상황 재현에서 교신 열림(v2 모형) · 남은 성능 → K14 · SEN1(BD-257).
