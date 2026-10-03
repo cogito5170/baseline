@@ -617,3 +617,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 134 회차: GMG 세션 첫 노크(#16) → 통로 · 소유 · CMD-GMG1(BD-167). ga-SDK 통합 bfcadf4(트리 차이 0). GR 세션은 아직 없음.
 - 135 회차: gentleMonster_gemini `629f943` — CMD-GMG1 성공(BD-168). Q4 첫 Gemini 실호출 사용자에게 물음.
 - 136 회차(안전망): amp `bf38252` 통합(재생 13/0 재현) · AMP `ga permit` 도 분류기 거부 → 막힘, 사용자에게 선택지(BD-169). GR ACK(#15).
+- 137 회차: 사용자 결정(BD-170) — Gemini 언제나 허락 · 도구로 추론 대체 · 병렬. CMD-GMG2 · CMD-AMP1 rev 6.
