@@ -100,3 +100,9 @@
 - ReAct 로 허가를 넓히지 않는다. 자유 추론으로 대안을 만들지 않는다.
 - 사람 전용 연산(permit · 가드 push · 배포)을 자동으로 하지 않는다.
 - 원문 · 비밀값을 신호에 싣지 않는다.
+
+## 8. Gemini 확장도 ga 를 쓴다 (BD-217)
+
+- 분당 한도(RPM) 제어부 — 속도 관리자 · model/tool 단계표 · 다시 보내기 — 는 rlo 에 한 번 짓고(CMD-K12), well_used_gemini · gentleMonster_gemini 가 ga-sdk 를 깔아 Gemini 를 LLM 공급자로 꽂아 쓴다.
+- 확장의 OOM 같은 Gemini CLI 쪽 문제는 확장에서 푼다(CMD-WUG1 A).
+- 대가: 확장에 Python 3.10+ · 설치에 GitHub 접근.
