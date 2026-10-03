@@ -591,3 +591,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 108 회차: ga-SDK `21bbe80`(139, 변이 10/10, 원격 세션 1 개 $0.1375 · 보관) — CMD-GA8 성공(BD-144): GitHub Channel · 원격 Runner(콜백) · remote 격리, 실제 바퀴 통합 · 재현. 막힘 둘(환경: 라이브러리 HTTP · 원격 세션 공개 API). METHOD rev 8 → CMD-GA9.
 - 109 회차: ga-SDK `e61bcd1`(144, 변이 6/7 — 남은 1 은 같은 값을 내는 변이) — CMD-GA9 성공: METHOD rev 8 의 바닥(거절된 보고뿐 · 통합 0 → 정보 부족 · requirement). **2판 순서 1–4 끝.** GA wait. stage-7 · 다음 방향은 사용자에게 물음.
 - 110 회차: 사용자 결정 BD-145 — **stage-7 마감**(ga-SDK `e61bcd1`) · 실사용 검증 시작 → CMD-GA10(ga 허브로 rlo-SDK 의 두 일 W1 suggest-model · W2 나란히 부르기 세기, 브랜치 `claude/ga-trial-k9`, 실행 12 번까지).
+- 111 회차: CMD-GA10 막힘(환경 · 권한) — GA 세션이 rlo-SDK 를 붙이려던 `add_repo` 가 그 세션의 권한 분류기에서 거부됨(Permission Grant). 실행 0/12. GA 는 우회하지 않고 멈춤(맞는 처리). 권한은 사용자만 줄 수 있음 → 사용자에게 물음. baseline 이 대신 붙이거나 대신 push 하지 않는다(권한 세탁 금지).
