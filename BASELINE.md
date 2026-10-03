@@ -600,3 +600,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 117 회차: AMP 세션 시작(BD-150) — 통로 #14, CMD-AMP1(P1a), PROTOCOL 소유 줄. 7 일 사용량 창 경고(allowed_warning)를 사용자에게 알림.
 - 118 회차: ga-SDK `3b004a4`(177, 변이 11/11) — CMD-GA13 성공(BD-151). 개입 재생 4 · 1 · 1. METHOD rev 12 → CMD-GA14. amp 통합 `6e911bc`(PREP 검정력 조건).
 - 119 회차: 사용자 결정 — P1a 경로 (b) `claude -p` 헤드리스 · MBA 로 토큰 절약(BD-152). MBA 의 잰 교훈(BARE 머리 교체 ~1/20 · 하니스 결함 대책)만 넣고 앞단(훅 · 캐시 · 컴파일)은 측정 오염 때문에 걸지 않음 → CMD-AMP1 rev 2. GA14 · AMP 보고 기다림.
+- 120 회차: AMP — rev 2 받음, ga 허브 꾸림(`ga tick --dry-run` · `ga check` 통과, 데이터 sha). `ga send CMD-WA1` 이 세션 자동 권한 분류기에 거부됨("Create Unsafe Agents") → **막힘(환경 · 권한)**, 비용 $0, 우회 없음. baseline 권고 (1) 사용자가 AMP 세션에서 직접 허락(작업 턴 · BARE 측정), 대안 (2) 수동 Runner. 사용자에게 물음. ga 발견(METHOD §4c 사전 확인 · 수동 강등)은 다음 GA 지시로.
