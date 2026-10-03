@@ -129,6 +129,7 @@ ga-SDK METHOD rev 16 §3.6 을 우리 통로에도 그대로 쓴다.
 | baseline `VERIFIER.md` | **baseline** | 검증 담당 하위 세션의 상속 규칙(BD-237). 검증 담당은 판정 초안만, 서명은 baseline |
 | baseline `HUB_CLASSES.md` | **baseline** | 허브 일의 상속 구조(BD-244): 기반 `Hub` 의 공통 절차 P1–P8 · 하위 `Baseline` · `Operator`(AO) · `Verifier` · 절차마다 주인 하나 |
 | `AO` 저장소 · baseline#18 | **AO** (Agent Orchestrator, 사용자가 만든 세션) | 운영 일만(살피기 · 모으기 · 머리 미리 검사 · 집계). 지시 · 판정 · 통합 · baseline 기록 쓰기는 하지 않는다. 지금은 P1 그림자(BD-243): #18 에 ao-status/1 만, 다른 세션에 보내지 않음, W1 은 읽기만 |
+| gentleMonster_gemini 가지 `gmg5/refset` (bench/gmg5/refset/ 만) · baseline#16 머리 `[gmg-net]` | **gmg-net** (사용자가 gmg-net 환경에 만든 세션 session_01DeN9dTch83c6s6uVvLv6B6) | 공개 사진 · 레이아웃 참고 수집(CMD-GN1). GMG 가지와 다른 파일은 건드리지 않는다. 보정(GMG5 S4)은 GMG 몫 |
 | well_used_gemini `*` | **WUG** (`session_01WTesMn7FjKtPKSo7SpQBY8`) | Gemini CLI 확장(se_new agentic 을 게이트 뒤에서). 지시 머리글자 `CMD-WUG`. 통로 baseline#17 (BD-215). 두 확장에 같이 쓸 고침은 여기서 짓고 GMG 가 옮긴다 |
 | gentleMonster_gemini `*` | **GMG** (`sleepy-cori`) | ga_rlo 검증 과제의 결과물. 지시 머리글자 `CMD-GMG`. 통로 baseline#16 (BD-167). gentleMonster · well_used_gemini 는 읽기만(허브 구성 때 다시 정함) |
 | baseline `*` | **baseline** (이 세션) | |

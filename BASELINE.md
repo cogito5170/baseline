@@ -678,3 +678,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 195 회차: 사용자 결정 — 허브 일 상속 구조 HUB_CLASSES.md(Hub → Baseline · Operator(AO) · Verifier, 절차마다 주인 하나) · Q5 끝(BD-244).
 - 196 회차: K13 중간 보고 — W1 막힘의 근본 원인(옛 미해결 실패가 건강 상태를 낡게 묶음) · B 로 정함 · 훅 성능(62 초, fail open) → K13 rev 3(BD-246).
 - 197 회차: ga-SDK `db6c3fa`(GA21 rev 3 성공, BD-247) · W1↔AMP: W1 은 받기 통과 · 보내기 전부 D(한쪽 통로) — SDK 문제 P1–P5, AMP 에 실제 시험 메시지 요청(BD-248).
+- 198 회차: W1 은 작업 폴더가 v1 이라 받기도 issue_read 뿐(BD-249) · Q1 끝, gmg-net 에 CMD-GN1(BD-250) · AO 연락 규칙 CMD-AO1(BD-251) · Q6(WUG ga-sdk 설치 허락).

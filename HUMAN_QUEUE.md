@@ -17,7 +17,7 @@
 
 | # | 종류 | 할 일 | 링크 | 기다리는 세션 | 올린 때 |
 |---|---|---|---|---|---|
-| Q1 | E | 기존 환경은 Network access 를 바꿀 수 없음(사용자 확인: Custom 은 만들 때만) → **새 환경 하나 만들기**: 이름 `gmg-net`, Network access = Custom, Allowed domains 에 `api.openverse.org` · `live.staticflickr.com` · `upload.wikimedia.org` · `commons.wikimedia.org` · `archive.org`(기본 패키지 목록 유지), 비밀값 없음. 만들면 baseline 이 그 환경에 GMG5 전용 세션을 만들어 넘긴다(GMG 세션은 그대로) | claude.ai/code → 새 세션 화면의 환경 메뉴 → 새 환경 · 안내 https://code.claude.com/docs/en/cloud-environments#network-access | GMG5 만 | 2026-10-03 |
+| Q6 | D | WUG 가 확장 venv 에 ga-sdk(github cogito5170/ga-SDK, rlo 0.7.0 포함)를 깔아도 되는지 사용자에게 묻는 중 — WUG 대화창에서 허락 한 줄(예: 'ga-sdk 를 확장 venv 에 설치해도 된다') | WUG 세션 대화창 | WUG(CMD-WUG1 S6 · S10). 그동안 heap 측정은 계속 | 2026-10-03 |
 
 ## 끝남
 
@@ -37,3 +37,4 @@
 | Q2 | G | W1 가지에 main 병합 | 사용자가 AMP 대화창에서 허락 → w1/work 714c00b→36ca54d(가드 v2 모형 · 허락 바로 적용, rlo 는 0.5.0 그대로 — 새 세션 없이는 SessionStart 가 안 돎) (BD-242) |
 | Q3 | D | Gemini API 키 결제 | 사용자 결정: 켜지 않는다 — 무료 하루 20 요청 유지(BD-242) |
 | Q5 | P | GMG 를 Antigravity 로(A 블록 실행 · agy 모델 목록) | 사용자가 Mac 에서 A 블록 실행 · 모델 목록을 GMG 대화창에 직접 붙여넣음(BD-244). 모델 고르기는 GMG 가 사용자에게 묻는다 |
+| Q1 | E | GMG5 용 네트워크 | 사용자가 새 환경 gmg-net(env_01DoC1Nd3tRxTJyoJA7Hmg9d, Custom 다섯 호스트) 을 만들고 그 안의 세션이 접속 확인(16:35Z) → 그 세션이 CMD-GN1 로 수집(BD-250) |
