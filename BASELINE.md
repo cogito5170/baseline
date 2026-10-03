@@ -660,3 +660,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 177 회차: gentleMonster_gemini `02ee452`(여섯 묶음, 변이 잡힘) — CMD-GMG6 rev 3 판정 보류(머리) · 예상 부분 성공 · GMG5 막힘 · Q1 갱신(BD-223).
 - 178 회차: gentleMonster_gemini `0d3113f`(여섯 묶음) — CMD-GMG6 rev 3 부분 성공(D5 · D6 은 할당량 재설정 뒤) · GMG5 멈춤(Q1)(BD-224).
 - 179 회차: ga-SDK `75a3825`(GR5 병합, 360, 변이 잡힘) — CMD-GR5 성공: ga_rlo 가 `ga rlo` 로 들어옴 · ga_rlo 동결 · U2 끝(BD-225).
+- 180 회차: ga-SDK `f6725b1`(302, 탐침이 결함 찾음) — CMD-GA21 rev 1 부분 성공 · 통합 보류 · rev 2 필수 · K12 rev 3 병렬 도구 단계(BD-226).
