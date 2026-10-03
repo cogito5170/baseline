@@ -614,3 +614,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 131 회차: 사용자 결정 — ga_rlo(결합층, 새 세션 GR, BD-164). `GA_RLO.md` · 통로 #15 · CMD-GR1. 세션 생성 기다림.
 - 132 회차: ga-SDK `645f8da`(GA17 merge, 220) — CMD-GA17 성공(BD-165), 실제 rlo 끝까지 확인. AMP 판 올림 · GR 고정 갱신.
 - 133 회차: 사용자 지시 — ga_rlo 검증 과제 gentleMonster(BD-166, `GA_RLO.md` §7). GR 세션 생성 기다림.
+- 134 회차: GMG 세션 첫 노크(#16) → 통로 · 소유 · CMD-GMG1(BD-167). ga-SDK 통합 bfcadf4(트리 차이 0). GR 세션은 아직 없음.
