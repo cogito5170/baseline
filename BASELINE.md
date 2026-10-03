@@ -676,3 +676,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 193 회차: 사람 몫 결과 — Q2 끝(w1/work 36ca54d) · Q3 결제 안 함 · Q4 끝 · Q1 새 환경 필요 · Q5 agy 모델 고르기 대기(BD-242).
 - 194 회차: 새 세션 AO(사용자 생성, #18) — 운영 일 분리 제안 받음 · P1 그림자만 허락(BD-243).
 - 195 회차: 사용자 결정 — 허브 일 상속 구조 HUB_CLASSES.md(Hub → Baseline · Operator(AO) · Verifier, 절차마다 주인 하나) · Q5 끝(BD-244).
+- 196 회차: K13 중간 보고 — W1 막힘의 근본 원인(옛 미해결 실패가 건강 상태를 낡게 묶음) · B 로 정함 · 훅 성능(62 초, fail open) → K13 rev 3(BD-246).
