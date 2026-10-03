@@ -606,3 +606,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 123 회차: 사용자 지시 — METHOD rev 13(`742bb3b`) §4c 권한 사전 확인 · 수동 강등, F9(BD-156). 구현 지시와 stage-8 마감은 사용자 답 기다림.
 - 124 회차: **stage-8 마감**(BD-157, ga-SDK `742bb3b` · rlo-SDK `a152e14`). CMD-GA15(rev 13 구현). AMP 는 사용자 직접 허락 기다림.
 - 125 회차: stage-8 태그 확인(ga-SDK · rlo-SDK, stage-1–7 태그는 없음). ga-SDK `7230741`(199) — CMD-GA15 성공(BD-158). Judge 호출 허락 여부 사용자에게 물음.
+- 126 회차: 사용자 결정 — Judge 호출도 허락으로 막음(BD-159). METHOD rev 14 → CMD-GA16.
