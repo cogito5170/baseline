@@ -640,3 +640,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 157 회차: gentleMonster 세션의 질문 의미 데이터(`4eb4ffa`) — 머리 고침 요청 · GMG 동결 전 읽기 허용 · 사진 업로드는 사용자에게(BD-190).
 - 158 회차: 사용자 결정 — 사진은 비공개 저장소 gm-photos 에, GMG 에만 붙임 · 보류 사진은 heldout/(BD-191).
 - 159 회차: 사용자 지시 — 공개 사진 · 잡지 레이아웃 레퍼런스를 설계 자료로(CMD-GMG5, BD-192). baseline 환경에선 공개 이미지 호스트가 망 정책에 막힘.
+- 160 회차: gm-photos 14 장 비공개 완료(sha 14/14, 머리 다시 고침 요청) · W1 가드 동작(WebFetch A1 거부, 기록 줄 +1/호출) — AMP 전달 대기(BD-193).
