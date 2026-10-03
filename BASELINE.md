@@ -609,3 +609,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 126 회차: 사용자 결정 — Judge 호출도 허락으로 막음(BD-159). METHOD rev 14 → CMD-GA16.
 - 127 회차: AMP 06:43 보고를 늦게 읽음(BD-160, 허브 결함 — 알림 막힘 + 안전망 범위). 판정 막힘(권한), 권고 (A) 사용자가 AMP 권한 모드 변경. 안전망 프롬프트 고침.
 - 128 회차: 사용자 결정 — AMP 자동 모드 유지 · rlo 가 ga 작업 턴 감시(BD-161). METHOD rev 15 → CMD-GA17, CMD-AMP1 rev 4.
+- 129 회차: ga-SDK `41a248a`(GA16 merge, 210) — CMD-GA16 성공(BD-162). GA17 진행.
