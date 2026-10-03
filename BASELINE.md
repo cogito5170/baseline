@@ -689,3 +689,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 206 회차: gmg5/refset `fa481fd` — CMD-GN1 성공(87 사진 · 40 레이아웃, 라이선스 검사 · 변이 잡힘), 머리 고침 요청 · GMG5 rev 2(S4 만)(BD-261).
 - 207 회차: 사용자 결정 — baseline 은 정책 · 판정, AO 가 일정 · 지시 · 교신(BD-263, CMD-AO2).
 - 208 회차: ga-SDK `26f54e6` — CMD-GA23 성공(`ga gemini --host agy`, 가정 고정물; 변이 2/2), Q6 끝 · Q7 올림(BD-264).
+- 209 회차: AO `229e772` — CMD-AO2 성공(운영 시작, 일정 표 T1–T4); Q6 은 WUG 대화창 직접 허락으로 다시 열림(BD-265).
