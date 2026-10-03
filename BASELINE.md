@@ -645,3 +645,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 162 회차: 사용자 결정 — gentleMonster_gemini 미리보기로 먼저 써 보고 기록으로 고침(CMD-GMG6, BD-195). 새 질문 직접 작성(BD-187)은 실사용 기록으로 대신.
 - 163 회차: 가드 v2 main(`344a604`, 사용자) · W1 의 D 막힘 원인 재현(쉰 뒤 건강 낡음 → 읽기 호출 하나로 풀림) → AMP 에 순서 알림(BD-197).
 - 164 회차: 밀린 지시 — CMD-GR2(remote 프로필, W1 교훈 포함) · CMD-K10(깨진 입력 deny · 낡음 D 힌트)(BD-198).
+- 165 회차: ga_rlo `40a45c3`(54, 변이 잡힘) — CMD-GR2 성공, remote 프로필(BD-199).
