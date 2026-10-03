@@ -668,3 +668,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 185 회차: rlo-sdk `250a88e`(160, 변이 잡힘) — CMD-K12 rev 2 성공: governor · scheduler · 저장 · status, 0.7.0(BD-231). rev 3(병렬) 보고 대기.
 - 186 회차: ga-SDK `b901595`(GA21 rev 2 병합, 401, 탐침 · 변이 잡힘) — CMD-GA21 rev 2 성공 · `ga gemini` 통합 · baseline 의 maxAttempts 사실 정정 → rev 3(BD-232).
 - 187 회차: gentleMonster_gemini `62af1a5`(일곱 묶음, 변이 잡힘) — CMD-GMG7 성공: agy 경로, Mac 실행은 Q5(BD-233).
+- 188 회차: ga-SDK `102e48a`(GA21 rev 2 머리 병합) · Antigravity 한도 정보 → CMD-GA23(agy 감독) · W1↔AMP 교신 끊김 원인 → CMD-GA22(ga mail) · CMD-GR7(BD-234 · 235).
