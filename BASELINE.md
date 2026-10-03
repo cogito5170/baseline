@@ -638,3 +638,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 155 회차: GMG 머리 고침 → GMG4 부분 성공(H3 못 미침) · GMG3 성공(보류 평가 약함 4/11 · 1/11)(BD-188).
 - 156 회차: 사용자가 amp main 에 W1 가드 push(`714c00b`, 꾸러미와 같음 확인) → CMD-AMP1 rev 8: W1 가드 시연(BD-189).
 - 157 회차: gentleMonster 세션의 질문 의미 데이터(`4eb4ffa`) — 머리 고침 요청 · GMG 동결 전 읽기 허용 · 사진 업로드는 사용자에게(BD-190).
+- 158 회차: 사용자 결정 — 사진은 비공개 저장소 gm-photos 에, GMG 에만 붙임 · 보류 사진은 heldout/(BD-191).
