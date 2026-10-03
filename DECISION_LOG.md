@@ -280,6 +280,7 @@
 | BD-157 | **stage-8 마감**(사용자 결정 "마감해라 · rev 13 구현해라"). ga-SDK `742bb3b`(METHOD rev 13, 코드 GA14, 184) · rlo-SDK `a152e14`(0.5.0, 97), 나머지는 stage-6 과 같다. 다음: CMD-GA15(rev 13 §4c 구현 — 허락 기록 없으면 모형 턴을 열지 않음 · 거부 시 보내지 않음 + 게이트 6 · 강등은 사람만) | `STAGES.md` stage-8 · 태그 명령. baseline#12 CMD-GA15 |
 | BD-158 | **CMD-GA15 성공**(ga-SDK `7230741`, 시험 199, 변이 18/18 + baseline 변이 1). §4c 구현: `ga permit` → `runner.permission`, 허락 없음 · 범위 밖이면 보내지 않음(`not_sent`) + 게이트 6, 거부도 같음(재시도 없음 · 반쯤 쓴 상태 없음), 수동 강등은 사람 답으로만. 한계: `by: user` 는 기록이지 신원 증명이 아님 → 운영 규칙(사람 직접 답 뒤에만 permit, note 에 요지) | Judge 호출을 허락으로 막을지는 사용자에게 물음(권고: 허락 없으면 Judge 안 부름 · 기계 클래스 · 재시도 없이 게이트 6 한 번) |
 | BD-159 | **Judge 호출도 허락으로 막는다**(사용자 결정 "막아줘"). METHOD rev 14(ga-SDK `080699c`) §4c 6: 허락 범위에 `measurement_calls` 가 없으면 LLM Judge 를 부르지 않음 · 기계 클래스 · 재시도 없이 게이트 6 한 번(rev 12 실패 셈과 별개). `FileJudge` · `CallableJudge` 는 허락 불필요. §4c 5 덧붙임: permit 의 by user 는 기록이지 신원 증명 아님 | baseline#12 CMD-GA16(수동 Runner 허브의 Judge 만 허락하는 길 포함) |
+| BD-160 | **baseline 이 AMP 보고(06:43)를 늦게 읽음 — 허브 쪽 결함.** 까닭: AMP 의 send_message 알림이 그쪽 분류기에 막힘 + 매시 안전망이 #1–#4 만 보고 #14 를 안 봄 + "사용자 직접 답 기다림" 뒤 baseline 이 수동적으로 기다림. 고침: 안전망이 열린 이슈 전부를 "마지막 baseline 댓글 뒤" 기준으로 읽음(시간 창 없음), ga-SDK · rlo-SDK · amp fetch 포함, 사용자만 풀 수 있는 막힘은 사용자에게 알림. AMP 판정: 막힘(환경 · 권한) — 채팅 허락으로는 분류기가 안 풀림(확인됨). 권고 (A) 사용자가 AMP 세션 권한 모드를 자동 아닌 것으로 | baseline#14. 트리거 `trig_01RsSwQxwd5TuzF6ihnuEE8d` 프롬프트 갱신 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---
