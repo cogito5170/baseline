@@ -92,6 +92,7 @@ baseline 의 확인 댓글은 결과를 **성공 · 부분 성공 · 실패 · �
 | guard `*` | **Guard** (새 세션) | Validate · Arbitrate · Guard (BD-07 · BD-24). shadow 먼저, enforce 는 OQ-17 뒤. 통로 baseline#7 |
 | health `*` | **Health** (새 세션) | ASSESS 진단 · 격리 · VERIFY (BD-22). 통로 baseline#9 |
 | rlo-SDK `*` | **SDK** (새 세션) | 일곱 패키지를 조립하는 SDK 입구 · 훅 어댑터 (BD-119). 지시 머리글자 `CMD-K`. 통로 baseline#11 |
+| rlo-SDK 브랜치 `claude/ga-trial-k9` | **GA** (ga 허브 시험, BD-145) | 이번 실사용 검증만의 예외. SDK 세션은 wait. baseline 이 재현 · 판정 뒤 통합 |
 | ga-SDK `*` (아래 제외) | **GA** (새 세션) | 허브 지시-보고 고리 SDK (BD-131). 지시 머리글자 `CMD-GA`. 통로 baseline#12 |
 | ga-SDK `METHOD.md` | **baseline** | 명세. 바꿀 곳은 #12 에 `요청:` |
 | baseline `*` | **baseline** (이 세션) | |

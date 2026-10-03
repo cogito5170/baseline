@@ -113,6 +113,18 @@
   - GA5 rev 2 의 B 실패 원인(미해결).
   - 기록을 허브 저장소에 커밋하는 일.
 
+## stage-7 — 2026-10-03 (통합 110 회차, 사용자 결정, BD-145) — ga 2판 끝(순서 1–4)
+
+| 저장소 | 커밋 | 시험 |
+|---|---|---|
+| ga-SDK | `e61bcd1714ab8315dccafe9574ce1b2ec061bdf2` (METHOD method-1 rev 8) | 144 |
+| rlo-SDK · Telemetry · Sensor · MS · DC · action · guard · health | stage-6 과 같다 | stage-6 과 같다 |
+
+- stage-6 뒤에 선 것: GitHub 이슈 Channel(표준 라이브러리, 가짜 서버로 모든 경로) · `CallbackChannel` · 원격 세션 Runner(콜백) · `isolation: "remote"` · METHOD rev 8 기계 바닥(보고가 모두 거절되고 통합 0 → 정보 부족).
+- 실제 확인: ga-SDK#1 이슈 + 원격 세션 1 개(haiku, $0.14, 보관)로 한 바퀴.
+- 막힘(환경): 라이브러리 HTTP 로 api.github.com 을 직접 부르는 것과 원격 세션 공개 API 는 이 실행 환경에서 확인하지 못했다.
+- 다음: 실사용 검증 — ga 허브로 실제 작업(rlo-SDK)을 굴린다(CMD-GA10).
+
 ### 태그를 달려면 (사용자 컴퓨터에서)
 
 ```
@@ -150,4 +162,6 @@ gh api repos/cogito5170/ga-SDK/git/refs     -f ref=refs/tags/stage-5 -f sha=90aa
 gh api repos/cogito5170/rlo-SDK/git/refs    -f ref=refs/tags/stage-5 -f sha=c6b2f95122f4828ff341b7d140579543936cc34c
 
 gh api repos/cogito5170/ga-SDK/git/refs     -f ref=refs/tags/stage-6 -f sha=32d4e106ff82431291f51ee6aa60a0b4ba21850a
+
+gh api repos/cogito5170/ga-SDK/git/refs     -f ref=refs/tags/stage-7 -f sha=e61bcd1714ab8315dccafe9574ce1b2ec061bdf2
 ```
