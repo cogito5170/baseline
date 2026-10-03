@@ -675,3 +675,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 192 회차(안전망 16:10): W1 관찰 — 변화 없음(마지막 활동 15:13:40, 도구 호출 0, w1/work 714c00b, amp#1 마지막 12:59). 새 보고 없음.
 - 193 회차: 사람 몫 결과 — Q2 끝(w1/work 36ca54d) · Q3 결제 안 함 · Q4 끝 · Q1 새 환경 필요 · Q5 agy 모델 고르기 대기(BD-242).
 - 194 회차: 새 세션 AO(사용자 생성, #18) — 운영 일 분리 제안 받음 · P1 그림자만 허락(BD-243).
+- 195 회차: 사용자 결정 — 허브 일 상속 구조 HUB_CLASSES.md(Hub → Baseline · Operator(AO) · Verifier, 절차마다 주인 하나) · Q5 끝(BD-244).

@@ -18,7 +18,6 @@
 | # | 종류 | 할 일 | 링크 | 기다리는 세션 | 올린 때 |
 |---|---|---|---|---|---|
 | Q1 | E | 기존 환경은 Network access 를 바꿀 수 없음(사용자 확인: Custom 은 만들 때만) → **새 환경 하나 만들기**: 이름 `gmg-net`, Network access = Custom, Allowed domains 에 `api.openverse.org` · `live.staticflickr.com` · `upload.wikimedia.org` · `commons.wikimedia.org` · `archive.org`(기본 패키지 목록 유지), 비밀값 없음. 만들면 baseline 이 그 환경에 GMG5 전용 세션을 만들어 넘긴다(GMG 세션은 그대로) | claude.ai/code → 새 세션 화면의 환경 메뉴 → 새 환경 · 안내 https://code.claude.com/docs/en/cloud-environments#network-access | GMG5 만 | 2026-10-03 |
-| Q5 | P | agy 실행 결과: 실행 명령이 'Gemini 3 Flash' 에 해당하는 agy 모델을 못 찾아 멈춤(설계대로 — 모델은 사용자가 고름). **그 위에 나온 모델 목록 줄들과 `/usage` 줄을 이 채팅에 붙여넣기**(또는 Mac 에서 `agy models` 한 줄 실행 결과). baseline 이 고를 후보를 권하고, 고른 뒤 `export GENTLEMONSTER_AGY_MODEL=<이름>` 한 줄 | Mac 터미널의 직전 출력 | GMG7 마무리 · GA23 | 2026-10-03 |
 
 ## 끝남
 
@@ -37,3 +36,4 @@
 | Q4 | G | WUG 가 baseline 지시를 받도록 허락 | 사용자가 16:21 에 WUG 대화창에 한 줄(같은 줄이 실수로 GMG 에도 감 → baseline 이 GMG 에 정정, BD-241). WUG 는 CMD-WUG1 rev 3 시작, 보고는 send_message 로 baseline 에 |
 | Q2 | G | W1 가지에 main 병합 | 사용자가 AMP 대화창에서 허락 → w1/work 714c00b→36ca54d(가드 v2 모형 · 허락 바로 적용, rlo 는 0.5.0 그대로 — 새 세션 없이는 SessionStart 가 안 돎) (BD-242) |
 | Q3 | D | Gemini API 키 결제 | 사용자 결정: 켜지 않는다 — 무료 하루 20 요청 유지(BD-242) |
+| Q5 | P | GMG 를 Antigravity 로(A 블록 실행 · agy 모델 목록) | 사용자가 Mac 에서 A 블록 실행 · 모델 목록을 GMG 대화창에 직접 붙여넣음(BD-244). 모델 고르기는 GMG 가 사용자에게 묻는다 |
