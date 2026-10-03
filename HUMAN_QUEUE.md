@@ -18,6 +18,7 @@
 | # | 종류 | 할 일 | 링크 | 기다리는 세션 | 올린 때 |
 |---|---|---|---|---|---|
 | Q1 | E | GMG 환경 Network access 를 Custom 으로: `api.openverse.org` · `commons.wikimedia.org` · `upload.wikimedia.org` · `api.unsplash.com` · `images.unsplash.com` · `www.pexels.com` · `images.pexels.com` 추가(기본 패키지 목록 유지) | GMG 세션 제목 표시줄 → 환경 메뉴 → Edit · 안내 https://code.claude.com/docs/en/cloud-environments#network-access | GMG(CMD-GMG5 만; 다른 일은 계속) | 2026-10-03 |
+| Q2 | G | W1 을 가드 v2 · rlo 0.5.1 로 올리기. W1 대화창에 한 줄: `Read README.md first, then run: git fetch origin main && git merge origin/main && git push origin w1/work. Then read amp#1 directly and follow AMP's latest CMD-WA.` — 그래도 막히면 W1 을 새로 만든다(저장소 amp, 브랜치 w1/work, 프롬프트는 처음과 같음) | W1 세션 대화창(claude.ai/code) | W1 · AMP(AMP 는 W1 을 기다림) | 2026-10-03 |
 
 ## 끝남
 
