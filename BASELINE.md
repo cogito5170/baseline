@@ -624,3 +624,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 141 회차: ga_rlo `868d618` — CMD-GR1 성공(BD-174). GR wait(GR2 는 AMP W1 가드 실물 뒤).
 - 142 회차: 사용자 결정 — 세션 통신은 영어(BD-175, PROTOCOL §3b).
 - 143 회차: GMG2 보고 — 머리 없음으로 판정 보류(§3a), rev 1 만 처리(엇갈림), 맹검 묶음 사용자에게(BD-176).
+- 144 회차: ga-SDK `a782cab`(240) — CMD-GA18 성공, 꼴 판 2 가동. METHOD rev 17 → CMD-GA19(첫 directive/2, 영어)(BD-177). GMG rev 2 ACK.
