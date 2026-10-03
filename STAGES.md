@@ -125,6 +125,20 @@
 - 막힘(환경): 라이브러리 HTTP 로 api.github.com 을 직접 부르는 것과 원격 세션 공개 API 는 이 실행 환경에서 확인하지 못했다.
 - 다음: 실사용 검증 — ga 허브로 실제 작업(rlo-SDK)을 굴린다(CMD-GA10).
 
+## stage-8 — 2026-10-03 (통합 124 회차, 사용자 결정, BD-157) — ga 실사용 검증 끝
+
+| 저장소 | 커밋 | 시험 |
+|---|---|---|
+| ga-SDK | `742bb3b900dd6b72925782ddf251925ee994f001` (METHOD method-1 rev 13, 코드는 CMD-GA14 `8c67c35`) | 184 |
+| rlo-SDK | `a152e14bc84dc282f66bb3426a12a70934fc530d` (0.5.0: suggest-model · parallel_calls · 요구 문자열 뜻 비교) | 97 |
+| Telemetry · Sensor · MS · DC · action · guard · health | stage-6 과 같다 | stage-6 과 같다 |
+
+- stage-7 뒤에 선 것: 실사용 검증(GA10–GA14). ga 허브가 rlo-SDK 의 실제 두 일을 끝냈다. 고친 것은 다음과 같다.
+  - METHOD rev 9–12: 알려진 건너뜀, `not_install_checked`, R4 비ff 자동 rev+1, `import_check`, `review/1` 바깥 판정, 빈 초안 메우기, Judge ask_user 의 §6 근거, Judge 실패 재시도와 게이트 6.
+  - 운영자 개입 재생: 6 번 가운데 필요 없음 4 · Judge 에 달림 1 · 남음 1.
+- METHOD rev 13(§4c 권한 사전 확인 · 수동 강등, F9)은 글만 들어갔다. 구현은 CMD-GA15 다.
+- 다음: CMD-GA15(rev 13 구현). AMP P1a 는 사용자가 AMP 세션에 직접 허락하면 시작한다.
+
 ### 태그를 달려면 (사용자 컴퓨터에서)
 
 ```
@@ -164,4 +178,7 @@ gh api repos/cogito5170/rlo-SDK/git/refs    -f ref=refs/tags/stage-5 -f sha=c6b2
 gh api repos/cogito5170/ga-SDK/git/refs     -f ref=refs/tags/stage-6 -f sha=32d4e106ff82431291f51ee6aa60a0b4ba21850a
 
 gh api repos/cogito5170/ga-SDK/git/refs     -f ref=refs/tags/stage-7 -f sha=e61bcd1714ab8315dccafe9574ce1b2ec061bdf2
+
+gh api repos/cogito5170/ga-SDK/git/refs     -f ref=refs/tags/stage-8 -f sha=742bb3b900dd6b72925782ddf251925ee994f001
+gh api repos/cogito5170/rlo-SDK/git/refs    -f ref=refs/tags/stage-8 -f sha=a152e14bc84dc282f66bb3426a12a70934fc530d
 ```

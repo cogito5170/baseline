@@ -604,3 +604,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 121 회차: 사용자 결정 — MBA 사용하지 않음(BD-153). CMD-AMP1 rev 3 로 rev 2 의 MBA 항목 철회, 경로 (b) 유지. 권한 막힘 사용자 답 기다림.
 - 122 회차: 사용자 결정 — AMP 권한 (1) 권고대로, 사용자가 AMP 에 직접 답함(BD-154). ga-SDK `8c67c35`(184, 변이 8/8 · baseline 변이 1 잡힘) — CMD-GA14 성공(BD-155). stage-8 마감 사용자에게 물음.
 - 123 회차: 사용자 지시 — METHOD rev 13(`742bb3b`) §4c 권한 사전 확인 · 수동 강등, F9(BD-156). 구현 지시와 stage-8 마감은 사용자 답 기다림.
+- 124 회차: **stage-8 마감**(BD-157, ga-SDK `742bb3b` · rlo-SDK `a152e14`). CMD-GA15(rev 13 구현). AMP 는 사용자 직접 허락 기다림.
