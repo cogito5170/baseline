@@ -623,3 +623,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 140 회차: 사용자 결정 — 메시지 꼴을 의미 단위로(BD-173). METHOD rev 16 · PROTOCOL §3a · CMD-GA18.
 - 141 회차: ga_rlo `868d618` — CMD-GR1 성공(BD-174). GR wait(GR2 는 AMP W1 가드 실물 뒤).
 - 142 회차: 사용자 결정 — 세션 통신은 영어(BD-175, PROTOCOL §3b).
+- 143 회차: GMG2 보고 — 머리 없음으로 판정 보류(§3a), rev 1 만 처리(엇갈림), 맹검 묶음 사용자에게(BD-176).
