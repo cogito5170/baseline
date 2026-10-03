@@ -71,3 +71,20 @@ P2–P4 는 rlo 층(Telemetry · Sensor · Guard)을 고쳐야 하므로 SDK 세
 - 허락을 대신 만들지 않는다. 사람의 설정을 고치지 않는다.
 - 바깥 실행 환경의 권한 검사를 피하는 길을 만들지 않는다.
 - 비밀값 · 원문 대화를 기록하지 않는다.
+
+## 7. 검증 과제 — gentleMonster (사용자 지시, BD-166)
+
+ga_rlo 로 baseline–세션 구조를 **다른 프로젝트에서 처음부터** 세워 본다. 우리 구조(GitHub 이슈 + send_message + 사람인 baseline)를 ga_rlo 가 대신할 수 있는지가 검증 대상이다.
+
+| 자리 | 저장소 | 하는 일 |
+|---|---|---|
+| 허브(그 프로젝트의 baseline) | cogito5170/gentleMonster | ga_rlo 허브를 돌린다. 지시 · 통합 · 재현 · 판정 · 기록 |
+| 작업 세션 | cogito5170/well_used_gemini | Gemini 런타임 쪽 일. MCP 철학(런타임이 판정하는 게이트 · 원장에서만 그린 상태 · 위조 거절 · sandbox 도구)은 유지하고, 사용성을 고친다 |
+| 결과물 | cogito5170/gentleMonster_gemini | gentleMonster 작업 공간을 Gemini API 로 그대로 쓸 수 있게 한 것 |
+
+- 모형: `gemini-3.1-flash-lite`. 근거는 well_used_gemini README(Gemini CLI `models.js` 의 `DEFAULT_GEMINI_FLASH_LITE_MODEL`)다. 첫 실행에서 키로 모형 목록을 읽어 `generateContent` 를 받는지 확인한다(assumption 까지).
+- 작은 모형이라 판단을 모형에 맡기지 않는다. 닫힌 연산 · 코드가 판정하는 관문 · 쓰기 쉬운 입구로 사용자 쪽을 고친다.
+- 키는 클라우드 환경의 환경 변수 `GEMINI_API_KEY` 로만 받는다. 저장소 · 이슈 · 채팅 · 기록에 남기지 않는다(BD-95).
+- 이 환경에서 `generativelanguage.googleapis.com` 에 닿는다(키 없이 403 = Google 의 응답, 프록시 차단 아님, 2026-10-03 확인).
+- **작업 세션은 원격 세션(send_message 로 깨움)을 기본으로 한다.** 허브 안에서 헤드리스 턴을 여는 길은 자동 모드 분류기에 막힐 수 있다(AMP, BD-154 · 160). 원격 작업 세션에는 rlo 가드를 **작업 저장소의 프로젝트 설정**(`.claude/settings.json`)으로 걸고, 그 경로는 허브 소유로 둔다 — 작업 세션이 자기 가드를 고치는 커밋은 R1 소유 검사에서 거절된다.
+- 최종 검증이 끝나면 통합 SDK 를 만들어 배포한다. 배포는 게이트 1(사용자 결정)이다.
