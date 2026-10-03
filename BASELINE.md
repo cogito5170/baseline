@@ -616,3 +616,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 133 회차: 사용자 지시 — ga_rlo 검증 과제 gentleMonster(BD-166, `GA_RLO.md` §7). GR 세션 생성 기다림.
 - 134 회차: GMG 세션 첫 노크(#16) → 통로 · 소유 · CMD-GMG1(BD-167). ga-SDK 통합 bfcadf4(트리 차이 0). GR 세션은 아직 없음.
 - 135 회차: gentleMonster_gemini `629f943` — CMD-GMG1 성공(BD-168). Q4 첫 Gemini 실호출 사용자에게 물음.
+- 136 회차(안전망): amp `bf38252` 통합(재생 13/0 재현) · AMP `ga permit` 도 분류기 거부 → 막힘, 사용자에게 선택지(BD-169). GR ACK(#15).
