@@ -585,3 +585,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 102 회차: ga-SDK `05c96e7`(108, 변이 7/7) — CMD-GA5 진행(BD-140): R3 를 구조로(독립 clone · 허브 pull · OS 쓰기 샌드박스), 공격 15/15 실패 · 대조군 11/15 통과 · baseline 탈출 탐침 9/9 실패. (2) 는 정상 턴 확인으로 바꿈(rev 2).
 - 103 회차: ga-SDK `7a1fe10`(108, 장치 · 결과만) — CMD-GA5 rev 2 부분 성공: 실제 정상 턴 2 번(haiku, $0.128) 모두 sandboxed. A 는 통합까지 됐고 B 는 통합되지 않음(정보 부족, 단서는 가드 other_repo 1 번). 실행 2 번 더 허락(rev 3, 합계 4 번), 원인을 가린다.
 - 104 회차: ga-SDK `ec9db01`(108) — CMD-GA5 rev 3 성공(BD-141): 샌드박스 안 실제 정상 턴 A · B 모두 통합($0.116), rev 2 B 원인은 미해결(R3 영향 없음). R3 일 닫음. CMD-GA6(Agent SDK Runner · 진단 라벨).
+- 105 회차: ga-SDK `cfa34ac`(119, 변이 7/7, 실제 4 번 $0.178) — CMD-GA6 성공(BD-142): Agent SDK Runner(래퍼 env -i + 샌드박스) · 턴 진단 라벨. CMD-GA7(허용 목록 · 프롬프트로 조용한 실패 줄이기). 2판 순서 4 는 사용자에게 물음.
