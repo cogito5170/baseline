@@ -686,3 +686,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 203 회차: ga-SDK `98cbd26` — CMD-GA24 성공: Google 비밀 패턴, 탐침의 AIza 글 이제 거절(BD-258).
 - 204 회차: heap OOM 원인 확정(Gemini CLI 텔레메트리 버퍼, WUG) · GMG8 · SEN1 을 진짜 Sensor 세션에(BD-259).
 - 205 회차: CMD-WUG1 rev 3 부분 성공(heap 원인 · 고침 met, rlo 채택은 Q6 대기) — 중계 머리는 baseline 이 형식만 맞춤(BD-260).
+- 206 회차: gmg5/refset `fa481fd` — CMD-GN1 성공(87 사진 · 40 레이아웃, 라이선스 검사 · 변이 잡힘), 머리 고침 요청 · GMG5 rev 2(S4 만)(BD-261).
