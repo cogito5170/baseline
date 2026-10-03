@@ -597,3 +597,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 114 회차: rlo-SDK `a152e14`(0.5.0, 97, 변이 54/54) — CMD-K9 성공: 요구 문자열을 뜻으로 비교(빌드 꼴 무관, sha 는 여전히 봄) · 나란히 시험 자료를 패키지 자원으로 · 새 칸 초안 required:false · README 두 명령. baseline 재현: PYTHONPATH OK · 빈 venv 설치 OK(건너뜀 4, 모두 까닭 있음). Manifest 실패 까닭 = packaging<22 의 str(Requirement) 꼴(흉내로 verified, GA 쪽 빌드 도구는 GA12 증거로 확정). SDK wait.
 - 115 회차: ga-SDK `237ea32`(167, 변이 17/17) — CMD-GA12 성공(BD-148): review/1 · 세션별 빈 초안 메우기 · (b) 빌드 도구 판. 개입 6 재생: 없앰 3 · Judge 에 달림 2 · 남음 1. METHOD rev 11 → CMD-GA13.
 - 116 회차: 사용자 결정 BD-149 — Token Amplifier 명세 `AMP.md`(amp-1 rev 1). 짓는 쪽: 새 저장소 · AMP 세션 · ga 허브 운영 → 사용자에게 저장소 · 세션 생성 요청.
+- 117 회차: AMP 세션 시작(BD-150) — 통로 #14, CMD-AMP1(P1a), PROTOCOL 소유 줄. 7 일 사용량 창 경고(allowed_warning)를 사용자에게 알림.
