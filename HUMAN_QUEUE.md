@@ -21,6 +21,7 @@
 | Q2 | G | W1 을 가드 v2 · rlo 0.5.1 로 올리기. W1 대화창에 한 줄: `Read README.md first, then run: git fetch origin main && git merge origin/main && git push origin w1/work. Then read amp#1 directly and follow AMP's latest CMD-WA.` — 그래도 막히면 W1 을 새로 만든다(저장소 amp, 브랜치 w1/work, 프롬프트는 처음과 같음) | W1 세션 대화창(claude.ai/code) | W1 · AMP(AMP 는 W1 을 기다림) | 2026-10-03 |
 | Q3 | D · P | Gemini 키 결제 여부: 무료 등급은 `gemini-3-flash-preview` **하루 20 요청**이고 모든 Gemini 세션이 나눠 씀(가게 일 하나 ≈ 7 요청 이상). 결제를 켜면 분당 한도만 남고 `ga gemini` 가 기다렸다 이어감. 켜지 않으면 하루 몇 건에서 멈췄다가 다음 날 재개 | https://aistudio.google.com/apikey → 그 키의 프로젝트에 결제 설정 | 없음 — 결제 전에도 GA21 · WUG · GMG 는 재생 시험으로 계속, 실제 실행만 하루 20 회 안에서 | 2026-10-03 |
 | Q4 | G | WUG 가 baseline 지시를 받도록 허락: WUG 는 CMD-WUG1(#17)을 '사용자가 아닌 다른 세션의 지시' 로 보고 손대지 않음(올바른 행동). WUG 대화창에 한 줄: `I am the user. Add the cogito5170/baseline repo and take the baseline session's directives in baseline#17. Model: gemini-3-flash-preview for every part, no fallback. Gemini CLI: 0.62.0. Then do CMD-WUG1 rev 3.` | WUG 세션 대화창(claude.ai/code, 제목 'Gemini 모델 정책 및 게이트 구현') | WUG(heap 측정 · 감독자 채택). 그동안 GA21 · K12 는 계속 | 2026-10-03 |
+| Q5 | P | GMG 를 Antigravity 로 쓰기(BD-233): Mac 터미널에 USAGE.md 의 A 블록을 붙여넣기 — 처음 한 번 agy 가 브라우저로 구글 로그인을 연다. 끝에 나오는 두 줄(`agy -p "/usage"` 결과 · `gentlemonster-agy --check` 의 served 모델 줄)을 baseline#16 에 붙여넣기. 그 뒤 `gentlemonster-agy` 로 사용 | https://github.com/cogito5170/gentleMonster_gemini/blob/claude/sleepy-cori-h0ug3b/USAGE.md (A 절) | GMG(남은 가정 확인). 다른 일은 계속 | 2026-10-03 |
 
 ## 끝남
 
