@@ -603,3 +603,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 120 회차: AMP — rev 2 받음, ga 허브 꾸림(`ga tick --dry-run` · `ga check` 통과, 데이터 sha). `ga send CMD-WA1` 이 세션 자동 권한 분류기에 거부됨("Create Unsafe Agents") → **막힘(환경 · 권한)**, 비용 $0, 우회 없음. baseline 권고 (1) 사용자가 AMP 세션에서 직접 허락(작업 턴 · BARE 측정), 대안 (2) 수동 Runner. 사용자에게 물음. ga 발견(METHOD §4c 사전 확인 · 수동 강등)은 다음 GA 지시로.
 - 121 회차: 사용자 결정 — MBA 사용하지 않음(BD-153). CMD-AMP1 rev 3 로 rev 2 의 MBA 항목 철회, 경로 (b) 유지. 권한 막힘 사용자 답 기다림.
 - 122 회차: 사용자 결정 — AMP 권한 (1) 권고대로, 사용자가 AMP 에 직접 답함(BD-154). ga-SDK `8c67c35`(184, 변이 8/8 · baseline 변이 1 잡힘) — CMD-GA14 성공(BD-155). stage-8 마감 사용자에게 물음.
+- 123 회차: 사용자 지시 — METHOD rev 13(`742bb3b`) §4c 권한 사전 확인 · 수동 강등, F9(BD-156). 구현 지시와 stage-8 마감은 사용자 답 기다림.
