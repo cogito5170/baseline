@@ -670,3 +670,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 187 회차: gentleMonster_gemini `62af1a5`(일곱 묶음, 변이 잡힘) — CMD-GMG7 성공: agy 경로, Mac 실행은 Q5(BD-233).
 - 188 회차: ga-SDK `102e48a`(GA21 rev 2 머리 병합) · Antigravity 한도 정보 → CMD-GA23(agy 감독) · W1↔AMP 교신 끊김 원인 → CMD-GA22(ga mail) · CMD-GR7(BD-234 · 235).
 - 189 회차: AMP 전달 — W1 보고가 D 에 막혀 하나도 안 닿음 · baseline 재현(0.7.0 도 통로 댓글을 D 로 막음) → CMD-K13(BD-236).
+- 190 회차: 사용자 결정 — 검증 담당 하위 세션(VERIFIER.md, BD-237) · W1 은 새로 만들지 않고 지금 rlo 의 자율 회복을 관찰(시작점 15:13, 회복 시도 없음, BD-238).
