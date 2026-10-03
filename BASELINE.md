@@ -664,3 +664,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 181 회차: 안전망 — WUG 가 다른 세션 지시라며 CMD-WUG1 을 하지 않음 → HUMAN_QUEUE Q4(BD-227).
 - 182 회차: GA 질문(rlo 고정 값이 GR 시험에 박힘) → 출처 하나(_pins.py) · CMD-GR6 · 통합 순서 K12 → GR6 → GA21(BD-228).
 - 183 회차: 사용자 지시 — GMG 를 Antigravity(agy)로 → CMD-GMG7(MCP 서버 그대로 · Mac 에서 구글 로그인 · 대안 Gemini CLI 구글 로그인)(BD-229).
+- 184 회차: ga-SDK `f87fddb`(369, 변이 잡힘) — CMD-GR6 성공: 고정 값 출처 하나 · doctor 가 턴과 같이 재생(BD-230).
