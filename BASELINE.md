@@ -655,3 +655,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 172 회차: rlo-sdk 0.6.0 `3323f88`(127, 변이 잡힘) — CMD-K11 성공: 거부마다 닫힌 대안 하나 · 세 번째는 위로(BD-211).
 - 173 회차: ga_rlo `c2fcbc3`(78, 변이 잡힘) — CMD-GR4 성공, U1 끝(BD-213). U2 지시 CMD-GA20 · CMD-GR5(BD-214).
 - 174 회차: 사용자 지시 — Gemini CLI heap OOM · 분당 한도를 well_used_gemini 와 → 통로 #17 · WUG · CMD-WUG1(BD-215).
+- 175 회차: ga-SDK `3aeacf0`(279, 변이 잡힘) — CMD-GA20 성공: ga 한 줄 설치로 rlo 0.6.0 까지 · ga.rlo 자리(BD-216). → GR5 시작.
