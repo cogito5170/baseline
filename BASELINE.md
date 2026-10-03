@@ -588,3 +588,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 105 회차: ga-SDK `cfa34ac`(119, 변이 7/7, 실제 4 번 $0.178) — CMD-GA6 성공(BD-142): Agent SDK Runner(래퍼 env -i + 샌드박스) · 턴 진단 라벨. CMD-GA7(허용 목록 · 프롬프트로 조용한 실패 줄이기). 2판 순서 4 는 사용자에게 물음.
 - 106 회차: ga-SDK `32d4e10`(125, 실제 4 번 $0.155) — CMD-GA7 성공: 허용 목록(해가 없는 명령 · 허브 보고 명령) · 턴 프롬프트(일하는 방법 · 막혀도 보고) 뒤 실제 정상 턴 4/4 통합, 거부 0 (전 2/8 실패; 작은 표본이라 증명 아님). 가드 · 샌드박스 그대로. GA wait — 2판 순서 4 는 사용자 게이트.
 - 107 회차: 사용자 결정 BD-143 — **stage-6 마감**(ga-SDK `32d4e10`) · 2판 순서 4 시작 → CMD-GA8(GitHub Channel · 원격 Runner, 통로는 ga-SDK 이슈, 원격 세션 3 개까지 · 끝나면 보관).
+- 108 회차: ga-SDK `21bbe80`(139, 변이 10/10, 원격 세션 1 개 $0.1375 · 보관) — CMD-GA8 성공(BD-144): GitHub Channel · 원격 Runner(콜백) · remote 격리, 실제 바퀴 통합 · 재현. 막힘 둘(환경: 라이브러리 HTTP · 원격 세션 공개 API). METHOD rev 8 → CMD-GA9.
