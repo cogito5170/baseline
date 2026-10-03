@@ -94,6 +94,25 @@
   - Bundle (b) 시험 분리
   - rlo 의 Glob 등 도구 측정
 
+## stage-6 — 2026-10-03 (통합 107 회차, 사용자 결정, BD-143) — ga 2판(로컬 실행기)
+
+| 저장소 | 커밋 | 시험 |
+|---|---|---|
+| ga-SDK | `32d4e106ff82431291f51ee6aa60a0b4ba21850a` (METHOD method-1 rev 7) | 125 |
+| rlo-SDK · Telemetry · Sensor · MS · DC · action · guard · health | stage-5 와 같다 | stage-5 와 같다 |
+
+- 이 단계에서 선 것은 다음과 같다. 실제 `claude -p` · Agent SDK 실행은 haiku 로 모두 합쳐 약 $1.6 들었다.
+  - 로컬 헤드리스 Runner(GA2): `--resume` 이어 가기, 비용 기록, R12 예산 게이트.
+  - LLM Judge(GA3–4): 판정은 제안만 하고 기계 바닥을 넘지 못한다. 기록 8 사례를 재생해 클래스 7/8, 원인 3/5 가 맞았다.
+  - R3 를 구조로 지킨다(GA5): 독립 clone, 허브 pull, OS 쓰기 샌드박스. 공격 15/15 와 baseline 탈출 탐침 9/9 가 모두 실패했다.
+  - Agent SDK Runner(GA6): 래퍼에서 `env -i` 로 환경을 비우고 샌드박스 안에서 돈다. 턴 진단 라벨을 남긴다.
+  - 조용한 실패 줄이기(GA7): 실제 정상 턴 4/4 가 통합됐다.
+  - METHOD rev 5–7: 기계 클래스, 엇갈림은 사실로만 남김, R3 는 구조로.
+- 다음으로 넘어간 것:
+  - 2판 순서 4(GitHub 이슈 Channel · 원격 세션 Runner) → CMD-GA8.
+  - GA5 rev 2 의 B 실패 원인(미해결).
+  - 기록을 허브 저장소에 커밋하는 일.
+
 ### 태그를 달려면 (사용자 컴퓨터에서)
 
 ```
@@ -129,4 +148,6 @@ gh api repos/cogito5170/health/git/refs    -f ref=refs/tags/stage-4 -f sha=afcff
 
 gh api repos/cogito5170/ga-SDK/git/refs     -f ref=refs/tags/stage-5 -f sha=90aa9a54cd9065887b8804c7346646ff42542af6
 gh api repos/cogito5170/rlo-SDK/git/refs    -f ref=refs/tags/stage-5 -f sha=c6b2f95122f4828ff341b7d140579543936cc34c
+
+gh api repos/cogito5170/ga-SDK/git/refs     -f ref=refs/tags/stage-6 -f sha=32d4e106ff82431291f51ee6aa60a0b4ba21850a
 ```
