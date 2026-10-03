@@ -593,3 +593,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 110 회차: 사용자 결정 BD-145 — **stage-7 마감**(ga-SDK `e61bcd1`) · 실사용 검증 시작 → CMD-GA10(ga 허브로 rlo-SDK 의 두 일 W1 suggest-model · W2 나란히 부르기 세기, 브랜치 `claude/ga-trial-k9`, 실행 12 번까지).
 - 111 회차: CMD-GA10 막힘(환경 · 권한) — GA 세션이 rlo-SDK 를 붙이려던 `add_repo` 가 그 세션의 권한 분류기에서 거부됨(Permission Grant). 실행 0/12. GA 는 우회하지 않고 멈춤(맞는 처리). 권한은 사용자만 줄 수 있음 → 사용자에게 물음. baseline 이 대신 붙이거나 대신 push 하지 않는다(권한 세탁 금지).
 - 112 회차: CMD-GA10 실사용 1 차 부분 성공(BD-146): ga 3 회차 · 8 실행 · $2.59 · 개입 4. rlo `6c33b85` 는 PYTHONPATH 95 OK 지만 **깨끗한 설치에 `rlo.suggest_model` 없음** → 통합 안 함. ga vs baseline 판정 클래스 1/3 · 원인 0/3(기계 규칙 · 프롬프트 · 설정 탓). METHOD rev 9. CMD-GA11(고치고 이어 감).
+- 113 회차: ga-SDK `1cdfa7a`(154) · rlo `326592c` — CMD-GA11 성공(BD-147). baseline 깨끗한 설치에서 suggest_model · parallel_calls 동작, 시험 OK → **rlo-SDK 통합 `326592c`**. ga 의 '실패' 는 빌드 도구가 메타데이터를 다르게 쓰는 것과 rlo 시험의 문자열 비교 탓. METHOD rev 10. CMD-K9(SDK) · CMD-GA12.
