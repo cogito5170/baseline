@@ -656,3 +656,5 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 173 회차: ga_rlo `c2fcbc3`(78, 변이 잡힘) — CMD-GR4 성공, U1 끝(BD-213). U2 지시 CMD-GA20 · CMD-GR5(BD-214).
 - 174 회차: 사용자 지시 — Gemini CLI heap OOM · 분당 한도를 well_used_gemini 와 → 통로 #17 · WUG · CMD-WUG1(BD-215).
 - 175 회차: ga-SDK `3aeacf0`(279, 변이 잡힘) — CMD-GA20 성공: ga 한 줄 설치로 rlo 0.6.0 까지 · ga.rlo 자리(BD-216). → GR5 시작.
+- 176 회차: ga-SDK `83ab857`(280, 변이 잡힘) — BD-218 고침 성공 · GA21 rev 2(stream-json 사실 · 하루 한도) · 무료 등급 하루 20 회 → Q3(BD-222).
+- 177 회차: gentleMonster_gemini `02ee452`(여섯 묶음, 변이 잡힘) — CMD-GMG6 rev 3 판정 보류(머리) · 예상 부분 성공 · GMG5 막힘 · Q1 갱신(BD-223).

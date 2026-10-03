@@ -17,8 +17,9 @@
 
 | # | 종류 | 할 일 | 링크 | 기다리는 세션 | 올린 때 |
 |---|---|---|---|---|---|
-| Q1 | E | GMG 환경 Network access 를 Custom 으로: `api.openverse.org` · `commons.wikimedia.org` · `upload.wikimedia.org` · `api.unsplash.com` · `images.unsplash.com` · `www.pexels.com` · `images.pexels.com` 추가(기본 패키지 목록 유지) | GMG 세션 제목 표시줄 → 환경 메뉴 → Edit · 안내 https://code.claude.com/docs/en/cloud-environments#network-access | GMG(CMD-GMG5 만; 다른 일은 계속) | 2026-10-03 |
+| Q1 | E | GMG 환경 Network access 를 Custom 으로: `api.openverse.org` · `live.staticflickr.com` · `upload.wikimedia.org` · `commons.wikimedia.org` · `archive.org` 추가(기본 패키지 목록 유지) — GMG5 가 고른 최소 집합(BD-223) | GMG 세션 제목 표시줄 → 환경 메뉴 → Edit · 안내 https://code.claude.com/docs/en/cloud-environments#network-access | GMG(CMD-GMG5 만; 다른 일은 계속) | 2026-10-03 |
 | Q2 | G | W1 을 가드 v2 · rlo 0.5.1 로 올리기. W1 대화창에 한 줄: `Read README.md first, then run: git fetch origin main && git merge origin/main && git push origin w1/work. Then read amp#1 directly and follow AMP's latest CMD-WA.` — 그래도 막히면 W1 을 새로 만든다(저장소 amp, 브랜치 w1/work, 프롬프트는 처음과 같음) | W1 세션 대화창(claude.ai/code) | W1 · AMP(AMP 는 W1 을 기다림) | 2026-10-03 |
+| Q3 | D · P | Gemini 키 결제 여부: 무료 등급은 `gemini-3-flash-preview` **하루 20 요청**이고 모든 Gemini 세션이 나눠 씀(가게 일 하나 ≈ 7 요청 이상). 결제를 켜면 분당 한도만 남고 `ga gemini` 가 기다렸다 이어감. 켜지 않으면 하루 몇 건에서 멈췄다가 다음 날 재개 | https://aistudio.google.com/apikey → 그 키의 프로젝트에 결제 설정 | 없음 — 결제 전에도 GA21 · WUG · GMG 는 재생 시험으로 계속, 실제 실행만 하루 20 회 안에서 | 2026-10-03 |
 
 ## 끝남
 
