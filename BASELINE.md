@@ -684,3 +684,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 201 회차(안전망 17:10): ga-SDK `d8a5bfd`(rlo 3d2e7d0 고정) · GMG7 뒤따름: agy 모델 gemini-3.8-flash-high(사용자 결정) · 주간 계열별 한도(BD-255). W1 관찰: 16:44 시험 뒤 변화 없음.
 - 202 회차: rlo `a8791e0`(0.8.0) — CMD-K13 성공: 실제 세션 수락 7/7, W1 상황 재현에서 교신 열림(v2 모형) · 남은 성능 → K14 · SEN1(BD-257).
 - 203 회차: ga-SDK `98cbd26` — CMD-GA24 성공: Google 비밀 패턴, 탐침의 AIza 글 이제 거절(BD-258).
+- 204 회차: heap OOM 원인 확정(Gemini CLI 텔레메트리 버퍼, WUG) · GMG8 · SEN1 을 진짜 Sensor 세션에(BD-259).
