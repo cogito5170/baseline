@@ -680,3 +680,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 197 회차: ga-SDK `db6c3fa`(GA21 rev 3 성공, BD-247) · W1↔AMP: W1 은 받기 통과 · 보내기 전부 D(한쪽 통로) — SDK 문제 P1–P5, AMP 에 실제 시험 메시지 요청(BD-248).
 - 198 회차: W1 은 작업 폴더가 v1 이라 받기도 issue_read 뿐(BD-249) · Q1 끝, gmg-net 에 CMD-GN1(BD-250) · AO 연락 규칙 CMD-AO1(BD-251) · Q6(WUG ga-sdk 설치 허락).
 - 199 회차: W1 실제 시험 = 재현(받기는 issue_read 만 · 보내기 0 · A1/D) → SDK 문제 P1–P6 확정(BD-252) · AO1 rev 2 '답함' 기준(BD-253).
+- 200 회차: ga-SDK `9831f98`(GA22 ga mail 성공, 왕복 탐침 됨) · 비밀 패턴에 Google 없음 → CMD-GA24(BD-254).
