@@ -621,3 +621,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 138 회차: 사용자 결정 — W1 원격 세션(BD-171). CMD-AMP1 rev 7. W1 프롬프트 사용자에게.
 - 139 회차: 사용자 결정 — gentleMonster_gemini 는 flash-lite 전용 Gemini 확장(BD-172). CMD-GMG2 rev 2.
 - 140 회차: 사용자 결정 — 메시지 꼴을 의미 단위로(BD-173). METHOD rev 16 · PROTOCOL §3a · CMD-GA18.
+- 141 회차: ga_rlo `868d618` — CMD-GR1 성공(BD-174). GR wait(GR2 는 AMP W1 가드 실물 뒤).
