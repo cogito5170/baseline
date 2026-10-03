@@ -647,3 +647,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 164 회차: 밀린 지시 — CMD-GR2(remote 프로필, W1 교훈 포함) · CMD-K10(깨진 입력 deny · 낡음 D 힌트)(BD-198).
 - 165 회차: ga_rlo `40a45c3`(54, 변이 잡힘) — CMD-GR2 성공, remote 프로필(BD-199).
 - 166 회차: rlo-SDK `61c3dfd`(108, 변이 잡힘) — CMD-K10 성공: 깨진 입력은 deny · 낡음 D 에 힌트(BD-200).
+- 167 회차: rlo-sdk 0.5.1 `9af276f`(판 올림, 108 통과)(BD-201).
