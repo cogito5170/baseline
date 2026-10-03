@@ -690,3 +690,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 207 회차: 사용자 결정 — baseline 은 정책 · 판정, AO 가 일정 · 지시 · 교신(BD-263, CMD-AO2).
 - 208 회차: ga-SDK `26f54e6` — CMD-GA23 성공(`ga gemini --host agy`, 가정 고정물; 변이 2/2), Q6 끝 · Q7 올림(BD-264).
 - 209 회차: AO `229e772` — CMD-AO2 성공(운영 시작, 일정 표 T1–T4); Q6 은 WUG 대화창 직접 허락으로 다시 열림(BD-265).
+- 210 회차: rlo-SDK `8131a2b`(0.8.1) — CMD-K14 S1 성공(훅 ~62 s → ~2.7 s, 판정 같음; 변이 2/2)(BD-266).
