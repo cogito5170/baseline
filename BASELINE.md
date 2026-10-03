@@ -696,3 +696,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 213 회차: Sensor `b705574` — CMD-SEN1 성공(증분 수집 0.3%; Verifier 검증, 시험 공백 둘)(BD-269).
 - 214 회차: gentleMonster_gemini `8c91d57` — CMD-GMG8 성공(heap 고침 개인 CLI 홈; Verifier 검증, 실행기 시험 공백 V7 · 잔여 79.5 KB/turn)(BD-270).
 - 215 회차: Sensor `f1e45b5` — CMD-SEN2 성공(변이 D · E 잡힘, A–E 5/5) · AO 운영 고리 첫 한 바퀴(BD-271).
+- 216 회차: ga-SDK `d629833` — CMD-GR8 성공(이은 명령 변이 이제 잡힘); AO 가 권한 분류기에 막힘 → Q9(BD-272).
