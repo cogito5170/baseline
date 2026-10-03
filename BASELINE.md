@@ -649,3 +649,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 166 회차: rlo-SDK `61c3dfd`(108, 변이 잡힘) — CMD-K10 성공: 깨진 입력은 deny · 낡음 D 에 힌트(BD-200).
 - 167 회차: rlo-sdk 0.5.1 `9af276f`(판 올림, 108 통과)(BD-201).
 - 168 회차: ga_rlo `2f86775`(68, 변이 잡힘) — CMD-GR3 성공: rlo 0.5.1 고정 · state 줄 · upgrade-remote. amp PIN 옮기기 블록(macOS 용) 준비, push 는 사용자(BD-203).
+- 169 회차: amp main `36ca54d`(사용자) — W1 가드 rlo 0.5.1 PIN. W1 은 main 을 아직 안 받음 → AMP 에 알림(BD-204).
