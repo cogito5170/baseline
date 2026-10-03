@@ -16,7 +16,7 @@
 
 | 방향 | 통로 | 꼴 |
 |---|---|---|
-| 세션 → baseline (보고 · 질문 · 다른 세션에 대한 요청) | **cogito5170/baseline 의 이슈, 세션마다 하나.** 제목 머리 `[Telemetry]` #1 · `[MS]` #2 · `[Sensor]` #3 · `[DC]` #4 · `[Action]` #6 · `[Guard]` #7 · `[Health]` #9 · `[SDK]` #11 · `[GA]` #12 · `[AMP]` #14 · `[GR]` #15 · `[gentleMonster_gemini]` #16 · `[well_used_gemini]` #17. 보고 하나 = 댓글 하나. **새 이슈를 열지 않는다.** 저장소 안의 보고 파일(`inbox/` 등)은 쓰지 않는다 | §2 의 보고 꼴 |
+| 세션 → baseline (보고 · 질문 · 다른 세션에 대한 요청) | **cogito5170/baseline 의 이슈, 세션마다 하나.** 제목 머리 `[Telemetry]` #1 · `[MS]` #2 · `[Sensor]` #3 · `[DC]` #4 · `[Action]` #6 · `[Guard]` #7 · `[Health]` #9 · `[SDK]` #11 · `[GA]` #12 · `[AMP]` #14 · `[GR]` #15 · `[gentleMonster_gemini]` #16 · `[well_used_gemini]` #17 · `[AO]` #18. 보고 하나 = 댓글 하나. **새 이슈를 열지 않는다.** 저장소 안의 보고 파일(`inbox/` 등)은 쓰지 않는다 | §2 의 보고 꼴 |
 | **보고 뒤 깨우기** | 댓글을 올린 **바로 뒤** baseline 세션에 세션 메시지 한 줄: Claude Code Remote 의 `send_message`, `session_id = session_013GnrUQPpcfK4ea1a1Y6SuY`, 내용 = `[<세션>] 보고 <댓글 링크>`. baseline 은 그 메시지로 깨어나 판단 · 지시한다 | 놓치면 baseline 의 1 시간 안전망이 잡는다 |
 | baseline → 세션 (판단 · 지시) | 그 세션의 이슈에 **댓글** + 세션을 깨우는 **세션 메시지**(댓글을 가리키는 한 줄) | §3 의 지시 꼴 |
 | 구속력 있는 결정 | 이 저장소의 `claude/gracious-meitner-vp49xe` — DECISION_LOG(BD) · BASELINE §13 · 이 문서 | 이슈 댓글은 결정의 전달이다. 결정의 원본은 이 저장소다 |
@@ -127,6 +127,7 @@ ga-SDK METHOD rev 16 §3.6 을 우리 통로에도 그대로 쓴다.
 | baseline `GA_RLO.md` | **baseline** | 명세. 바꿀 곳은 #15 에 `요청:` |
 | baseline `GA_UNIFIED.md` | **baseline** | 하나의 ga 설계(BD-206, GA_RLO.md 를 대신). 바꿀 곳은 #12 · #15 · #11 에 `요청:` |
 | baseline `VERIFIER.md` | **baseline** | 검증 담당 하위 세션의 상속 규칙(BD-237). 검증 담당은 판정 초안만, 서명은 baseline |
+| `AO` 저장소 · baseline#18 | **AO** (Agent Orchestrator, 사용자가 만든 세션) | 운영 일만(살피기 · 모으기 · 머리 미리 검사 · 집계). 지시 · 판정 · 통합 · baseline 기록 쓰기는 하지 않는다. 지금은 P1 그림자(BD-243): #18 에 ao-status/1 만, 다른 세션에 보내지 않음, W1 은 읽기만 |
 | well_used_gemini `*` | **WUG** (`session_01WTesMn7FjKtPKSo7SpQBY8`) | Gemini CLI 확장(se_new agentic 을 게이트 뒤에서). 지시 머리글자 `CMD-WUG`. 통로 baseline#17 (BD-215). 두 확장에 같이 쓸 고침은 여기서 짓고 GMG 가 옮긴다 |
 | gentleMonster_gemini `*` | **GMG** (`sleepy-cori`) | ga_rlo 검증 과제의 결과물. 지시 머리글자 `CMD-GMG`. 통로 baseline#16 (BD-167). gentleMonster · well_used_gemini 는 읽기만(허브 구성 때 다시 정함) |
 | baseline `*` | **baseline** (이 세션) | |
