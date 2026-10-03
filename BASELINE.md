@@ -687,3 +687,5 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 204 회차: heap OOM 원인 확정(Gemini CLI 텔레메트리 버퍼, WUG) · GMG8 · SEN1 을 진짜 Sensor 세션에(BD-259).
 - 205 회차: CMD-WUG1 rev 3 부분 성공(heap 원인 · 고침 met, rlo 채택은 Q6 대기) — 중계 머리는 baseline 이 형식만 맞춤(BD-260).
 - 206 회차: gmg5/refset `fa481fd` — CMD-GN1 성공(87 사진 · 40 레이아웃, 라이선스 검사 · 변이 잡힘), 머리 고침 요청 · GMG5 rev 2(S4 만)(BD-261).
+- 207 회차: 사용자 결정 — baseline 은 정책 · 판정, AO 가 일정 · 지시 · 교신(BD-263, CMD-AO2).
+- 208 회차: ga-SDK `26f54e6` — CMD-GA23 성공(`ga gemini --host agy`, 가정 고정물; 변이 2/2), Q6 끝 · Q7 올림(BD-264).

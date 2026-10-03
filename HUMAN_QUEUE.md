@@ -17,12 +17,13 @@
 
 | # | 종류 | 할 일 | 링크 | 기다리는 세션 | 올린 때 |
 |---|---|---|---|---|---|
-| Q6 | D | WUG 가 확장 venv 에 ga-sdk(github cogito5170/ga-SDK, rlo 0.7.0 포함)를 깔아도 되는지 사용자에게 묻는 중 — WUG 대화창에서 허락 한 줄(예: 'ga-sdk 를 확장 venv 에 설치해도 된다') | WUG 세션 대화창 | WUG(CMD-WUG1 S6 · S10). 그동안 heap 측정은 계속 | 2026-10-03 |
+| Q7 | P | GA23 의 agy 실제 모양 확인 — Mac 작업 폴더에서 #12 댓글 'D2' 의 8 개 명령을 돌리고 출력 그대로를 GMG 대화창에 붙여넣기(토큰은 절대 붙이지 않음, 'Use AI Credits' 에는 절대 '예' 하지 않음) | https://github.com/cogito5170/baseline/issues/12#issuecomment-5971823866 | GA(가정 고정물 → 실제 기록) · GMG | 2026-10-03 |
 
 ## 끝남
 
 | # | 종류 | 할 일 | 결과 |
 |---|---|---|---|
+| Q6 | D | WUG 확장 venv 에 ga-sdk 설치 | 사용자 허락 '사용자 → baseline: ga-sdk 설치를 허락한다'(2026-10-03) → WUG 에 전함(BD-264) |
 | — | G | W1 가드 v1 을 amp main 에 | `714c00b` (BD-189) |
 | — | G | W1 가드 v2(알림 읽기 · send_message) | `344a604` (BD-194) |
 | — | G | W1 가드 rlo 0.5.1 PIN | `36ca54d` (BD-204) |
