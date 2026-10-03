@@ -629,3 +629,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 146 회차(안전망): gentleMonster 사용자 질문 44 개 들어옴(`35073f7`) → 분석 `GM_QUESTIONS.md`(BD-179) → CMD-GMG3.
 - 147 회차: AMP 08:32 보고 늦게 읽음(BD-180, 안전망 고침). rev 6 작업 = 부분 성공 · W1 기준선, amp 통합 `5e5a365`. 가드 쓰기 막힘 → 사용자에게(대신 쓰기는 사용자 결정 없이 안 함).
 - 148 회차: ga-SDK `af904fe`(265) — CMD-GA19 성공(BD-181).
+- 149 회차: gentleMonster_gemini `ff4de88` — CMD-GMG2 rev 2 성공(BD-182). H2(CLI 가 3.5-flash-lite 로 바꿈) 사용자에게.
