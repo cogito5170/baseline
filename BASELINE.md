@@ -704,3 +704,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 221 회차: rlo-SDK `c491e96`(0.8.2) — CMD-K14 S2 성공(훅이 once 로 선형, 창 없이; 변이 2/2)(BD-278).
 - 222 회차: well_used_gemini `da691aa` — CMD-WUG2 성공(변이 스크립트 8/8); Q10 탐침 상한 15 · 첫 429 에서 멈춤(BD-279).
 - 223 회차: well_used_gemini `cad67de` — CMD-WUG2 rev 2 성공(탐침 상한 15, 변이 10/10); WUG1 D3 판정 규칙(exit 0/6/5)(BD-280).
+- 224 회차: ga-SDK `2c68ea2` — CMD-GR9 성공(doctor 재생이 rlo 판 따라 D 기대값; 다음 GA25 rev 2)(BD-283).
