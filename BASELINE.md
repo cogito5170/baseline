@@ -721,3 +721,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 238 회차: ga judge 일괄 — ga-SDK `e24d3e6`(GA30 rev 2 + GA31, ga 0.4.0; 612 OK) · DC `7e0ac14` CMD-NET3 성공; ④ 구조 코드 통합(BD-322).
 - 239 회차: ga judge — Telemetry `f6c7ae2` CMD-NET1 · Sensor `00d4a97` CMD-NET2 성공(NET2 의 빨강 1 은 기준에서도 같음); NET1–5 끝(BD-323).
 - 240 회차: ga judge — MS `1f1018e` CMD-NET6 성공(action-contract 0.2.0 고정)(BD-325).
+- 241 회차: ga judge — ga-sdk `3df2a5b` CMD-GA32 rev 1 S3 · S4 수용, S1 · S2 막힘; S2 는 핀 이동뿐임을 baseline 이 재현 → rev 2 새 세션(BD-326).
