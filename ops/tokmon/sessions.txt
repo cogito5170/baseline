@@ -1,6 +1,3 @@
 # hub:fresh 세션(BD-305) — baseline 이 세션을 열고 닫을 때 고친다
-session_01XhPTjyMn2uSCq7AJeLTb2j GA CMD-GA30
 session_01XaR8sWEhqGtVpPxnFXmqV9 Telemetry CMD-NET1
 session_019Dra7FqA2LGihHDyh7eX4y Sensor CMD-NET2
-session_01JfF3pc62Sguiwq2iYjyLVj DC CMD-NET3
-session_01Bp1YV456q7cNN5o8zit2FA GA CMD-GA31
