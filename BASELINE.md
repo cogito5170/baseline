@@ -719,3 +719,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 236 회차: ga-SDK `31cfdfe` — CMD-GA30 성공(ga judge, ga 0.3.0; ga judge 로 자기 판정 554/0/1 · 변이 잡힘; 얕은 clone 결함 → rev 2)(BD-319).
 - 237 회차: ga judge 일괄 — action `9d6729f` CMD-NET5 · MS `9371151` CMD-NET4 · ga-SDK `d9675d2`(GA28 병합) 성공; needs_judgement 7 건 모두 받음(BD-320).
 - 238 회차: ga judge 일괄 — ga-SDK `e24d3e6`(GA30 rev 2 + GA31, ga 0.4.0; 612 OK) · DC `7e0ac14` CMD-NET3 성공; ④ 구조 코드 통합(BD-322).
+- 239 회차: ga judge — Telemetry `f6c7ae2` CMD-NET1 · Sensor `00d4a97` CMD-NET2 성공(NET2 의 빨강 1 은 기준에서도 같음); NET1–5 끝(BD-323).
