@@ -273,7 +273,7 @@ def _check(spec, t: T, v, path, values, seen, out):
             out.append(path)
     elif k == "id_new":
         rx = spec.lets.get("id")
-        if not (isinstance(v, str) and (rx is None or rx.match(v))) or v in seen:
+        if not (isinstance(v, str) and (rx is None or rx.fullmatch(v))) or v in seen:
             out.append(path)
         seen.append(v)
     elif k == "id_seen":
@@ -293,7 +293,8 @@ def _check(spec, t: T, v, path, values, seen, out):
         names = {f.name for f in t.arg}
         if set(v) - names:
             out.append(path + ".unknown_field")
-        for f in t.arg:
+        # id new fields last, so `id seen` inside an object means ids of earlier objects only (BD-292 P1)
+        for f in sorted(t.arg, key=lambda f: f.type.kind == "id_new"):
             if f.name not in v:
                 if not f.optional:
                     out.append(f"{path}.{f.name}")

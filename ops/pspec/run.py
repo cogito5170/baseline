@@ -52,6 +52,7 @@ plans = [
  {"schema": "ga-gemini-plan/1", "steps": [{"id": "s%d" % i, "tool": "noop"} for i in range(16)]},
  {"schema": "ga-gemini-plan/1", "steps": [{"id": "a", "tool": "noop", "zz": 1}]},
  "not an object",
+ {"schema": "ga-gemini-plan/1", "steps": [{"id": "a", "tool": "noop", "after": ["a"]}]},
 ]
 agree = [bool(G.check_plan(p, tools)) == bool(P.check(spec, p, {"tools": tools})) for p in plans]
 print("checker agrees with ga check_plan:", sum(agree), "/", len(agree), [i for i, a in enumerate(agree) if not a])
