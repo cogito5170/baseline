@@ -19,7 +19,7 @@
 |---|---|---|---|---|---|
 | Q7 | P | GA23 의 agy 실제 모양 확인 — Mac 작업 폴더에서 #12 댓글 'D2' 의 8 개 명령을 돌리고 출력 그대로를 GMG 대화창에 붙여넣기(토큰은 절대 붙이지 않음, 'Use AI Credits' 에는 절대 '예' 하지 않음) | https://github.com/cogito5170/baseline/issues/12#issuecomment-5971823866 | GA(가정 고정물 → 실제 기록) · GMG | 2026-10-03 |
 | Q8 | G | **W1 단절 풀기 2 단계(1 단계 끝: AMP 가 사용자 허락으로 amp main · w1/work 를 `1584696` = rlo 0.8.1 PIN 으로)** — W1 에 새 컨테이너가 필요: W1 의 지금 컨테이너는 옛 작업 폴더(714c00b)와 옛 rlo venv 를 쥐고 있고, 옛 guard.sh 는 PIN 이 바뀌어도 다시 깔지 않음(SessionStart 에서만). 사용자가 W1 세션을 **보관(archive) 뒤 되살리기(unarchive)** — 같은 세션 · 새 컨테이너(새 세션 아님, BD-238 그대로); 또는 사용자가 baseline 대화창에 '''W1 을 보관 · 되살려도 된다''' 한 줄 → baseline 이 실행 | W1 세션(session_012bx4BgLuifWh7YzJ1k1dcU) 또는 baseline 대화창 | W1 · AMP(T1) | 2026-10-04 |
-| Q10 | P | WUG1 D3 — **2026-10-05 00:00 UTC(한국 9 시) 뒤, GMG6 예약 요청이 돈 다음에** Mac 에서: (1) 확장을 그 가지에서 다시 깔기 (2) `wug.py setup` (3) `python3 ~/.gemini/extensions/well-used-gemini/wug.py d3; echo "exit=$?"` 한 번(최대 15 요청 · 분당 한도에 걸리면 기다렸다 다시 보내고 첫 성공에서 멈춤 · 다시 쳐도 안 보냄 · 키는 출력에 안 나옴). **마지막 두 줄만** WUG 대화창에 붙임. 같은 날 다시 돌리지 않음 | https://github.com/cogito5170/baseline/issues/17#issuecomment-5975388009 | WUG(D3) | 2026-10-04 |
+| Q10 | P | WUG1 D3 — **언제든(BD-294: 무료 하루 한도가 없어져 00:00 UTC 를 기다릴 까닭이 없음)** Mac 에서: (1) 확장을 그 가지에서 다시 깔기 (2) `wug.py setup` (3) `python3 ~/.gemini/extensions/well-used-gemini/wug.py d3; echo "exit=$?"` 한 번(최대 15 요청 · 분당 한도에 걸리면 기다렸다 다시 보내고 첫 성공에서 멈춤 · 다시 쳐도 안 보냄 · 키는 출력에 안 나옴). **마지막 두 줄만** WUG 대화창에 붙임. 같은 날 다시 돌리지 않음 | https://github.com/cogito5170/baseline/issues/17#issuecomment-5975388009 | WUG(D3) | 2026-10-04 |
 
 ## 끝남
 
@@ -39,6 +39,6 @@
 3. 끝나면 baseline 이 결과(커밋 · 확인)를 적어 '끝남' 으로 옮긴다. 매시 안전망이 이 표를 본다.
 | Q4 | G | WUG 가 baseline 지시를 받도록 허락 | 사용자가 16:21 에 WUG 대화창에 한 줄(같은 줄이 실수로 GMG 에도 감 → baseline 이 GMG 에 정정, BD-241). WUG 는 CMD-WUG1 rev 3 시작, 보고는 send_message 로 baseline 에 |
 | Q2 | G | W1 가지에 main 병합 | 사용자가 AMP 대화창에서 허락 → w1/work 714c00b→36ca54d(가드 v2 모형 · 허락 바로 적용, rlo 는 0.5.0 그대로 — 새 세션 없이는 SessionStart 가 안 돎) (BD-242) |
-| Q3 | D | Gemini API 키 결제 | 사용자 결정: 켜지 않는다 — 무료 하루 20 요청 유지(BD-242) |
+| Q3 | D | Gemini API 키 결제 | 사용자 결정: 켜지 않는다 — 무료 하루 20 요청 유지(BD-242). **바뀜 2026-10-04: 사용자 'Gemini 무료한도는 없앴다' — 결제 켬, 하루 20 제한 없음(BD-294)** |
 | Q5 | P | GMG 를 Antigravity 로(A 블록 실행 · agy 모델 목록) | 사용자가 Mac 에서 A 블록 실행 · 모델 목록을 GMG 대화창에 직접 붙여넣음(BD-244). 모델 고르기는 GMG 가 사용자에게 묻는다 |
 | Q1 | E | GMG5 용 네트워크 | 사용자가 새 환경 gmg-net(env_01DoC1Nd3tRxTJyoJA7Hmg9d, Custom 다섯 호스트) 을 만들고 그 안의 세션이 접속 확인(16:35Z) → 그 세션이 CMD-GN1 로 수집(BD-250) |
