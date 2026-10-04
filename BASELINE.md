@@ -714,3 +714,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 231 회차: gentleMonster_gemini `057ef4f` — CMD-GMG6 D5/D6 성공(실제 턴이 gemini-3-flash-preview; 변이 2/3 잡힘, 픽스처 틈 하나)(BD-301).
 - 232 회차: ga-SDK `ad5b070` — CMD-GA26 rev 2 성공(pspec 프롬프트 · rlo 0.9.1 · 기본 하루 상한 없음; 503 OK · 변이 2/2 잡힘); 제안 셋 받음, GA29 뒤로(BD-304).
 - 233 회차: ga-SDK `9619312` — CMD-GA27 성공(압축 머리 · ga render · ga inbox; 통로 −39.5% · 보고 −62.4%; 527 OK · 변이 2/2 잡힘)(BD-306).
+- 234 회차: ga-SDK `6e15f57`(GA2 `803edfc` 병합) — CMD-GA29 성공(fresh · ctxpack · 예산 훅, ga 0.2.0 · rlo 0.10.0; 542 OK · 변이 2/2 잡힘)(BD-307).
