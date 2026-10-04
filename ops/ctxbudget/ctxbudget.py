@@ -11,7 +11,8 @@ additionalContext). 압축을 요청하는 훅 출력은 문서에 없다 -- 그
     단계        조건                 PreToolUse 출력
     ok          ctx < soft           {} (다른 훅 · 가드에 맡김)
     warn        soft <= ctx < hard   additionalContext: 예산 알림, 지금 하는 일만 끝내고 checkpoint
-    checkpoint  ctx >= hard          checkpoint 도구(상태 파일 쓰기 · git add/commit/push)만 allow, 나머지 deny + 까닭
+    checkpoint  ctx >= hard          checkpoint 도구(상태 파일 쓰기 · git add/commit/push)는 막지 않음(알림만), 나머지 deny + 까닭
+                                     allow 는 내지 않는다(BD-299 P1: 허용은 사용자 설정 몫, 훅이 권한을 주지 않음)
     unknown     usage 를 못 읽음      {} (모름은 막지 않는다 -- 가드의 rule D 와 같은 태도; 기록만)
 """
 from __future__ import annotations
@@ -78,8 +79,7 @@ def decide(ctx: "int | None", tool_name: str, tool_input: dict, *, soft: int, ha
     if ctx < hard:
         return "warn", {"hookSpecificOutput": {"hookEventName": "PreToolUse", "additionalContext": note}}
     if is_checkpoint(tool_name, tool_input, state_paths):
-        return "checkpoint", {"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "allow",
-                                                     "additionalContext": note}}
+        return "checkpoint", {"hookSpecificOutput": {"hookEventName": "PreToolUse", "additionalContext": note}}
     return "checkpoint", {"hookSpecificOutput": {
         "hookEventName": "PreToolUse", "permissionDecision": "deny",
         "permissionDecisionReason": f"[{NAME}] over the hard budget ({ctx} >= {hard}): only checkpoint tools are "

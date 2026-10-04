@@ -710,3 +710,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 227 회차: ga-SDK `438a34a` — CMD-GA25 rev 2 성공(ga 의 rlo 고정 0.8.2; 변이 잡힘); POL-1 의 AO 지시 끝(BD-286).
 - 228 회차: rlo-SDK `6bc76c7` — CMD-K15 rev 4 성공(prompt-spec/1, rlo 0.9.0; §4 바닥 · 변이 2/2 잡힘); 제안 P1–P3 받음(BD-292).
 - 229 회차: rlo-SDK `3e68f21` — CMD-K16 성공(P1–P3, rlo 0.9.1; check 17/17 · 변이 잡힘)(BD-293).
+- 230 회차: rlo-SDK `d190d95` — CMD-K17 성공(context-budget/1, rlo 0.10.0; 258 OK · 변이 2/2 잡힘 · 재연 −63.2%); deny-only P1 받음(BD-299). 모든 모형 · 플러그인 → CMD-K18 · CMD-GA28(BD-300).

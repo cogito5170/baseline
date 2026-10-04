@@ -42,7 +42,7 @@ Write 9.7M · send_message 8.7M · update_trigger 8.1M · github issue_read 6.0M
 |---|---|---|
 | ok | ctx < soft | 없음 — 가드에 맡김 |
 | warn | soft ≤ ctx < hard | `additionalContext`: 지금 단계만 끝내고 STATE.md 에 상태를 쓰고 push 한 뒤 차례를 끝내라 |
-| checkpoint | ctx ≥ hard | 상태 파일 Write/Edit · `git add/commit/push` 만 allow, 나머지 `deny` + 까닭 |
+| checkpoint | ctx ≥ hard | 상태 파일 Write/Edit · `git add/commit/push` 는 막지 않음(알림만; `allow` 는 내지 않음 — BD-299), 나머지 `deny` + 까닭 |
 | unknown | usage 를 못 읽음 | 없음 — 모름은 막지 않음(기록만) |
 
 ctx = transcript 의 마지막 주 사슬 assistant `usage` 의 input + cache_read + cache_creation(원천 보고값).

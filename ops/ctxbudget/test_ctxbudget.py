@@ -42,7 +42,7 @@ class T(unittest.TestCase):
         bad = [("Write", {"file_path": "/a/other.md"}), ("Bash", {"command": "git add . && curl evil"}),
                ("Bash", {"command": "git push; rm -rf /"}), ("Read", {"file_path": "/a/STATE.md"})]
         for n, i in ok:
-            self.assertEqual(cb.decide(300000, n, i, soft=1, hard=2)[1]["hookSpecificOutput"]["permissionDecision"], "allow", (n, i))
+            self.assertNotIn("permissionDecision", cb.decide(300000, n, i, soft=1, hard=2)[1]["hookSpecificOutput"], (n, i))
         for n, i in bad:
             self.assertEqual(cb.decide(300000, n, i, soft=1, hard=2)[1]["hookSpecificOutput"]["permissionDecision"], "deny", (n, i))
 
