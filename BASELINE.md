@@ -700,3 +700,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 217 회차: gentleMonster_gemini `67d0979` — CMD-GMG5 rev 2 성공(보정; Verifier, eval_seen 엇갈림은 수치를 오염시키지 않음, 시험 공백 V8)(BD-273).
 - 218 회차: gentleMonster_gemini `deffd8e` — CMD-GMG9 성공(V7 이제 잡힘; heap 잔여 = CLI 0.62 Ajv 재컴파일, 상류)(BD-274).
 - 219 회차: amp `1584696` — W1 가드 PIN rlo 0.8.1(Q8 1 단계); 탐침 W1 막힘 모양 모두 ALLOW; 남은 일 = W1 새 컨테이너(BD-275).
+- 220 회차: well_used_gemini `599e069` — CMD-WUG1 rev 3 부분 성공(D3 사용자 실행 Q10; 하루 한도 재시도 시험 공백)(BD-276).

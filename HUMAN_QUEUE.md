@@ -19,6 +19,7 @@
 |---|---|---|---|---|---|
 | Q7 | P | GA23 의 agy 실제 모양 확인 — Mac 작업 폴더에서 #12 댓글 'D2' 의 8 개 명령을 돌리고 출력 그대로를 GMG 대화창에 붙여넣기(토큰은 절대 붙이지 않음, 'Use AI Credits' 에는 절대 '예' 하지 않음) | https://github.com/cogito5170/baseline/issues/12#issuecomment-5971823866 | GA(가정 고정물 → 실제 기록) · GMG | 2026-10-03 |
 | Q8 | G | **W1 단절 풀기 2 단계(1 단계 끝: AMP 가 사용자 허락으로 amp main · w1/work 를 `1584696` = rlo 0.8.1 PIN 으로)** — W1 에 새 컨테이너가 필요: W1 의 지금 컨테이너는 옛 작업 폴더(714c00b)와 옛 rlo venv 를 쥐고 있고, 옛 guard.sh 는 PIN 이 바뀌어도 다시 깔지 않음(SessionStart 에서만). 사용자가 W1 세션을 **보관(archive) 뒤 되살리기(unarchive)** — 같은 세션 · 새 컨테이너(새 세션 아님, BD-238 그대로); 또는 사용자가 baseline 대화창에 '''W1 을 보관 · 되살려도 된다''' 한 줄 → baseline 이 실행 | W1 세션(session_012bx4BgLuifWh7YzJ1k1dcU) 또는 baseline 대화창 | W1 · AMP(T1) | 2026-10-04 |
+| Q10 | P | WUG1 D3 — 사용자 Mac 에서 자신의 Gemini 키로 well_used_gemini 를 한 번 실제로 돌려 분당 한도를 넘겨 보기(무료 하루 20 회 중 몇 회 씀). 정확한 명령은 WUG 가 AO 를 통해 #17 에 줌 — 그 명령이 오면 실행하고 마지막 출력만 WUG 대화창에 붙임(키는 절대 붙이지 않음) | #17 (명령 올 때) | WUG(D3) | 2026-10-04 |
 
 ## 끝남
 
