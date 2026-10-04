@@ -96,6 +96,18 @@
 규칙: 응답 모형 ≠ 설정 모형이면 그 턴은 실패(GA28, 조용한 대체 금지) · 목록에 없는 모형/계열은 설정 오류(추측 금지) · 모순 검증은 만든 쪽과 다른 계열로(오류 상관 줄이기) · 키 · 결제 · AI credits 는 건드리지 않음.
 지금 비어 있는 것: 플러그인의 능력 · 손잡이 목록(GA28 후속), 지시의 `needs` 칸(directive 꼴 작은 추가), router 와 올림/내림(GA31 node step 이 턴마다 백엔드를 고를 때 함께). 그때까지 baseline 이 같은 표로 손으로 고른다.
 
+## 8. 외부 환경 독립 · 예산 정지 뒤 이어가기 (BD-316, GA31 범위에 넣음)
+
+**claude-code-remote 없이 돌아야 한다.** ga 코어는 이미 기대지 않는다: 실행기(claude -p · Agent SDK · gemini/agv CLI · HTTP, GA28)는 로컬 프로세스, 전송은 git 우편함(ga mail) · 파일 · GitHub API, `RemoteSessionRunner` 는 깨우는 함수를 밖에서 주입받는 선택 부품. 기대는 것은 **운영**(baseline 이 세션 생성 · 메시지 · 루틴 · tokmon 의 get_session)이다. GA31 에 넣을 것: (a) 상시 실행기 `ga run --every <s>`(cron · systemd 로도) (b) 노드 = ga 가 띄우는 fresh 자식 프로세스, 노드 사이 = ga mail (c) 토큰 감시는 get_session 이 아니라 ga 의 L0(`.ga/telemetry/*.jsonl`)에서 (d) 합격 시험: CCR 도구가 없는 깨끗한 컨테이너에서 git + 로컬 CLI/HTTP 백엔드만으로 한 바퀴. CCR 은 실행기 플러그인 하나(`ccr_remote`)일 뿐 필수 아님.
+
+**K17 훅이 세션을 멈췄을 때.** 지금(GA29): 기본 shadow 라 멈추지 않음. enforce 면 hard 에서 상태 쓰기 · git 외 도구가 막히고 모형은 상태를 남기고 턴을 끝내는데, ga 는 답에 report/2 + state 블록이 없으면 `answer:<why>` 실패 턴으로 두고 다시 하지 않는다 → **지시가 멈춘 채 남는다(빈틈).** 고칠 동작:
+1. 실행기가 훅 기록(ga-budget.jsonl)을 읽어 `TurnResult.stop = budget_checkpoint` 로 실패와 구분.
+2. 고정 지시문: 예산 알림을 받으면 report/2(status partial) + state 블록(한 것 · 다음 걸음)으로 끝낸다. ga 는 상태를 쓰고, 지시는 열린 채, 커서는 지시를 닫지 않음.
+3. 다음 tick 에 같은 지시를 **새 fresh 턴으로 이어감** — 문맥은 새 state 로 다시 작게 시작(K17 이 말한 '끝내고 다시 시작' 을 바깥 = ga 가 함).
+4. 진전 감시: 이어가기 두 번 연속 state 해시 · 가지 머리가 그대로면 멈추고 needs_judgement(지시 쪼개기 · 등급 올리기 · 사람).
+5. state 블록 없이 멈춤: 가지의 커밋(git 이 진실)과 마지막 state 로 한 번 이어감, 또 없으면 needs_judgement.
+6. 이어가기는 지시의 runs 예산(r12)에 들어감, L0 에 단계 기록.
+
 ## 6. 사용자 결정이 필요한 것
 
 1. 규칙 3.1(메시지는 State 를 직접 쓰지 않고, 관측 + 의견으로 들어가 기존 규칙이 갱신) — spec §5 의 해석으로 받아들일지
