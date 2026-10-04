@@ -19,7 +19,7 @@
 |---|---|---|---|---|---|
 | Q7 | P | GA23 의 agy 실제 모양 확인 — Mac 작업 폴더에서 #12 댓글 'D2' 의 8 개 명령을 돌리고 출력 그대로를 GMG 대화창에 붙여넣기(토큰은 절대 붙이지 않음, 'Use AI Credits' 에는 절대 '예' 하지 않음) | https://github.com/cogito5170/baseline/issues/12#issuecomment-5971823866 | GA(가정 고정물 → 실제 기록) · GMG | 2026-10-03 |
 | Q8 | G | **W1 단절 풀기 2 단계(1 단계 끝: AMP 가 사용자 허락으로 amp main · w1/work 를 `1584696` = rlo 0.8.1 PIN 으로)** — W1 에 새 컨테이너가 필요: W1 의 지금 컨테이너는 옛 작업 폴더(714c00b)와 옛 rlo venv 를 쥐고 있고, 옛 guard.sh 는 PIN 이 바뀌어도 다시 깔지 않음(SessionStart 에서만). 사용자가 W1 세션을 **보관(archive) 뒤 되살리기(unarchive)** — 같은 세션 · 새 컨테이너(새 세션 아님, BD-238 그대로); 또는 사용자가 baseline 대화창에 '''W1 을 보관 · 되살려도 된다''' 한 줄 → baseline 이 실행 | W1 세션(session_012bx4BgLuifWh7YzJ1k1dcU) 또는 baseline 대화창 | W1 · AMP(T1) | 2026-10-04 |
-| Q10 | P | WUG1 D3 — **2026-10-05 00:00 UTC 뒤, GMG6 예약 요청이 돈 다음에** Mac 에서 #17 링크의 블록 하나를 붙여 실행(키는 환경변수 GEMINI_API_KEY 에서, 출력에 안 나옴; 하루 무료 20 중 약 12–15 씀). 마지막 두 줄(`[essay] 원장 …` 과 `exit=…`)만 WUG 대화창에 붙임. 10-04 에는 하지 않음(그날 몫 이미 소진) | https://github.com/cogito5170/baseline/issues/17#issuecomment-5975299581 (well_used_gemini `7bf3c88` README 'D3 -- 진짜 분당 한도를 한 번 넘겨 보기') | WUG(D3) | 2026-10-04 |
+| Q10 | P | WUG1 D3 — **2026-10-05 00:00 UTC(한국 9 시) 뒤, GMG6 예약 요청이 돈 다음에** Mac 에서: 확장을 그 가지에서 다시 깔고 `wug.py setup`, 그다음 `python3 wug.py d3` 한 번(첫 429 에서 멈춤 · 최대 15 요청 · 다시 쳐도 안 보냄 · 키는 환경변수에서, 출력에 안 나옴). 마지막 `[d3] …` 줄과 끝값만 WUG 대화창에 붙임. 정확한 명령은 #17 의 WUG 글(상한 15 로 바뀐 판) | https://github.com/cogito5170/baseline/issues/17 | WUG(D3) | 2026-10-04 |
 
 ## 끝남
 
