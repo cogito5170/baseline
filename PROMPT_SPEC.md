@@ -63,7 +63,7 @@ compact 서명은 같은 선언에서 나온다: `{"schema":"ga-gemini-plan/1","
 | 확인 | 결과 |
 |---|---|
 | verbatim 이 ga 의 지금 글과 바이트 같음 — `protocol()` · 첫 턴 · `--resume` 턴 · agy(--resume 없음) 턴, 도구 표 3 가지 | 모두 같음 |
-| `check` 가 ga `check_plan` 과 받음/거부가 같음 — 사례 16(잘못된 schema · 표 밖 도구 · 겹친 id · 긴 id · 앞에 없는 after · 17 단계 · 모르는 칸 · 빈 next.prompt …) | 16/16 |
+| `check` 가 ga `check_plan` 과 받음/거부가 같음 — 사례 17(잘못된 schema · 표 밖 도구 · 겹친 id · 긴 id · 앞에 없는 after · 자기를 가리키는 after · 17 단계 · 모르는 칸 · 빈 next.prompt …) | 17/17 (BD-292 뒤; 처음 16/16) |
 | 모르는 낱말 · 모르는 근거 · 빠진 입력 | 모두 오류 |
 | dict 순서 바뀜 | 같은 글 |
 | 8 턴 대화 토큰(추정) — Gemini(--resume) | 646 → 447 (**−31%**), 첫 턴 245 → 161 |
