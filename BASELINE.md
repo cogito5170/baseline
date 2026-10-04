@@ -701,3 +701,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 218 회차: gentleMonster_gemini `deffd8e` — CMD-GMG9 성공(V7 이제 잡힘; heap 잔여 = CLI 0.62 Ajv 재컴파일, 상류)(BD-274).
 - 219 회차: amp `1584696` — W1 가드 PIN rlo 0.8.1(Q8 1 단계); 탐침 W1 막힘 모양 모두 ALLOW; 남은 일 = W1 새 컨테이너(BD-275).
 - 220 회차: well_used_gemini `599e069` — CMD-WUG1 rev 3 부분 성공(D3 사용자 실행 Q10; 하루 한도 재시도 시험 공백)(BD-276).
+- 221 회차: rlo-SDK `c491e96`(0.8.2) — CMD-K14 S2 성공(훅이 once 로 선형, 창 없이; 변이 2/2)(BD-278).
