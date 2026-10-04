@@ -17,15 +17,15 @@
 
 | # | 종류 | 할 일 | 링크 | 기다리는 세션 | 올린 때 |
 |---|---|---|---|---|---|
-| Q6 | D | WUG 가 다른 세션을 거친 허락은 받지 않음(설계대로) — **WUG 대화창에 직접** 한 줄: 'ga-sdk 를 확장 venv 에 설치해도 된다' | WUG 세션 대화창(session_01WTesMn7FjKtPKSo7SpQBY8, 'Gemini 모델 정책 및 게이트 구현') | WUG(CMD-WUG1 S6 · S10) | 2026-10-03 |
 | Q7 | P | GA23 의 agy 실제 모양 확인 — Mac 작업 폴더에서 #12 댓글 'D2' 의 8 개 명령을 돌리고 출력 그대로를 GMG 대화창에 붙여넣기(토큰은 절대 붙이지 않음, 'Use AI Credits' 에는 절대 '예' 하지 않음) | https://github.com/cogito5170/baseline/issues/12#issuecomment-5971823866 | GA(가정 고정물 → 실제 기록) · GMG | 2026-10-03 |
 | Q8 | G | **W1 단절 풀기(GR7 기다리지 않음, BD-267)** — ① AMP 대화창에 한 줄: 'amp main 과 w1/work 의 ops/rlo/install.sh PIN 을 rlo-SDK 8131a2b(0.8.1)로 올려도 된다' ② AMP 가 push 한 뒤, W1 에 새 컨테이너를 주는 방법(같은 세션 보관→되살리기, 또는 W1 대화창에서 `! git pull origin w1/work` 가 되는지)은 baseline 이 안내 | AMP 대화창 → 그다음 W1 | W1 · AMP(T1) | 2026-10-03 |
-| Q9 | G | **AO 가 멈춤** — AO 세션의 권한 분류기가 21:18 부터 GitHub 댓글 게시와 send_message 를 막음(판정 요청 GR8 · GMG5, K14 S2 안내, GA25 알림 보류). AO 대화창에서 둘 중 하나: '이 세션에서 GitHub 댓글 게시와 send_message 를 허용한다' 또는 '일상 게시만 허용, 비용 큰 작업 시작은 매번 묻기' | AO 대화창(session_01JWUCzhkqtsYpyJ6PyRq9cA, 'Agent Orchestrator 아키텍처 재정의') | AO(운영 전체) | 2026-10-03 |
 
 ## 끝남
 
 | # | 종류 | 할 일 | 결과 |
 |---|---|---|---|
+| Q9 | G | AO 의 GitHub 댓글 · send_message 허용 | 사용자가 AO 대화창에 '허가한다'(2026-10-04 01:04 UTC, #18 5975236014) — AO 가 보류한 일 풀어냄 |
+| Q6 | D | WUG 확장 venv 에 ga-sdk 설치 | 사용자가 WUG 대화창에서 허락 → WUG 가 ga-sdk 98cbd26 · rlo 3d2e7d0 설치(WUG 보고 01:05 UTC) |
 | — | G | W1 가드 v1 을 amp main 에 | `714c00b` (BD-189) |
 | — | G | W1 가드 v2(알림 읽기 · send_message) | `344a604` (BD-194) |
 | — | G | W1 가드 rlo 0.5.1 PIN | `36ca54d` (BD-204) |
