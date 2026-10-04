@@ -707,3 +707,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 224 회차: ga-SDK `2c68ea2` — CMD-GR9 성공(doctor 재생이 rlo 판 따라 D 기대값; 다음 GA25 rev 2)(BD-283).
 - 225 회차: gentleMonster_gemini `216efc2` — CMD-GMG10 성공(눈 감은 임계값 .17/.52, held-out 4/5; 무드 스크립트 재현)(BD-284).
 - 226 회차: gentleMonster_gemini `7207edd` — CMD-GMG11 성공(블록 B 216efc2; 고정 변이 잡힘)(BD-285).
+- 227 회차: ga-SDK `438a34a` — CMD-GA25 rev 2 성공(ga 의 rlo 고정 0.8.2; 변이 잡힘); POL-1 의 AO 지시 끝(BD-286).
