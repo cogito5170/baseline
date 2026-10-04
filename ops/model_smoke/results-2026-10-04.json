@@ -1,0 +1,107 @@
+[
+ {
+  "case": "haiku_smoke",
+  "served": [
+   "claude-haiku-4-5-20251001"
+  ],
+  "in": 29287,
+  "out": 38,
+  "usd": 0.0131578,
+  "turns": 1,
+  "result": "OK"
+ },
+ {
+  "case": "haiku_smoke_bare",
+  "served": [
+   "claude-haiku-4-5-20251001"
+  ],
+  "in": 945,
+  "out": 55,
+  "usd": 0.00122,
+  "turns": 1,
+  "result": "OK"
+ },
+ {
+  "case": "haiku_plan_verbatim",
+  "served": [
+   "claude-haiku-4-5-20251001"
+  ],
+  "in": 1463,
+  "out": 300,
+  "usd": 0.002963,
+  "turns": 1,
+  "result": "```json\n{\n  \"schema\": \"ga-gemini-plan/1\",\n  \"steps\": [\n    {\n      \"id\": \"a\",\n      \"tool\": \"list_dir\",\n      \"args\": {\n        \"path\": \"/tmp/claude-0/-home-user/d7b52199-cb2f-5033-a193-21ebbcd2a7a4/scratchpad/claude_smoke\"\n      },\n      \"after\": []\n    }\n  ],\n  \"next\": {\n    \"prompt\": \"I'll search for design notes about the hero banner in the workspace\",\n    \"after\": [\"a\"]\n  },\n  \"say\": \"Looking for design notes about the hero banner in your workspace...\"\n}\n```",
+  "prompt_est_tokens": 463,
+  "check": []
+ },
+ {
+  "case": "haiku_plan_compact",
+  "served": [
+   "claude-haiku-4-5-20251001"
+  ],
+  "in": 1313,
+  "out": 333,
+  "usd": 0.0029779999999999997,
+  "turns": 1,
+  "result": "```json\n{\n  \"schema\": \"ga-gemini-plan/1\",\n  \"steps\": [\n    {\n      \"id\": \"list_work\",\n      \"tool\": \"list_dir\",\n      \"args\": {\n        \"path\": \"/tmp/claude-0/-home-user/d7b52199-cb2f-5033-a193-21ebbcd2a7a4/scratchpad/claude_smoke\"\n      }\n    }\n  ],\n  \"next\": {\n    \"prompt\": \"I'll search for design notes about the hero banner in the workspace.\",\n    \"after\": [\"list_work\"]\n  }\n}\n```",
+  "prompt_est_tokens": 295,
+  "check": []
+ },
+ {
+  "case": "sonnet_smoke",
+  "served": [
+   "claude-sonnet-5-5"
+  ],
+  "in": 32287,
+  "out": 4,
+  "usd": 0.0389378,
+  "turns": 1,
+  "result": "OK"
+ },
+ {
+  "case": "sonnet_smoke_bare",
+  "served": [
+   "claude-sonnet-5-5"
+  ],
+  "in": 1197,
+  "out": 4,
+  "usd": 0.004824,
+  "turns": 1,
+  "result": "OK"
+ },
+ {
+  "case": "sonnet_plan_verbatim",
+  "served": [
+   "claude-sonnet-5-5"
+  ],
+  "in": 1848,
+  "out": 193,
+  "usd": 0.009318,
+  "turns": 1,
+  "result": "```json\n{\"schema\": \"ga-gemini-plan/1\", \"steps\": [{\"id\": \"a\", \"tool\": \"list_dir\", \"args\": {\"path\": \".\"}, \"after\": []}, {\"id\": \"b\", \"tool\": \"search\", \"args\": {\"query\": \"hero banner design notes\"}, \"after\": []}], \"next\": {\"prompt\": \"Identify the design notes about the hero banner from the directory listing and search results, then read the three most recent ones and summarise what changed between them.\", \"after\": [\"a\", \"b\"]}, \"say\": \"Listing the workspace and searching for hero banner design notes first.\"}\n```",
+  "prompt_est_tokens": 463,
+  "check": []
+ },
+ {
+  "case": "sonnet_plan_compact",
+  "served": [
+   "claude-sonnet-5-5"
+  ],
+  "in": 1670,
+  "out": 145,
+  "usd": 0.008126,
+  "turns": 1,
+  "result": "```json\n{\"schema\":\"ga-gemini-plan/1\",\"steps\":[{\"id\":\"ls\",\"tool\":\"list_dir\",\"args\":{\"path\":\".\"}}],\"next\":{\"prompt\":\"From the directory listing, identify design notes about the hero banner (by filename/date), pick the three most recent, and read them with read_file in the next turn.\",\"after\":[\"ls\"]},\"say\":\"Listing the workspace to find the hero banner design notes.\"}\n```",
+  "prompt_est_tokens": 295,
+  "check": []
+ },
+ {
+  "case": "gemini_cli_smoke (GMG6, BD-301)",
+  "served": [
+   "gemini-3-flash-preview"
+  ],
+  "in": 11822,
+  "out": 1,
+  "note": "from GMG's report, not re-run"
+ }
+]
