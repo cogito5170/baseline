@@ -206,6 +206,8 @@
 | `enables` | 버림 (`requires` 의 역) | — | 역관계를 따로 저장하지 않는다 | — |
 | `conflicts_with` | **채택 (유형 수준)** | 모형 | 행동 ↔ 행동, 목표 ↔ 목표. 중재(ARBITRATE)의 입력 | 없음 |
 | `supports` | **보류** | 인식 | 근거 → 진단 가설. 진단 가설 객체가 생길 때 다시 본다 | 없음 (BD-34) |
+| `informs` | **채택 (POL-3, BD-312)** | 실체 | 세션 → 세션. 메시지 하나가 보내졌다는 관측된 사실(L0 `peer.message.*` 근거). 내용의 권위가 아니다 — 내용은 Observation 참조 또는 Opinion | 없음 → NET2 |
+| `contradicts` | **채택 (POL-3, BD-312)** | 인식 | 관측 ↔ 관측(같은 StateRef 다른 값, 서로 다른 근거). 검증 상호작용 · 중재의 입력. 유형 수준 `conflicts_with` 와 다르다(이것은 사례 수준) | 없음 → NET2 |
 | 도메인 간선 `contains` · `uses` · `executed_by` · `runs_on` | **채택** | 실체 | 이미 쓰인다. 질의 · 선택 · 격리에 쓰인다 | MS `contains` · `uses`, Sensor `uses` · `executed_by` · `runs_on` |
 
 모든 관계는 `subject · predicate · object · valid_from · valid_to(또는 last_seen) · basis · evidence_refs` 를 가진다. 유형 관계는 판본 있는
