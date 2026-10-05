@@ -66,6 +66,7 @@ def search(pattern: str, path: str = ".", max_hits: int = 50) -> str:
 
 
 DEFAULT_TIMEOUT, MAX_TIMEOUT = 1200, 3600
+SUMMARY_LINES = 8
 _SECRETISH = re.compile(r"(?i)(key|token|secret|password|credential|auth)")
 
 
@@ -94,4 +95,8 @@ def run_check(name: str) -> str:
         out, code = (p.stdout or "") + (p.stderr or ""), p.returncode
     except subprocess.TimeoutExpired:
         out, code = f"timed out after {limit} s", 124
-    return f"exit {code}\n" + out[-CAP:]
+    lines = out.rstrip().splitlines()
+    summary = "\n".join(lines[-SUMMARY_LINES:])
+    # The summary (last lines: e.g. 'Ran 891 tests' / 'FAILED (failures=3)') comes first, so a result preview that
+    # keeps only the head still shows it (BD-413: AG7's preview cut the count off). Then the tail as before.
+    return f"exit {code}\n--- last {min(len(lines), SUMMARY_LINES)} lines ---\n{summary}\n--- output tail ---\n" + out[-CAP:]

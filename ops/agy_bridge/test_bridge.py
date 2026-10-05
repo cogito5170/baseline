@@ -202,7 +202,7 @@ class ToolsTest(unittest.TestCase):
         os.environ["AGY_BRIDGE_COMMANDS"] = json.dumps({"py": [sys.executable, "-c", "import os;print('ok', 'MY_API_KEY' in os.environ)"]})
         os.environ["MY_API_KEY"] = "fake"
         try:
-            self.assertEqual(agy_tools.run_check("py").split(), ["exit", "0", "ok", "False"])
+            self.assertEqual(agy_tools.run_check("py").splitlines()[:3], ["exit 0", "--- last 1 lines ---", "ok False"])
             with self.assertRaises(ValueError):
                 agy_tools.run_check("rm")
         finally:
@@ -213,13 +213,23 @@ class ToolsTest(unittest.TestCase):
             "slow": {"argv": [sys.executable, "-c", "import time; time.sleep(3)"], "timeout_s": 1},
             "ok": {"argv": [sys.executable, "-c", "print('fine')"], "timeout_s": 99999}})
         try:
-            self.assertEqual(agy_tools.run_check("slow").splitlines()[:2], ["exit 124", "timed out after 1 s"])
-            self.assertEqual(agy_tools.run_check("ok").split(), ["exit", "0", "fine"])
+            self.assertEqual(agy_tools.run_check("slow").splitlines()[:3], ["exit 124", "--- last 1 lines ---", "timed out after 1 s"])
+            self.assertEqual(agy_tools.run_check("ok").splitlines()[:3], ["exit 0", "--- last 1 lines ---", "fine"])
             os.environ["AGY_BRIDGE_COMMANDS"] = json.dumps({"bad": {"argv": "rm -rf /"}})
             with self.assertRaises(ValueError):
                 agy_tools.run_check("bad")  # a string is never run (no shell)
         finally:
             del os.environ["AGY_BRIDGE_COMMANDS"]
+
+    def test_summary_comes_first(self):
+        script = "import sys\nfor i in range(3000): print('line', i, file=sys.stderr)\nprint('Ran 891 tests', file=sys.stderr)\nprint('FAILED (failures=3)', file=sys.stderr)"
+        os.environ["AGY_BRIDGE_COMMANDS"] = json.dumps({"t": [sys.executable, "-c", script]})
+        try:
+            head = agy_tools.run_check("t")[:300]  # what a head-only preview keeps
+        finally:
+            del os.environ["AGY_BRIDGE_COMMANDS"]
+        self.assertIn("Ran 891 tests", head)
+        self.assertIn("FAILED (failures=3)", head)
 
     def test_confined(self):
         for bad in ("../x", "/etc/passwd", ".env"):
