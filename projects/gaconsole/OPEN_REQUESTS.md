@@ -30,3 +30,8 @@
 | CMD-GC25 | run 도메인 pg_store.py(ga_dirs · monitor_recordings) 분리와 녹화 영속 저장(지금은 프로세스 메모리) | 후속 run 작업 |
 | CMD-GC25 | 모니터 소스 등록 경로 허용 루트(GC_MONITOR_ROOTS) 정책 — 지금은 서버의 아무 절대 경로나 admin 이 등록 | 보안 결정(baseline) + 후속 |
 | CMD-GC25 | 견적 outcome 을 사용 작업 라벨링 이벤트에서 자동 기록 | 후속 consulting 작업 |
+| CMD-GC18 | core/config.py 설정 덤프 제외에 `GC_KEK_` 접두어(SECRET_ENV_PREFIXES) | 후속 core 작업 |
+| CMD-GC18 | .env.example 에 KEK 줄(GC_KEK_ID · GC_KEK_dev, 값 없음) | 후속 infra 작업 |
+| CMD-GC18 | test_e2e reset_singletons 에 integration.wiring | 후속 core 작업 |
+| CMD-GC18 · GC25 | 도메인 시험(backend/app/domains/*/tests)이 make test 에 없음 | 후속 infra 작업(우선) |
+| CMD-GC18 | 운영 KMS 키링, KEK 회전 시 fingerprint 재계산 | 출시 전 보안 작업 |

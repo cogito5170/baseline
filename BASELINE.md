@@ -765,3 +765,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 282 회차: AGY AG1 · AG2 수용, AG3 부분(이어가기 · slash 끄기로 고정 비용 안 줄어듦), Antigravity 채팅 구동 중지 권고(BD-386).
 - 283 회차: CMD-GA36 시작(ga ask · ga ui, 모델 없는 라우팅 · 비용 확인), GC25 · GC18 되돌림(변이 생존 3), GC18 rev 2 확인(BD-387).
 - 284 회차: CMD-GC25 성공 — Token `453a804` 통합(ff), 변이 생존 2 → 시험 추가 뒤 잡힘(BD-389).
+- 285 회차: CMD-GC18 성공 — Token `963ebb1` 통합(ff), MVP API 경로 전부 마운트(BD-390). 구동자 진단(BD-391).
