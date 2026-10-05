@@ -18,3 +18,4 @@
 | CMD-GC20 | ingestion-analytics | Sonnet | 1(통합 merge) | 0 | 542 | 14,351 | 1,505,589 | 83,739 | 0.78 | 성공 | BD-361 |
 | CMD-GC43 | frontend | Sonnet | 1(통합 merge) | 1(순서 지정) | 548 | 11,350 | 1,663,366 | 75,703 | 0.75 | 성공 | BD-362 |
 | CMD-GC15 | core-backend | Sonnet | 1(통합 merge) | 1(순서 · 소유 확장) | 576 | 20,183 | 3,233,357 | 97,232 | 1.24 | 성공 | BD-363 |
+| CMD-GC21 | ingestion-analytics | Sonnet | 1(통합 merge) | 1(순서 지정) | 1,084 | 48,673 | 4,665,502 | 145,079 | 2.00 | 성공 | BD-364 |
