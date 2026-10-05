@@ -97,6 +97,9 @@ def run_check(name: str) -> str:
         out, code = f"timed out after {limit} s", 124
     lines = out.rstrip().splitlines()
     summary = "\n".join(lines[-SUMMARY_LINES:])
-    # The summary (last lines: e.g. 'Ran 891 tests' / 'FAILED (failures=3)') comes first, so a result preview that
-    # keeps only the head still shows it (BD-413: AG7's preview cut the count off). Then the tail as before.
-    return f"exit {code}\n--- last {min(len(lines), SUMMARY_LINES)} lines ---\n{summary}\n--- output tail ---\n" + out[-CAP:]
+    failing = [ln for ln in lines if re.match(r"^(FAIL|ERROR):|^\s*(✘|×)\s", ln)][:60]
+    # Previews may keep only the head or only the tail of a result, so the summary (counts) and the failing test names
+    # sit at both ends (BD-413/414: AG7 lost the count at the head, AG8 lost the names in the middle).
+    key = f"--- failing ({len(failing)}) ---\n" + "\n".join(failing) + \
+        f"\n--- last {min(len(lines), SUMMARY_LINES)} lines ---\n{summary}"
+    return f"exit {code}\n{key}\n--- output tail ---\n" + out[-(CAP // 2):] + f"\n--- again ---\nexit {code}\n{key}\n"
