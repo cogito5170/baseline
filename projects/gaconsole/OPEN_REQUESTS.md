@@ -27,3 +27,6 @@
 | CMD-IF1 | frontend: `window.gaDesktop` 이 있으면 /live 에서 로그인 리디렉션 생략(크롬 없이) → preload 의 placeholder 우회 제거 | 후속 frontend 작업 + IF 후속 |
 | CMD-IF1 | frontend: /live 가 `window.gaDesktop.sidecarUrl` 을 읽기(지금은 URL 쿼리 api) | 후속 frontend 작업 |
 | CMD-IF1 | desktop 시험이 추적 파일 tests/electron-window.png 를 매 실행 덮어씀 → test-results 로 | IF 후속(설치 파일 electron-builder 와 함께) |
+| CMD-GC25 | run 도메인 pg_store.py(ga_dirs · monitor_recordings) 분리와 녹화 영속 저장(지금은 프로세스 메모리) | 후속 run 작업 |
+| CMD-GC25 | 모니터 소스 등록 경로 허용 루트(GC_MONITOR_ROOTS) 정책 — 지금은 서버의 아무 절대 경로나 admin 이 등록 | 보안 결정(baseline) + 후속 |
+| CMD-GC25 | 견적 outcome 을 사용 작업 라벨링 이벤트에서 자동 기록 | 후속 consulting 작업 |
