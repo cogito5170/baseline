@@ -769,3 +769,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 286 회차: CMD-IF2 성공 — Token `1d9fdbe` 통합(ff), AppImage · 데모 녹화, 변이 2/2; FE3 발행(frontend 기존 빨강)(BD-399).
 - 287 회차: CMD-FE3 성공 — Token `a1a055b` 통합(ff), frontend 시험 초록 · make test 포함, 변이 2/2(BD-403). AG5 판정 · bridge 2 차 고침(BD-402).
 - 288 회차: CMD-GA38 성공 — ga-sdk `adcc871` 통합(ff), GA Engine Executor(ga act), 보안 되돌림 1 회(BD-404, BD-407).
+- 289 회차: CMD-GA37 성공 — ga-sdk `ecc80b0` 통합(ff), GA Engine Intake(ga do), rev 2 되돌림 1 회(BD-405, BD-409).
