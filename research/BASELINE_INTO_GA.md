@@ -60,3 +60,13 @@ VM ─ systemd(사용자 단위, 다시 시작=항상)
 ## 4. 지시 순서
 
 GA42(진행 중) → GA42 rev 2(그림자 모드 + 빈틈 a–c) → OPS1(VM 배치: systemd 단위 3 개, `ga setup vm` 점검, ssh -L 안내, 비밀 없음) → GA39 → GA40 → RW 비교(실행자 전환).
+
+## 5. VM 조건 (사용자: Oracle Free Tier, GPU 없음)
+
+- 기계는 Ampere A1(ARM aarch64, 최대 4 OCPU · 24 GB)을 권한다. AMD micro(1 GB)로는 Token 스택을 함께 돌리기 어렵다.
+- agy CLI 의 linux-arm64 지원은 확인하지 않았다. 지원하지 않으면 bridge 는 맥에 두고, ga run(hub)과 console 만 VM 에서 돌린다(둘은 git 우편함으로 이어진다).
+- 유휴 회수(baseline 이 아는 정책, 확인 필요): 7 일 동안 CPU · 네트워크 · (A1) 메모리 사용률이 낮으면 회수될 수 있다. 대응:
+  - (a) 종량제 계정 전환은 사용자 결정이다(결제 수단이 필요하고, 세션은 권하거나 진행하지 않는다).
+  - (b) VM 은 잃어도 되게 만든다. 상태는 모두 git 에 두고, 설치 스크립트로 다시 세운다(OPS1).
+  - 일부러 부하를 만들어 회수를 피하지 않는다.
+- GPU 가 없으니 작은 모델은 계속 agv(agy 서비스)다. gpt-oss-20b 를 A1 CPU 로 로컬 실행하는 것은 실험 후보로만 남긴다.
