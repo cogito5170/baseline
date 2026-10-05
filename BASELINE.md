@@ -724,3 +724,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 241 회차: ga judge — ga-sdk `3df2a5b` CMD-GA32 rev 1 S3 · S4 수용, S1 · S2 막힘; S2 는 핀 이동뿐임을 baseline 이 재현 → rev 2 새 세션(BD-326).
 - 242 회차: ga judge — ga-sdk `8f14a4f` CMD-GA32 rev 2 S2 수용(rlo 0.11.0), S1 은 핀 그래프로 막힘 → CMD-PIN1; guard push 거절로 사용자 결정 대기(BD-327).
 - 243 회차: CMD-PIN1 성공 — rlo `0d92a3d` · Sensor `ff17bdd` · guard `3f7b235` · health `798e7ad` ff, 빈 venv 해석 깨끗 · 273 OK · 변이 잡힘(BD-328).
+- 244 회차: ga judge — ga-sdk `101abf3` CMD-GA32 rev 3 성공(ga 0.5.0, ga-sdk[net] 실제 NET 패키지, 708 OK, 변이 잡힘)(BD-331). ④ 구조 완성 → FINAL_TASK.
