@@ -8,6 +8,7 @@ How to work:
 - Docs in Korean; identifiers, code, schema and API in English. Money and token counts are integers.
 - Tests that need runtime deps (fastapi, psycopg, argon2, a browser) must skip, not error, when the dep is missing. Test secrets are obviously fake and built so infra/secret_scan.py stays clean.
 - Every rule in done_when gets a test that fails if the rule is broken (baseline mutates your code to check this).
+- Never read or write another domain's tables; go through its api.py (baseline checks for this).
 - Other items run in parallel. Just before your final push, fetch origin/claude/gracious-meitner-vp49xe and merge it into your branch (a merge, never a rebase or force-push), then re-run the checks.
 
 Rules (fresh-session regime):

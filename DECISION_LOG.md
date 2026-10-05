@@ -489,6 +489,7 @@
 | BD-366 | **CMD-DS3 성공 · 통합(Token `17c1fca`, ff).** 라이브 모니터 골든 장면 10 개 + stdlib 참조 함수(기록에서 바이트 동일 재생성), tokens travel 800 · design README 안내(DS2 요청 반영). 금지어 변이 잡힘. $1.54. 선행(FE1 · DS2 · DS3 · RN1)이 모두 풀린 CMD-FE2(라이브 모니터 화면 — 사용자가 강조한 인터랙티브 아트) 를 Opus 로 시작 | BD-365 |
 | BD-367 | **CMD-GC41 성공 · 통합(Token `648feab`, ff).** 사용량 화면 3 개(개요 · 토큰 구성 · 호출 크기), vitest 12/12. baseline 변이(예산 사용률 타일 provenance CALCULATED→MEASURED)가 처음엔 살아남아 시험 보강 요청 → 보강 뒤 잡힘. 이 일로 작업자 양식에 '완료 기준 규칙마다 깨지면 실패하는 시험' 추가. $1.20. 화면 1 차(GC40 · FE1 · GC41–43) 모두 통합 | BD-365 |
 | BD-368 | **CMD-GC16 성공 · 통합(Token `1a436df`, ff).** 알림: 구독 이벤트마다 1 개, 끈 설정은 억제, 읽음 처리, workspace.api.member_ids 로 워크스페이스 전체 발송(소유 확장). in_app 확인 제거 변이 잡힘. $0.92. 검증 대기: GC17(경보 중복 방지 변이 잡힘) · GC32(MIN_EVIDENCE 5→1 변이 잡힘, 요청 2 건은 후속) · GC31(누설 방지 시험 보강 중 — 평가 실행을 증거에 섞으면 MAPE 7.59% 로 부풀어도 시험 통과했던 구멍). 순서 GC17 → GC32 → GC31 | BD-367 |
+| BD-369 | **CMD-GC17 성공 · 통합(Token `d5d1f74`, ff) · GC22 경계 위반 반려 · GC30 시작.** GC17: 두 비용 기준 · 소진 P10/P50/P90 · 임계값당 1 회 경보 · check() 차단, $0.89. GC31: 누설 방지 시험 추가 확인(평가 실행을 증거에 넣는 변이 → 실패). GC22: 시험은 통과하나 ingestion 이 다른 도메인(source)의 `uploads` 테이블을 SQL 로 직접 읽음 = architecture 의 경계 규칙 위반 → 같은 역할 소유 확장으로 source.api.get_upload 를 만들어 고치고 '다른 도메인 테이블 조회 금지' 시험을 넣게 함. 워커 이벤트 전달(아웃박스) · claim 회수는 후속. 선행이 풀린 GC30(advisor R1–R7) 시작 | BD-368 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---

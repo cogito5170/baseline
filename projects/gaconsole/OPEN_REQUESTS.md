@@ -15,3 +15,5 @@
 | CMD-GC31 | estimation 의 HTTP 경로 · PG 저장소 미구현, 정가 비용 MAPE 104.5%(기준선 92.7%보다 나쁨) | 후속 consulting 작업 |
 | CMD-GC32 | usage 의 task 에 user_id (개인 통계용) | 다음 usage 작업 |
 | CMD-GC32 | openapi: 추천 → Proposal 경로 | 다음 contract 작업 |
+| CMD-GC22 | 워커 프로세스의 도메인 이벤트가 api 프로세스에 닿지 않음 — domain_events 아웃박스 전달 경로 결정 | 후속 core-backend/infra 작업(아키텍처) |
+| CMD-GC22 | 워커 사망으로 남은 claim 회수(claimed_at 기준) | 후속 ingestion 작업 |
