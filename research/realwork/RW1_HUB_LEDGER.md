@@ -15,3 +15,4 @@
 | CMD-GC14 | core-backend | Sonnet | 0 | 0 | 28 | 14,592 | 1,127,600 | 56,568 | 0.60 | 성공 | BD-357 |
 | CMD-FE1 | frontend | Sonnet | 1(check 재현 — devDeps 누락) | 1(소유 확장) | 570 | 22,213 | 3,227,818 | 109,113 | 1.31 | 성공 | BD-359 |
 | CMD-RN1 | core-backend | Sonnet | 0 | 0 | 30 | 27,604 | 1,274,504 | 67,581 | 0.80 | 성공 | BD-360 |
+| CMD-GC20 | ingestion-analytics | Sonnet | 1(통합 merge) | 0 | 542 | 14,351 | 1,505,589 | 83,739 | 0.78 | 성공 | BD-361 |

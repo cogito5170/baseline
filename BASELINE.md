@@ -741,3 +741,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 258 회차: CMD-GC14 성공 — Token `57e791d` 통합(ff), 워크스페이스(BD-357). FE1 은 package.json 보완 대기.
 - 259 회차: CMD-FE1 성공 — Token `4814254` 통합(ff), 공용 부품(BD-359). GC41–43 시작.
 - 260 회차: CMD-RN1 성공 — Token `0971840` 통합(ff), 라이브 모니터 읽기(BD-360). DS3 시작.
+- 261 회차: CMD-GC20 성공 — Token `cfa872f` 통합(ff), 업로드(BD-361). GC43 → GC15 순서 대기.
