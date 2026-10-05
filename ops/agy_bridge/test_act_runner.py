@@ -69,6 +69,7 @@ class ActRunnerTest(unittest.TestCase):
         self.assertNotEqual(run.seen["wt"], self.checkout)
         self.assertIn("+    return 2", text)
         self.assertIn("tests/test_app.py", text)  # baseline's test is part of the patch, for review
+        self.assertNotIn("node_modules", text)  # the link prepare() made is not part of the change
         self.assertEqual((self.checkout / "app.py").read_text(), "user's own uncommitted edit\n")
         self.assertFalse(run.seen["wt"].exists())  # worktree removed
         self.assertIn("agv/CMD-AGA9", git("-C", str(self.checkout), "branch"))

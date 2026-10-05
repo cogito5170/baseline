@@ -104,6 +104,7 @@ def run_act(cfg: dict[str, Any], spec: dict[str, Any], wt: Path, checkout: Path)
 def finish(wt: Path, checkout: Path, did: str, owned: list[str]) -> str:
     """Commit the model's change on agv/<id> (baseline's tests excluded from 'changed') and return the patch."""
     _git(wt, "add", "-A")
+    _git(wt, "reset", "-q", "--", "frontend/node_modules", check=False)  # the link prepare() made is not a change (BD-427)
     if not _git(wt, "status", "--porcelain").stdout.strip():
         patch = ""
     else:
