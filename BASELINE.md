@@ -779,3 +779,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 296 회차: CMD-GA39 성공 — ga-sdk `507da93`, GA Verifier(diff 에서 변이 생성 · judge --sha · 항목 점검); OPS1 · GA40 은 생성기가 찾은 생존 변이로 작게 되돌림(BD-441).
 - 297 회차: CMD-GA40 성공 — ga-sdk `9c1554d`, GA Planner(그림자) · 계획 교훈 L1–L7 코드 점검(BD-443).
 - 298 회차: GA Console 완성 — ga-sdk `73c0437`: 다크 흑백 디자인 + 정적 7 화면 + VM 배치(ga vm) + ga hub 그림자 모드 · 도구 승격(BD-444).
+- 299 회차: CMD-GA43 성공 — ga-sdk `83fccea`(0.11.0), judge 가 정의되지 않은 토큰을 잡음 · bridge 파이썬 · SSE · JS 변이(BD-447).
