@@ -469,6 +469,7 @@
 | BD-346 | **Token MVP 1 물결 시작(허브 방식, RW1 (가)).** 선행 없는 두 작업을 동시에: CMD-GC10(core-backend, 계약 v0.1) `session_01QMyk3nWV8x1UVLTm1Kns9r` · CMD-DS1(design, 디자인 토큰) `session_01L3JnTv4qBkJzLboL2bNcwD`, 둘 다 Sonnet. 지시 = 로드맵 작업 항목 그대로(`projects/gaconsole/WORKER_PROMPT.md` 틀). 다음 물결: GC10 뒤 GC11 · GC12 · GC40, DS1 뒤 DS2. 판정은 baseline 이 새 clone 에서(Token 은 ga judge 불가 — R7) | BD-343 · 345 |
 | BD-347 | **CMD-GC10 성공 · 통합(Token `f08ea4d`, ff).** 0001_init.sql 이 schema.sql 과 바이트 동일, 계약 시험(빈 DB 적용 · 응답 스키마에 비밀 필드 없음) green, make check/test 31+4 OK. baseline 변이 2 개(마이그레이션에 한 줄 추가 · User.password_hash 심기) 잡힘. 되돌림 1 회: change_size 값 — baseline 의 작업자 양식이 허용값을 안 적은 탓, 양식 고침. 세션 archive. 비용 $0.54(장부). 2 물결: GC11 · GC12 · GC40 | BD-346 |
 | BD-348 | **Token MVP 2 물결 시작.** GC10 통합(`f08ea4d`) 뒤 선행이 풀린 세 작업을 동시에, 모두 Sonnet: CMD-GC11 infra `session_0147ydEp6Ek9VJyqVmFaJx5W` · CMD-GC12 core-backend `session_01E7rQzjD2Yt31RuQqmfqMZf` · CMD-GC40 frontend `session_01F854HrX6TRyYZZD6uscuCv`. 작업자 양식에 '마지막 push 전 통합 브랜치를 merge(재작성 금지)' 추가 — 병렬 작업이 ff 로 들어오게 | BD-347 |
+| BD-349 | **CMD-DS1 성공 · 통합(Token `d782c45`, ff).** 디자인 토큰 최종(밝은/어두운, 글자 대비 ≥4.5 · UI ≥3 · 시리즈 밝기 차 ≥0.08, 빨강/초록 쌍 없음), 토큰 시험 green, make check/test 31+4 OK, ga check hard 0. baseline 변이 2 개(muted 대비 낮춤 · 두 시리즈 같은 색) 잡힘. 세션 archive, 비용 $0.67. 선행이 풀린 CMD-DS2(라이브 모니터 시각 언어 — 디자인 판단이 커서 Opus) `session_014esetihTR1NsSpozeycntw` 시작 | BD-348 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---
