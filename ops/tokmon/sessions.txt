@@ -1,6 +1,5 @@
 session_01PXnZE2hU9RDcKc2gNSz9b3 GA CMD-GA34
 session_01LTyeEH3arqpny5mMYVUQpN frontend CMD-GC41
-session_01KrvRh1re6F8ERJE9WY1uod frontend CMD-GC42
 session_01EvK9s66EeicunJ76JtSR1w design CMD-DS3
 session_01L2J1yUabBHh2tACYLoVgiX core-backend CMD-GC16
 session_014sdp55YvKjjyknC4XrUeAx core-backend CMD-GC17

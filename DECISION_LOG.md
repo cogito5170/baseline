@@ -485,6 +485,7 @@
 | BD-362 | **CMD-GC43 성공 · 통합(Token `fd43d22`, ff) + agv 고정 비용 먼저 고치기.** GC43: vitest 8/8, 감사 화면 역할 변이 잡힘, $0.75. GC21 검증 통과(가격 변이 잡힘) — 순서 GC15 → GC21, Comparison 범위 계약 요청은 다음 contract 작업. 사용자: '고정 비용을 고치고 그 다음 정제' → ① CMD-AG3(AGY 실측: agy 설정 8 가지로 1 턴 입력 토큰 비교, 최대 10 턴) ② CMD-GA35(GA34 뒤): 가장 싼 조합 + 이어가기를 agv 기본으로, 재측정으로 확인 ③ 그 뒤 refine 앞에 agy 뜻 다듬기 턴(선택) | 사용자 2026-10-05 |
 | BD-363 | **CMD-GC15 성공 · 통합(Token `c40a793`, ff).** 감사 로그(append-only, 키 모양 detail 거부, 관리자만 조회) + identity/api.py + 인증 · 워크스페이스 → 감사 배선. 실제 PG16 로 audit · identity · workspace 시험 OK, scan 0. $1.24. 검증 대기열: GC41(변이 생존 — 개요 타일 provenance 를 MEASURED 로 바꿔도 통과 → 시험 보강 요청), GC42(확인 없는 적용 변이 잡힘), DS3(골든 10 장면 재생성 동일, 금지어 변이 잡힘, test_tokens 한 줄은 소유로 인정). 통합 순서 GC21 → GC42 → DS3 → GC41 | BD-362 |
 | BD-364 | **CMD-GC21 성공 · 통합(Token `c0c9da7`, ff).** 사용량: FINAL_TASK 장부 213 호출을 가격표로 계산해 quota_usd 와 1 micro-USD 안, dedupe_key 로 재적재 멱등, NULL 토큰 보존, 모든 시리즈에 단위 · provenance. 실제 PG16 시험 OK, 변이(cache_write 를 read 단가로) 잡힘. $2.00. 선행이 풀린 5 작업 시작: GC16(알림) · GC17(쿼터) · GC22(수집 파이프라인, GC20 의 job_id 요청 포함) · GC31(견적, MAPE 21.98% 를 이겨야) · GC32(프로필) | BD-363 |
+| BD-365 | **CMD-GC42 성공 · 통합(Token `0e7b9aa`, ff).** 컨설팅 화면 6 개(구성 비교 · 예산 소진 · 진단 + 확인 대화 · 견적 · 가정 시뮬레이터 · 리포트), vitest 12/12, 확인 없는 적용 변이 잡힘. $1.43. GC41 은 provenance 고정 시험 추가 뒤 baseline 이 같은 변이로 재확인 → 이제 실패(잡힘). 순서: DS3 → GC41 | BD-363 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---
