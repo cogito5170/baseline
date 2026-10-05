@@ -19,3 +19,5 @@
 | CMD-GC22 | 워커 사망으로 남은 claim 회수(claimed_at 기준) | 후속 ingestion 작업 |
 | CMD-GC30 | usage.api.calls 에 prompt_prefix_hash · content_hashes · cost_list_nanousd, tasks 에 first_try_success, usage.api.prices() — 없으면 R1–R5 일부가 발화하지 않음 | 후속 usage 작업(GC24 신설 예정) |
 | CMD-GC30 · GC22 · GC13 | 앱 시작 시 배선: advisor.wiring.subscribe(), source enqueuer, audit recorder, open_pool | 마무리 조립 작업(GC19 신설 예정) |
+| CMD-GC33 | usage.api.prices() · main.py 에 simulation 라우터 마운트 · advisor.submit_proposal 실제 배선 | 마무리 조립 작업(GC19) · 후속 usage 작업(GC24) |
+| CMD-GC23 | 작업 세션에서 고정 버전 l0-telemetry · rlo-sdk pip 설치가 sandbox 에 막힘 → baseline 이 같은 sha 로 대신 시험 | 환경 설정(사람) 또는 baseline 대리 검증 유지 |
