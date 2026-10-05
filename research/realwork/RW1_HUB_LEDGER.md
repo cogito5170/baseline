@@ -13,3 +13,4 @@
 | CMD-GC12 | core-backend | Sonnet | 3(commits 형식 · healthz skip · 통합 merge 2 회) | 1(순서 지정) | 2,096 | 13,312 | 3,168,631 | 57,756 | 1.00 | 성공 | BD-354 |
 | CMD-GC13 | core-backend | Sonnet | 0 | 0 | 28 | 15,461 | 1,093,430 | 51,040 | 0.58 | 성공 | BD-355 |
 | CMD-GC14 | core-backend | Sonnet | 0 | 0 | 28 | 14,592 | 1,127,600 | 56,568 | 0.60 | 성공 | BD-357 |
+| CMD-FE1 | frontend | Sonnet | 1(check 재현 — devDeps 누락) | 1(소유 확장) | 570 | 22,213 | 3,227,818 | 109,113 | 1.31 | 성공 | BD-359 |
