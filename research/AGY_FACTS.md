@@ -11,3 +11,8 @@
 - 남은 확인: `agy models` 출력 형식과 GPT-OSS 120B 의 slug, `-p "/usage"` 줄 형식, stream-json 한 턴의 원시 줄.
 
 후속(ga-sdk 작업 후보): agv 백엔드가 `--conversation` 으로 이어가기, `--disable-slash-commands` · `--effort` 옵션, 원시 출력 형식 확인 뒤 파서 고정.
+
+## 첫 실측 (2026-10-05, 사용자 Mac)
+
+- `ga supervise --config ga-supervise.json "Reply with the word OK"` → `OK`. ga-sdk 0.6.0(`03e8dae`)의 agv 백엔드가 실제 agy 로 처음 끝까지 돌았다(그전까지는 오프라인 시험뿐).
+- 모델 slug · 로그(`.ga-supervise/log.jsonl`) 숫자는 아직 못 받음 — 사용자에게 요청.
