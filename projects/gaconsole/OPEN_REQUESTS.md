@@ -23,3 +23,7 @@
 | CMD-GC19 | estimation · integration · run 도메인의 HTTP 라우터 없음 → openapi 22 경로 미마운트 | 후속(GC25 신설: 남은 라우터) |
 | CMD-GC19 | report 내보내기에 uuid 가 아닌 id → 500(404 여야) | GC25 에 묶음 |
 | CMD-GC19 | API · 워커 두 프로세스 사이 이벤트 전달(아웃박스) 미검증 · 미구현, quota 경보 평가 시점 | 후속 아키텍처 작업 |
+| CMD-IF1 | frontend: next.config 에 정적 export(`output:"export"`, trailingSlash, images.unoptimized)를 환경 변수로 켜기 — 지금은 desktop 빌드 스크립트가 복사본에서 덮어씀 | 후속 frontend 작업 |
+| CMD-IF1 | frontend: `window.gaDesktop` 이 있으면 /live 에서 로그인 리디렉션 생략(크롬 없이) → preload 의 placeholder 우회 제거 | 후속 frontend 작업 + IF 후속 |
+| CMD-IF1 | frontend: /live 가 `window.gaDesktop.sidecarUrl` 을 읽기(지금은 URL 쿼리 api) | 후속 frontend 작업 |
+| CMD-IF1 | desktop 시험이 추적 파일 tests/electron-window.png 를 매 실행 덮어씀 → test-results 로 | IF 후속(설치 파일 electron-builder 와 함께) |

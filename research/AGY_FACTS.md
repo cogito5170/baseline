@@ -46,3 +46,21 @@
 - 사용자 쿼터 소진이 아니라 **서버 쪽 일시 용량 부족**. 유료 크레딧과도 무관.
 - ga agv 에 필요한 것(GA35 에 넣음): 이 오류를 쿼터 정지(주간 리셋까지 대기)와 구별해 **일시 오류**로 분류 — 짧은 backoff 뒤 1 회 재시도, 그래도 같으면 설정된 대체 모델(같은 family 규칙 안)로 넘기거나 그 턴을 `capacity` 로 실패 처리. 오류 줄은 라벨 · 숫자만 기록.
 - 08:33 UTC 같은 대화(Trajectory `fa78aba8…`)에서 같은 오류 재발. 사용자: "다른 프롬프트는 되는데 rules 를 수행하라고 하면 이 오류". 같은 trajectory id 가 두 번 나온 것으로 보아 그 대화가 `gpt-oss-120b-medium` 에 묶여 있고, 그 모델의 서버 용량이 계속 없음. 다른 요청은 다른 대화/모델에서 돌았을 가능성이 큼. 대응: 새 대화에서 다른 모델을 고른 뒤 규칙을 붙인다.
+
+## AG1 · AG2 보고와 AG3 부분 수치 (BD-386, 2026-10-05)
+
+- 모델 목록(`agy models`): gemini-3.8/3.7/3.6-flash-{high,medium,low}, gemini-3.1-pro-{high,low}, claude-sonnet-4-6, claude-opus-4-6-thinking, gpt-oss-120b-medium.
+- `/usage`: 주간 버킷 두 개. "Gemini Models" 와 "Claude and GPT models". **gpt-oss 와 Claude 는 같은 버킷을 쓴다.** 그 시점 Gemini 0%, Claude and GPT 78% 남음.
+- stream-json: init(conversation_id, model, cwd, **tools 57 개**, permission_mode request-review) → step_update 줄들(text_delta, 마지막에 usage) → result. json: result 한 객체(status, response, duration_seconds, num_turns, usage{input,output,thinking,cache_read,total}).
+- 503 MODEL_CAPACITY_EXHAUSTED 의 종료 코드는 **3**(retryable). 30 초 뒤 재시도로 성공.
+- `--continue`: 같은 대화를 잇고 usage 를 누적(2 턴 누적 입력 19,896, cache_read 383, 152 초). **이어가기는 고정 비용을 줄이지 않는다** — 둘째 턴도 ≈10k.
+- AG3 부분: V0 기본 입력 9,852(cache_read 188, 118 초 — 도중 "Model produced invalid output" 재시도), V1 `--disable-slash-commands` 10,657(효과 없음). `agy agents` · `agy mcp list` 비어 있음(V4 · V5 해당 없음).
+- 추정: 고정 비용의 몸통은 도구 57 개 정의. GA35 절감 수단 = 도구를 줄인 에이전트(정의 방법 확인 필요), 이어가기는 아님.
+
+## Antigravity 채팅으로 AGY 를 구동한 비용 (사용자 보고, BD-386)
+
+- 채팅 모델 Sonnet 이 rules 대로 ga 를 셸로 불러 AG1–AG3 를 처리. 셸 명령마다 사용자 동의 필요, Antigravity 터미널 sandbox 가 `~/ga-venv/bin/ga` 실행을 막아(operation not permitted) sandbox 밖 실행을 요청.
+- 한 세션 진행 중 주간 쿼터 50% 소모. 원인: 채팅 모델이 매 단계(타이머 · 상태 확인 포함) 대화 전체를 다시 읽음 + 안쪽 agy 턴마다 ≈10k, 둘 다 같은 "Claude and GPT" 버킷.
+- Antigravity 는 ga-sdk 로 돌지 않는다. ga 는 거기서 git 처럼 불리는 명령일 뿐이고, ga 의 문맥 상한 · 비용 기록은 ga 가 모델을 직접 부를 때(`ga supervise` · bridge.py)만 적용된다.
+- 권고: AGY 작업은 터미널 bridge.py 로(채팅 모델 없음, 도구는 bridge 의 Python 함수라 명령마다 동의 불필요). 채팅은 사람이 직접 묻는 용도로만.
+
