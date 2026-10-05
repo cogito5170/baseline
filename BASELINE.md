@@ -754,3 +754,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 271 회차: CMD-GC31 성공 — Token `68dab6a` 통합(ff), 토큰 MAPE 12.04%(BD-371). GC33 시작.
 - 272 회차: CMD-GC22 성공 — Token `cb86376` 통합(ff)(BD-372). GC23 시작.
 - 273 회차: CMD-GC30 성공 — Token `b2ff038` 통합(ff)(BD-373). GC34 시작.
+- 274 회차: GC23 실제 패키지로 결함 발견 반려(BD-374); CMD-GC34 성공 — Token `f7c478e` 통합(ff)(BD-375).
