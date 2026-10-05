@@ -763,3 +763,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 280 회차: CMD-GC19 성공 — Token `6af06f5` 통합(ff), 백엔드 조립 · 끝-끝 실제 파서 통과(BD-383).
 - 281 회차: CMD-IF1 성공 — Token `c5ae1e1` 통합(ff), 데스크톱 셸 playwright 10/10 · 변이 2/2(BD-385).
 - 282 회차: AGY AG1 · AG2 수용, AG3 부분(이어가기 · slash 끄기로 고정 비용 안 줄어듦), Antigravity 채팅 구동 중지 권고(BD-386).
+- 283 회차: CMD-GA36 시작(ga ask · ga ui, 모델 없는 라우팅 · 비용 확인), GC25 · GC18 되돌림(변이 생존 3), GC18 rev 2 확인(BD-387).
