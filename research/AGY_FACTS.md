@@ -39,3 +39,9 @@
 1. **실측(CMD-AG3, AGY 에게):** 같은 1 턴("Reply with the word OK")을 설정만 바꿔 잰다 — V0 기본 · V1 `--disable-slash-commands` · V2 `--mode plan` · V3 `--sandbox` · V4 도구가 가장 적은 `--agent` · V5 MCP 서버 끔 · V6 `--continue` 둘째 턴(캐시) · V7 한 프로세스 두 턴(stream-json). 최대 10 턴.
 2. **고침(CMD-GA35, GA34 통합 뒤):** 가장 싼 조합을 ga agv 백엔드의 기본으로 — 이어가기(`--conversation`)로 같은 작업 안 턴들이 한 대화를 쓰게, 줄인 플래그 · 에이전트, `--list-backends` 의 overhead 를 실측값으로. 오프라인 시험 + AGY 재측정으로 확인.
 3. **그 다음 정제:** `prompt.py refine` 앞에 agy 한 턴(뜻 다듬기)을 선택 단계로 넣는다. 그 턴의 실제 입력 토큰을 보고서에 함께 적는다.
+
+## 서버 용량 오류 (2026-10-05 08:20 UTC, 사용자 Antigravity 화면)
+
+- `HTTP 503 UNAVAILABLE`, reason `MODEL_CAPACITY_EXHAUSTED`, domain `cloudcode-pa.googleapis.com`, error_number 2010, model `gpt-oss-120b-medium`: "No capacity available for model … on the server".
+- 사용자 쿼터 소진이 아니라 **서버 쪽 일시 용량 부족**. 유료 크레딧과도 무관.
+- ga agv 에 필요한 것(GA35 에 넣음): 이 오류를 쿼터 정지(주간 리셋까지 대기)와 구별해 **일시 오류**로 분류 — 짧은 backoff 뒤 1 회 재시도, 그래도 같으면 설정된 대체 모델(같은 family 규칙 안)로 넘기거나 그 턴을 `capacity` 로 실패 처리. 오류 줄은 라벨 · 숫자만 기록.
