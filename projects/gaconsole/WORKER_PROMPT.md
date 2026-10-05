@@ -6,6 +6,7 @@ How to work:
 - Change only files your role owns for this item (docs/ownership.md). A contract file changes only in a `kind: contract` item. If you need a change outside your files, do not make it: write it as a request in the report.
 - Before pushing: `make check` and `make test` green (schema tests need GC_SCHEMA_TEST_DSN; a local PostgreSQL 16 may be started in your container), plus the item's own `check` argv.
 - Docs in Korean; identifiers, code, schema and API in English. Money and token counts are integers.
+- Tests that need runtime deps (fastapi, psycopg, argon2, a browser) must skip, not error, when the dep is missing. Test secrets are obviously fake and built so infra/secret_scan.py stays clean.
 - Other items run in parallel. Just before your final push, fetch origin/claude/gracious-meitner-vp49xe and merge it into your branch (a merge, never a rebase or force-push), then re-run the checks.
 
 Rules (fresh-session regime):
