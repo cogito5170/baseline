@@ -1,0 +1,3 @@
+```ga
+{"schema":"directive/2","id":"CMD-AGA3","rev":1,"to":"AGY","after":["CMD-AGA2"],"goal":"agv builds the Token report screen component (ReportsView) through ga act against baseline's acceptance test.","why":"AGA2 (BD-429) stopped at the 8-turn cap with 3 of 4 tests green: the model read r.from instead of r.period.from (the item goal did not state the data shape). Same test; the goal now states the shapes.","scope":[{"id":"S1","text":"only frontend/src/app/(app)/reports/ReportsView.tsx; the test frontend/tests/reports/reports-view.test.ts is baseline's"}],"done_when":[{"id":"D1","text":"ga act ends done: the acceptance test passes in the worktree"}],"budget":{"claude_p_runs":0}}
+```
