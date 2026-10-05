@@ -208,6 +208,19 @@ class ToolsTest(unittest.TestCase):
         finally:
             del os.environ["AGY_BRIDGE_COMMANDS"], os.environ["MY_API_KEY"]
 
+    def test_run_check_timeout_per_command(self):
+        os.environ["AGY_BRIDGE_COMMANDS"] = json.dumps({
+            "slow": {"argv": [sys.executable, "-c", "import time; time.sleep(3)"], "timeout_s": 1},
+            "ok": {"argv": [sys.executable, "-c", "print('fine')"], "timeout_s": 99999}})
+        try:
+            self.assertEqual(agy_tools.run_check("slow").splitlines()[:2], ["exit 124", "timed out after 1 s"])
+            self.assertEqual(agy_tools.run_check("ok").split(), ["exit", "0", "fine"])
+            os.environ["AGY_BRIDGE_COMMANDS"] = json.dumps({"bad": {"argv": "rm -rf /"}})
+            with self.assertRaises(ValueError):
+                agy_tools.run_check("bad")  # a string is never run (no shell)
+        finally:
+            del os.environ["AGY_BRIDGE_COMMANDS"]
+
     def test_confined(self):
         for bad in ("../x", "/etc/passwd", ".env"):
             with self.assertRaises(ValueError):

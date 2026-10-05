@@ -65,14 +65,17 @@ def search(pattern: str, path: str = ".", max_hits: int = 50) -> str:
     return "\n".join(hits)[:CAP] or "(no match)"
 
 
+DEFAULT_TIMEOUT, MAX_TIMEOUT = 1200, 3600
 _SECRETISH = re.compile(r"(?i)(key|token|secret|password|credential|auth)")
 
 
 def run_check(name: str) -> str:
-    """Run one command the project owner allowed by name (agy-bridge.json "commands": {"test": ["npm", "test"]}).
+    """Run one command the project owner allowed by name (agy-bridge.json "commands": {"test": ["npm", "test"]},
+    or {"test": {"argv": ["npm", "test"], "timeout_s": 1800}} for a slow suite).
 
-    The argv is fixed in the config: the model picks only the name. No shell, project cwd, 600 s cap, environment
-    variables whose names look like secrets removed, output tail capped. Exit code first line.
+    The argv is fixed in the config: the model picks only the name. No shell, project cwd, a time cap (default
+    1200 s, at most 3600 s; BD-410: ga-sdk's full suite needs about 600 s), environment variables whose names look
+    like secrets removed, output tail capped. Exit code first line.
     """
     import json
     import os
@@ -80,10 +83,15 @@ def run_check(name: str) -> str:
     allowed = json.loads(os.environ.get("AGY_BRIDGE_COMMANDS") or "{}")
     if name not in allowed:
         raise ValueError(f"not an allowed command: {name!r} (allowed: {', '.join(sorted(allowed)) or 'none'})")
+    spec = allowed[name]
+    argv, limit = (spec.get("argv"), spec.get("timeout_s", DEFAULT_TIMEOUT)) if isinstance(spec, dict) else (spec, DEFAULT_TIMEOUT)
+    if not isinstance(argv, list) or not argv or not all(isinstance(a, str) for a in argv):
+        raise ValueError(f"command {name!r}: argv must be a non-empty list of strings")
+    limit = max(1, min(int(limit), MAX_TIMEOUT))
     env = {k: v for k, v in os.environ.items() if not _SECRETISH.search(k)}
     try:
-        p = subprocess.run(list(allowed[name]), cwd=_root(), env=env, capture_output=True, text=True, timeout=600)
+        p = subprocess.run(list(argv), cwd=_root(), env=env, capture_output=True, text=True, timeout=limit)
         out, code = (p.stdout or "") + (p.stderr or ""), p.returncode
     except subprocess.TimeoutExpired:
-        out, code = "timed out after 600 s", 124
+        out, code = f"timed out after {limit} s", 124
     return f"exit {code}\n" + out[-CAP:]
