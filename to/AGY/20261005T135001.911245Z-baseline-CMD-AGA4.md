@@ -1,0 +1,3 @@
+```ga
+{"schema":"directive/2","id":"CMD-AGA4","rev":1,"to":"AGY","after":["CMD-AGA3"],"goal":"agv wires the Token report page (load.ts, page.tsx, nav.json around the ReportsView from AGA3) through ga act against baseline's acceptance test.","why":"User 2026-10-05: the web has no report screen; this work is given to agv. AGA3 (45a1f3f) made the view; this makes it reachable and working (list, generate, JSON/CSV download). The item goal states every call shape (lesson BD-429).","scope":[{"id":"S1","text":"only frontend/src/app/(app)/reports/{load.ts,page.tsx,nav.json}; the test frontend/tests/reports/reports-load.test.ts is baseline's"}],"done_when":[{"id":"D1","text":"ga act ends done: the acceptance test passes in the worktree"}],"budget":{"claude_p_runs":0}}
+```
