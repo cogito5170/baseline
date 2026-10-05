@@ -11,3 +11,4 @@
 | CMD-GC40 | frontend | Sonnet | 1(commits 형식 · 통합 merge) | 0 | 549 | 24,498 | 2,076,371 | 64,416 | 0.92 | 성공 | BD-352 |
 | CMD-DS2 | design | Opus | 2(commits 형식 · 통합 merge 경쟁) | 1(baseline 이 순서 지정) | 1,071 | 22,242 | 3,199,359 | 79,176 | 1.72 | 성공 | BD-353 |
 | CMD-GC12 | core-backend | Sonnet | 3(commits 형식 · healthz skip · 통합 merge 2 회) | 1(순서 지정) | 2,096 | 13,312 | 3,168,631 | 57,756 | 1.00 | 성공 | BD-354 |
+| CMD-GC13 | core-backend | Sonnet | 0 | 0 | 28 | 15,461 | 1,093,430 | 51,040 | 0.58 | 성공 | BD-355 |
