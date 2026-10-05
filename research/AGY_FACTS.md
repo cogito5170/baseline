@@ -16,3 +16,20 @@
 
 - `ga supervise --config ga-supervise.json "Reply with the word OK"` → `OK`. ga-sdk 0.6.0(`03e8dae`)의 agv 백엔드가 실제 agy 로 처음 끝까지 돌았다(그전까지는 오프라인 시험뿐).
 - 모델 slug · 로그(`.ga-supervise/log.jsonl`) 숫자는 아직 못 받음 — 사용자에게 요청.
+
+## 첫 실측 로그 (사용자가 붙여 준 `.ga-supervise/log.jsonl`, 숫자 · 라벨만)
+
+| 항목 | 값 |
+|---|---|
+| model / served | `gpt-oss-120b-medium` / `["gpt-oss-120b-medium"]` (일치 → 턴 인정) |
+| bare | false (agy 는 도구 끄기 불가) |
+| prompt_est (ga 가 보낸 프롬프트 추정) | 86 토큰 |
+| provider_prompt_tokens (input) | 11,210 |
+| 출력 | 121 (tokens 11,331 − input 11,210) |
+| 시간 | 8.243 초 |
+| usage_format | openai |
+| 결과 | done, model_turns 1, tool_steps 0, failed 0 |
+
+- **agv 고정 오버헤드 실측: 약 11,124 입력 토큰/턴**(11,210 − 86). 지금까지 `--list-backends` 에 "not measured" 였던 값. gemini_cli 11,822(BD-302)와 비슷하고, bare claude_cli(945/1,197)의 약 9–12 배.
+- 함의: agv 로 짧은 작업을 여러 턴 돌리면 대부분이 고정 오버헤드다. 이어가기(`--conversation`)로 캐시를 살리거나 턴 수를 줄이는 것이 절감의 핵심(후속 ga 작업 후보).
+- slug 는 `gpt-oss-120b-medium`(노력 단계가 slug 에 붙는 꼴, catalog 의 `gemini-3.8-flash-high` 와 같은 규칙). ga catalog 에는 없는 모델이지만 family 규칙(gpt-*)으로 통과했다.
