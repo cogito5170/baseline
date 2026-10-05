@@ -759,3 +759,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 276 회차: CMD-GC23 성공 — Token `5a44cf9` 통합(ff) + baseline 판정 기록(보고 머리 오류는 baseline 확인 누락, BD-377).
 - 277 회차: CMD-GC24 성공 — Token `087369d` 통합(ff), usage 보강(BD-379).
 - 278 회차: CMD-FE2 성공 — Token `83191d6` 통합(ff), 라이브 모니터 화면(BD-381). IF1 시작.
+- 279 회차: ga judge — ga-sdk `1926e0e` CMD-GA34 성공(ga 0.7.0, 실제 개발용 노드 풀, 795 OK, 변이 10/10 + baseline 2)(BD-382).
