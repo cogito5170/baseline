@@ -486,6 +486,7 @@
 | BD-363 | **CMD-GC15 성공 · 통합(Token `c40a793`, ff).** 감사 로그(append-only, 키 모양 detail 거부, 관리자만 조회) + identity/api.py + 인증 · 워크스페이스 → 감사 배선. 실제 PG16 로 audit · identity · workspace 시험 OK, scan 0. $1.24. 검증 대기열: GC41(변이 생존 — 개요 타일 provenance 를 MEASURED 로 바꿔도 통과 → 시험 보강 요청), GC42(확인 없는 적용 변이 잡힘), DS3(골든 10 장면 재생성 동일, 금지어 변이 잡힘, test_tokens 한 줄은 소유로 인정). 통합 순서 GC21 → GC42 → DS3 → GC41 | BD-362 |
 | BD-364 | **CMD-GC21 성공 · 통합(Token `c0c9da7`, ff).** 사용량: FINAL_TASK 장부 213 호출을 가격표로 계산해 quota_usd 와 1 micro-USD 안, dedupe_key 로 재적재 멱등, NULL 토큰 보존, 모든 시리즈에 단위 · provenance. 실제 PG16 시험 OK, 변이(cache_write 를 read 단가로) 잡힘. $2.00. 선행이 풀린 5 작업 시작: GC16(알림) · GC17(쿼터) · GC22(수집 파이프라인, GC20 의 job_id 요청 포함) · GC31(견적, MAPE 21.98% 를 이겨야) · GC32(프로필) | BD-363 |
 | BD-365 | **CMD-GC42 성공 · 통합(Token `0e7b9aa`, ff).** 컨설팅 화면 6 개(구성 비교 · 예산 소진 · 진단 + 확인 대화 · 견적 · 가정 시뮬레이터 · 리포트), vitest 12/12, 확인 없는 적용 변이 잡힘. $1.43. GC41 은 provenance 고정 시험 추가 뒤 baseline 이 같은 변이로 재확인 → 이제 실패(잡힘). 순서: DS3 → GC41 | BD-363 |
+| BD-366 | **CMD-DS3 성공 · 통합(Token `17c1fca`, ff).** 라이브 모니터 골든 장면 10 개 + stdlib 참조 함수(기록에서 바이트 동일 재생성), tokens travel 800 · design README 안내(DS2 요청 반영). 금지어 변이 잡힘. $1.54. 선행(FE1 · DS2 · DS3 · RN1)이 모두 풀린 CMD-FE2(라이브 모니터 화면 — 사용자가 강조한 인터랙티브 아트) 를 Opus 로 시작 | BD-365 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---

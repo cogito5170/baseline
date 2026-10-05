@@ -4,8 +4,6 @@
 
 | 출처 | 요청 | 보낼 곳 |
 |---|---|---|
-| CMD-DS2 | design/tokens.json `motion.duration_ms` 에 `travel: 800` 추가(motion.md 와 일치) | DS3 (소유 확장으로 붙여 보냄) |
-| CMD-DS2 | design/README.md 에 encoding.json · motion.md 안내 한 줄 | DS3 (소유 확장으로 붙여 보냄) |
 | CMD-GC13 | backend/app/main.py 에 HTTPException(detail={code,message}) → `{code,message}` 본문 예외 처리기 | backend/app/main.py 소유 작업 — 로드맵에 아직 없음, 작은 core-backend 정리 작업으로 묶을 것 |
 | CMD-GC13 | GC15 뒤 `router.set_audit_recorder(audit.api.record)` 배선, 시작 시 `open_pool` | GC15 (소유 확장으로 붙여 보냄) |
 | CMD-GC14 | `identity/api.py`(current_user 재수출) 추가 뒤 workspace 의 fallback 제거 | GC15 (소유 확장으로 붙여 보냄) |
@@ -14,3 +12,4 @@
 | CMD-GC0 | baseline 요청 9 건(l0-telemetry 공급자 usage 파서 · 비밀 스크러버 · 호출별 시각/CLI 비용 · router 통계 내보내기 · Codex/Gemini 수집기 · turn.started/턴 중 이벤트 · L0 시각 · 풀 판정 · usage.json 원자적 쓰기) | ga-sdk / l0-telemetry 후속(GA34 이후) |
 | CMD-GC20 | Upload.job_id 를 채울 ingestion enqueuer 훅 | GC22 |
 | CMD-GC21 | openapi Comparison 에 선택적 범위(P10/P90) 필드 — 계약 변경 | 다음 contract 작업 |
+
