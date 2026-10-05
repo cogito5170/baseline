@@ -1,0 +1,3 @@
+```ga
+{"schema":"directive/2","id":"CMD-AGA2","rev":1,"to":"AGY","after":["CMD-AGA1"],"goal":"agv builds the Token report screen component (ReportsView) through ga act against baseline's acceptance test.","why":"User (BD-425): the report screen and UI work go to agv. AGA1 succeeded (1 turn, 4,906 tokens). This is the first UI piece; the page wiring is the next item.","scope":[{"id":"S1","text":"only frontend/src/app/(app)/reports/ReportsView.tsx; the test frontend/tests/reports/reports-view.test.ts is baseline's"}],"done_when":[{"id":"D1","text":"ga act ends done: the acceptance test passes in the worktree"}],"budget":{"claude_p_runs":0}}
+```
