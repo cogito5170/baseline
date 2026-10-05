@@ -488,6 +488,7 @@
 | BD-365 | **CMD-GC42 성공 · 통합(Token `0e7b9aa`, ff).** 컨설팅 화면 6 개(구성 비교 · 예산 소진 · 진단 + 확인 대화 · 견적 · 가정 시뮬레이터 · 리포트), vitest 12/12, 확인 없는 적용 변이 잡힘. $1.43. GC41 은 provenance 고정 시험 추가 뒤 baseline 이 같은 변이로 재확인 → 이제 실패(잡힘). 순서: DS3 → GC41 | BD-363 |
 | BD-366 | **CMD-DS3 성공 · 통합(Token `17c1fca`, ff).** 라이브 모니터 골든 장면 10 개 + stdlib 참조 함수(기록에서 바이트 동일 재생성), tokens travel 800 · design README 안내(DS2 요청 반영). 금지어 변이 잡힘. $1.54. 선행(FE1 · DS2 · DS3 · RN1)이 모두 풀린 CMD-FE2(라이브 모니터 화면 — 사용자가 강조한 인터랙티브 아트) 를 Opus 로 시작 | BD-365 |
 | BD-367 | **CMD-GC41 성공 · 통합(Token `648feab`, ff).** 사용량 화면 3 개(개요 · 토큰 구성 · 호출 크기), vitest 12/12. baseline 변이(예산 사용률 타일 provenance CALCULATED→MEASURED)가 처음엔 살아남아 시험 보강 요청 → 보강 뒤 잡힘. 이 일로 작업자 양식에 '완료 기준 규칙마다 깨지면 실패하는 시험' 추가. $1.20. 화면 1 차(GC40 · FE1 · GC41–43) 모두 통합 | BD-365 |
+| BD-368 | **CMD-GC16 성공 · 통합(Token `1a436df`, ff).** 알림: 구독 이벤트마다 1 개, 끈 설정은 억제, 읽음 처리, workspace.api.member_ids 로 워크스페이스 전체 발송(소유 확장). in_app 확인 제거 변이 잡힘. $0.92. 검증 대기: GC17(경보 중복 방지 변이 잡힘) · GC32(MIN_EVIDENCE 5→1 변이 잡힘, 요청 2 건은 후속) · GC31(누설 방지 시험 보강 중 — 평가 실행을 증거에 섞으면 MAPE 7.59% 로 부풀어도 시험 통과했던 구멍). 순서 GC17 → GC32 → GC31 | BD-367 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---

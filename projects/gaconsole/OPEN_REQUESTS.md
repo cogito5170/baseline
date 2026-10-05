@@ -13,4 +13,5 @@
 | CMD-GC20 | Upload.job_id 를 채울 ingestion enqueuer 훅 | GC22 |
 | CMD-GC21 | openapi Comparison 에 선택적 범위(P10/P90) 필드 — 계약 변경 | 다음 contract 작업 |
 | CMD-GC31 | estimation 의 HTTP 경로 · PG 저장소 미구현, 정가 비용 MAPE 104.5%(기준선 92.7%보다 나쁨) | 후속 consulting 작업 |
-| CMD-GC16 | workspace.api.member_ids(ws) | GC16 (소유 확장으로 처리 중) |
+| CMD-GC32 | usage 의 task 에 user_id (개인 통계용) | 다음 usage 작업 |
+| CMD-GC32 | openapi: 추천 → Proposal 경로 | 다음 contract 작업 |
