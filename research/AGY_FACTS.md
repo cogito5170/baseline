@@ -83,3 +83,17 @@
   - `plugin install|uninstall|list|enable|disable`
   - 그 밖에 `install`, `update`, `changelog`, `mic-serve`, `remote-control`.
 - **내장 도구를 끄는 플래그는 없다.** 도구 수를 줄일 수 있는 길은 plugin 으로 정의한 에이전트(`--agent`) 하나뿐이다(형식 미확인).
+
+## E0 계속: mcp add · plugin (사용자, BD-415) — 0 토큰
+
+- `agy mcp add [flags] <name> <commandOrUrl> [args...]`:
+  - 플래그: `--type stdio|http`, `--env KEY=value`, `--header`.
+  - 플래그는 이름보다 앞에 둔다. `-` 로 시작하는 인자는 `--` 뒤에 둔다.
+  - stdio 서버를 붙일 수 있다 → ga 의 원시 동작 MCP 서버(E2)를 stdio 로 붙일 수 있다.
+- `agy plugin list|import [gemini|claude]|install <dir>|uninstall|enable|disable|validate [path]|link`:
+  - **Gemini · Claude 플러그인을 가져올 수 있다.** 그래서 에이전트를 Claude Code 플러그인 형식(`agents/*.md`, 앞머리 `tools:`)으로 정의해 가져올 수 있을 가능성이 있다.
+  - install 대상은 디렉터리다.
+- E1 설계:
+  - `.claude-plugin/plugin.json` + `agents/minimal.md`(`tools: []`)로 된 디렉터리를 만든다.
+  - `agy plugin validate` → `install` → `agy agents` 순으로 확인한다.
+  - `agy -p … --agent minimal` 로 입력 토큰을 V0(9,852)와 비교한다. agy 가 앞머리의 tools 를 따르는지가 핵심이다.
