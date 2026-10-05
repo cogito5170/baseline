@@ -111,3 +111,16 @@
 - 해석: 고정 비용의 대부분은 도구 정의가 아니라 **기본 에이전트의 시스템 지시문**이었다. 에이전트를 바꾸면 그 지시문이 짧은 것으로 대체된다. init 의 도구 목록은 표시일 뿐, 모델 입력에 다 실리지 않는다.
 - ga 에 쓰는 법(코드 변경 없음): ga-supervise.json 의 `"cli": ["<agy 경로>", "--agent", "<이름>"]`. agv 백엔드가 이 argv 뒤에 `-p`, `--model` 등을 붙인다.
 - 다음(E1b): 에이전트 지시문을 'ga 의 계획 양식 JSON 하나로만 답한다' 로 바꾼 ga-plan 에이전트를 bridge 경로에서 잰다. 작은 모델의 not_json(AG5 · AG8)이 줄어드는지 본다.
+
+## E1b: ga-plan 에이전트 직접 실행 (사용자, BD-420)
+
+- 명령: `~/ga-sdk-check` 에서 `agy --agent ga-plan -p "Reply with the word OK" --output-format json --model gpt-oss-120b-medium --print-timeout 90s`.
+- 결과: `status: ERROR`, `error: "API error (attempt 3): INTERNAL (code 500): Internal error encountered."`, 31.5 초.
+  - response 는 정상 양식이었다: ```json {"result":"OK"} ```.
+  - usage: input **2,585**, output 292, cache_read 64.
+  - **종료 코드는 0** 이었다(오류여도 0). 판정은 json 의 status 로 해야 한다.
+- 해석:
+  - ga-plan 에이전트는 동작하고, JSON 하나로 답했다.
+  - 입력은 기본 에이전트의 ≈1/4 이다.
+  - 500 INTERNAL 은 서버 쪽 일시 오류로 보인다(agy 안에서 3 회 재시도). AG10 의 160 초 대기 뒤 GeminiError 도 같은 원인일 가능성이 크다.
+  - GA41: 503 MODEL_CAPACITY_EXHAUSTED 와 함께 500 INTERNAL 도 '일시' 로 분류한다. 짧은 backoff 뒤 1 회 재시도하고, 그래도 실패하면 blocked(capacity/server).
