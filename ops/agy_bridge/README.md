@@ -43,7 +43,9 @@ agy 는 계획만 세우고, 도구 실행은 ga 가 승인 목록(`tools.json` 
 
 `PYTHONPATH=<ga-sdk> python3 -m unittest test_bridge` — 임시 git 저장소의 진짜 ga mail + 가짜 ga supervise, 모델 호출 0.
 
-## Antigravity 화면(채팅)에서 쓰기 — 터미널 없이 (BD-358)
+## (쓰지 않음, BD-391) Antigravity 화면(채팅)에서 쓰기 — 터미널 없이 (BD-358)
+
+> 이 방식은 Antigravity 채팅 모델이 바깥 구동자가 되어 기다림 · 상태 확인마다 대화 전체를 다시 읽는다. 두 작은 작업에 주간 쿼터 60% 를 썼다(BD-386). 검증 · 작업은 위의 bridge(터미널)로 한다.
 
 1. **규칙 한 번 붙여넣기:** `python3 ~/baseline/ops/agy_bridge/prompt.py rules` 의 출력을 Antigravity 채팅에 붙이거나 워크스페이스 규칙으로 저장한다. 이제 그 에이전트가 AGY 다.
 2. **일 받기:** 채팅에 "check mail" 이라고 하면 AGY 가 `ga mail read --as AGY` 로 baseline 지시를 읽고 IDE 도구로 일한다(도구 호출마다 사용자가 승인).
