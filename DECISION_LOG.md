@@ -460,6 +460,7 @@
 | BD-337 | **ga Console 방향 바로잡음(사용자: 'ga sdk 를 바꾸는 게 아니라, ga sdk 를 활용해서 토큰 서비스 플랫폼을 개발').** 제품 = 사용자의 AI 사용 기록(Claude Code transcript · 공급자 usage · ga L0)을 모아 시각화 · 견적 · 절약 진단 · 맞춤 추천을 주는 토큰 서비스 플랫폼. ga-sdk 는 (1) 개발 방법(동적 노드 풀 + ga judge) (2) 고정 버전 부품(l0-telemetry 파서 · rlo 기록 읽기 · 토큰 추정 · FINAL_TASK 데이터)으로만 쓰고, 이 저장소에서 고치지 않음(부족하면 baseline 에 요청). 플랫폼 안 ga 실행은 MVP 이후. SPEC · ARCH_PROMPT · CMD-GC0 갱신 | 사용자 · baseline |
 | BD-338 | **Token 플랫폼 0 단계 시작.** 사용자가 cogito5170/Token 저장소를 만듦. baseline: 사양을 docs/00-product-spec.md 로 claude/gracious-meitner-vp49xe 에 올림(`b17ae01`), CMD-GC0 아키텍처 세션(Opus, 01Fgnz8V) 시작 — MVP 의 실시간 스트림 · 워커는 수집 작업용, 플랫폼 안 ga 실행(Run)은 설계만 하고 나중으로. tokmon 이 이 세션을 봄 | 사용자 · baseline |
 | BD-339 | **Token 사양 3.1 라이브 워크플로 모니터 추가(사용자 요청).** 노드 카드 · 작업 보드 · 메시지 흐름 · 토큰 미터 · 판정 패널 · 타임라인 재생. 웹 기본 + 같은 컴포넌트를 데스크톱(Electron/Tauri, ADR)으로; 데스크톱은 로컬 .ga 를 읽기만. 한계: ga L0 는 턴 끝(run.end)만 기록 — 턴 진행 중 활동 · 턴 시작은 안 보임 → ga-sdk 쪽 `turn.started` + 진행 이벤트가 필요(별도 ga 작업, 사용자 결정 대기). Token `docs/00-product-spec.md` 갱신, ARCH 세션에 알림 | 사용자 · baseline |
+| BD-340 | **UI 디자인도 ARCH 가 맡는다(사용자 지시).** CMD-GC0 에 추가: docs/ui-design.md(원칙 · 디자인 토큰 · 데이터 상태 표기 MEASURED 실선/CALCULATED 외곽선/ESTIMATED 점선/SIMULATED 점 · P10–P90 띠 · 두 비용 기준 나란히 · 밝은 기본 + 모니터용 어두운 테마 · AA 대비 · 파랑/주황), 10개 화면 와이어프레임(docs/ui/), 공용 컴포넌트 라이브러리 작업 항목. baseline 은 방향 시안 1장(개요 대시보드, FINAL_TASK 실측치)만 아티팩트로 남김 | 사용자: "ui가 직관적이면서도 눈에 보기 편했으면" → "제작도 ARCH에게 맡기자" |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---
