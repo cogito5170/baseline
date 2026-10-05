@@ -757,3 +757,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 274 회차: GC23 실제 패키지로 결함 발견 반려(BD-374); CMD-GC34 성공 — Token `f7c478e` 통합(ff)(BD-375).
 - 275 회차: CMD-GC33 성공 — Token `077707b` 통합(ff)(BD-376). 컨설팅 5 도메인 완료.
 - 276 회차: CMD-GC23 성공 — Token `5a44cf9` 통합(ff) + baseline 판정 기록(보고 머리 오류는 baseline 확인 누락, BD-377).
+- 277 회차: CMD-GC24 성공 — Token `087369d` 통합(ff), usage 보강(BD-379).

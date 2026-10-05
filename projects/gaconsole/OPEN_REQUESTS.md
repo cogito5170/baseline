@@ -13,12 +13,11 @@
 | CMD-GC20 | Upload.job_id 를 채울 ingestion enqueuer 훅 | GC22 |
 | CMD-GC21 | openapi Comparison 에 선택적 범위(P10/P90) 필드 — 계약 변경 | 다음 contract 작업 |
 | CMD-GC31 | estimation 의 HTTP 경로 · PG 저장소 미구현, 정가 비용 MAPE 104.5%(기준선 92.7%보다 나쁨) | 후속 consulting 작업 |
-| CMD-GC32 | usage 의 task 에 user_id (개인 통계용) | 다음 usage 작업 |
 | CMD-GC32 | openapi: 추천 → Proposal 경로 | 다음 contract 작업 |
 | CMD-GC22 | 워커 프로세스의 도메인 이벤트가 api 프로세스에 닿지 않음 — domain_events 아웃박스 전달 경로 결정 | 후속 core-backend/infra 작업(아키텍처) |
 | CMD-GC22 | 워커 사망으로 남은 claim 회수(claimed_at 기준) | 후속 ingestion 작업 |
-| CMD-GC30 | usage.api.calls 에 prompt_prefix_hash · content_hashes · cost_list_nanousd, tasks 에 first_try_success, usage.api.prices() — 없으면 R1–R5 일부가 발화하지 않음 | 후속 usage 작업(GC24 신설 예정) |
 | CMD-GC30 · GC22 · GC13 | 앱 시작 시 배선: advisor.wiring.subscribe(), source enqueuer, audit recorder, open_pool | 마무리 조립 작업(GC19 신설 예정) |
 | CMD-GC33 | usage.api.prices() · main.py 에 simulation 라우터 마운트 · advisor.submit_proposal 실제 배선 | 마무리 조립 작업(GC19) · 후속 usage 작업(GC24) |
 | CMD-GC23 | 작업 세션에서 고정 버전 l0-telemetry · rlo-sdk pip 설치가 sandbox 에 막힘 → baseline 이 같은 sha 로 대신 시험 | 환경 설정(사람) 또는 baseline 대리 검증 유지 |
 | CMD-GC34 | quota.api.list_budgets(ws) | 마무리 조립 작업(GC19) |
+
