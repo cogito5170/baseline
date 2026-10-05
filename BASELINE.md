@@ -731,3 +731,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 248 회차: 후속 연구 RW — ga 0.6 노드 풀의 실제 개발 가능성 탐침 9/9 확인(막는 기능 6개), 필요 기능 F1–F10 · 실험 설계 RW1 기록(BD-342, `research/REAL_WORK.md`).
 - 249 회차: CMD-GC0 1차 판정 — Token `df31d9a` 기본 범위 독립 검증 통과, 보고 형식(`$.needs`) · 추가 요청 미반영 · 통합 브랜치 미포함으로 통합 보류(BD-344).
 - 250 회차: CMD-GC0 성공 — Token `b966f02` 통합(ff), 작업 28 개 · design 역할 · 라이브 모니터 설계, ARCH archive(BD-345).
+- 251 회차: CMD-GC10 성공 — Token `f08ea4d` 통합(ff), 계약 v0.1(BD-347). DS1 은 검증 통과, 형식 · 통합 브랜치 merge 대기.

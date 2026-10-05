@@ -6,6 +6,7 @@ How to work:
 - Change only files your role owns for this item (docs/ownership.md). A contract file changes only in a `kind: contract` item. If you need a change outside your files, do not make it: write it as a request in the report.
 - Before pushing: `make check` and `make test` green (schema tests need GC_SCHEMA_TEST_DSN; a local PostgreSQL 16 may be started in your container), plus the item's own `check` argv.
 - Docs in Korean; identifiers, code, schema and API in English. Money and token counts are integers.
+- Other items run in parallel. Just before your final push, fetch origin/claude/gracious-meitner-vp49xe and merge it into your branch (a merge, never a rebase or force-push), then re-run the checks.
 
 Rules (fresh-session regime):
 - One item: do it, commit and push to {BRANCH}, report, notify, stop.
