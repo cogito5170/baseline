@@ -772,3 +772,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 289 회차: CMD-GA37 성공 — ga-sdk `ecc80b0` 통합(ff), GA Engine Intake(ga do), rev 2 되돌림 1 회(BD-405, BD-409).
 - 290 회차: CMD-GA36 성공 — ga-sdk `5558f39` 0.8.0, GA CLI · GA UI · ga bridge(BD-418). agy 고정 비용 −74% 실측(E1, BD-416).
 - 291 회차: CMD-GC50 성공 — Token `4089af4`, 웹 실제 연결 · make dev · 전체 스택 브라우저 시험(BD-423).
+- 292 회차: CMD-GA41 통합 — ga-sdk `718a2cd`(0.9.0), 작은 모델 고치기 턴 · 일시 오류 재시도(BD-430). CMD-AGA4 rev 1 되돌림(tsc 실패), rev 2 발송.
