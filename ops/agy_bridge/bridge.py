@@ -113,6 +113,8 @@ def build_report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any])
     blockers += [{"kind": "dependency",
                   "what": f"model answer was not a valid plan in {e.get('step', '?')}: {e.get('problems', '?')}"[:300]}
                  for e in run["events"] if e.get("event") == "plan" and e.get("ok") is False]
+    blockers += [{"kind": "dependency", "what": f"model turn {e.get('step', '?')} failed: {e.get('reason', '?')}"[:300]}
+                 for e in run["events"] if e.get("event") == "turn" and e.get("ok") is False]
     evidence = [f"ga supervise exit {run['code']}, status {end.get('status', '?')}, model turns "
                 f"{end.get('model_turns', len(turns))}, tool steps {end.get('tool_steps', 0)}",
                 "self-reported through the agy bridge; baseline verifies"]

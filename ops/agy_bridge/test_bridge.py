@@ -107,11 +107,13 @@ class BridgeTest(unittest.TestCase):
             return {"code": 1, "out": "[ga supervise] T1 failed", "state": str(state), "events": [
                 {"event": "turn", "input_tokens": 10000, "tokens": 10500, "seconds": 3},
                 {"event": "plan", "step": "T1.m2", "ok": False, "problems": "not_json"},
+                {"event": "turn", "step": "T1.m3", "ok": False, "reason": "timeout"},
                 {"event": "end", "status": "failed"}]}
         self.pass_(run)
         (msg,) = self.replies()
         head, _ = parse_text(msg.text)
         self.assertIn("not a valid plan in T1.m2: not_json", head["blockers"][0]["what"])
+        self.assertIn("model turn T1.m3 failed: timeout", [b["what"] for b in head["blockers"]])
         self.assertIn("Ran 795 tests", msg.text)
         self.assertNotIn("ant-api03", msg.text)
 
