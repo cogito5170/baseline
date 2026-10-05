@@ -37,4 +37,6 @@
 | CMD-GC18 | 운영 KMS 키링, KEK 회전 시 fingerprint 재계산 | 출시 전 보안 작업 |
 | CMD-FE3 | design: 실패 신호(톱니 틈 고리 2px · 갈라진 타일)의 강조 크기 · 굵기를 design/encoding.json 에 정의 — 지금은 데모 화면에서 잘 안 보임 | 다음 design 작업(사용자 시각 방향과 함께) |
 | CMD-IF2 | 맥 · 윈도우 설치 파일 서명 · 공증(Apple Developer ID, Windows 코드 서명 인증서) | 사람(소유자 자격 증명) |
+| CMD-GC50 | frontend: 웹 리포트 화면(생성 · 내보내기)과 업로드 화면의 소스 선택 UI | 후속 frontend 작업 |
+| CMD-GC50 | Docker Desktop(맥)에서 `make dev` 실제 기동 확인 | 사람(사용자 맥) |
 
