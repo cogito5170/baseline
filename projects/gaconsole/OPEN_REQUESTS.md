@@ -20,4 +20,6 @@
 | CMD-GC33 | usage.api.prices() · main.py 에 simulation 라우터 마운트 · advisor.submit_proposal 실제 배선 | 마무리 조립 작업(GC19) · 후속 usage 작업(GC24) |
 | CMD-GC23 | 작업 세션에서 고정 버전 l0-telemetry · rlo-sdk pip 설치가 sandbox 에 막힘 → baseline 이 같은 sha 로 대신 시험 | 환경 설정(사람) 또는 baseline 대리 검증 유지 |
 | CMD-GC34 | quota.api.list_budgets(ws) | 마무리 조립 작업(GC19) |
-
+| CMD-GC19 | estimation · integration · run 도메인의 HTTP 라우터 없음 → openapi 22 경로 미마운트 | 후속(GC25 신설: 남은 라우터) |
+| CMD-GC19 | report 내보내기에 uuid 가 아닌 id → 500(404 여야) | GC25 에 묶음 |
+| CMD-GC19 | API · 워커 두 프로세스 사이 이벤트 전달(아웃박스) 미검증 · 미구현, quota 경보 평가 시점 | 후속 아키텍처 작업 |
