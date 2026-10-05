@@ -735,3 +735,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 252 회차: CMD-DS1 성공 — Token `d782c45` 통합(ff), DS2 시작(BD-349).
 - 253 회차: CMD-GC11 성공 — Token `680010d` 통합(ff), 개발 환경 · CI(BD-351). GC12 검증 통과, 형식 · 시험 skip 수정 대기.
 - 254 회차: CMD-GC40 성공 — Token `1631b3d` 통합(ff); agv 고정 오버헤드 ≈11.1k 토큰/턴 실측(BD-352).
+- 255 회차: CMD-DS2 성공 — Token `7c17bfb` 통합(ff), 라이브 모니터 시각 언어(BD-353). GC12 는 순서대로 다음.

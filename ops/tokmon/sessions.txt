@@ -1,4 +1,3 @@
 session_01PXnZE2hU9RDcKc2gNSz9b3 GA CMD-GA34
 session_01E7rQzjD2Yt31RuQqmfqMZf core-backend CMD-GC12
-session_014esetihTR1NsSpozeycntw design CMD-DS2
 session_0122YYNFYsHQgkhRpxhAAazz frontend CMD-FE1
