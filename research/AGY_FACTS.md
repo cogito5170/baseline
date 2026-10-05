@@ -70,3 +70,16 @@
 - 사용자가 Antigravity 요금제를 올렸다: 모든 모델 100% 접근. `agy models` 에 Claude 5.5 가 생겼다: claude-opus-5-5-{low,medium,high}, claude-sonnet-5-5-{low,medium,high} (이전 claude-sonnet-4-6 · claude-opus-4-6-thinking 대신). gemini-3.8/3.7/3.6-flash-{high,medium,low}, gemini-3.1-pro-{high,low}, gpt-oss-120b-medium 은 그대로.
 - agv family 규칙(gpt-* · claude-* · gemini-*)으로 새 slug 모두 통과한다.
 - 대화형 `agy`(인자 없이)는 폴더 신뢰 질문("Antigravity CLI requires permission to read, edit, and execute files here") 뒤 터미널 채팅이 된다. 이것도 Antigravity 채팅과 같은 에이전트다: 입력 한 번 = 모델 턴(도구 57 개 정의 포함 ≈10k 입력), 명령마다 승인.
+
+## E0: agy 도움말 (사용자, 2026-10-05, BD-414) — 0 토큰
+
+- 새로 확인된 플래그:
+  - `--input-format text|stream-json`: stream-json 은 stdin 에서 NDJSON 메시지를 한 줄씩 읽어 **각각 한 턴을 실행한다**. `--output-format stream-json` 이 필요하다. → 한 프로세스 여러 턴. 고정 앞부분이 캐시되는지가 핵심 측정(AG3 V7, 미측정).
+  - `--json-schema`: 최종 결과에 구조화 출력을 강제한다. → 작은 모델의 '양식 지키기' 실패(AG5 · AG8 의 not_json)를 agy 쪽에서 막을 수단 후보.
+  - `--print-timeout`, `--prompt-interactive(-i)`, `--remote-control`, `--project`, `--new-project`.
+- 하위 명령:
+  - `agent(s)`: 목록만 낼 뿐 만들기 옵션이 없다. 사용자 에이전트는 plugin 으로 들어오는 것으로 보인다.
+  - `mcp add|remove|list|enable|disable`
+  - `plugin install|uninstall|list|enable|disable`
+  - 그 밖에 `install`, `update`, `changelog`, `mic-serve`, `remote-control`.
+- **내장 도구를 끄는 플래그는 없다.** 도구 수를 줄일 수 있는 길은 plugin 으로 정의한 에이전트(`--agent`) 하나뿐이다(형식 미확인).
