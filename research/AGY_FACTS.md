@@ -33,3 +33,9 @@
 - **agv 고정 오버헤드 실측: 약 11,124 입력 토큰/턴**(11,210 − 86). 지금까지 `--list-backends` 에 "not measured" 였던 값. gemini_cli 11,822(BD-302)와 비슷하고, bare claude_cli(945/1,197)의 약 9–12 배.
 - 함의: agv 로 짧은 작업을 여러 턴 돌리면 대부분이 고정 오버헤드다. 이어가기(`--conversation`)로 캐시를 살리거나 턴 수를 줄이는 것이 절감의 핵심(후속 ga 작업 후보).
 - slug 는 `gpt-oss-120b-medium`(노력 단계가 slug 에 붙는 꼴, catalog 의 `gemini-3.8-flash-high` 와 같은 규칙). ga catalog 에는 없는 모델이지만 family 규칙(gpt-*)으로 통과했다.
+
+## 고정 비용 줄이기 계획 (BD-362, 사용자: "고정 비용을 고치고 그 다음에 정제")
+
+1. **실측(CMD-AG3, AGY 에게):** 같은 1 턴("Reply with the word OK")을 설정만 바꿔 잰다 — V0 기본 · V1 `--disable-slash-commands` · V2 `--mode plan` · V3 `--sandbox` · V4 도구가 가장 적은 `--agent` · V5 MCP 서버 끔 · V6 `--continue` 둘째 턴(캐시) · V7 한 프로세스 두 턴(stream-json). 최대 10 턴.
+2. **고침(CMD-GA35, GA34 통합 뒤):** 가장 싼 조합을 ga agv 백엔드의 기본으로 — 이어가기(`--conversation`)로 같은 작업 안 턴들이 한 대화를 쓰게, 줄인 플래그 · 에이전트, `--list-backends` 의 overhead 를 실측값으로. 오프라인 시험 + AGY 재측정으로 확인.
+3. **그 다음 정제:** `prompt.py refine` 앞에 agy 한 턴(뜻 다듬기)을 선택 단계로 넣는다. 그 턴의 실제 입력 토큰을 보고서에 함께 적는다.

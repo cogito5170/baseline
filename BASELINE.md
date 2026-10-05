@@ -742,3 +742,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 259 회차: CMD-FE1 성공 — Token `4814254` 통합(ff), 공용 부품(BD-359). GC41–43 시작.
 - 260 회차: CMD-RN1 성공 — Token `0971840` 통합(ff), 라이브 모니터 읽기(BD-360). DS3 시작.
 - 261 회차: CMD-GC20 성공 — Token `cfa872f` 통합(ff), 업로드(BD-361). GC43 → GC15 순서 대기.
+- 262 회차: CMD-GC43 성공 — Token `fd43d22` 통합(ff)(BD-362). agv 고정 비용 실측 지시 CMD-AG3 발송.

@@ -13,3 +13,4 @@
 | CMD-GC13 | 로그인 속도 제한이 프로세스 메모리 — 다중 프로세스면 공유 안 됨(MVP 한계로 기록) | 운영 단계 |
 | CMD-GC0 | baseline 요청 9 건(l0-telemetry 공급자 usage 파서 · 비밀 스크러버 · 호출별 시각/CLI 비용 · router 통계 내보내기 · Codex/Gemini 수집기 · turn.started/턴 중 이벤트 · L0 시각 · 풀 판정 · usage.json 원자적 쓰기) | ga-sdk / l0-telemetry 후속(GA34 이후) |
 | CMD-GC20 | Upload.job_id 를 채울 ingestion enqueuer 훅 | GC22 |
+| CMD-GC21 | openapi Comparison 에 선택적 범위(P10/P90) 필드 — 계약 변경 | 다음 contract 작업 |
