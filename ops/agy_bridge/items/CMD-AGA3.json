@@ -1,0 +1,27 @@
+{
+ "item": {
+  "id": "CMD-AGA3",
+  "goal": "Create the Token web's report screen component: frontend/src/app/(app)/reports/ReportsView.tsx exporting TITLE = \"리포트\" and a pure component ReportsView({reports, onGenerate, onExport}) (no data fetching; same style as frontend/src/app/(app)/budgets/BurnView.tsx; types from ../../../lib/api Schemas[\"Report\"] and Schemas[\"Period\"]). It renders: <h1>리포트</h1>; a form with two date inputs name=from and name=to and a submit button 생성 that calls onGenerate({from, to}); if there is no report the text 리포트가 없다.; otherwise a table whose body has one row per report showing 'from ~ to', the created time, and two buttons with data-report-id=<id> and data-export=csv / json that call onExport(id, format). Data shapes (exact): a report is {id: string, period: {from: string, to: string}, body: object, created_at?: string} — the period is NESTED: show `${r.period.from} ~ ${r.period.to}`; onGenerate receives {from, to}; onExport receives (id, \"csv\" | \"json\"). Do not use (r as any).",
+  "files": [
+   "frontend/src/app/(app)/reports/ReportsView.tsx"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "frontend/tests/reports/reports-view.test.ts": "// Acceptance test for CMD-AGA2 (written by baseline; the executor may not edit it).\nimport { beforeAll, describe, expect, it } from \"vitest\";\nimport * as React from \"react\";\nimport { renderToStaticMarkup } from \"react-dom/server\";\n\nconst h = React.createElement;\nlet m: any;\nbeforeAll(async () => {\n  (globalThis as { React?: unknown }).React = React;\n  m = await import(\"../../src/app/(app)/reports/ReportsView\");\n});\nconst rep = (id: string, from: string, to: string) => ({ id, period: { from, to }, body: {}, created_at: \"2026-10-05T00:00:00Z\" });\nconst html = (reports: unknown[]) => renderToStaticMarkup(h(m.ReportsView, { reports, onGenerate() {}, onExport() {} }));\nconst both = (a: string, b: string) => new RegExp(`<[^>]*${a}[^>]*${b}|<[^>]*${b}[^>]*${a}`);\n\ndescribe(\"ReportsView\", () => {\n  it(\"is titled 리포트 and shows it as h1\", () => {\n    expect(m.TITLE).toBe(\"리포트\");\n    expect(html([])).toContain(\"<h1>리포트</h1>\");\n  });\n  it(\"says so when there is no report\", () => {\n    expect(html([])).toContain(\"리포트가 없다.\");\n  });\n  it(\"lists one row per report with its period and a CSV and a JSON export button\", () => {\n    const out = html([rep(\"a1\", \"2026-09-01\", \"2026-09-30\"), rep(\"b2\", \"2026-10-01\", \"2026-10-05\")]);\n    expect(out.replace(/<!-- -->/g, \"\")).toContain(\"2026-09-01 ~ 2026-09-30\");\n    expect(out.replace(/<!-- -->/g, \"\")).toContain(\"2026-10-01 ~ 2026-10-05\");\n    expect((out.match(/<tbody[\\s\\S]*<\\/tbody>/)?.[0].match(/<tr/g) ?? []).length).toBe(2);\n    for (const id of [\"a1\", \"b2\"]) for (const f of [\"csv\", \"json\"]) expect(out).toMatch(both(`data-report-id=\"${id}\"`, `data-export=\"${f}\"`));\n  });\n  it(\"has a period form: two date inputs named from and to, and a 생성 submit button\", () => {\n    const out = html([]);\n    expect(out).toMatch(both('name=\"from\"', 'type=\"date\"'));\n    expect(out).toMatch(both('name=\"to\"', 'type=\"date\"'));\n    expect(out).toMatch(/<button[^>]*type=\"submit\"[^>]*>생성<\\/button>/);\n  });\n});\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "node",
+    "frontend/node_modules/vitest/vitest.mjs",
+    "run",
+    "--root",
+    "frontend",
+    "tests/reports/reports-view.test.ts"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe"
+}
