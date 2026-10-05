@@ -1,0 +1,3 @@
+```ga
+{"schema":"directive/2","id":"CMD-AG1","rev":1,"to":"AGY","after":[],"goal":"First run through the agy bridge: list the project's top-level files and summarize its README in at most three lines.","why":"BD-356: check the baseline -> ga mail -> bridge -> ga supervise (agv) -> report/2 loop end to end on the user's Mac.","scope":[{"id":"S1","text":"Use list_dir and read_file only; do not change any file."},{"id":"S2","text":"If a tool you need is missing, write a TOOL_NEEDED line."}],"done_when":[{"id":"D1","text":"The answer names the top-level files and gives a summary of at most three lines."}],"budget":{"claude_p_runs":0}}
+```
