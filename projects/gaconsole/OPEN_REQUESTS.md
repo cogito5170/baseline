@@ -12,4 +12,5 @@
 | CMD-GC0 | baseline 요청 9 건(l0-telemetry 공급자 usage 파서 · 비밀 스크러버 · 호출별 시각/CLI 비용 · router 통계 내보내기 · Codex/Gemini 수집기 · turn.started/턴 중 이벤트 · L0 시각 · 풀 판정 · usage.json 원자적 쓰기) | ga-sdk / l0-telemetry 후속(GA34 이후) |
 | CMD-GC20 | Upload.job_id 를 채울 ingestion enqueuer 훅 | GC22 |
 | CMD-GC21 | openapi Comparison 에 선택적 범위(P10/P90) 필드 — 계약 변경 | 다음 contract 작업 |
-
+| CMD-GC31 | estimation 의 HTTP 경로 · PG 저장소 미구현, 정가 비용 MAPE 104.5%(기준선 92.7%보다 나쁨) | 후속 consulting 작업 |
+| CMD-GC16 | workspace.api.member_ids(ws) | GC16 (소유 확장으로 처리 중) |
