@@ -32,3 +32,4 @@
 | CMD-GC33 | consulting | Sonnet | 2(통합 merge 2 회) | 0 | 572 | 34,093 | 3,389,578 | 117,869 | 1.49 | 성공 | BD-376 |
 | CMD-GC23 | ingestion-analytics | Sonnet | 3(튜플 · OpenAI 중첩 키 · 통합 merge) | 1(baseline 대리 검증 — 의존성 설치 불가) | 1,586 | 22,489 | 3,078,681 | 91,196 | 1.21 | 성공(보고 머리는 baseline 판정으로 대체) | BD-377 |
 | CMD-GC24 | ingestion-analytics | Sonnet | 0 | 0 | 58 | 25,744 | 3,183,205 | 124,284 | 1.39 | 성공 | BD-379 |
+| CMD-FE2 | frontend | Opus | 1(통합 merge) | 0 | 622 | 58,875 | 7,676,443 | 130,359 | 3.76 | 성공 | BD-381 |
