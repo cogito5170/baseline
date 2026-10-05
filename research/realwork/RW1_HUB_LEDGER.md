@@ -29,3 +29,4 @@
 | CMD-GC22 | ingestion-analytics | Sonnet | 2(경계 위반 · 통합 merge) | 1(소유 확장) | 1,086 | 39,125 | 4,398,242 | 103,786 | 1.69 | 성공 | BD-372 |
 | CMD-GC30 | consulting | Sonnet | 0 | 0 | 60 | 38,488 | 3,115,447 | 127,023 | 1.52 | 성공 | BD-373 |
 | CMD-GC34 | consulting | Sonnet | 0 | 0 | 34 | 13,709 | 1,341,263 | 81,561 | 0.73 | 성공 | BD-375 |
+| CMD-GC33 | consulting | Sonnet | 2(통합 merge 2 회) | 0 | 572 | 34,093 | 3,389,578 | 117,869 | 1.49 | 성공 | BD-376 |

@@ -496,6 +496,7 @@
 | BD-373 | **CMD-GC30 성공 · 통합(Token `b2ff038`, ff), 되돌림 0.** 절약 진단 R1–R7: 7 fixture 의 근거 id · P10/P50/P90 를 정확히 재현, 적용은 정책 → quota.check → 사용자 확인 순, 모든 결정 감사. baseline 변이 2 개(확인 검사 제거 · R4 절감식 분모 변경) 잡힘. $1.52. usage.api 보강(해시 · first_try_success · prices)이 없어 일부 규칙이 아직 실제 데이터에서 발화하지 않음 → 후속 usage 작업, 앱 시작 배선은 마무리 조립 작업으로 묶음. GC34(리포트) 시작 | BD-372 |
 | BD-374 | **GC23 · GC33 판정.** GC23(형식 어댑터): 작업 세션에서 고정 버전 l0-telemetry 설치가 막혀 파서 의존 시험이 skip 된 채 보고됨 → baseline 이 로컬 checkout 의 정확한 sha(f6c7ae2 · 0d92a3d)로 설치해 돌림: 12 중 3 ERROR — `l0_usage` 가 (dict, null 목록) 튜플을 돌려주는데 어댑터가 dict 로 가정. 이 결함은 작업 세션 혼자서는 찾을 수 없었음 = 실제 개발에서 '의존성 설치 불가' 환경의 위험(RW1 기록). 고치게 반려. GC33(가정 시뮬레이터): 빈 가정 422 변이 잡힘, 통합 merge 대기 | BD-373 |
 | BD-375 | **CMD-GC34 성공 · 통합(Token `f7c478e`, ff), 되돌림 0.** 기간 리포트(사용량 · 절감 · 예산 · 다음 설정) JSON/CSV 내보내기 일치, 모든 숫자에 provenance 열, 내보내기 감사. 실제 PG 10 OK, 감사 제거 변이 → 2 실패. $0.73. 컨설팅 도메인 5 개(GC30–34) 중 GC33 만 통합 대기 | BD-374 |
+| BD-376 | **CMD-GC33 성공 · 통합(Token `077707b`, ff).** 가정 시뮬레이터: 빈 가정 422, 모든 결과 SIMULATED + basis(price_version), 같은 가격 모델 교체 비용 변화 0, 제안은 실제 advisor.submit_proposal 로. 빈 가정 검사 제거 변이 → 3 실패. $1.49. 컨설팅 5 도메인(GC30–34) 모두 통합. 남은 것: GC23(OpenAI 중첩 키 수정 중) · FE2 · GA34, 그 뒤 GC19(조립) · GC24(usage 보강) · IF1(데스크톱) | BD-375 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---
