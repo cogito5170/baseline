@@ -2,7 +2,7 @@ session_01PXnZE2hU9RDcKc2gNSz9b3 GA CMD-GA34
 session_015ytwGzcvMPgX5QGsBXfBov core-backend CMD-GC15
 session_01KqZdtnd1Fq4U2wZ5GGKRiY ingestion-analytics CMD-GC20
 session_01NTX47i6CAuVzNuNt4iVDzh ingestion-analytics CMD-GC21
-session_01DJ1RxHCtkSKpE1v1XNvvXw core-backend CMD-RN1
 session_01LTyeEH3arqpny5mMYVUQpN frontend CMD-GC41
 session_01KrvRh1re6F8ERJE9WY1uod frontend CMD-GC42
 session_01QSSumCCimy7hWxsdHFqi39 frontend CMD-GC43
+session_01EvK9s66EeicunJ76JtSR1w design CMD-DS3
