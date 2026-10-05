@@ -775,3 +775,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 292 회차: CMD-GA41 통합 — ga-sdk `718a2cd`(0.9.0), 작은 모델 고치기 턴 · 일시 오류 재시도(BD-430). CMD-AGA4 rev 1 되돌림(tsc 실패), rev 2 발송.
 - 293 회차: CMD-AGA4 rev 2 성공 — Token `62be86e`, 리포트 화면 동작(agv 1 턴 · 11,185 토큰), 실제 스택 브라우저 시험 통과(BD-431).
 - 294 회차: CMD-CON1 rev 1 성공 — ga-sdk `2fcc383`, GA Console 디자인 토큰 · 화면 문법 · 골든 7 화면 · V 판정기(BD-433).
+- 295 회차: CMD-CON2 성공 — ga-sdk `5b2b194`(0.10.0), GA Console 서버(GA API) · 처음으로 ga judge 판정 · 허브 쪽 병합과 init 기본값 고침(BD-435).
