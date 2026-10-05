@@ -97,3 +97,17 @@
   - `.claude-plugin/plugin.json` + `agents/minimal.md`(`tools: []`)로 된 디렉터리를 만든다.
   - `agy plugin validate` → `install` → `agy agents` 순으로 확인한다.
   - `agy -p … --agent minimal` 로 입력 토큰을 V0(9,852)와 비교한다. agy 가 앞머리의 tools 를 따르는지가 핵심이다.
+
+## E1: 도구 없는 에이전트 (사용자, 2026-10-05, BD-416) — agy 1 턴
+
+- 플러그인 디렉터리:
+  - `.claude-plugin/plugin.json` + `agents/minimal.md`(앞머리 `tools: []`, 본문 "Answer in plain text. Do not use any tool.").
+  - `agy plugin validate` 는 루트의 `plugin.json` 을 찾아 실패했다(exit 1). `agy plugin install` 은 Claude 형식으로 받아들였다(agents 1 processed, exit 0).
+  - `agy agents` 목록에 `minimal` 이 생겼다(그 밖에 `cavecrew-builder`).
+- `agy -p "Reply with the word OK" --output-format stream-json --model gpt-oss-120b-medium --agent minimal`:
+  - init 에 표시된 도구는 60 개다.
+  - usage: input **2,530**, output 35, cache_read 64.
+  - **V0(기본 에이전트) 9,852 → 2,530, −74%.**
+- 해석: 고정 비용의 대부분은 도구 정의가 아니라 **기본 에이전트의 시스템 지시문**이었다. 에이전트를 바꾸면 그 지시문이 짧은 것으로 대체된다. init 의 도구 목록은 표시일 뿐, 모델 입력에 다 실리지 않는다.
+- ga 에 쓰는 법(코드 변경 없음): ga-supervise.json 의 `"cli": ["<agy 경로>", "--agent", "<이름>"]`. agv 백엔드가 이 argv 뒤에 `-p`, `--model` 등을 붙인다.
+- 다음(E1b): 에이전트 지시문을 'ga 의 계획 양식 JSON 하나로만 답한다' 로 바꾼 ga-plan 에이전트를 bridge 경로에서 잰다. 작은 모델의 not_json(AG5 · AG8)이 줄어드는지 본다.
