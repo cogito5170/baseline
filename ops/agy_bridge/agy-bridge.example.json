@@ -1,0 +1,12 @@
+{
+ "mailbox_repo": "~/baseline",
+ "workdir": "~/내프로젝트",
+ "supervise_config": "ga-supervise.json",
+ "name": "AGY",
+ "hub": "baseline",
+ "every_s": 300,
+ "turn_timeout_s": 1800,
+ "commands": {
+  "test": ["python3", "-m", "unittest", "discover", "-s", "tests"]
+ }
+}

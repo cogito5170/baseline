@@ -1,0 +1,18 @@
+{
+ "list_dir": {
+  "python": "agy_tools:list_dir",
+  "about": "list one project folder; args: path (default '.')"
+ },
+ "read_file": {
+  "python": "agy_tools:read_file",
+  "about": "read numbered lines of one project text file; args: path, start (default 1), lines (default 400)"
+ },
+ "search": {
+  "python": "agy_tools:search",
+  "about": "regex search under a project folder; args: pattern, path (default '.'), max_hits (default 50)"
+ },
+ "run_check": {
+  "python": "agy_tools:run_check",
+  "about": "run one command the project owner allowed, by name (e.g. 'test'); args: name"
+ }
+}
