@@ -64,3 +64,9 @@
 - Antigravity 는 ga-sdk 로 돌지 않는다. ga 는 거기서 git 처럼 불리는 명령일 뿐이고, ga 의 문맥 상한 · 비용 기록은 ga 가 모델을 직접 부를 때(`ga supervise` · bridge.py)만 적용된다.
 - 권고: AGY 작업은 터미널 bridge.py 로(채팅 모델 없음, 도구는 bridge 의 Python 함수라 명령마다 동의 불필요). 채팅은 사람이 직접 묻는 용도로만.
 
+
+## 요금제 상향 (사용자, 2026-10-05 09:2x UTC, BD-388)
+
+- 사용자가 Antigravity 요금제를 올렸다: 모든 모델 100% 접근. `agy models` 에 Claude 5.5 가 생겼다: claude-opus-5-5-{low,medium,high}, claude-sonnet-5-5-{low,medium,high} (이전 claude-sonnet-4-6 · claude-opus-4-6-thinking 대신). gemini-3.8/3.7/3.6-flash-{high,medium,low}, gemini-3.1-pro-{high,low}, gpt-oss-120b-medium 은 그대로.
+- agv family 규칙(gpt-* · claude-* · gemini-*)으로 새 slug 모두 통과한다.
+- 대화형 `agy`(인자 없이)는 폴더 신뢰 질문("Antigravity CLI requires permission to read, edit, and execute files here") 뒤 터미널 채팅이 된다. 이것도 Antigravity 채팅과 같은 에이전트다: 입력 한 번 = 모델 턴(도구 57 개 정의 포함 ≈10k 입력), 명령마다 승인.
