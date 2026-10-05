@@ -45,3 +45,4 @@
 - `HTTP 503 UNAVAILABLE`, reason `MODEL_CAPACITY_EXHAUSTED`, domain `cloudcode-pa.googleapis.com`, error_number 2010, model `gpt-oss-120b-medium`: "No capacity available for model … on the server".
 - 사용자 쿼터 소진이 아니라 **서버 쪽 일시 용량 부족**. 유료 크레딧과도 무관.
 - ga agv 에 필요한 것(GA35 에 넣음): 이 오류를 쿼터 정지(주간 리셋까지 대기)와 구별해 **일시 오류**로 분류 — 짧은 backoff 뒤 1 회 재시도, 그래도 같으면 설정된 대체 모델(같은 family 규칙 안)로 넘기거나 그 턴을 `capacity` 로 실패 처리. 오류 줄은 라벨 · 숫자만 기록.
+- 08:33 UTC 같은 대화(Trajectory `fa78aba8…`)에서 같은 오류 재발. 사용자: "다른 프롬프트는 되는데 rules 를 수행하라고 하면 이 오류". 같은 trajectory id 가 두 번 나온 것으로 보아 그 대화가 `gpt-oss-120b-medium` 에 묶여 있고, 그 모델의 서버 용량이 계속 없음. 다른 요청은 다른 대화/모델에서 돌았을 가능성이 큼. 대응: 새 대화에서 다른 모델을 고른 뒤 규칙을 붙인다.
