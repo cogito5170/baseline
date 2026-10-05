@@ -728,3 +728,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 245 회차: ga judge — ga-sdk `bfd473c` CMD-FT1 부분(58/100 실행, $7.50): H1 bulk 쿼터 21.7×/59.9×, H3 C 통과(셀 5), T2 무효 → rev 2(BD-332).
 - 246 회차: ga judge — ga-sdk `5e8ef4b` CMD-FT1 rev 2 성공: FINAL_TASK 100/100, H1 bulk 쿼터 24.7–63.1×, H3 C PASS(두 모형)(BD-333). POL-3 최종 과제 끝.
 - 247 회차: ga judge — ga-sdk `03e8dae` CMD-GA33 성공(ga 0.6.0, 작업 대기열 · 노드 풀 · 역할 State, 759 OK, 변이 9/9)(BD-335).
+- 248 회차: 후속 연구 RW — ga 0.6 노드 풀의 실제 개발 가능성 탐침 9/9 확인(막는 기능 6개), 필요 기능 F1–F10 · 실험 설계 RW1 기록(BD-342, `research/REAL_WORK.md`).
