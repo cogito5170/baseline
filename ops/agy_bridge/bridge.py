@@ -158,7 +158,7 @@ def tool_results(run: dict[str, Any], per: int = 1500, most: int = 4) -> str:
 def _code_stamp() -> str:
     import hashlib
     h = hashlib.sha256()
-    for name in ("bridge.py", "agy_tools.py", "tools.json"):
+    for name in ("bridge.py", "agy_tools.py", "tools.json", "act_runner.py"):
         try:
             h.update((HERE / name).read_bytes())
         except OSError:
@@ -183,6 +183,12 @@ def declined(cfg: dict[str, Any], form: str, why: str) -> str:
     return "```ga\n" + json.dumps(report, separators=(",", ":")) + "\n```\n"
 
 
+def act(cfg: dict[str, Any], head: dict[str, Any]) -> str:
+    """The code-work path; replaced in tests."""
+    import act_runner
+    return act_runner.handle(cfg, head)
+
+
 def one_pass(cfg: dict[str, Any], box: Mailbox | None = None,
              runner: Callable[[dict, Path, str], dict] = run_supervise, log: Callable[[str], None] = print) -> int:
     if cfg.get("pull"):
@@ -200,8 +206,12 @@ def one_pass(cfg: dict[str, Any], box: Mailbox | None = None,
                 reply = declined(cfg, m.form, "not a valid directive/2: " + "; ".join(m.problems)[:150])
             else:
                 head, _ = parse_text(m.text)
-                run = runner(cfg, effective_config(cfg, head["id"]), task_text(head))
-                reply = build_report(cfg, head, run)
+                import act_runner
+                if act_runner.item_file(head["id"]).exists():  # code work: ga act in a worktree (BD-424)
+                    reply = act(cfg, head)
+                else:
+                    run = runner(cfg, effective_config(cfg, head["id"]), task_text(head))
+                    reply = build_report(cfg, head, run)
             problems = hard(validate(parse_text(reply)[0]))
             if problems:
                 raise FormError(problems)

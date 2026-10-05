@@ -144,8 +144,8 @@ def report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any], patch
 
 
 def handle(cfg: dict[str, Any], head: dict[str, Any],
-           runner: Callable[[dict, dict, Path, Path], dict] = run_act) -> str:
-    spec = json.loads(item_file(head["id"]).read_text(encoding="utf-8"))
+           runner: Callable[[dict, dict, Path, Path], dict] = run_act, spec: dict[str, Any] | None = None) -> str:
+    spec = spec or json.loads(item_file(head["id"]).read_text(encoding="utf-8"))
     checkout = Path((cfg.get("act") or {}).get("repo") or "").expanduser().resolve()
     if not (checkout / ".git").exists():
         raise ValueError(f"act.repo is not a git checkout: {checkout}")
