@@ -10,6 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import agy_tools  # noqa: E402
 import bridge  # noqa: E402
+import prompt  # noqa: E402
 from ga.forms import hard, parse_text, validate  # noqa: E402
 from ga.mailbox import Mailbox  # noqa: E402
 
@@ -103,6 +104,38 @@ class BridgeTest(unittest.TestCase):
         self.pass_(fake_runner(out="key " + "sk-" + "ant-api03-" + "A" * 40))
         (msg,) = self.replies()
         self.assertIn("withheld", msg.text)
+
+
+class PromptTest(unittest.TestCase):
+    def test_next_prints_the_directive_compactly(self):
+        w = World()
+        w.hub.send("AGY", form(DIRECTIVE), "baseline")
+        import io
+        from contextlib import redirect_stdout, redirect_stderr
+        out = io.StringIO()
+        with redirect_stdout(out), redirect_stderr(io.StringIO()):
+            self.assertEqual(prompt.cmd_next(str(w.tmp / "mac")), 0)
+        text = out.getvalue()
+        self.assertIn("Goal: Summarize the project README.", text)
+        self.assertIn("- D1: a three-line summary", text)
+        self.assertRegex(text, r"\(ga: \d+ tokens\)")
+        self.assertEqual(len(list(w.mac.unread("AGY"))), 1)  # not marked read
+
+    def test_refine_makes_a_valid_directive(self):
+        import io
+        from contextlib import redirect_stdout
+        out = io.StringIO()
+        with redirect_stdout(out):
+            prompt.main(["refine", "--goal", "README 를 세 줄로 요약", "--scope", "읽기만", "--done", "세 줄 이하"])
+        head, _ = parse_text(out.getvalue().split("--- paste")[0])
+        self.assertEqual(hard(validate(head)), [])
+        self.assertEqual(head["done_when"][0], {"id": "D1", "text": "세 줄 이하"})
+        with self.assertRaises(SystemExit):
+            prompt.main(["refine", "--goal", "x"])  # no done criterion
+
+    def test_cap(self):
+        with self.assertRaises(SystemExit):
+            prompt.checked("word " * 5000)
 
 
 class ToolsTest(unittest.TestCase):

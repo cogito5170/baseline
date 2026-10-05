@@ -738,3 +738,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 255 회차: CMD-DS2 성공 — Token `7c17bfb` 통합(ff), 라이브 모니터 시각 언어(BD-353). GC12 는 순서대로 다음.
 - 256 회차: CMD-GC12 성공 — Token `685c153` 통합(ff), 백엔드 코어(BD-354). GC13 시작.
 - 257 회차: CMD-GC13 성공 — Token `c2f4e44` 통합(ff), 인증, 되돌림 0(BD-355). GC14 시작.
+- 258 회차: CMD-GC14 성공 — Token `57e791d` 통합(ff), 워크스페이스(BD-357). FE1 은 package.json 보완 대기.

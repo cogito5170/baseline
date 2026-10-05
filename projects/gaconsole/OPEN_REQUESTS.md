@@ -7,6 +7,8 @@
 | CMD-DS2 | design/tokens.json `motion.duration_ms` 에 `travel: 800` 추가(motion.md 와 일치) | 다음 design 작업(DS3) |
 | CMD-DS2 | design/README.md 에 encoding.json · motion.md 안내 한 줄 | 다음 design 작업(DS3) |
 | CMD-GC13 | backend/app/main.py 에 HTTPException(detail={code,message}) → `{code,message}` 본문 예외 처리기 | backend/app/main.py 소유 작업 — 로드맵에 아직 없음, 작은 core-backend 정리 작업으로 묶을 것 |
-| CMD-GC13 | GC15 뒤 `router.set_audit_recorder(audit.api.record)` 배선, 시작 시 `open_pool` | GC15 |
+| CMD-GC13 | GC15 뒤 `router.set_audit_recorder(audit.api.record)` 배선, 시작 시 `open_pool` | GC15 (소유 확장으로 붙여 보냄) |
+| CMD-GC14 | `identity/api.py`(current_user 재수출) 추가 뒤 workspace 의 fallback 제거 | GC15 (소유 확장으로 붙여 보냄) |
+| CMD-FE1 | 갤러리 라우트(frontend/src/app/**)와 components.css 전역 @import | GC41 |
 | CMD-GC13 | 로그인 속도 제한이 프로세스 메모리 — 다중 프로세스면 공유 안 됨(MVP 한계로 기록) | 운영 단계 |
 | CMD-GC0 | baseline 요청 9 건(l0-telemetry 공급자 usage 파서 · 비밀 스크러버 · 호출별 시각/CLI 비용 · router 통계 내보내기 · Codex/Gemini 수집기 · turn.started/턴 중 이벤트 · L0 시각 · 풀 판정 · usage.json 원자적 쓰기) | ga-sdk / l0-telemetry 후속(GA34 이후) |

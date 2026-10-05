@@ -42,3 +42,13 @@ agy 는 계획만 세우고, 도구 실행은 ga 가 승인 목록(`tools.json` 
 ## 시험
 
 `PYTHONPATH=<ga-sdk> python3 -m unittest test_bridge` — 임시 git 저장소의 진짜 ga mail + 가짜 ga supervise, 모델 호출 0.
+
+## Antigravity 화면(채팅)에서 쓰기 — 터미널 없이 (BD-358)
+
+1. **규칙 한 번 붙여넣기:** `python3 ~/baseline/ops/agy_bridge/prompt.py rules` 의 출력을 Antigravity 채팅에 붙이거나 워크스페이스 규칙으로 저장한다. 이제 그 에이전트가 AGY 다.
+2. **일 받기:** 채팅에 "check mail" 이라고 하면 AGY 가 `ga mail read --as AGY` 로 baseline 지시를 읽고 IDE 도구로 일한다(도구 호출마다 사용자가 승인).
+3. **보고:** AGY 가 `ga judge --template` 로 보고 뼈대를 만들고 `ga check` 로 검사한 뒤 `ga mail send` 로 baseline 에 보낸다.
+4. **내 요청을 정제해서 시키기:** `python3 prompt.py refine --goal "…" --scope "…" --done "…"` → ga 의 directive/2 형식으로 묶고 ga 검사기로 확인한 뒤, 1,500 토큰 상한 안의 짧은 프롬프트를 낸다. 그대로 채팅에 붙인다.
+5. **다음 지시만 보기:** `python3 prompt.py next` (읽음 표시는 하지 않는다).
+
+ga 가 하는 "정제"의 범위: 뜻을 모델로 다시 쓰지 않는다. 목표 · 범위 · 완료 기준 · 예산으로 구조를 고정하고, 형식을 검사하고, 크기를 재서 짧게 유지한다. 완료 기준(`--done`)이 없으면 거부한다 — 끝났는지 확인할 수 없는 요청은 받지 않는다.
