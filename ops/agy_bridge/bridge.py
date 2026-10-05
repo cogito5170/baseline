@@ -34,6 +34,7 @@ DEFAULTS = {"name": "AGY", "hub": "baseline", "every_s": 300, "turn_timeout_s": 
             "supervise_config": "ga-supervise.json", "pull": True}
 TOOL_NEEDED = re.compile(r"^\s*TOOL_NEEDED:\s*(.+?)\s*$", re.M)
 REFUSED = re.compile(r"agy refused (\d+) action\(s\) in \S+: ([\w, ]+)")
+STUCK = re.compile(r"\[ga supervise\] (\S+) is not finished")
 
 
 def load_config(path: str) -> dict[str, Any]:
@@ -58,11 +59,16 @@ def task_text(head: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def effective_config(cfg: dict[str, Any]) -> Path:
-    """Your ga-supervise.json with the approved tool table merged in, written next to the project (agy's workspace)."""
+def effective_config(cfg: dict[str, Any], directive_id: str | None = None) -> Path:
+    """Your ga-supervise.json with the approved tool table merged in, written next to the project (agy's workspace).
+
+    Each directive gets its own state dir (<state_dir>/<id>), so an unfinished task left by an earlier run (by hand or
+    by another directive) never blocks this one (BD-398: CMD-AG4 stopped on "T1 is not finished")."""
     base = json.loads((Path(cfg["workdir"]) / cfg["supervise_config"]).read_text(encoding="utf-8"))
     approved = json.loads((HERE / "tools.json").read_text(encoding="utf-8"))
     base["tools"] = {**approved, **(base.get("tools") or {})}
+    if directive_id:
+        base["state_dir"] = str(Path(base.get("state_dir") or ".ga-supervise") / directive_id)
     out = Path(cfg["workdir"]) / "ga-supervise.bridge.json"
     out.write_text(json.dumps(base, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return out
@@ -102,6 +108,8 @@ def build_report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any])
     refused = REFUSED.findall(out)
     blockers = [{"kind": "dependency", "what": f"tool needed: {t}"[:300]} for t in needed]
     blockers += [{"kind": "permission", "what": f"agy refused {n} action(s): {what.strip()}"} for n, what in refused]
+    blockers += [{"kind": "dependency", "what": f"ga supervise state: task {t} unfinished in the state dir"}
+                 for t in STUCK.findall(out)]
     evidence = [f"ga supervise exit {run['code']}, status {end.get('status', '?')}, model turns "
                 f"{end.get('model_turns', len(turns))}, tool steps {end.get('tool_steps', 0)}",
                 "self-reported through the agy bridge; baseline verifies"]
@@ -147,7 +155,7 @@ def one_pass(cfg: dict[str, Any], box: Mailbox | None = None,
                 reply = declined(cfg, m.form, "not a valid directive/2: " + "; ".join(m.problems)[:150])
             else:
                 head, _ = parse_text(m.text)
-                run = runner(cfg, effective_config(cfg), task_text(head))
+                run = runner(cfg, effective_config(cfg, head["id"]), task_text(head))
                 reply = build_report(cfg, head, run)
             problems = hard(validate(parse_text(reply)[0]))
             if problems:

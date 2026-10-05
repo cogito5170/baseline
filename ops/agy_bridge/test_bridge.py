@@ -84,6 +84,18 @@ class BridgeTest(unittest.TestCase):
         self.assertEqual(next(r["value"] for r in head["results"] if r["name"] == "input_tokens"), 11210)
         self.assertEqual(self.pass_(fake_runner()), 0)  # read once, never run twice
 
+    def test_each_directive_gets_its_own_state_dir(self):
+        self.w.hub.send("AGY", form(DIRECTIVE), "baseline")
+        run = fake_runner()
+        self.pass_(run)
+        self.assertEqual(run.calls[0]["conf"]["state_dir"], ".ga-supervise/CMD-AG1")
+
+    def test_stuck_state_is_a_blocker(self):
+        self.w.hub.send("AGY", form(DIRECTIVE), "baseline")
+        self.pass_(fake_runner(out="[ga supervise] T1 is not finished — ga supervise --resume continues it first\n", code=1))
+        head, _ = parse_text(self.replies()[0].text)
+        self.assertIn("T1 unfinished", head["blockers"][0]["what"])
+
     def test_failed_run_is_unmet(self):
         self.w.hub.send("AGY", form(DIRECTIVE), "baseline")
         self.pass_(fake_runner(out="[ga supervise] agy refused 1 action(s) in T1.m1: command\n", code=1))
