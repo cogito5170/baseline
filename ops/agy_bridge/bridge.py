@@ -96,7 +96,7 @@ def run_supervise(cfg: dict[str, Any], conf: Path, task: str) -> dict[str, Any]:
                     events.append(json.loads(line))
                 except ValueError:
                     pass
-    return {"code": code, "out": out, "events": events}
+    return {"code": code, "out": out, "events": events, "state": str(Path(cfg["workdir"]) / state)}
 
 
 def build_report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any]) -> str:
@@ -110,6 +110,9 @@ def build_report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any])
     blockers += [{"kind": "permission", "what": f"agy refused {n} action(s): {what.strip()}"} for n, what in refused]
     blockers += [{"kind": "dependency", "what": f"ga supervise state: task {t} unfinished in the state dir"}
                  for t in STUCK.findall(out)]
+    blockers += [{"kind": "dependency",
+                  "what": f"model answer was not a valid plan in {e.get('step', '?')}: {e.get('problems', '?')}"[:300]}
+                 for e in run["events"] if e.get("event") == "plan" and e.get("ok") is False]
     evidence = [f"ga supervise exit {run['code']}, status {end.get('status', '?')}, model turns "
                 f"{end.get('model_turns', len(turns))}, tool steps {end.get('tool_steps', 0)}",
                 "self-reported through the agy bridge; baseline verifies"]
@@ -128,7 +131,47 @@ def build_report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any])
     if secrets_in(answer):
         answer = "(the answer was withheld: it looked like it held a secret)"
     return "```ga\n" + json.dumps(report, ensure_ascii=False, separators=(",", ":")) + "\n```\n\n## agy answer\n\n" + \
-        "```text\n" + answer.replace("```", "'''") + "\n```\n"
+        "```text\n" + answer.replace("```", "'''") + "\n```\n" + tool_results(run)
+
+
+def tool_results(run: dict[str, Any], per: int = 1500, most: int = 4) -> str:
+    """What the tools returned in this run (ga keeps them in <state>/results/), so baseline can verify even when the
+    model's last turn fails (BD-402). Tails only, capped; a result that looks like it holds a secret is withheld."""
+    d = Path(run.get("state") or "") / "results"
+    if not run.get("state") or not d.is_dir():
+        return ""
+    out = []
+    for f in sorted(d.glob("*.json"))[-most:]:
+        try:
+            raw = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        text = str((raw.get("text") if isinstance(raw, dict) else raw) or "")[-per:]
+        if secrets_in(text):
+            text = "(withheld: it looked like it held a secret)"
+        out.append(f"### {f.stem}\n\n```text\n" + text.replace("```", "'''") + "\n```\n")
+    return ("\n## tool results\n\n" + "\n".join(out)) if out else ""
+
+
+def _code_stamp() -> str:
+    import hashlib
+    h = hashlib.sha256()
+    for name in ("bridge.py", "agy_tools.py", "tools.json"):
+        try:
+            h.update((HERE / name).read_bytes())
+        except OSError:
+            pass
+    return h.hexdigest()
+
+
+STAMP = _code_stamp()
+
+
+def restart_if_updated(log: Callable[[str], None] = print) -> None:
+    """After `git pull` brings new bridge code, run it: replace this process with a fresh one, same argv (BD-402)."""
+    if _code_stamp() != STAMP:
+        log("bridge: new bridge code pulled; restarting with it")
+        os.execv(sys.executable, [sys.executable, *sys.argv])
 
 
 def declined(cfg: dict[str, Any], form: str, why: str) -> str:
@@ -177,6 +220,8 @@ def main(argv: list[str] | None = None) -> int:
     cfg = load_config(a.config)
     while True:
         n = one_pass(cfg)
+        if cfg.get("pull") and not a.once:
+            restart_if_updated()
         if a.once:
             return 0
         if n == 0:

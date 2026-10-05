@@ -96,6 +96,37 @@ class BridgeTest(unittest.TestCase):
         head, _ = parse_text(self.replies()[0].text)
         self.assertIn("T1 unfinished", head["blockers"][0]["what"])
 
+    def test_plan_problems_and_tool_results_reach_the_report(self):
+        self.w.hub.send("AGY", form(DIRECTIVE), "baseline")
+        state = self.w.work / ".ga-supervise" / "CMD-AG1"
+        (state / "results").mkdir(parents=True)
+        (state / "results" / "T1.r1.a.json").write_text(json.dumps({"text": "exit 0\nRan 795 tests\nOK"}))
+        (state / "results" / "T1.r1.b.json").write_text(json.dumps({"text": "token " + "sk-" + "ant-api03-" + "B" * 40}))
+
+        def run(cfg, conf, task):
+            return {"code": 1, "out": "[ga supervise] T1 failed", "state": str(state), "events": [
+                {"event": "turn", "input_tokens": 10000, "tokens": 10500, "seconds": 3},
+                {"event": "plan", "step": "T1.m2", "ok": False, "problems": "not_json"},
+                {"event": "end", "status": "failed"}]}
+        self.pass_(run)
+        (msg,) = self.replies()
+        head, _ = parse_text(msg.text)
+        self.assertIn("not a valid plan in T1.m2: not_json", head["blockers"][0]["what"])
+        self.assertIn("Ran 795 tests", msg.text)
+        self.assertNotIn("ant-api03", msg.text)
+
+    def test_restart_when_code_changes(self):
+        calls, old, orig = [], bridge.STAMP, bridge.os.execv
+        try:
+            bridge.os.execv = lambda *a: calls.append(a)
+            bridge.restart_if_updated(log=lambda s: None)  # unchanged code: no restart
+            self.assertEqual(calls, [])
+            bridge.STAMP = "stale"
+            bridge.restart_if_updated(log=lambda s: None)
+        finally:
+            bridge.os.execv, bridge.STAMP = orig, old
+        self.assertEqual(len(calls), 1)
+
     def test_failed_run_is_unmet(self):
         self.w.hub.send("AGY", form(DIRECTIVE), "baseline")
         self.pass_(fake_runner(out="[ga supervise] agy refused 1 action(s) in T1.m1: command\n", code=1))
