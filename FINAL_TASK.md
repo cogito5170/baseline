@@ -48,3 +48,9 @@
 - T4 에서 tool_calls = peer_messages = 0, T5 에서 UNKNOWN(추측하면 실패).
 - repeated_information 이 A 보다 적음.
 - spec §15: 높은 연결도 · 많은 메시지를 지능의 증거로 보지 않는다.
+
+## 5. 실행 설정 (사용자 결정 2026-10-05, BD-329)
+
+- 노드 3 개, 모두 Haiku(`claude-haiku-4-5-20251001`), fresh 모드(ga 0.5.0 · ctxpack), 실행 주체는 `claude -p` bare 호출(BD-302).
+- 비용 상한: 전체 $15(팔 A · B · C × 과제 T1–T5 × 3 회 = 45 실행). 상한에 닿으면 그 자리에서 멈추고 그때까지의 측정값으로 보고(부분 결과로 표시).
+- 시작 조건: CMD-GA32 rev 3(ga 0.5.0, ga-sdk[net]) 판정 성공 뒤. 실행 · 측정은 새 세션 하나(CMD-FT1)가 하고, baseline 은 판정만 한다.
