@@ -493,6 +493,7 @@
 | BD-370 | **CMD-GC32 성공 · 통합(Token `5c6be2d`, ff).** 프로필(본문 저장 기본 off) · 개인 통계 · 품질 하한/근거 5 건 미만이면 추천 없음 · 다른 사용자 통계 차단, 실제 PG + 경로 19 OK, MIN_EVIDENCE 변이 잡힘. $1.33. 다음: GC31 | BD-369 |
 | BD-371 | **CMD-GC31 성공 · 통합(Token `68dab6a`, ff).** 견적기: FINAL_TASK leave-one-out 토큰 MAPE **12.04%**(기준선 21.98%), P10–P90 포괄 89%; 근거 3 건 미만이면 범위 확대; 설명 본문은 sha256+길이만. baseline 이 통합 후 직접 재현. 누설(평가 실행을 증거에 포함) 변이가 처음엔 살아남아 시험 보강 → 잡힘. 정가 비용 MAPE 104.5%(기준선 92.7%보다 나쁨) · HTTP/PG 미구현은 후속. $1.01. GC33(가정 시뮬레이터) 시작 | BD-370 |
 | BD-372 | **CMD-GC22 성공 · 통합(Token `cb86376`, ff).** 수집 파이프라인 · 워커(SKIP LOCKED claim) · SSE(Last-Event-ID) · enqueuer 배선, source.api.get_upload 로 경계 위반 해소 + '다른 도메인 테이블 조회 금지' 시험. 실제 PG16 36 OK. baseline 변이 2 개(FROM uploads 심기 · SKIP LOCKED 제거) 잡힘. $1.69. 아웃박스 전달 · claim 회수는 후속. GC23(형식 어댑터) 시작 | BD-369 |
+| BD-373 | **CMD-GC30 성공 · 통합(Token `b2ff038`, ff), 되돌림 0.** 절약 진단 R1–R7: 7 fixture 의 근거 id · P10/P50/P90 를 정확히 재현, 적용은 정책 → quota.check → 사용자 확인 순, 모든 결정 감사. baseline 변이 2 개(확인 검사 제거 · R4 절감식 분모 변경) 잡힘. $1.52. usage.api 보강(해시 · first_try_success · prices)이 없어 일부 규칙이 아직 실제 데이터에서 발화하지 않음 → 후속 usage 작업, 앱 시작 배선은 마무리 조립 작업으로 묶음. GC34(리포트) 시작 | BD-372 |
 | BD-60 | 세션 interaction 의 참고 기준으로 [`GUIDANCE.md`](GUIDANCE.md)(사용자 제공)를 둔다. 새 규칙이 아니다 | PROTOCOL §3 지시 꼴에 왜 · 성공 기준 · 결과 분류 · wait 를 반영 |
 
 ---
