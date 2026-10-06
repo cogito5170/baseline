@@ -39,3 +39,5 @@
 {"id":"CMD-TKG9","rev":2,"sha":"0fe0656","decision":"ACCEPT","bd":"BD-470"}
 {"id":"CMD-TKG10","rev":2,"sha":"6d9a494","decision":"ACCEPT","bd":"BD-470"}
 {"id":"CMD-GA49","rev":2,"sha":"e8730f4","decision":"SEND_BACK","bd":"BD-471","note":"report head; m2/m5 survived"}
+{"id":"CMD-GA49","rev":3,"sha":"3d142ae","decision":"ACCEPT","note":"m1-m5 killed; suite 1358 OK; ga check 0; ff via ga-sdk integrator; test edits reviewed (ga42 S2 flip, version >=)","at":"2026-10-06T17:21:00+09:00"}
+{"id":"CMD-GA50","rev":1,"sha":"cbf0a0b","decision":"SEND_BACK","note":"ga check rc2 (commits sha text); g1 g2 g4 g6 survived; merge GA49 base","at":"2026-10-06T17:21:00+09:00"}
