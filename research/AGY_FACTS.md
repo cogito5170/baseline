@@ -124,3 +124,9 @@
   - 입력은 기본 에이전트의 ≈1/4 이다.
   - 500 INTERNAL 은 서버 쪽 일시 오류로 보인다(agy 안에서 3 회 재시도). AG10 의 160 초 대기 뒤 GeminiError 도 같은 원인일 가능성이 크다.
   - GA41: 503 MODEL_CAPACITY_EXHAUSTED 와 함께 500 INTERNAL 도 '일시' 로 분류한다. 짧은 backoff 뒤 1 회 재시도하고, 그래도 실패하면 blocked(capacity/server).
+
+## VM 실측 (2026-10-06, Oracle VM x86_64 Ubuntu 24.04)
+
+- 공식 설치 스크립트(sudo 없음, `~/.local/bin/agy`, 같은 서버의 sha512 대조, 이후 자체 갱신)로 설치, SSH 에서 URL + 코드 붙여넣기로 Google 계정 로그인(API 키 아님).
+- `agy models` 에 `gpt-oss-120b-medium` 있음(Gemini 3.x Flash/Pro, Claude 5.5 계열도 목록에 있음). `agy -p "Reply with the word OK"` → `OK`.
+- 따라서 BASELINE_INTO_GA §5 의 "agy 리눅스 지원 미확인" 조건은 풀렸다: bridge · 묻기 · 셰도우 허브 모두 VM 에서 agv 로 돌 수 있다(CMD-OPS2).
