@@ -782,3 +782,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 299 회차: CMD-GA43 성공 — ga-sdk `83fccea`(0.11.0), judge 가 정의되지 않은 토큰을 잡음 · bridge 파이썬 · SSE · JS 변이(BD-447).
 - 300 회차: CMD-AGA6 성공 — Token `62fca39`, agv 가 gc-* 화면 CSS 를 1 턴에 씀 · 변이 5/5 · 실제 스택 스크린샷(BD-453).
 - 301 회차: CMD-GA44 성공 — ga-sdk `3fcea91`(0.12.0), 묻기 기본 도구 없는 에이전트 · 설정 질문 코드 답 · Enter 보내기(BD-454).
+- 302 회차: CMD-OPS2 성공 — ga-sdk `698c1e2`(0.13.0), ga vm install --full · 브리지 넘겨받기 · 터널 전용(BD-455).
