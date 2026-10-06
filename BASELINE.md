@@ -791,3 +791,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 308 회차: TKG1 · TKG2 (shadow gate 첫 Token 항목) 받음 — 각 1 턴, baseline ACCEPT, Token 7a45a8d 통합; 셰도우 ASK_HUMAN(결정 턴 실패 추정) → CMD-GA49 발송(BD-467).
 - 309 회차: TKG3 · 4 · 6 ACCEPT(Token fcf216a), TKG5 SEND_BACK rev 2(하드코딩, BD-468); 셰도우는 계속 ASK_HUMAN.
 - 310 회차: TKG7 · 8 · 5r2 ACCEPT(Token 3b34b5c), TKG9(tsc) · TKG10(-0) SEND_BACK rev 2 (BD-469).
+- 311 회차: TKG9 · 10 rev 2 ACCEPT(Token 9c28c85) — TKG 10건 전부 통합; GA49 rev 1 SEND_BACK(옛 기준, BD-470).
