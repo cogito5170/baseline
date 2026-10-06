@@ -7,4 +7,4 @@ OPS-R0 done 21:2x: ops/flow/measure/R0.json by ops/hub/measure_r0.py (static: li
   shadow gate 0/10: 25 compared, 0 agree, 0 false accepts, 40 baseline rows missing in shadow; every shadow decision ASK_HUMAN (judge_class failure); newest shadow row 07:18Z (daily_turns 40 cap, resumes 10-07 00:00Z).
   62 env fails: rlo missing; per-test list owed by DEV-R0c; ga-sdk tests not runnable here (auto-mode denies running external code).
 sent: B-R0 21:17; INC-OPS-1 (dev ctx caps) + ST-OPS-2 21:21; B-TKG13 21:2x. Watcher now session_01X47ETY7Sx9hpAefj8vC28B (routine trig_012iYV3o :49), old archived. Ops successor: baseline asking user (depth-0).
-next: each hourly fire also run `python3 ops/hub/shadow_digest.py digest` (OPS-SH1; routine prompt not editable at depth 8). OPS-R1 values with DEV-R1 once R0 lands; verify each release/1.
+next: hourly: shadow_digest digest + snapshot via subagent (list_sessions 12 -> cloud_snapshot.py; OPS-WATCH needs >=hourly). OPS-WATCH: thresholds ops/hub/watch_thresholds.json; after DEV-WATCH release run 24 h side-by-side vs Claude watcher 01TBHcmu, then baseline retires it. Sent B-R1W-R3D 23:25 (DEV-WATCH+OPS-LIMITS-WATCH, DEV-R3-DET).

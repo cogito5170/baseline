@@ -1,0 +1,73 @@
+{
+ "id": "B-R1W-R3D",
+ "specs": [
+  {
+   "id": "DEV-R3-DET",
+   "goal": "Verdict and integration run on the VM as ga-engine code, and the accept/integrate decision never depends on an LLM.",
+   "why": "User 10-06 23:0x: go with R3 on the VM; verdict and integration must not depend on LLM performance.",
+   "acceptance": [
+    "the decision to integrate is a pure function of executable checks: head==sha, ancestry, allowed files, acceptance test identical and red on base, full suite green in the reference environment, generated mutations all killed (or cross-covered by the full suite), revert makes the test fail",
+    "mutations are generated from the diff by code (no model)",
+    "no model call anywhere on the verdict or integration path; a test fails if one is added",
+    "criteria that cannot be executed never lead to integration: the item stays in shadow and is reported",
+    "the VM performs the push itself under a policy the user approves once; ff or merge commit to the one integration ref only, never force",
+    "same input gives the same verdict (deterministic, replayable from the recorded inputs)"
+   ],
+   "constraints": [
+    "spec only: Dev decides method and plan",
+    "stay within your own domain"
+   ],
+   "stage": "R3"
+  },
+  {
+   "id": "DEV-WATCH",
+   "goal": "Token and context watching runs on the VM as ga-engine code with no model call, and replaces the Claude watcher session.",
+   "why": "User 10-06 23:2x: watching rules as VM code; an independent check outside the Claude sessions it measures.",
+   "acceptance": [
+    "reads the published session snapshot (baseline ops/hub/cloud_sessions.json: per-session ctx, cost, status) and the ga ledgers; no Claude credentials on the VM",
+    "alarms by fixed rules: ctx over the cap on a non-completed session, one session's cost rising faster than a set rate, total cost rising faster than a set rate, snapshot older than a set age",
+    "thresholds come from a config file Ops owns; defaults: ctx 150000, 5 USD/h per session, 12 USD/h total, snapshot 2 h",
+    "each alarm is mailed once per kind per session per day as notify/1 kind alert to baseline-ops; a stale snapshot alarm also reaches the user",
+    "no model call on this path (a test fails if one is added); deterministic for the same inputs"
+   ],
+   "constraints": [
+    "spec only: Dev decides method and plan",
+    "stay within your own domain"
+   ],
+   "stage": "R1"
+  },
+  {
+   "id": "OPS-LIMITS-WATCH",
+   "stage": "R1",
+   "goal": "The VM watcher uses the Ops thresholds file as its only source of threshold values.",
+   "why": "OPS-WATCH: Ops owns operating limits.",
+   "acceptance": [
+    "values read from baseline ops/hub/watch_thresholds.json (ctx_cap_tokens 150000, session_usd_per_h 5, total_usd_per_h 12, snapshot_max_age_h 2)",
+    "a change committed to that file takes effect without a code change",
+    "snapshot source is ops/hub/cloud_sessions.json, published by Ops at least hourly"
+   ],
+   "constraints": [
+    "values are Ops's; method is Dev's"
+   ]
+  }
+ ],
+ "parallel": [
+  [
+   "DEV-WATCH",
+   "OPS-LIMITS-WATCH"
+  ],
+  [
+   "DEV-R3-DET"
+  ]
+ ],
+ "order": [
+  "DEV-WATCH",
+  "OPS-LIMITS-WATCH",
+  "DEV-R3-DET"
+ ],
+ "why": "DEV-WATCH (+ its limits) and DEV-R3-DET are independent; run in parallel if capacity allows, else DEV-WATCH first (small, retires an always-on Claude session after Ops's 24 h side-by-side). Release each as release/1 to Ops; Ops verifies on the VM (notify-1 version, alarms vs Claude watcher for 24 h; R3-DET by replayed verdicts over past branches).",
+ "form": "batch/1",
+ "from": "ops",
+ "to": "dev",
+ "at": "2026-10-06T23:25:10+09:00"
+}

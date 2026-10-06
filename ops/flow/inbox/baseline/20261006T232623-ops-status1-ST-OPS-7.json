@@ -1,0 +1,17 @@
+{
+ "id": "ST-OPS-7",
+ "items": [
+  {
+   "id": "OPS-WATCH",
+   "state": "acting",
+   "note": "thresholds ops/hub/watch_thresholds.json (ctx 150000, 5 USD/h session, 12 USD/h total, snapshot 2 h). Snapshot republished 14:2xZ; Ops publishes hourly. batch B-R1W-R3D to Dev: DEV-WATCH + OPS-LIMITS-WATCH || DEV-R3-DET. 24 h side-by-side starts at DEV-WATCH release verify."
+  }
+ ],
+ "blockers": [
+  "Ops ctx 231k: successor still needed (depth-0 hub)"
+ ],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-06T23:26:23+09:00"
+}

@@ -1,0 +1,11 @@
+{
+ "schema": "watch-thresholds/1",
+ "owner": "ops",
+ "note": "OPS-WATCH / DEV-WATCH: the VM watcher reads these; only Ops changes them (via commit on the baseline integration branch).",
+ "ctx_cap_tokens": 150000,
+ "session_usd_per_h": 5.0,
+ "total_usd_per_h": 12.0,
+ "snapshot_max_age_h": 2,
+ "snapshot_source": "ops/hub/cloud_sessions.json",
+ "alarm_dedupe": "once per kind per session per UTC day"
+}

@@ -1,13 +1,85 @@
 {
  "schema": "cloud-sessions/1",
- "at": "2026-10-06T21:21:44+09:00",
+ "at": "2026-10-06T23:26:10+09:00",
  "plan": {
   "kind": "five_hour",
   "status": "allowed",
   "overage": false,
-  "resets_at": "2026-10-06T22:10+09:00"
+  "resets_at": "2026-10-07T04:20+09:00"
  },
  "sessions": [
+  {
+   "id": "session_01TBHcmu5ar3uwnjL7m6NhYg",
+   "title": "baseline ◎ 토큰 감시 (10-06 22:5x~)",
+   "status": "idle",
+   "bucket": "review_ready",
+   "detail": "baseline token watcher armed; awaiting :49 KST signal",
+   "repo": "baseline",
+   "branch": null,
+   "model": "claude-haiku-4-5-20251001",
+   "ctx": 53178,
+   "cost_usd": 0.03,
+   "tags": [
+    "baseline-watcher"
+   ],
+   "updated_at": "2026-10-06T13:51:56.215159Z",
+   "url": "https://claude.ai/code/session_01TBHcmu5ar3uwnjL7m6NhYg",
+   "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
+   "tokens": {
+    "input": 10,
+    "output": 461,
+    "cache_read": 39070,
+    "cache_write": 14098
+   }
+  },
+  {
+   "id": "session_015U1LfqNoymrTP9Wduzmh31",
+   "title": "ga-sdk DEV-R0a · 실제 응답 모델 기록 (10-06 21:2x~)",
+   "status": "idle",
+   "bucket": "completed",
+   "detail": "DEV-R0a pushed; all writers name answering model",
+   "repo": "ga-sdk",
+   "branch": "claude/DEV-R0a",
+   "model": "claude-sonnet-5-5",
+   "ctx": 112240,
+   "cost_usd": 1.34,
+   "tags": [
+    "baseline-worker"
+   ],
+   "updated_at": "2026-10-06T12:45:02.399325Z",
+   "url": "https://claude.ai/code/session_015U1LfqNoymrTP9Wduzmh31",
+   "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
+   "tokens": {
+    "input": 596,
+    "output": 13689,
+    "cache_read": 4159991,
+    "cache_write": 92643
+   }
+  },
+  {
+   "id": "session_01X47ETY7Sx9hpAefj8vC28B",
+   "title": "baseline ◎ 토큰 감시 (10-06 21:2x~)",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "monitoring cycle complete; cost & context alarms sent to Ops",
+   "repo": "baseline",
+   "branch": null,
+   "model": "claude-sonnet-5-5",
+   "ctx": 123835,
+   "cost_usd": 0.67,
+   "tags": [
+    "baseline-watcher"
+   ],
+   "updated_at": "2026-10-06T13:50:06.796619Z",
+   "url": "https://claude.ai/code/session_01X47ETY7Sx9hpAefj8vC28B",
+   "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
+   "tokens": {
+    "input": 5757,
+    "output": 7187,
+    "cache_read": 1495558,
+    "cache_write": 70640
+   }
+  },
   {
    "id": "session_01MuXcCLZm3KXYyDj9v8HqyB",
    "title": "baseline ▼ Ops_baseline (10-06 21:2x~)",
@@ -17,20 +89,20 @@
    "repo": "baseline",
    "branch": "claude/gracious-meitner-vp49xe",
    "model": "claude-opus-5-5",
-   "ctx": 0,
-   "cost_usd": 0.0,
+   "ctx": 230840,
+   "cost_usd": 4.74,
    "tags": [
     "baseline-hub",
     "ops"
    ],
-   "updated_at": "2026-10-06T12:15:01.148227Z",
+   "updated_at": "2026-10-06T14:25:21.426067Z",
    "url": "https://claude.ai/code/session_01MuXcCLZm3KXYyDj9v8HqyB",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 0,
-    "output": 0,
-    "cache_read": 0,
-    "cache_write": 0
+    "input": 7512,
+    "output": 38741,
+    "cache_read": 12638995,
+    "cache_write": 175484
    }
   },
   {
@@ -42,114 +114,114 @@
    "repo": "baseline",
    "branch": "claude/gracious-meitner-vp49xe",
    "model": "claude-opus-5-5",
-   "ctx": 0,
-   "cost_usd": 0.0,
+   "ctx": 296316,
+   "cost_usd": 7.68,
    "tags": [
     "baseline-hub",
     "dev"
    ],
-   "updated_at": "2026-10-06T12:14:54.512090Z",
+   "updated_at": "2026-10-06T14:25:12.614222Z",
    "url": "https://claude.ai/code/session_01Vtf8JhoPbyf3o8v87LPVLb",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 0,
-    "output": 0,
-    "cache_read": 0,
-    "cache_write": 0
+    "input": 15382,
+    "output": 54918,
+    "cache_read": 21350696,
+    "cache_write": 281097
    }
   },
   {
    "id": "session_01H2PH8BwPn3e3ut6Qjoaed3",
    "title": "ga-sdk CMD-GA57 · ga ops 자율 고리 (10-06 20:5x~)",
    "status": "idle",
-   "bucket": "review_ready",
-   "detail": "GA-45 implementation: alert wiring + ops tick tests updated",
+   "bucket": "blocked",
+   "detail": "pushed DEV-R0c branch; awaiting hub go-ahead to integrate",
    "repo": "ga-sdk",
    "branch": "claude/CMD-GA57",
    "model": "claude-opus-5-5",
-   "ctx": 231827,
-   "cost_usd": 6.04,
+   "ctx": 266853,
+   "cost_usd": 8.21,
    "tags": [
     "baseline-worker"
    ],
-   "updated_at": "2026-10-06T12:14:15.763436Z",
+   "updated_at": "2026-10-06T12:54:54.864852Z",
    "url": "https://claude.ai/code/session_01H2PH8BwPn3e3ut6Qjoaed3",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 1194,
-    "output": 78422,
-    "cache_read": 14785643,
-    "cache_write": 188263
+    "input": 3282,
+    "output": 93225,
+    "cache_read": 22751549,
+    "cache_write": 223289
    }
   },
   {
    "id": "session_01HurcnHXjzVhZjQ6vYSYwkc",
    "title": "ga-sdk CMD-GA56 · hub 한도 정지 알림 (10-06 20:4x~)",
-   "status": "idle",
+   "status": "archived",
    "bucket": "completed",
-   "detail": "design poll opinion sent to hub; no code changes",
+   "detail": "DEV-R0b pushed at b891bea; work complete",
    "repo": "ga-sdk",
-   "branch": "claude/CMD-GA56",
+   "branch": "claude/DEV-R0b",
    "model": "claude-sonnet-5-5",
-   "ctx": 112068,
-   "cost_usd": 1.02,
+   "ctx": 142156,
+   "cost_usd": 1.73,
    "tags": [
     "baseline-worker"
    ],
-   "updated_at": "2026-10-06T12:04:12.936509Z",
+   "updated_at": "2026-10-06T13:08:00.517094Z",
    "url": "https://claude.ai/code/session_01HurcnHXjzVhZjQ6vYSYwkc",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 572,
-    "output": 14608,
-    "cache_read": 3000134,
-    "cache_write": 68379
+    "input": 1622,
+    "output": 23852,
+    "cache_read": 5476438,
+    "cache_write": 98153
    }
   },
   {
    "id": "session_01FynfJTJBM1D3itToGCjyM1",
    "title": "baseline ◇ Token 통합 (10-06 20:27~)",
-   "status": "pending",
-   "bucket": "working",
-   "detail": "TKG13 red-check root-cause: bool passes int check at service.py:127; sent hub verdict + design poll",
+   "status": "idle",
+   "bucket": "blocked",
+   "detail": "CMD-TKG13 accepted at acf7352; awaiting push approval",
    "repo": "Token",
    "branch": null,
    "model": "claude-sonnet-5-5",
-   "ctx": 84661,
-   "cost_usd": 0.34,
+   "ctx": 108933,
+   "cost_usd": 0.69,
    "tags": [
     "baseline-integrator"
    ],
-   "updated_at": "2026-10-06T12:14:59.405300Z",
+   "updated_at": "2026-10-06T12:25:22.327831Z",
    "url": "https://claude.ai/code/session_01FynfJTJBM1D3itToGCjyM1",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 531,
-    "output": 3391,
-    "cache_read": 904067,
-    "cache_write": 31066
+    "input": 1059,
+    "output": 6935,
+    "cache_read": 2011680,
+    "cache_write": 54706
    }
   },
   {
    "id": "session_01UafTvmJjZiza4ctSfoeV8V",
    "title": "baseline ● 현재 허브 (10-06 20:23~)",
-   "status": "running",
-   "bucket": "working",
-   "detail": "",
+   "status": "idle",
+   "bucket": "blocked",
+   "detail": "sent watch & dev requests; awaiting 2 user inputs to proceed",
    "repo": "baseline",
    "branch": "claude/gracious-meitner-vp49xe",
    "model": "claude-opus-5-5",
-   "ctx": 326620,
-   "cost_usd": 10.46,
+   "ctx": 521573,
+   "cost_usd": 26.5,
    "tags": [],
-   "updated_at": "2026-10-06T12:15:01.271051Z",
+   "updated_at": "2026-10-06T14:25:14.418172Z",
    "url": "https://claude.ai/code/session_01UafTvmJjZiza4ctSfoeV8V",
    "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
    "tokens": {
-    "input": 8823,
-    "output": 116556,
-    "cache_read": 29566603,
-    "cache_write": 273397
+    "input": 29199,
+    "output": 213725,
+    "cache_read": 91909891,
+    "cache_write": 466123
    }
   },
   {
@@ -203,93 +275,23 @@
    "title": "ga-sdk CMD-GA53 · 엔진 결함 4건 (10-06 20:08~)",
    "status": "idle",
    "bucket": "blocked",
-   "detail": "CMD-GA53 pushed; awaiting go-ahead on hub session routing",
+   "detail": "CMD-GA53 done (49f24c3); unclear if DEV-R0a redirect is legit",
    "repo": "ga-sdk",
    "branch": "claude/CMD-GA53",
    "model": "claude-sonnet-5-5",
-   "ctx": 105335,
-   "cost_usd": 0.82,
+   "ctx": 115965,
+   "cost_usd": 0.98,
    "tags": [
     "baseline-worker"
    ],
-   "updated_at": "2026-10-06T12:15:01.140226Z",
+   "updated_at": "2026-10-06T12:16:31.488966Z",
    "url": "https://claude.ai/code/session_01HKHSLNc3akPq52QTeKmDPm",
    "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
    "tokens": {
-    "input": 55,
-    "output": 11870,
-    "cache_read": 2258773,
-    "cache_write": 61293
-   }
-  },
-  {
-   "id": "session_01LBoWy9AXfEwQsHqMcumAuC",
-   "title": "baseline ◇ ga-sdk 통합 (10-06 19:58~)",
-   "status": "pending",
-   "bucket": "working",
-   "detail": "poll answered; awaiting your INTEGRATE approval for GA52",
-   "repo": "ga-sdk",
-   "branch": null,
-   "model": "claude-sonnet-5-5",
-   "ctx": 144073,
-   "cost_usd": 1.98,
-   "tags": [
-    "baseline-integrator"
-   ],
-   "updated_at": "2026-10-06T12:14:58.661029Z",
-   "url": "https://claude.ai/code/session_01LBoWy9AXfEwQsHqMcumAuC",
-   "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
-   "tokens": {
-    "input": 14313,
-    "output": 18718,
-    "cache_read": 6607159,
-    "cache_write": 111467
-   }
-  },
-  {
-   "id": "session_01FUssZmVMp6rDvZ7GFTEpuK",
-   "title": "baseline ◆ CMD-GA52 merge (Sonnet)",
-   "status": "idle",
-   "bucket": "blocked",
-   "detail": "unverified hub session; awaiting confirmation on rev-2 work",
-   "repo": "ga-sdk",
-   "branch": "claude/CMD-GA52",
-   "model": "claude-sonnet-5-5",
-   "ctx": 148753,
-   "cost_usd": 1.83,
-   "tags": [
-    "baseline-worker"
-   ],
-   "updated_at": "2026-10-06T12:15:00.219581Z",
-   "url": "https://claude.ai/code/session_01FUssZmVMp6rDvZ7GFTEpuK",
-   "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
-   "tokens": {
-    "input": 1086,
-    "output": 8770,
-    "cache_read": 2938550,
-    "cache_write": 287353
-   }
-  },
-  {
-   "id": "session_01Eu6SdhSHCCwkL8BoAsULXr",
-   "title": "baseline ○ 이전 허브 (10-06 19:22~20:23, 인계 완료)",
-   "status": "idle",
-   "bucket": "completed",
-   "detail": "context limit reached; handoff to new hub complete",
-   "repo": "baseline",
-   "branch": "claude/gracious-meitner-vp49xe",
-   "model": "claude-opus-5-5",
-   "ctx": 287156,
-   "cost_usd": 7.35,
-   "tags": [],
-   "updated_at": "2026-10-06T11:44:41.947222Z",
-   "url": "https://claude.ai/code/session_01Eu6SdhSHCCwkL8BoAsULXr",
-   "parent": "session_01J4GYxF1DgQExRvBkxRm9pp",
-   "tokens": {
-    "input": 73411,
-    "output": 66617,
-    "cache_read": 20175758,
-    "cache_write": 232160
+    "input": 571,
+    "output": 12614,
+    "cache_read": 2819267,
+    "cache_write": 71499
    }
   }
  ]
