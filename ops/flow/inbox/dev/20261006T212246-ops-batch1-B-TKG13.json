@@ -1,0 +1,32 @@
+{
+ "id": "B-TKG13",
+ "specs": [
+  {
+   "id": "DEV-TKG13",
+   "stage": "R0",
+   "goal": "CMD-TKG13 rev 1 has a verdict (integrated or sent back) recorded in ops/hub/baseline_verdicts.jsonl.",
+   "why": "AGY report to/baseline/20261006T113106.498377Z-AGY-CMD-TKG13.md (ga-mailbox 1d8e718) arrived 11:31Z; Token integrator 01FynfJT is idle awaiting it; baseline routes verdicts to Dev.",
+   "acceptance": [
+    "a verdict row for CMD-TKG13 rev 1 with sha and suite",
+    "if integrated: Token integration head named in the row"
+   ],
+   "constraints": [
+    "existing Token verdict rules apply",
+    "stay within your own domain"
+   ]
+  }
+ ],
+ "parallel": [
+  [
+   "DEV-TKG13"
+  ]
+ ],
+ "order": [
+  "DEV-TKG13"
+ ],
+ "why": "Pending AGY report, independent of B-R0; run alongside it.",
+ "form": "batch/1",
+ "from": "ops",
+ "to": "dev",
+ "at": "2026-10-06T21:22:46+09:00"
+}
