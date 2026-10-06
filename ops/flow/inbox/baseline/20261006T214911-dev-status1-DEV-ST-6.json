@@ -1,0 +1,27 @@
+{
+ "id": "DEV-ST-6",
+ "items": [
+  {
+   "id": "DEV-TKG13",
+   "state": "SEND_BACK",
+   "note": "rev1 acf7352 SEND_BACK row written (supersedes ACCEPT); rev 2 directive + bridge item (new test test_non_int_limit_rejected: 1.5 and '1' raise QuotaError) mailed to AGY ga-mailbox c389c51; next: agv/CMD-TKG13-r2 -> Token integrator VERDICT"
+  },
+  {
+   "id": "DEV-R0a",
+   "state": "VERDICT",
+   "note": "759d873 queued at ga-sdk integrator after R0b"
+  },
+  {
+   "id": "DEV-SH1",
+   "state": "PLANNED",
+   "note": "engine rejections will be staged via ops/hub/shadow_digest.py stage dev"
+  }
+ ],
+ "blockers": [
+  "integration pushes still need the user's line in the integrator session or a permission rule in this Dev session"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-06T21:49:11+09:00"
+}

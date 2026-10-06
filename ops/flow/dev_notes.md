@@ -23,3 +23,4 @@ integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 - INC-OPS-1: integrator stays through R0; successor built from R0c recipe. GA52/GA57 archive after current item.
 - successors (integrator after R0c, 2 R1 workers): send baseline status/1 kind successor_needed when due
 - DEV-SH1 (R4 shadow-on-rejection): PLANNED after R1 gateway
+- shadow rows: python3 ops/hub/shadow_digest.py stage dev <row.json> (never send shadow/1 to baseline)
