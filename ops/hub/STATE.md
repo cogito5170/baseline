@@ -59,7 +59,9 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
   a hub-configured repo (old AGY reports had none; GM1/GM2 commit to cogito5170/baseline). Only Token items via the bridge
   (act_runner: repo token|baseline) feed the gate. shadow-compare prints gate_ok:true with 0 agreements — misleading, fix.
 - Plan: ~10 small real Token items through the bridge → baseline verdict each → compare; at 10 clean, a stage-3 directive.
-- Blocker: add_repo (push) for Token / ga-sdk denied by the permission classifier; asked the user to allow it.
+- add_repo: Token (push) granted on retry after the user objected to human steps (clone /home/user/token); ga-sdk push
+  still denied by the classifier ([Permission Grant]). Handoff fix: create the next hub session with ga-sdk/Token already
+  as sources (or the user adds one allow rule once), so no handoff ever needs add_repo again.
   ga-sdk read-only clone works (scratchpad/ga-sdk) for running ga locally.
 
 ## Next after that
