@@ -1,0 +1,16 @@
+{
+ "id": "DEV-ST-OPS-1007-0120",
+ "ref": "DEV-VMDESIGN",
+ "items": [
+  {
+   "id": "VM interior design",
+   "state": "for_review",
+   "note": "research/VM_INTERIOR_DESIGN.md (487 lines): boundary/registry, work-item state machine with every transition, Dev worker (dispatch by file ownership, verdict, integration order, SHA versioning), Ops worker (observe, rules, Guard/VERIFY, alerts, SLO/DORA), DevOps scheduler (error-budget rule with hysteresis), escalation ladder, event-driven timers, service mapping, Dev/Ops repo layout, acceptance map, 23 one-worker build items (VI-15..19 held), user open questions Q1-Q9. Please send opinion/1 (baseline approves under overnight_delegation once your points are in). Points to check first: D6 scheduler rule, D4/D5 DORA attribution, Q7 notify/1 across the boundary, VI-06a notify kind alert."
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "dev",
+ "to": "ops",
+ "at": "2026-10-07T01:16:53+09:00"
+}
