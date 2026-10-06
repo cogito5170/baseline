@@ -49,7 +49,13 @@ Code refs are ga-sdk @ 277945de (`ga/...`).
   via ops/hub/shadow_digest.py stage; the item waits (fail-closed).
 - After the call: record served model, input/output/cache tokens, USD (actual), card size, purpose, item_id,
   evidence fingerprint. Repeated judgment on the same fingerprint → rule cache entry → 0 calls next time.
-- Values are read from policy.json at each call (no constants); a policy change takes effect without a code change.
+- Values are read from the enforcing policy at each call (no constants); a policy change takes effect without a code change.
+- Post-call reconciliation: the actual USD (incl. cache read/write) replaces the estimate in the window ledger before
+  the next call is checked, so an estimate error can exceed a cap by at most one call; the provider-console spend
+  limit on the VM key is the backstop. Estimate-vs-actual error is reported hourly.
+- Hourly boundary report (status/1 to cloud; Ops stores ops/flow/measure/vm_spend.json + hourly.jsonl): per cap
+  window spend vs limit, calls, 0-call (rule/cache) share, estimate-vs-actual error, refusals by cap, sessions
+  created/ended/refused, commit gate pass/fail with rule ids, pushes {sha, ref, actor}, running ga-sdk SHA, policy hash.
 - Card only (role + evidence, fixed max size); no conversation history; context size recorded.
 
 ### 1.2 Session manager
@@ -58,7 +64,7 @@ Code refs are ga-sdk @ 277945de (`ga/...`).
   total session budget/day, session timeout, one session per work item (dedup by item id), item budget (§1.1).
   Refusal → shadow/1 `rejected_by: policy|budget`.
 - A session is a sandboxed worker process (headless adapter) in its own worktree with PRE_PUSH hook that rejects
-  every push and no push credential in its environment; model calls only through the gateway.
+  every push and no push credential in its environment (test: a worker `git push --no-verify` still fails for lack of a credential); model calls only through the gateway.
 - End: on done, timeout, budget stop (net/checkpoint budget_stop = checkpoint, not failure) or error; the
   worktree and its commits stay for the gates; journal records the end reason.
 
@@ -93,8 +99,16 @@ Code refs are ga-sdk @ 277945de (`ga/...`).
 | `policy.json auto_integrate.conditions/never` | push gate |
 | `watch_thresholds.json` (Ops) | DEV-WATCH, not the gates |
 
-A write to these keys from anything but a user-signed commit on the baseline branch is rejected and recorded
-(the VM verifies the commit author/hash against the last user-approved policy hash it was given at the boundary).
+Policy integrity (rev after OP-OPS-VMHUB-R3, accepted): there is no "user-signed commit" today — every
+policy.json commit is written by a Claude session recording user words. So the ENFORCING copy lives on the VM in
+`/etc/ga/vm_policy.json`, owned by root (mode 0644), written only by the user over SSH; the VM's ga user reads it
+and cannot write it. baseline `ops/flow/policy.json` (vm_budget, vm_policy) is the declared MIRROR. The VM reports
+the sha256 of its enforcing copy in the hourly boundary report; Ops compares it with the mirror's hash every hour
+and files incident/1 on mismatch. Missing/unreadable enforcing copy = halt (fail-closed).
+Cap applicability (purpose -> caps) and window definitions are user-owned data in that policy, not sets in code:
+`vm_budget.applies: {cap_name: [purposes]}`, `vm_budget.windows: {hour: "rolling_60m", day: "rolling_24h"}`
+(Ops proposal; reporting by KST day). `cloud_top_baseline_usd_per_h` and `session_ctx_cap_tokens` are cloud-side
+and never applied by the VM gateway.
 
 ## 3. Failure and rollback
 
@@ -105,9 +119,9 @@ A write to these keys from anything but a user-signed commit on the baseline bra
 | commit gate fail | session gets the evidence card once (budgeted), else item ends `fail` and is reported |
 | push gate fail | no push; status/1 with the failed check; nothing outside the VM changes |
 | bad push already made (shadow ref) | revert commit on the same ref (never force); cloud informed by status/1 |
-| VM restart | replay journal; outbox resends unacked ids; sessions marked `ended(error)` and re-admitted by rule |
+| VM restart | replay journal; outbox resends unacked ids; sessions marked `ended(error)` and re-admitted by rule; the interrupted session's recorded spend counts once toward its item (no double charge, no free retry) |
 | policy file missing/invalid | fail-closed: no model call, no session, no push; incident/1 to cloud |
-| kill switch | user-only flag outside the VM's control (systemd unit disable / a policy key the VM cannot write) stops all |
+| kill switch | three layers outside what the VM controls: (1) soft halt `halt: true` in the root-owned VM policy, read every tick, missing/unreadable = halt; (2) provider-console spend limit + key revoke on the VM's own API key (user); (3) instance stop in the Oracle console / revoke the VM's GitHub push credential (user). Ops tests (1) and the push-credential revoke once in shadow and records time-to-stop |
 
 ## 4. Acceptance map (DEV-VMHUB rev3 → part)
 
@@ -127,7 +141,14 @@ A write to these keys from anything but a user-signed commit on the baseline bra
 3. Session manager, commit gate, push gate — HELD (VMHUB rev3).
 4. Boundary/registry (DEV-FORMATS) — not held.
 
-## 6. Open questions for Ops / user
+## 6. Revisions
+- r2 (10-07 01:1x): Ops OP-OPS-VMHUB-R3 taken in full — root-owned enforcing policy + mirror hash check, three-layer
+  kill switch, post-call reconciliation + provider cap, hourly boundary report, applicability/windows as policy
+  data, --no-verify test, restart charge once. Approved by baseline on the user's behalf (overnight_delegation,
+  ASK-VMHUB-DESIGN-APPROVAL). Build HELD.
+
+## 7. Open questions for Ops / user
 - `vm_policy.sessions` and `push_allowed` values (user).
-- Where the user's kill switch lives (Ops).
+- Layer 2/3 kill switch and writing /etc/ga/vm_policy.json over SSH (user, morning list).
+- Window definitions rolling vs calendar (user; Ops proposes rolling).
 - Model credential on the VM (user; status/1 blocker when R1 needs it).

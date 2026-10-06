@@ -15,6 +15,11 @@ Scope (what is built tonight):
    coordination/h (purpose coordination), baselines/h (coordination+intake+diagnosis+opinion), total/h,
    total/day, per item default (soft → result `needs_judgment`, no call) and hard (refuse).
    Estimate = catalog price (`backends/catalog.py`) × (card tokens + max_output). Tightest cap wins.
+   After each call the actual USD (incl. cache tokens) replaces the estimate in the window (post-call reconciliation).
+   Applicability purpose->caps and windows come from policy data (`vm_budget.applies`, `vm_budget.windows`; default
+   until the user sets them: Ops' proposal, rolling 60 min / rolling 24 h) — not sets in code. The VM enforcing copy
+   is the root-owned /etc/ga/vm_policy.json when present, else the baseline mirror (cloud/dev runs); `halt: true` or
+   an unreadable policy refuses every call.
    Refusal → no call, `shadow/1 {rejected_by: "budget", reason: cap+window+estimate, would_do}` staged, result
    `refused`. Policy missing/unreadable → refuse all (fail-closed).
 3. Ledger: `~/.ga/llm/ledger/<UTC date>.jsonl` one row per call: at, purpose, item_id, requested/served model,
@@ -27,6 +32,8 @@ Scope (what is built tonight):
    Subprocess adapters (claude -p, agy, gemini CLI, agent_sdk) are invoked only through gateway-run backends.
 6. Test `test_llm_single_site`: AST/grep scan of `ga/` fails on any `backends.create(`, `run_turn(`, model CLI
    subprocess or `query(` outside `ga/llm/` and `ga/backends|adapters` internals.
+8. Hourly boundary report: `ga llm report --hour` writes the VMHUB_DESIGN §1.1 fields (spend vs limit per cap,
+   calls, 0-call share, estimate error, refusals by cap, running ga-sdk SHA, policy sha256) as status/1-ready JSON.
 7. Tests per cap: for each cap, spend just below → call allowed; estimate crossing the cap → refused, no backend
    invoked, shadow row written. Policy change (temp file) takes effect on the next call without code change.
 
