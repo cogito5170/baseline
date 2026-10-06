@@ -91,6 +91,7 @@ fixes_queued: GA39 survivors (rest → CMD-GA53).
 - Token plan (research/BASELINE_TOKENS.md): 1,2,3,5 done; 4 = stage 3.
 
 ## Rules
+- TOKEN LOOP (user 10-06 20:5x, top priority for all automation): LLM calls minimal; batch parallel tasks into ONE call with ONE consistent prompt (same template, items as a list); measure tokens on every call (input/output/cache, per item); after measuring, evaluate whether it can be cheaper (smaller card, cheaper rung, more batching, rule instead of model) and re-optimize; repeat. Hub practice too: one send_message per session per round, batch verdicts (like TKG12-20).
 - Anomaly found (stall, red, missing rows) → diagnose it yourself first (mailbox, ga-sdk code read-only clone in scratchpad, logs); spawn a worker session only if it needs a repo/run the hub lacks. Ask the user only for a VM-side or permission action, with the cause already stated (user 10-06 20:4x).
 - No keys/secrets anywhere; never read OAuth stores; no paid AI credits.
 - No bypassPermissions, no PRs, no model ids in commits. Guard/settings/hook/permission changes and ga tool promotion: human-only.
