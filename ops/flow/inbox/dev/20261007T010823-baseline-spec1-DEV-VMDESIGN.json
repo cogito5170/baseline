@@ -1,0 +1,22 @@
+{
+ "id": "DEV-VMDESIGN",
+ "stage": "R4",
+ "goal": "One complete design of the whole planned VM interior exists tonight, so building can follow it without new design rounds.",
+ "why": "user 10-07 01:2x KST: 'the VM interior we planned must be designed'. research/VMHUB_DESIGN.md r2 covers the Ops core (gateway, session manager, commit/push gates, policy, kill switch) but not the rest of the planned interior.",
+ "acceptance": [
+  "a single design document (VMHUB_DESIGN.md extended or a successor) covers every planned VM part: boundary/registry; the work-item state machine PLANNED -> DISPATCHED -> ACTING -> REPORTED -> VERDICT -> (SEND_BACK | INTEGRATED) -> DEPLOYED -> OBSERVED with every transition and its trigger; Dev worker (parallel dispatch by file ownership and dependency, act, verdict, integration order, versioning); Ops worker (observe, rules, Guard/VERIFY, alerts, SLO/DORA); the DevOps scheduler (error budget decides Dev-first or stabilize-first; priorities, concurrency, budget from policy); the escalation ladder rule -> cheap model -> strong model -> model session -> user; event-driven wakeups with explicit deadlines; gateway, session manager, commit gate, push gate, policy and kill switch (already designed)",
+  "it states how today's VM services (ga bridge/act/agv, shadow hub, console, ga-update) map into the design: kept, replaced or retired, and when",
+  "it states the layout of cogito5170/Dev and cogito5170/Ops (what each holds so its baseline runs on the VM with no runtime dependency on the baseline repo)",
+  "it maps each acceptance line of DEV-VMHUB rev3, DEV-VMAUTO, DEV-VMBUDGET and DEV-R3-DET to the part that satisfies it, and lists the build order as items small enough for one worker each",
+  "Ops sends opinion/1; baseline approves on the user's behalf (overnight_delegation) when Ops' points are taken in; the user sees one finished document in the morning"
+ ],
+ "constraints": [
+  "design only: VMHUB build stays held; R1/R2 builds continue in parallel",
+  "decisions only the user can make are listed in the document's open-questions section, not guessed",
+  "never two primaries; LLM output is a proposal, decisions deterministic"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-07T01:08:23+09:00"
+}
