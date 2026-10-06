@@ -21,8 +21,11 @@ artifacts: ga-SDK 최종 보고 https://claude.ai/artifact/MZdSkCP57fDTWQpsZvf6F
 
 ## Routines
 trig_01RuQYZmps22rXz7h8u5qvZy: mail+workers check, :19 hourly, fires INTO the hub (recreate on handoff, disable old)
-trig_01Egfbe1CAGL6bXNu6NK9H2M: independent token watcher, :49 hourly, fresh session; alarms (ctx>150k, burst,
-  +5 USD/h) → send_message to hub + push to user. First run 10-06 15:49.
+watcher: session_019EWtXvKB3EE8RTYPHnNHLP "baseline ◎ 토큰 감시" (Sonnet, persistent, source baseline), woken by
+  trig_01XtMnV6yMeywrMbcTFeeeJE ("watch run", :49 KST hourly). Rules live in its first prompt. Alarms (ctx>150k, burst,
+  +5 USD/h) → send_message to hub + push to user. It asks the hub to recreate it at ~100k own context.
+  Why: fresh-session routines get no claude-code-remote tools (no get_session) — first run 10-06 15:49 failed that way.
+trig_01Egfbe1CAGL6bXNu6NK9H2M: disabled (old fresh-session watcher)
 trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 
 ## Heads (10-06 15:40)
