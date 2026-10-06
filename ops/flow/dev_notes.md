@@ -3,9 +3,9 @@ hub: session_01Vtf8JhoPbyf3o8v87LPVLb (Dev) · baseline 01UafTvm · Ops 01MuXcCL
 integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 
 ## Items (state)
-- DEV-R0a served model = final-turn model      -> worker-R0a 015U1LfqNoymrTP9Wduzmh31 (fresh, baseline-prompted), claude/DEV-R0a   REPORTED 759d873 (6/6) -> VERDICT queued after R0b
-- DEV-R0b router can descend rungs              -> worker-GA56 01HurcnH, branch claude/DEV-R0b   REPORTED b891bea (8/8 killed) -> VERDICT sent to integrator; GA56 free
-- DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   ACTING (251k: retire after)
+- DEV-R0a served model = final-turn model      -> worker-R0a 015U1LfqNoymrTP9Wduzmh31 (fresh, baseline-prompted), claude/DEV-R0a   ACCEPT 759d873 (integrate blocked: permission)
+- DEV-R0b router can descend rungs              -> worker-GA56 01HurcnH, branch claude/DEV-R0b   ACCEPT b891bea (integrate blocked: permission)
+- DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   REPORTED 78d8c69 (1400/0/1) -> VERDICT at integrator
 - in-flight GA52 r2                             -> worker-GA52 01FUssZm (finish r2)              ACTING
 - VERDICT queue -> ga-sdk-integrator 01LBoWy9: GA52 r2, then R0 in Ops B-R0 order R0c > R0a > R0b (all parallel); each landed -> release/1 to Ops
 - DEV-TKG13: rev1 SEND_BACK (M3); rev2 mailed to AGY (test non-int limit) -> await agv/CMD-TKG13-r2 -> token-integrator VERDICT
