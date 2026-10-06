@@ -1,5 +1,5 @@
 # Ops_baseline notes (fixed size; overwrite, do not append history)
-STATUS: successor_needed sent 21:5x (ctx 173k). Watcher = session_01X47ETY7Sx9hpAefj8vC28B (alarms as notify/1 to Ops).
+STATUS: successor_needed sent 21:5x. Watcher = session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku; wake trig_01EFFxRB :49 KST); 01X47ETY + GA56 archived.
 session: session_01MuXcCLZm3KXYyDj9v8HqyB (lineage 8/8, cannot create sessions). baseline 01UafTvm. Dev session_01Vtf8JhoPbyf3o8v87LPVLb (confirmed by baseline). Watcher told Ops directs it. Shadow: no model call in shadow decisions (O2); GA56 fixes cap count. Hourly routine still bound to baseline.
 inbox seen up to: ops 20261006T212227 (DEV-ST-2o: INC-OPS-1 decided — integrator stays through GA52 r2 + R0 verdicts, GA52/GA57 archive after current item; R0a blocked on GA53 director confirm (baseline/user); R0b,R0c acting).
 OPS-R0 done 21:2x: ops/flow/measure/R0.json by ops/hub/measure_r0.py (static: list_sessions + ga-mailbox shadow rows + baseline_verdicts).
