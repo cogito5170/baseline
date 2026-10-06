@@ -36,6 +36,7 @@ records_next: BD-470, round 311
 ## Work loop
 directive: one fresh worker session per directive (create_session, source ga-sdk, branch claude/<id>); Sonnet narrow,
   Opus design/security; whole directive/2 JSON inline; worker cap ~150k; workers notify/1 via send_message.
+worker_base_check: GA49 rev 1 started from 698c1e2 (0.13.0) although the session source was the integration branch → its diff deleted GA45-48. Before verdict: merge-base --is-ancestor <integration> <branch>; tell every new worker "verify HEAD == origin/<integration> before editing".
 verdict: `python3 ops/verdict.py <branch> --mut <mut.json> --venv <python with rlo-sdk>` → one JSON line; review the
   diff yourself; 3–6 own mutations on risky lines; ff push to integration only if all green.
 records: BD row before `| BD-60 |` in DECISION_LOG.md; `- <n> 회차:` in BASELINE.md §13; ops/hub/baseline_verdicts.jsonl;
