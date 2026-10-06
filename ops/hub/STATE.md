@@ -11,7 +11,7 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
 - One directive = one fresh worker session (create_session, source ga-sdk, branch claude/<id>). Sonnet for narrow work,
   Opus for design or security. Put the whole directive/2 JSON inline in the prompt (workers cannot clone baseline).
   Worker context cap ~150k. Workers notify you with notify/1 via send_message.
-- Records for every verdict: BD row inserted before the line starting `| BD-60 |` in DECISION_LOG.md (next is **BD-466**),
+- Records for every verdict: BD row inserted before the line starting `| BD-60 |` in DECISION_LOG.md (next is **BD-466**; BD-464/465 = token plan and this handoff),
   a `- <n> 회차:` line after the last one in BASELINE.md §13 (next round **307**), ops/hub/baseline_verdicts.jsonl row,
   ops/tokmon/sessions.txt (add on dispatch, remove on verdict), archive the worker session.
 - Verdict = `python3 ops/verdict.py <branch> --mut <mut.json> --venv <python with rlo-sdk>` (fresh clone, ff, ga check,
@@ -49,15 +49,15 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
 1. **User task: Gentle Monster applications** (BD-463). Sources/facts/checker in deliverables/gentlemonster/.
    - CMD-GM1 done on the VM: branch agv/CMD-GM1-r1 (36b7a72) in baseline, gemini-3.8-flash-high, 2 turns, 9,265 tokens,
      checker ok, fact audit clean. Not merged yet.
-   - CMD-GM2 (robot software) sent 06:08 UTC, reply not yet in to/baseline. When it lands: fetch agv/CMD-GM2-r1, run
+   - CMD-GM2 (robot software) sent 06:08 UTC; its reply landed 06:18 (to/baseline/20261006T061840.636815Z-AGY-CMD-GM2.md). When it lands: fetch agv/CMD-GM2-r1, run
      `python3 deliverables/gentlemonster/test_job2.py`, run the number/claim audit (numbers not in source/*.md, lines
      with 학사/석사/졸업/재직/경력 outside [placeholders]), merge both agv branches into the integration branch, record a
      BD row with tokens/turns/models, and give the user the six documents (job1/2 × interpretation, application,
      portfolio) — publish as an artifact or give paths — plus the token totals and the 확인 필요 lists.
 2. ops/verdict.py was being self-tested on claude/ga48 (work dir in the old session's scratchpad; just rerun it once on
    any landed branch to confirm it prints one JSON line).
-3. Baseline token plan (research/BASELINE_TOKENS.md): user approved 1 (this handoff), 2 (hourly check in a small fresh
-   session — routine created by the old session, reads ops/hub/BASELINE_SESSION), 3 (verdict.py), 5 (short reads).
+3. Baseline token plan (research/BASELINE_TOKENS.md): user approved 1 (this handoff), 2 (hourly check: routine
+   trig_01QDkY2th2C19fSzj62MTdZ8 fires into THIS hub session; recreate it for the next one on handoff), 3 (verdict.py), 5 (short reads).
    4 (stage 3) waits for the shadow gate.
 
 ## Next after that
