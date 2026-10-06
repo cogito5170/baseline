@@ -75,5 +75,21 @@
    "ops/flow/inbox/baseline/20261006T234209-ops-opinion1-OP-VM-COST.json"
   ],
   "change": "only the user, by their own words to the top baseline hub"
+ },
+ "overnight_delegation": {
+  "approved_by": "user, in top baseline session_016tT1vvrTFehVFzWzfgxcCV, 10-07 01:1x KST (chose option 'baseline이 대신 승인 (권장)')",
+  "user_words": [
+   "잠을 자야한다. 내일까지 GA-engine을 만들어야 하는데, 지금 설계안 하나하나에 시간을 쓸 수가 없다. 방법이 없는가? 자고 일어났는데 세션이 멈춰있으면 안된다",
+   "baseline이 대신 승인 (권장)"
+  ],
+  "until": "2026-10-07T09:00:00+09:00",
+  "meaning": "until 'until', the top baseline hub approves Dev designs on the user's behalf when Ops has sent opinion/1 on them and the design meets its spec acceptance; Dev then builds in order R0-baseline -> R1 gateway (DEV-VMAUTO, DEV-VMBUDGET) -> R2 verdict dry-run (DEV-R3-DET)",
+  "unchanged": [
+   "vm_budget caps (fail-closed)",
+   "auto_integrate conditions and never-list",
+   "DEV/OPS-VMHUB build stays on hold",
+   "decisions only the user can make (credentials, policy changes, cutover, platform permission prompts) are queued for the morning; independent work continues"
+  ],
+  "change": "only the user, by their own words to the top baseline hub"
  }
 }

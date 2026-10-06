@@ -1,0 +1,21 @@
+{
+ "id": "OPS-OVERNIGHT",
+ "stage": "R1",
+ "why": "user 10-07 01:1x KST: GA engine needed by tomorrow; user sleeps until 09:00 KST and has no time to review each design; sessions must not be found stopped in the morning. Design approval delegated to the top baseline until 09:00 (policy.json overnight_delegation).",
+ "goal": "Overnight, Ops keeps the pipeline moving and visible: opinions on Dev designs within one round, verification of each release, hourly measurement against vm_budget, and stalled-session detection.",
+ "acceptance": [
+  "opinion/1 on each Dev design within one hourly round of receiving it",
+  "each Dev release verified (verify/1) or an incident/1 within one round",
+  "every hourly tick lists sessions that are blocked or idle with work pending, with the reason, to baseline",
+  "a final status/1 at 08:30 KST: what landed, budget used vs caps, and the morning list of user-only decisions"
+ ],
+ "constraints": [
+  "vm_budget caps, auto_integrate conditions/never-list unchanged; VMHUB build stays on hold",
+  "a decision only the user can make (credential, policy change, cutover, a platform permission prompt) goes into one morning list with the exact action and cause; work that does not depend on it continues",
+  "a session nearing its context cap (150k) sends successor_needed to baseline before it stops, with its handoff written in a repository"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "ops",
+ "at": "2026-10-07T01:04:12+09:00"
+}

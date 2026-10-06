@@ -1,0 +1,22 @@
+{
+ "id": "DEV-OVERNIGHT",
+ "stage": "R1",
+ "why": "user 10-07 01:1x KST: GA engine needed by tomorrow; user sleeps until 09:00 KST and has no time to review each design; sessions must not be found stopped in the morning. Design approval delegated to the top baseline until 09:00 (policy.json overnight_delegation).",
+ "goal": "By 09:00 KST the GA engine has R0-baseline, the R1 single LLM gateway with budget enforcement, and the R2 verdict dry-run built, integrated where verdicts pass, and reported.",
+ "acceptance": [
+  "R0-baseline exists on the ga-sdk remote (DEV-R0FREEZE)",
+  "DEV-VMAUTO gateway and DEV-VMBUDGET caps are integrated with their tests, or the exact failing point is reported",
+  "DEV-R3-DET verdict dry-run is compared with recorded integrator verdicts and the agreement count is reported",
+  "each design is sent to Ops for opinion/1 and to baseline for approval before its build; baseline answers within one hourly round",
+  "no Dev-directed session is found idle without a reported reason at any hourly check; a status/1 at least every 2 hours and a final status/1 at 08:30 KST"
+ ],
+ "constraints": [
+  "vm_budget caps, auto_integrate conditions/never-list unchanged; VMHUB build stays on hold",
+  "a decision only the user can make (credential, policy change, cutover, a platform permission prompt) goes into one morning list with the exact action and cause; work that does not depend on it continues",
+  "a session nearing its context cap (150k) sends successor_needed to baseline before it stops, with its handoff written in a repository"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-07T01:04:12+09:00"
+}
