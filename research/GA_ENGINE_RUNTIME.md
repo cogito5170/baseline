@@ -123,3 +123,4 @@ ga-sdk 자체 변경(GA5x)은 agv 가 아니라 Claude 작업 세션 + ga-sdk �
 8. **세션 운영** — 허브는 약 1시간마다 150k 초과(cache_read 가 비용의 대부분, 33.6M/시간) → 인계 자동화, 끝난 세션 자동 보관.
 
 **수정된 순서:** R0 결함 3개 → R1 얇은 관문 + 예산 → R2 verdict dry-run(shadow) → R3 자동 통합(엄격 조건) → R4 상태 기계 → R5 은퇴(감시 제외).
+- (21:14, GA57 작업자, 5/7) ga/ops/core.py 의 _model_batch/_optimize/_learn 가 이미 묶음 창 · 고정 접두 · rung · 항목당 토큰 · 조정+되돌림 · 규칙 승격을 함 → R1 관문으로 끌어올림. 직접 backends.create 6곳(hub.py:1662, act/loop.py:621,669, plan/cli.py:59, intake/cli.py:57, gemini.py:246,725, ops/core.py:219). O2 원인 확정: shadow 의 결정 전 조기 종료가 사용량/오류를 지우고 ASK_HUMAN 기록. 관문이 served 확인 · 오류 라벨 · 호출자별 조정 키 · 학습 규칙 만료를 가져야 함. 나머지 의견(GA52 · GA53)은 Dev_baseline 이 종합해 opinion/1 로 보냄.
