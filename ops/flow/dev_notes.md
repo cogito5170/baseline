@@ -1,26 +1,25 @@
 # Dev_baseline notes (fixed size; overwrite, never append history)
-hub: session_01Vtf8JhoPbyf3o8v87LPVLb (Dev) · baseline 01UafTvm · Ops 01MuXcCLZm3KXYyDj9v8HqyB
-integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
+hub: session_01VMbRhMjtfPAALfLjAWJ1tT (Dev, since 10-07 00:0x KST) · baseline top 016tT1vv · Ops 01M4vGeV
+integration: ga-sdk claude/gracious-meitner-vp49xe 277945de (R0a+R0b, 0.18.1) · policy/1 extended to this hub (ad21638)
 
 ## Items (state)
-- DEV-R0a served model = final-turn model      -> worker-R0a 015U1LfqNoymrTP9Wduzmh31 (fresh, baseline-prompted), claude/DEV-R0a   ACCEPT 759d873 (integrate blocked: permission)
-- DEV-R0b router can descend rungs              -> worker-GA56 01HurcnH, branch claude/DEV-R0b   ACCEPT b891bea (integrate blocked: permission)
-- DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   REPORTED 78d8c69 (1400/0/1) -> VERDICT at integrator
-- in-flight GA52 r2                             -> worker-GA52 01FUssZm (finish r2)              ACTING
-- VERDICT queue -> ga-sdk-integrator 01LBoWy9: GA52 r2, then R0 in Ops B-R0 order R0c > R0a > R0b (all parallel); each landed -> release/1 to Ops
-- DEV-TKG13: rev1 SEND_BACK (M3); rev2 mailed to AGY (test non-int limit) -> await agv/CMD-TKG13-r2 -> token-integrator VERDICT
-- R1..R5: PLANNED, start after R0 lands (R1 thin gateway+budgets first)
+- DEV-R0FREEZE  -> integrator 01LBoWy9: merge R0c 78d8c69, refenv suite, docs/R0_BASELINE.md, push, tag R0-baseline (tag: user line)   ACTING
+- DEV-VMSHA     -> worker-R0a 015U1Lfq, claude/DEV-VMSHA from 277945de; VERDICT after R0-baseline                                     ACTING
+- CMD-GA52 r2   -> worker-GA52 01FUssZm (approved innerHTML check + negative _num); archive after report                               ACTING
+- CMD-TKG13 r2  -> AGY declined (missing $.changes, rev>1); resend directive/2 with changes=rev1 M3 -> token-integrator 01FynfJT     TODO (owner Dev, ASK-TKG13 answered DEV-ST-2)
+- awaiting VERDICT after R0-baseline: GA52 r2, GA53 49f24c3 (worker 01HKHSLN idle), GA54 364680d (p2,p3 survived), GA56 c10675e, GA57 46687db (1381/0/56, 31/31)
+- R1..R5 after R0-baseline: R1 = DEV-VMAUTO gateway + budgets + DEV-WATCH; DEV-R3-DET; DEV-BASEAUTO (R5); DEV-FORMATS (R4)
+- HELD: DEV-VMHUB rev3 (needs token problem solved by measurement + R0-baseline)
+
+## Sessions / INC-OPS-2,3
+- archive pending user OK in this session (platform refused archive_session): worker-GA57 01H2PH8B (done), old dev hub 01Vtf8Jh
+- integrator 01LBoWy9 (230k): replace right after R0-baseline; successor from ops/hub/successors/ga_sdk_integrator.md + refenv; ask baseline
+- GA52 (227k): archive after r2 report
 
 ## Rules in force
-- send only via ops/flow/flow.py; doorbell {"flow":"<path>"}
-- integration: user changed Dev settings (21:5x); send INTEGRATE per ops/flow/policy.json once verdict ACCEPT recorded; refusal -> report exact text to baseline, stop
-- workers report: {"id","branch","sha","tests","mutations":[{id,file,find,replace,tests}]}
+- send via ops/flow/flow.py + doorbell {"flow":"<path>"}; git + send_message allowed by user in this session (10-07 00:5x)
+- INTEGRATE per policy/1; new refs (tags) need a user line in the integrator
+- worker report: {"id","branch","sha","tests","mutations":[{id,file,find,replace,tests}]}
 
-## Pending
-- POLL-RUNTIME opinions: GA57 in (gateway: lift ga/ops/core.py batch/tune into ga.llm; 6+ direct backends.create sites; served-model check + error labels in gateway; rule expiry; per-caller tune keys). GA52, GA53 pending -> one opinion/1 to baseline.
-- done awaiting verdict (re-merge after GA52 lands): GA53 49f24c3, GA54 364680d (p2,p3 survived), GA56 c10675e, GA57 46687db. Release order GA52->53->54->55->56->57 (Ops may re-batch).
-- integrator 01LBoWy9 ack: head f9671da, venv rlo 0.11.1.
-- INC-OPS-1: integrator stays through R0; successor built from R0c recipe. GA52/GA57 archive after current item.
-- successors (integrator after R0c, 2 R1 workers): send baseline status/1 kind successor_needed when due
-- DEV-SH1 (R4 shadow-on-rejection): PLANNED after R1 gateway
-- shadow rows: python3 ops/hub/shadow_digest.py stage dev <row.json> (never send shadow/1 to baseline)
+## Sent
+- DEV-ST-1, DEV-ST-2 (baseline, direct); DEV-ST-OPS-1 (ops); OP-DEV-VM-COST opinion/1 (ASK-VM-COST) to baseline

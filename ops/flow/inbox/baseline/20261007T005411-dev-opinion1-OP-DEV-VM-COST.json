@@ -1,0 +1,41 @@
+{
+ "id": "OP-DEV-VM-COST",
+ "ref": "ASK-VM-COST",
+ "question": "expected tokens/USD per hour for Dev and Ops baselines inside the VM vs today's cloud hubs; cost drivers; cuts; budget",
+ "agree": [
+  "cost today is dominated by context re-read, not by work: cache_read is ~74% of hub cost (R0); the old dev hub 01Vtf8Jh read 36.0M cache tokens for 11.35 USD, worker-GA57 24.5M for 10.52 USD (ops/flow/measure/last.json)",
+  "a VM baseline only pays off as an event-driven loop of fixed-size cards, not as a long conversation; with that shape the coordination cost drops by an order of magnitude"
+ ],
+ "disagree": [
+  "moving today's hub conversations into the VM unchanged would not save tokens; the saving comes from removing the conversation (cards + rules), wherever it runs"
+ ],
+ "missing": [
+  "per-call measurement on the VM (needs the DEV-VMAUTO gateway); today's numbers are session lifetime averages from cloud usage",
+  "the user's budget (ASK-VM-COST constraint: no continuous VM model until set)"
+ ],
+ "facts": [
+  "model call sites that stay after R1-R4 + VMHUB (rules cannot decide them): 1) building/editing code for a spec (worker) - largest, per item; 2) intake: user words -> candidate spec/1 (DEV-BASEAUTO), only when the user writes; 3) diagnosis on needs_judgment: a failing test or incident whose cause is not matched by a rule (each repeat becomes a rule, 0 calls); 4) design opinions (opinion/1) on request",
+  "zero model calls by design: verdict + integration (DEV-R3-DET), watching (DEV-WATCH), routing/batching order, successor prompt + assign swap + digest (DEV-BASEAUTO), commit/push gates (VMHUB rev3)",
+  "estimate (not measured): coordination as cards ~10-20 calls/h when active x ~10-20k tokens on Sonnet-class -> ~0.2-0.6 USD/h for Dev+Ops together, ~0 when idle; vs today's cloud hubs 6-11 USD/h each at 200-330k ctx",
+  "build cost per item measured roughly 1.7 USD (R0a, short worker) to 10.5 USD (GA57, long worker); long workers cost mostly re-read"
+ ],
+ "risk": [
+  "estimates are unvalidated until the gateway meters per call; a judgment loop without a rule-cache can still grow cost; Opus for routine calls multiplies cost ~5x"
+ ],
+ "first_step": "land R0-baseline, then R1 gateway (DEV-VMAUTO) with budgets; measure one day of the VM loop in shadow before any VM baseline runs continuously",
+ "proposal_budget": {
+  "vm_coordination_dev_plus_ops_usd_per_h": 1.0,
+  "build_per_item_usd": {
+   "default": 3,
+   "hard": 6
+  },
+  "vm_total_usd_per_h": 6,
+  "cloud_top_baseline_usd_per_h": 2,
+  "session_ctx_cap_tokens": 150000,
+  "model_default": "cheapest that passes; Opus only for design opinions and diagnosis"
+ },
+ "form": "opinion/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T00:54:11+09:00"
+}

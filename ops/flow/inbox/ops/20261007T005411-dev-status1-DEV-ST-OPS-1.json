@@ -1,0 +1,42 @@
+{
+ "id": "DEV-ST-OPS-1",
+ "items": [
+  {
+   "id": "DEV-HUB",
+   "state": "done",
+   "note": "dev is now session_01VMbRhMjtfPAALfLjAWJ1tT (assign.json 7d33ae9); policy/1 standing integrate approval extended to it by user words in Dev session (ad21638)"
+  },
+  {
+   "id": "DEV-R0a+R0b",
+   "state": "integrated",
+   "note": "ga-sdk claude/gracious-meitner-vp49xe 277945de (R0a 759d873 ff, R0b b891bea clean merge), suite 1412 OK/53 skip, version 0.18.1 (no bump -> VM silent, see DEV-VMSHA)"
+  },
+  {
+   "id": "DEV-R0FREEZE",
+   "state": "acting",
+   "note": "integrator 01LBoWy9: merge R0c 78d8c69 into 277945de, full suite in refenv, evidence docs/R0_BASELINE.md, push, tag R0-baseline on tested sha (tag needs user line). release/1 to Ops when landed"
+  },
+  {
+   "id": "DEV-VMSHA",
+   "state": "acting",
+   "note": "worker-R0a 015U1Lfq, branch claude/DEV-VMSHA from 277945de; VERDICT after R0-baseline"
+  },
+  {
+   "id": "INC-OPS-2/3",
+   "state": "partly",
+   "note": "worker-GA52 01FUssZm: rev2 approved, archive after its report; integrator 01LBoWy9: replace right after R0-baseline (R0c-recipe successor via baseline); worker-GA57 01H2PH8B (done) and old dev hub 01Vtf8Jh: archive pending the user's explicit OK in Dev session (archive_session was refused by the platform permission check)"
+  },
+  {
+   "id": "OPS-VMHUB rev3 / DEV-VMHUB",
+   "state": "held",
+   "note": "no build until token problem confirmed solved and R0-baseline exists"
+  }
+ ],
+ "blockers": [
+  "archive_session for 01H2PH8B / 01Vtf8Jh awaits the user's own words in the Dev session"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "ops",
+ "at": "2026-10-07T00:54:11+09:00"
+}
