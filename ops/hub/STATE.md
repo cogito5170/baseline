@@ -11,7 +11,7 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
 - One directive = one fresh worker session (create_session, source ga-sdk, branch claude/<id>). Sonnet for narrow work,
   Opus for design or security. Put the whole directive/2 JSON inline in the prompt (workers cannot clone baseline).
   Worker context cap ~150k. Workers notify you with notify/1 via send_message.
-- Records for every verdict: BD row inserted before the line starting `| BD-60 |` in DECISION_LOG.md (next is **BD-467**),
+- Records for every verdict: BD row inserted before the line starting `| BD-60 |` in DECISION_LOG.md (next is **BD-467**; BD-464/465 = token plan and this handoff),
   a `- <n> 회차:` line after the last one in BASELINE.md §13 (next round **308**), ops/hub/baseline_verdicts.jsonl row,
   ops/tokmon/sessions.txt (add on dispatch, remove on verdict), archive the worker session.
 - Verdict = `python3 ops/verdict.py <branch> --mut <mut.json> --venv <python with rlo-sdk>` (fresh clone, ff, ga check,
@@ -51,8 +51,8 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
    session — ask the user before retrying.
 2. ops/verdict.py was being self-tested on claude/ga48 (work dir in the old session's scratchpad; just rerun it once on
    any landed branch to confirm it prints one JSON line).
-3. Baseline token plan (research/BASELINE_TOKENS.md): user approved 1 (this handoff), 2 (hourly check in a small fresh
-   session — routine created by the old session, reads ops/hub/BASELINE_SESSION), 3 (verdict.py), 5 (short reads).
+3. Baseline token plan (research/BASELINE_TOKENS.md): user approved 1 (this handoff), 2 (hourly check: routine
+   trig_01QDkY2th2C19fSzj62MTdZ8 fires into THIS hub session; recreate it for the next one on handoff), 3 (verdict.py), 5 (short reads).
    4 (stage 3) waits for the shadow gate.
 
 ## Next after that
