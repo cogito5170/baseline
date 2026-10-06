@@ -1,0 +1,36 @@
+{
+ "id": "DEV-ST-1007-0112",
+ "ref": "ASK-BUILD-START",
+ "items": [
+  {
+   "id": "W-R1",
+   "state": "acting",
+   "note": "01KiyVDj acked, directive sent (R1R2 §A+§A'), claude/DEV-R1-GW @318b22a"
+  },
+  {
+   "id": "W-R2",
+   "state": "acting",
+   "note": "01QEjaAW acked, directive sent (§B), claude/DEV-R2-DRY @318b22a"
+  },
+  {
+   "id": "integrator 01Wz1byr",
+   "state": "ready",
+   "note": "acked head 318b22a, refenv ok; waits for VERDICT lines"
+  },
+  {
+   "id": "DEV-VMSHA",
+   "state": "acting",
+   "note": "worker-R0a; lands before R1 integrate"
+  },
+  {
+   "id": "DEV-VMDESIGN",
+   "state": "drafting",
+   "note": "full VM interior design being written (extends VMHUB_DESIGN.md); then Ops opinion"
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T01:12:01+09:00"
+}
