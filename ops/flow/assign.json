@@ -31,8 +31,8 @@
   "previous": "session_01M4vGeVjHtivZ5nKLDSmdED (prev 01Qhj1TX)"
  },
  "baseline": {
-  "hub": "session_016tT1vvrTFehVFzWzfgxcCV",
-  "previous": "session_01LtsebbxyWz4BAggiGcG1WF"
+  "hub": "session_01KvzrDZZJDxYhbkb9Yb8LKs",
+  "previous": "session_016tT1vvrTFehVFzWzfgxcCV"
  },
- "note": "Dev/Ops hubs created by baseline 01UafTvm (lineage depth 8): they cannot create sessions; they direct the sessions assigned here. Need more capacity -> status/1 blocker to baseline. Top baseline is now session_016tT1vvrTFehVFzWzfgxcCV (depth 1, opened 10-07 00:3x KST by top 01Ltsebb at the user's request): it creates successors."
+ "note": "Dev/Ops hubs created by baseline 01UafTvm (lineage depth 8): they cannot create sessions; they direct the sessions assigned here. Need more capacity -> status/1 blocker to baseline. Top baseline is now session_01KvzrDZZJDxYhbkb9Yb8LKs (depth 0, opened by the user 10-07 04:2x KST; previous top 016tT1vv left idle): it creates successors."
 }
