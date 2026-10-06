@@ -66,7 +66,7 @@ fixes_queued: GA39 survivors (rest → CMD-GA53).
 
 ## In flight (handoff 10-06 20:23 KST from session_01Eu6Sdh…, ctx 215k)
 - ga-sdk integration head f9671da (0.18.1, GA51 integrated 19:56). Landing order GA52 → GA53 → GA54 → GA55; each later one merges the new head and bumps the next patch (0.18.2, .3, .4 …).
-- CMD-GA52 done 20:21 (0c4f041, 0.18.2, 1417 run 0 failed). Hub reviewed diff; VERDICT sent 20:3x to ga-sdk integrator with ops/hub/mut/CMD-GA52.json (D1 d1-d5 + own h1-h5; relay escapes < > as &lt; &gt;, addendum sent). Await result → INTEGRATE (ff) → archive worker 01FUssZm.
+- CMD-GA52 r1 SEND_BACK 20:39 (integrator: 1417 OK, 8/10 mutations killed; d5 innerHTML + h5 negative survived — JS test likely node-skipped). Worker 01FUssZm… adding a node-free static check + negative case → r2 done → re-VERDICT (same mut file) → INTEGRATE ff.
 - CMD-GA53 (4 engine fixes) worker session_01HKHSLN… done 20:23: 49f24c3, 0.18.2, 4/4 mutations killed; 10 failures (test_judge x6, ga32 x2, ga39 x2) that it says fail on base too, but the integrator ran f9671da 1401 OK, so likely its environment. After GA52 lands: tell the worker to merge the new head + bump 0.18.3 → VERDICT (D1 mutations; the integrator's suite decides on the 10).
 - CMD-GA54 `ga project` (user chose (가); generic — user: no example content) worker session_01VxBgf9gyDktXz8Ke7T6NiY (Opus, claude/CMD-GA54) drafting core.
 - CMD-GA55 usage panel (user OK 20:3x): directives/CMD-GA55.md ready; dispatch AFTER GA54 lands. Producer done: cloud_snapshot.py emits `plan` + per-session parent/tokens.
