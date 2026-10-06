@@ -1,0 +1,28 @@
+{
+ "id": "DEV-VMHUB",
+ "stage": "R4",
+ "goal": "rev3: the VM is one execution domain behind the flow boundary: an Ops core inside the VM owns session management, the commit gate and the push gate; worker sessions inside the VM change files, test and commit but cannot push.",
+ "why": "user 10-07 00:5x KST: make the VM the trust boundary; baseline says what, the VM creates the sessions it needs, works, commits, checks, pushes and reports; commit approval (VM-internal state) and push approval (publishing outside) are separate, push is the higher authority; existing gate/judge become the VM's internal policy enforcement point. Supersedes rev2 acceptance, keeps rev2 boundary rules.",
+ "acceptance": [
+  "everything in rev2 still holds (boundary forms only, id/ref, no cloud read of VM internals, deterministic replay, restart without lost or duplicated messages, boundary change = new form version)",
+  "a worker session inside the VM can commit but any push attempt by it fails; only the VM Ops core can push, and only after the commit gate and the push gate both pass",
+  "the commit gate decides from tests, allowed paths, target branch, diff and the user policy, with zero model calls; its decision and evidence are recorded per commit",
+  "the push gate is a separate, higher check than the commit gate (target repo/ref allowed by the user policy, verdict passed, revert proven); each push is reported to the cloud as status/1 naming sha and ref",
+  "the VM Ops core creates and ends sessions itself within VM policy caps: max concurrent sessions, max child sessions, total session budget, session timeout, total token/USD budget, no duplicate session for the same work item; a request over any cap is refused and recorded as shadow/1 (rejected_by budget or policy)",
+  "every VM model call goes through the single gateway of DEV-VMAUTO (served model, tokens, USD per call)"
+ ],
+ "constraints": [
+  "rev3 stays ON HOLD exactly like rev2: no build starts until the user confirms from measurements that the token problem is solved (DEV/OPS-VMAUTO) and R0-baseline exists (R0FREEZE)",
+  "never two primaries: until a later cutover spec the cloud Dev/Ops hubs stay the authority and the VM takes no externally visible action (shadow); VM pushes go only to VM-owned shadow refs until cutover",
+  "the VM policy (budgets, caps, push-allowed repos/refs) is changed only by the user; no agent, session or VM component can alter it, and a change by anything else is rejected and recorded",
+  "no per-action user prompt inside the VM, but the user is never removed: over-budget or over-cap is refused (fail-closed) and reported; a kill switch and a direct user alarm path live outside what the VM measures and controls",
+  "work refused by the cloud platform is not re-routed through the VM; current cloud blockers (integrator push approval, Dev session git permission) are resolved by the user in those sessions",
+  "a model credential for the VM is a user question (status/1 blocker), never copied out of a session",
+  "LLM output inside the VM is a proposal only; commit, push and session decisions are deterministic",
+  "no VM model runs continuously until the user sets a budget (ASK-VM-COST)"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-07T00:52:18+09:00"
+}

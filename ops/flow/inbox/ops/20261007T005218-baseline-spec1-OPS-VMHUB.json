@@ -1,0 +1,26 @@
+{
+ "id": "OPS-VMHUB",
+ "stage": "R4",
+ "goal": "rev3: Ops verifies and observes the VM execution domain (session manager, commit gate, push gate) from boundary messages only, while it runs in shadow.",
+ "why": "user 10-07 00:5x KST: make the VM the trust boundary; baseline says what, the VM creates the sessions it needs, works, commits, checks, pushes and reports; commit approval (VM-internal state) and push approval (publishing outside) are separate, push is the higher authority; existing gate/judge become the VM's internal policy enforcement point. Supersedes rev2 acceptance, keeps rev2 boundary rules.",
+ "acceptance": [
+  "everything in rev2 still holds (deploy check by SHA, boundary-only observation, VM token/USD per hour in R0 units, written rollback leaving cloud hubs as authority)",
+  "per hour the VM reports sessions created/ended/refused, commits gated (pass/fail with reason) and pushes (sha, ref); Ops checks them against the user policy caps",
+  "any push by something other than the VM Ops core, any push to a ref outside the user policy, a policy change not made by the user, or a cap exceeded without refusal is an incident/1 and triggers the rollback path",
+  "the kill switch and the direct user alarm path are tested once in shadow and the result is recorded"
+ ],
+ "constraints": [
+  "rev3 stays ON HOLD exactly like rev2: no build starts until the user confirms from measurements that the token problem is solved (DEV/OPS-VMAUTO) and R0-baseline exists (R0FREEZE)",
+  "never two primaries: until a later cutover spec the cloud Dev/Ops hubs stay the authority and the VM takes no externally visible action (shadow); VM pushes go only to VM-owned shadow refs until cutover",
+  "the VM policy (budgets, caps, push-allowed repos/refs) is changed only by the user; no agent, session or VM component can alter it, and a change by anything else is rejected and recorded",
+  "no per-action user prompt inside the VM, but the user is never removed: over-budget or over-cap is refused (fail-closed) and reported; a kill switch and a direct user alarm path live outside what the VM measures and controls",
+  "work refused by the cloud platform is not re-routed through the VM; current cloud blockers (integrator push approval, Dev session git permission) are resolved by the user in those sessions",
+  "a model credential for the VM is a user question (status/1 blocker), never copied out of a session",
+  "LLM output inside the VM is a proposal only; commit, push and session decisions are deterministic",
+  "no VM model runs continuously until the user sets a budget (ASK-VM-COST)"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "ops",
+ "at": "2026-10-07T00:52:18+09:00"
+}
