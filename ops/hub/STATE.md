@@ -62,6 +62,8 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
 - add_repo: Token (push) granted on retry after the user objected to human steps (clone /home/user/token); ga-sdk push
   still denied by the classifier ([Permission Grant]). Handoff fix: create the next hub session with ga-sdk/Token already
   as sources (or the user adds one allow rule once), so no handoff ever needs add_repo again.
+  Old session suggested a tiny ga-sdk-sourced session just to push integration heads: NOT used — it would route around
+  the classifier's denial. Normal ga-sdk workers (own branches) are fine; integration push waits for a real grant.
   ga-sdk read-only clone works (scratchpad/ga-sdk) for running ga locally.
 
 ## Next after that
