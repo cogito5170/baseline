@@ -1,6 +1,6 @@
 {
  "dev": {
-  "hub": "session_01Vtf8JhoPbyf3o8v87LPVLb",
+  "hub": "session_01VMbRhMjtfPAALfLjAWJ1tT",
   "sessions": {
    "ga-sdk-integrator": "session_01LBoWy9AXfEwQsHqMcumAuC",
    "token-integrator": "session_01FynfJTJBM1D3itToGCjyM1",
@@ -10,7 +10,8 @@
   },
   "idle_unredirected": {
    "worker-GA53": "session_01HKHSLNc3akPq52QTeKmDPm (refuses relayed redirect; holds CMD-GA53 49f24c3)"
-  }
+  },
+  "previous": "session_01Vtf8JhoPbyf3o8v87LPVLb"
  },
  "ops": {
   "hub": "session_01Qhj1TXTH414PdvL1n2JCRy",
