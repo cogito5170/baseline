@@ -1,0 +1,22 @@
+{
+ "id": "OPS-VMHUB",
+ "stage": "R4",
+ "why": "user 10-06 23:5x KST: cogito5170/Dev and cogito5170/Ops are where the Dev and Ops baselines are transplanted into the VM; the cloud keeps one external baseline (boundary). VM internals are encapsulated from the cloud but keep being updated by the automated pipeline. Cutover is a later, separate spec.",
+ "constraints": [
+  "never two primaries: until a later cutover spec the cloud Dev/Ops hubs stay the authority and the VM baselines take no externally visible action",
+  "cloud hubs are never deleted; after a later cutover they become a read-only archive (rollback reference)",
+  "no VM baseline runs a model continuously until the user sets a budget after ASK-VM-COST",
+  "LLM output inside the VM is a proposal/opinion only, never a decision"
+ ],
+ "goal": "Ops deploys, observes and measures the VM-hosted Dev/Ops baselines built under DEV-VMHUB while they run in shadow, using only boundary messages from the cloud side.",
+ "acceptance": [
+  "deploy check: the VM runs the release Dev reported, confirmed by a VM->cloud status/1 that names the version",
+  "observation of the VM baselines needs no cloud read of VM internals; health, incidents and rejections arrive as status/1 / incident/1 / shadow/1",
+  "token and USD per hour of the VM baselines is reported in the same units as ops/flow/measure/R0.json, next to the cloud hubs' figures",
+  "a VM incident has a written rollback path that leaves the cloud hubs as authority"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "ops",
+ "at": "2026-10-06T23:40:51+09:00"
+}

@@ -1,0 +1,25 @@
+{
+ "id": "DEV-VMHUB",
+ "stage": "R4",
+ "why": "user 10-06 23:5x KST: cogito5170/Dev and cogito5170/Ops are where the Dev and Ops baselines are transplanted into the VM; the cloud keeps one external baseline (boundary). VM internals are encapsulated from the cloud but keep being updated by the automated pipeline. Cutover is a later, separate spec.",
+ "constraints": [
+  "never two primaries: until a later cutover spec the cloud Dev/Ops hubs stay the authority and the VM baselines take no externally visible action",
+  "cloud hubs are never deleted; after a later cutover they become a read-only archive (rollback reference)",
+  "no VM baseline runs a model continuously until the user sets a budget after ASK-VM-COST",
+  "LLM output inside the VM is a proposal/opinion only, never a decision"
+ ],
+ "goal": "Dev baseline and Ops baseline run inside the VM, each with its role, rules, notes and inbox held in its own repository (cogito5170/Dev, cogito5170/Ops), reachable from the cloud only through the protocol boundary.",
+ "acceptance": [
+  "cogito5170/Dev and cogito5170/Ops each hold everything their baseline needs to run on the VM; neither depends on the baseline repo's ops/flow at runtime",
+  "the boundary admits only cloud->VM spec/1 and ask/1, and VM->cloud status/1, opinion/1, incident/1 and shadow/1; any other form or direction is rejected at the boundary and the rejection is recorded",
+  "every boundary message carries request_id, parent_id, source, timestamp and protocol_version; every VM reply carries the request_id it answers; a duplicate request_id is answered once",
+  "the cloud side operates without reading the Dev/Ops repositories, VM inbox, session state or internal logs; anything it needs arrives as a VM->cloud message",
+  "authority, routing, state transitions, admission/rejection and integration inside the VM are decided by deterministic rules; replaying the same input sequence gives the same decisions",
+  "VM internals can be updated by the automated pipeline (built release -> verified deploy) without changing the boundary; a boundary change requires a new protocol_version",
+  "after a VM restart the baselines resume from persisted state with no lost or duplicated message"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T23:40:51+09:00"
+}

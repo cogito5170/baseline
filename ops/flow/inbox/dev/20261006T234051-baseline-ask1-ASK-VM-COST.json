@@ -1,0 +1,9 @@
+{
+ "id": "ASK-VM-COST",
+ "question": "User wants to discuss token use before VM Dev/Ops baselines run. Give opinion/1: expected tokens and USD per hour for Dev and Ops baselines inside the VM (where do model calls still remain after R1-R4 and DEV-VMHUB, which are deterministic), vs today's cloud hubs (R0: hub 6.08 USD/h, total 10.2 USD/h); the biggest cost drivers (e.g. cache_read in long hubs); what would cut it and what each cut costs in capability; a budget you would propose.",
+ "context": "specs DEV-VMHUB / OPS-VMHUB (stage R4). Ops owns the measurement; Dev owns where model calls sit in the design.",
+ "form": "ask/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T23:40:51+09:00"
+}
