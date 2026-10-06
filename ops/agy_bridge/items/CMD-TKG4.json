@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG4",
+  "goal": "Fix drop_bodies in backend/app/domains/ingestion/adapters/common.py so that, when store_bodies is false, body keys (BODY_KEYS) are removed at any depth, including dicts inside lists (and lists inside lists): {\"turns\": [{\"text\": \"S\", \"n\": 1}]} -> {\"turns\": [{\"n\": 1}]}. Non-dict list items are kept as they are; the store_bodies=True path (scrub_value) is unchanged; a non-dict top-level value is returned as is.",
+  "files": [
+   "backend/app/domains/ingestion/adapters/common.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/ingestion/tests/adapters/test_tkg4_drop_bodies.py": "\"\"\"Acceptance test for CMD-TKG4 (written by baseline; the executor may not edit it).\"\"\"\nimport math\nimport unittest\n\nfrom app.domains.ingestion.adapters.common import drop_bodies\n\n\nclass DropBodiesInLists(unittest.TestCase):\n    def test_dicts_in_lists_lose_bodies(self):\n        self.assertEqual(drop_bodies({\"turns\": [{\"text\": \"SECRET\", \"n\": 1}]}), {\"turns\": [{\"n\": 1}]})\n        self.assertEqual(drop_bodies({\"a\": {\"b\": [[{\"prompt\": \"p\", \"k\": 2}]]}}), {\"a\": {\"b\": [[{\"k\": 2}]]}})\n\n    def test_other_values_kept(self):\n        self.assertEqual(drop_bodies({\"tags\": [\"text\", 1, None], \"n\": 3}), {\"tags\": [\"text\", 1, None], \"n\": 3})\n        self.assertEqual(drop_bodies({\"text\": \"x\", \"m\": {\"content\": \"y\", \"z\": 1}}), {\"m\": {\"z\": 1}})\n        self.assertEqual(drop_bodies(\"plain\"), \"plain\")\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/ingestion",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg4_drop_bodies.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

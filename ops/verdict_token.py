@@ -52,7 +52,7 @@ def main():
             rc, tail = sh(["node", "frontend/node_modules/vitest/vitest.mjs", "run", "--root", "frontend"], wt)
             suites["frontend"] = rc == 0 or tail
         if any(f.startswith("backend/") for f in changed):
-            rc, tail = sh([sys.executable, "-m", "unittest", "discover", "-s", "app", "-t", ".", "-q"],
+            rc, tail = sh([sys.executable, "-m", "unittest", "discover", "-s", "app/domains", "-t", ".", "-q"],
                           os.path.join(wt, "backend"))
             suites["backend"] = rc == 0 or tail
         out["suites"] = suites

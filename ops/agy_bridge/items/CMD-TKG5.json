@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG5",
+  "goal": "Fix backend/app/domains/audit/service.py so that check_detail accepts count fields named after tokens: input_tokens, output_tokens, cache_read_tokens, max_tokens with numeric values do not raise (the module already allows counts like *_count). Secret-named fields must still raise AuditError: token, access_token, api_key, refresh_token, password with a non-empty string value.",
+  "files": [
+   "backend/app/domains/audit/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/audit/tests/test_tkg5_token_counts.py": "\"\"\"Acceptance test for CMD-TKG5 (written by baseline; the executor may not edit it).\"\"\"\nimport math\nimport unittest\n\nfrom app.domains.audit.service import AuditError, check_detail\n\n\nclass TokenCounts(unittest.TestCase):\n    def test_token_counts_are_allowed(self):\n        check_detail({\"input_tokens\": 5000, \"output_tokens\": 12, \"cache_read_tokens\": 7, \"max_tokens\": 4096})\n        check_detail({\"usage\": [{\"input_tokens\": 1}]})\n\n    def test_secrets_still_rejected(self):\n        for k in (\"token\", \"access_token\", \"api_key\", \"refresh_token\", \"password\"):\n            with self.assertRaises(AuditError, msg=k):\n                check_detail({k: \"abc123\"})\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/audit",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg5_token_counts.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

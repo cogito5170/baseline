@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG6",
+  "goal": "Fix _permille in backend/app/domains/run/gadir.py so it never raises: +inf (float or the string \"inf\") -> 1000, -inf -> 0, nan -> 0, keeping 0.5 -> 500, 2 -> 1000, -1 -> 0, None -> 0, \"x\" -> 0.",
+  "files": [
+   "backend/app/domains/run/gadir.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/run/tests/test_tkg6_permille.py": "\"\"\"Acceptance test for CMD-TKG6 (written by baseline; the executor may not edit it).\"\"\"\nimport math\nimport unittest\n\nfrom app.domains.run.gadir import _permille\n\n\nclass PermilleNeverRaises(unittest.TestCase):\n    def test_infinities_clamp(self):\n        self.assertEqual(_permille(math.inf), 1000)\n        self.assertEqual(_permille(\"inf\"), 1000)\n        self.assertEqual(_permille(-math.inf), 0)\n        self.assertEqual(_permille(math.nan), 0)\n\n    def test_existing_behaviour(self):\n        for v, want in ((0.5, 500), (2, 1000), (-1, 0), (None, 0), (\"x\", 0), (\"0.25\", 250)):\n            self.assertEqual(_permille(v), want, v)\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/run",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg6_permille.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

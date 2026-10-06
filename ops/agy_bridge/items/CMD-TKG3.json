@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG3",
+  "goal": "Fix beta_quantiles_permille in backend/app/domains/simulation/service.py: its docstring says Beta(s+1, n-s+1) (Laplace) but b is n - successes; it must be n - successes + 1. So (10, 10) has p50 917 (11/12), (5, 10) has p50 500, (0, 0) has p50 500. Keep the normal approximation, the 0..1000 clamp and the (p10, p50, p90) order.",
+  "files": [
+   "backend/app/domains/simulation/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/simulation/tests/test_tkg3_beta.py": "\"\"\"Acceptance test for CMD-TKG3 (written by baseline; the executor may not edit it).\"\"\"\nimport math\nimport unittest\n\nfrom app.domains.simulation.service import beta_quantiles_permille as bq\n\n\nclass BetaLaplace(unittest.TestCase):\n    def test_p50_is_the_laplace_mean(self):\n        self.assertEqual(bq(10, 10)[1], 917)\n        self.assertEqual(bq(5, 10)[1], 500)\n        self.assertEqual(bq(0, 0)[1], 500)\n        self.assertEqual(bq(0, 10)[1], 83)\n\n    def test_all_successes_is_not_certain(self):\n        p10, p50, p90 = bq(10, 10)\n        self.assertLess(p10, p50)\n        self.assertLess(p50, 1000)\n\n    def test_order_and_range(self):\n        for s, n in ((0, 1), (3, 4), (300, 400), (7, 7)):\n            p10, p50, p90 = bq(s, n)\n            self.assertTrue(0 <= p10 <= p50 <= p90 <= 1000, (s, n))\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/simulation",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg3_beta.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}
