@@ -4,7 +4,7 @@ integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 
 ## Items (state)
 - DEV-R0a served model = final-turn model      -> worker-R0a 015U1LfqNoymrTP9Wduzmh31 (fresh, baseline-prompted), claude/DEV-R0a   ACTING; GA53 idle_unredirected
-- DEV-R0b router can descend rungs              -> worker-GA56 01HurcnH, branch claude/DEV-R0b   ACTING
+- DEV-R0b router can descend rungs              -> worker-GA56 01HurcnH, branch claude/DEV-R0b   REPORTED b891bea (8/8 killed) -> VERDICT sent to integrator; GA56 free
 - DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   ACTING (251k: retire after)
 - in-flight GA52 r2                             -> worker-GA52 01FUssZm (finish r2)              ACTING
 - VERDICT queue -> ga-sdk-integrator 01LBoWy9: GA52 r2, then R0 in Ops B-R0 order R0c > R0a > R0b (all parallel); each landed -> release/1 to Ops
