@@ -76,6 +76,7 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
   Was: CMD-GA52 (console '클라우드' screen from ops/hub/cloud_sessions.json, producer ops/hub/cloud_snapshot.py; user 18:00) dispatched 18:00 to session_01GThc7uijAktpufbUynL5ws (Opus), branch claude/CMD-GA52. Lands after GA50, GA51. Mail routine step (3) now refreshes the snapshot + the 상황판 memo.
 - Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on branch ga-mailbox, commit "ga mail: baseline -> AGY <id>" (git worktree; no ga needed).
 - Token alarm 19:50: ga-sdk integrator 186k (recreate right after GA51 INTEGRATE lands); GA51 worker 155k done (archive on user OK); GA52 worker 214k → GA52 merge goes to a fresh Sonnet worker from 91468e3, not that one.
+- Archived 20:0x (user "끝난 세션들 보관해"): GA49 01EPcQJa, GA50 018CgEgH, GA51 01A4XZDg, old GA52 01GThc7u, old ga-sdk integrator 01JaqBjV, old hub 01J4GYxF.
 - Was: token alarm 18:50: GA50 worker 292k (done; dropped from tokmon, archive when the user agrees); GA52 worker 204k idle (only a merge+rerun left; if it stalls, fresh Sonnet worker from 91468e3); ga-sdk integrator 157k idle (no new work there until GA51 VERDICT; recreate only if it grows); GA51 138k (finish merge only).
 - Next after GA51: ~10 new small real Token items (ask Token integrator for code excerpts; red-check each inline) → rescore gate.
 - Watcher session status says 'cron modified to 20m' but trig_01XtMnV6… is still hourly :49 — likely a session-local cron; verify, not approved by the user.
