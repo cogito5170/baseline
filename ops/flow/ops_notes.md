@@ -1,5 +1,5 @@
 # Ops_baseline notes (fixed size; overwrite, do not append history)
-session: session_01MuXcCLZm3KXYyDj9v8HqyB (lineage 8/8, cannot create sessions). baseline 01UafTvm. Dev 01Vtf8Jh (seen in list; confirm via baseline).
+session: session_01MuXcCLZm3KXYyDj9v8HqyB (lineage 8/8, cannot create sessions). baseline 01UafTvm. Dev session_01Vtf8JhoPbyf3o8v87LPVLb (confirmed by baseline). Watcher told Ops directs it. Shadow: no model call in shadow decisions (O2); GA56 fixes cap count. Hourly routine still bound to baseline.
 inbox seen up to: ops 20261006T211343 (OPS-R0..R5).
 OPS-R0 done 21:2x: ops/flow/measure/R0.json by ops/hub/measure_r0.py (static: list_sessions + ga-mailbox shadow rows + baseline_verdicts).
   cost 10-06 UTC: 110.8 USD / 10.9 wall-h = 10.2 USD/h. per class USD/h: hub 6.08, worker 4.57, integrator 1.15, watcher 0.51. cache_read dominates (hub 16.3M/h).
