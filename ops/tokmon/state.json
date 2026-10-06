@@ -21,24 +21,24 @@
    "usd": 12.67
   },
   "session_01A4XZDgCfueMHW6rBGSWLuA": {
-   "cache_read": 0,
-   "cache_write": 0,
-   "ctx": 0,
+   "cache_read": 7256000,
+   "cache_write": 84321,
+   "ctx": 137727,
    "id": "session_01A4XZDgCfueMHW6rBGSWLuA",
-   "output": 0,
+   "output": 23499,
    "status": "",
    "title": "",
-   "usd": 0.0
+   "usd": 2.6
   },
   "session_01DWVfRidtP9ENpP7jnhodSu": {
-   "cache_read": 1907835,
-   "cache_write": 46388,
-   "ctx": 90164,
+   "cache_read": 3881652,
+   "cache_write": 72559,
+   "ctx": 116753,
    "id": "session_01DWVfRidtP9ENpP7jnhodSu",
-   "output": 5825,
+   "output": 10353,
    "status": "",
    "title": "",
-   "usd": 0.63
+   "usd": 1.18
   },
   "session_01EPcQJaVSEzjV7LAhb1enSb": {
    "cache_read": 6017554,
@@ -50,15 +50,35 @@
    "title": "",
    "usd": 1.77
   },
-  "session_01JaqBjV1w4EXWE4Yc7YgGDz": {
-   "cache_read": 5893857,
-   "cache_write": 108559,
-   "ctx": 121738,
-   "id": "session_01JaqBjV1w4EXWE4Yc7YgGDz",
-   "output": 17041,
+  "session_01GThc7uijAktpufbUynL5ws": {
+   "cache_read": 8063133,
+   "cache_write": 185705,
+   "ctx": 203958,
+   "id": "session_01GThc7uijAktpufbUynL5ws",
+   "output": 43756,
    "status": "",
    "title": "",
-   "usd": 1.8
+   "usd": 3.97
+  },
+  "session_01J4GYxF1DgQExRvBkxRm9pp": {
+   "cache_read": 2305568,
+   "cache_write": 66959,
+   "ctx": 120489,
+   "id": "session_01J4GYxF1DgQExRvBkxRm9pp",
+   "output": 6317,
+   "status": "",
+   "title": "",
+   "usd": 1.12
+  },
+  "session_01JaqBjV1w4EXWE4Yc7YgGDz": {
+   "cache_read": 8800353,
+   "cache_write": 142527,
+   "ctx": 156840,
+   "id": "session_01JaqBjV1w4EXWE4Yc7YgGDz",
+   "output": 22154,
+   "status": "",
+   "title": "",
+   "usd": 2.57
   },
   "session_01ThMJnkXYNSMWt4BtSiVDGx": {
    "cache_read": 11024254,
@@ -71,5 +91,5 @@
    "usd": 4.04
   }
  },
- "t": "2026-10-06T08:49:44Z"
+ "t": "2026-10-06T09:50:24Z"
 }
