@@ -1,5 +1,5 @@
 # Dev_baseline notes (fixed size; overwrite, never append history)
-hub: session_01VMbRhMjtfPAALfLjAWJ1tT (Dev 10-07 00:0x-01:2x KST, handing off) · baseline top 016tT1vv · Ops successor 013aqrQG (old 01M4vGeV)
+hub: session_01EqmaVLL6vWPFnmAqv9UKWH (Dev 10-07 01:2x~; prev 01VMbRhM) · baseline top 016tT1vv · Ops successor 013aqrQG (old 01M4vGeV)
 OVERNIGHT (DEV-OVERNIGHT, policy.json overnight_delegation until 09:00 KST): baseline approves designs after Ops opinion; status/1 every 2h, final 08:30 KST; hourly self check-in via send_later (re-arm it in the successor; old trig_014GXkyw fires into the OLD hub)
 integration: ga-sdk claude/gracious-meitner-vp49xe head 318b22a (evidence docs/R0_BASELINE.md) on tested 8ead789 = R0a+R0b+R0c, 1411/0/1 refenv; R0 = 318b22a until tag; tag R0-baseline = morning list (user line in an integrator session)
 
@@ -25,5 +25,5 @@ integration: ga-sdk claude/gracious-meitner-vp49xe head 318b22a (evidence docs/R
 ## Rules / gotchas
 - send only via ops/flow/flow.py + doorbell {"flow":"<path>"}; status ids must be unique (use DEV-ST-<MMDD-HHMM>)
 - platform classifier refuses: relaying the user's words from another session to a worker (Instruction Poisoning) — ask the user to type in that session; archive needs explicit user OK in Dev session (given 00:5x)
-- the user allowed git + send_message + archive in this Dev session (00:5x); a successor must get its own user line
+- the user allowed git + send_message + archive in Dev 01EqmaVL (10-07 01:3x KST, own line); a successor must get its own user line; auto_integrate extension to 01EqmaVL NOT yet given
 - suite 15-20 min: workers/integrator run it in background with nohup + done marker
