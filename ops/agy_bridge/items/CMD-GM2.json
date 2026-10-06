@@ -1,0 +1,31 @@
+{
+ "item": {
+  "id": "CMD-GM2",
+  "goal": "Read first (NEED file): deliverables/gentlemonster/source/job2.md (the posting), deliverables/gentlemonster/source/facts.md (the only facts you may use about the applicant). Then write the three files with NEW, all in Korean: (1) deliverables/gentlemonster/job2/interpretation.md — the posting translated into the engine's directive form with headings '## goal', '## scope' (each 담당업무 as S1, S2 ...), '## done_when' (each 자격요건 and 우대사항 as a checkable D-line), '## gap' (for each requirement: 근거 from facts.md, or 공백 when facts.md has nothing); (2) deliverables/gentlemonster/job2/application.md — 입사지원서 with headings '## 지원 동기', '## 직무 이해', '## 핵심 역량', '## 경험 및 프로젝트', '## 입사 후 계획', '## 확인 필요'; start with '[이름] / [연락처] / [이메일]' placeholders; every claim about the applicant must come from facts.md with its numbers; anything unknown stays a [placeholder] and is listed under '## 확인 필요'; never invent a degree, employer, years or a skill; (3) deliverables/gentlemonster/job2/portfolio.md — the portfolio for LAB 로봇 소프트웨어: '## 개요' then '## 프로젝트' with at least three '### ' entries from facts.md (llmsensor, the Telemetry → Sensor → State → DC → MS layers, GA Engine's ga judge / router), each told as a control problem: 관측 → 상태 추정 → 결정 → 행동, what was built in Python, measured numbers; then '## 제어 관점' on how this maps to robot software (sensing, state estimation, fault detection, deterministic arbitration of a learned policy), and '## 다음 단계' naming the gaps honestly (C++, Isaac Sim / Isaac Lab) as a learning plan, not as experience. Use facts.md numbers (9,852 → 2,530 tokens, 37,023 tokens, 1,347 tests ...). Then RUN test and finish with DONE when it passes.",
+  "files": [
+   "deliverables/gentlemonster/job2/interpretation.md",
+   "deliverables/gentlemonster/job2/application.md",
+   "deliverables/gentlemonster/job2/portfolio.md"
+  ],
+  "done_when": "test",
+  "route": {
+   "difficulty": 3,
+   "start": "gemini-3.8-flash-high",
+   "max_turns": 4
+  }
+ },
+ "tests": {
+  "deliverables/gentlemonster/test_job2.py": "# Acceptance test for CMD-GM2 (written by baseline; the executor may not edit it).\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, str(Path(__file__).resolve().parent))\nfrom checks import check  # noqa: E402\n\ncheck(\"job2\",\n      req_words=[\"로봇공학\", \"C++\", \"Python\", \"제어\", \"Isaac Sim\", \"Isaac Lab\", \"석사\", \"1년\"],\n      app_words=[\"Future Artifact\", \"Python\"],\n      port_heads=[\"프로젝트\", \"제어\"],\n      port_words=[\"관측\", \"상태\", \"결정\", \"Python\"],\n      gap_words=[\"전공\", \"학위\", \"C++\", \"Isaac\"])\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "deliverables/gentlemonster/test_job2.py"
+   ]
+  },
+  "timeout_s": 60
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "baseline"
+}

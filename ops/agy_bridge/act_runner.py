@@ -213,6 +213,10 @@ def handle(cfg: dict[str, Any], head: dict[str, Any],
         act = cfg.get("act") or {}
         opts = {k: v for k, v in (act.get("options") or {}).items() if k != "agent"}
         cfg = {**cfg, "act": {**act, "options": {**opts, **({"agent": spec["agent"]} if spec["agent"] else {})}}}
+    if spec.get("repo", "token") == "baseline":  # BD-463: work that lands in baseline (e.g. a user's documents)
+        cfg = {**cfg, "act": {**(cfg.get("act") or {}), "repo": cfg["mailbox_repo"], "repo_name": "cogito5170/baseline"}}
+    elif spec.get("repo", "token") != "token":
+        raise ValueError(f"unknown item repo: {spec.get('repo')!r} (token or baseline)")
     checkout = Path((cfg.get("act") or {}).get("repo") or "").expanduser().resolve()
     if not (checkout / ".git").exists():
         raise ValueError(f"act.repo is not a git checkout: {checkout}")

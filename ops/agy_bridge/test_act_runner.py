@@ -215,6 +215,19 @@ class ActRunnerTest(unittest.TestCase):
             act_runner.subprocess.run = old
         self.assertNotIn("--route", seen[0])  # an older ga on the VM still runs the item
 
+    def test_an_item_may_land_in_the_baseline_clone(self):
+        seen = {}
+
+        def run(cfg, spec, wt, checkout):
+            seen["checkout"], seen["name"] = checkout, cfg["act"]["repo_name"]
+            return {"code": 0, "out": "", "result": {"status": "done", "turns": 1, "tokens": {}, "changed": []}}
+        cfg = dict(self.cfg, mailbox_repo=str(self.checkout))  # a clone with origin, standing in for ~/baseline
+        act_runner.handle(dict(cfg, act=dict(self.cfg["act"], repo="/nonexistent")), HEAD, runner=run,
+                          spec=dict(self.spec, repo="baseline"))
+        self.assertEqual((seen["checkout"], seen["name"]), (self.checkout.resolve(), "cogito5170/baseline"))
+        with self.assertRaises(ValueError):
+            act_runner.handle(cfg, HEAD, runner=run, spec=dict(self.spec, repo="../elsewhere"))
+
     def test_placeholders_expand(self):
         self.assertEqual(act_runner._expand(["{venv_python}", "-m", "x"], {"venv_python": "/v/bin/python"}),
                          ["/v/bin/python", "-m", "x"])

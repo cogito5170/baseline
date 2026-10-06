@@ -1,0 +1,31 @@
+{
+ "item": {
+  "id": "CMD-GM1",
+  "goal": "Read first (NEED file): deliverables/gentlemonster/source/job1.md (the posting), deliverables/gentlemonster/source/facts.md (the only facts you may use about the applicant). Then write the three files with NEW, all in Korean: (1) deliverables/gentlemonster/job1/interpretation.md — the posting translated into the engine's directive form with headings '## goal', '## scope' (each 담당업무 as S1, S2 ...), '## done_when' (each 자격요건 and 우대사항 as a checkable D-line), '## gap' (for each requirement: 근거 from facts.md, or 공백 when facts.md has nothing); (2) deliverables/gentlemonster/job1/application.md — 입사지원서 with headings '## 지원 동기', '## 직무 이해', '## 핵심 역량', '## 경험 및 프로젝트', '## 입사 후 계획', '## 확인 필요'; start with '[이름] / [연락처] / [이메일]' placeholders; every claim about the applicant must come from facts.md with its numbers; anything unknown stays a [placeholder] and is listed under '## 확인 필요'; never invent a degree, employer, years or a skill; (3) deliverables/gentlemonster/job1/portfolio.md — the portfolio essay for AI Experience 기획/디자인: pick one AI technology from facts.md item 8 that you used in the last 6 months and answer the four questions as headings: '## 1. 무엇이며, 왜 주목했는가', '## 2. 직접 사용하며 발견한 가능성과 한계', '## 3. 사람의 행동이나 경험을 어떻게 바꿀까', '## 4. 패션 또는 브랜드와 연결한 새로운 가능성' (one concrete Gentle Monster experience idea: space, object, digital), then '## 프로젝트' with GA Console's design principle and the other facts as short project entries. Use facts.md numbers (9,852 → 2,530 tokens, 37,023 tokens, 1,347 tests ...). Then RUN test and finish with DONE when it passes.",
+  "files": [
+   "deliverables/gentlemonster/job1/interpretation.md",
+   "deliverables/gentlemonster/job1/application.md",
+   "deliverables/gentlemonster/job1/portfolio.md"
+  ],
+  "done_when": "test",
+  "route": {
+   "difficulty": 3,
+   "start": "gemini-3.8-flash-high",
+   "max_turns": 4
+  }
+ },
+ "tests": {
+  "deliverables/gentlemonster/test_job1.py": "# Acceptance test for CMD-GM1 (written by baseline; the executor may not edit it).\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, str(Path(__file__).resolve().parent))\nfrom checks import check  # noqa: E402\n\ncheck(\"job1\",\n      req_words=[\"미적 감각\", \"미학\", \"문화\", \"패션\", \"AI 디바이스\", \"프로토타입\", \"생성형 AI\", \"멀티모달\", \"아카이빙\"],\n      app_words=[\"AI Experience\"],\n      port_heads=[\"무엇이며\", \"가능성과 한계\", \"행동이나 경험\", \"패션 또는 브랜드\"],\n      port_words=[\"한계\"],\n      gap_words=[\"학력\", \"전공\"])\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "deliverables/gentlemonster/test_job1.py"
+   ]
+  },
+  "timeout_s": 60
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "baseline"
+}
