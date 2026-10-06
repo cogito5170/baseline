@@ -8,7 +8,7 @@ integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 - DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   ACTING (251k: retire after)
 - in-flight GA52 r2                             -> worker-GA52 01FUssZm (finish r2)              ACTING
 - VERDICT queue -> ga-sdk-integrator 01LBoWy9: GA52 r2, then R0 in Ops B-R0 order R0c > R0a > R0b (all parallel); each landed -> release/1 to Ops
-- token-integrator 01FynfJT: TKG13 continues; no R0 work
+- DEV-TKG13 (Ops B-TKG13): VERDICT sent to token-integrator 01FynfJT (agv/CMD-TKG13-r1 acf7352, M1-M3); then row in ops/hub/baseline_verdicts.jsonl + release/1 to Ops
 - R1..R5: PLANNED, start after R0 lands (R1 thin gateway+budgets first)
 
 ## Rules in force
