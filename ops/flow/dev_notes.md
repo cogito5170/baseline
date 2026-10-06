@@ -7,7 +7,7 @@ integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 - DEV-R0b router can descend rungs              -> worker-GA56 01HurcnH, branch claude/DEV-R0b   DISPATCHED
 - DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   DISPATCHED
 - in-flight GA52 r2                             -> worker-GA52 01FUssZm (finish r2)              ACTING
-- VERDICT queue                                  -> ga-sdk-integrator 01LBoWy9 (GA52 r2, then R0a/b/c)
+- VERDICT queue -> ga-sdk-integrator 01LBoWy9: GA52 r2, then R0 in Ops B-R0 order R0c > R0a > R0b (all parallel); each landed -> release/1 to Ops
 - token-integrator 01FynfJT: TKG13 continues; no R0 work
 - R1..R5: PLANNED, start after R0 lands (R1 thin gateway+budgets first)
 
