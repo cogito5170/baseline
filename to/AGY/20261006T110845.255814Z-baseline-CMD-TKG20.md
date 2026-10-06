@@ -1,0 +1,3 @@
+```ga
+{"schema": "directive/2", "id": "CMD-TKG20", "rev": 1, "to": "AGY", "after": [], "goal": "agv fixes a small real Token defect through ga act against baseline's acceptance test: identity normalize_email must reject addresses with more than one '@' or with whitespace inside (after the outer strip).", "why": "Red-checked on Token 4720d5f by the Token integrator (10-06 20:07 KST): identity/service.py:129 only checks presence/position of '@' and length.", "scope": [{"id": "S1", "text": "only backend/app/domains/identity/service.py; the tests are baseline's"}], "done_when": [{"id": "D1", "text": "ga act ends done: the acceptance test (and the other tkg tests of the domain, same command) passes in the worktree"}], "budget": {"claude_p_runs": 0}}
+```
