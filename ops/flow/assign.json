@@ -2,16 +2,20 @@
  "dev": {
   "hub": "session_01VMbRhMjtfPAALfLjAWJ1tT",
   "sessions": {
-   "ga-sdk-integrator": "session_01LBoWy9AXfEwQsHqMcumAuC",
+   "ga-sdk-integrator": "session_01Wz1byrS7ZeUJegQupssgr4",
    "token-integrator": "session_01FynfJTJBM1D3itToGCjyM1",
    "worker-GA52": "session_01FUssZmVMp6rDvZ7GFTEpuK",
-   "worker-GA57": "session_01H2PH8BwPn3e3ut6Qjoaed3",
-   "worker-R0a": "session_015U1LfqNoymrTP9Wduzmh31"
+   "worker-R0a": "session_015U1LfqNoymrTP9Wduzmh31",
+   "worker-W-R1": "session_01KiyVDjXGVzKdLAEjC9T7Du",
+   "worker-W-R2": "session_01QEjaAWsA1RhPRCjpWza1iZ"
   },
   "idle_unredirected": {
    "worker-GA53": "session_01HKHSLNc3akPq52QTeKmDPm (refuses relayed redirect; holds CMD-GA53 49f24c3)"
   },
-  "previous": "session_01Vtf8JhoPbyf3o8v87LPVLb"
+  "previous": "session_01Vtf8JhoPbyf3o8v87LPVLb",
+  "retiring": {
+   "ga-sdk-integrator": "session_01LBoWy9AXfEwQsHqMcumAuC (230k; archive after successor acks)"
+  }
  },
  "ops": {
   "hub": "session_01M4vGeVjHtivZ5nKLDSmdED",
