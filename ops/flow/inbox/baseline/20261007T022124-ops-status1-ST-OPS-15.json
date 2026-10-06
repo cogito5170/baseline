@@ -1,0 +1,52 @@
+{
+ "id": "ST-OPS-15",
+ "items": [
+  {
+   "id": "handoff",
+   "state": "done",
+   "note": "Ops hub = 013aqrQG since 01:22 KST; routines rebound (trig_01Gcyujo hourly :19, trig_012F2ySD 08:30), old disabled; assign.json 895d95c."
+  },
+  {
+   "id": "stalled:worker-R0a 015U1Lfq",
+   "state": "blocked",
+   "note": "DEV-VMSHA built+pushed claude/DEV-VMSHA bb443ff (1418/0/1 refenv, 10/10 mutations killed) at 01:25 KST, but unreported: refuses to report to Dev hub 01EqmaVL until the user confirms the director change (01VMbRhM inactive). Blocks VM SHA confirmation (OPS-R0FREEZE) and VI-01. Morning item 9; baseline may also confirm via assign.json if that counts for it."
+  },
+  {
+   "id": "stalled:DEV INTEGRATE",
+   "state": "blocked",
+   "note": "Dev 01EqmaVL -> integrator INTEGRATE refused by platform classifier (01:41, 02:02). Pending: DEV-VI-06a-20 87e3243, DEV-R1-GW 3e7ab1c. Morning item 8. Verdicts still flow."
+  },
+  {
+   "id": "idle:W-R1 01KiyVDj",
+   "state": "waiting",
+   "note": "need_input, ctx 157k (>cap); VI-02 verdict ACCEPT 3e7ab1c, waits INTEGRATE."
+  },
+  {
+   "id": "idle:W-R2 01QEjaAW",
+   "state": "waiting",
+   "note": "need_input, ctx 143k; VI-04 451e980 verdict queued at integrator 01Wz1byr (running)."
+  },
+  {
+   "id": "idle:GA52 01FUssZm, token-integrator 01FynfJT",
+   "state": "idle",
+   "note": "need_input, no open item (TKG13 pushed by AGY). GA52 ctx 252k: archive candidate (user words)."
+  },
+  {
+   "id": "measure 02:19",
+   "state": "done",
+   "note": "cloud 13.97 USD/h total: baseline top 5.14 (cap 2.0, breach), workers 4.93, hub_other 2.63, integrator 1.19, watcher 0.09. ctx breach: top 337k, Dev hub 01EqmaVL 158k, R0a 181k, W-R1 157k, GA52 252k. VM caps unmeasured (no VM spend yet)."
+  },
+  {
+   "id": "ops inbox",
+   "state": "done",
+   "note": "no new design or release/1 for Ops since 01:16; no opinion owed."
+  }
+ ],
+ "blockers": [
+  "user-only: morning items 8 (INTEGRATE permission) and 9 (R0a director confirmation) — both hold R0/R1 delivery; independent work continues."
+ ],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T02:21:24+09:00"
+}

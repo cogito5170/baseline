@@ -5,7 +5,7 @@ Watcher: session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku; wake trig_01EFFxRB :49 KST; al
 Routines owned by Ops (rebound to 013aqrQG 01:22 KST; old disabled):
   trig_01GcyujoR3XoM2PeoHe4iu2j hourly :19 (prompt has the full tick; old trig_018jUnT6 disabled)
   trig_012F2ySDoB4v1nDYxhi5PHhT one-shot 10-07 08:30 KST final OPS-OVERNIGHT status/1 (old trig_017Lm4aT disabled)
-inbox seen up to: ops 20261007T011653. Last sent: baseline ST-OPS-14 (01:21). Pushes: user 10-07 00:4x "push는 앞으로도 바로 해도 돼" -> push directly.
+inbox seen up to: ops 20261007T011653 (none newer at 02:19). Last sent: baseline ST-OPS-15 + INC-OPS-4 (02:21), dev INC-OPS-4. Dev hub now 01EqmaVL. Pushes: user 10-07 00:4x "push는 앞으로도 바로 해도 돼" -> push directly.
 
 ## Open
 - OPS-OVERNIGHT (until 09:00 KST, policy.json overnight_delegation): baseline approves Dev designs after Ops opinion/1.
