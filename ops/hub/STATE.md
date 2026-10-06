@@ -39,7 +39,7 @@ trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 
 ## Heads (10-06 19:20)
 ga-sdk: f9671da (0.18.1, GA51 10-06 19:56) | Token: 12600f8 (TKG1-12,14-20, 10-06 20:26; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
-mail_newest: to/baseline-ops/…T1003…-vm-notify-1 (VM runs ga 0.18.0, handled 19:20)
+mail_newest: to/baseline-ops/…T112630…-vm-notify-1 (VM runs ga 0.18.1, handled 20:3x)
 records_next: BD-471.., round 312 — unwritten in DECISION_LOG/BASELINE §13: GA49 r2 SEND_BACK, GA49 r3 ACCEPT+integrate, GA50 r1 SEND_BACK, GA51 dispatch, TKG11 mail+ACCEPT (verdicts.jsonl has GA49 r3, GA50 r1, TKG11 r1, GA51 r2 SEND_BACK; also unwritten: GA50 r2 ACCEPT+integrate).
 
 ## Work loop
@@ -70,7 +70,7 @@ fixes_queued: GA39 survivors (rest → CMD-GA53).
 - CMD-GA53 (4 engine fixes) worker session_01HKHSLN… done 20:23: 49f24c3, 0.18.2, 4/4 mutations killed; 10 failures (test_judge x6, ga32 x2, ga39 x2) that it says fail on base too, but the integrator ran f9671da 1401 OK, so likely its environment. After GA52 lands: tell the worker to merge the new head + bump 0.18.3 → VERDICT (D1 mutations; the integrator's suite decides on the 10).
 - CMD-GA54 `ga project` (user chose (가); generic — user: no example content) worker session_01VxBgf9gyDktXz8Ke7T6NiY (Opus, claude/CMD-GA54) drafting core.
 - CMD-GA55 usage panel (user OK 20:3x): directives/CMD-GA55.md ready; dispatch AFTER GA54 lands. Producer done: cloud_snapshot.py emits `plan` + per-session parent/tokens.
-- TKG12,14-20 INTEGRATED 20:26 (Token 12600f8, 8 merge commits, fe 105 / be 321 OK; verdicts.jsonl written). Still to do: rescore gate (`ga hub shadow-compare`). Next: TKG13 red re-check on 12600f8 by new integrator, then mail TKG13 to AGY (base 12600f8).
+- TKG12,14-20 INTEGRATED 20:26 (Token 12600f8, 8 merge commits, fe 105 / be 321 OK; verdicts.jsonl written). Gate rescored 20:3x: 0/25 agree, 0 false accepts, gate 0/10 — shadow hub has written NO decision since TKG9 (to/baseline-shadow newest 16:18 KST), so TKG10-20 are all missing_in_shadow. VM is alive (notify-1 20:26: ga 0.18.1, token head still 4720d5f). Shadow stall cause unknown (VM-side; check hub shadow timer/log on VM). Next: TKG13 red re-check on 12600f8 by new integrator, then mail TKG13 to AGY (base 12600f8).
 - Push question (user 20:4x): told the user that a one-line standing approval typed in each integrator session ("ACCEPT + suites green + all mutations killed + ff/merge to integration → push without asking; no force") would remove manual pushes; no answer yet. Relayed approvals still don't count.
 - Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on ga-mailbox (git worktree), commit "ga mail: baseline -> AGY <id>".
 - Status board: cloud_sessions.json 20:21 (6 live). Build it from list_sessions by writing a trimmed JSON (raw result ~30k tokens); archived sessions excluded.
