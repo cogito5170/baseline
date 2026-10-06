@@ -45,7 +45,7 @@ records_next: BD-471.., round 312 — unwritten in DECISION_LOG/BASELINE §13: G
 ## Work loop
 directive: one fresh worker session per directive (create_session, source ga-sdk, branch claude/<id>); Sonnet narrow,
   Opus design/security; whole directive/2 JSON inline; worker cap ~150k; workers notify/1 via send_message.
-ops_rules: `python3 ops/hub/ops_rules.py < obs.json` (O3 base compare, O5 ctx>150k successor/checkpoint, O6 lineage depth) prints actions — execute as printed; state ops/hub/ops_state.json. Mutations/any text with < > & go through `ops_rules.py wire` (O8: \u003c escapes survive the relay). Worker prompts: "report failing tests as a diff vs the integration head run in YOUR env" (O3).
+ops_rules: `python3 ops/hub/ops_rules.py < obs.json` (O3 base compare, O5 ctx>150k successor/checkpoint, O6 lineage depth) prints actions — execute as printed; state ops/hub/ops_state.json. Mutations/any text with < > & go through `ops_rules.py wire` (O8: base64, receiver runs base64 -d). Worker prompts: "report failing tests as a diff vs the integration head run in YOUR env" (O3).
 worker_base_check: GA49 rev 1 started from 698c1e2 (0.13.0) although the session source was the integration branch → its diff deleted GA45-48. Before verdict: merge-base --is-ancestor <integration> <branch>; tell every new worker "verify HEAD == origin/<integration> before editing".
 verdict: `python3 ops/verdict.py <branch> --mut <mut.json> --venv <python with rlo-sdk>` → one JSON line; review the
   diff yourself; 3–6 own mutations on risky lines; ff push to integration only if all green.

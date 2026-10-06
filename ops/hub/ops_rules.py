@@ -4,7 +4,7 @@ The hourly routine (and the hub on events) gathers a small JSON and pipes it in;
 the printed actions as written. Decisions are code; a model only runs what is printed.
 
     python3 ops/hub/ops_rules.py < obs.json          -> one JSON line per action (nothing printed = nothing to do)
-    python3 ops/hub/ops_rules.py wire < mut.json     -> the JSON with < > & escaped as \\u003c \\u003e \\u0026 (O8)
+    python3 ops/hub/ops_rules.py wire < mut.json     -> base64 of the JSON, relay-safe (O8)
     python3 ops/hub/ops_rules.py --self-test
 
 obs.json:
@@ -94,8 +94,10 @@ def decide(obs: dict, state: dict) -> list[dict]:
 
 
 def wire(obj) -> str:
-    """O8: JSON safe through the session relay (it HTML-escapes < > &); every JSON parser decodes it back."""
-    return json.dumps(obj, ensure_ascii=False).replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
+    """O8: the session relay HTML-escapes < > & and tool arguments decode \\u escapes, so mutations travel as base64
+    of the UTF-8 JSON (one line, [A-Za-z0-9+/=] only). The receiver: `echo <b64> | base64 -d > mut.json`."""
+    import base64
+    return base64.b64encode(json.dumps(obj, ensure_ascii=False).encode("utf-8")).decode("ascii")
 
 
 def _self_test() -> None:
@@ -112,7 +114,8 @@ def _self_test() -> None:
     assert kinds == ["alert_user", "replace_integrator", "verdict_with_base_compare", "worker_checkpoint"], kinds
     assert decide({"hub": obs["hub"]}, st) == [], "depth alert must fire once"
     w = wire([{"find": "a < b && c > d"}])
-    assert "<" not in w and ">" not in w and "&" not in w and json.loads(w) == [{"find": "a < b && c > d"}]
+    import base64
+    assert re.fullmatch(r"[A-Za-z0-9+/=]+", w) and json.loads(base64.b64decode(w)) == [{"find": "a < b && c > d"}]
     print("self-test ok")
 
 
