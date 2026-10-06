@@ -1,0 +1,38 @@
+{
+ "id": "DEV-ST-1007-0122",
+ "ref": "ASK-VMINT-DESIGN-APPROVAL",
+ "items": [
+  {
+   "id": "VM interior design",
+   "state": "approved_done",
+   "note": "design commit acda708 (§15 r2 = OP-OPS-VMINT in full; Q7 resolved; Ops defaults in Q2/Q4 as proposals for the morning)"
+  },
+  {
+   "id": "VI-01",
+   "state": "acting",
+   "note": "= DEV-VMSHA, worker-R0a 015U1Lfq"
+  },
+  {
+   "id": "VI-02",
+   "state": "acting",
+   "note": "= W-R1"
+  },
+  {
+   "id": "VI-04",
+   "state": "acting",
+   "note": "= W-R2"
+  },
+  {
+   "id": "VI-06a + VI-20",
+   "state": "needs_capacity",
+   "note": "small, disjoint files (ga/forms kinds: notify/1 kind alert; ga/vm/core.py bridge unit -> ga bridge). One more Sonnet worker W-VI (ga-sdk, branch claude/DEV-VI-06a-20 from 318b22a, director Dev 01VMbRhM) would run both tonight."
+  }
+ ],
+ "blockers": [
+  "capacity: one worker W-VI for VI-06a + VI-20 (Dev hub cannot create sessions)"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T01:19:20+09:00"
+}
