@@ -5,9 +5,12 @@
    "ga-sdk-integrator": "session_01LBoWy9AXfEwQsHqMcumAuC",
    "token-integrator": "session_01FynfJTJBM1D3itToGCjyM1",
    "worker-GA52": "session_01FUssZmVMp6rDvZ7GFTEpuK",
-   "worker-GA53": "session_01HKHSLNc3akPq52QTeKmDPm",
    "worker-GA56": "session_01HurcnHXjzVhZjQ6vYSYwkc",
-   "worker-GA57": "session_01H2PH8BwPn3e3ut6Qjoaed3"
+   "worker-GA57": "session_01H2PH8BwPn3e3ut6Qjoaed3",
+   "worker-R0a": "session_015U1LfqNoymrTP9Wduzmh31"
+  },
+  "idle_unredirected": {
+   "worker-GA53": "session_01HKHSLNc3akPq52QTeKmDPm (refuses relayed redirect; holds CMD-GA53 49f24c3)"
   }
  },
  "ops": {
