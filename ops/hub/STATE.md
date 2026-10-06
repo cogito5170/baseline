@@ -41,7 +41,7 @@ Access is settled (2026-10-06 06:37): the user added an allow rule for add_repo;
   (ops/tokmon/sessions.txt) → tokmon.py alarms → one line in ops/tokmon/baseline_usage.jsonl → on alarm (ctx > 150k,
   burst, +5 USD/hour) send_message to the hub ("hand off now") and a push notification to the user. Created without MCP
   connectors (warning); claude-code-remote tools are expected to work — verify on its first run (06:49 UTC 10-06).
-- Mail routine: trig_01QDkY2th2C19fSzj62MTdZ8, :19 each hour, fires INTO the hub (mailbox + workers).
+- Mail routine: trig_01RuQYZmps22rXz7h8u5qvZy, :19 each hour, fires INTO the hub session_018XDm17… (mailbox + workers); old trig_01QDkY… disabled.
 
 ## Who you are, how you talk
 - The baseline hub. Reply to the user in **Korean**; sessions talk to each other in English.
@@ -129,3 +129,9 @@ Access is settled (2026-10-06 06:37): the user added an allow rule for add_repo;
 - Access: baseline (source) + Token + ga-sdk push via add_repo. Routines: trig_01QDkY… (mail, into hub — move it),
   trig_01Egfbe… (independent watcher, fresh sessions). Records: next BD-467, round 308.
 - Session names: old first hub "baseline ○ 이전 허브 (10-02~10-06 06:18…)".
+- Handoff audit (new hub session_018XDm17bNkdU75huKaxKmkf, 06:40 UTC): heads match (ga-sdk e364817, Token 95fe935 / main
+  0e19043, rlo-sdk 0d92a3d); newest baseline-shadow mail still GM2. STALE: "Access settled" was wrong for this session —
+  add_repo push for ga-sdk ([Permission Grant]) and Token ([Self-Modification]) both DENIED; venv install of rlo-sdk/ga-sdk
+  from GitHub DENIED ([Code from External]). The user's allow rule did not reach this session. MISSING: ops/hub/BASELINE_SESSION
+  still named the old hub (fixed). Mail routine moved: trig_01RuQYZmps22rXz7h8u5qvZy (new) / trig_01QDkY… disabled.
+  Blocked on the user: shadow-gate Token items need ga (venv) to send and verdict; integration pushes need add_repo push.
