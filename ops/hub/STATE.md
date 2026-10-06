@@ -11,9 +11,10 @@ language: user=Korean; sessions=English. Times to the user: KST.
 
 ## Hub
 session: session_018XDm17bNkdU75huKaxKmkf "baseline ● 현재 허브 (10-06 15:45~)" (also in ops/hub/BASELINE_SESSION)
-sources: baseline only. add_repo push ga-sdk/Token DENIED 10-06 15:40; pip install from GitHub DENIED → no venv.
-blocked_on_user: allow rules for mcp__claude-code-remote__add_repo and pip install of cogito5170 repos,
-  OR a hub opened from the web with ga-sdk + Token as sources.
+repos_attach: ga-sdk, Token (push) — the hub's inherited repo list; add_repo each at session start, before any work.
+attached: baseline(source), ga-sdk, Token (10-06 15:47, clones /home/user/ga-sdk, /home/user/token); venv /home/user/venv (rlo-sdk + ga-sdk).
+user_direction 10-06 15:46: "이전 세션에서 다음 세션으로 인계해야 하는 repo를 넘겨 받고, add_repo으로 baseline 세션 생길 때 부터 추가해.
+  개념적으로는 class(add_repo) : this -> add_repo (){}" — i.e. repo attachment is part of the hub's constructor.
 integration_branch: claude/gracious-meitner-vp49xe (all repos)
 repos: baseline, ga-sdk, Token(token), Sensor, DC, MS, Telemetry, action, health, guard, rlo-sdk, amp, ga_rlo
 artifacts: ga-SDK 최종 보고 https://claude.ai/artifact/MZdSkCP57fDTWQpsZvf6Fp ; ga Console UI https://claude.ai/artifact/JgFn8ddLQPpzMrtbyQ9vZQ
@@ -46,7 +47,7 @@ done: stage 4 verifier, stage 5 planner(shadow), verdict.py self-test
 now: stage 2 shadow gate = 10 consecutive shadow verdicts on ga-sdk/Token reports, 0 false accepts, scored by
   `ga hub shadow-compare --mailbox <baseline> --name baseline-shadow` vs baseline_verdicts.jsonl.
   score 10-06 15:4x: 31 rows all ASK_HUMAN, 0 false accepts, gate 0/10 (only Token bridge items count).
-next_action: ~10 small real Token items through the bridge → verdict each → compare (blocked: venv + push).
+next_action: ~10 small real Token items through the bridge → verdict each → compare (unblocked 10-06 15:47).
 then: stage 3 directive (hub judges+integrates on VM, baseline audits, roll back on quality drop) — user said go.
 fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 results.model shows gpt-oss while rung was
   gemini; ledger learns only upward; console 'starting' timeout; GA39 survivors.
@@ -66,9 +67,10 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 ## Handoff
 1. Outgoing: re-verify every line above against reality, commit, push.
 2. create_session: source baseline @ integration branch (+ ga-sdk, Token if the API allows), title "baseline ● 현재 허브 (MM-DD HH:MM~)",
-   prompt "read ops/hub/STATE.md and follow it; then <next_action>".
+   prompt "read ops/hub/STATE.md; first add_repo (push) every repos_attach entry — the user's standing direction of 10-06 15:46
+   is quoted in STATE; then <next_action>". If add_repo is still denied, ask the user once in Korean to say "추가해" in that session.
 3. Outgoing renames itself "baseline ○ 이전 허브 (start~end, 인계 완료)", writes new id to ops/hub/BASELINE_SESSION,
    moves the mail routine, tells the user the link in one line, stops.
-4. Incoming: get_session, attach repos, venv (rlo-sdk + ga-sdk), audit this file, add one `audit:` line below, work.
+4. Incoming (constructor): add_repo push for every repos_attach entry citing user_direction above, clone, venv (rlo-sdk + ga-sdk), audit this file, add one `audit:` line below, work.
 audit 10-06 15:40 (session_018XDm17…): heads OK; stale "access settled" (add_repo + pip denied here);
   BASELINE_SESSION was old id (fixed); mail routine moved. STATE rewritten to KST key:value (12.9 KB → 5.6 KB, ~57% fewer tokens).
