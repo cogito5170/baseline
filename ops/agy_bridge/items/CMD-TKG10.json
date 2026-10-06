@@ -1,0 +1,28 @@
+{
+ "item": {
+  "id": "CMD-TKG10",
+  "goal": "Fix frontend/src/lib/format/money.ts so no formatter prints a negative zero: formatMicroUsd(-40) -> \"$0.0000\" (rounds to zero), formatTokens(-0.5) -> \"0\", formatTokens(-0) -> \"0\"; real negatives keep the sign (formatMicroUsd(-1234) -> \"-$0.0012\", formatMicroUsd(-2_500_000) -> \"-$2.50\", formatTokens(-1234) -> \"-1,234\").",
+  "files": [
+   "frontend/src/lib/format/money.ts"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "frontend/tests/shell/format-negzero.test.ts": "// Acceptance test for CMD-TKG10 (written by baseline; the executor may not edit it).\nimport { describe, expect, it } from \"vitest\";\nimport { formatMicroUsd, formatTokens } from \"../../src/lib/format\";\n\ndescribe(\"no negative zero (CMD-TKG10)\", () => {\n  it(\"prints zero without a sign\", () => {\n    expect(formatMicroUsd(-40)).toBe(\"$0.0000\");\n    expect(formatTokens(-0.5)).toBe(\"0\");\n    expect(formatTokens(-0)).toBe(\"0\");\n  });\n  it(\"keeps real negatives\", () => {\n    expect(formatMicroUsd(-1234)).toBe(\"-$0.0012\");\n    expect(formatMicroUsd(-2_500_000)).toBe(\"-$2.50\");\n    expect(formatTokens(-1234)).toBe(\"-1,234\");\n  });\n});\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "node",
+    "frontend/node_modules/vitest/vitest.mjs",
+    "run",
+    "--root",
+    "frontend",
+    "tests/shell/format-negzero.test.ts"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

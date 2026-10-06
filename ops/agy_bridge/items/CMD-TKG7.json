@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG7",
+  "goal": "Fix backend/app/domains/estimation/service.py so accuracy_view buckets each outcome by its UTC date: an aware datetime in another zone is converted to UTC first (2026-09-02T03:00+09:00 belongs to 2026-09-01T00:00:00Z); naive datetimes keep being treated as UTC. Nothing else in the view changes.",
+  "files": [
+   "backend/app/domains/estimation/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/estimation/tests/test_tkg7_accuracy_days.py": "\"\"\"Acceptance test for CMD-TKG7 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nfrom datetime import datetime, timedelta, timezone\n\nKST = timezone(timedelta(hours=9))\n\nfrom app.domains.estimation.service import EstimationService\n\n\ndef oc(ape):\n    return {\"total_tokens\": {\"ape_permille\": ape, \"within_p10_p90\": True}}\n\n\nclass AccuracyDaysAreUtc(unittest.TestCase):\n    def test_days_are_utc_dates(self):\n        svc = EstimationService(prior=[])\n        svc.store.outcomes_ = {\n            \"a\": {\"at\": datetime(2026, 9, 2, 3, 0, tzinfo=KST), \"workspace_id\": \"w\", \"oc\": oc(100)},\n            \"b\": {\"at\": datetime(2026, 9, 1, 23, 0, tzinfo=timezone.utc), \"workspace_id\": \"w\", \"oc\": oc(300)},\n            \"c\": {\"at\": datetime(2026, 9, 2, 1, 0), \"workspace_id\": \"w\", \"oc\": oc(50)},\n        }\n        pts = svc.accuracy_view(\"w\")[\"series\"][\"series\"][0][\"points\"]\n        self.assertEqual(pts, [[\"2026-09-01T00:00:00Z\", 200], [\"2026-09-02T00:00:00Z\", 50]])\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/estimation",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg7_accuracy_days.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

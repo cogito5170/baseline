@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG8",
+  "goal": "Fix UsageService.summary in backend/app/domains/usage/service.py so the returned period.from / period.to are the UTC dates that were actually queried (the same dates passed to store.daily): from 2026-09-01T00:30+09:00 to 2026-09-02T00:30+09:00 gives period {from: 2026-08-31, to: 2026-09-01}. UTC inputs are unchanged.",
+  "files": [
+   "backend/app/domains/usage/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/usage/tests/test_tkg8_summary_period.py": "\"\"\"Acceptance test for CMD-TKG8 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nfrom datetime import datetime, timedelta, timezone\n\nKST = timezone(timedelta(hours=9))\n\nfrom app.domains.usage.service import MemoryStore, UsageService\n\n\nclass SummaryPeriodIsUtc(unittest.TestCase):\n    def svc(self):\n        return UsageService(MemoryStore(), now=lambda: datetime(2026, 9, 3, tzinfo=timezone.utc))\n\n    def test_period_is_the_queried_utc_dates(self):\n        r = self.svc().summary(\"w\", datetime(2026, 9, 1, 0, 30, tzinfo=KST), datetime(2026, 9, 2, 0, 30, tzinfo=KST))\n        self.assertEqual(r[\"period\"], {\"from\": \"2026-08-31\", \"to\": \"2026-09-01\"})\n\n    def test_utc_input_unchanged(self):\n        r = self.svc().summary(\"w\", datetime(2026, 9, 1, tzinfo=timezone.utc), datetime(2026, 9, 2, tzinfo=timezone.utc))\n        self.assertEqual(r[\"period\"], {\"from\": \"2026-09-01\", \"to\": \"2026-09-02\"})\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/usage",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg8_summary_period.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}
