@@ -158,6 +158,25 @@ class ActRunnerTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             act_runner.handle(cfg, HEAD, runner=run, spec=dict(self.spec, agent="a;b"))
 
+    def test_ladder_reaches_ga_act_argv_and_unknown_models_are_refused(self):
+        seen = {}
+        old = act_runner.subprocess.run
+
+        def fake_run(argv, **kw):
+            seen["argv"] = argv
+            return act_runner.subprocess.CompletedProcess(argv, 0, '{"status": "done", "turns": 1, "tokens": {}}', "")
+        try:
+            act_runner.subprocess.run = fake_run
+            wt = act_runner.prepare(self.spec, self.checkout, "CMD-AGA9")
+            act_runner.run_act(self.cfg, dict(self.spec, ladder=["gpt-oss-120b-medium", "gemini-3.1-pro-high"]), wt,
+                               self.checkout)
+        finally:
+            act_runner.subprocess.run = old
+        i = seen["argv"].index("--ladder")
+        self.assertEqual(seen["argv"][i + 1], "gpt-oss-120b-medium,gemini-3.1-pro-high")
+        with self.assertRaises(ValueError):
+            act_runner.run_act(self.cfg, dict(self.spec, ladder=["gpt-oss-120b-medium", "x; rm"]), wt, self.checkout)
+
     def test_placeholders_expand(self):
         self.assertEqual(act_runner._expand(["{venv_python}", "-m", "x"], {"venv_python": "/v/bin/python"}),
                          ["/v/bin/python", "-m", "x"])

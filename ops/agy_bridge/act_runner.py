@@ -97,6 +97,9 @@ MODELS = frozenset({
 def run_act(cfg: dict[str, Any], spec: dict[str, Any], wt: Path, checkout: Path) -> dict[str, Any]:
     """`ga act` in the worktree; returns {code, out, result (act/1 dict or None)}."""
     act = cfg.get("act") or {}
+    ladder = list(spec.get("ladder") or act.get("ladder") or [])  # GA45: cheap model first, the next only when blocked
+    if any(m not in MODELS for m in ladder):
+        raise ValueError(f"unknown model in the ladder: {ladder!r}")
     subs = {"venv_python": str(checkout / ".venv" / "bin" / "python"), "checkout": str(checkout)}
     cmds = dict(spec.get("commands") or {})
     cmds["commands"] = {k: _expand(v, subs) for k, v in (cmds.get("commands") or {}).items()}
@@ -105,6 +108,7 @@ def run_act(cfg: dict[str, Any], spec: dict[str, Any], wt: Path, checkout: Path)
     (tmp / "commands.json").write_text(json.dumps(cmds, ensure_ascii=False), encoding="utf-8")
     argv = [sys.executable, "-m", "ga", "act", "--item", str(tmp / "item.json"), "--repo", str(wt),
             "--backend", act.get("backend", "agv"), "--model", act.get("model", "gpt-oss-120b-medium"),
+            *(["--ladder", ",".join(ladder)] if ladder else []),
             "--options", json.dumps(act.get("options") or {}), "--config", str(tmp / "commands.json"),
             "--state", str(tmp / "state"), "--max-turns", str(int(act.get("max_turns", 10)))]
     try:
