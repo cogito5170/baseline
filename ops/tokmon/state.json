@@ -1,14 +1,14 @@
 {
  "sessions": {
   "session_018CgEgHQN6sJn6teqNEnWz2": {
-   "cache_read": 0,
-   "cache_write": 0,
-   "ctx": 0,
+   "cache_read": 28061219,
+   "cache_write": 254798,
+   "ctx": 292540,
    "id": "session_018CgEgHQN6sJn6teqNEnWz2",
-   "output": 0,
+   "output": 104834,
    "status": "",
    "title": "",
-   "usd": 0.0
+   "usd": 9.78
   },
   "session_018XDm17bNkdU75huKaxKmkf": {
    "cache_read": 36820912,
@@ -20,6 +20,26 @@
    "title": "",
    "usd": 12.67
   },
+  "session_01A4XZDgCfueMHW6rBGSWLuA": {
+   "cache_read": 0,
+   "cache_write": 0,
+   "ctx": 0,
+   "id": "session_01A4XZDgCfueMHW6rBGSWLuA",
+   "output": 0,
+   "status": "",
+   "title": "",
+   "usd": 0.0
+  },
+  "session_01DWVfRidtP9ENpP7jnhodSu": {
+   "cache_read": 1907835,
+   "cache_write": 46388,
+   "ctx": 90164,
+   "id": "session_01DWVfRidtP9ENpP7jnhodSu",
+   "output": 5825,
+   "status": "",
+   "title": "",
+   "usd": 0.63
+  },
   "session_01EPcQJaVSEzjV7LAhb1enSb": {
    "cache_read": 6017554,
    "cache_write": 88958,
@@ -29,7 +49,27 @@
    "status": "",
    "title": "",
    "usd": 1.77
+  },
+  "session_01JaqBjV1w4EXWE4Yc7YgGDz": {
+   "cache_read": 5893857,
+   "cache_write": 108559,
+   "ctx": 121738,
+   "id": "session_01JaqBjV1w4EXWE4Yc7YgGDz",
+   "output": 17041,
+   "status": "",
+   "title": "",
+   "usd": 1.8
+  },
+  "session_01ThMJnkXYNSMWt4BtSiVDGx": {
+   "cache_read": 11024254,
+   "cache_write": 127901,
+   "ctx": 182876,
+   "id": "session_01ThMJnkXYNSMWt4BtSiVDGx",
+   "output": 39203,
+   "status": "",
+   "title": "",
+   "usd": 4.04
   }
  },
- "t": "2026-10-06T07:50:25Z"
+ "t": "2026-10-06T08:49:44Z"
 }
