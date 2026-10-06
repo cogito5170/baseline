@@ -1,0 +1,23 @@
+{
+ "item": {
+  "id": "CMD-AGV0",
+  "goal": "Create the file probe/ping.txt whose whole content is the single word pong followed by a newline. Use one NEW action. Nothing else.",
+  "files": [
+   "probe/ping.txt"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "probe/test_ping.py": "# Acceptance test for CMD-AGV0 (written by baseline; the executor may not edit it).\nfrom pathlib import Path\nassert (Path(__file__).parent / 'ping.txt').read_text() == 'pong\\n', 'ping.txt must be exactly pong + newline'\nprint('ok')\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "probe/test_ping.py"
+   ]
+  },
+  "timeout_s": 60
+ },
+ "base": "claude/gracious-meitner-vp49xe"
+}
