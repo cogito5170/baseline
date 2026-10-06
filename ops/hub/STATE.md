@@ -10,6 +10,7 @@ never: route around a permission denial (other session, tool, host).
 language: user=Korean; sessions=English. Times to the user: KST.
 
 ## Hub
+flow (user 10-06 21:2x): baseline 01UafTvm… = top (spec-only requests, opinions, user synthesis) · Dev_baseline session_01Vtf8JhoPbyf3o8v87LPVLb · Ops_baseline session_01MuXcCLZm3KXYyDj9v8HqyB. Roles/edges/spec-only enforced by ops/flow/flow.py; requests ops/flow/requests/ (R0-R5); assignment ops/flow/assign.json. Dev/Ops are depth 8 (cannot create sessions).
 split (user 10-06 21:0x/21:1x): DevOps_baseline (DevOps_developer, directs) creates Dev_baseline + Ops_baseline; prompts ops/hub/roles/{DEVOPS,DEV,OPS}_BASELINE.md; the user opens ONLY DevOps_baseline (O6 probe 20:51: fresh routine sessions have NO claude-code-remote tools, so only a user-opened session starts at depth 0). Outgoing hub 01UafTvm… tells integrators/workers/watcher the new ids after both ack.
 session: session_01UafTvmJjZiza4ctSfoeV8V "baseline ● 현재 허브 (10-06 20:23~)" (also in ops/hub/BASELINE_SESSION); previous session_01Eu6Sdh… (19:22~20:23)
 repos_attach: ga-sdk, Token (push) — the hub's inherited repo list; add_repo each at session start, before any work.

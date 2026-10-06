@@ -1,6 +1,27 @@
-{"dev": {"hub": null, "sessions": {"ga-sdk-integrator": "session_01LBoWy9AXfEwQsHqMcumAuC", "token-integrator": "session_01FynfJTJBM1D3itToGCjyM1",
-          "worker-GA52": "session_01FUssZmVMp6rDvZ7GFTEpuK", "worker-GA53": "session_01HKHSLNc3akPq52QTeKmDPm",
-          "worker-GA56": "session_01HurcnHXjzVhZjQ6vYSYwkc", "worker-GA57": "session_01H2PH8BwPn3e3ut6Qjoaed3"}},
- "ops": {"hub": null, "sessions": {"token-watcher": "session_019EWtXvKB3EE8RTYPHnNHLP"}, "routines": ["trig_019KsmGzNYDSiK3pogJaR4yf", "trig_01XtMnV6yMeywrMbcTFeeeJE"]},
- "baseline": {"hub": "session_01UafTvmJjZiza4ctSfoeV8V"},
- "note": "Dev/Ops hubs created by baseline 01UafTvm (lineage depth 8): they cannot create sessions; they direct the sessions assigned here. Need more capacity -> status/1 blocker to baseline (the user opens a depth-0 hub)."}
+{
+ "dev": {
+  "hub": "session_01Vtf8JhoPbyf3o8v87LPVLb",
+  "sessions": {
+   "ga-sdk-integrator": "session_01LBoWy9AXfEwQsHqMcumAuC",
+   "token-integrator": "session_01FynfJTJBM1D3itToGCjyM1",
+   "worker-GA52": "session_01FUssZmVMp6rDvZ7GFTEpuK",
+   "worker-GA53": "session_01HKHSLNc3akPq52QTeKmDPm",
+   "worker-GA56": "session_01HurcnHXjzVhZjQ6vYSYwkc",
+   "worker-GA57": "session_01H2PH8BwPn3e3ut6Qjoaed3"
+  }
+ },
+ "ops": {
+  "hub": "session_01MuXcCLZm3KXYyDj9v8HqyB",
+  "sessions": {
+   "token-watcher": "session_019EWtXvKB3EE8RTYPHnNHLP"
+  },
+  "routines": [
+   "trig_019KsmGzNYDSiK3pogJaR4yf",
+   "trig_01XtMnV6yMeywrMbcTFeeeJE"
+  ]
+ },
+ "baseline": {
+  "hub": "session_01UafTvmJjZiza4ctSfoeV8V"
+ },
+ "note": "Dev/Ops hubs created by baseline 01UafTvm (lineage depth 8): they cannot create sessions; they direct the sessions assigned here. Need more capacity -> status/1 blocker to baseline (the user opens a depth-0 hub)."
+}
