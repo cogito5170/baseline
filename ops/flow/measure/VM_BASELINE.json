@@ -1,6 +1,6 @@
 {
  "name": "R0-baseline",
- "state": "pending",
+ "state": "vm_reports_r0_baseline (unsigned report; VMSHA bb443ff not deployed, vm_r0_tests not reported)",
  "ga_sdk_sha": "8ead7893e4051ed82cfc357ccf7f52d1d812614b (candidate; tag pending user line; evidence docs/R0_BASELINE.md @318b22a: 1411 passed/0 failed/1 skipped refenv)",
  "vm_confirmed_sha": null,
  "vm_r0_tests": null,
@@ -10,5 +10,11 @@
   "R0c_78d8c69_integrated": true,
   "vm_last_message": "2026-10-06T20:26 KST notify/1: ga 0.18.1, ga-sdk f9671daa01cd",
   "vm_reports_sha_only_on_version_change": true
+ },
+ "vm_reported_sha": {
+  "sha": "318b22a1eb16",
+  "at": "2026-10-07T03:29+09:00",
+  "source": "ga-mailbox 35fd9dd to/baseline-ops notify/1 ack (unsigned: information only)",
+  "matches_r0_baseline_tag": true
  }
 }

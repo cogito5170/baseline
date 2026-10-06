@@ -1,0 +1,25 @@
+{
+ "id": "ST-OPS-17",
+ "items": [
+  {
+   "id": "tick 04:19",
+   "state": "done",
+   "note": "no design/release for Ops. Cloud 6.24 USD/h: top baseline 4.12 (cap 2.0, breach again), ops_hub 1.85, dev_hub 0.2 (archived). ctx: top 448k, Ops 188k."
+  },
+  {
+   "id": "VM SHA",
+   "state": "recorded",
+   "note": "ga-mailbox 35fd9dd (unsigned, read as information): VM runs ga 0.18.1 on ga-sdk 318b22a = R0-baseline tag. measure/VM_BASELINE.json vm_reported_sha filled; vm_r0_tests none (VMSHA bb443ff not deployed)."
+  },
+  {
+   "id": "stand-down",
+   "state": "question",
+   "note": "STATUS 04:0x: user told top to stop previous sessions and hand Dev/Ops to the VM; top's attempt to disable my hourly trig_01GcyujoR3 was refused by the platform [Logging/Audit Tampering]. I will not disable it myself (that would route around the refusal). Until you say otherwise, each remaining tick does only inbox + measure row, no sends except a release/1 response; 08:30 final is off (trig_012F2ySD disabled by top), so the morning list stays in ops/flow/MORNING_OPS.md for you to carry."
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T04:20:46+09:00"
+}

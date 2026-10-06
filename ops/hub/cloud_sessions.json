@@ -1,6 +1,6 @@
 {
  "schema": "cloud-sessions/1",
- "at": "2026-10-07T03:20:47+09:00",
+ "at": "2026-10-07T04:20:25+09:00",
  "plan": {
   "kind": "five_hour",
   "status": "allowed",
@@ -11,28 +11,28 @@
   {
    "id": "session_01EqmaVLL6vWPFnmAqv9UKWH",
    "title": "baseline ◆ Dev hub (10-07 01:3x~) [replaces 01VMbRhM]",
-   "status": "idle",
-   "bucket": "review_ready",
-   "detail": "5 branches verified, awaiting user approval to integrate",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "checked 5 PRs ready for morning integration; awaiting user approval",
    "repo": "baseline",
    "branch": "claude/gracious-meitner-vp49xe",
    "model": "claude-opus-5-5",
-   "ctx": 205582,
-   "cost_usd": 4.29,
+   "ctx": 214000,
+   "cost_usd": 4.49,
    "tags": [
     "branch:claude/gracious-meitner-vp49xe",
     "dev-hub",
     "replaces:session_01VMbRhMjtfPAALfLjAWJ1tT",
     "role:dev"
    ],
-   "updated_at": "2026-10-06T18:09:04.403676Z",
+   "updated_at": "2026-10-06T18:27:50.504063Z",
    "url": "https://claude.ai/code/session_01EqmaVLL6vWPFnmAqv9UKWH",
    "parent": "session_016tT1vvrTFehVFzWzfgxcCV",
    "tokens": {
-    "input": 11360,
-    "output": 32291,
-    "cache_read": 11625267,
-    "cache_write": 159729
+    "input": 11366,
+    "output": 32821,
+    "cache_read": 12256518,
+    "cache_write": 167772
    }
   },
   {
@@ -44,22 +44,22 @@
    "repo": "baseline",
    "branch": "claude/gracious-meitner-vp49xe",
    "model": "claude-opus-5-5",
-   "ctx": 148166,
-   "cost_usd": 2.45,
+   "ctx": 187657,
+   "cost_usd": 4.28,
    "tags": [
     "branch:claude/gracious-meitner-vp49xe",
     "ops-hub",
     "replaces:session_01M4vGeVjHtivZ5nKLDSmdED",
     "role:ops"
    ],
-   "updated_at": "2026-10-06T18:20:06.521563Z",
+   "updated_at": "2026-10-06T19:20:00.092966Z",
    "url": "https://claude.ai/code/session_013aqrQGg4d1hyd3uyDVG7kM",
    "parent": "session_016tT1vvrTFehVFzWzfgxcCV",
    "tokens": {
-    "input": 138,
-    "output": 18812,
-    "cache_read": 2770864,
-    "cache_write": 242587
+    "input": 718,
+    "output": 28029,
+    "cache_read": 4785897,
+    "cache_write": 442470
    }
   },
   {
@@ -91,8 +91,8 @@
   {
    "id": "session_01QEjaAWsA1RhPRCjpWza1iZ",
    "title": "baseline ◇ worker W-R2 verdict dry-run (10-07 01:2x~)",
-   "status": "idle",
-   "bucket": "blocked",
+   "status": "archived",
+   "bucket": "completed",
    "detail": "ga verdict dry-run complete: 2/70 replay agree, 68 not reproducible",
    "repo": "ga-sdk",
    "branch": "claude/DEV-R2-DRY",
@@ -143,7 +143,7 @@
   {
    "id": "session_01Wz1byrS7ZeUJegQupssgr4",
    "title": "baseline ◇ ga-sdk 통합 (10-07 01:2x~) [replaces 01LBoWy9]",
-   "status": "idle",
+   "status": "archived",
    "bucket": "completed",
    "detail": "suite green on merged tree 24cc576d (1418p, 1s, 0f); awaiting INTEGRATE",
    "repo": "ga-sdk",
@@ -171,13 +171,13 @@
    "id": "session_016tT1vvrTFehVFzWzfgxcCV",
    "title": "baseline ● top (10-07 00:2x~) [replaces 01Ltsebb]",
    "status": "idle",
-   "bucket": "blocked",
-   "detail": "VI-01 보고 대기 (Dev 허브 확인 필요) + 통합 push 플랫폼 거부",
+   "bucket": "completed",
+   "detail": "bridge interval: 120s→30s, no token cost; VM config change needed",
    "repo": "baseline",
    "branch": "claude/gracious-meitner-vp49xe",
    "model": "claude-opus-5-5",
-   "ctx": 369113,
-   "cost_usd": 13.84,
+   "ctx": 447806,
+   "cost_usd": 17.94,
    "tags": [
     "baseline-hub",
     "branch:claude/gracious-meitner-vp49xe",
@@ -185,14 +185,14 @@
     "replaces:session_01LtsebbxyWz4BAggiGcG1WF",
     "role:baseline"
    ],
-   "updated_at": "2026-10-06T18:05:03.165560Z",
+   "updated_at": "2026-10-06T19:18:35.180502Z",
    "url": "https://claude.ai/code/session_016tT1vvrTFehVFzWzfgxcCV",
    "parent": "session_01LtsebbxyWz4BAggiGcG1WF",
    "tokens": {
-    "input": 24525,
-    "output": 108380,
-    "cache_read": 45064405,
-    "cache_write": 320168
+    "input": 32336,
+    "output": 131388,
+    "cache_read": 60000056,
+    "cache_write": 397827
    }
   },
   {
@@ -337,23 +337,23 @@
    "title": "baseline ◎ 토큰 감시 (10-06 22:5x~)",
    "status": "idle",
    "bucket": "review_ready",
-   "detail": "baseline token watcher standing by for next watch run (17:49 UTC)",
+   "detail": "baseline token watcher standing by; next check 19:49 KST",
    "repo": "baseline",
    "branch": null,
    "model": "claude-haiku-4-5-20251001",
-   "ctx": 123593,
-   "cost_usd": 0.49,
+   "ctx": 132288,
+   "cost_usd": 0.55,
    "tags": [
     "baseline-watcher"
    ],
-   "updated_at": "2026-10-06T17:49:46.284055Z",
+   "updated_at": "2026-10-06T18:49:41.471837Z",
    "url": "https://claude.ai/code/session_01TBHcmu5ar3uwnjL7m6NhYg",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 610,
-    "output": 12668,
-    "cache_read": 2640604,
-    "cache_write": 83482
+    "input": 636,
+    "output": 13249,
+    "cache_read": 3018414,
+    "cache_write": 91923
    }
   },
   {
@@ -535,7 +535,7 @@
   {
    "id": "session_01UafTvmJjZiza4ctSfoeV8V",
    "title": "baseline ● 현재 허브 (10-06 20:23~)",
-   "status": "idle",
+   "status": "archived",
    "bucket": "completed",
    "detail": "R0a·R0b merged to ga-sdk; R0c validated; handoff to new Dev complete",
    "repo": "baseline",
@@ -607,8 +607,8 @@
   {
    "id": "session_01HKHSLNc3akPq52QTeKmDPm",
    "title": "ga-sdk CMD-GA53 · 엔진 결함 4건 (10-06 20:08~)",
-   "status": "idle",
-   "bucket": "blocked",
+   "status": "archived",
+   "bucket": "completed",
    "detail": "CMD-GA53 done (49f24c3); unclear if DEV-R0a redirect is legit",
    "repo": "ga-sdk",
    "branch": "claude/CMD-GA53",
@@ -658,8 +658,8 @@
   {
    "id": "session_01FUssZmVMp6rDvZ7GFTEpuK",
    "title": "baseline ◆ CMD-GA52 merge (Sonnet)",
-   "status": "idle",
-   "bucket": "blocked",
+   "status": "archived",
+   "bucket": "completed",
    "detail": "rev-2 static checks ready; awaiting your go + session ID",
    "repo": "ga-sdk",
    "branch": "claude/CMD-GA52",
@@ -682,7 +682,7 @@
   {
    "id": "session_01Eu6SdhSHCCwkL8BoAsULXr",
    "title": "baseline ○ 이전 허브 (10-06 19:22~20:23, 인계 완료)",
-   "status": "idle",
+   "status": "archived",
    "bucket": "completed",
    "detail": "context limit reached; handoff to new hub complete",
    "repo": "baseline",

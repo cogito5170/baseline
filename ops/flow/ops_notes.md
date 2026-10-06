@@ -5,7 +5,7 @@ Watcher: session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku; wake trig_01EFFxRB :49 KST).
 Routines owned by Ops (rebind both to the successor: create self-bound copies with the same prompts, disable these, update assign.json):
   trig_01GcyujoR3XoM2PeoHe4iu2j hourly :19 UTC-minute (prompt has the full tick)
   trig_012F2ySDoB4v1nDYxhi5PHhT one-shot 10-07 08:30 KST final OPS-OVERNIGHT status/1
-inbox seen up to: ops 20261007T011653 (nothing newer at 03:19). Last sent: baseline ST-OPS-16 (03:2x); INC-OPS-4 to baseline+dev (02:21).
+inbox seen up to: ops 20261007T011653 (none newer at 04:19). Last sent: baseline ST-OPS-17 (04:2x, stand-down question). User 04:0x: stop previous sessions, hand Dev/Ops to VM; top archived Dev; 08:30 trig_012F2ySD disabled by top; hourly disable refused by platform (do not route around).
 Pushes: user 10-07 00:4x "push는 앞으로도 바로 해도 돼" -> push directly. Doorbell = send_message {"flow":"<path>"}.
 Cheap tick: list_sessions via a Haiku subagent writing scratchpad sessions.json (keeps hub ctx low); measure_hourly.py tick; cloud_snapshot.py; shadow_digest.py digest.
 
