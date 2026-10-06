@@ -104,4 +104,5 @@ audit 10-06 17:0x (session_01ThMJnk…): add_repo push ga-sdk/Token denied by cl
   VERDICT claude/CMD-GA49 3d142ae sent to ga-sdk integrator (mut ops/hub/mut/CMD-GA49.json); no clone/venv in this hub.
 audit 10-06 17:58 (session_01ERe9em…): heads/mail/routines OK; outgoing step 3 done; TKG11 report arrived.
 audit 10-06 18:25 (session_01J4GYxF…): routine trig_01X8fbEr → this hub OK; BASELINE_SESSION OK; mail: only vm notify-1 (0.17.1, known); no add_repo.
+audit 10-06 19:22 (session_01J4GYxF…, outgoing): step 3 done — routine trig_01NdsVqy → new hub, old disabled; integrators, GA51/GA52 workers, watcher told "hub is now session_01Eu6Sdh…".
 audit 10-06 19:24 (session_01Eu6Sdh…): heads/mail OK (ga-mailbox 52fc8ac, nothing new since TKG11/vm notify-1); routine trig_01NdsVqy → this hub, old trig_01X8fbEr disabled; BASELINE_SESSION written here; no add_repo.
