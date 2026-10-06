@@ -38,7 +38,7 @@ trig_01Egfbe1CAGL6bXNu6NK9H2M: disabled (old fresh-session watcher)
 trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 
 ## Heads (10-06 17:50)
-ga-sdk: 3d142ae (0.17.1, GA49 10-06 17:30) | Token: 4720d5f (TKG1-11, 10-06 17:53; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
+ga-sdk: 3d142ae (0.17.1, GA49 10-06 17:30; VM runs it — baseline-ops notice 17:55) | Token: 4720d5f (TKG1-11, 10-06 17:53; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
 mail_newest: to/baseline-shadow/…T062003…-CMD-GM2.md (handled)
 records_next: BD-471.., round 312 — unwritten in DECISION_LOG/BASELINE §13: GA49 r2 SEND_BACK, GA49 r3 ACCEPT+integrate, GA50 r1 SEND_BACK, GA51 dispatch, TKG11 mail+ACCEPT (verdicts.jsonl has GA49 r3, GA50 r1, TKG11 r1).
 
@@ -65,14 +65,16 @@ then: stage 3 directive (hub judges+integrates on VM, baseline audits, roll back
 fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 results.model shows gpt-oss while rung was
   gemini; ledger learns only upward; console 'starting' timeout; GA39 survivors.
 
-## In flight (handoff 10-06 17:52 KST from session_01ThMJnk…, ctx 183k — watcher alarm)
+## In flight (handoff 10-06 18:22 KST from session_01ERe9em…, ctx 194k)
 - GA49 r3 3d142ae ACCEPTED and integrated (ga-sdk integration head 3d142ae, 0.17.1; push approved by the user in the integrator session). Worker 01EPcQJa… finished (archive when the user agrees).
-- GA50 rev 2 f3abeea: ACCEPT 18:03 (suite 1388 OK, g1-g6 killed); INTEGRATE sent to ga-sdk integrator — push awaits the user's approval there. Then: tell GA51 worker to merge integration + re-run, then VERDICT GA51.
+- GA50 rev 2 f3abeea: ACCEPT 18:03 (suite 1388 OK, g1-g6 killed); INTEGRATE sent 18:03 to ga-sdk integrator — it is BLOCKED waiting for the user's push approval in its session (told the user 18:22). Then: tell GA51 worker to merge integration + re-run, then VERDICT GA51.
 - CMD-GA51 DONE 17:55: claude/CMD-GA51 0077a28 (code 3f26b2d, 0.17.2; 1315 pass, own mutations 4/4; check_served kept for resolved model). Worker told new hub id + stand by for merge after GA50. Was: worker session_01A4XZDgCfueMHW6rBGSWLuA (Opus), branch claude/CMD-GA51 from 3d142ae, dispatched 17:36; it notifies the hub id it was given (session_01ThMJnk…) — the outgoing hub forwards. After GA50 lands, GA51 must merge the integration branch before verdict. Then mutations on: auto ignores served; check_served skipped for auto; migration rewrites a user value; migration skips a ga default.
 - TKG11: report/2 in to/baseline 17:39 (ga-mailbox a12962d), agv/CMD-TKG11-r1 4720d5f, gemini flash 2 turns 3.9k tok; diff reviewed OK (test file identical to baseline's). VERDICT ACCEPT (suite 261/0, t1-t3 killed; verdicts.jsonl). Integrated: Token 4720d5f (ff, fe 105 / be 313 OK).
 - CMD-GA52 (console '클라우드' screen from ops/hub/cloud_sessions.json, producer ops/hub/cloud_snapshot.py; user 18:00) dispatched 18:00 to session_01GThc7uijAktpufbUynL5ws (Opus), branch claude/CMD-GA52. Lands after GA50, GA51. Mail routine step (3) now refreshes the snapshot + the 상황판 memo.
 - Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on branch ga-mailbox, commit "ga mail: baseline -> AGY <id>" (git worktree; no ga needed).
 - Next after GA51: ~10 new small real Token items (ask Token integrator for code excerpts; red-check each inline) → rescore gate.
+- Watcher session status says 'cron modified to 20m' but trig_01XtMnV6… is still hourly :49 — likely a session-local cron; verify, not approved by the user.
+- cloud_sessions.json not yet written (first run needs list_sessions saved to a file; do it via a small script fed by the tool result, or let GA52 fixtures cover until then).
 - Open user question: token watcher every 20 min — (a) 3 hourly routines :09/:29/:49 only with the user's OK, (b) project setting, (c) keep hourly. No answer yet.
 
 ## Open with the user
