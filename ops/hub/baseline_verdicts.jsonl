@@ -38,3 +38,4 @@
 {"id":"CMD-GA49","rev":1,"sha":"e6a25ea","decision":"SEND_BACK","bd":"BD-470","note":"stale base 698c1e2 deletes GA45-48"}
 {"id":"CMD-TKG9","rev":2,"sha":"0fe0656","decision":"ACCEPT","bd":"BD-470"}
 {"id":"CMD-TKG10","rev":2,"sha":"6d9a494","decision":"ACCEPT","bd":"BD-470"}
+{"id":"CMD-GA49","rev":2,"sha":"e8730f4","decision":"SEND_BACK","bd":"BD-471","note":"report head; m2/m5 survived"}
