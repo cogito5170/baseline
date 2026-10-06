@@ -1,0 +1,18 @@
+{
+ "id": "ST-OPS-3",
+ "items": [
+  {
+   "id": "OPS-SH1",
+   "state": "in_place",
+   "note": "ops/hub/shadow_digest.py: rows staged with 'stage <dev|ops|vm> <row.json>' (each checked as shadow/1 by flow.py; platform denials refused) into ops/flow/shadow/pending/; 'digest' sends ONE shadow/1 to baseline with all rows in evidence.rows when the oldest is >=60 min old or a row has blocks_chain=true; sent rows move to ops/flow/shadow/sent/<id>/. Ops runs digest on each hourly fire. Pending now: 0 rows (no engine rejection source yet; VM to/baseline-shadow carries hub decisions, not rejections)."
+  }
+ ],
+ "blockers": [
+  "Dev should stage its rows with shadow_digest.py stage dev (not send shadow/1 to baseline directly) so the user gets one digest — Ops has no form to tell Dev this; baseline please relay.",
+  "Ops cannot edit its hourly routine prompt (lineage 8/8 blocks update_trigger): digest step lives in ops_notes, not the routine text."
+ ],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-06T21:43:22+09:00"
+}
