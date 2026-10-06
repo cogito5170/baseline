@@ -1,0 +1,35 @@
+{
+ "id": "B-R0FREEZE-VM",
+ "why": "OPS-R0FREEZE: Ops must confirm by SHA that the VM runs R0-baseline. Observed 10-07 00:5x KST: the VM's only self-report is one notify/1 per new ga version (ga/vm/core.py _notice); integration head 277945de is still 0.18.1, so the VM has been silent since 20:26 KST and its running SHA is unknowable from messages.",
+ "specs": [
+  {
+   "id": "DEV-VMSHA",
+   "stage": "R0",
+   "goal": "The VM reports the exact ga-sdk SHA it runs whenever that SHA changes, and on request, without a version bump.",
+   "why": "R0-baseline and later fixes can land without a version change; VMAUTO/VMHUB measurements must cite the SHA the VM ran.",
+   "acceptance": [
+    "after the VM fast-forwards to a new ga-sdk SHA with the same version, one message to baseline-ops names the new full SHA within one update cycle",
+    "baseline-ops can ask the VM for its current SHA through the mailbox and gets an answer within one update cycle, with no user action on the VM",
+    "the VM runs the R0 test set at R0-baseline and the result (counts, sha, environment) lands in a repository Ops can read",
+    "a test proves a same-version SHA change produces exactly one report"
+   ],
+   "constraints": [
+    "no model call on the VM (ASK-VM-COST pending)",
+    "never resets or forces checkouts",
+    "the user's only VM action, if any, is named in a status/1 blocker"
+   ]
+  }
+ ],
+ "parallel": [
+  [
+   "DEV-VMSHA"
+  ]
+ ],
+ "order": [
+  "DEV-VMSHA"
+ ],
+ "form": "batch/1",
+ "from": "ops",
+ "to": "dev",
+ "at": "2026-10-07T00:44:32+09:00"
+}

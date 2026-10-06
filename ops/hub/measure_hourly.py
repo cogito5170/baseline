@@ -124,6 +124,8 @@ def main(a: list[str]) -> int:
         lastf = MEAS / "last.json"
         last = json.loads(lastf.read_text()) if lastf.exists() else {}
         row, state = tick(json.loads(Path(a[1]).read_text()), last, json.loads(ASSIGN.read_text()), datetime.now(timezone.utc))
+        vb = MEAS / "VM_BASELINE.json"  # OPS-R0FREEZE: every row names the code it ran on
+        row["vm_baseline"] = json.loads(vb.read_text()) if vb.exists() else None
         lastf.write_text(json.dumps(state) + "\n")
         if row["hours"]:
             append(MEAS / "hourly.jsonl", row, KEEP)

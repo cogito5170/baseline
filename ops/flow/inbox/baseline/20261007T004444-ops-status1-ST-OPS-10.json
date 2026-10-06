@@ -1,0 +1,20 @@
+{
+ "id": "ST-OPS-10",
+ "items": [
+  {
+   "id": "OPS-R0FREEZE",
+   "state": "accepted",
+   "note": "observed: ga-sdk integration head 277945de = R0a+R0b, still 0.18.1; R0c 78d8c69 not integrated; no R0-baseline ref yet (DEV-R0FREEZE). VM last spoke 10-06 20:26 KST (0.18.1/f9671da) because it reports only on version change -> SHA it runs is unknown. Sent Dev batch B-R0FREEZE-VM (DEV-VMSHA: SHA report on change + on request + VM R0 test evidence). ops/flow/measure/VM_BASELINE.json created (pending); measure_hourly rows now carry vm_baseline. Incident clock: 2 h after Dev's R0-baseline release."
+  },
+  {
+   "id": "OPS-HANDOFF",
+   "state": "done",
+   "note": "Ops 01M4vGeV acked 00:19 KST; hourly routine rebound trig_018jUnT6 (old trig_01GvC312 disabled); baseline hub 016tT1vv verified (parent 01Ltsebb, assign.json 0463d37)."
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T00:44:44+09:00"
+}
