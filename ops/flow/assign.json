@@ -19,15 +19,16 @@
   ]
  },
  "ops": {
-  "hub": "session_01M4vGeVjHtivZ5nKLDSmdED",
+  "hub": "session_013aqrQGg4d1hyd3uyDVG7kM",
   "sessions": {
    "token-watcher": "session_01TBHcmu5ar3uwnjL7m6NhYg"
   },
   "routines": [
-   "trig_018jUnT6xNGK5xNszk1o3EDn (hourly :19, bound to Ops 01M4vGeV, incl. shadow digest + measure tick; replaces trig_01GvC312, disabled 10-07 00:19 KST)",
+   "trig_01GcyujoR3XoM2PeoHe4iu2j (hourly :19, bound to Ops 013aqrQG; replaces trig_018jUnT6, disabled 10-07 01:22 KST)",
+   "trig_012F2ySDoB4v1nDYxhi5PHhT (one-shot 10-07 08:30 KST final OPS-OVERNIGHT status/1, bound to 013aqrQG; replaces trig_017Lm4aT, disabled)",
    "trig_01EFFxRBWdkVJDYpn4ZNFYYS (watcher wake :49 KST, Haiku)"
   ],
-  "previous": "session_01Qhj1TXTH414PdvL1n2JCRy"
+  "previous": "session_01M4vGeVjHtivZ5nKLDSmdED (prev 01Qhj1TX)"
  },
  "baseline": {
   "hub": "session_016tT1vvrTFehVFzWzfgxcCV",

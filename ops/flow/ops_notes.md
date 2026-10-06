@@ -1,10 +1,10 @@
 # Ops_baseline notes (fixed size; overwrite, do not append history) — handoff 10-07 01:2x KST
-Ops: session_01M4vGeVjHtivZ5nKLDSmdED (prev 01Qhj1TX) — ctx 217k, successor_needed sent (ST-OPS-14).
+Ops: session_013aqrQGg4d1hyd3uyDVG7kM (since 10-07 01:22 KST; prev 01M4vGeV, 01Qhj1TX).
 baseline: session_016tT1vvrTFehVFzWzfgxcCV (prev 01Ltsebb). Dev: session_01VMbRhMjtfPAALfLjAWJ1tT (ctx 283k).
 Watcher: session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku; wake trig_01EFFxRB :49 KST; alarms as notify/1).
-Routines owned by Ops (rebind both to the successor; record in assign.json):
-  trig_018jUnT6xNGK5xNszk1o3EDn hourly :19 (prompt has the full tick; old trig_01GvC312 disabled)
-  trig_017Lm4aTso73qxZ9Ud1AaQvU one-shot 10-07 08:30 KST final OPS-OVERNIGHT status/1
+Routines owned by Ops (rebound to 013aqrQG 01:22 KST; old disabled):
+  trig_01GcyujoR3XoM2PeoHe4iu2j hourly :19 (prompt has the full tick; old trig_018jUnT6 disabled)
+  trig_012F2ySDoB4v1nDYxhi5PHhT one-shot 10-07 08:30 KST final OPS-OVERNIGHT status/1 (old trig_017Lm4aT disabled)
 inbox seen up to: ops 20261007T011653. Last sent: baseline ST-OPS-14 (01:21). Pushes: user 10-07 00:4x "push는 앞으로도 바로 해도 돼" -> push directly.
 
 ## Open

@@ -1,0 +1,1 @@
+{"schema": "ops-handoff/1", "role": "ops", "old": "session_01M4vGeVjHtivZ5nKLDSmdED", "new": "session_013aqrQGg4d1hyd3uyDVG7kM", "crossed_at": "2026-10-07T01:21:13+09:00", "ack_at": "2026-10-07T01:22:40+09:00", "latency_min": 1.4, "lost": 0, "dup": 0}
