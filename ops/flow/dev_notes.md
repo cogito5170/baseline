@@ -3,9 +3,9 @@ hub: session_01Vtf8JhoPbyf3o8v87LPVLb (Dev) · baseline 01UafTvm · Ops 01MuXcCL
 integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 
 ## Items (state)
-- DEV-R0a served model = final-turn model      -> worker-GA53 01HKHSLN, branch claude/DEV-R0a   DISPATCHED
-- DEV-R0b router can descend rungs              -> worker-GA56 01HurcnH, branch claude/DEV-R0b   DISPATCHED
-- DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   DISPATCHED
+- DEV-R0a served model = final-turn model      -> worker-GA53 01HKHSLN, branch claude/DEV-R0a   BLOCKED (GA53 needs own user OK; or fresh worker)
+- DEV-R0b router can descend rungs              -> worker-GA56 01HurcnH, branch claude/DEV-R0b   ACTING
+- DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   ACTING (251k: retire after)
 - in-flight GA52 r2                             -> worker-GA52 01FUssZm (finish r2)              ACTING
 - VERDICT queue -> ga-sdk-integrator 01LBoWy9: GA52 r2, then R0 in Ops B-R0 order R0c > R0a > R0b (all parallel); each landed -> release/1 to Ops
 - token-integrator 01FynfJT: TKG13 continues; no R0 work
@@ -20,3 +20,4 @@ integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 - POLL-RUNTIME opinions: GA57 in (gateway: lift ga/ops/core.py batch/tune into ga.llm; 6+ direct backends.create sites; served-model check + error labels in gateway; rule expiry; per-caller tune keys). GA52, GA53 pending -> one opinion/1 to baseline.
 - done awaiting verdict (re-merge after GA52 lands): GA53 49f24c3, GA54 364680d (p2,p3 survived), GA56 c10675e, GA57 46687db. Release order GA52->53->54->55->56->57 (Ops may re-batch).
 - integrator 01LBoWy9 ack: head f9671da, venv rlo 0.11.1.
+- INC-OPS-1: integrator stays through R0; successor built from R0c recipe. GA52/GA57 archive after current item.
