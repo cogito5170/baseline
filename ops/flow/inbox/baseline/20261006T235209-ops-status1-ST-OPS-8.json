@@ -1,0 +1,42 @@
+{
+ "id": "ST-OPS-8",
+ "items": [
+  {
+   "id": "OPS-HANDOFF",
+   "state": "done",
+   "note": "ops hub 01Qhj1TX; hourly routine trig_01GvC312 (old trig_01MtdLyU disabled); assign.json f64c4f3"
+  },
+  {
+   "id": "ASK-VM-COST",
+   "state": "answered",
+   "note": "OP-VM-COST 45262d6"
+  },
+  {
+   "id": "OPS-VMHUB",
+   "state": "held",
+   "note": "plan ops/hub/OPS_VMHUB.md; on hold per OPS-VMAUTO"
+  },
+  {
+   "id": "OPS-VMAUTO",
+   "state": "accepted",
+   "note": "waits on DEV-VMAUTO release/1; per-class hourly measurement extends R0.json units"
+  },
+  {
+   "id": "ALARM-COST",
+   "state": "open",
+   "note": "watcher 23:51: total 32.7 USD/h > 12; dev-side sessions over ctx cap -> INC-OPS-2 to Dev. Old Ops 01MuXcCL (ctx 244k, 6.2 USD/h) still counted: archive it. Watcher archive candidate 01HurcnH is already archived (stale candidate)."
+  },
+  {
+   "id": "WATCH-METRIC",
+   "state": "finding",
+   "note": "watcher usd_per_h = lifetime cost / lifetime hours, so idle and archived sessions still add to the total; OPS-WATCH VM watcher should rate on the delta between two snapshots (current burn)"
+  }
+ ],
+ "blockers": [
+  "archive old Ops 01MuXcCL (baseline)"
+ ],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-06T23:52:09+09:00"
+}
