@@ -1,0 +1,21 @@
+{
+ "id": "DEV-WATCH",
+ "stage": "R1",
+ "goal": "Token and context watching runs on the VM as ga-engine code with no model call, and replaces the Claude watcher session.",
+ "why": "User 10-06 23:2x: watching rules as VM code; an independent check outside the Claude sessions it measures.",
+ "acceptance": [
+  "reads the published session snapshot (baseline ops/hub/cloud_sessions.json: per-session ctx, cost, status) and the ga ledgers; no Claude credentials on the VM",
+  "alarms by fixed rules: ctx over the cap on a non-completed session, one session's cost rising faster than a set rate, total cost rising faster than a set rate, snapshot older than a set age",
+  "thresholds come from a config file Ops owns; defaults: ctx 150000, 5 USD/h per session, 12 USD/h total, snapshot 2 h",
+  "each alarm is mailed once per kind per session per day as notify/1 kind alert to baseline-ops; a stale snapshot alarm also reaches the user",
+  "no model call on this path (a test fails if one is added); deterministic for the same inputs"
+ ],
+ "constraints": [
+  "spec only: Dev decides method and plan",
+  "stay within your own domain"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T23:24:34+09:00"
+}
