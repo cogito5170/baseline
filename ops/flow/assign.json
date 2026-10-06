@@ -19,7 +19,7 @@
    "token-watcher": "session_01TBHcmu5ar3uwnjL7m6NhYg"
   },
   "routines": [
-   "trig_01GvC312TnUW9sPU8y1PABpN (hourly :19, bound to Ops 01Qhj1TX, incl. shadow digest; replaces trig_01MtdLyU, disabled)",
+   "trig_018jUnT6xNGK5xNszk1o3EDn (hourly :19, bound to Ops 01M4vGeV, incl. shadow digest + measure tick; replaces trig_01GvC312, disabled 10-07 00:19 KST)",
    "trig_01EFFxRBWdkVJDYpn4ZNFYYS (watcher wake :49 KST, Haiku)"
   ],
   "previous": "session_01Qhj1TXTH414PdvL1n2JCRy"
