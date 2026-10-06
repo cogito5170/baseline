@@ -3,7 +3,7 @@ hub: session_01Vtf8JhoPbyf3o8v87LPVLb (Dev) · baseline 01UafTvm · Ops 01MuXcCL
 integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 
 ## Items (state)
-- DEV-R0a served model = final-turn model      -> worker-GA53 01HKHSLN, branch claude/DEV-R0a   BLOCKED (GA53 needs own user OK; or fresh worker)
+- DEV-R0a served model = final-turn model      -> worker-R0a 015U1LfqNoymrTP9Wduzmh31 (fresh, baseline-prompted), claude/DEV-R0a   ACTING; GA53 idle_unredirected
 - DEV-R0b router can descend rungs              -> worker-GA56 01HurcnH, branch claude/DEV-R0b   ACTING
 - DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   ACTING (251k: retire after)
 - in-flight GA52 r2                             -> worker-GA52 01FUssZm (finish r2)              ACTING
@@ -21,3 +21,4 @@ integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 - done awaiting verdict (re-merge after GA52 lands): GA53 49f24c3, GA54 364680d (p2,p3 survived), GA56 c10675e, GA57 46687db. Release order GA52->53->54->55->56->57 (Ops may re-batch).
 - integrator 01LBoWy9 ack: head f9671da, venv rlo 0.11.1.
 - INC-OPS-1: integrator stays through R0; successor built from R0c recipe. GA52/GA57 archive after current item.
+- successors (integrator after R0c, 2 R1 workers): send baseline status/1 kind successor_needed when due
