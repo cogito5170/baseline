@@ -23,8 +23,8 @@
 | Ops 허브 | `013aqrQG` | 01:2x 교체 (이전 `01M4vGeV` 보관) |
 | ga-sdk 통합 | `01Wz1byr` | 준비 완료 (이전 `01LBoWy9` 보관) |
 | Token 통합 | `01FynfJT` | TKG13 push 완료 (사용자 맥 AGY, 01:5x) |
-| W-R1 (VI-02 R1 관문) | `01KiyVDj` | 시험 중 |
-| W-R2 (VI-04 R2 판정 dry-run) | `01QEjaAW` | `451e980` 판정 대기 |
+| W-R1 (VI-02 R1 관문) | `01KiyVDj` | 보관됨 (ACCEPT `3e7ab1c`, 1435 OK, 사용자 보관 문장 in Dev 세션) |
+| W-R2 (VI-04 R2 판정 dry-run) | `01QEjaAW` | `451e980` ACCEPT이나 동시 부하에서 1건 실패 → 단독 재실행 중 |
 | W-VI (VI-06a + VI-20) | `01CnLoJD` | ACCEPT `87e3243` (1412 OK, 변이 2/2), 통합 대기 |
 | worker-R0a (VI-01 VM SHA 보고) | `015U1Lfq` | `bb443ff` 완성(1418 OK, 변이 10/10) · 새 Dev 허브를 지휘자로 인정 안 함 → top이 02:2x 확인 보냄 |
 | GA52 / GA53 작업자 | `01FUssZm` / `01HKHSLN` | GA52 보고 후 보관 예정 / GA53 대기 |
@@ -80,6 +80,7 @@ VM 내부 빌드 순서 (`VM_INTERIOR_DESIGN.md` §12): VI-01, 02, 04, 06a, 20 �
 ## 7. 비용
 
 - 02:19 측정: 클라우드 13.97 USD/h. **top 5.14 USD/h > 상한 2.0 (위반)**, ctx 337k. 대응: top 점검 2시간 간격, 아침에 새 top(사용자가 열기) 권장. 작업 세션 4.93, 다른 허브 2.63, 통합 1.19.
+- Dev 허브 후임 요청(158k)은 아침으로 미룸: 교체하면 사용자의 통합 승인(8c01da6, id 지정)이 무효가 되고, 남은 일은 대부분 사용자 대기. 250k를 넘으면 즉시 교체.
 - 문맥 상한(150k) 초과: top 337k, Dev 158k, R0a 181k, W-R1 157k, GA52 252k (INC-OPS-4).
 
 - 01:19 측정: 클라우드 12.19 USD/h (감시 상한 12 초과), Dev 허브가 8.1 USD/h → 01:2x에 Dev·Ops 허브 교체.
