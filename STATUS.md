@@ -24,6 +24,8 @@
   - 설계 공백: 실행 실패 시 브리지가 baseline에 아무것도 보내지 않음 (로그만).
 - CMD-PING4 (05:02 KST, 회신 `2bf8e3a` 19초): ga supervise exit 2, **모델 호출 0회**. `~/token/ga-supervise.json`은 이제 있으나 형식 오류 — schema가 `ga-supervise/1`이 아니어서 ga-gemini/1로 읽힘, `max_turns`·`repo`·`timeout_s`는 없는 필드. VM의 `ga bridge`(ga-sdk 318b22a)에는 item/ga act 경로가 없음 → 모든 지시는 ga supervise로 감 (baseline `ops/agy_bridge/items/CMD-PING4.json`은 VM에서 쓰이지 않음). VM 모델 연결 여부: 아직 미확인.
 - VM 직접 확인 (05:07 KST, 사용자 SSH): ga-sdk `318b22a`; `ga supervise`는 `ga-supervise/1` 받음 (필드: backend, budget, daily, est_tokens, max_model_steps, max_parallel, mcp_servers, model, options, prompt_mode, result_cap, schema, state_dir, tools, transient_backoff_s, turn_status_s, turn_timeout_s); agv backend 로드됨; **agy 1.3.0 설치·로그인, `agy models` 18개** (gemini-3.6~3.8 flash, 3.1 pro, claude opus/sonnet 5.5, gpt-oss-120b-medium) → VM 모델 연결 확인. 브리지 설정 `/home/ubuntu/agy-bridge.json` (workdir ~/token, act: agv·gpt-oss-120b-medium·agent ga-act). `~/token/ga-supervise.json`은 act 블록 복사본이라 검사기 오류 4건 (schema 없음, max_turns·repo·timeout_s 없는 필드).
+- **05:14 CMD-PING5 성공 (`a6f4e96`, 51초)**: 사용자가 `~/token/ga-supervise.json`을 ga-supervise/1(agv, gpt-oss-120b-medium, agent ga-act, max_model_steps 10, turn_timeout_s 1800)로 고치고 검사 OK. ga supervise exit 0, 모델 3턴·도구 2단계, 입력 8,370 / 전체 10,078 토큰, 32.9초, served model gpt-oss-120b-medium. 플랫폼→우편함→VM 브리지→모델→회신 전 경로 확인.
+- 요구 VM-BRIDGE-MODEL-1 (`ops/flow/requests/VM-BRIDGE-MODEL-1.md`, `1218711`): 지시마다 모델 지정 (사용자 05:2x 1번 안, 실행자 VM Antigravity 에이전트). 미전달: 사용자 VM 터미널 사용 불가, VM 브리지 도구는 읽기 전용(list_dir·read_file·search·run_check)이라 브리지 지시로는 코드 수정 불가.
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
