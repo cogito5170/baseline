@@ -7,7 +7,8 @@
    "worker-GA52": "session_01FUssZmVMp6rDvZ7GFTEpuK",
    "worker-R0a": "session_015U1LfqNoymrTP9Wduzmh31",
    "worker-W-R1": "session_01KiyVDjXGVzKdLAEjC9T7Du",
-   "worker-W-R2": "session_01QEjaAWsA1RhPRCjpWza1iZ"
+   "worker-W-R2": "session_01QEjaAWsA1RhPRCjpWza1iZ",
+   "worker-W-VI": "session_01CnLoJDKJJZ8bZ93tbGHmiN"
   },
   "idle_unredirected": {
    "worker-GA53": "session_01HKHSLNc3akPq52QTeKmDPm (refuses relayed redirect; holds CMD-GA53 49f24c3)"
