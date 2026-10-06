@@ -33,6 +33,22 @@
     "in": "Dev session_01VMbRhMjtfPAALfLjAWJ1tT",
     "user_words": "Dev 세션 상시 통합 승인을 새 Dev ID로 확장해",
     "meaning": "the standing approval applies to INTEGRATE sent by Dev hub session_01VMbRhMjtfPAALfLjAWJ1tT (replaces 01Vtf8Jh); conditions and never-list unchanged"
+   },
+   {
+    "at": "2026-10-07 01:0x KST",
+    "in": "top baseline session_016tT1vvrTFehVFzWzfgxcCV",
+    "user_words": "기준선 이름표는 매번 승인 없이 허용해",
+    "meaning": "standing approval also covers creating a baseline tag (name R<n>-baseline, e.g. R0-baseline) on the repos listed above, sent as INTEGRATE/TAG by the Dev hub",
+    "conditions": [
+     "the tag points at a commit on the listed integration branch that met every auto_integrate condition (verdict ACCEPT, full suites green)",
+     "create only: the tag does not exist yet on the remote"
+    ],
+    "never": [
+     "moving, re-pointing or deleting an existing tag",
+     "force push",
+     "any tag name other than R<n>-baseline",
+     "any other ref"
+    ]
    }
   ]
  },
