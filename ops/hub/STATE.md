@@ -37,10 +37,10 @@ watcher: session_019EWtXvKB3EE8RTYPHnNHLP "baseline ◎ 토큰 감시" (Sonnet, 
 trig_01Egfbe1CAGL6bXNu6NK9H2M: disabled (old fresh-session watcher)
 trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 
-## Heads (10-06 15:40)
+## Heads (10-06 17:50)
 ga-sdk: 3d142ae (0.17.1, GA49 10-06 17:30) | Token: 9c28c85 (TKG1-10; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
 mail_newest: to/baseline-shadow/…T062003…-CMD-GM2.md (handled)
-records_next: BD-471, round 312 (BD-471 = GA49 r2 send-back + GA50 dispatch, not yet written in DECISION_LOG)
+records_next: BD-471.., round 312 — unwritten in DECISION_LOG/BASELINE §13: GA49 r2 SEND_BACK, GA49 r3 ACCEPT+integrate, GA50 r1 SEND_BACK, GA51 dispatch, TKG11 mail (verdicts.jsonl has GA49 r3 + GA50 r1).
 
 ## Work loop
 directive: one fresh worker session per directive (create_session, source ga-sdk, branch claude/<id>); Sonnet narrow,
@@ -65,12 +65,14 @@ then: stage 3 directive (hub judges+integrates on VM, baseline audits, roll back
 fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 results.model shows gpt-oss while rung was
   gemini; ledger learns only upward; console 'starting' timeout; GA39 survivors.
 
-## In flight (handoff 10-06 16:52 KST from session_018XDm17…, ctx 308k, ~12.7 USD — watcher alarm)
-- CMD-GA49 worker session_01EPcQJaVSEzjV7LAhb1enSb, branch claude/CMD-GA49: rev 2 e8730f4 SEND_BACK 16:47 (report has no ```ga head; mutations m2 `"agree": bd == hd and not err` → `bd == hd` and m5 run-count `break`→`continue` survived; asked for tests). Next: on notify (or remote head != e8730f4) run the ga-sdk integrator VERDICT with ops/hub/mut/CMD-GA49.json (or `python3 ops/verdict.py claude/CMD-GA49 --mut ops/hub/mut/CMD-GA49.json --venv /home/user/venv/bin/python` (~16 min; mut format {id,file,find,replace,tests}), all killed + ga check rc 0 → ff push ga-sdk integration (0.17.1). Then set the VM hub model to the bridge's rung (served_model_mismatch is why every shadow decision is ASK_HUMAN) — that is VM config: ask the user only if no ga-side default can do it.
-- CMD-GA50 worker session_018CgEgHQN6sJn6teqNEnWz2 (Opus), live screen + ga.events/1 (directive directives/CMD-GA50.md): dispatched 16:45. Watch claude/CMD-GA50; nudge if idle without notify.
-- Gate: TKG1-10 integrated (Token 9c28c85); shadow-compare 0/25+, all ASK_HUMAN (model mismatch). After GA49 lands + VM self-update: TKG11 (audit `_tokens` only for numeric values) + ~10 new small real Token items → rescore. Item tools: scratchpad mkitem pattern = ops/agy_bridge/items/<id>.json {item, tests, commands, base, repo token} + directives/<id>.md (rev>1 needs "changes"); verdict ops/verdict_token.py; Token frontend needs `npm ci` in /home/user/token/frontend.
-- Open user question: token watcher every 20 min — platform rejects <1 h per routine. Offered (a) 3 hourly routines at :09/:29/:49 (skirts the limit; only with the user's OK), (b) project setting allowing shorter, (c) keep hourly. Waiting for the user's choice.
-- User asked (answered): Mac kernel panic 15:59 KST = DCP external display HPD=0, not the VM/agv.
+## In flight (handoff 10-06 17:52 KST from session_01ThMJnk…, ctx 183k — watcher alarm)
+- GA49 r3 3d142ae ACCEPTED and integrated (ga-sdk integration head 3d142ae, 0.17.1; push approved by the user in the integrator session). Worker 01EPcQJa… finished (archive when the user agrees).
+- GA50 rev 2 f3abeea (worker session_018CgEgH…, ctx 292k, idle — do not reuse; archive when the user agrees): VERDICT sent 17:49 to ga-sdk integrator with mutations g1-g6 (in this STATE's git history / ask integrator); asked also full suite with rlo-sdk + diffs of pre-existing tests. On all killed + 0 failures + ga check 0 + test edits sound → INTEGRATE claude/CMD-GA50 f3abeea… (ff over 3d142ae). The integrator's push needs the user's approval in ITS session — if denied, ask the user once.
+- CMD-GA51 (hub model "auto" = bridge served rung; S4) worker session_01A4XZDgCfueMHW6rBGSWLuA (Opus), branch claude/CMD-GA51 from 3d142ae, dispatched 17:36; it notifies the hub id it was given (session_01ThMJnk…) — the outgoing hub forwards. After GA50 lands, GA51 must merge the integration branch before verdict. Then mutations on: auto ignores served; check_served skipped for auto; migration rewrites a user value; migration skips a ga default.
+- TKG11 mailed to AGY 17:39 (ga-mailbox f02ca74; red check on 9c28c85: only test_non_numeric_tokens_values_rejected fails). Await agv/CMD-TKG11-r1 + report/2 in to/baseline → VERDICT via Token integrator (send tests inline: it has no baseline remote). Mutations to try: drop the numeric-type condition; apply it to every suffix (breaks api_key_id string).
+- Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on branch ga-mailbox, commit "ga mail: baseline -> AGY <id>" (git worktree; no ga needed).
+- Next after GA51: ~10 new small real Token items (ask Token integrator for code excerpts; red-check each inline) → rescore gate.
+- Open user question: token watcher every 20 min — (a) 3 hourly routines :09/:29/:49 only with the user's OK, (b) project setting, (c) keep hourly. No answer yet.
 
 ## Open with the user
 - Gentle Monster (BD-466) done; waits on user feedback on six documents / [확인 필요].
