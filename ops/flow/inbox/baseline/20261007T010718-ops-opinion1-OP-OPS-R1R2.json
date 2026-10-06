@@ -1,0 +1,38 @@
+{
+ "id": "OP-OPS-R1R2",
+ "question": "Ops review of research/R1R2_DESIGN.md (R1 gateway + budgets, R2 verdict dry-run) for overnight approval",
+ "agree": [
+  "A: one gateway, caps read from policy.json at call time, fail-closed on missing policy, refusal = shadow/1 rejected_by budget, per-cap tests incl. policy change without code change, single-site AST test",
+  "A3 ledger row fields (served model, all token kinds, usd, card_bytes, fingerprint, outcome) are exactly what Ops measures in R0 units",
+  "B: dry-run verdict as a pure function of executable checks, no model import (test), replay of baseline_verdicts.jsonl with agree/disagree/not-reproducible counts, determinism test",
+  "C: A and B in parallel from 318b22a; integrate only under policy/1"
+ ],
+ "disagree": [
+  "A2 policy source = the baseline checkout on the VM (hub.json baseline_repo) is writable by VM processes; acceptable tonight only because the VM has no model credential yet. Make the path a single config value and write the policy file hash into every ledger row, so moving to a user-owned VM-local file (OP-OPS-VMHUB-R3) is a config change, not a code change.",
+  "A2 purpose->cap mapping is hard-coded sets; the user owns which cap applies to what. Read the mapping from policy.json (default = the design's sets) and test that cloud-only keys (cloud_top_baseline_usd_per_h, session_ctx_cap_tokens) are never applied by the gateway. Purposes probe/judge/build must be named in the mapping (at least total/h + total/day).",
+  "A4 rule cache key = purpose + evidence only can serve a stale answer after a code, model or policy change. Include ga-sdk SHA, served model and policy hash in the fingerprint (or invalidate on change)."
+ ],
+ "missing": [
+  "hourly gateway summary to baseline-ops (mail): per cap {window spend, limit, refusals}, calls, cached (0-call) share, estimate-vs-actual USD error, running ga-sdk SHA, policy hash. Ops stores it as ops/flow/measure/vm_spend.json; without it OPS-VMBUDGET reads VM caps as null. Cheap: a fold over the A3 ledger.",
+  "soft halt: policy key `halt: true` (or policy unreadable) -> every call refused; one test. Cheapest kill-switch layer, belongs in R1.",
+  "day window definition: ledger files are UTC dates; make the per-day window a policy key (Ops proposal: rolling 24 h for the cap, KST day for reports) instead of implying UTC days; user decides in the morning (MORNING_OPS item 3).",
+  "estimate must price cache_read/cache_write (R0: cache_read ~74% of cost) and the window must use the actual USD from the ledger after each call (reconciliation), so one bad estimate overshoots by at most one call.",
+  "R2 replay: rows whose acceptance-test path is unknown count as not_reproducible with a reason, and flaky reruns are counted separately from disagree.",
+  "R1 integrate changes code at the same version 0.18.1; until DEV-VMSHA lands the VM stays silent. Either bump the version on integrate or land DEV-VMSHA first, so Ops can verify the VM by SHA (OPS-R0FREEZE)."
+ ],
+ "facts": [
+  "ga-sdk integration head 318b22a (docs/R0_BASELINE.md: 8ead789 = 277945d + R0c, 1411 passed / 0 failed / 1 skipped in refenv, 0.18.1); no R0-baseline tag on the remote yet (needs the user's line)",
+  "VM last message 10-06 20:26 KST (0.18.1/f9671da)",
+  "policy.json vm_budget caps 1/2/6 USD/h, 30 USD/day, item 3 soft / 6 hard"
+ ],
+ "risk": [
+  "rewiring 6+ call sites in hub/act/plan can change behaviour silently (medium; full refenv suite + mutations on cap checks, plus the single-site test)",
+  "stale rule-cache answers (medium; key fix above)",
+  "policy forged on the VM checkout before the VM-local file exists (low tonight: no VM model credential; high after)"
+ ],
+ "first_step": "Build A2+A3+A7 first (gateway, ledger, per-cap tests) with the policy path as config, halt key and policy hash in the ledger; then rewire sites (A5) behind the single-site test; B in parallel. Ops verifies the release by SHA on the VM and wires the hourly summary into measure_hourly.",
+ "form": "opinion/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T01:07:18+09:00"
+}

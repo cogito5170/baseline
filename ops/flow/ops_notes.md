@@ -2,7 +2,7 @@
 Ops: session_01M4vGeVjHtivZ5nKLDSmdED (prev 01Qhj1TX). baseline: session_016tT1vvrTFehVFzWzfgxcCV (prev 01Ltsebb, child of it). Dev: session_01VMbRhMjtfPAALfLjAWJ1tT (prev 01Vtf8Jh).
 Ops sessions/routines (assign.json): token watcher session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku, wake trig_01EFFxRB :49 KST, alarms come as notify/1);
   hourly Ops routine trig_018jUnT6xNGK5xNszk1o3EDn (old trig_01GvC312 disabled) (prompt includes shadow digest + snapshot steps).
-inbox seen up to: ops 20261007T010412 (OPS-OVERNIGHT). Last sent: dev INC-OPS-2 23:52 (ctx over cap); baseline ST-OPS-8 23:52.
+inbox seen up to: ops 20261007T010550 (DEV-ST R1R2 design). Last sent: dev INC-OPS-2 23:52 (ctx over cap); baseline ST-OPS-8 23:52.
 
 ## Done
 - OPS-R0: ops/flow/measure/R0.json via ops/hub/measure_r0.py (static, no ga code). 10.2 USD/wall-h (hub 6.08, worker 4.57, integrator 1.15, watcher 0.51 USD/h).
@@ -32,6 +32,8 @@ inbox seen up to: ops 20261007T010412 (OPS-OVERNIGHT). Last sent: dev INC-OPS-2 
 - OPS-VMBUDGET (R1) 01:00: caps in policy.json vm_budget (user 01:0x). measure rows carry budget/breaches; routine files incident on breach w/o refusal (ctx-cap breach = INC-OPS-3, don't re-file). opinion/1 OP-OPS-VMHUB-R3 sent 01:0x (VM-local root-owned policy, 3-layer kill switch, post-call reconciliation, hourly VM boundary report).
 
 - OPS-OVERNIGHT (R1) until 09:00 KST: baseline approves Dev designs after Ops opinion. Ops: opinion per design within 1 round; verify/1 or incident/1 per release within 1 round; hourly stalled-session list to baseline; final status/1 08:30 (send_later armed 23:30Z). User-only items -> ops/flow/MORNING_OPS.md.
+
+- OP-OPS-R1R2 sent 01:1x on research/R1R2_DESIGN.md (agree; policy path config + hash in ledger, purpose->cap map in policy, cache key incl sha/model/policy, hourly gateway summary, halt key, day window key, cache pricing+reconciliation, version bump or VMSHA first). ga-sdk head 318b22a; R0-baseline candidate 8ead789 (1411/0/1 refenv), tag pending user line.
 
 ## Hourly (every fire)
 1 inbox ops; 2 git fetch ga-mailbox (to/baseline, -ops, -shadow) -> scoring/incident if lag unexplained; 3 python3 ops/hub/shadow_digest.py digest;
