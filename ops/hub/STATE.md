@@ -10,7 +10,7 @@ never: route around a permission denial (other session, tool, host).
 language: user=Korean; sessions=English. Times to the user: KST.
 
 ## Hub
-session: session_01ThMJnkXYNSMWt4BtSiVDGx "baseline ● 현재 허브 (10-06 16:55~)" (also in ops/hub/BASELINE_SESSION)
+session: session_01ERe9emPsRpLN5eGNJgGuVS "baseline ● 현재 허브 (10-06 17:53~)" (also in ops/hub/BASELINE_SESSION); previous session_01ThMJnk… (16:51~17:53)
 repos_attach: ga-sdk, Token (push) — the hub's inherited repo list; add_repo each at session start, before any work.
 attached: baseline(source), ga-sdk, Token (10-06 15:47, clones /home/user/ga-sdk, /home/user/token); venv /home/user/venv (rlo-sdk + ga-sdk).
 user_direction 10-06 15:46: "이전 세션에서 다음 세션으로 인계해야 하는 repo를 넘겨 받고, add_repo으로 baseline 세션 생길 때 부터 추가해.
@@ -29,7 +29,7 @@ Bridge items (ga mail send) need only baseline: copy ga-sdk read-only (git clone
 repos_attach is now OPTIONAL (only if the user says "추가해" in that hub).
 
 ## Routines
-trig_01XgQLp8ZMCe7xEmDJiTWcFF: mail+workers check, :19 hourly, fires INTO the hub (recreate on handoff, disable old); trig_01RuQYZ… disabled
+trig_01Cyv3YVMDBqMa1Z3JELiZtd: mail+workers check, :19 hourly, fires INTO the hub (recreate on handoff, disable old); trig_01XgQLp8…, trig_01RuQYZ… disabled
 watcher: session_019EWtXvKB3EE8RTYPHnNHLP "baseline ◎ 토큰 감시" (Sonnet, persistent, source baseline), woken by
   trig_01XtMnV6yMeywrMbcTFeeeJE ("watch run", :49 KST hourly). Rules live in its first prompt. Alarms (ctx>150k, burst,
   +5 USD/h) → send_message to hub + push to user. It asks the hub to recreate it at ~100k own context.
