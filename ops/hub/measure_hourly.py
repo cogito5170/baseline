@@ -8,6 +8,8 @@ A tick compares each session's cumulative usage with the previous tick (ops/flow
 elapsed wall time, so idle and archived sessions add 0 (the lifetime-average watcher metric counted them; WATCH-METRIC).
 Classes: baseline (top hub, assign.json baseline.hub), dev_hub, ops_hub (assign.json), integrator, worker, watcher,
 vm_auto (rows Ops adds from VM status/1 once DEV-VMAUTO reports usage). Units as ops/flow/measure/R0.json per_hour.
+Each row also carries vm_baseline (VM_BASELINE.json, the SHA it ran on) and budget: every policy.json vm_budget cap with
+value/limit/breach (VM values from vm_spend.json once the VM reports; None = not measured). OPS-VMBUDGET.
 Rows go to ops/flow/measure/hourly.jsonl (last KEEP rows), handoffs to handoffs.jsonl.
 """
 from __future__ import annotations
@@ -82,6 +84,30 @@ def tick(raw: dict, last: dict, assign: dict, now: datetime) -> tuple[dict, dict
     return row, {"at": row["at"], "sessions": cur}
 
 
+POLICY = HERE.parent / "flow" / "policy.json"
+
+
+def budget(row: dict, caps: dict, vm: dict | None) -> dict:
+    """OPS-VMBUDGET: every vm_budget cap next to its measured value (None = not measured yet). Caps come from policy.json only."""
+    cls, per_h = row.get("classes") or {}, lambda k: ((row.get("classes") or {}).get(k) or {}).get("per_hour") or {}
+    vm = vm or {}
+    measured = {
+        "cloud_top_baseline_usd_per_h": per_h("baseline").get("usd") if row.get("hours") else None,
+        "session_ctx_cap_tokens": max((c.get("ctx_max") or 0 for c in cls.values()), default=None) or None,
+        "vm_coordination_dev_plus_ops_usd_per_h": vm.get("coordination_usd_per_h"),
+        "vm_baselines_usd_per_h": vm.get("baselines_usd_per_h"),
+        "vm_total_usd_per_h": vm.get("total_usd_per_h"),
+        "vm_total_usd_per_day": vm.get("total_usd_day"),
+        "build_per_item_usd": vm.get("max_item_usd"),
+    }
+    out = {}
+    for k, lim in caps.items():
+        lim = lim.get("hard") if isinstance(lim, dict) else lim
+        v = measured.get(k)
+        out[k] = {"value": v, "limit": lim, "breach": None if v is None else v > lim}
+    return out
+
+
 def append(path: Path, row: dict, keep: int | None = None) -> None:
     lines = path.read_text().splitlines() if path.exists() else []
     lines.append(json.dumps(row, ensure_ascii=False))
@@ -96,6 +122,10 @@ def handoff(a: list[str]) -> dict:
 
 
 def self_test() -> None:
+    caps = {"cloud_top_baseline_usd_per_h": 2.0, "vm_total_usd_per_h": 6.0, "build_per_item_usd": {"default": 3, "hard": 6}}
+    b = budget({"hours": 1, "classes": {"baseline": {"per_hour": {"usd": 2.5}, "ctx_max": 9}}}, caps, {"total_usd_per_h": 1})
+    assert b["cloud_top_baseline_usd_per_h"]["breach"] and b["vm_total_usd_per_h"]["breach"] is False
+    assert b["build_per_item_usd"] == {"value": None, "limit": 6, "breach": None}
     assign = {"baseline": {"hub": "B"}, "dev": {"hub": "D"}, "ops": {"hub": "O"}}
     def s(i, usd, cr, title="", tags=(), st="RUNNING"):
         return {"id": i, "title": title, "tags": list(tags), "session_status": st,
@@ -126,6 +156,9 @@ def main(a: list[str]) -> int:
         row, state = tick(json.loads(Path(a[1]).read_text()), last, json.loads(ASSIGN.read_text()), datetime.now(timezone.utc))
         vb = MEAS / "VM_BASELINE.json"  # OPS-R0FREEZE: every row names the code it ran on
         row["vm_baseline"] = json.loads(vb.read_text()) if vb.exists() else None
+        vmf = MEAS / "vm_spend.json"  # VM-reported spend for the last hour (absent until the VM reports; VM runs no model yet)
+        row["budget"] = budget(row, json.loads(POLICY.read_text())["vm_budget"]["caps"], json.loads(vmf.read_text()) if vmf.exists() else None)
+        row["breaches"] = sorted(k for k, b in row["budget"].items() if b["breach"])
         lastf.write_text(json.dumps(state) + "\n")
         if row["hours"]:
             append(MEAS / "hourly.jsonl", row, KEEP)

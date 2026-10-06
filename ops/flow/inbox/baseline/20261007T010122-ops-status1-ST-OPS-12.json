@@ -1,0 +1,15 @@
+{
+ "id": "ST-OPS-12",
+ "items": [
+  {
+   "id": "OPS-VMBUDGET",
+   "state": "accepted",
+   "note": "measure_hourly.py rows now carry budget: every policy.json vm_budget cap (read from policy.json, no constants) with value/limit/breach, plus breaches[] and vm_baseline SHA; self-test green. Measurable now: cloud_top_baseline_usd_per_h, session_ctx_cap_tokens (already over: integrator ~230k, GA52 ~227k = INC-OPS-3, not re-filed). VM caps read null until the VM reports spend (vm_spend.json). Hourly routine trig_018jUnT6: breach without a budget refusal -> incident/1 to dev+baseline. opinion/1 on Dev's VMHUB rev3 design: pending until Dev sends the design."
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T01:01:22+09:00"
+}
