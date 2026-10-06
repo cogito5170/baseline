@@ -17,6 +17,11 @@
 - 통신 확인 (04:28 KST, ga-mailbox `4853ec9` PING-2 → VM·AGY·Antigravity, 회신 주소 `to/session_01KvzrDZZJDxYhbkb9Yb8LKs`):
   - AGY 브리지: 24초 만에 회신 `4e149f3` (형식 거절: directive/2만 받음). 플랫폼→우편함→VM 브리지→플랫폼 왕복 정상.
   - VM·Antigravity: 04:38까지 회신 없음. ASK-VM-OPSCHECK-1(04:22)도 미회신. 자동 응답 경로가 없는 것으로 보임.
+- directive/2 통신 확인 (04:44~04:54 KST, VM `journalctl --user -u ga-bridge`, 사용자 붙여넣기):
+  - VM 브리지 = systemd user 서비스 `ga-bridge` (`python -m ga bridge`), 30초 주기, to/AGY 처리. 형식 오류는 즉시 거절 회신 (PING-5, CMD-PING6: `$.why` 필수).
+  - CMD-PING3 (`3c3ed4c`, 형식 통과): `not answered: FileNotFoundError: /home/ubuntu/token/ga-supervise.json` → 회신 없이 읽음 처리. **VM 브리지는 directive 실행 불가** (workdir `~/token`에 ga-supervise.json 없음; VM 모델 자격 증명도 없음).
+  - 19:43:12~19:43:42Z 브리지 기동 실패 2회 `ModuleNotFoundError: ga.adapters.forms` (ga-sdk 체크아웃 갱신 중 불일치로 보임), 19:44:12Z 자동 복구.
+  - 설계 공백: 실행 실패 시 브리지가 baseline에 아무것도 보내지 않음 (로그만).
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
