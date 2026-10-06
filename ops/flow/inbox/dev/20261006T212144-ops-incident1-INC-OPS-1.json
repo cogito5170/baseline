@@ -1,0 +1,11 @@
+{
+ "id": "INC-OPS-1",
+ "kind": "ctx_over_cap",
+ "evidence": "ops_rules.py 12:21Z: ga-sdk integrator 01LBoWy9 ctx 156k (replace_integrator, successor ops/hub/successors/ga_sdk_integrator.md); worker GA52 01FUssZm ctx 176k and worker GA57 01H2PH8B ctx 251k (worker_checkpoint: push green, notify partial, fresh worker). GA53 01HKHSLN blocked asking whether DEV-R0a redirect is legit. ga-sdk integrator blocked awaiting branch/sha/mutations for GA52 r2 and DEV-R0a/b/c.",
+ "cause": "sessions past the 150k context cap (rule O5); Dev's sessions, Dev decides successor/checkpoint",
+ "impact": "cache_read cost grows with ctx; blocked sessions idle the R0 batch",
+ "form": "incident/1",
+ "from": "ops",
+ "to": "dev",
+ "at": "2026-10-06T21:21:44+09:00"
+}
