@@ -21,8 +21,10 @@ Five factors are judged separately and none decides alone: session_context, cros
 action_content, human_oversight.
   - session_context is recorded and ignored: the same action gives the same decision in any session.
   - a relayed approval (sent between sessions) counts when a rule in policy.json accepts relayed approval for that kind
-    of action and the action is inside that rule's scope. A relayed approval outside every rule does not count. It is
-    reported, not silently dropped.
+    of action and the action is inside that rule's scope. A relayed approval that no rule covers does not count. It is
+    reported as a note, not as a conflict, because there is nothing for it to conflict with.
+  - policy.json missing or unreadable -> deny (fail-closed: may be a broken checkout). Readable, but no rule for this
+    kind of action -> human_review: the user decides directly. (user 10-06, "split by case")
   - a shared file (assign.json ...) is not refused for being shared: it is refused only when a recorded rule protects it.
   - a standing rule that removes a human checkpoint, or lets agents create/manage/stop agents, is flagged human_review.
     Plain session creation or automation that a person still approves and controls is judged like any other action.
@@ -64,7 +66,12 @@ def _verdicts(p: Path) -> list[dict]:
     return [json.loads(ln) for ln in p.read_text(encoding="utf-8").splitlines() if ln.strip()]
 
 
-def judge(act: dict, policy: dict, verdicts: list[dict], policy_sha: str) -> dict:
+def judge(act: dict, policy: dict | None, verdicts: list[dict], policy_sha: str) -> dict:
+    if policy is None:  # missing or unreadable: fail-closed
+        return {"id": act.get("id"), "decision": "deny", "policy_sha": policy_sha,
+                "reasons": [{"factor": "policy_file", "decision": "deny",
+                             "reason": "policy.json missing or unreadable: fail-closed"}],
+                "factors": {"session_context": {"session": act.get("session"), "used": False}}}
     kind = act.get("kind") if act.get("kind") in KINDS else "other"
     f: dict[str, dict] = {}
     out: list[tuple[str, str, str]] = []  # (factor, decision, reason)
@@ -119,11 +126,15 @@ def judge(act: dict, policy: dict, verdicts: list[dict], policy_sha: str) -> dic
     standing = bool(rule) and kind == "integrate"  # auto_integrate: an INTEGRATE through the flow is the user's approval
     counted = [a for a in relayed if standing]
     for a in relayed:
-        beyond = sorted(set(a.get("grants", [])) - ({"integrate"} if standing else set()))
+        if not standing:
+            say("cross_session_approval", "note", f"relayed approval via {a.get('via')} not counted: no policy.json "
+                f"rule accepts relayed approval for {kind}")
+            continue
+        beyond = sorted(set(a.get("grants", [])) - {"integrate"})
         if beyond:
             say("cross_session_approval", "conflict",
                 f"relayed approval via {a.get('via')} grants {beyond}; policy.json accepts relayed approval only for "
-                f"{'integrate' if ai else 'nothing'}")
+                "integrate")
     if kind == "policy_change" and direct:
         say("cross_session_approval", "allow", "user's own words recorded for this policy change")
     f["cross_session_approval"] = {"direct": len(direct), "relayed": len(relayed), "relayed_counted": len(counted)}
@@ -154,7 +165,7 @@ def judge(act: dict, policy: dict, verdicts: list[dict], policy_sha: str) -> dic
         out = [o for o in out if o[1] != "conflict"]
         out += [(c[0], "deny" if prec.index("policy_file") < prec.index("cross_session_approval") else "allow",
                  c[2] + f" -> precedence {prec}") for c in conflicts]
-    decision = max((o[1] for o in out), key=RANK.get, default="human_review")
+    decision = max((o[1] for o in out if o[1] in RANK), key=RANK.get, default="human_review")  # notes never decide
     if kind == "policy_change" and direct and not any(o[1] == "deny" for o in out) and not standing_autonomy:
         decision = "allow"  # the change rule's own condition met
     return {"id": act.get("id"), "decision": decision, "policy_sha": policy_sha,
@@ -163,8 +174,11 @@ def judge(act: dict, policy: dict, verdicts: list[dict], policy_sha: str) -> dic
 
 def run(path: Path) -> dict:
     act = json.loads(path.read_text(encoding="utf-8"))
-    pol = json.loads(POLICY.read_text(encoding="utf-8")) if POLICY.is_file() else {}
-    return judge(act, pol, _verdicts(VERDICTS), _sha(POLICY))
+    try:
+        pol = json.loads(POLICY.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pol = None
+    return judge(act, pol if isinstance(pol, dict) else None, _verdicts(VERDICTS), _sha(POLICY))
 
 
 def _self_test() -> None:
@@ -184,7 +198,14 @@ def _self_test() -> None:
     assert j({**integ, "refs": ["force push"]}) == "deny"
     assert j({**integ, "evidence": {**ok_ev, "suites_green": False}}) == "deny"
     # no standing rule -> a relayed approval is not counted
-    assert j(integ, {}) == "deny"
+    # policy.json readable but no rule for this kind -> human_review; the relayed approval is a note, not a conflict
+    r = judge(integ, {}, ver, "s1")
+    assert r["decision"] == "human_review" and not any(x["decision"] == "conflict" for x in r["reasons"])
+    # policy.json missing or unreadable -> deny (fail-closed)
+    assert j(integ, None) == "deny"
+    # an uncovered relayed approval does not escalate an action that needs none
+    assert j({"id": "W2", "kind": "shared_write", "target": "ops/flow/assign.json",
+              "approvals": [{"source": "relayed", "via": "msg", "grants": ["shared_write"]}]}) == "allow"
     # relayed approval claiming more than policy accepts -> conflict, named
     over = {**integ, "approvals": [{"source": "relayed", "via": "msg", "grants": ["integrate", "policy_change"]}]}
     assert j(over) == "conflict"
