@@ -94,23 +94,50 @@ MODELS = frozenset({
     "claude-sonnet-5-5-low", "claude-sonnet-5-5-medium", "claude-sonnet-5-5-high",
     "gpt-oss-120b-medium"})
 
+_HELP: dict[str, str] = {}
+
+
+def _ga_act_has(flag: str) -> bool:
+    """The installed ga may be older than baseline's bridge code (the VM updates ga-sdk only on `ga vm install`):
+    use a ga act flag only when its --help lists it."""
+    if "act" not in _HELP:
+        try:
+            p = subprocess.run([sys.executable, "-m", "ga", "act", "--help"], capture_output=True, text=True, timeout=60)
+            _HELP["act"] = p.stdout or ""
+        except (OSError, subprocess.TimeoutExpired):
+            _HELP["act"] = ""
+    return flag in _HELP["act"]
+
+
 def run_act(cfg: dict[str, Any], spec: dict[str, Any], wt: Path, checkout: Path) -> dict[str, Any]:
     """`ga act` in the worktree; returns {code, out, result (act/1 dict or None)}."""
     act = cfg.get("act") or {}
     ladder = list(spec.get("ladder") or act.get("ladder") or [])  # GA45: cheap model first, the next only when blocked
     if any(m not in MODELS for m in ladder):
         raise ValueError(f"unknown model in the ladder: {ladder!r}")
+    # GA47: without an explicit ladder the item is routed (its own route, else the ledger, else one triage turn); the
+    # route ledger lives in a state dir that outlives the run so later items of a known kind need no triage (BD-460)
+    route: list[str] = []
+    if not ladder and spec.get("route", act.get("route", True)) and _ga_act_has("--route"):
+        route = ["--route"]
+        cmp = list(spec.get("triage_compare") or act.get("triage_compare") or [])
+        if cmp:
+            if len(cmp) != 2 or any(m not in MODELS for m in cmp):
+                raise ValueError(f"triage_compare needs two known models: {cmp!r}")
+            route += ["--triage-compare", ",".join(cmp)]
+    state = str(Path(act.get("state_dir") or "~/.ga/act-bridge").expanduser()) if route else None
     subs = {"venv_python": str(checkout / ".venv" / "bin" / "python"), "checkout": str(checkout)}
     cmds = dict(spec.get("commands") or {})
     cmds["commands"] = {k: _expand(v, subs) for k, v in (cmds.get("commands") or {}).items()}
     tmp = Path(tempfile.mkdtemp(prefix="agv-act-"))
+    state = state or str(tmp / "state")
     (tmp / "item.json").write_text(json.dumps(spec["item"], ensure_ascii=False), encoding="utf-8")
     (tmp / "commands.json").write_text(json.dumps(cmds, ensure_ascii=False), encoding="utf-8")
     argv = [sys.executable, "-m", "ga", "act", "--item", str(tmp / "item.json"), "--repo", str(wt),
             "--backend", act.get("backend", "agv"), "--model", act.get("model", "gpt-oss-120b-medium"),
-            *(["--ladder", ",".join(ladder)] if ladder else []),
+            *(["--ladder", ",".join(ladder)] if ladder else route),
             "--options", json.dumps(act.get("options") or {}), "--config", str(tmp / "commands.json"),
-            "--state", str(tmp / "state"), "--max-turns", str(int(act.get("max_turns", 10)))]
+            "--state", state, "--max-turns", str(int(act.get("max_turns", 10)))]
     try:
         p = subprocess.run(argv, capture_output=True, text=True, timeout=int(act.get("timeout_s", 3600)))
         code, out = p.returncode, (p.stdout or "") + (p.stderr or "")

@@ -177,6 +177,44 @@ class ActRunnerTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             act_runner.run_act(self.cfg, dict(self.spec, ladder=["gpt-oss-120b-medium", "x; rm"]), wt, self.checkout)
 
+    def test_routed_by_default_with_a_lasting_state_dir_and_ladder_wins(self):
+        seen = []
+        old = act_runner.subprocess.run
+
+        def fake_run(argv, **kw):
+            seen.append(argv)
+            return act_runner.subprocess.CompletedProcess(argv, 0, '{"status": "done", "turns": 1, "tokens": {}}', "")
+        cfg = dict(self.cfg, act=dict(self.cfg["act"], state_dir=str(self.tmp / "act-state")))
+        wt = act_runner.prepare(self.spec, self.checkout, "CMD-AGA9")
+        act_runner._HELP["act"] = "usage: ga act ... --route ..."
+        self.addCleanup(act_runner._HELP.clear)
+        try:
+            act_runner.subprocess.run = fake_run
+            act_runner.run_act(cfg, self.spec, wt, self.checkout)
+            act_runner.run_act(cfg, dict(self.spec, triage_compare=["gemini-3.1-pro-high", "claude-opus-5-5-high"]),
+                               wt, self.checkout)
+            act_runner.run_act(cfg, dict(self.spec, ladder=["gpt-oss-120b-medium"]), wt, self.checkout)
+            act_runner.run_act(cfg, dict(self.spec, route=False), wt, self.checkout)
+        finally:
+            act_runner.subprocess.run = old
+        a = seen[0]
+        self.assertIn("--route", a)
+        self.assertEqual(a[a.index("--state") + 1], str(self.tmp / "act-state"))  # outlives the run: the route ledger
+        self.assertEqual(seen[1][seen[1].index("--triage-compare") + 1], "gemini-3.1-pro-high,claude-opus-5-5-high")
+        self.assertNotIn("--route", seen[2])  # an explicit ladder is not routed
+        self.assertNotIn("--route", seen[3])
+        self.assertNotEqual(seen[3][seen[3].index("--state") + 1], str(self.tmp / "act-state"))
+        with self.assertRaises(ValueError):
+            act_runner.run_act(cfg, dict(self.spec, triage_compare=["x", "y"]), wt, self.checkout)
+        act_runner._HELP["act"] = "usage: ga act (an older ga without routing)"
+        seen.clear()
+        try:
+            act_runner.subprocess.run = fake_run
+            act_runner.run_act(cfg, self.spec, wt, self.checkout)
+        finally:
+            act_runner.subprocess.run = old
+        self.assertNotIn("--route", seen[0])  # an older ga on the VM still runs the item
+
     def test_placeholders_expand(self):
         self.assertEqual(act_runner._expand(["{venv_python}", "-m", "x"], {"venv_python": "/v/bin/python"}),
                          ["/v/bin/python", "-m", "x"])
