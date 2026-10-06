@@ -60,6 +60,26 @@
    "title": "",
    "usd": 1.19
   },
+  "session_01FUssZmVMp6rDvZ7GFTEpuK": {
+   "cache_read": 2777878,
+   "cache_write": 169313,
+   "ctx": 122572,
+   "id": "session_01FUssZmVMp6rDvZ7GFTEpuK",
+   "output": 8368,
+   "status": "",
+   "title": "",
+   "usd": 1.32
+  },
+  "session_01FynfJTJBM1D3itToGCjyM1": {
+   "cache_read": 668657,
+   "cache_write": 19687,
+   "ctx": 73035,
+   "id": "session_01FynfJTJBM1D3itToGCjyM1",
+   "output": 2106,
+   "status": "",
+   "title": "",
+   "usd": 0.23
+  },
   "session_01GThc7uijAktpufbUynL5ws": {
    "cache_read": 8693163,
    "cache_write": 194275,
@@ -69,6 +89,36 @@
    "status": "",
    "title": "",
    "usd": 4.18
+  },
+  "session_01H2PH8BwPn3e3ut6Qjoaed3": {
+   "cache_read": 0,
+   "cache_write": 0,
+   "ctx": 0,
+   "id": "session_01H2PH8BwPn3e3ut6Qjoaed3",
+   "output": 0,
+   "status": "",
+   "title": "",
+   "usd": 0.0
+  },
+  "session_01HKHSLNc3akPq52QTeKmDPm": {
+   "cache_read": 2061032,
+   "cache_write": 51795,
+   "ctx": 95484,
+   "id": "session_01HKHSLNc3akPq52QTeKmDPm",
+   "output": 11416,
+   "status": "",
+   "title": "",
+   "usd": 0.73
+  },
+  "session_01HurcnHXjzVhZjQ6vYSYwkc": {
+   "cache_read": 0,
+   "cache_write": 0,
+   "ctx": 0,
+   "id": "session_01HurcnHXjzVhZjQ6vYSYwkc",
+   "output": 0,
+   "status": "",
+   "title": "",
+   "usd": 0.0
   },
   "session_01J4GYxF1DgQExRvBkxRm9pp": {
    "cache_read": 2305568,
@@ -90,6 +140,16 @@
    "title": "",
    "usd": 3.54
   },
+  "session_01LBoWy9AXfEwQsHqMcumAuC": {
+   "cache_read": 5118286,
+   "cache_write": 98462,
+   "ctx": 131019,
+   "id": "session_01LBoWy9AXfEwQsHqMcumAuC",
+   "output": 14151,
+   "status": "",
+   "title": "",
+   "usd": 1.59
+  },
   "session_01ThMJnkXYNSMWt4BtSiVDGx": {
    "cache_read": 11024254,
    "cache_write": 127901,
@@ -99,7 +159,27 @@
    "status": "",
    "title": "",
    "usd": 4.04
+  },
+  "session_01UafTvmJjZiza4ctSfoeV8V": {
+   "cache_read": 16846405,
+   "cache_write": 165711,
+   "ctx": 218934,
+   "id": "session_01UafTvmJjZiza4ctSfoeV8V",
+   "output": 59029,
+   "status": "",
+   "title": "",
+   "usd": 5.89
+  },
+  "session_01VxBgf9gyDktXz8Ke7T6NiY": {
+   "cache_read": 11779510,
+   "cache_write": 171729,
+   "ctx": 215293,
+   "id": "session_01VxBgf9gyDktXz8Ke7T6NiY",
+   "output": 66918,
+   "status": "",
+   "title": "",
+   "usd": 5.07
   }
  },
- "t": "2026-10-06T10:50:23Z"
+ "t": "2026-10-06T11:50:16Z"
 }
