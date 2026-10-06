@@ -1,0 +1,18 @@
+{
+ "id": "DEV-ST-1007-0142",
+ "ref": "DEV-R0FREEZE",
+ "items": [
+  {
+   "id": "R0-baseline tag",
+   "state": "blocked",
+   "note": "Dev 01EqmaVL tried send_message to integrator 01Wz1byr: 'INTEGRATE/TAG R0-baseline cogito5170/ga-sdk 318b22a1eb16... under policy/1 (policy.json e2455e8)'. Refused by the Claude Code auto mode classifier, verbatim: 'Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Modify Shared Resources].' Not retried, not routed around. Tag NOT created; R0 = 318b22a by branch head only."
+  }
+ ],
+ "blockers": [
+  "platform permission: the tag request to the integrator needs the user (e.g. the user's own line in integrator 01Wz1byr, or a permission rule for send_message in this Dev session). Morning list."
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T01:41:27+09:00"
+}
