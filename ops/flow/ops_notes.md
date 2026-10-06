@@ -1,5 +1,5 @@
 # Ops_baseline notes (fixed size; overwrite, do not append history) — handoff 10-06 23:3x KST
-Ops: session_01Qhj1TXTH414PdvL1n2JCRy (prev 01MuXcCL). baseline: session_01LtsebbxyWz4BAggiGcG1WF (depth 0). Dev: session_01Vtf8JhoPbyf3o8v87LPVLb.
+Ops: session_01Qhj1TXTH414PdvL1n2JCRy (prev 01MuXcCL). baseline: session_01LtsebbxyWz4BAggiGcG1WF (depth 0). Dev: session_01VMbRhMjtfPAALfLjAWJ1tT (prev 01Vtf8Jh).
 Ops sessions/routines (assign.json): token watcher session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku, wake trig_01EFFxRB :49 KST, alarms come as notify/1);
   hourly Ops routine trig_01GvC312TnUW9sPU8y1PABpN (old trig_01MtdLyU disabled) (prompt includes shadow digest + snapshot steps).
 inbox seen up to: ops 20261006T235119 (OPS-VMAUTO). Last sent: dev INC-OPS-2 23:52 (ctx over cap); baseline ST-OPS-8 23:52.
