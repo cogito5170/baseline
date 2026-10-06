@@ -63,6 +63,23 @@ seeded mutations; "no model call, test" → 1; "non-executable → shadow, repor
 replayable" → 3; "agreement count reported" (DEV-OVERNIGHT) → 2. The integrating push stays with the integrator
 under policy/1 until a later spec.
 
+## A'. Revisions r3 (Ops OP-OPS-R1R2 taken in full)
+- Policy path is ONE config value (`llm.policy_path`; default baseline mirror, VM later /etc/ga/vm_policy.json) and
+  the policy file sha256 is written into every ledger row; moving to the VM-local file is a config change.
+- purpose->cap mapping read from policy (`vm_budget.applies`; default = the sets in A2); every purpose incl.
+  probe/judge/build is under at least total/h + total/day; test that `cloud_top_baseline_usd_per_h` and
+  `session_ctx_cap_tokens` are never applied by the gateway.
+- Rule-cache fingerprint = sha256(purpose + normalized evidence + ga-sdk SHA + served model + policy hash).
+- Estimate prices cache_read/cache_write; window uses actual USD from the ledger after each call (reconciliation).
+- Day window is a policy key (`vm_budget.windows.day`; default rolling_24h, reports by KST day) — user confirms (morning).
+- Soft halt: `halt: true` or unreadable policy -> every call refused; one test.
+- Hourly gateway summary mailed to baseline-ops (fold over the ledger): per cap {spend, limit, refusals}, calls,
+  cached share, estimate-vs-actual error, ga-sdk SHA, policy hash.
+- R2 replay: unknown acceptance-test path -> not_reproducible with reason; flaky reruns counted separately.
+- R1 integrate keeps 0.18.1 → land DEV-VMSHA before (or with) R1 so Ops verifies the VM by SHA; else bump version.
+- Build order in A: gateway + ledger + per-cap tests + halt (A2, A3, A7) first, then rewire sites (A5) behind the
+  single-site test (A6); B in parallel.
+
 ## C. Order and owners tonight
 R0-baseline tag (integrator; needs user line) → A (worker W-R1) and B (worker W-R2) in parallel from 318b22a →
 VERDICT by integrator successor → INTEGRATE under policy/1 → release/1 to Ops.
