@@ -35,5 +35,29 @@
     "meaning": "the standing approval applies to INTEGRATE sent by Dev hub session_01VMbRhMjtfPAALfLjAWJ1tT (replaces 01Vtf8Jh); conditions and never-list unchanged"
    }
   ]
+ },
+ "vm_budget": {
+  "approved_by": "user, in top baseline session_016tT1vvrTFehVFzWzfgxcCV, 10-07 01:0x KST",
+  "user_words": "Dev 안(지휘 1 USD/h, 전체 6 USD/h)과 Ops 안(2 USD/h, 하루 30 USD) 를 모두 사용하자. 설계는 계속해서 진행해.",
+  "meaning": "both proposals apply at once; every cap is enforced and the tightest one that applies wins",
+  "caps": {
+   "vm_coordination_dev_plus_ops_usd_per_h": 1.0,
+   "vm_baselines_usd_per_h": 2.0,
+   "vm_total_usd_per_h": 6.0,
+   "vm_total_usd_per_day": 30.0,
+   "build_per_item_usd": {
+    "default": 3,
+    "hard": 6
+   },
+   "cloud_top_baseline_usd_per_h": 2.0,
+   "session_ctx_cap_tokens": 150000
+  },
+  "model": "cheapest that passes; Opus only for design opinions and diagnosis",
+  "on_exceed": "refuse the call (fail-closed), record shadow/1 rejected_by budget, report to baseline",
+  "sources": [
+   "ops/flow/inbox/baseline/20261007T005411-dev-opinion1-OP-DEV-VM-COST.json",
+   "ops/flow/inbox/baseline/20261006T234209-ops-opinion1-OP-VM-COST.json"
+  ],
+  "change": "only the user, by their own words to the top baseline hub"
  }
 }

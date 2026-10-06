@@ -1,0 +1,22 @@
+{
+ "id": "DEV-VMBUDGET",
+ "stage": "R1",
+ "why": "user 10-07 01:0x KST set the VM budget (both Dev and Ops proposals, tightest cap wins; recorded in ops/flow/policy.json vm_budget) and said design continues.",
+ "goal": "The VM never spends beyond the user's budget, and the VMHUB rev3 design is written down ready for review while its build stays on hold.",
+ "acceptance": [
+  "every VM model call is checked against all vm_budget caps before it is made; a call that would exceed any cap is refused and recorded as shadow/1 rejected_by budget (DEV-VMAUTO gateway)",
+  "a test shows each cap (coordination/h, baselines/h, total/h, total/day, per item default and hard) refusing at its limit",
+  "a VMHUB rev3 design document exists in a repository: components (session manager, commit gate, push gate), their states, the policy fields they read, failure and rollback paths, and which acceptance line of DEV-VMHUB rev3 each part satisfies",
+  "Ops gives opinion/1 on that design before any build request"
+ ],
+ "constraints": [
+  "the budget values are read from ops/flow/policy.json vm_budget, never copied into code as constants; only the user changes them",
+  "DEV/OPS-VMHUB rev3 build stays on hold until the user confirms from measurements that the token problem is solved; design work for it may proceed",
+  "a model credential for the VM is a user question (status/1 blocker)",
+  "never two primaries; cloud hubs stay the authority"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-07T01:00:29+09:00"
+}
