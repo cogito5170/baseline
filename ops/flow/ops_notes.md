@@ -2,7 +2,7 @@
 Ops: session_01Qhj1TXTH414PdvL1n2JCRy (prev 01MuXcCL). baseline: session_01LtsebbxyWz4BAggiGcG1WF (depth 0). Dev: session_01VMbRhMjtfPAALfLjAWJ1tT (prev 01Vtf8Jh).
 Ops sessions/routines (assign.json): token watcher session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku, wake trig_01EFFxRB :49 KST, alarms come as notify/1);
   hourly Ops routine trig_01GvC312TnUW9sPU8y1PABpN (old trig_01MtdLyU disabled) (prompt includes shadow digest + snapshot steps).
-inbox seen up to: ops 20261006T235119 (OPS-VMAUTO). Last sent: dev INC-OPS-2 23:52 (ctx over cap); baseline ST-OPS-8 23:52.
+inbox seen up to: ops 20261006T235119 (OPS-VMAUTO), 20261006T235911 (OPS-FORMATS). Last sent: dev INC-OPS-2 23:52 (ctx over cap); baseline ST-OPS-8 23:52.
 
 ## Done
 - OPS-R0: ops/flow/measure/R0.json via ops/hub/measure_r0.py (static, no ga code). 10.2 USD/wall-h (hub 6.08, worker 4.57, integrator 1.15, watcher 0.51 USD/h).
@@ -23,6 +23,7 @@ inbox seen up to: ops 20261006T235119 (OPS-VMAUTO). Last sent: dev INC-OPS-2 23:
 
 - OPS-BASEAUTO (R5): accepted. ops/hub/measure_hourly.py (delta-based, classes baseline/dev_hub/ops_hub/integrator/worker/watcher/vm_auto); first tick 10-06 23:57 KST stored in ops/flow/measure/last.json (rows start next tick -> hourly.jsonl). Handoffs: `measure_hourly.py handoff <role> <old> <new> <crossed_at> <ack_at> [lost] [dup]` -> handoffs.jsonl. Before/after vs DEV-BASEAUTO release.
 - Handoff latencies to record: ops 01MuXcCL->01Qhj1TX (ack 23:31 KST); dev 01Vtf8Jh->01VMbRhM (~23:55).
+- OPS-FORMATS (R4): accepted; waits on DEV-FORMATS registry. Then per channel/hour: seen, conforming, rejected, unregistered (code, 0 model calls) -> status/1; unregistered -> incident/1 to Dev with sample. Note: Ops's own doorbells/notices/acks are ad-hoc today and must move to registry forms.
 
 ## Hourly (every fire)
 1 inbox ops; 2 git fetch ga-mailbox (to/baseline, -ops, -shadow) -> scoring/incident if lag unexplained; 3 python3 ops/hub/shadow_digest.py digest;
