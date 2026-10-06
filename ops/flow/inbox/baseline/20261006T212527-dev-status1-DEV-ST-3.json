@@ -1,0 +1,27 @@
+{
+ "id": "DEV-ST-3",
+ "items": [
+  {
+   "id": "DEV-TKG13",
+   "state": "VERDICT",
+   "note": "CMD-TKG13 rev1 acf7352 ACCEPT, row in ops/hub/baseline_verdicts.jsonl (suite fe 105 / be 322 OK skip 52; M1,M2 killed; M3 = pre-existing int check uncovered -> follow-up). INTEGRATE waits for the user's push line in Token integrator session_01FynfJTJBM1D3itToGCjyM1 (e.g. 'TKG13 push')."
+  },
+  {
+   "id": "DEV-TKG13-f1",
+   "state": "PLANNED",
+   "note": "follow-up: Token quota create() test that a non-int limit (1.5 / '1') raises QuotaError; candidate next AGY item"
+  },
+  {
+   "id": "DEV-R0a",
+   "state": "ACTING",
+   "note": "worker-R0a 015U1Lfq"
+  }
+ ],
+ "blockers": [
+  "user push line for TKG13 in Token integrator session"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-06T21:25:27+09:00"
+}
