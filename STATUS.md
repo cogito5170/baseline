@@ -1,6 +1,6 @@
 # STATUS — baseline 전체 현황 (단일 진입점)
 
-갱신: 2026-10-07 03:04 KST (2시간 점검, 02:2x 이후 변화 없음) · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
+갱신: 2026-10-07 03:2x KST · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
 이 문서 하나로 지금 상황을 파악할 수 있어야 한다. 세부 근거는 각 줄의 경로에 있다.
 
 ## 1. 목표와 원칙
@@ -26,7 +26,7 @@
 | W-R1 (VI-02 R1 관문) | `01KiyVDj` | 보관됨 (ACCEPT `3e7ab1c`, 1435 OK, 사용자 보관 문장 in Dev 세션) |
 | W-R2 (VI-04 R2 판정 dry-run) | `01QEjaAW` | `451e980` ACCEPT이나 동시 부하에서 1건 실패 → 단독 재실행 중 |
 | W-VI (VI-06a + VI-20) | `01CnLoJD` | ACCEPT `87e3243` (1412 OK, 변이 2/2), 통합 대기 |
-| worker-R0a (VI-01 VM SHA 보고) | `015U1Lfq` | `bb443ff` 완성(1418 OK, 변이 10/10) · 새 Dev 허브를 지휘자로 인정 안 함 → top이 02:2x 확인 보냄 |
+| worker-R0a (VI-01 VM SHA 보고) | `015U1Lfq` | VMSHA `bb443ff` ACCEPT (지휘자 문제 해결) · 통합 대기 |
 | GA52 / GA53 작업자 | `01FUssZm` / `01HKHSLN` | GA52 보고 후 보관 예정 / GA53 대기 |
 | 토큰 감시 | `01TBHcmu` | 상시 |
 
@@ -79,6 +79,9 @@ VM 내부 빌드 순서 (`VM_INTERIOR_DESIGN.md` §12): VI-01, 02, 04, 06a, 20 �
 
 ## 7. 비용
 
+- 03:19 측정: 클라우드 5.41 USD/h (Dev 허브 1.52, Ops 허브 1.56, top 1.39 — 상한 2.0 안으로 복귀, 통합 0.76). 위반은 세션 문맥 상한만.
+- Ops 허브(148k)·Dev 허브(206k) 후임 요청: 250k까지 미룸 (남은 밤 작업이 적어 교체 비용 ≈ 절감).
+
 - 02:19 측정: 클라우드 13.97 USD/h. **top 5.14 USD/h > 상한 2.0 (위반)**, ctx 337k. 대응: top 점검 2시간 간격, 아침에 새 top(사용자가 열기) 권장. 작업 세션 4.93, 다른 허브 2.63, 통합 1.19.
 - Dev 허브 후임 요청(158k)은 아침으로 미룸: 교체하면 사용자의 통합 승인(8c01da6, id 지정)이 무효가 되고, 남은 일은 대부분 사용자 대기. 250k를 넘으면 즉시 교체.
 - 문맥 상한(150k) 초과: top 337k, Dev 158k, R0a 181k, W-R1 157k, GA52 252k (INC-OPS-4).
@@ -100,7 +103,6 @@ VM 내부 빌드 순서 (`VM_INTERIOR_DESIGN.md` §12): VI-01, 02, 04, 06a, 20 �
 ## 9. 사용자가 할 일 (아침 목록)
 
 1. 통합 push: Dev → 통합 세션 INTEGRATE 메시지가 플랫폼에 거부됨. 대기: VI-06a-20 `87e3243` (ACCEPT), 이어서 VI-04, VI-02. 통합 세션 `01Wz1byr`에 직접 입력하거나 Dev `01EqmaVL` 설정에 send_message 허용. (이름표·TKG13은 01:5x 사용자 맥 AGY로 완료)
-2. worker-R0a `015U1Lfq`가 사용자 확인을 요구하면: 그 세션에 "Dev 허브는 01EqmaVL" 한 줄.
 3. Dev 세션 `01EqmaVL`에서 git·send_message·세션 보관 허용 한 줄.
 3. (완료) TKG13 push.
 4. VM: 사용자 소유 정책 파일 `/etc/ga/vm_policy.json`(SSH), VM API 키 지출 한도, 인스턴스 정지·자격 증명 폐기 경로, VM 모델 자격 증명.
