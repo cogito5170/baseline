@@ -3,7 +3,7 @@ hub: session_01Vtf8JhoPbyf3o8v87LPVLb (Dev) · baseline 01UafTvm · Ops 01MuXcCL
 integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 
 ## Items (state)
-- DEV-R0a served model = final-turn model      -> worker-R0a 015U1LfqNoymrTP9Wduzmh31 (fresh, baseline-prompted), claude/DEV-R0a   ACTING; GA53 idle_unredirected
+- DEV-R0a served model = final-turn model      -> worker-R0a 015U1LfqNoymrTP9Wduzmh31 (fresh, baseline-prompted), claude/DEV-R0a   REPORTED 759d873 (6/6) -> VERDICT queued after R0b
 - DEV-R0b router can descend rungs              -> worker-GA56 01HurcnH, branch claude/DEV-R0b   REPORTED b891bea (8/8 killed) -> VERDICT sent to integrator; GA56 free
 - DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   ACTING (251k: retire after)
 - in-flight GA52 r2                             -> worker-GA52 01FUssZm (finish r2)              ACTING
