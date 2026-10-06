@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG11",
+  "goal": "In backend/app/domains/audit/service.py check_detail, the *_tokens exemption from the secret-named-key rule applies only to numeric values (int/float, or empty None/0): a secret-named key ending in _tokens whose value is a string, list, tuple or dict (e.g. refresh_tokens: \"abc123\" or [\"abc123\"]) is rejected with audit.detail_secret. Other exempt suffixes (_id, _ids, _fingerprint, _last4, _at, _count, has_/is_ prefixes) behave exactly as today.",
+  "files": [
+   "backend/app/domains/audit/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/audit/tests/test_tkg11_tokens_numeric.py": "\"\"\"Acceptance test for CMD-TKG11 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\n\nfrom app.domains.audit.service import AuditError, check_detail\n\n\nclass TokenCountsNumericOnly(unittest.TestCase):\n    def test_numeric_counts_still_allowed(self):\n        check_detail({\"input_tokens\": 5000, \"output_tokens\": 0, \"cache_read_tokens\": 7, \"max_tokens\": None})\n        check_detail({\"reasoning_tokens\": 1.5, \"usage\": [{\"total_tokens\": 9}]})\n\n    def test_non_numeric_tokens_values_rejected(self):\n        for v in (\"abc123\", [\"abc123\"], {\"value\": \"abc123\"}, (\"abc123\",)):\n            with self.assertRaises(AuditError, msg=repr(v)):\n                check_detail({\"refresh_tokens\": v})\n        with self.assertRaises(AuditError):\n            check_detail({\"usage\": {\"access_tokens\": [\"abc123\", \"def456\"]}})\n\n    def test_other_suffixes_unchanged(self):\n        check_detail({\"api_key_id\": \"k_123\", \"token_fingerprint\": \"ab:cd:ef\", \"password_last4\": \"1234\", \"has_password\": True})\n        check_detail({\"secret_rotated_at\": \"2026-10-06T00:00:00Z\", \"token_count\": 3})\n\n    def test_secrets_still_rejected(self):\n        for k in (\"token\", \"access_token\", \"api_key\", \"refresh_token\", \"password\"):\n            with self.assertRaises(AuditError, msg=k):\n                check_detail({k: \"abc123\"})\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/audit",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg*_*.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

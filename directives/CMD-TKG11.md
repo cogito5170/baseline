@@ -1,0 +1,3 @@
+```ga
+{"schema": "directive/2", "id": "CMD-TKG11", "rev": 1, "to": "AGY", "after": [], "goal": "agv fixes a small real Token defect through ga act against baseline's acceptance test: audit check_detail lets any value through under a secret-named *_tokens key", "why": "BD-469: the TKG5 suffix rule exempts *_tokens keys for every value type, so refresh_tokens:\"abc123\" or [\"abc123\"] is stored in the audit log. Counts are numbers; anything else under such a key is secret-shaped.", "scope": [{"id": "S1", "text": "only backend/app/domains/audit/service.py; the tests are baseline's"}], "done_when": [{"id": "D1", "text": "ga act ends done: the acceptance test (and the TKG5 test, same command) passes in the worktree"}], "budget": {"claude_p_runs": 0}}
+```
