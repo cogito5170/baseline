@@ -783,3 +783,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 300 회차: CMD-AGA6 성공 — Token `62fca39`, agv 가 gc-* 화면 CSS 를 1 턴에 씀 · 변이 5/5 · 실제 스택 스크린샷(BD-453).
 - 301 회차: CMD-GA44 성공 — ga-sdk `3fcea91`(0.12.0), 묻기 기본 도구 없는 에이전트 · 설정 질문 코드 답 · Enter 보내기(BD-454).
 - 302 회차: CMD-OPS2 성공 — ga-sdk `698c1e2`(0.13.0), ga vm install --full · 브리지 넘겨받기 · 터널 전용(BD-455).
+- 303 회차: CMD-GA45 성공 — ga-sdk `87d37c0`(0.14.0), VM 허브 설정 · 셰도우 결정 메일 · ga act 모델 사다리, Token 판정 설정 · agv 커밋 push(BD-457).
