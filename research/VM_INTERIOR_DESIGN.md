@@ -468,12 +468,12 @@ VMHUB hold.
 | # | question | why it is the user's |
 |---|---|---|
 | Q1 | When does cutover happen, and is the VM integration ref the existing `claude/gracious-meitner-vp49xe` or a new one? | never two primaries; push authority |
-| Q2 | `vm_policy.deadlines.*` values: plan_s, dispatch_ack_s, verdict_s, integrate_s, deploy_s (Ops uses 2 h today), observe_window_s; `boundary.fetch_s` | user-owned VM policy |
+| Q2 | `vm_policy.deadlines.*` values: plan_s, dispatch_ack_s, verdict_s, integrate_s, deploy_s (Ops uses 2 h today), observe_window_s; `boundary.fetch_s` | user-owned VM policy Ops default proposal: plan_s 900, dispatch_ack_s 600, verdict_s 1800, integrate_s 1800, deploy_s 7200, observe_window_s 3600, boundary.fetch_s 300 |
 | Q3 | `vm_policy.ladder.*` values: cheap/strong max calls and USD, cheap_min_confidence, agree_n, promote_after, refusal_wait_windows, card_max_bytes; `strong_only_purposes` | spend and autonomy level |
-| Q4 | SLO set and targets, and who owns `slo.json` (Ops as operating limits, or the user); `scheduler.resume_fraction`, `min_events`, `stabilize_kinds` | decides when feature work stops |
+| Q4 | SLO set and targets, and who owns `slo.json` (Ops as operating limits, or the user); `scheduler.resume_fraction`, `min_events`, `stabilize_kinds` | decides when feature work stops Ops proposal: Ops owns slo.json as operating limits (initial values shown to the user once, changes announced in status/1): verdict latency p90 < 30 min target 0.9/24 h; lead time median < 2 h target 0.8/7 d; change failure < 20 %/7 d; time to restore < 1 h target 0.9/7 d; min_events 5; resume_fraction 0.5; stabilize_kinds [deploy_mismatch, boundary_violation, budget_overrun, two_primaries] |
 | Q5 | `vm_policy.sessions{max_concurrent, max_children, timeout_s, per_day_usd}` and `push_allowed` shadow refs | already on the morning list (ASK-VMHUB-DESIGN-APPROVAL) |
 | Q6 | Create cogito5170/Dev and cogito5170/Ops (Gate 7 new repo) and give the VM a push credential limited to their VM branches and shadow refs | credential / new repo |
-| Q7 | VM → cloud forms: may the boundary also carry notify/1 (SHA report, alert), as today's `_notice` does, or must those become status/1 / incident/1? | rev2 lists only status/opinion/incident/shadow |
+| Q7 | RESOLVED by Dev+Ops (forms are a Dev+Ops contract, OP-OPS-VMINT): the boundary carries notify/1 VM->cloud with exactly two registered kinds, ack (SHA report / sha answer) and alert; status/1 stays the hourly summary. Recorded in the registry change VI-06a/VI-06. Not a user question. | — |
 | Q8 | Day window rolling 24 h vs KST calendar day (`vm_budget.windows.day`) | already open from R1R2 |
 | Q9 | Model credential on the VM, provider spend limit, writing `/etc/ga/vm_policy.json` over SSH, instance-stop path | credentials / kill switch layers 2-3 |
 
@@ -485,3 +485,19 @@ VMHUB hold.
   clone), D2 (side states), D3 (SHA identity, version per release), D4 (alarm attribution), D5 (change-failure
   definition), D6 (hysteresis), D7 (learned-rule promotion), D8 (journal committed hourly). Each is open to Ops'
   opinion.
+
+## 15. Revisions r2 (Ops OP-OPS-VMINT taken in full; nothing rejected)
+- D4 attribution (§4.4): an alarm is attributed to EVERY DEPLOYED sha within observe_window_s whose diff touches a
+  file in the alarm's evidence (CFR counts each item at most once). Alarms of kind environment/infra/budget never
+  count toward CFR but do count toward their SLO. A revert or fix item later PLANNED for a sha marks that sha failed
+  even without file evidence.
+- D6 scheduler (§5): new key `vm_policy.scheduler.max_stabilize_s`; on expiry status/1 blocker to the cloud (user
+  decides); feature items are still never cancelled. Missing data never counts as good: an SLO whose data gap exceeds
+  window/4 is reported `unknown`, not remaining=1, and `unknown` does not release STABILIZE.
+- §0 thresholds: until VI-18 (Ops repo, held) the boundary adapter copies ops/hub/watch_thresholds.json with its
+  sha256 into the VM inbox; the watcher (VI-05) reads only that copy and logs the hash in every alert.
+- Q7 resolved by Dev+Ops (notify/1 ack + alert across the boundary); Q2/Q4 carry Ops' default proposals for the user.
+- Alert dedup: once per kind per session per KST day.
+- Test (VI-05): during the 24 h side-by-side a VM alert and the cloud Ops alarm for the same condition both appear;
+  Ops scores agreement; that report retires the Claude watcher.
+- First builds: VI-01 (SHA reporting) + VI-06a (notify kind alert), then VI-02/VI-04/VI-20 in parallel; VI-15..19 held.

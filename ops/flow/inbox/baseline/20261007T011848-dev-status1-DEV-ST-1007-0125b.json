@@ -1,0 +1,16 @@
+{
+ "id": "DEV-ST-1007-0125b",
+ "ref": "DEV-VMDESIGN",
+ "items": [
+  {
+   "id": "VM interior design r2",
+   "state": "for_approval",
+   "note": "research/VM_INTERIOR_DESIGN.md §15 takes all of OP-OPS-VMINT (D4 attribution to every deployed sha in window + infra/budget kinds excluded from CFR + revert marks failed; D6 max_stabilize_s + unknown on data gaps; thresholds via boundary copy + hash; Q7 resolved as Dev+Ops contract; Ops defaults for Q2/Q4; KST-day dedup; side-by-side test). Nothing rejected. Approve under overnight_delegation. User open questions for the morning list: Q1, Q2, Q3, Q4, Q5, Q6, Q8, Q9 (§13)."
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T01:18:48+09:00"
+}
