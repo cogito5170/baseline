@@ -10,7 +10,7 @@ never: route around a permission denial (other session, tool, host).
 language: user=Korean; sessions=English. Times to the user: KST.
 
 ## Hub
-session: session_01J4GYxF1DgQExRvBkxRm9pp "baseline ● 현재 허브 (10-06 18:22~)" (also in ops/hub/BASELINE_SESSION); previous session_01ERe9em… (17:53~18:22)
+session: session_01Eu6SdhSHCCwkL8BoAsULXr "baseline ● 현재 허브 (10-06 19:22~)" (also in ops/hub/BASELINE_SESSION); previous session_01J4GYxF… (18:22~19:22)
 repos_attach: ga-sdk, Token (push) — the hub's inherited repo list; add_repo each at session start, before any work.
 attached: baseline(source), ga-sdk, Token (10-06 15:47, clones /home/user/ga-sdk, /home/user/token); venv /home/user/venv (rlo-sdk + ga-sdk).
 user_direction 10-06 15:46: "이전 세션에서 다음 세션으로 인계해야 하는 repo를 넘겨 받고, add_repo으로 baseline 세션 생길 때 부터 추가해.
@@ -29,7 +29,7 @@ Bridge items (ga mail send) need only baseline: copy ga-sdk read-only (git clone
 repos_attach is now OPTIONAL (only if the user says "추가해" in that hub).
 
 ## Routines
-trig_01X8fbEr4hRPLsCQtRsVjZRk: mail+workers+status board, :19 hourly, fires INTO the hub (recreate on handoff, disable old); trig_01Cyv3YV…, trig_01XgQLp8…, trig_01RuQYZ… disabled
+trig_01NdsVqy8tLj6p7Cea7fG499: mail+workers+status board, :19 hourly, fires INTO the hub (recreate on handoff, disable old); trig_01X8fbEr…, trig_01Cyv3YV…, trig_01XgQLp8…, trig_01RuQYZ… disabled
 watcher: session_019EWtXvKB3EE8RTYPHnNHLP "baseline ◎ 토큰 감시" (Sonnet, persistent, source baseline), woken by
   trig_01XtMnV6yMeywrMbcTFeeeJE ("watch run", :49 KST hourly). Rules live in its first prompt. Alarms (ctx>150k, burst,
   +5 USD/h) → send_message to hub + push to user. It asks the hub to recreate it at ~100k own context.
@@ -104,3 +104,4 @@ audit 10-06 17:0x (session_01ThMJnk…): add_repo push ga-sdk/Token denied by cl
   VERDICT claude/CMD-GA49 3d142ae sent to ga-sdk integrator (mut ops/hub/mut/CMD-GA49.json); no clone/venv in this hub.
 audit 10-06 17:58 (session_01ERe9em…): heads/mail/routines OK; outgoing step 3 done; TKG11 report arrived.
 audit 10-06 18:25 (session_01J4GYxF…): routine trig_01X8fbEr → this hub OK; BASELINE_SESSION OK; mail: only vm notify-1 (0.17.1, known); no add_repo.
+audit 10-06 19:24 (session_01Eu6Sdh…): heads/mail OK (ga-mailbox 52fc8ac, nothing new since TKG11/vm notify-1); routine trig_01NdsVqy → this hub, old trig_01X8fbEr disabled; BASELINE_SESSION written here; no add_repo.
