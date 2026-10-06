@@ -1,5 +1,5 @@
 # Dev_baseline notes (fixed size; overwrite, never append history)
-hub: session_01EqmaVLL6vWPFnmAqv9UKWH (Dev 10-07 01:2x-02:2x KST, handing off: ctx over cap, INC-OPS-4) · prev 01VMbRhM · baseline top 016tT1vv · Ops 013aqrQG
+hub: session_01EqmaVLL6vWPFnmAqv9UKWH (Dev 10-07 01:2x~; over cap 158k, successor deferred to morning by baseline 02:23 — act on events only; successor_needed again at ~250k) · prev 01VMbRhM · baseline top 016tT1vv · Ops 013aqrQG
 OVERNIGHT (policy.json overnight_delegation until 09:00 KST): status/1 every 2h, final 08:30 KST with morning list; hourly self check-in via send_later (01EqmaVL's trig_01JUyE96 fires ~02:25 into the OLD hub; successor re-arms its own)
 policy: auto_integrate.dev_hub = 01EqmaVL (8c01da6) -> successor needs baseline to extend again (user words in top). R0-baseline tag target = ga-sdk 318b22a (e2455e8).
 integration: ga-sdk claude/gracious-meitner-vp49xe head 318b22a (R0). Tag R0-baseline NOT created.
