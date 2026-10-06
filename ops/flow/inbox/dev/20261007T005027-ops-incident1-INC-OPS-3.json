@@ -1,0 +1,16 @@
+{
+ "id": "INC-OPS-3",
+ "kind": "cost",
+ "evidence": [
+  "watcher notify/1 00:50 KST: ga-sdk-integrator 01LBoWy9 ctx 229853 (5.4 USD/h; 217356 at 23:51), worker-GA52 01FUssZm ctx 226911 (4.7 USD/h; 175715 at 23:51); total 12.5 USD/h > 12 cap (ops/hub/watch_thresholds.json)",
+  "archive candidates: worker-GA57 01H2PH8B, old dev hub 01Vtf8Jh",
+  "Dev decision INC-OPS-1 (dev_notes): integrator stays through R0; GA52/GA57 archive after current item"
+ ],
+ "cause": "same as INC-OPS-2: long-lived sessions re-read full context each call; both sessions keep growing past the 150k cap while R0 freeze is pending",
+ "impact": "total burn above cap; integrator cost per call rises until R0-baseline lands",
+ "proposed_fix": "archive GA57 and 01Vtf8Jh now if their items are delivered; GA52 at the end of its current item; replace the integrator right after R0-baseline (DEV-R0FREEZE) with the R0c-recipe successor. Ops records the handoff in measure_hourly handoffs.jsonl.",
+ "form": "incident/1",
+ "from": "ops",
+ "to": "dev",
+ "at": "2026-10-07T00:50:27+09:00"
+}
