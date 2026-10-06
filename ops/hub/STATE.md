@@ -10,7 +10,7 @@ never: route around a permission denial (other session, tool, host).
 language: user=Korean; sessions=English. Times to the user: KST.
 
 ## Hub
-split (user 10-06 21:0x): Dev_baseline + Ops_baseline hubs, prompts ops/hub/roles/{DEV,OPS}_BASELINE.md; the user opens both (O6 probe 20:51: fresh routine sessions have NO claude-code-remote tools, so only a user-opened session starts at depth 0). Outgoing hub 01UafTvm… tells integrators/workers/watcher the new ids after both ack.
+split (user 10-06 21:0x/21:1x): DevOps_baseline (DevOps_developer, directs) creates Dev_baseline + Ops_baseline; prompts ops/hub/roles/{DEVOPS,DEV,OPS}_BASELINE.md; the user opens ONLY DevOps_baseline (O6 probe 20:51: fresh routine sessions have NO claude-code-remote tools, so only a user-opened session starts at depth 0). Outgoing hub 01UafTvm… tells integrators/workers/watcher the new ids after both ack.
 session: session_01UafTvmJjZiza4ctSfoeV8V "baseline ● 현재 허브 (10-06 20:23~)" (also in ops/hub/BASELINE_SESSION); previous session_01Eu6Sdh… (19:22~20:23)
 repos_attach: ga-sdk, Token (push) — the hub's inherited repo list; add_repo each at session start, before any work.
 attached: baseline(source), ga-sdk, Token (10-06 15:47, clones /home/user/ga-sdk, /home/user/token); venv /home/user/venv (rlo-sdk + ga-sdk).
@@ -92,6 +92,7 @@ fixes_queued: GA39 survivors (rest → CMD-GA53).
 - Token plan (research/BASELINE_TOKENS.md): 1,2,3,5 done; 4 = stage 3.
 
 ## Rules
+- PRINCIPLES (user 10-06 21:1x, ga-engine uses the same internally): LLM minimum · user minimum · runtime first · token loop · power · memory · velocity efficiency · autonomy · hard-task cooperation · semantic notify/1 communication, batched one message per peer per round. Full text: ops/hub/roles/DEVOPS_BASELINE.md.
 - DEVOPS (user 10-06 21:0x): our work is DevOps; follow its methodology — research/GA_ENGINE_OPS.md §6 (CI/CD gates, IaC, observability, SLO + error budget, incident loop with blameless postmortem, small batches, DORA metrics measured from our own records).
 - TOKEN LOOP (user 10-06 20:5x, top priority for all automation): LLM calls minimal; batch parallel tasks into ONE call with ONE consistent prompt (same template, items as a list); measure tokens on every call (input/output/cache, per item); after measuring, evaluate whether it can be cheaper (smaller card, cheaper rung, more batching, rule instead of model) and re-optimize; repeat. Hub practice too: one send_message per session per round, batch verdicts (like TKG12-20).
 - Anomaly found (stall, red, missing rows) → diagnose it yourself first (mailbox, ga-sdk code read-only clone in scratchpad, logs); spawn a worker session only if it needs a repo/run the hub lacks. Ask the user only for a VM-side or permission action, with the cause already stated (user 10-06 20:4x).
