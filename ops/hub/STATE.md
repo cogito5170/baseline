@@ -37,10 +37,10 @@ watcher: session_019EWtXvKB3EE8RTYPHnNHLP "baseline ◎ 토큰 감시" (Sonnet, 
 trig_01Egfbe1CAGL6bXNu6NK9H2M: disabled (old fresh-session watcher)
 trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 
-## Heads (10-06 17:50)
+## Heads (10-06 19:20)
 ga-sdk: f3abeea (0.18.0, GA50 10-06 18:47) | Token: 4720d5f (TKG1-11, 10-06 17:53; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
-mail_newest: to/baseline-shadow/…T062003…-CMD-GM2.md (handled)
-records_next: BD-471.., round 312 — unwritten in DECISION_LOG/BASELINE §13: GA49 r2 SEND_BACK, GA49 r3 ACCEPT+integrate, GA50 r1 SEND_BACK, GA51 dispatch, TKG11 mail+ACCEPT (verdicts.jsonl has GA49 r3, GA50 r1, TKG11 r1).
+mail_newest: to/baseline-ops/…T1003…-vm-notify-1 (VM runs ga 0.18.0, handled 19:20)
+records_next: BD-471.., round 312 — unwritten in DECISION_LOG/BASELINE §13: GA49 r2 SEND_BACK, GA49 r3 ACCEPT+integrate, GA50 r1 SEND_BACK, GA51 dispatch, TKG11 mail+ACCEPT (verdicts.jsonl has GA49 r3, GA50 r1, TKG11 r1, GA51 r2 SEND_BACK; also unwritten: GA50 r2 ACCEPT+integrate).
 
 ## Work loop
 directive: one fresh worker session per directive (create_session, source ga-sdk, branch claude/<id>); Sonnet narrow,
@@ -65,7 +65,7 @@ then: stage 3 directive (hub judges+integrates on VM, baseline audits, roll back
 fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 results.model shows gpt-oss while rung was
   gemini; ledger learns only upward; console 'starting' timeout; GA39 survivors.
 
-## In flight (handoff 10-06 18:22 KST from session_01ERe9em…, ctx 194k)
+## In flight (handoff 10-06 19:22 KST from session_01J4GYxF…, ctx 151k)
 - GA49 r3 3d142ae ACCEPTED and integrated (ga-sdk integration head 3d142ae, 0.17.1; push approved by the user in the integrator session). Worker 01EPcQJa… finished (archive when the user agrees).
 - GA50 r2 f3abeea INTEGRATED 18:47 (ff by ga-sdk integrator, user-approved; ls-remote verified). 18:48 GA51 worker told: merge f3abeea, bump 0.18.1, re-run, notify → then VERDICT GA51.
 - CMD-GA51 rev 2 b034373 SEND_BACK 19:19 (suite 1400 OK, m1-m5 killed, m6 survived: served-chain last element unpinned). Worker asked for one test → rev 3 → re-VERDICT (m6 only + suite) → INTEGRATE (user's push OK in integrator) → GA52 merge + VERDICT.
@@ -76,7 +76,7 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 - Token alarm 18:50: GA50 worker 292k (done; dropped from tokmon, archive when the user agrees); GA52 worker 204k idle (only a merge+rerun left; if it stalls, fresh Sonnet worker from 91468e3); ga-sdk integrator 157k idle (no new work there until GA51 VERDICT; recreate only if it grows); GA51 138k (finish merge only).
 - Next after GA51: ~10 new small real Token items (ask Token integrator for code excerpts; red-check each inline) → rescore gate.
 - Watcher session status says 'cron modified to 20m' but trig_01XtMnV6… is still hourly :49 — likely a session-local cron; verify, not approved by the user.
-- cloud_sessions.json not yet written (first run needs list_sessions saved to a file; do it via a small script fed by the tool result, or let GA52 fixtures cover until then).
+- cloud_sessions.json first written 19:20 (8 live sessions; built from list_sessions by hand-trimmed JSON — the raw tool result is ~30k tokens, keep it trimmed).
 - Open user question: token watcher every 20 min — (a) 3 hourly routines :09/:29/:49 only with the user's OK, (b) project setting, (c) keep hourly. No answer yet.
 
 ## Open with the user

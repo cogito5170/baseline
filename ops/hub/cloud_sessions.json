@@ -1,0 +1,140 @@
+{
+ "schema": "cloud-sessions/1",
+ "at": "2026-10-06T19:20:32+09:00",
+ "sessions": [
+  {
+   "id": "session_01J4GYxF1DgQExRvBkxRm9pp",
+   "title": "baseline ● 현재 허브 (10-06 18:22~)",
+   "status": "running",
+   "bucket": "working",
+   "detail": "GA51 r2 SEND_BACK; handoff at 151k",
+   "repo": "baseline",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-opus-5-5",
+   "ctx": 151280,
+   "cost_usd": 1.99,
+   "tags": [],
+   "updated_at": "2026-10-06T10:20:11Z",
+   "url": "https://claude.ai/code/session_01J4GYxF1DgQExRvBkxRm9pp"
+  },
+  {
+   "id": "session_01A4XZDgCfueMHW6rBGSWLuA",
+   "title": "ga-sdk CMD-GA51 · 허브 모델 auto (10-06 17:45~)",
+   "status": "idle",
+   "bucket": "review_ready",
+   "detail": "committed test to claude/CMD-GA51 (ba52088); suite running",
+   "repo": "ga-sdk",
+   "branch": "claude/CMD-GA51",
+   "model": "claude-opus-5-5",
+   "ctx": 150155,
+   "cost_usd": 3.21,
+   "tags": [
+    "baseline-worker"
+   ],
+   "updated_at": "2026-10-06T10:19:45Z",
+   "url": "https://claude.ai/code/session_01A4XZDgCfueMHW6rBGSWLuA"
+  },
+  {
+   "id": "session_01GThc7uijAktpufbUynL5ws",
+   "title": "ga-sdk CMD-GA52 · 콘솔 클라우드 화면 (10-06 18:05~)",
+   "status": "idle",
+   "bucket": "completed",
+   "detail": "GA52 cloud snapshot & API complete; 1374 tests pass, 0 failed",
+   "repo": "ga-sdk",
+   "branch": "claude/CMD-GA52",
+   "model": "claude-opus-5-5",
+   "ctx": 203958,
+   "cost_usd": 3.97,
+   "tags": [
+    "baseline-worker"
+   ],
+   "updated_at": "2026-10-06T09:33:24Z",
+   "url": "https://claude.ai/code/session_01GThc7uijAktpufbUynL5ws"
+  },
+  {
+   "id": "session_01JaqBjV1w4EXWE4Yc7YgGDz",
+   "title": "baseline ◇ ga-sdk 통합 (10-06 17:00~)",
+   "status": "idle",
+   "bucket": "review_ready",
+   "detail": "GA51 verdict: 5/6 mutations killed, m6 survived; awaiting hub request",
+   "repo": "ga-sdk",
+   "branch": null,
+   "model": "claude-sonnet-5-5",
+   "ctx": 170276,
+   "cost_usd": 2.95,
+   "tags": [
+    "baseline-integrator"
+   ],
+   "updated_at": "2026-10-06T10:18:41Z",
+   "url": "https://claude.ai/code/session_01JaqBjV1w4EXWE4Yc7YgGDz"
+  },
+  {
+   "id": "session_01DWVfRidtP9ENpP7jnhodSu",
+   "title": "baseline ◇ Token 통합 (10-06 17:00~)",
+   "status": "idle",
+   "bucket": "review_ready",
+   "detail": "integration head 4720d5ff; awaiting request from hub",
+   "repo": "Token",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-sonnet-5-5",
+   "ctx": 116753,
+   "cost_usd": 1.18,
+   "tags": [
+    "baseline-integrator"
+   ],
+   "updated_at": "2026-10-06T09:21:22Z",
+   "url": "https://claude.ai/code/session_01DWVfRidtP9ENpP7jnhodSu"
+  },
+  {
+   "id": "session_019EWtXvKB3EE8RTYPHnNHLP",
+   "title": "baseline ◎ 토큰 감시 (10-06 16:00~)",
+   "status": "idle",
+   "bucket": "review_ready",
+   "detail": "monitoring cron alarms (18:50 KST)",
+   "repo": "baseline",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-sonnet-5-5",
+   "ctx": 149792,
+   "cost_usd": 1.43,
+   "tags": [
+    "baseline-watcher"
+   ],
+   "updated_at": "2026-10-06T09:50:41Z",
+   "url": "https://claude.ai/code/session_019EWtXvKB3EE8RTYPHnNHLP"
+  },
+  {
+   "id": "session_01EPcQJaVSEzjV7LAhb1enSb",
+   "title": "ga-sdk CMD-GA49 · shadow gate 가시화 (10-06 16:10~)",
+   "status": "idle",
+   "bucket": "blocked",
+   "detail": "finished; waits on archive",
+   "repo": "ga-sdk",
+   "branch": "claude/CMD-GA49",
+   "model": "claude-sonnet-5-5",
+   "ctx": 146567,
+   "cost_usd": 2.12,
+   "tags": [
+    "baseline-worker"
+   ],
+   "updated_at": "2026-10-06T07:56:10Z",
+   "url": "https://claude.ai/code/session_01EPcQJaVSEzjV7LAhb1enSb"
+  },
+  {
+   "id": "session_018CgEgHQN6sJn6teqNEnWz2",
+   "title": "ga-sdk CMD-GA50 · 실시간 화면 (10-06 16:45~)",
+   "status": "idle",
+   "bucket": "completed",
+   "detail": "integrated f3abeea",
+   "repo": "ga-sdk",
+   "branch": "claude/CMD-GA50",
+   "model": "claude-opus-5-5",
+   "ctx": 292540,
+   "cost_usd": 9.78,
+   "tags": [
+    "baseline-worker"
+   ],
+   "updated_at": "2026-10-06T08:48:21Z",
+   "url": "https://claude.ai/code/session_018CgEgHQN6sJn6teqNEnWz2"
+  }
+ ]
+}
