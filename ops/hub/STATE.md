@@ -73,6 +73,7 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 - CMD-GA52 DONE 18:33: claude/CMD-GA52 91468e3 (code 0d2b99d, from 3d142ae, 0.17.2 → re-bump at merge; 1374 run/0 fail, own mut 5/5). Waits: GA50 push → GA51 → merge integration into GA52 → VERDICT.
   Was: CMD-GA52 (console '클라우드' screen from ops/hub/cloud_sessions.json, producer ops/hub/cloud_snapshot.py; user 18:00) dispatched 18:00 to session_01GThc7uijAktpufbUynL5ws (Opus), branch claude/CMD-GA52. Lands after GA50, GA51. Mail routine step (3) now refreshes the snapshot + the 상황판 memo.
 - Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on branch ga-mailbox, commit "ga mail: baseline -> AGY <id>" (git worktree; no ga needed).
+- Token alarm 18:50: GA50 worker 292k (done; dropped from tokmon, archive when the user agrees); GA52 worker 204k idle (only a merge+rerun left; if it stalls, fresh Sonnet worker from 91468e3); ga-sdk integrator 157k idle (no new work there until GA51 VERDICT; recreate only if it grows); GA51 138k (finish merge only).
 - Next after GA51: ~10 new small real Token items (ask Token integrator for code excerpts; red-check each inline) → rescore gate.
 - Watcher session status says 'cron modified to 20m' but trig_01XtMnV6… is still hourly :49 — likely a session-local cron; verify, not approved by the user.
 - cloud_sessions.json not yet written (first run needs list_sessions saved to a file; do it via a small script fed by the tool result, or let GA52 fixtures cover until then).
