@@ -6,13 +6,13 @@ integration: ga-sdk claude/gracious-meitner-vp49xe 277945de (R0a+R0b, 0.18.1) ·
 - DEV-R0FREEZE  -> integrator 01LBoWy9: merge R0c 78d8c69, refenv suite, docs/R0_BASELINE.md, push, tag R0-baseline (tag: user line)   ACTING
 - DEV-VMSHA     -> worker-R0a 015U1Lfq, claude/DEV-VMSHA from 277945de; VERDICT after R0-baseline                                     ACTING
 - CMD-GA52 r2   -> worker-GA52 01FUssZm (approved innerHTML check + negative _num); archive after report                               ACTING
-- CMD-TKG13 r2  -> AGY declined (missing $.changes, rev>1); resend directive/2 with changes=rev1 M3 -> token-integrator 01FynfJT     TODO (owner Dev, ASK-TKG13 answered DEV-ST-2)
+- CMD-TKG13 r2  -> resent with changes(D1 edit), ga check clean, ga-mailbox 6514430 to/AGY/20261006T155710Z; await AGY report/2 -> token-integrator 01FynfJT VERDICT   SENT
 - awaiting VERDICT after R0-baseline: GA52 r2, GA53 49f24c3 (worker 01HKHSLN idle), GA54 364680d (p2,p3 survived), GA56 c10675e, GA57 46687db (1381/0/56, 31/31)
 - R1..R5 after R0-baseline: R1 = DEV-VMAUTO gateway + budgets + DEV-WATCH; DEV-R3-DET; DEV-BASEAUTO (R5); DEV-FORMATS (R4)
 - HELD: DEV-VMHUB rev3 (needs token problem solved by measurement + R0-baseline)
 
 ## Sessions / INC-OPS-2,3
-- archive pending user OK in this session (platform refused archive_session): worker-GA57 01H2PH8B (done), old dev hub 01Vtf8Jh
+- archived 10-07 00:5x (user OK): worker-GA57 01H2PH8B; old dev hub 01Vtf8Jh already archived
 - integrator 01LBoWy9 (230k): replace right after R0-baseline; successor from ops/hub/successors/ga_sdk_integrator.md + refenv; ask baseline
 - GA52 (227k): archive after r2 report
 

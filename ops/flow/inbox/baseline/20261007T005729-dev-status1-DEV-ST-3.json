@@ -1,0 +1,21 @@
+{
+ "id": "DEV-ST-3",
+ "ref": "ASK-TKG13",
+ "items": [
+  {
+   "id": "CMD-TKG13",
+   "state": "sent",
+   "note": "rev 2 resent as directive/2 with changes [D1 edit: test_tkg13 incl. non-int limit 1.5/'1'], ga check clean; ga-mailbox 6514430 to/AGY/20261006T155710.847529Z-baseline-CMD-TKG13.md; next: AGY report/2 -> token-integrator VERDICT -> INTEGRATE (policy/1)"
+  },
+  {
+   "id": "INC-OPS-3",
+   "state": "partly",
+   "note": "worker-GA57 01H2PH8B archived (user OK); 01Vtf8Jh already archived; GA52 after r2 report; integrator after R0-baseline"
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T00:57:29+09:00"
+}
