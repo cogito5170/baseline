@@ -45,3 +45,4 @@
 {"id":"CMD-GA50","rev":2,"sha":"f3abeea","decision":"ACCEPT","note":"ff over 3d142ae; suite 1388 OK (53 skip) with rlo-sdk; g1-g6 killed; ga check 0 (soft wire:prose); test edits: STATE_KEYS +version, mutations_ga48 reindent; via ga-sdk integrator","at":"2026-10-06T18:03:00+09:00"}
 {"id":"CMD-GA51","rev":2,"sha":"b034373","verdict":"SEND_BACK","why":"m6 survived (served chain last element unpinned)","suite":"1400 OK","mut":"5/6","by":"hub+ga-sdk integrator","at":"2026-10-06T19:19:00+09:00"}
 {"id":"CMD-GA51","rev":3,"sha":"f9671da","verdict":"ACCEPT","why":"m6 now killed; ancestor of f3abeea; ga check 0","suite":"1401 OK (skip 53)","mut":"6/6","by":"hub+ga-sdk integrator","at":"2026-10-06T19:48:00+09:00"}
+{"id":"CMD-GA51","rev":3,"sha":"f9671da","verdict":"INTEGRATED","why":"ff f3abeea→f9671da, user-approved push in integrator, ls-remote verified by integrator","by":"ga-sdk integrator","at":"2026-10-06T19:56:00+09:00"}

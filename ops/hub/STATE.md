@@ -38,7 +38,7 @@ trig_01Egfbe1CAGL6bXNu6NK9H2M: disabled (old fresh-session watcher)
 trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 
 ## Heads (10-06 19:20)
-ga-sdk: f3abeea (0.18.0, GA50 10-06 18:47) | Token: 4720d5f (TKG1-11, 10-06 17:53; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
+ga-sdk: f9671da (0.18.1, GA51 10-06 19:56) | Token: 4720d5f (TKG1-11, 10-06 17:53; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
 mail_newest: to/baseline-ops/…T1003…-vm-notify-1 (VM runs ga 0.18.0, handled 19:20)
 records_next: BD-471.., round 312 — unwritten in DECISION_LOG/BASELINE §13: GA49 r2 SEND_BACK, GA49 r3 ACCEPT+integrate, GA50 r1 SEND_BACK, GA51 dispatch, TKG11 mail+ACCEPT (verdicts.jsonl has GA49 r3, GA50 r1, TKG11 r1, GA51 r2 SEND_BACK; also unwritten: GA50 r2 ACCEPT+integrate).
 
@@ -68,7 +68,7 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 ## In flight (handoff 10-06 19:22 KST from session_01J4GYxF…, ctx 151k)
 - GA49 r3 3d142ae ACCEPTED and integrated (ga-sdk integration head 3d142ae, 0.17.1; push approved by the user in the integrator session). Worker 01EPcQJa… finished (archive when the user agrees).
 - GA50 r2 f3abeea INTEGRATED 18:47 (ff by ga-sdk integrator, user-approved; ls-remote verified). 18:48 GA51 worker told: merge f3abeea, bump 0.18.1, re-run, notify → then VERDICT GA51.
-- CMD-GA51 rev 3 f9671da (test ba52088, m6 test added) notify 19:34 → VERDICT 19:48 ACCEPT (1401 OK, mut 6/6, 0.18.1) → INTEGRATE sent (awaits user push OK in integrator) → then GA52 merge + VERDICT. Was: rev 2 b034373 SEND_BACK 19:19 (suite 1400 OK, m1-m5 killed, m6 survived: served-chain last element unpinned). Worker asked for one test → rev 3 → re-VERDICT (m6 only + suite) → INTEGRATE (user's push OK in integrator) → GA52 merge + VERDICT.
+- CMD-GA51 rev 3 f9671da (test ba52088, m6 test added) notify 19:34 → VERDICT 19:48 ACCEPT (1401 OK, mut 6/6, 0.18.1) → INTEGRATED 19:56 (ga-sdk f9671da, 0.18.1, ff, ls-remote OK) → next GA52 merge + VERDICT. Was: rev 2 b034373 SEND_BACK 19:19 (suite 1400 OK, m1-m5 killed, m6 survived: served-chain last element unpinned). Worker asked for one test → rev 3 → re-VERDICT (m6 only + suite) → INTEGRATE (user's push OK in integrator) → GA52 merge + VERDICT.
 - TKG11: report/2 in to/baseline 17:39 (ga-mailbox a12962d), agv/CMD-TKG11-r1 4720d5f, gemini flash 2 turns 3.9k tok; diff reviewed OK (test file identical to baseline's). VERDICT ACCEPT (suite 261/0, t1-t3 killed; verdicts.jsonl). Integrated: Token 4720d5f (ff, fe 105 / be 313 OK).
 - CMD-GA52 DONE 18:33: claude/CMD-GA52 91468e3 (code 0d2b99d, from 3d142ae, 0.17.2 → re-bump at merge; 1374 run/0 fail, own mut 5/5). Waits: GA50 push → GA51 → merge integration into GA52 → VERDICT.
   Was: CMD-GA52 (console '클라우드' screen from ops/hub/cloud_sessions.json, producer ops/hub/cloud_snapshot.py; user 18:00) dispatched 18:00 to session_01GThc7uijAktpufbUynL5ws (Opus), branch claude/CMD-GA52. Lands after GA50, GA51. Mail routine step (3) now refreshes the snapshot + the 상황판 memo.
