@@ -13,7 +13,7 @@ integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 
 ## Rules in force
 - send only via ops/flow/flow.py; doorbell {"flow":"<path>"}
-- integration still needs user push line in integrator session (R3 not live)
+- integration: user changed Dev settings (21:5x); send INTEGRATE per ops/flow/policy.json once verdict ACCEPT recorded; refusal -> report exact text to baseline, stop
 - workers report: {"id","branch","sha","tests","mutations":[{id,file,find,replace,tests}]}
 
 ## Pending
