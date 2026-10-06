@@ -1,0 +1,39 @@
+{
+ "id": "DEV-ST-1",
+ "items": [
+  {
+   "id": "DEV-R0a",
+   "state": "DISPATCHED",
+   "note": "worker-GA53 01HKHSLN, ga-sdk claude/DEV-R0a"
+  },
+  {
+   "id": "DEV-R0b",
+   "state": "DISPATCHED",
+   "note": "worker-GA56 01HurcnH, ga-sdk claude/DEV-R0b"
+  },
+  {
+   "id": "DEV-R0c",
+   "state": "DISPATCHED",
+   "note": "worker-GA57 01H2PH8B, ga-sdk claude/DEV-R0c; verdicts switch to its recipe once landed"
+  },
+  {
+   "id": "GA52-r2",
+   "state": "ACTING",
+   "note": "worker-GA52 01FUssZm finishing r2; integrator re-VERDICT queued"
+  },
+  {
+   "id": "DEV-R1..R5",
+   "state": "PLANNED",
+   "note": "start after R0 lands; R1 thin gateway + budgets first"
+  }
+ ],
+ "blockers": [
+  "sessions were told their director is 01UafTvm; worker-GA52 asked to confirm Dev hub 01Vtf8Jh. Please send each dev.sessions member one line naming Dev_baseline session_01Vtf8JhoPbyf3o8v87LPVLb as director, or confirm when they ask.",
+  "integration still needs the user's explicit push line in the ga-sdk integrator session per change until R3",
+  "Ops_baseline session id not yet received"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-06T21:16:36+09:00"
+}
