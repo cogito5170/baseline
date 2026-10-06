@@ -1,6 +1,6 @@
 # Ops_baseline notes (fixed size; overwrite, do not append history) — handoff 10-07 03:2x KST
 Ops: session_013aqrQGg4d1hyd3uyDVG7kM (since 01:22 KST; prev 01M4vGeV, 01Qhj1TX) — ctx 148k at 03:19, successor_needed sent (ST-OPS-16).
-baseline: session_016tT1vvrTFehVFzWzfgxcCV (ctx 369k). Dev hub: session_01EqmaVLL6vWPFnmAqv9UKWH (ctx 206k, also successor_needed; handoff ops/hub/roles/DEV_BASELINE.md).
+baseline: session_01KvzrDZZJDxYhbkb9Yb8LKs (since 04:4x KST, user-opened; prev 016tT1vv) (ctx 369k). Dev hub: session_01EqmaVLL6vWPFnmAqv9UKWH (ctx 206k, also successor_needed; handoff ops/hub/roles/DEV_BASELINE.md).
 Watcher: session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku; wake trig_01EFFxRB :49 KST).
 Routines owned by Ops (rebind both to the successor: create self-bound copies with the same prompts, disable these, update assign.json):
   trig_01GcyujoR3XoM2PeoHe4iu2j hourly :19 UTC-minute (prompt has the full tick)
