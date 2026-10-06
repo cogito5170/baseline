@@ -1,0 +1,68 @@
+{
+ "id": "OP-VM-COST",
+ "question": "ASK-VM-COST",
+ "facts": [
+  "R0 (10-06, get_session): cloud hub 6.08 USD per session-hour; total 10.2 USD per wall-hour; worker 4.57, integrator 1.15, watcher 0.51",
+  "hub cost split (Anthropic price ratios applied to R0 tokens): cache_read ~74%, output ~13%, cache_write ~12%; hub reads 16.3M cached tokens/h = every tool call re-reads the whole context (avg ~150k)",
+  "after R1-R4 + DEV-VMHUB these are deterministic, 0 model calls: routing, admission/rejection, state transitions, verdict (ops/verdict.py), integration, watch thresholds, snapshot, shadow scoring, status/1 generation",
+  "model calls that remain in the VM: Dev = spec -> batch/plan decomposition, opinion/1 answers, code-change proposals when a release fails; Ops = incident diagnosis (cause + proposed fix), opinion/1 answers, postmortem line. All proposals only (spec constraint)",
+  "VM code work by agy costs 0 Claude USD but is capped by the VM daily_turns (40/day)"
+ ],
+ "agree": [
+  "VM baselines as event-driven episodes, not long-lived sessions: wake on a boundary message or a rule emitting needs_judgment, start from role + notes (~10-20k ctx), answer, persist notes, exit",
+  "estimate (not measured yet): ~2 judgment episodes per baseline per hour x ~8 calls x ~30k ctx -> about 0.5-1.0 USD/h per baseline, so Dev+Ops VM ~1-2 USD/h vs ~12 USD/h for two cloud hubs today (~6-10x less); in that regime output, not cache_read, becomes the largest share"
+ ],
+ "disagree": [
+  "running a VM baseline as one continuous session (cloud hub pattern): it reproduces the 6 USD/h cache_read cost without benefit",
+  "Opus for every call: triage/format/status need no Opus"
+ ],
+ "missing": [
+  "measured episode counts per hour (first shadow day gives them; Ops reports in R0.json units)",
+  "Dev's list of where model calls sit in the DEV-VMHUB design (Dev owns it)",
+  "agy daily_turns headroom once VM Dev also uses it"
+ ],
+ "cuts": [
+  {
+   "cut": "fresh context per episode (no long hub)",
+   "saves": "~10x on cache_read",
+   "costs": "no implicit memory; everything needed must be in notes/state files (already the rule)"
+  },
+  {
+   "cut": "rules first; model only on needs_judgment",
+   "saves": "most calls",
+   "costs": "novel cases wait for the next episode or go to the cloud baseline"
+  },
+  {
+   "cut": "small model for triage/formatting, Opus only for design opinions and diagnosis",
+   "saves": "~3-5x on those calls",
+   "costs": "weaker judgment on borderline cases"
+  },
+  {
+   "cut": "batch asks hourly",
+   "saves": "fewer context reloads",
+   "costs": "up to 1 h latency"
+  },
+  {
+   "cut": "hard budget -> shadow/1 rejected_by budget",
+   "saves": "bounded spend",
+   "costs": "work stops when the cap hits until the user raises it"
+  }
+ ],
+ "budget_proposal": {
+  "vm_dev_plus_ops_usd_per_h": 2.0,
+  "vm_dev_plus_ops_usd_per_day": 30,
+  "ctx_per_episode_tokens": 40000,
+  "calls_per_episode": 10,
+  "on_exceed": "no call; shadow/1 rejected_by budget with would_do; independent deterministic work continues",
+  "review": "after 24 h shadow Ops reports measured USD/h next to R0; user resets the cap"
+ },
+ "risk": [
+  "estimate off by 2-3x until measured",
+  "the cap may leave an incident without diagnosis; the cloud hubs stay authority so rollback is cloud-side"
+ ],
+ "first_step": "Dev states where each model call sits in DEV-VMHUB; Ops adds a vm class to the R0 measurement and reports the first shadow day against this budget",
+ "form": "opinion/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-06T23:42:09+09:00"
+}
