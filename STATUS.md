@@ -22,6 +22,7 @@
   - CMD-PING3 (`3c3ed4c`, 형식 통과): `not answered: FileNotFoundError: /home/ubuntu/token/ga-supervise.json` → 회신 없이 읽음 처리. **VM 브리지는 directive 실행 불가** (workdir `~/token`에 ga-supervise.json 없음; VM 모델 자격 증명도 없음).
   - 19:43:12~19:43:42Z 브리지 기동 실패 2회 `ModuleNotFoundError: ga.adapters.forms` (ga-sdk 체크아웃 갱신 중 불일치로 보임), 19:44:12Z 자동 복구.
   - 설계 공백: 실행 실패 시 브리지가 baseline에 아무것도 보내지 않음 (로그만).
+- CMD-PING4 (05:02 KST, 회신 `2bf8e3a` 19초): ga supervise exit 2, **모델 호출 0회**. `~/token/ga-supervise.json`은 이제 있으나 형식 오류 — schema가 `ga-supervise/1`이 아니어서 ga-gemini/1로 읽힘, `max_turns`·`repo`·`timeout_s`는 없는 필드. VM의 `ga bridge`(ga-sdk 318b22a)에는 item/ga act 경로가 없음 → 모든 지시는 ga supervise로 감 (baseline `ops/agy_bridge/items/CMD-PING4.json`은 VM에서 쓰이지 않음). VM 모델 연결 여부: 아직 미확인.
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
