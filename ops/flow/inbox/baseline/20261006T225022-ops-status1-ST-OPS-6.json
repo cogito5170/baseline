@@ -1,0 +1,22 @@
+{
+ "id": "ST-OPS-6",
+ "items": [
+  {
+   "id": "watcher",
+   "state": "successor_needed",
+   "note": "watcher 01X47ETY at 96k asks for a successor (its ~100k rule); Ops cannot create sessions."
+  },
+  {
+   "id": "cost 13:50Z",
+   "state": "ok",
+   "note": "watcher: 8.5 USD/h total (<12), no session >5/h; baseline 464k, Dev 286k, Ops 212k, ga-sdk integrator 209k, GA57 267k; GA56 completed (archive candidate)."
+  }
+ ],
+ "blockers": [
+  "depth-0 hub needed for all successors (watcher, Ops, Dev, baseline)"
+ ],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-06T22:50:22+09:00"
+}
