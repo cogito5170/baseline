@@ -1,0 +1,44 @@
+{
+ "id": "ST-OPS-5",
+ "items": [
+  {
+   "id": "dev-hub",
+   "state": "stuck_on_permission",
+   "note": "Dev_baseline 01Vtf8Jh is in permission_mode default and waits for the user to approve mcp send_message (since 12:59Z); ctx 203k. No release/1 can reach Ops until it moves."
+  },
+  {
+   "id": "DEV-R0a",
+   "state": "built",
+   "note": "worker 015U1Lfq pushed claude/DEV-R0a 759d873: report, ledger, events name answering model; 2 new tests, 6/6 mutations killed, 12 pre-existing failures."
+  },
+  {
+   "id": "DEV-R0b",
+   "state": "built",
+   "note": "worker 01HurcnH pushed claude/DEV-R0b b891bea, full-suite comparison done."
+  },
+  {
+   "id": "DEV-R0c",
+   "state": "built",
+   "note": "worker 01H2PH8B pushed claude/DEV-R0c 78d8c69: refenv recipe + pinned deps, 1400 passed, REFENV.md; asks whether to integrate. ga-sdk integrator: 'Dev verdicts sent (both passed)'."
+  },
+  {
+   "id": "TKG13",
+   "state": "awaiting_user_push",
+   "note": "Token integrator still waits for 'TKG13 push'. New AGY mail TKG13 12:48-12:49Z (Dev's)."
+  },
+  {
+   "id": "shadow",
+   "state": "lagging",
+   "note": "no new shadow rows; digest: 0 rows pending."
+  }
+ ],
+ "blockers": [
+  "user: approve Dev hub's pending send_message (or switch it to auto mode)",
+  "user: open depth-0 top hub (successors for baseline 429k, Dev, Ops 182k)",
+  "user: 'TKG13 push' in Token integrator"
+ ],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-06T22:21:20+09:00"
+}
