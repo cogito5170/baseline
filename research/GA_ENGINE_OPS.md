@@ -100,3 +100,30 @@ VERIFY ── 창(window_ms) 안에 사후조건 확인: 예) "다음 tick 에 s
 | DORA 지표 | 측정 안 함 | 우리 기록에서 계산: 배포 빈도(INTEGRATED 행/일), 리드타임(dispatch → INTEGRATED), 변경 실패율(SEND_BACK/전체 판정), MTTR(alert → 해소) — baseline_verdicts.jsonl · ops_state.json 으로 코드 계산, 상황판 표시 |
 
 다음 directive 후보: CMD-OPS3 `ops/hub/dora.py` (DORA 4 지표 + SLO 판정, 상황판 연결), GA57 의 alert/1 에 사고 번호 · 회고 링크.
+
+## 7. Dev / Ops 로 나눈 매핑 (사용자 10-06 21:0x)
+
+DevOps 무한 고리: Dev = 계획 → 코드 → 빌드 → 시험 → 릴리스 / Ops = 배포 → 운영 → 관측 → (피드백 → 계획).
+
+### Dev (변경을 만드는 쪽)
+| 단계 | 우리 구성요소 | 주체 | 상태 · 빈 곳 |
+|---|---|---|---|
+| 계획 | 사용자 요구 → directive/2(S/D 계약), 계획기(stage 5 shadow), intake(task/1) | baseline 허브 · 강한 모델 1–2턴 | 지금 허브가 손으로 씀 → 계획기 승격 |
+| 코드 | 작업 세션(Claude, Sonnet/Opus) · agv `ga act`(gemini flash, AGY bridge) | 작업자 노드 | 작업자 환경 차이(O3) |
+| 빌드 | 버전 bump · 의존 고정(_pins) · ga check | 작업자 | 버전은 착지 순서대로 허브가 배정 |
+| 시험 | 작업자 suite → 통합 세션 VERDICT(전체 suite · ancestor · 변이 · revert) | 통합 세션(CI 기준 환경) | 변이 생존 → 자동 SEND_BACK(O4) |
+| 릴리스 | ACCEPT → INTEGRATE(ff/merge) → 통합 브랜치 push | 통합 세션 | push 사람 승인(O10) |
+
+### Ops (변경을 돌리고 지키는 쪽)
+| 단계 | 우리 구성요소 | 주체 | 상태 · 빈 곳 |
+|---|---|---|---|
+| 배포 | VM ga-update.timer(30분 ff + 재설치) → notify-1 버전 보고 | VM 노드 | 배포 실패 경보 확인 필요 |
+| 운영 | VM hub tick(shadow) · console · agy bridge · 서비스 · 클라우드 허브/루틴/세션 계보 | VM 노드 + baseline 허브 | cap 정지(O1) · 계보 한도(O6) · 서비스 고착(O9) |
+| 관측 | ga.events/1 · L0 · ledger(토큰) · shadow.jsonl · cloud snapshot · 상황판 · 토큰 감시 세션 | 코드(0토큰) | SLO 없음, DORA 없음 |
+| 사고 대응 | ga ops tick(GA57): 탐지 → 규칙 → Guard → 완화 → VERIFY → 승격 / baseline ops_rules.py(O3·O5·O6·O8) | 노드(저위험) · 허브(교차 저장소) · 사람(고위험만) | 구현 중 |
+| 피드백 | 회고 BD 1줄 + rule/1 추가 → 새 directive | 허브 | 사고 = 규칙 하나 추가가 완료 조건 |
+
+### 둘을 잇는 것 (공통)
+- 계약: directive/2 · report/2 · notify/1 · alert/1 (메일함 = 이벤트 버스)
+- 토큰 고리(§5): 양쪽 모든 모델 호출을 묶음 · 측정 · 재최적화
+- DORA: 배포 빈도 · 리드타임(Dev 끝 → Ops 시작) · 변경 실패율 · MTTR(Ops) / SLO 와 오류 예산이 Dev 속도를 조절
