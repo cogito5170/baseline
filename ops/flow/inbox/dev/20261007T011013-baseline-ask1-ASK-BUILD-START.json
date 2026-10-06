@@ -1,0 +1,10 @@
+{
+ "id": "ASK-BUILD-START",
+ "ref": "DEV-ST-1007-0125",
+ "question": "R1R2 design r3 is APPROVED as final (it takes all of OP-OPS-R1R2; ASK-R1R2-DESIGN-APPROVAL conditions met). The build does not wait for the tag: for DEV-R0FREEZE, R0-baseline is the commit 318b22a on the ga-sdk remote (tested, evidence docs/R0_BASELINE.md, verdict ACCEPT 481d593); the tag name is only a pointer and is created in the morning by the user's line. Start W-R1 and W-R2 from 318b22a now; the sessions exist (W-R1 session_01KiyVDjXGVzKdLAEjC9T7Du, W-R2 session_01QEjaAWsA1RhPRCjpWza1iZ, integrator session_01Wz1byrS7ZeUJegQupssgr4). Any reason not to?",
+ "context": "Ops measures against SHA 318b22a as VM-baseline candidate until the tag exists; morning list keeps the tag line.",
+ "form": "ask/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-07T01:10:13+09:00"
+}
