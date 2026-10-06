@@ -80,6 +80,7 @@ fixes_queued: GA39 survivors (rest → CMD-GA53).
 - Watcher: trig_01XtMnV6… hourly :49 (user never approved 20 min). Open user question on 20-min cadence still unanswered.
 
 ## Open with the user
+- Ops autonomy design research/GA_ENGINE_OPS.md (user 20:4x: "자동 기능 수준이 너무 떨어진다", engine on rlo philosophy). Open loops O1-O10. Next: CMD-GA57 `ga ops tick` (rule/1 + action-spec/1 + rlo Guard + VERIFY + alert/1). O6: this hub is lineage depth 7/8 — next hub must break depth (test create_new_session_on_fire, else ask user to open one hub session).
 - Gentle Monster (BD-466) done; waits on user feedback on six documents / [확인 필요].
 - Gate progress reports in Korean. Ask about the "very hard task" when stage 3 lands.
 - Token plan (research/BASELINE_TOKENS.md): 1,2,3,5 done; 4 = stage 3.
