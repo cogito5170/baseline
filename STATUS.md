@@ -1,6 +1,6 @@
 # STATUS — baseline 전체 현황 (단일 진입점)
 
-갱신: 2026-10-07 04:3x KST · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
+갱신: 2026-10-07 04:5x KST · 작성: top baseline `session_01KvzrDZZJDxYhbkb9Yb8LKs` (사용자가 새로 연 top, depth 0; 이전 top `016tT1vv`는 대기) · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
 이 문서 하나로 지금 상황을 파악할 수 있어야 한다. 세부 근거는 각 줄의 경로에 있다.
 
 
@@ -32,7 +32,7 @@
 
 | 역할 | 세션 | 상태 |
 |---|---|---|
-| top baseline | `016tT1vv` | 활동 중 (lineage depth 1, ctx ~260k → 후임 메모 `ops/hub/roles/BASELINE_TOP.md`) |
+| top baseline | `01KvzrDZ` | 활동 중 (depth 0, 04:5x 사용자가 엶; 이전 `016tT1vv` 대기, ack 보냄 · Ops `013aqrQG`에 통보) |
 | Dev 허브 | `01EqmaVL` | 01:2x 교체 (이전 `01VMbRhM` 보관) |
 | Ops 허브 | `013aqrQG` | 01:2x 교체 (이전 `01M4vGeV` 보관) |
 | ga-sdk 통합 | `01Wz1byr` | 준비 완료 (이전 `01LBoWy9` 보관) |
