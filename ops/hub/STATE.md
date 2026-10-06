@@ -101,3 +101,4 @@ audit 10-06 15:40 (session_018XDm17…): heads OK; stale "access settled" (add_r
 audit 10-06 17:0x (session_01ThMJnk…): add_repo push ga-sdk/Token denied by classifier; user chose "통합세션으로 진행해" → integrators told hub id;
   VERDICT claude/CMD-GA49 3d142ae sent to ga-sdk integrator (mut ops/hub/mut/CMD-GA49.json); no clone/venv in this hub.
 audit 10-06 17:58 (session_01ERe9em…): heads/mail/routines OK; outgoing step 3 done; TKG11 report arrived.
+audit 10-06 18:25 (session_01J4GYxF…): routine trig_01X8fbEr → this hub OK; BASELINE_SESSION OK; mail: only vm notify-1 (0.17.1, known); no add_repo.
