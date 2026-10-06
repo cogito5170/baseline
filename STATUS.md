@@ -1,6 +1,6 @@
 # STATUS — baseline 전체 현황 (단일 진입점)
 
-갱신: 2026-10-07 02:04 KST (매시 점검) · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
+갱신: 2026-10-07 02:2x KST · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
 이 문서 하나로 지금 상황을 파악할 수 있어야 한다. 세부 근거는 각 줄의 경로에 있다.
 
 ## 1. 목표와 원칙
@@ -26,7 +26,7 @@
 | W-R1 (VI-02 R1 관문) | `01KiyVDj` | 시험 중 |
 | W-R2 (VI-04 R2 판정 dry-run) | `01QEjaAW` | `451e980` 판정 대기 |
 | W-VI (VI-06a + VI-20) | `01CnLoJD` | ACCEPT `87e3243` (1412 OK, 변이 2/2), 통합 대기 |
-| worker-R0a (VI-01 VM SHA 보고) | `015U1Lfq` | 진행 중 |
+| worker-R0a (VI-01 VM SHA 보고) | `015U1Lfq` | `bb443ff` 완성(1418 OK, 변이 10/10) · 새 Dev 허브를 지휘자로 인정 안 함 → top이 02:2x 확인 보냄 |
 | GA52 / GA53 작업자 | `01FUssZm` / `01HKHSLN` | GA52 보고 후 보관 예정 / GA53 대기 |
 | 토큰 감시 | `01TBHcmu` | 상시 |
 
@@ -79,6 +79,9 @@ VM 내부 빌드 순서 (`VM_INTERIOR_DESIGN.md` §12): VI-01, 02, 04, 06a, 20 �
 
 ## 7. 비용
 
+- 02:19 측정: 클라우드 13.97 USD/h. **top 5.14 USD/h > 상한 2.0 (위반)**, ctx 337k. 대응: top 점검 2시간 간격, 아침에 새 top(사용자가 열기) 권장. 작업 세션 4.93, 다른 허브 2.63, 통합 1.19.
+- 문맥 상한(150k) 초과: top 337k, Dev 158k, R0a 181k, W-R1 157k, GA52 252k (INC-OPS-4).
+
 - 01:19 측정: 클라우드 12.19 USD/h (감시 상한 12 초과), Dev 허브가 8.1 USD/h → 01:2x에 Dev·Ops 허브 교체.
 - VM 예산 상한 대비 사용액: 0 (VM 모델 호출 없음). 측정: `ops/flow/measure/hourly.jsonl`.
 
@@ -96,7 +99,8 @@ VM 내부 빌드 순서 (`VM_INTERIOR_DESIGN.md` §12): VI-01, 02, 04, 06a, 20 �
 ## 9. 사용자가 할 일 (아침 목록)
 
 1. 통합 push: Dev → 통합 세션 INTEGRATE 메시지가 플랫폼에 거부됨. 대기: VI-06a-20 `87e3243` (ACCEPT), 이어서 VI-04, VI-02. 통합 세션 `01Wz1byr`에 직접 입력하거나 Dev `01EqmaVL` 설정에 send_message 허용. (이름표·TKG13은 01:5x 사용자 맥 AGY로 완료)
-2. Dev 세션 `01EqmaVL`에서 git·send_message·세션 보관 허용 한 줄.
+2. worker-R0a `015U1Lfq`가 사용자 확인을 요구하면: 그 세션에 "Dev 허브는 01EqmaVL" 한 줄.
+3. Dev 세션 `01EqmaVL`에서 git·send_message·세션 보관 허용 한 줄.
 3. (완료) TKG13 push.
 4. VM: 사용자 소유 정책 파일 `/etc/ga/vm_policy.json`(SSH), VM API 키 지출 한도, 인스턴스 정지·자격 증명 폐기 경로, VM 모델 자격 증명.
 5. 값 결정 (`VM_INTERIOR_DESIGN.md` §13, Ops 기본값 있음): Q1 전환 시점·통합 ref, Q2 단계 기한, Q3 사다리 값, Q4 SLO, Q5 세션 상한·push 허용 ref, Q6 Dev/Ops 저장소·VM push 자격 증명, Q8 하루 30 USD 기준(달력일/24시간), Q9 끄는 스위치.
@@ -109,7 +113,7 @@ VM 내부 빌드 순서 (`VM_INTERIOR_DESIGN.md` §12): VI-01, 02, 04, 06a, 20 �
 
 | 루틴 | 대상 | 일정 |
 |---|---|---|
-| `trig_0148AQEj` | top `016tT1vv` | 매시 :04, 09:00 이후 첫 회에 아침 요약 후 종료 |
+| `trig_0148AQEj` | top `016tT1vv` | 03:04·05:04·07:04·09:04 KST (02:2x에 2시간 간격으로 줄임: top 비용 상한 초과), 09:04에 아침 요약 후 종료 |
 | Ops 매시 루틴 `trig_01GcyujoR3` (이전 `trig_018jUnT6` 비활성) | Ops `013aqrQG` | 매시 :19 |
 | Ops 08:30 최종 보고 `trig_012F2ySD` (이전 `trig_017Lm4aT` 비활성) | Ops `013aqrQG` | 08:30 KST 1회 |
 | Dev 자기 점검 `trig_01JUyE96` | Dev `01EqmaVL` | 02:25부터 매시, 09:00까지 |
