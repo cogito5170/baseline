@@ -1,0 +1,24 @@
+{
+ "item": {
+  "id": "CMD-PING4",
+  "goal": "Create the file ops/agy_bridge/ping/PING4.txt whose whole content is the single line OK.",
+  "files": [
+   "ops/agy_bridge/ping/PING4.txt"
+  ],
+  "done_when": "test"
+ },
+ "tests": {},
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-c",
+    "import sys; sys.exit(0 if open('ops/agy_bridge/ping/PING4.txt').read().strip() == 'OK' else 1)"
+   ]
+  },
+  "timeout_s": 60
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "baseline",
+ "model": "gemini-3.7-flash-low"
+}
