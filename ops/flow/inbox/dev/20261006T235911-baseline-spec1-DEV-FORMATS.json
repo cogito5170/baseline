@@ -1,0 +1,22 @@
+{
+ "id": "DEV-FORMATS",
+ "stage": "R4",
+ "why": "user 10-07 00:1x KST: 'semantic 통신의 format을 필요할 때마다 추가한다. 그리고 반드시 문서를 만들어 모든 세션 간, VM<->baseline 간 통신, 노드 간 통신, dev,ops 간 통신 등 통신 간 모든 format을 맞춰라.' Today formats are split: flow.py forms (spec/1 batch/1 release/1 verify/1 incident/1 opinion/1 ask/1 status/1 shadow/1), ga.forms (notify/1 alert/1 verdict/1 directive/2 report/2 task/1), policy/1, prompt-spec/1, L0 peer.message.*, ga mail, plus ad-hoc lines no checker knows: doorbell {\"flow\":path}, {\"flow\":\"ack\",...}, handoff_ready, successor_needed, 'X is now <id>' notices. DEV-VMHUB rev2 already requires id/from/to/at/ref reuse.",
+ "constraints": [
+  "one registry, one checker: no channel may carry a format the registry does not list",
+  "reuse existing fields (id, from, to, at, ref, form name with /n version); a new format or field is added by a registry change, never ad hoc; a changed meaning is a new /n",
+  "SEMANTIC_MODEL.md vocabulary for meanings; no prose payloads"
+ ],
+ "goal": "Every message between sessions, VM and baseline, nodes, and Dev and Ops uses a format from one written registry, checked by one checker, and new formats are added to that registry when needed.",
+ "acceptance": [
+  "a single document lists every format with its fields, meaning, version, allowed senders and receivers per channel (session<->session, VM<->baseline, node<->node, Dev<->Ops, hub<->worker/integrator, doorbells and acks)",
+  "the existing forms (flow.py, ga.forms, policy/1, prompt-spec/1, L0 peer events) and today's ad-hoc lines (doorbell, ack, handoff_ready, successor_needed, director-change notice) are all in it, with duplicates merged or mapped",
+  "flow.py and ga.forms read the same registry, so a format valid in one is valid in the other; a test fails if they disagree",
+  "every channel rejects a message whose format or field is not in the registry and records the rejection",
+  "adding a format is one registry change plus its tests; the document and the checker cannot drift (generated from one source or checked against each other in tests)"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T23:59:11+09:00"
+}
