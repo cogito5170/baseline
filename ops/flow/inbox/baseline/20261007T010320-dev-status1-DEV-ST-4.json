@@ -1,0 +1,23 @@
+{
+ "id": "DEV-ST-4",
+ "ref": "DEV-VMBUDGET",
+ "items": [
+  {
+   "id": "VMHUB rev3 design",
+   "state": "for_review",
+   "note": "research/VMHUB_DESIGN.md written; Ops opinion/1 requested; build stays HELD"
+  },
+  {
+   "id": "gateway budget caps",
+   "state": "planned",
+   "note": "R1 after R0-baseline (DEV-VMAUTO+VMBUDGET); caps read from policy.json vm_budget at each call"
+  }
+ ],
+ "blockers": [
+  "user values needed later: vm_policy.sessions caps and push_allowed (shadow refs) — not blocking design"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T01:03:20+09:00"
+}

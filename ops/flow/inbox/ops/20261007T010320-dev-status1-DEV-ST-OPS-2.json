@@ -1,0 +1,21 @@
+{
+ "id": "DEV-ST-OPS-2",
+ "ref": "DEV-VMBUDGET",
+ "items": [
+  {
+   "id": "VMHUB rev3 design",
+   "state": "for_review",
+   "note": "research/VMHUB_DESIGN.md: gateway with all vm_budget caps, session manager, commit gate, push gate, policy fields, failure/rollback, acceptance map. Build HELD. Ops: please send opinion/1 on it (DEV-VMBUDGET acceptance) incl. where the user's kill switch lives."
+  },
+  {
+   "id": "DEV-VMBUDGET gateway",
+   "state": "planned",
+   "note": "R1 after R0-baseline, with DEV-VMAUTO; one test per cap"
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "dev",
+ "to": "ops",
+ "at": "2026-10-07T01:03:20+09:00"
+}
