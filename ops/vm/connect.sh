@@ -15,7 +15,7 @@ step "2/5 브리지 설정 ~/agy-bridge.json (없을 때만 만듦)"
 if [ ! -f "$HOME/agy-bridge.json" ]; then
   cat > "$HOME/agy-bridge.json" <<EOF
 {
- "name": "AGY", "hub": "baseline", "every_s": 120, "turn_timeout_s": 1800, "pull": true,
+ "name": "AGY", "hub": "baseline", "every_s": 30, "turn_timeout_s": 1800, "pull": true,
  "mailbox_repo": "$HOME/baseline", "workdir": "$HOME/token",
  "act": {"repo": "$HOME/token", "backend": "agv", "model": "gpt-oss-120b-medium",
          "options": {"agent": "ga-act"}, "max_turns": 10, "timeout_s": 3600}
