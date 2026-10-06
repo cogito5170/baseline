@@ -1,14 +1,14 @@
 {
  "item": {
   "id": "CMD-TKG13",
-  "goal": "In backend/app/domains/quota/service.py: quota create() must reject bool limit_microusd (and bool thresholds) with QuotaError (422); bool is an int subclass, so True is accepted as 1 today.",
+  "goal": "In backend/app/domains/quota/service.py: quota create() must reject bool limit_microusd (and bool thresholds) with QuotaError (422); bool is an int subclass, so True is accepted as 1 today. Rev 2: non-int limits (1.5, '1') must also raise QuotaError; keep the int check.",
   "files": [
    "backend/app/domains/quota/service.py"
   ],
   "done_when": "test"
  },
  "tests": {
-  "backend/app/domains/quota/tests/test_tkg13_budget_bool.py": "\"\"\"Acceptance test for CMD-TKG13 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nfrom app.domains.quota.service import MemoryStore, QuotaError, QuotaService\n\n\nclass T(unittest.TestCase):\n    def test_bool_limit_and_threshold_rejected(self):\n        svc = QuotaService(MemoryStore(), summary=lambda *a: {})\n        with self.assertRaises(QuotaError):\n            svc.create(\"w\", None, \"workspace\", \"month\", \"list\", True)\n        with self.assertRaises(QuotaError):\n            svc.create(\"w\", None, \"workspace\", \"month\", \"list\", 1000, thresholds=[True])\n"
+  "backend/app/domains/quota/tests/test_tkg13_budget_bool.py": "\"\"\"Acceptance test for CMD-TKG13 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nfrom app.domains.quota.service import MemoryStore, QuotaError, QuotaService\n\n\nclass T(unittest.TestCase):\n    def test_bool_limit_and_threshold_rejected(self):\n        svc = QuotaService(MemoryStore(), summary=lambda *a: {})\n        with self.assertRaises(QuotaError):\n            svc.create(\"w\", None, \"workspace\", \"month\", \"list\", True)\n        with self.assertRaises(QuotaError):\n            svc.create(\"w\", None, \"workspace\", \"month\", \"list\", 1000, thresholds=[True])\n\n    def test_non_int_limit_rejected(self):\n        svc = QuotaService(MemoryStore(), summary=lambda *a: {})\n        for bad in (1.5, \"1\"):\n            with self.assertRaises(QuotaError):\n                svc.create(\"w\", None, \"workspace\", \"month\", \"list\", bad)\n"
  },
  "commands": {
   "commands": {
