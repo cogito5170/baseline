@@ -1,0 +1,28 @@
+{
+ "item": {
+  "id": "CMD-TKG2",
+  "goal": "Fix formatPermille in frontend/src/lib/format/money.ts for negative permille: -5 -> \"-0.5%\", -875 -> \"-87.5%\", -10 -> \"-1%\". Keep 875 -> \"87.5%\", 1000 -> \"100%\", 0 -> \"0%\", null -> \"—\" and the rounding of fractional input (874.6 -> \"87.5%\").",
+  "files": [
+   "frontend/src/lib/format/money.ts"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "frontend/tests/shell/format-permille.test.ts": "import { describe, expect, it } from \"vitest\";\nimport { formatPermille as f } from \"../../src/lib/format\";\n\ndescribe(\"formatPermille negatives (CMD-TKG2)\", () => {\n  it(\"formats negative permille with one sign\", () => {\n    expect(f(-5)).toBe(\"-0.5%\");\n    expect(f(-875)).toBe(\"-87.5%\");\n    expect(f(-10)).toBe(\"-1%\");\n  });\n  it(\"keeps existing behaviour\", () => {\n    expect(f(875)).toBe(\"87.5%\");\n    expect(f(1000)).toBe(\"100%\");\n    expect(f(0)).toBe(\"0%\");\n    expect(f(874.6)).toBe(\"87.5%\");\n    expect(f(null)).toBe(\"—\");\n  });\n});\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "node",
+    "frontend/node_modules/vitest/vitest.mjs",
+    "run",
+    "--root",
+    "frontend",
+    "tests/shell/format-permille.test.ts"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

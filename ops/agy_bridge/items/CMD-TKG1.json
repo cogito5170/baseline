@@ -1,0 +1,28 @@
+{
+ "item": {
+  "id": "CMD-TKG1",
+  "goal": "Fix formatTokensCompact in frontend/src/lib/format/money.ts: when rounding to one decimal reaches 1000 of a unit, use the next unit (999_950 -> \"1M\", 999_960_000 -> \"1B\"; 999_949 stays \"999.9K\"). Keep every existing behaviour (1500 -> \"1.5K\", 3_400_000 -> \"3.4M\", 12 -> \"12\", null -> \"—\", negatives keep the sign).",
+  "files": [
+   "frontend/src/lib/format/money.ts"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "frontend/tests/shell/format-compact.test.ts": "import { describe, expect, it } from \"vitest\";\nimport { formatTokensCompact as f } from \"../../src/lib/format\";\n\ndescribe(\"formatTokensCompact unit rollover (CMD-TKG1)\", () => {\n  it(\"moves to the next unit when rounding reaches 1000\", () => {\n    expect(f(999_950)).toBe(\"1M\");\n    expect(f(999_960_000)).toBe(\"1B\");\n    expect(f(-999_950)).toBe(\"-1M\");\n  });\n  it(\"keeps values just below the boundary\", () => {\n    expect(f(999_949)).toBe(\"999.9K\");\n    expect(f(999)).toBe(\"999\");\n  });\n  it(\"keeps existing behaviour\", () => {\n    expect(f(1500)).toBe(\"1.5K\");\n    expect(f(3_400_000)).toBe(\"3.4M\");\n    expect(f(12)).toBe(\"12\");\n    expect(f(null)).toBe(\"—\");\n  });\n});\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "node",
+    "frontend/node_modules/vitest/vitest.mjs",
+    "run",
+    "--root",
+    "frontend",
+    "tests/shell/format-compact.test.ts"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}
