@@ -5,7 +5,6 @@
    "ga-sdk-integrator": "session_01LBoWy9AXfEwQsHqMcumAuC",
    "token-integrator": "session_01FynfJTJBM1D3itToGCjyM1",
    "worker-GA52": "session_01FUssZmVMp6rDvZ7GFTEpuK",
-   "worker-GA56": "session_01HurcnHXjzVhZjQ6vYSYwkc",
    "worker-GA57": "session_01H2PH8BwPn3e3ut6Qjoaed3",
    "worker-R0a": "session_015U1LfqNoymrTP9Wduzmh31"
   },
@@ -16,11 +15,11 @@
  "ops": {
   "hub": "session_01MuXcCLZm3KXYyDj9v8HqyB",
   "sessions": {
-   "token-watcher": "session_01X47ETY7Sx9hpAefj8vC28B"
+   "token-watcher": "session_01TBHcmu5ar3uwnjL7m6NhYg"
   },
   "routines": [
    "trig_01MtdLyUZwfJNqtzKyXLkxpb (hourly :19, bound to Ops, incl. shadow digest)",
-   "trig_012iYV3ow8BDUxTCwL1hBEb2 (watcher wake :49 KST)"
+   "trig_01EFFxRBWdkVJDYpn4ZNFYYS (watcher wake :49 KST, Haiku)"
   ]
  },
  "baseline": {
