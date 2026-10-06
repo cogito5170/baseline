@@ -784,3 +784,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 301 회차: CMD-GA44 성공 — ga-sdk `3fcea91`(0.12.0), 묻기 기본 도구 없는 에이전트 · 설정 질문 코드 답 · Enter 보내기(BD-454).
 - 302 회차: CMD-OPS2 성공 — ga-sdk `698c1e2`(0.13.0), ga vm install --full · 브리지 넘겨받기 · 터널 전용(BD-455).
 - 303 회차: CMD-GA45 성공 — ga-sdk `87d37c0`(0.14.0), VM 허브 설정 · 셰도우 결정 메일 · ga act 모델 사다리, Token 판정 설정 · agv 커밋 push(BD-457).
+- 304 회차: CMD-GA46 성공 — ga-sdk `49d1c84`(0.15.0), ga act 적용 0 턴도 진전 없음 · 소유 파일 NEW 교체 · NEW 끝 빈 줄 정리(BD-459).
