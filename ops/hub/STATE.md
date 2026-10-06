@@ -29,9 +29,9 @@ trig_01Egfbe1CAGL6bXNu6NK9H2M: disabled (old fresh-session watcher)
 trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 
 ## Heads (10-06 15:40)
-ga-sdk: e364817 (0.17.0) | Token: fcf216a (TKG1-4,6; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
+ga-sdk: e364817 (0.17.0) | Token: 3b34b5c (TKG1-8; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
 mail_newest: to/baseline-shadow/…T062003…-CMD-GM2.md (handled)
-records_next: BD-469, round 310
+records_next: BD-470, round 311
 
 ## Work loop
 directive: one fresh worker session per directive (create_session, source ga-sdk, branch claude/<id>); Sonnet narrow,
@@ -50,7 +50,7 @@ done: stage 4 verifier, stage 5 planner(shadow), verdict.py self-test
 now: stage 2 shadow gate = 10 consecutive shadow verdicts on ga-sdk/Token reports, 0 false accepts, scored by
   `ga hub shadow-compare --mailbox <baseline> --name baseline-shadow` vs baseline_verdicts.jsonl.
   score 10-06 15:4x: 31 rows all ASK_HUMAN, 0 false accepts, gate 0/10 (only Token bridge items count).
-next_action: verdict TKG7-10 + TKG5 r2 (ops/verdict_token.py, own mutations); CMD-GA49 worker session_01EPcQJa… → verdict, ff ga-sdk, VM self-updates in ≤30 min, then rescore. Shadow so far: TKG1-5 all ASK_HUMAN with null tokens (decision turn fails).
+next_action: verdict TKG9 r2, TKG10 r2; CMD-GA49 worker session_01EPcQJa… → verdict + ff ga-sdk → VM self-update ≤30 min → new items rescore the gate. Follow-up TKG11: audit _tokens allowed only for numeric values. Shadow so far: every TKG decision ASK_HUMAN, tokens null.
 then: stage 3 directive (hub judges+integrates on VM, baseline audits, roll back on quality drop) — user said go.
 fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 results.model shows gpt-oss while rung was
   gemini; ledger learns only upward; console 'starting' timeout; GA39 survivors.

@@ -1,7 +1,7 @@
 """One-call verdict for a Token agv branch (sibling of ops/verdict.py, which is ga-sdk only).
 
 usage: python3 ops/verdict_token.py <branch> --item ops/agy_bridge/items/<id>.json --mut <mut.json> [--token /home/user/token]
-Worktree of <branch> from the local Token clone (fetched first), fast-forward check against the integration branch,
+Worktree of <branch> from the local Token clone (fetched first), fast-forward or clean-merge check against the integration branch, scope from the merge base,
 baseline's acceptance tests byte-identical, the item's test command, the full suite of the touched side (frontend vitest
 and/or backend unittest), then each mutation [{"file", "old", "new"}] must make the item's test command fail.
 Prints one JSON line; exit 0 only if everything is green.
@@ -30,7 +30,8 @@ def main():
     out = {"branch": a.branch, "id": item["item"]["id"]}
     out["sha"] = sh(["git", "rev-parse", "--short", f"origin/{a.branch}"], t)[1].strip()
     out["ff"] = sh(["git", "merge-base", "--is-ancestor", f"origin/{INTEG}", f"origin/{a.branch}"], t)[0] == 0
-    changed = sh(["git", "diff", "--name-only", f"origin/{INTEG}", f"origin/{a.branch}"], t)[1].split()
+    out["clean_merge"] = out["ff"] or sh(["git", "merge-tree", "--write-tree", f"origin/{INTEG}", f"origin/{a.branch}"], t)[0] == 0
+    changed = sh(["git", "diff", "--name-only", f"origin/{INTEG}...origin/{a.branch}"], t)[1].split()
     allowed = set(item["item"]["files"]) | set(item["tests"])
     out["outside_scope"] = [f for f in changed if f not in allowed]
     wt = tempfile.mkdtemp(prefix="vt-")
@@ -70,7 +71,7 @@ def main():
         out["mut_detail"] = killed
     finally:
         sh(["git", "worktree", "remove", "--force", wt], t)
-    out["green"] = (out["ff"] and not out["outside_scope"] and out["tests_identical"] and out["accept"]
+    out["green"] = (out["clean_merge"] and not out["outside_scope"] and out["tests_identical"] and out["accept"]
                     and all(v is True for v in out["suites"].values()) and all(k is True for k in out["mut_detail"]))
     print(json.dumps(out, ensure_ascii=False))
     sys.exit(0 if out["green"] else 1)

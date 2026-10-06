@@ -34,3 +34,4 @@
 {"id":"CMD-TKG8","rev":1,"sha":"9d72e58","decision":"ACCEPT","bd":"BD-469"}
 {"id":"CMD-TKG9","rev":1,"sha":"cd18d21","decision":"SEND_BACK","bd":"BD-469"}
 {"id":"CMD-TKG10","rev":1,"sha":"71e0d51","decision":"SEND_BACK","bd":"BD-469"}
+{"id":"CMD-TKG5","rev":2,"sha":"d4c8333","decision":"ACCEPT","bd":"BD-469"}
