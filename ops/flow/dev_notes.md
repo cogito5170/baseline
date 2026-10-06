@@ -1,15 +1,18 @@
 # Dev_baseline notes (fixed size; overwrite, never append history)
 hub: session_01VMbRhMjtfPAALfLjAWJ1tT (Dev, since 10-07 00:0x KST) · baseline top 016tT1vv · Ops 01M4vGeV
-integration: ga-sdk claude/gracious-meitner-vp49xe 277945de (R0a+R0b, 0.18.1) · policy/1 extended to this hub (ad21638)
+OVERNIGHT (DEV-OVERNIGHT, until 09:00 KST): baseline approves designs after Ops opinion; status/1 every 2h, final 08:30; hourly self check-in via send_later
+integration: ga-sdk head 318b22a (evidence) on tested 8ead789 = R0a+R0b+R0c, 1411/0/1 refenv; tag R0-baseline pending user line in old integrator 01LBoWy9 · policy/1 extended to this hub (ad21638)
 
 ## Items (state)
-- DEV-R0FREEZE  -> integrator 01LBoWy9: merge R0c 78d8c69, refenv suite, docs/R0_BASELINE.md, push, tag R0-baseline (tag: user line)   ACTING
-- DEV-VMSHA     -> worker-R0a 015U1Lfq, claude/DEV-VMSHA from 277945de; VERDICT after R0-baseline                                     ACTING
-- CMD-GA52 r2   -> worker-GA52 01FUssZm (approved innerHTML check + negative _num); archive after report                               ACTING
-- CMD-TKG13 r2  -> resent with changes(D1 edit), ga check clean, ga-mailbox 6514430 to/AGY/20261006T155710Z; await AGY report/2 -> token-integrator 01FynfJT VERDICT   SENT
-- awaiting VERDICT after R0-baseline: GA52 r2, GA53 49f24c3 (worker 01HKHSLN idle), GA54 364680d (p2,p3 survived), GA56 c10675e, GA57 46687db (1381/0/56, 31/31)
-- R1..R5 after R0-baseline: R1 = DEV-VMAUTO gateway + budgets + DEV-WATCH; DEV-R3-DET; DEV-BASEAUTO (R5); DEV-FORMATS (R4)
-- HELD: DEV-VMHUB rev3 (needs token problem solved by measurement + R0-baseline)
+- DEV-R0FREEZE  verdict ACCEPT 8ead789 (481d593); branch pushed 318b22a; TAG pending (user line; my relay refused as Instruction Poisoning)
+- W-R1 01KiyVDj  DEV-VMAUTO+VMBUDGET gateway, claude/DEV-R1-GW from 318b22a (design research/R1R2_DESIGN.md §A,§A' approved)   ACTING
+- W-R2 01QEjaAW  DEV-R3-DET dry-run + replay, claude/DEV-R2-DRY from 318b22a (§B)                                             ACTING
+- worker-R0a 015U1Lfq  DEV-VMSHA claude/DEV-VMSHA from 277945de (land before/with R1)                                             ACTING
+- integrator successor 01Wz1byr: told state, prepare refenv, wait for VERDICT; old 01LBoWy9 -> archive after tag
+- CMD-GA52 r2 (01FUssZm) ACTING -> archive after report; CMD-TKG13 r2 SENT (ga-mailbox 6514430), AGY needs "check mail"
+- DEV-VMDESIGN (R4): full VM interior design tonight -> Ops opinion -> baseline approval   TODO (extend research/VMHUB_DESIGN.md)
+- awaiting VERDICT later: GA52 r2, GA53 49f24c3, GA54 364680d, GA56 c10675e, GA57 46687db
+- HELD: VMHUB build
 
 ## Sessions / INC-OPS-2,3
 - archived 10-07 00:5x (user OK): worker-GA57 01H2PH8B; old dev hub 01Vtf8Jh already archived
