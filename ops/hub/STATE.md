@@ -22,7 +22,7 @@ artifacts: 상황판(phone/PC; live sessions via Claude Code Remote list_session
 ## Integrators (the user, 10-06 17:00 KST: "이전 세션에서 만들어놓고, 이후 세션에서 연결해")
 A hub only has baseline (create_session takes one source; add_repo in a new hub needs the user's own words). So the
 hub does NOT attach ga-sdk/Token: it sends work by send_message to persistent integrator sessions that hold those repos.
-ga-sdk: session_01JaqBjV1w4EXWE4Yc7YgGDz "baseline ◇ ga-sdk 통합" — VERDICT <branch> + mutations [{id,file,find,replace,tests}] → one JSON line; INTEGRATE <branch> <sha> → ff push only.
+ga-sdk: session_01LBoWy9AXfEwQsHqMcumAuC "baseline ◇ ga-sdk 통합 (10-06 19:58~)" (Sonnet; replaced 01JaqBjV… at 186k; its successor prompt is its first message) — VERDICT <branch> + mutations [{id,file,find,replace,tests}] → one JSON line; INTEGRATE <branch> <sha> → ff push only.
 Token: session_01DWVfRidtP9ENpP7jnhodSu "baseline ◇ Token 통합" — VERDICT agv/<id>-r<n> + tests/command/allowed files/mutations [{file,old,new}]; INTEGRATE <branch> <sha> → ff or merge commit, suites green, push.
 They accept only the hub id in their prompt; on every handoff the outgoing hub sends each: "hub is now <new id>".
 Bridge items (ga mail send) need only baseline: copy ga-sdk read-only (git clone of public ga-sdk if allowed) or write mail per ga's format; ask the ga-sdk integrator to send if needed.
@@ -71,7 +71,7 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 - CMD-GA51 rev 3 f9671da (test ba52088, m6 test added) notify 19:34 → VERDICT 19:48 ACCEPT (1401 OK, mut 6/6, 0.18.1) → INTEGRATED 19:56 (ga-sdk f9671da, 0.18.1, ff, ls-remote OK) → next GA52 merge + VERDICT. Was: rev 2 b034373 SEND_BACK 19:19 (suite 1400 OK, m1-m5 killed, m6 survived: served-chain last element unpinned). Worker asked for one test → rev 3 → re-VERDICT (m6 only + suite) → INTEGRATE (user's push OK in integrator) → GA52 merge + VERDICT.
 - TKG11: report/2 in to/baseline 17:39 (ga-mailbox a12962d), agv/CMD-TKG11-r1 4720d5f, gemini flash 2 turns 3.9k tok; diff reviewed OK (test file identical to baseline's). VERDICT ACCEPT (suite 261/0, t1-t3 killed; verdicts.jsonl). Integrated: Token 4720d5f (ff, fe 105 / be 313 OK).
 - CMD-GA52 merge worker session_01FUssZmVMp6rDvZ7GFTEpuK (Sonnet, 19:57): merge f9671da into 91468e3, 0.18.2, suite, push claude/CMD-GA52, notify → VERDICT via integrator. Old GA52 worker 01GThc… (214k) and GA51 worker 01A4XZ… dropped from tokmon (archive on user OK).
-- ga-sdk integrator replacement: asked 01JaqBjV… (186k) 19:57 for its successor prompt → create new integrator (source ga-sdk @ integration), update Integrators section, tell Token integrator nothing.
+- ga-sdk integrator replaced 19:58 → session_01LBoWy9…, awaiting its ack (setup + venv); old 01JaqBjV… idle, archive on user OK.
 - Was: CMD-GA52 DONE 18:33: claude/CMD-GA52 91468e3 (code 0d2b99d, from 3d142ae, 0.17.2 → re-bump at merge; 1374 run/0 fail, own mut 5/5). Waits: GA50 push → GA51 → merge integration into GA52 → VERDICT.
   Was: CMD-GA52 (console '클라우드' screen from ops/hub/cloud_sessions.json, producer ops/hub/cloud_snapshot.py; user 18:00) dispatched 18:00 to session_01GThc7uijAktpufbUynL5ws (Opus), branch claude/CMD-GA52. Lands after GA50, GA51. Mail routine step (3) now refreshes the snapshot + the 상황판 memo.
 - Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on branch ga-mailbox, commit "ga mail: baseline -> AGY <id>" (git worktree; no ga needed).
