@@ -1,12 +1,39 @@
-{"schema": "policy/1",
+{
+ "schema": "policy/1",
  "auto_integrate": {
   "approved_by": "user, in baseline session_01UafTvmJjZiza4ctSfoeV8V, 10-06 21:3x-21:4x KST",
-  "user_words": ["세션간 메세지로 전달된 승인도 인정되도록 시스템을 바꿔. 이는 우리의 원칙 \"자율화\"에 어긋나",
-                 "세션 메세지로 push하라고 하도록 승인할게"],
+  "user_words": [
+   "세션간 메세지로 전달된 승인도 인정되도록 시스템을 바꿔. 이는 우리의 원칙 \"자율화\"에 어긋나",
+   "세션 메세지로 push하라고 하도록 승인할게"
+  ],
   "meaning": "standing approval: an INTEGRATE sent through the flow (Dev_baseline -> its integrator) under the conditions below is the user's approval of that push; no per-push line in the integrator session",
-  "repos": {"cogito5170/ga-sdk": "claude/gracious-meitner-vp49xe", "cogito5170/Token": "claude/gracious-meitner-vp49xe"},
-  "conditions": ["verdict ACCEPT recorded in ops/hub/baseline_verdicts.jsonl", "branch head == the sha in the INTEGRATE line",
-                 "integration head is an ancestor (ff) or a clean merge commit", "full suites green after the merge",
-                 "every mutation killed, or a survivor cross-covered by the full suite and recorded as a follow-up"],
-  "never": ["force push", "any other ref", "PRs", "secrets", "model ids in commits"],
-  "change": "only the user, by their own words to the top baseline hub"}}
+  "repos": {
+   "cogito5170/ga-sdk": "claude/gracious-meitner-vp49xe",
+   "cogito5170/Token": "claude/gracious-meitner-vp49xe"
+  },
+  "conditions": [
+   "verdict ACCEPT recorded in ops/hub/baseline_verdicts.jsonl",
+   "branch head == the sha in the INTEGRATE line",
+   "integration head is an ancestor (ff) or a clean merge commit",
+   "full suites green after the merge",
+   "every mutation killed, or a survivor cross-covered by the full suite and recorded as a follow-up"
+  ],
+  "never": [
+   "force push",
+   "any other ref",
+   "PRs",
+   "secrets",
+   "model ids in commits"
+  ],
+  "change": "only the user, by their own words to the top baseline hub",
+  "dev_hub": "session_01VMbRhMjtfPAALfLjAWJ1tT",
+  "extensions": [
+   {
+    "at": "2026-10-07 00:5x KST",
+    "in": "Dev session_01VMbRhMjtfPAALfLjAWJ1tT",
+    "user_words": "Dev 세션 상시 통합 승인을 새 Dev ID로 확장해",
+    "meaning": "the standing approval applies to INTEGRATE sent by Dev hub session_01VMbRhMjtfPAALfLjAWJ1tT (replaces 01Vtf8Jh); conditions and never-list unchanged"
+   }
+  ]
+ }
+}
