@@ -1,0 +1,6 @@
+[{"id": "m1", "file": "ga/hub.py", "find": "    if served:\n        return {\"configured\": \"auto\", \"resolved\": served}", "replace": "    if False:\n        return {\"configured\": \"auto\", \"resolved\": served}", "tests": ["tests.test_ga51"]},
+ {"id": "m2", "file": "ga/hub.py", "find": "self.runner = backends.create(self.conf.get(\"backend\", \"agv\"), m[\"resolved\"],", "replace": "self.runner = backends.create(self.conf.get(\"backend\", \"agv\"), m[\"configured\"],", "tests": ["tests.test_ga51"]},
+ {"id": "m3", "file": "ga/vm/core.py", "find": "    if old not in GA_HUB_MODELS:\n        return False", "replace": "    if not old:\n        return False", "tests": ["tests.test_ga51"]},
+ {"id": "m4", "file": "ga/vm/core.py", "find": "GA_HUB_MODELS = (\"gemini-3.1-pro-high\", \"gpt-oss-120b-medium\")", "replace": "GA_HUB_MODELS = (\"gpt-oss-120b-medium\",)", "tests": ["tests.test_ga51"]},
+ {"id": "m5", "file": "ga/hub.py", "find": "        if self.runner is not None and self._own_runner and m[\"resolved\"] != self._model.get(\"resolved\"):", "replace": "        if False:", "tests": ["tests.test_ga51"]},
+ {"id": "m6", "file": "ga/bridge/__init__.py", "find": "    model = served.split(\",\")[-1]", "replace": "    model = served.split(\",\")[0]", "tests": ["tests.test_ga51"]}]
