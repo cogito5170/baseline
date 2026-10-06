@@ -4,3 +4,4 @@
 {"at":"2026-10-06T15:51+09:00","session":"session_018XDm17bNkdU75huKaxKmkf","context":101091,"cost_usd":1.0467,"cache_read":1825848,"cache_write":47868,"input":2083,"output":14683,"src":"watcher"}
 {"at":"2026-10-06T15:53+09:00","session":"session_018XDm17bNkdU75huKaxKmkf","context":126227,"cost_usd":1.6209,"cache_read":3211369,"cache_write":73004,"input":2613,"output":19381,"src":"watcher"}
 {"at":"2026-10-06T16:50+09:00","session":"session_018XDm17bNkdU75huKaxKmkf","context":308064,"cost_usd":12.6735,"cache_read":36820912,"cache_write":423073,"input":8531,"output":119868,"src":"watcher"}
+{"at":"2026-10-06T16:51+09:00","session":"session_018XDm17bNkdU75huKaxKmkf","context":308064,"cost_usd":12.67,"src":"handoff (self)"}
