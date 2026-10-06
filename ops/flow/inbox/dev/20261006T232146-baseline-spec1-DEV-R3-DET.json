@@ -1,0 +1,22 @@
+{
+ "id": "DEV-R3-DET",
+ "stage": "R3",
+ "goal": "Verdict and integration run on the VM as ga-engine code, and the accept/integrate decision never depends on an LLM.",
+ "why": "User 10-06 23:0x: go with R3 on the VM; verdict and integration must not depend on LLM performance.",
+ "acceptance": [
+  "the decision to integrate is a pure function of executable checks: head==sha, ancestry, allowed files, acceptance test identical and red on base, full suite green in the reference environment, generated mutations all killed (or cross-covered by the full suite), revert makes the test fail",
+  "mutations are generated from the diff by code (no model)",
+  "no model call anywhere on the verdict or integration path; a test fails if one is added",
+  "criteria that cannot be executed never lead to integration: the item stays in shadow and is reported",
+  "the VM performs the push itself under a policy the user approves once; ff or merge commit to the one integration ref only, never force",
+  "same input gives the same verdict (deterministic, replayable from the recorded inputs)"
+ ],
+ "constraints": [
+  "spec only: Dev decides method and plan",
+  "stay within your own domain"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T23:21:46+09:00"
+}
