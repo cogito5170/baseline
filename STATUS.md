@@ -1,6 +1,6 @@
 # STATUS — baseline 전체 현황 (단일 진입점)
 
-갱신: 2026-10-07 02:0x KST · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
+갱신: 2026-10-07 02:04 KST (매시 점검) · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
 이 문서 하나로 지금 상황을 파악할 수 있어야 한다. 세부 근거는 각 줄의 경로에 있다.
 
 ## 1. 목표와 원칙
@@ -110,8 +110,8 @@ VM 내부 빌드 순서 (`VM_INTERIOR_DESIGN.md` §12): VI-01, 02, 04, 06a, 20 �
 | 루틴 | 대상 | 일정 |
 |---|---|---|
 | `trig_0148AQEj` | top `016tT1vv` | 매시 :04, 09:00 이후 첫 회에 아침 요약 후 종료 |
-| Ops 매시 루틴 (`trig_018jUnT6` → 새 Ops로 재연결) | Ops `013aqrQG` | 매시 :19 |
-| Ops 08:30 최종 보고 (`trig_017Lm4aT` → 재연결) | Ops | 08:30 KST 1회 |
+| Ops 매시 루틴 `trig_01GcyujoR3` (이전 `trig_018jUnT6` 비활성) | Ops `013aqrQG` | 매시 :19 |
+| Ops 08:30 최종 보고 `trig_012F2ySD` (이전 `trig_017Lm4aT` 비활성) | Ops `013aqrQG` | 08:30 KST 1회 |
 | Dev 자기 점검 `trig_01JUyE96` | Dev `01EqmaVL` | 02:25부터 매시, 09:00까지 |
 | 감시 깨우기 `trig_01EFFxRB` | 토큰 감시 | 매시 :49 |
 
