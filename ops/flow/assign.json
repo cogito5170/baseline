@@ -19,7 +19,7 @@
    "token-watcher": "session_01X47ETY7Sx9hpAefj8vC28B"
   },
   "routines": [
-   "trig_01YcM6BJMFPTW7oJh2BPqPuq (hourly :19, bound to Ops)",
+   "trig_01MtdLyUZwfJNqtzKyXLkxpb (hourly :19, bound to Ops, incl. shadow digest)",
    "trig_012iYV3ow8BDUxTCwL1hBEb2 (watcher wake :49 KST)"
   ]
  },
