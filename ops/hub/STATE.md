@@ -14,21 +14,40 @@ create_session takes ONE source_url, so a hub it creates gets only baseline; add
 the auto-mode classifier ([Permission Grant]): Token passed on retry, ga-sdk did not. ga-sdk push is needed for EVERY
 ga-sdk verdict (a version bump = fast-forward push of a verdicted worker branch to the integration branch, as GA45–48
 were pushed up to e364817 / 0.17.0), not only for stage 3.
-1. Before creating the next hub, settle access: if the user has added an allow rule for mcp__claude-code-remote__add_repo,
-   the new hub adds ga-sdk + Token (+ Sensor/DC/MS/Telemetry when needed) with access push as its first step. If not,
-   do not hand off by create_session; tell the user once that the one-time rule is needed (human-only by our rules).
-2. Re-verify STATE against reality right before handing off (mailbox replies already landed? BD rows/rounds committed?
-   heads of ga-sdk/Token?), commit and push it, THEN create the session (source baseline, branch
-   claude/gracious-meitner-vp49xe, prompt = "read ops/hub/STATE.md and follow it" + the one next action).
-3. Write the new id to ops/hub/BASELINE_SESSION; recreate the hourly routine for it and disable the old one; tell the
-   user the new link. Then the old hub stops — no more messages from it (each turn there costs its whole context).
-4. The new hub checks: get_session (its sources), add_repo per step 1, venv with rlo-sdk + ga-sdk, then works.
+Access is settled (2026-10-06 06:37): the user added an allow rule for add_repo; ga-sdk + Token push both attached here.
+1. Re-verify STATE against reality right before handing off (mailbox replies landed? BD rows/rounds committed? heads of
+   ga-sdk/Token? routines?) and fill the Handoff checklist below. Commit and push.
+2. create_session: source baseline, revision claude/gracious-meitner-vp49xe, title "baseline ● 현재 허브 (<MM-DD HH:MM>~)",
+   prompt = "read ops/hub/STATE.md and follow it; then <the one next action>".
+3. Rename yourself "baseline ○ 이전 허브 (<start>~<end>, 인계 완료 → 현재 허브)". Write the new id to
+   ops/hub/BASELINE_SESSION (the independent watcher reads it). Recreate the mail routine for the new hub and disable
+   yours. Tell the user the new link in one line. Then stop — no more messages from the old hub.
+4. The new hub: get_session (sources), add_repo push for ga-sdk + Token (+ others when needed), clone, venv with rlo-sdk +
+   ga-sdk, audit the checklist against reality and append a "Handoff audit" line (what was stale or missing), then work.
+
+## Handoff checklist (the outgoing hub fills every line; "none" is an answer, blank is not)
+- Mission and the user's standing directions given since the last handoff (verbatim, Korean ok).
+- Open user questions and promises made to the user (what was asked, what we said we would do, by when).
+- In flight: each item with its exact next action and where its evidence lives (mail path, branch, sha).
+- Heads verified at handoff time: ga-sdk, Token, baseline; mailbox newest file in to/baseline*.
+- Access: repos attached with push; anything denied and why.
+- Routines: ids, what each does, which session it fires into.
+- Artifacts published and their links. Records: next BD, next round.
+- Token use of the outgoing hub at handoff (context, cost_usd) — also appended to ops/tokmon/baseline_usage.jsonl.
+
+## Token watch (who watches baseline's own tokens)
+- Independent watcher: routine trig_01Egfbe1CAGL6bXNu6NK9H2M "baseline 토큰 감시 · 독립 (매시)", :49 each hour, a FRESH
+  session each time (never the hub's context): get_session of the hub (ops/hub/BASELINE_SESSION) and workers
+  (ops/tokmon/sessions.txt) → tokmon.py alarms → one line in ops/tokmon/baseline_usage.jsonl → on alarm (ctx > 150k,
+  burst, +5 USD/hour) send_message to the hub ("hand off now") and a push notification to the user. Created without MCP
+  connectors (warning); claude-code-remote tools are expected to work — verify on its first run (06:49 UTC 10-06).
+- Mail routine: trig_01QDkY2th2C19fSzj62MTdZ8, :19 each hour, fires INTO the hub (mailbox + workers).
 
 ## Who you are, how you talk
 - The baseline hub. Reply to the user in **Korean**; sessions talk to each other in English.
 - Integration branch everywhere: `claude/gracious-meitner-vp49xe`. Repos: cogito5170/baseline (this), ga-sdk (= ga-SDK),
   Token (`token`), Sensor, DC, MS, Telemetry (also action, health, guard, rlo-sdk, amp, ga_rlo were sources of the first
-  hub). This hub (session_01Tj…): baseline + Token push; ga-sdk read-only clone in scratchpad. See Handoff procedure.
+  hub). This hub (session_01Tj…): baseline + Token + ga-sdk push (clones /home/user/token, /home/user/ga-sdk). See Handoff procedure.
 - Published artifacts of the first hub: "ga-SDK 최종 보고" https://claude.ai/artifact/MZdSkCP57fDTWQpsZvf6Fp,
   "ga Console UI" https://claude.ai/artifact/JgFn8ddLQPpzMrtbyQ9vZQ.
 - One directive = one fresh worker session (create_session, source ga-sdk, branch claude/<id>). Sonnet for narrow work,
