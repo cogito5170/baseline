@@ -168,6 +168,13 @@ def finish(wt: Path, checkout: Path, did: str, owned: list[str]) -> str:
     return patch if len(patch) <= PATCH_CAP else patch[:PATCH_CAP] + "\n(patch cut at the cap)\n"
 
 
+def _served_model(cfg: dict[str, Any], res: dict[str, Any]) -> str:
+    """The model the item actually ran on: the last rung of a routed / laddered run, else the configured one."""
+    rungs = res.get("rungs") if isinstance(res.get("rungs"), list) else []
+    last = rungs[-1].get("model") if rungs and isinstance(rungs[-1], dict) else None
+    return str(last if last in MODELS else (cfg.get("act") or {}).get("model", "?"))
+
+
 def report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any], patch: str,
            commit: dict[str, str] | None = None) -> str:
     res = run.get("result") or {}
@@ -184,7 +191,7 @@ def report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any], patch
            "results": [{"name": "input_tokens", "value": int(tok.get("input") or 0)},
                        {"name": "tokens", "value": int(tok.get("total") or 0)},
                        {"name": "turns", "value": int(res.get("turns") or 0)},
-                       {"name": "model", "value": (cfg.get("act") or {}).get("model", "?")}]}
+                       {"name": "model", "value": _served_model(cfg, res)}]}
     if commit:
         rep["commits"] = [commit]
         rep["change_size"] = "implementation"

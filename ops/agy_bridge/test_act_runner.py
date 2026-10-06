@@ -228,6 +228,13 @@ class ActRunnerTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             act_runner.handle(cfg, HEAD, runner=run, spec=dict(self.spec, repo="../elsewhere"))
 
+    def test_the_report_names_the_model_that_actually_ran(self):
+        def run(cfg, spec, wt, checkout):
+            return {"code": 0, "out": "", "result": {"status": "done", "turns": 2, "tokens": {}, "changed": [],
+                                                     "rungs": [{"model": "gemini-3.8-flash-high", "status": "done"}]}}
+        head, _ = parse_text(act_runner.handle(self.cfg, HEAD, runner=run, spec=self.spec))
+        self.assertIn({"name": "model", "value": "gemini-3.8-flash-high"}, head["results"])
+
     def test_placeholders_expand(self):
         self.assertEqual(act_runner._expand(["{venv_python}", "-m", "x"], {"venv_python": "/v/bin/python"}),
                          ["/v/bin/python", "-m", "x"])
