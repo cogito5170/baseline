@@ -31,4 +31,4 @@ inbox seen up to: ops 20261007T004312 (OPS-R0FREEZE). Last sent: dev INC-OPS-2 2
 1 inbox ops; 2 git fetch ga-mailbox (to/baseline, -ops, -shadow) -> scoring/incident if lag unexplained; 3 python3 ops/hub/shadow_digest.py digest;
 3b python3 ops/hub/measure_hourly.py tick <sessions.json> (subagent writes sessions.json from list_sessions 30, see measure_hourly doc) -> commit row;
 4 snapshot EVERY hour (VM stale alarm at 2 h): subagent list_sessions 12 -> ops/hub/cloud_snapshot.py -> commit; 5 ops_rules.py on get_session obs when ctx matters.
-Limits: Ops may not run ga-sdk code in-container (auto-mode denial); measure statically.
+Limits: Ops may not run ga-sdk code in-container (auto-mode denial); measure statically. Pushes: user 10-07 00:4x KST in Ops 01M4vGeV: "push는 앞으로도 바로 해도 돼" -> Ops commits are pushed to the integration branch directly (overrides "user handles pushes").
