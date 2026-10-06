@@ -21,7 +21,11 @@ inbox seen up to: ops 20261006T235119 (OPS-VMAUTO). Last sent: dev INC-OPS-2 23:
 - OPS-VMAUTO (R1): accepted; on DEV-VMAUTO release verify deploy, then hourly per-class measurement (R0 units) + calls per item + 0-call share; opinion/1 "solved" criteria after 24 h.
 - WATCH-METRIC: watcher usd_per_h is lifetime average (idle/archived sessions inflate total); VM watcher must rate on snapshot deltas.
 
+- OPS-BASEAUTO (R5): accepted. ops/hub/measure_hourly.py (delta-based, classes baseline/dev_hub/ops_hub/integrator/worker/watcher/vm_auto); first tick 10-06 23:57 KST stored in ops/flow/measure/last.json (rows start next tick -> hourly.jsonl). Handoffs: `measure_hourly.py handoff <role> <old> <new> <crossed_at> <ack_at> [lost] [dup]` -> handoffs.jsonl. Before/after vs DEV-BASEAUTO release.
+- Handoff latencies to record: ops 01MuXcCL->01Qhj1TX (ack 23:31 KST); dev 01Vtf8Jh->01VMbRhM (~23:55).
+
 ## Hourly (every fire)
 1 inbox ops; 2 git fetch ga-mailbox (to/baseline, -ops, -shadow) -> scoring/incident if lag unexplained; 3 python3 ops/hub/shadow_digest.py digest;
+3b python3 ops/hub/measure_hourly.py tick <sessions.json> (subagent writes sessions.json from list_sessions 30, see measure_hourly doc) -> commit row;
 4 snapshot EVERY hour (VM stale alarm at 2 h): subagent list_sessions 12 -> ops/hub/cloud_snapshot.py -> commit; 5 ops_rules.py on get_session obs when ctx matters.
 Limits: Ops may not run ga-sdk code in-container (auto-mode denial); measure statically.
