@@ -31,7 +31,7 @@ trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 ## Heads (10-06 15:40)
 ga-sdk: e364817 (0.17.0) | Token: 9c28c85 (TKG1-10; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
 mail_newest: to/baseline-shadow/…T062003…-CMD-GM2.md (handled)
-records_next: BD-471, round 312
+records_next: BD-471, round 312 (BD-471 = GA49 r2 send-back + GA50 dispatch, not yet written in DECISION_LOG)
 
 ## Work loop
 directive: one fresh worker session per directive (create_session, source ga-sdk, branch claude/<id>); Sonnet narrow,
@@ -55,6 +55,13 @@ next_action: GA49 rev 2 e8730f4 verdict running (verdict.py); then ff ga-sdk, VM
 then: stage 3 directive (hub judges+integrates on VM, baseline audits, roll back on quality drop) — user said go.
 fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 results.model shows gpt-oss while rung was
   gemini; ledger learns only upward; console 'starting' timeout; GA39 survivors.
+
+## In flight (handoff 10-06 16:52 KST from session_018XDm17…, ctx 308k, ~12.7 USD — watcher alarm)
+- CMD-GA49 worker session_01EPcQJaVSEzjV7LAhb1enSb, branch claude/CMD-GA49: rev 2 e8730f4 SEND_BACK 16:47 (report has no ```ga head; mutations m2 `"agree": bd == hd and not err` → `bd == hd` and m5 run-count `break`→`continue` survived; asked for tests). Next: on notify (or remote head != e8730f4) run `python3 ops/verdict.py claude/CMD-GA49 --mut <mut with ids m1..m5> --venv /home/user/venv/bin/python` (~16 min; mut format {id,file,find,replace,tests}), all killed + ga check rc 0 → ff push ga-sdk integration (0.17.1). Then set the VM hub model to the bridge's rung (served_model_mismatch is why every shadow decision is ASK_HUMAN) — that is VM config: ask the user only if no ga-side default can do it.
+- CMD-GA50 worker session_018CgEgHQN6sJn6teqNEnWz2 (Opus), live screen + ga.events/1 (directive directives/CMD-GA50.md): dispatched 16:45. Watch claude/CMD-GA50; nudge if idle without notify.
+- Gate: TKG1-10 integrated (Token 9c28c85); shadow-compare 0/25+, all ASK_HUMAN (model mismatch). After GA49 lands + VM self-update: TKG11 (audit `_tokens` only for numeric values) + ~10 new small real Token items → rescore. Item tools: scratchpad mkitem pattern = ops/agy_bridge/items/<id>.json {item, tests, commands, base, repo token} + directives/<id>.md (rev>1 needs "changes"); verdict ops/verdict_token.py; Token frontend needs `npm ci` in /home/user/token/frontend.
+- Open user question: token watcher every 20 min — platform rejects <1 h per routine. Offered (a) 3 hourly routines at :09/:29/:49 (skirts the limit; only with the user's OK), (b) project setting allowing shorter, (c) keep hourly. Waiting for the user's choice.
+- User asked (answered): Mac kernel panic 15:59 KST = DCP external display HPD=0, not the VM/agv.
 
 ## Open with the user
 - Gentle Monster (BD-466) done; waits on user feedback on six documents / [확인 필요].
