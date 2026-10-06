@@ -13,14 +13,15 @@
   }
  },
  "ops": {
-  "hub": "session_01MuXcCLZm3KXYyDj9v8HqyB",
+  "hub": "session_01Qhj1TXTH414PdvL1n2JCRy",
   "sessions": {
    "token-watcher": "session_01TBHcmu5ar3uwnjL7m6NhYg"
   },
   "routines": [
-   "trig_01MtdLyUZwfJNqtzKyXLkxpb (hourly :19, bound to Ops, incl. shadow digest)",
+   "trig_01GvC312TnUW9sPU8y1PABpN (hourly :19, bound to Ops 01Qhj1TX, incl. shadow digest; replaces trig_01MtdLyU, disabled)",
    "trig_01EFFxRBWdkVJDYpn4ZNFYYS (watcher wake :49 KST, Haiku)"
-  ]
+  ],
+  "previous": "session_01MuXcCLZm3KXYyDj9v8HqyB"
  },
  "baseline": {
   "hub": "session_01LtsebbxyWz4BAggiGcG1WF",
