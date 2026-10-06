@@ -13,7 +13,8 @@ integration: ga-sdk claude/gracious-meitner-vp49xe head 318b22a (R0). Tag R0-bas
 1. DEV-VI-06a-20 87e3243 ACCEPT (row 9a40fc1) — ff
 2. DEV-R1-GW 3e7ab1c ACCEPT (row 502a042) — AFTER VI-01 VMSHA (order rule)
 3. DEV-R2-DRY 451e980 ACCEPT (clean solo 1432/0/1) — ff
-4. tag R0-baseline -> 318b22a
+4. DEV-VMSHA bb443ff ACCEPT (branch 1418/0/1) — merge commit onto 318b22a; merged-tree suite requested 02:5x; must land BEFORE R1
+5. tag R0-baseline -> 318b22a
 
 ## Sessions
 - integrator 01Wz1byr: refenv /root/.cache/ga-refenv; doing R2 solo rerun
