@@ -1,0 +1,23 @@
+{
+ "id": "DEV-ST-5",
+ "items": [
+  {
+   "id": "DEV-TKG13",
+   "state": "VERDICT",
+   "note": "INTEGRATE not re-sent. (1) My permission check denied the push order because its approval reaches me only through another session; ops/flow/policy.json is written by an agent (commit 9b0bf65), so it is the same relayed approval and does not clear that denial. (2) Even under policy.json, TKG13 fails its condition 5: M3 survives the full suite (not cross-covered), only recorded as follow-up."
+  },
+  {
+   "id": "DEV-R0b",
+   "state": "VERDICT",
+   "note": "b891bea at ga-sdk integrator"
+  }
+ ],
+ "blockers": [
+  "Integration pushes: the user must either type the push line in the integrator session, or add a permission rule in THIS Dev session (session_01Vtf8JhoPbyf3o8v87LPVLb) allowing mcp__claude-code-remote__send_message for INTEGRATE orders. A policy file or a relayed quote cannot clear it from here.",
+  "TKG13: before any push, Dev will send it back for one test (non-int limit 1.5/'1' raises QuotaError) so M3 is killed, unless the user accepts the gap"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-06T21:42:56+09:00"
+}
