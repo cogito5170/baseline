@@ -1,28 +1,29 @@
 # Dev_baseline notes (fixed size; overwrite, never append history)
-hub: session_01VMbRhMjtfPAALfLjAWJ1tT (Dev, since 10-07 00:0x KST) · baseline top 016tT1vv · Ops 01M4vGeV
-OVERNIGHT (DEV-OVERNIGHT, until 09:00 KST): baseline approves designs after Ops opinion; status/1 every 2h, final 08:30; hourly self check-in via send_later
-integration: ga-sdk head 318b22a (evidence) on tested 8ead789 = R0a+R0b+R0c, 1411/0/1 refenv; tag R0-baseline pending user line in old integrator 01LBoWy9 · policy/1 extended to this hub (ad21638)
+hub: session_01VMbRhMjtfPAALfLjAWJ1tT (Dev 10-07 00:0x-01:2x KST, handing off) · baseline top 016tT1vv · Ops successor 013aqrQG (old 01M4vGeV)
+OVERNIGHT (DEV-OVERNIGHT, policy.json overnight_delegation until 09:00 KST): baseline approves designs after Ops opinion; status/1 every 2h, final 08:30 KST; hourly self check-in via send_later (re-arm it in the successor; old trig_014GXkyw fires into the OLD hub)
+integration: ga-sdk claude/gracious-meitner-vp49xe head 318b22a (evidence docs/R0_BASELINE.md) on tested 8ead789 = R0a+R0b+R0c, 1411/0/1 refenv; R0 = 318b22a until tag; tag R0-baseline = morning list (user line in an integrator session)
 
-## Items (state)
-- DEV-R0FREEZE  verdict ACCEPT 8ead789 (481d593); branch pushed 318b22a; TAG pending (user line; my relay refused as Instruction Poisoning)
-- W-R1 01KiyVDj  DEV-VMAUTO+VMBUDGET gateway, claude/DEV-R1-GW from 318b22a (design research/R1R2_DESIGN.md §A,§A' approved)   ACTING
-- W-R2 01QEjaAW  DEV-R3-DET dry-run + replay, claude/DEV-R2-DRY from 318b22a (§B)                                             ACTING
-- worker-R0a 015U1Lfq  DEV-VMSHA claude/DEV-VMSHA from 277945de (land before/with R1)                                             ACTING
-- integrator successor 01Wz1byr: told state, prepare refenv, wait for VERDICT; old 01LBoWy9 -> archive after tag
-- CMD-GA52 r2 (01FUssZm) ACTING -> archive after report; CMD-TKG13 r2 SENT (ga-mailbox 6514430), AGY needs "check mail"
-- DEV-VMDESIGN (R4): full VM interior design tonight -> Ops opinion -> baseline approval   TODO (extend research/VMHUB_DESIGN.md)
-- awaiting VERDICT later: GA52 r2, GA53 49f24c3, GA54 364680d, GA56 c10675e, GA57 46687db
-- HELD: VMHUB build
+## Workers (all ga-sdk, base 318b22a unless noted; report ONE line to Dev; never integrate)
+- W-R1 01KiyVDj  claude/DEV-R1-GW   VI-02(+03,07): gateway ga/llm, caps from policy (applies/windows keys), halt, ledger+policy hash, reconciliation, rule cache key incl sha/model/policy, rewire sites, single-site test, per-cap tests, `ga llm report --hour`
+- W-R2 01QEjaAW  claude/DEV-R2-DRY  VI-04: `ga verdict --dry-run` (pure function, no model import test) + replay of baseline ops/hub/baseline_verdicts.jsonl (agree/disagree/not_reproducible/flaky)
+- worker-R0a 015U1Lfq claude/DEV-VMSHA (base 277945de) VI-01: VM reports SHA per change + on ask; R0 tests result in repo; land BEFORE/with R1 integrate
+- W-VI 01CnLoJD  claude/DEV-VI-06a-20  VI-06a notify/1 kind alert; VI-20 bridge unit -> ga bridge (no ~/baseline path)
+- worker-GA52 01FUssZm (227k) CMD-GA52 rev2 (innerHTML + negative _num) -> on report: archive (user allowed archive)
+- integrator 01Wz1byr: ready, refenv venv /root/.cache/ga-refenv; send VERDICT <id> <branch> <sha> per report, then INTEGRATE under policy/1 (auto_integrate extended to Dev hub id — successor: baseline must extend it to the new Dev id; user words needed)
+- token-integrator 01FynfJT: CMD-TKG13 r2 resent to AGY (ga-mailbox 6514430, D1 edit change); AGY needs user "check mail" on the Mac
 
-## Sessions / INC-OPS-2,3
-- archived 10-07 00:5x (user OK): worker-GA57 01H2PH8B; old dev hub 01Vtf8Jh already archived
-- integrator 01LBoWy9 (230k): replace right after R0-baseline; successor from ops/hub/successors/ga_sdk_integrator.md + refenv; ask baseline
-- GA52 (227k): archive after r2 report
+## Next steps
+1. On each worker report: VERDICT via integrator -> record verdict in ops/hub/baseline_verdicts.jsonl -> INTEGRATE (ff/clean merge, full suite, mutations) -> release/1 to Ops (flow.py dev->ops) with sha.
+2. Order: VMSHA (VI-01) before R1 integrate (or bump version); VI-06a before VI-05 watcher.
+3. Next build group after these: VI-03, VI-05, VI-06, VI-07 (research/VM_INTERIOR_DESIGN.md §12); ask baseline for capacity.
+4. Later VERDICT queue: GA52 r2, GA53 49f24c3 (worker 01HKHSLN idle), GA54 364680d (p2,p3 survived), GA56 c10675e, GA57 46687db (1381/0/56, 31/31).
 
-## Rules in force
-- send via ops/flow/flow.py + doorbell {"flow":"<path>"}; git + send_message allowed by user in this session (10-07 00:5x)
-- INTEGRATE per policy/1; new refs (tags) need a user line in the integrator
-- worker report: {"id","branch","sha","tests","mutations":[{id,file,find,replace,tests}]}
+## Designs (approved by baseline under overnight_delegation)
+- research/VMHUB_DESIGN.md r2 (build HELD) · research/R1R2_DESIGN.md r3 · research/VM_INTERIOR_DESIGN.md r2 (acda708; §13 user questions Q1-Q6,Q8,Q9 = morning list)
+- ASK-VM-COST answered (OP-DEV-VM-COST); vm_budget set by user in policy.json
 
-## Sent
-- DEV-ST-1, DEV-ST-2 (baseline, direct); DEV-ST-OPS-1 (ops); OP-DEV-VM-COST opinion/1 (ASK-VM-COST) to baseline
+## Rules / gotchas
+- send only via ops/flow/flow.py + doorbell {"flow":"<path>"}; status ids must be unique (use DEV-ST-<MMDD-HHMM>)
+- platform classifier refuses: relaying the user's words from another session to a worker (Instruction Poisoning) — ask the user to type in that session; archive needs explicit user OK in Dev session (given 00:5x)
+- the user allowed git + send_message + archive in this Dev session (00:5x); a successor must get its own user line
+- suite 15-20 min: workers/integrator run it in background with nohup + done marker

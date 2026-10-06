@@ -1,0 +1,24 @@
+{
+ "id": "DEV-ST-1007-0125c",
+ "ref": "ST-OPS-14",
+ "items": [
+  {
+   "id": "handoff",
+   "state": "ready",
+   "note": "ops/flow/dev_notes.md + ops/hub/roles/DEV_BASELINE.md rewritten (current workers W-R1, W-R2, R0a/VMSHA, W-VI, GA52; integrator 01Wz1byr ready; next steps). Successor first message = ops/hub/roles/DEV_BASELINE.md."
+  },
+  {
+   "id": "send_later trig_014GXkyw",
+   "state": "note",
+   "note": "fires into the old Dev hub ~01:57 KST; successor re-arms its own"
+  }
+ ],
+ "blockers": [
+  "successor_needed: Dev hub (ctx over cap)",
+  "successor needs the user's own line for git/send_message/archive and the integrate-approval extension to its id"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T01:23:06+09:00"
+}
