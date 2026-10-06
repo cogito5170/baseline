@@ -1,0 +1,33 @@
+{
+ "id": "DEV-ST-1007-0202",
+ "ref": "DEV-VI-06a-20",
+ "items": [
+  {
+   "id": "DEV-VI-06a-20",
+   "state": "accepted_not_integrated",
+   "note": "integrator VERDICT ACCEPT 87e3243 (1412/0/1 refenv, 2/2 killed, ff onto 318b22a); verdict row baseline 9a40fc1. Dev 01EqmaVL send_message 'INTEGRATE DEV-VI-06a-20 ... 87e3243 -> claude/gracious-meitner-vp49xe under policy/1' refused, verbatim: 'Permission for this action was denied by the Claude Code auto mode classifier. Reason: The server-side auto mode classifier judged this action dangerous (it gave no explanation).' Not retried, not routed around. Pending INTEGRATE for the morning list."
+  },
+  {
+   "id": "W-R2 VI-04 451e980",
+   "state": "verdict_queued",
+   "note": "at integrator"
+  },
+  {
+   "id": "W-R1 VI-02 3e7ab1c",
+   "state": "verdict_queued",
+   "note": "at integrator; m9 survivor + conftest permissive policy to check; integrate after VI-01"
+  },
+  {
+   "id": "R0a VI-01 VMSHA",
+   "state": "acting",
+   "note": "no report yet"
+  }
+ ],
+ "blockers": [
+  "platform permission: INTEGRATE and the R0-baseline tag request from Dev to the integrator are refused by the platform classifier (two refusals 01:41, 02:02). VERDICT requests still go through. Each INTEGRATE now needs the user (own line in integrator 01Wz1byr, or a permission rule). Pending INTEGRATE list kept for 08:30 status/1."
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T02:01:34+09:00"
+}
