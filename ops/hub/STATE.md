@@ -1,13 +1,36 @@
 # baseline hub — STATE (handoff, BD-465)
 
 Read this first; it replaces the old session's long context. Keep it current: update it whenever a directive is sent,
-landed or dropped, and before your context passes ~150k tokens (then hand off to a fresh baseline session the same way:
-commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, tell the user the new link).
+landed or dropped, and before your context passes ~150k tokens (then hand off — see "Handoff procedure").
+
+## Mission (the user's words, 2026-10-06)
+"사용자 개입을 최소화하고, 토큰 사용량을 아끼면서, 자율적으로 미션을 수행하는 엔진". Before asking the user anything,
+retry once on the strength of their standing direction; ask only for what is truly human-only (settings/permission rules,
+GitHub auth, secrets, logins). Never route around a permission denial through another session.
+
+## Handoff procedure (fixed after BD-465 lost push access)
+Lesson: the first hub (session_013G…) was opened from the web with 13 repos as sources, so it could push everywhere.
+create_session takes ONE source_url, so a hub it creates gets only baseline; add_repo (push) for the rest is then gated by
+the auto-mode classifier ([Permission Grant]): Token passed on retry, ga-sdk did not. ga-sdk push is needed for EVERY
+ga-sdk verdict (a version bump = fast-forward push of a verdicted worker branch to the integration branch, as GA45–48
+were pushed up to e364817 / 0.17.0), not only for stage 3.
+1. Before creating the next hub, settle access: if the user has added an allow rule for mcp__claude-code-remote__add_repo,
+   the new hub adds ga-sdk + Token (+ Sensor/DC/MS/Telemetry when needed) with access push as its first step. If not,
+   do not hand off by create_session; tell the user once that the one-time rule is needed (human-only by our rules).
+2. Re-verify STATE against reality right before handing off (mailbox replies already landed? BD rows/rounds committed?
+   heads of ga-sdk/Token?), commit and push it, THEN create the session (source baseline, branch
+   claude/gracious-meitner-vp49xe, prompt = "read ops/hub/STATE.md and follow it" + the one next action).
+3. Write the new id to ops/hub/BASELINE_SESSION; recreate the hourly routine for it and disable the old one; tell the
+   user the new link. Then the old hub stops — no more messages from it (each turn there costs its whole context).
+4. The new hub checks: get_session (its sources), add_repo per step 1, venv with rlo-sdk + ga-sdk, then works.
 
 ## Who you are, how you talk
 - The baseline hub. Reply to the user in **Korean**; sessions talk to each other in English.
 - Integration branch everywhere: `claude/gracious-meitner-vp49xe`. Repos: cogito5170/baseline (this), ga-sdk (= ga-SDK),
-  Token (`token`), Sensor, DC, MS, Telemetry. Add ga-sdk and Token with add_repo (access push) at start.
+  Token (`token`), Sensor, DC, MS, Telemetry (also action, health, guard, rlo-sdk, amp, ga_rlo were sources of the first
+  hub). This hub (session_01Tj…): baseline + Token push; ga-sdk read-only clone in scratchpad. See Handoff procedure.
+- Published artifacts of the first hub: "ga-SDK 최종 보고" https://claude.ai/artifact/MZdSkCP57fDTWQpsZvf6Fp,
+  "ga Console UI" https://claude.ai/artifact/JgFn8ddLQPpzMrtbyQ9vZQ.
 - One directive = one fresh worker session (create_session, source ga-sdk, branch claude/<id>). Sonnet for narrow work,
   Opus for design or security. Put the whole directive/2 JSON inline in the prompt (workers cannot clone baseline).
   Worker context cap ~150k. Workers notify you with notify/1 via send_message.
@@ -69,4 +92,5 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
 ## Next after that
 - Score shadow rows as they arrive; reach the stage 2 gate; then a directive for stage 3 (hub non-shadow on the VM).
 - Follow-ups: ledger only learns upward (try a cheaper rung occasionally); console 'starting' timeout; GA39 survivors;
-  the user mentioned a "very hard task" after the baseline-into-GA work.
+  the user mentioned a "very hard task" after the baseline-into-GA work (content not handed over — ask the user when
+  stage 3 lands). Found 2026-10-06: report/2 results.model shows gpt-oss-120b-medium while the rung was gemini (bridge).
