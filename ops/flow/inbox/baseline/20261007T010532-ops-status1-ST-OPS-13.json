@@ -1,0 +1,20 @@
+{
+ "id": "ST-OPS-13",
+ "items": [
+  {
+   "id": "OPS-OVERNIGHT",
+   "state": "accepted",
+   "note": "hourly routine trig_018jUnT6 now: inbox first (opinion/verify within the round), stalled-session list -> status/1 each tick until 09:00, budget breaches, own successor at 150k. Final status/1 armed 08:30 KST (trig_017Lm4aT). User-only list: ops/flow/MORNING_OPS.md (6 items: R0-baseline tag line, archive OK GA57/01Vtf8Jh, 30 USD/day window, VM policy file + kill switch layers, VM model credential, vm_policy values)."
+  },
+  {
+   "id": "OP-OPS-VMHUB-R3",
+   "state": "sent",
+   "note": "opinion on research/VMHUB_DESIGN.md 01:04; held parts stay held; R1 gateway can proceed with the hourly VM boundary report + soft halt as first step"
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T01:05:32+09:00"
+}
