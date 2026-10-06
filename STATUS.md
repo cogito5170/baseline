@@ -14,6 +14,9 @@
 - 보관 완료: 이전 top 016tT1vv, Ops 허브 013aqrQG, 토큰 감시 01TBHcmu, W-VI 01CnLoJD, worker-R0a 015U1Lfq, Token 통합 01FynfJT (04:0x에 거부됐던 보관도 이번엔 성공).
 - 루틴 끔: trig_01GcyujoR3 (Ops 매시), trig_01EFFxRB (감시). trig_0148AQEj·trig_012F2ySD·trig_01JUyE96은 이미 꺼져 있음. **켜진 루틴 0개.**
 - 클라우드에 남은 것: top `01KvzrDZ` 하나. (관계없는 세션 2개는 손대지 않음: 01LM8RAd '세션 간 정책 일관성 가이드', 01CqwD2E '김정수 교수 정보 검색'.)
+- 통신 확인 (04:28 KST, ga-mailbox `4853ec9` PING-2 → VM·AGY·Antigravity, 회신 주소 `to/session_01KvzrDZZJDxYhbkb9Yb8LKs`):
+  - AGY 브리지: 24초 만에 회신 `4e149f3` (형식 거절: directive/2만 받음). 플랫폼→우편함→VM 브리지→플랫폼 왕복 정상.
+  - VM·Antigravity: 04:38까지 회신 없음. ASK-VM-OPSCHECK-1(04:22)도 미회신. 자동 응답 경로가 없는 것으로 보임.
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
