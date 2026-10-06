@@ -1,0 +1,5 @@
+[
+ {"id":"t1","file":"backend/app/domains/audit/service.py","old":"if _TOKENS_SUFFIX.search(k) and (v is None or (isinstance(v, (int, float)) and not isinstance(v, bool))):","new":"if _TOKENS_SUFFIX.search(k):"},
+ {"id":"t2","file":"backend/app/domains/audit/service.py","old":"    if _KEY_OK_SUFFIX.search(k):\n        return True","new":"    if _KEY_OK_SUFFIX.search(k) and (v is None or isinstance(v, (int, float))):\n        return True"},
+ {"id":"t3","file":"backend/app/domains/audit/service.py","old":"and not _is_key_ok(k, v) and","new":"and not _KEY_OK_SUFFIX.search(k) and"}
+]
