@@ -55,6 +55,14 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
    trig_01QDkY2th2C19fSzj62MTdZ8 fires into THIS hub session; recreate it for the next one on handoff), 3 (verdict.py), 5 (short reads).
    4 (stage 3) waits for the shadow gate.
 
+## Stage 4 (user said go, 2026-10-06, with the shadow gate as stated)
+- Shadow score 06:4x UTC: 31 shadow rows, all ASK_HUMAN, false accepts 0, **gate 0/10** — no report so far had a commit in
+  a hub-configured repo (old AGY reports had none; GM1/GM2 commit to cogito5170/baseline). Only Token items via the bridge
+  (act_runner: repo token|baseline) feed the gate. shadow-compare prints gate_ok:true with 0 agreements — misleading, fix.
+- Plan: ~10 small real Token items through the bridge → baseline verdict each → compare; at 10 clean, a stage-3 directive.
+- Blocker: add_repo (push) for Token / ga-sdk denied by the permission classifier; asked the user to allow it.
+  ga-sdk read-only clone works (scratchpad/ga-sdk) for running ga locally.
+
 ## Next after that
 - Score shadow rows as they arrive; reach the stage 2 gate; then a directive for stage 3 (hub non-shadow on the VM).
 - Follow-ups: ledger only learns upward (try a cheaper rung occasionally); console 'starting' timeout; GA39 survivors;
