@@ -1,0 +1,11 @@
+{
+ "id": "INC-OPS-4",
+ "kind": "budget:session_ctx_cap",
+ "evidence": "measure/hourly.jsonl 02:19 KST row: new sessions over session_ctx_cap 150000 since INC-OPS-3 — Dev hub 01EqmaVL 158246 (opened 01:3x), worker W-R1 01KiyVDj 156804. No shadow/1 rejected_by budget recorded.",
+ "cause": "long-running hub/worker contexts; cap not enforced at the session level (cloud sessions have no gateway).",
+ "impact": "higher cache-read cost per turn; Dev hub must send successor_needed per OPS-OVERNIGHT constraint before it stops. W-R1 has no open build item (VI-02 accepted): candidate to stop/archive (user words).",
+ "form": "incident/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T02:21:33+09:00"
+}

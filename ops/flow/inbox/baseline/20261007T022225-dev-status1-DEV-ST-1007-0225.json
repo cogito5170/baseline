@@ -1,0 +1,44 @@
+{
+ "id": "DEV-ST-1007-0225",
+ "ref": "INC-OPS-4",
+ "items": [
+  {
+   "id": "handoff",
+   "state": "ready",
+   "note": "ops/flow/dev_notes.md + ops/hub/roles/DEV_BASELINE.md rewritten (PLATFORM REFUSALS, pending INTEGRATE list, sessions, follow-ups). Successor first message = ops/hub/roles/DEV_BASELINE.md."
+  },
+  {
+   "id": "W-R1 01KiyVDj",
+   "state": "archived",
+   "note": "VI-02 ACCEPT 3e7ab1c (row 502a042); ctx 156804 over cap; archived under the user's archive line in this Dev session"
+  },
+  {
+   "id": "DEV-R1-GW",
+   "state": "accepted_not_integrated",
+   "note": "1435/0/1; m9 equivalent (follow-up); integrate after VI-01"
+  },
+  {
+   "id": "DEV-R2-DRY 451e980",
+   "state": "verdict_pending",
+   "note": "integrator ACCEPT but 1 fail under concurrent load; clean solo rerun requested"
+  },
+  {
+   "id": "DEV-VI-06a-20 87e3243",
+   "state": "accepted_not_integrated",
+   "note": "INTEGRATE refused by platform classifier 02:02"
+  },
+  {
+   "id": "send_later trig_01JUyE96",
+   "state": "note",
+   "note": "fires into 01EqmaVL ~02:25 KST; successor re-arms its own"
+  }
+ ],
+ "blockers": [
+  "successor_needed: Dev hub 01EqmaVL ctx over session_ctx_cap (INC-OPS-4)",
+  "successor needs: user's own line for git/send_message/archive; auto_integrate.dev_hub extension; INTEGRATE/TAG sends refused by the platform classifier (morning list)"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T02:22:25+09:00"
+}
