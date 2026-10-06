@@ -1,140 +1,154 @@
 {
  "schema": "cloud-sessions/1",
- "at": "2026-10-06T19:20:32+09:00",
+ "at": "2026-10-06T20:21:49+09:00",
+ "plan": {
+  "kind": "five_hour",
+  "status": "allowed",
+  "overage": false,
+  "resets_at": "2026-10-06T22:10+09:00"
+ },
  "sessions": [
   {
-   "id": "session_01J4GYxF1DgQExRvBkxRm9pp",
-   "title": "baseline ● 현재 허브 (10-06 18:22~)",
+   "id": "session_01VxBgf9gyDktXz8Ke7T6NiY",
+   "title": "ga-sdk CMD-GA54 · ga project (10-06 20:25~)",
    "status": "running",
    "bucket": "working",
-   "detail": "GA51 r2 SEND_BACK; handoff at 151k",
-   "repo": "baseline",
-   "branch": "claude/gracious-meitner-vp49xe",
-   "model": "claude-opus-5-5",
-   "ctx": 151280,
-   "cost_usd": 1.99,
-   "tags": [],
-   "updated_at": "2026-10-06T10:20:11Z",
-   "url": "https://claude.ai/code/session_01J4GYxF1DgQExRvBkxRm9pp"
-  },
-  {
-   "id": "session_01A4XZDgCfueMHW6rBGSWLuA",
-   "title": "ga-sdk CMD-GA51 · 허브 모델 auto (10-06 17:45~)",
-   "status": "idle",
-   "bucket": "review_ready",
-   "detail": "committed test to claude/CMD-GA51 (ba52088); suite running",
+   "detail": "schema written; drafting core",
    "repo": "ga-sdk",
-   "branch": "claude/CMD-GA51",
+   "branch": "claude/CMD-GA54",
    "model": "claude-opus-5-5",
-   "ctx": 150155,
-   "cost_usd": 3.21,
+   "ctx": null,
+   "cost_usd": 0.0,
    "tags": [
     "baseline-worker"
    ],
-   "updated_at": "2026-10-06T10:19:45Z",
-   "url": "https://claude.ai/code/session_01A4XZDgCfueMHW6rBGSWLuA"
+   "updated_at": "2026-10-06T11:20:36Z",
+   "url": "https://claude.ai/code/session_01VxBgf9gyDktXz8Ke7T6NiY",
+   "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "tokens": {
+    "input": 0,
+    "output": 0,
+    "cache_read": 0,
+    "cache_write": 0
+   }
   },
   {
-   "id": "session_01GThc7uijAktpufbUynL5ws",
-   "title": "ga-sdk CMD-GA52 · 콘솔 클라우드 화면 (10-06 18:05~)",
-   "status": "idle",
-   "bucket": "completed",
-   "detail": "GA52 cloud snapshot & API complete; 1374 tests pass, 0 failed",
+   "id": "session_01HKHSLNc3akPq52QTeKmDPm",
+   "title": "ga-sdk CMD-GA53 · 엔진 결함 4건 (10-06 20:08~)",
+   "status": "running",
+   "bucket": "working",
+   "detail": "suite running",
    "repo": "ga-sdk",
-   "branch": "claude/CMD-GA52",
-   "model": "claude-opus-5-5",
-   "ctx": 203958,
-   "cost_usd": 3.97,
+   "branch": "claude/CMD-GA53",
+   "model": "claude-sonnet-5-5",
+   "ctx": null,
+   "cost_usd": 0.0,
    "tags": [
     "baseline-worker"
    ],
-   "updated_at": "2026-10-06T09:33:24Z",
-   "url": "https://claude.ai/code/session_01GThc7uijAktpufbUynL5ws"
+   "updated_at": "2026-10-06T11:20:59Z",
+   "url": "https://claude.ai/code/session_01HKHSLNc3akPq52QTeKmDPm",
+   "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "tokens": {
+    "input": 0,
+    "output": 0,
+    "cache_read": 0,
+    "cache_write": 0
+   }
   },
   {
-   "id": "session_01JaqBjV1w4EXWE4Yc7YgGDz",
-   "title": "baseline ◇ ga-sdk 통합 (10-06 17:00~)",
+   "id": "session_01LBoWy9AXfEwQsHqMcumAuC",
+   "title": "baseline ◇ ga-sdk 통합 (10-06 19:58~)",
    "status": "idle",
    "bucket": "review_ready",
-   "detail": "GA51 verdict: 5/6 mutations killed, m6 survived; awaiting hub request",
+   "detail": "answered Q1–Q4; awaiting GA52 verdict",
    "repo": "ga-sdk",
    "branch": null,
    "model": "claude-sonnet-5-5",
-   "ctx": 170276,
-   "cost_usd": 2.95,
+   "ctx": 98311,
+   "cost_usd": 0.55,
    "tags": [
     "baseline-integrator"
    ],
-   "updated_at": "2026-10-06T10:18:41Z",
-   "url": "https://claude.ai/code/session_01JaqBjV1w4EXWE4Yc7YgGDz"
+   "updated_at": "2026-10-06T11:05:18Z",
+   "url": "https://claude.ai/code/session_01LBoWy9AXfEwQsHqMcumAuC",
+   "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "tokens": {
+    "input": 540,
+    "output": 7004,
+    "cache_read": 1328168,
+    "cache_write": 54118
+   }
+  },
+  {
+   "id": "session_01FUssZmVMp6rDvZ7GFTEpuK",
+   "title": "baseline ◆ CMD-GA52 merge (Sonnet)",
+   "status": "idle",
+   "bucket": "review_ready",
+   "detail": "merge in progress; awaiting suite",
+   "repo": "ga-sdk",
+   "branch": "claude/CMD-GA52",
+   "model": "claude-sonnet-5-5",
+   "ctx": 90698,
+   "cost_usd": 0.73,
+   "tags": [
+    "baseline-worker"
+   ],
+   "updated_at": "2026-10-06T11:09:18Z",
+   "url": "https://claude.ai/code/session_01FUssZmVMp6rDvZ7GFTEpuK",
+   "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "tokens": {
+    "input": 554,
+    "output": 5628,
+    "cache_read": 1898010,
+    "cache_write": 72234
+   }
+  },
+  {
+   "id": "session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "title": "baseline ● 현재 허브 (10-06 19:22~)",
+   "status": "running",
+   "bucket": "working",
+   "detail": "",
+   "repo": "baseline",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-opus-5-5",
+   "ctx": 214808,
+   "cost_usd": 5.09,
+   "tags": [],
+   "updated_at": "2026-10-06T11:21:29Z",
+   "url": "https://claude.ai/code/session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "parent": "session_01J4GYxF1DgQExRvBkxRm9pp",
+   "tokens": {
+    "input": 72341,
+    "output": 52588,
+    "cache_read": 13193530,
+    "cache_write": 160189
+   }
   },
   {
    "id": "session_01DWVfRidtP9ENpP7jnhodSu",
    "title": "baseline ◇ Token 통합 (10-06 17:00~)",
-   "status": "idle",
-   "bucket": "review_ready",
-   "detail": "integration head 4720d5ff; awaiting request from hub",
+   "status": "pending",
+   "bucket": "working",
+   "detail": "TKG12-20 batch verdict",
    "repo": "Token",
    "branch": "claude/gracious-meitner-vp49xe",
    "model": "claude-sonnet-5-5",
-   "ctx": 116753,
-   "cost_usd": 1.18,
+   "ctx": 202574,
+   "cost_usd": 2.5,
    "tags": [
     "baseline-integrator"
    ],
-   "updated_at": "2026-10-06T09:21:22Z",
-   "url": "https://claude.ai/code/session_01DWVfRidtP9ENpP7jnhodSu"
-  },
-  {
-   "id": "session_019EWtXvKB3EE8RTYPHnNHLP",
-   "title": "baseline ◎ 토큰 감시 (10-06 16:00~)",
-   "status": "idle",
-   "bucket": "review_ready",
-   "detail": "monitoring cron alarms (18:50 KST)",
-   "repo": "baseline",
-   "branch": "claude/gracious-meitner-vp49xe",
-   "model": "claude-sonnet-5-5",
-   "ctx": 149792,
-   "cost_usd": 1.43,
-   "tags": [
-    "baseline-watcher"
-   ],
-   "updated_at": "2026-10-06T09:50:41Z",
-   "url": "https://claude.ai/code/session_019EWtXvKB3EE8RTYPHnNHLP"
-  },
-  {
-   "id": "session_01EPcQJaVSEzjV7LAhb1enSb",
-   "title": "ga-sdk CMD-GA49 · shadow gate 가시화 (10-06 16:10~)",
-   "status": "idle",
-   "bucket": "blocked",
-   "detail": "finished; waits on archive",
-   "repo": "ga-sdk",
-   "branch": "claude/CMD-GA49",
-   "model": "claude-sonnet-5-5",
-   "ctx": 146567,
-   "cost_usd": 2.12,
-   "tags": [
-    "baseline-worker"
-   ],
-   "updated_at": "2026-10-06T07:56:10Z",
-   "url": "https://claude.ai/code/session_01EPcQJaVSEzjV7LAhb1enSb"
-  },
-  {
-   "id": "session_018CgEgHQN6sJn6teqNEnWz2",
-   "title": "ga-sdk CMD-GA50 · 실시간 화면 (10-06 16:45~)",
-   "status": "idle",
-   "bucket": "completed",
-   "detail": "integrated f3abeea",
-   "repo": "ga-sdk",
-   "branch": "claude/CMD-GA50",
-   "model": "claude-opus-5-5",
-   "ctx": 292540,
-   "cost_usd": 9.78,
-   "tags": [
-    "baseline-worker"
-   ],
-   "updated_at": "2026-10-06T08:48:21Z",
-   "url": "https://claude.ai/code/session_018CgEgHQN6sJn6teqNEnWz2"
+   "updated_at": "2026-10-06T11:21:30Z",
+   "url": "https://claude.ai/code/session_01DWVfRidtP9ENpP7jnhodSu",
+   "parent": "session_018XDm17bNkdU75huKaxKmkf",
+   "tokens": {
+    "input": 3199,
+    "output": 30956,
+    "cache_read": 7776256,
+    "cache_write": 158072
+   }
   }
  ]
 }
