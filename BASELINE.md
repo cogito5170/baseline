@@ -780,3 +780,4 @@ baseline 계약 ──► Telemetry 봉투 ──► Sensor/MS 의 OBSERVE 정�
 - 297 회차: CMD-GA40 성공 — ga-sdk `9c1554d`, GA Planner(그림자) · 계획 교훈 L1–L7 코드 점검(BD-443).
 - 298 회차: GA Console 완성 — ga-sdk `73c0437`: 다크 흑백 디자인 + 정적 7 화면 + VM 배치(ga vm) + ga hub 그림자 모드 · 도구 승격(BD-444).
 - 299 회차: CMD-GA43 성공 — ga-sdk `83fccea`(0.11.0), judge 가 정의되지 않은 토큰을 잡음 · bridge 파이썬 · SSE · JS 변이(BD-447).
+- 300 회차: CMD-AGA6 성공 — Token `62fca39`, agv 가 gc-* 화면 CSS 를 1 턴에 씀 · 변이 5/5 · 실제 스택 스크린샷(BD-453).
