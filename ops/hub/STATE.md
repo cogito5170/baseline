@@ -17,7 +17,7 @@ user_direction 10-06 15:46: "이전 세션에서 다음 세션으로 인계해�
   개념적으로는 class(add_repo) : this -> add_repo (){}" — i.e. repo attachment is part of the hub's constructor.
 integration_branch: claude/gracious-meitner-vp49xe (all repos)
 repos: baseline, ga-sdk, Token(token), Sensor, DC, MS, Telemetry, action, health, guard, rlo-sdk, amp, ga_rlo
-artifacts: ga-SDK 최종 보고 https://claude.ai/artifact/MZdSkCP57fDTWQpsZvf6Fp ; ga Console UI https://claude.ai/artifact/JgFn8ddLQPpzMrtbyQ9vZQ
+artifacts: 상황판(phone/PC; live sessions via Claude Code Remote list_sessions + db doc hub/status) https://claude.ai/artifact/H8BSViquQW56mQX5HWKiQ9 (source ops/hub/status_page/index.html) ; ga-SDK 최종 보고 https://claude.ai/artifact/MZdSkCP57fDTWQpsZvf6Fp ; ga Console UI https://claude.ai/artifact/JgFn8ddLQPpzMrtbyQ9vZQ
 
 ## Integrators (the user, 10-06 17:00 KST: "이전 세션에서 만들어놓고, 이후 세션에서 연결해")
 A hub only has baseline (create_session takes one source; add_repo in a new hub needs the user's own words). So the
@@ -70,6 +70,7 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 - GA50 rev 2 f3abeea (worker session_018CgEgH…, ctx 292k, idle — do not reuse; archive when the user agrees): VERDICT sent 17:49 to ga-sdk integrator with mutations g1-g6 (in this STATE's git history / ask integrator); asked also full suite with rlo-sdk + diffs of pre-existing tests. On all killed + 0 failures + ga check 0 + test edits sound → INTEGRATE claude/CMD-GA50 f3abeea… (ff over 3d142ae). The integrator's push needs the user's approval in ITS session — if denied, ask the user once.
 - CMD-GA51 DONE 17:55: claude/CMD-GA51 0077a28 (code 3f26b2d, 0.17.2; 1315 pass, own mutations 4/4; check_served kept for resolved model). Worker told new hub id + stand by for merge after GA50. Was: worker session_01A4XZDgCfueMHW6rBGSWLuA (Opus), branch claude/CMD-GA51 from 3d142ae, dispatched 17:36; it notifies the hub id it was given (session_01ThMJnk…) — the outgoing hub forwards. After GA50 lands, GA51 must merge the integration branch before verdict. Then mutations on: auto ignores served; check_served skipped for auto; migration rewrites a user value; migration skips a ga default.
 - TKG11: report/2 in to/baseline 17:39 (ga-mailbox a12962d), agv/CMD-TKG11-r1 4720d5f, gemini flash 2 turns 3.9k tok; diff reviewed OK (test file identical to baseline's). VERDICT ACCEPT (suite 261/0, t1-t3 killed; verdicts.jsonl). Integrated: Token 4720d5f (ff, fe 105 / be 313 OK).
+- CMD-GA52 (console '클라우드' screen from ops/hub/cloud_sessions.json, producer ops/hub/cloud_snapshot.py; user 18:00) dispatched 18:00 to session_01GThc7uijAktpufbUynL5ws (Opus), branch claude/CMD-GA52. Lands after GA50, GA51. Mail routine step (3) now refreshes the snapshot + the 상황판 memo.
 - Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on branch ga-mailbox, commit "ga mail: baseline -> AGY <id>" (git worktree; no ga needed).
 - Next after GA51: ~10 new small real Token items (ask Token integrator for code excerpts; red-check each inline) → rescore gate.
 - Open user question: token watcher every 20 min — (a) 3 hourly routines :09/:29/:49 only with the user's OK, (b) project setting, (c) keep hourly. No answer yet.
