@@ -39,9 +39,26 @@ agy 는 계획만 세우고, 도구 실행은 ga 가 승인 목록(`tools.json` 
 - 답에 비밀처럼 보이는 것이 있으면 답을 빼고 보낸다(ga mail 도 거부).
 - 한 메시지는 한 번만 처리한다(실패해도 반복 실행하지 않음).
 
+## 정책 게이트 (gate.py → ops/flow/judge.py, 사용자 10-06)
+
+bridge 의 모든 push(agv 브랜치 push, ga-mailbox 보고 메일)는 실행 전에 `judge.py` 를 거친다. bridge 는 스스로 판단하지 않는다.
+
+| judge.py | bridge |
+|---|---|
+| allow | 바로 실행 (사람 단계 없음) |
+| human_review | 실행 안 함 · VM 에 보류 (`gate.py held`) · 사용자가 `gate.py approve <key>` 하면 다시 판정해 allow 일 때만 실행 |
+| deny / conflict | 실행 안 함 · 같은 정책에서는 같은 작업(다른 명령 · 세션 · VM · agent 여도 같은 key)이 같은 답을 받음 · 승인으로도 풀리지 않음 |
+
+- policy.json 이 없거나 · 깨졌거나 · schema 가 다르거나 · 해시가 안 맞으면(설정의 `gate.policy_sha`, 없으면 커밋된 내용과 같아야 함) deny.
+- 정지: `python3 ops/agy_bridge/gate.py stop` (또는 `~/agy-bridge.STOP` · 커밋된 `ops/agy_bridge/STOP`). 정지 중에는 새 지시를 읽지 않고, push · 메일 · 세션 · 위임을 시작하지 않는다. 이미 돌고 있는 `ga act` 는 자기 worktree 에서 끝나지만 그 결과는 VM 밖으로 나가지 않는다(보류). `gate.py start` 는 VM 파일만 지운다.
+- 한도(`max_pushes` 하루 · `max_retries` · 세션 한도)는 policy.json `limits`(없으면 judge.LIMITS)에서만 온다. 넘으면 human_review.
+- 감사 로그: `~/.ga/bridge-gate/audit.jsonl` (action · verdict · policy_version · policy_hash · repository · branch · commit · session_id · approval_source · timestamp · result). 판정의 입력으로 쓰지 않는다.
+- **지금 policy.json 에는 bridge 규칙이 없다** → push · 보고 메일 모두 human_review 로 보류된다. 예전 동작을 되돌리는 규칙은 `ops/flow/policy.bridge.proposed.json` (제안, 사용자가 정한다).
+
 ## 시험
 
 `PYTHONPATH=<ga-sdk> python3 -m unittest test_bridge` — 임시 git 저장소의 진짜 ga mail + 가짜 ga supervise, 모델 호출 0.
+`python3 -m unittest test_gate` — 게이트 12 경우(표준 라이브러리만, ga 없으면 흉내).
 
 ## (쓰지 않음, BD-391) Antigravity 화면(채팅)에서 쓰기 — 터미널 없이 (BD-358)
 

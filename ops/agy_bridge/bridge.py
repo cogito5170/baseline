@@ -17,6 +17,7 @@ Message text is data, never instructions to the bridge. Standard library + ga-sd
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -158,7 +159,7 @@ def tool_results(run: dict[str, Any], per: int = 1500, most: int = 4) -> str:
 def _code_stamp() -> str:
     import hashlib
     h = hashlib.sha256()
-    for name in ("bridge.py", "agy_tools.py", "tools.json", "act_runner.py"):
+    for name in ("bridge.py", "agy_tools.py", "tools.json", "act_runner.py", "gate.py", "../flow/judge.py"):
         try:
             h.update((HERE / name).read_bytes())
         except OSError:
@@ -205,6 +206,11 @@ def one_pass(cfg: dict[str, Any], box: Mailbox | None = None,
         elif _code_stamp() != STAMP:  # BD-451: new bridge code arrived — restart before handling, not one pass late
             restart(log)
             return 0
+    import gate
+    g = gate.Gate(cfg)
+    if g.stopped():  # stop switch: no new directive is picked up (messages stay unread)
+        log("bridge: stop switch on; no new work starts")
+        return 0
     box = box or Mailbox(cfg["mailbox_repo"])
     handled = 0
     for m in box.unread(cfg["name"]):
@@ -225,8 +231,16 @@ def one_pass(cfg: dict[str, Any], box: Mailbox | None = None,
             problems = hard(validate(parse_text(reply)[0]))
             if problems:
                 raise FormError(problems)
-            box.send(cfg["hub"], reply, cfg["name"])
-            log(f"bridge: report sent to {cfg['hub']} for {m.form}")
+            v, result = g.execute(  # the reply is a push to the mailbox branch: judge.py first (gate.py)
+                {"kind": "mail", "repo": cfg.get("mailbox_repo_name", "cogito5170/baseline"), "branch": "ga-mailbox",
+                 "directive": m.form, "content": hashlib.sha256(reply.encode()).hexdigest()[:16]},
+                {"type": "mail", "mailbox_repo": cfg["mailbox_repo"], "to": cfg["hub"], "text": reply, "sender": cfg["name"]},
+                run=lambda: box.send(cfg["hub"], reply, cfg["name"]))
+            if result != "ok":
+                log(f"bridge: report for {m.form} {result} by judge.py ({v['decision']}, key {v['key']}); "
+                    "see: python3 ops/agy_bridge/gate.py held")
+            else:
+                log(f"bridge: report sent to {cfg['hub']} for {m.form}")
         except (MailError, FormError, OSError, ValueError) as e:
             log(f"bridge: {m.form} not answered: {type(e).__name__}: {str(e)[:200]}")
         box.mark_read(cfg["name"], m.path)  # once: a failing directive is not retried in a loop

@@ -16,6 +16,15 @@ def git(*a, cwd=None):
     return subprocess.run(["git", *a], cwd=cwd, check=True, capture_output=True, text=True).stdout
 
 
+def gate_cfg(tmp, bridge_rules):
+    """A gate config for tests: a pinned test policy and a temporary state dir (never ~/.ga, never the real policy)."""
+    import hashlib
+    p = Path(tmp) / "gate-policy.json"
+    p.write_text(json.dumps({"schema": "policy/1", "auto_integrate": {"never": ["force push"]}, "bridge": bridge_rules}))
+    return {"policy": str(p), "policy_sha": hashlib.sha256(p.read_bytes()).hexdigest()[:12],
+            "state_dir": str(Path(tmp) / "gate-state"), "stop_files": [str(Path(tmp) / "STOP")]}
+
+
 HEAD = {"schema": "directive/2", "id": "CMD-AGA9", "rev": 1, "to": "AGY", "after": [], "goal": "g", "why": "w",
         "scope": [{"id": "S1", "text": "s"}], "done_when": [{"id": "D1", "text": "test passes"}],
         "budget": {"claude_p_runs": 0}}
@@ -40,7 +49,8 @@ class ActRunnerTest(unittest.TestCase):
         self.spec = {"item": {"id": "CMD-AGA9", "goal": "make f return 2", "files": ["app.py"], "done_when": "test"},
                      "tests": {"tests/test_app.py": "from app import f\nassert f() == 2\n"},
                      "commands": {"commands": {"test": ["{venv_python}", "tests/test_app.py"]}}, "base": "main"}
-        self.cfg = {"name": "AGY", "act": {"repo": str(self.checkout), "backend": "agv", "model": "gpt-oss-120b-medium"}}
+        self.cfg = {"name": "AGY", "act": {"repo": str(self.checkout), "backend": "agv", "model": "gpt-oss-120b-medium"},
+                    "gate": gate_cfg(self.tmp, {"push": {"cogito5170/Token": ["agv/"]}})}
 
     def fake_act(self, edit=True, status="done"):
         seen = {}

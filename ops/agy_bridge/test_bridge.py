@@ -24,6 +24,15 @@ def git(*a, cwd=None):
     subprocess.run(["git", *a], cwd=cwd, check=True, capture_output=True, text=True)
 
 
+def gate_cfg(tmp, bridge_rules):
+    """A gate config for tests: a pinned test policy and a temporary state dir (never ~/.ga, never the real policy)."""
+    import hashlib
+    p = Path(tmp) / "gate-policy.json"
+    p.write_text(json.dumps({"schema": "policy/1", "auto_integrate": {"never": ["force push"]}, "bridge": bridge_rules}))
+    return {"policy": str(p), "policy_sha": hashlib.sha256(p.read_bytes()).hexdigest()[:12],
+            "state_dir": str(Path(tmp) / "gate-state"), "stop_files": [str(Path(tmp) / "STOP")]}
+
+
 def form(head):
     return "```ga\n" + json.dumps(head, separators=(",", ":")) + "\n```\n"
 
@@ -39,7 +48,8 @@ class World:
         (self.work / "README.md").write_text("hello\nworld\n")
         (self.work / "ga-supervise.json").write_text(json.dumps({"schema": "ga-supervise/1", "backend": "agv",
                                                                  "model": "gpt-oss-120b-medium", "tools": {}}))
-        self.cfg = {**bridge.DEFAULTS, "mailbox_repo": str(self.tmp / "mac"), "workdir": str(self.work), "pull": False}
+        self.cfg = {**bridge.DEFAULTS, "mailbox_repo": str(self.tmp / "mac"), "workdir": str(self.work), "pull": False,
+                    "gate": gate_cfg(self.tmp, {"mail": {"cogito5170/baseline": ["ga-mailbox"]}})}
         self.hub = Mailbox(self.tmp / "hub", sleep=lambda s: None)
         self.mac = Mailbox(self.tmp / "mac", sleep=lambda s: None)
 

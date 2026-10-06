@@ -1,0 +1,14 @@
+{"schema": "policy-proposal/1",
+ "status": "PROPOSED — not in force. judge.py reads only policy.json. To adopt: the user, in their own words, adds the \"bridge\" (and optionally \"limits\") object below to policy.json (policy.json \"change\" rule).",
+ "why": "With the gate (ops/agy_bridge/gate.py) every bridge push goes through judge.py. policy.json has no bridge rule yet, so until one is added every agv push and every report mail is human_review (held on the VM, `gate.py held`). These rules restore what the bridge did before (BD-457 agv pushes, BD-463 baseline items, ga mail reports) as standing, unattended automation, and nothing more.",
+ "add_to_policy_json": {
+  "bridge": {
+   "push": {"cogito5170/Token": ["agv/"], "cogito5170/baseline": ["agv/"]},
+   "mail": {"cogito5170/baseline": ["ga-mailbox"]},
+   "never": ["force push", "secrets"]
+  },
+  "limits": {"max_sessions": 5, "max_children_per_session": 3, "max_runtime_s": 3600, "max_retries": 1, "max_pushes": 20}
+ },
+ "not_proposed": ["bridge.sessions: the bridge opens no sessions (Claude opens them). Until the user defines agent_types / scopes / repos / permissions, judge.py returns human_review for session_create / agent_create.",
+                  "integrate from the VM: auto_integrate already covers the integration push; the VM has no integrate executor yet."],
+ "effect": "agv/* pushes to Token and baseline, and report mail to ga-mailbox, run unattended within the limits. A baseline agv push that touches policy.json, judge.py or the bridge gate/executors is still a policy change (human_review). Any other repo/branch -> human_review; force push / secrets -> deny."}

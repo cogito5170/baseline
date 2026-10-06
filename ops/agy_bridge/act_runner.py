@@ -176,7 +176,7 @@ def _served_model(cfg: dict[str, Any], res: dict[str, Any]) -> str:
 
 
 def report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any], patch: str,
-           commit: dict[str, str] | None = None) -> str:
+           commit: dict[str, Any] | None = None) -> str:
     res = run.get("result") or {}
     ok = run["code"] == 0 and res.get("status") == "done"
     tok = res.get("tokens") or {}
@@ -192,11 +192,15 @@ def report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any], patch
                        {"name": "tokens", "value": int(tok.get("total") or 0)},
                        {"name": "turns", "value": int(res.get("turns") or 0)},
                        {"name": "model", "value": _served_model(cfg, res)}]}
-    if commit:
+    held = commit if commit and "held" in commit else None
+    if commit and not held:
         rep["commits"] = [commit]
         rep["change_size"] = "implementation"
     if not ok:
         rep["blockers"] = [{"kind": "dependency", "what": f"ga act: {str(res.get('reason') or run['out'][-200:])}"[:300]}]
+    if held:
+        rep.setdefault("blockers", []).append({"kind": "permission", "what": (
+            f"push {held['result']} (judge.py {held['decision']}, key {held['held']}): {held['why']}")[:300]})
     tail = run["out"].strip()[-3000:]
     if secrets_in(tail):
         tail = "(withheld: looked like it held a secret)"
@@ -236,7 +240,9 @@ def handle(cfg: dict[str, Any], head: dict[str, Any],
 
 def publish(cfg: dict[str, Any], checkout: Path, head: dict[str, Any], patch: str) -> dict[str, str] | None:
     """BD-457: push the agv commit as agv/<id>-r<rev> so the report can name it and ga judge / the GA hub can judge it
-    (a fresh clone of that sha). Only a real patch that passed the secret check is pushed; never with force."""
+    (a fresh clone of that sha). Only a real patch that passed the secret check is pushed; never with force.
+    The push runs only if ops/flow/judge.py says allow (gate.py); otherwise it is held and the report says so."""
+    import gate
     act = cfg.get("act") or {}
     if not act.get("push", True) or not patch.startswith("From ") or "withheld" in patch[:200]:
         return None
@@ -244,8 +250,12 @@ def publish(cfg: dict[str, Any], checkout: Path, head: dict[str, Any], patch: st
     sha = _git(checkout, "rev-parse", f"agv/{did}", check=False).stdout.strip()
     if not re.fullmatch(r"[0-9a-f]{40}", sha):
         return None
-    branch = f"agv/{did}-r{rev}"
-    p = _git(checkout, "push", "-q", act.get("remote", "origin"), f"{sha}:refs/heads/{branch}", check=False)
-    if p.returncode != 0:
-        return None
-    return {"repo": act.get("repo_name", "cogito5170/Token"), "branch": branch, "sha": sha}
+    branch, repo = f"agv/{did}-r{rev}", act.get("repo_name", "cogito5170/Token")
+    files = _git(checkout, "diff-tree", "--no-commit-id", "--name-only", "-r", sha, check=False).stdout.split()
+    v, result = gate.Gate(cfg).execute(
+        {"kind": "push", "repo": repo, "branch": branch, "sha": sha, "files": files, "directive": did},
+        {"type": "git_push", "repo_dir": str(checkout), "remote": act.get("remote", "origin"), "sha": sha, "branch": branch})
+    if result != "ok":
+        return {"held": v["key"], "decision": v["decision"], "result": result,
+                "why": "; ".join(r["reason"] for r in v["reasons"])[:240]}
+    return {"repo": repo, "branch": branch, "sha": sha}
