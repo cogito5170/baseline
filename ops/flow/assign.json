@@ -16,8 +16,8 @@
    "token-watcher": "session_019EWtXvKB3EE8RTYPHnNHLP"
   },
   "routines": [
-   "trig_019KsmGzNYDSiK3pogJaR4yf",
-   "trig_01XtMnV6yMeywrMbcTFeeeJE"
+   "trig_01YcM6BJMFPTW7oJh2BPqPuq (hourly :19, bound to Ops)",
+   "trig_01XtMnV6yMeywrMbcTFeeeJE (watcher wake :49)"
   ]
  },
  "baseline": {
