@@ -1,38 +1,26 @@
 {
  "dev": {
-  "hub": "session_01EqmaVLL6vWPFnmAqv9UKWH",
-  "sessions": {
-   "ga-sdk-integrator": "session_01Wz1byrS7ZeUJegQupssgr4",
-   "token-integrator": "session_01FynfJTJBM1D3itToGCjyM1",
-   "worker-GA52": "session_01FUssZmVMp6rDvZ7GFTEpuK",
-   "worker-R0a": "session_015U1LfqNoymrTP9Wduzmh31",
-   "worker-W-R1": "session_01KiyVDjXGVzKdLAEjC9T7Du",
-   "worker-W-R2": "session_01QEjaAWsA1RhPRCjpWza1iZ",
-   "worker-W-VI": "session_01CnLoJDKJJZ8bZ93tbGHmiN"
-  },
-  "idle_unredirected": {
-   "worker-GA53": "session_01HKHSLNc3akPq52QTeKmDPm (refuses relayed redirect; holds CMD-GA53 49f24c3)"
-  },
-  "previous": "session_01VMbRhMjtfPAALfLjAWJ1tT",
-  "archived": [
-   "session_01LBoWy9AXfEwQsHqMcumAuC (ga-sdk integrator, archived 10-07 01:1x KST after successor 01Wz1byr acked)"
+  "hub": null,
+  "sessions": {},
+  "archived_10_07_04_5x": [
+   "session_01EqmaVLL6vWPFnmAqv9UKWH",
+   "session_01CnLoJDKJJZ8bZ93tbGHmiN",
+   "session_015U1LfqNoymrTP9Wduzmh31",
+   "session_01FynfJTJBM1D3itToGCjyM1"
   ]
  },
  "ops": {
-  "hub": "session_013aqrQGg4d1hyd3uyDVG7kM",
-  "sessions": {
-   "token-watcher": "session_01TBHcmu5ar3uwnjL7m6NhYg"
-  },
-  "routines": [
-   "trig_01GcyujoR3XoM2PeoHe4iu2j (hourly :19, bound to Ops 013aqrQG; replaces trig_018jUnT6, disabled 10-07 01:22 KST)",
-   "trig_012F2ySDoB4v1nDYxhi5PHhT (one-shot 10-07 08:30 KST final OPS-OVERNIGHT status/1, bound to 013aqrQG; replaces trig_017Lm4aT, disabled)",
-   "trig_01EFFxRBWdkVJDYpn4ZNFYYS (watcher wake :49 KST, Haiku)"
-  ],
-  "previous": "session_01M4vGeVjHtivZ5nKLDSmdED (prev 01Qhj1TX)"
+  "hub": null,
+  "sessions": {},
+  "routines": [],
+  "archived_10_07_04_5x": [
+   "session_013aqrQGg4d1hyd3uyDVG7kM",
+   "session_01TBHcmu5ar3uwnjL7m6NhYg"
+  ]
  },
  "baseline": {
   "hub": "session_01KvzrDZZJDxYhbkb9Yb8LKs",
   "previous": "session_016tT1vvrTFehVFzWzfgxcCV"
  },
- "note": "Dev/Ops hubs created by baseline 01UafTvm (lineage depth 8): they cannot create sessions; they direct the sessions assigned here. Need more capacity -> status/1 blocker to baseline. Top baseline is now session_01KvzrDZZJDxYhbkb9Yb8LKs (depth 0, opened by the user 10-07 04:2x KST; previous top 016tT1vv left idle): it creates successors."
+ "note": "User 10-07 04:5x KST (policy.json cloud_top_only): cloud = top baseline only (instructions + user reports). Dev/Ops work runs on the VM. Top baseline: session_01KvzrDZZJDxYhbkb9Yb8LKs (depth 0)."
 }

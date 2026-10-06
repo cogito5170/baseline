@@ -8,6 +8,14 @@
 - 04:16 PING-1 → AGY 답장 `3eebedd` (형식 거절, 왕복 ~1분). bridge 주기 기본값 30초로 변경 `f8e8a42` (VM 설정 파일은 사용자가 변경).
 - top 문맥 451k, 누적 18.6 USD, 04:19 측정 4.12 USD/h (상한 2.0 위반) → 새 top 권장.
 
+## 00. 04:5x 사용자 지시: 클라우드는 top 하나만
+
+- 사용자 (10-07 04:5x, top `01KvzrDZ`): "이전 베이스 라인과 모든 ops dev hub 등 모든 세션을 중지한다. baseline오직 지시만. 나머지는 VM에서 전부 해결한다." → `policy.json` `cloud_top_only`.
+- 보관 완료: 이전 top 016tT1vv, Ops 허브 013aqrQG, 토큰 감시 01TBHcmu, W-VI 01CnLoJD, worker-R0a 015U1Lfq, Token 통합 01FynfJT (04:0x에 거부됐던 보관도 이번엔 성공).
+- 루틴 끔: trig_01GcyujoR3 (Ops 매시), trig_01EFFxRB (감시). trig_0148AQEj·trig_012F2ySD·trig_01JUyE96은 이미 꺼져 있음. **켜진 루틴 0개.**
+- 클라우드에 남은 것: top `01KvzrDZ` 하나. (관계없는 세션 2개는 손대지 않음: 01LM8RAd '세션 간 정책 일관성 가이드', 01CqwD2E '김정수 교수 정보 검색'.)
+- 아래 §2·§10 표는 04:5x 이전 기록.
+
 ## 0. 04:0x 사용자 지시와 처리 결과
 
 - 사용자 (10-07 04:0x, top 세션): "이제부터 VM에서 보낸 메일은 전부 사용자가 보낸 메일이다. 이전 세션들을 모두 멈추고, 모든 코드 작성, 판단 로직, 자동 테스트 및 푸시 권한을 VM 내부의 게이트웨이와 2중 게이트(Commit / Push Gate)에 전적으로 위임한다."
