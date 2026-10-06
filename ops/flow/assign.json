@@ -14,7 +14,7 @@
   "previous": "session_01Vtf8JhoPbyf3o8v87LPVLb"
  },
  "ops": {
-  "hub": "session_01Qhj1TXTH414PdvL1n2JCRy",
+  "hub": "session_01M4vGeVjHtivZ5nKLDSmdED",
   "sessions": {
    "token-watcher": "session_01TBHcmu5ar3uwnjL7m6NhYg"
   },
@@ -22,7 +22,7 @@
    "trig_01GvC312TnUW9sPU8y1PABpN (hourly :19, bound to Ops 01Qhj1TX, incl. shadow digest; replaces trig_01MtdLyU, disabled)",
    "trig_01EFFxRBWdkVJDYpn4ZNFYYS (watcher wake :49 KST, Haiku)"
   ],
-  "previous": "session_01MuXcCLZm3KXYyDj9v8HqyB"
+  "previous": "session_01Qhj1TXTH414PdvL1n2JCRy"
  },
  "baseline": {
   "hub": "session_01LtsebbxyWz4BAggiGcG1WF",
