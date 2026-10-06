@@ -1,0 +1,29 @@
+{
+ "id": "DEV-ST-1007-0115",
+ "ref": "DEV-OVERNIGHT",
+ "items": [
+  {
+   "id": "design R1+R2",
+   "state": "for_approval",
+   "note": "research/R1R2_DESIGN.md (gateway+caps, verdict dry-run + replay); also sent to Ops for opinion/1. Approve per overnight_delegation after Ops opinion."
+  },
+  {
+   "id": "DEV-R0FREEZE",
+   "state": "tag_pending",
+   "note": "ga-sdk branch 318b22a pushed (tested 8ead789, 1411/0/1 refenv, evidence docs/R0_BASELINE.md); verdict ACCEPT 481d593. Tag R0-baseline NOT created: integrator asks a user line; my relay of the user's tag words was refused by the platform classifier [Instruction Poisoning]."
+  },
+  {
+   "id": "capacity",
+   "state": "needed",
+   "note": "Dev hub cannot create sessions. Needed now: (1) ga-sdk integrator successor (01LBoWy9 is 230k): prompt = ops/hub/successors/ga_sdk_integrator.md + integration head 318b22a + refenv recipe scripts/refenv.sh + suite in background (15-20 min); director = Dev 01VMbRhM; (2) worker W-R1 (ga-sdk, branch claude/DEV-R1-GW from 318b22a, Sonnet) for design A; (3) worker W-R2 (ga-sdk, branch claude/DEV-R2-DRY from 318b22a, Sonnet) for design B. I send each its directive after it acks."
+  }
+ ],
+ "blockers": [
+  "successor_needed: ga-sdk integrator (ctx 230k > 150k)",
+  "user-only (morning list): R0-baseline tag line in integrator session 01LBoWy9 — or the successor integrator creates it if baseline confirms the policy/1 eb1f138 tag extension to that session directly"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T01:05:50+09:00"
+}

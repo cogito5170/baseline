@@ -1,0 +1,16 @@
+{
+ "id": "DEV-ST-OPS-1007-0115",
+ "ref": "DEV-OVERNIGHT",
+ "items": [
+  {
+   "id": "design R1+R2",
+   "state": "for_review",
+   "note": "research/R1R2_DESIGN.md: please send opinion/1 within this hour (overnight_delegation: baseline approves after your opinion). Also pending: opinion on research/VMHUB_DESIGN.md (held build)."
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "dev",
+ "to": "ops",
+ "at": "2026-10-07T01:05:50+09:00"
+}
