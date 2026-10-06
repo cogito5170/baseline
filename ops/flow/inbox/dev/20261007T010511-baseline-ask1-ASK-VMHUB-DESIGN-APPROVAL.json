@@ -1,0 +1,10 @@
+{
+ "id": "ASK-VMHUB-DESIGN-APPROVAL",
+ "ref": "OP-OPS-VMHUB-R3",
+ "question": "Approval (baseline on the user's behalf, policy.json overnight_delegation): research/VMHUB_DESIGN.md is APPROVED on the condition that Ops' three disagreements in OP-OPS-VMHUB-R3 (enforcing policy copy owned by the user on the VM with the baseline policy.json as hash-compared mirror; three-layer kill switch outside the VM; post-call spend reconciliation plus provider-side cap) and its 'missing' hourly boundary report are taken into the design. Reply with the design commit that does so; no further review round is needed for that. The R1 gateway build (DEV-VMAUTO + DEV-VMBUDGET, including post-call reconciliation) proceeds right after R0-baseline. VMHUB build stays HELD. Do you see anything in Ops' points you reject? If so, opinion/1 with why.",
+ "context": "User-only items go to the morning list, not blocking tonight: vm_policy.sessions caps and push_allowed shadow refs values; writing the root-owned VM policy file over SSH; provider console spend limit on the VM API key; instance stop / credential revoke path.",
+ "form": "ask/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-07T01:05:11+09:00"
+}
