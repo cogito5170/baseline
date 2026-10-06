@@ -62,8 +62,7 @@ now: stage 2 shadow gate = 10 consecutive shadow verdicts on ga-sdk/Token report
   score 10-06 15:4x: 31 rows all ASK_HUMAN, 0 false accepts, gate 0/10 (only Token bridge items count).
 next_action: GA49 integrated (ga-sdk 3d142ae). GA50 rev 2 (merge of GA49 + tests for g1 g2 g4 g6) awaited → VERDICT via ga-sdk integrator. CMD-GA51 (hub model auto = bridge served rung, S4) dispatched 17:36 to session_01A4XZDgCfueMHW6rBGSWLuA (Opus). TKG11 mailed to AGY 17:39 (ga-mailbox f02ca74; red check on 9c28c85 OK: only the new case fails); await agv/CMD-TKG11-r1 report → VERDICT via Token integrator with tests inline (it has no baseline remote). Integrators push only with the user's approval in their own session.
 then: stage 3 directive (hub judges+integrates on VM, baseline audits, roll back on quality drop) — user said go.
-fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 results.model shows gpt-oss while rung was
-  gemini; ledger learns only upward; console 'starting' timeout; GA39 survivors.
+fixes_queued: GA39 survivors (rest → CMD-GA53).
 
 ## In flight (handoff 10-06 19:22 KST from session_01J4GYxF…, ctx 151k)
 - GA49 r3 3d142ae ACCEPTED and integrated (ga-sdk integration head 3d142ae, 0.17.1; push approved by the user in the integrator session). Worker 01EPcQJa… finished (archive when the user agrees).
@@ -78,7 +77,7 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 - Token alarm 19:50: ga-sdk integrator 186k (recreate right after GA51 INTEGRATE lands); GA51 worker 155k done (archive on user OK); GA52 worker 214k → GA52 merge goes to a fresh Sonnet worker from 91468e3, not that one.
 - Archived 20:0x (user "끝난 세션들 보관해"): GA49 01EPcQJa, GA50 018CgEgH, GA51 01A4XZDg, old GA52 01GThc7u, old ga-sdk integrator 01JaqBjV, old hub 01J4GYxF.
 - Was: token alarm 18:50: GA50 worker 292k (done; dropped from tokmon, archive when the user agrees); GA52 worker 204k idle (only a merge+rerun left; if it stalls, fresh Sonnet worker from 91468e3); ga-sdk integrator 157k idle (no new work there until GA51 VERDICT; recreate only if it grows); GA51 138k (finish merge only).
-- 20:05 user "놀고 있는 세션들 계속 일 시켜": Token integrator asked for TKG12-21 (red-checked items, JSON) → write bridge items + mail AGY → rescore gate. ga-sdk integrator asked Q1-Q4 (fixes_queued causes, file:line) → CMD-GA53 bundle directive after GA52.
+- 20:05 user "놀고 있는 세션들 계속 일 시켜": Token integrator asked for TKG12-21 (red-checked items, JSON) → write bridge items + mail AGY → rescore gate. ga-sdk integrator answered Q1-Q4 20:05 (Q1 not reproduced; Q2 _served_model first turn; Q3 from_ledger max over all wins; Q4 no starting timeout) → CMD-GA53 dispatched 20:08 to session_01HKHSLNc3akPq52QTeKmDPm (Sonnet, branch claude/CMD-GA53, from f9671da; both GA52 and GA53 bump 0.18.2 → second to land re-merges + bumps).
 - Watcher session status says 'cron modified to 20m' but trig_01XtMnV6… is still hourly :49 — likely a session-local cron; verify, not approved by the user.
 - cloud_sessions.json first written 19:20 (8 live sessions; built from list_sessions by hand-trimmed JSON — the raw tool result is ~30k tokens, keep it trimmed).
 - Open user question: token watcher every 20 min — (a) 3 hourly routines :09/:29/:49 only with the user's OK, (b) project setting, (c) keep hourly. No answer yet.
