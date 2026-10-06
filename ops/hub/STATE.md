@@ -38,7 +38,7 @@ trig_01Egfbe1CAGL6bXNu6NK9H2M: disabled (old fresh-session watcher)
 trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 
 ## Heads (10-06 17:50)
-ga-sdk: 3d142ae (0.17.1, GA49 10-06 17:30; VM runs it — baseline-ops notice 17:55) | Token: 4720d5f (TKG1-11, 10-06 17:53; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
+ga-sdk: f3abeea (0.18.0, GA50 10-06 18:47) | Token: 4720d5f (TKG1-11, 10-06 17:53; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
 mail_newest: to/baseline-shadow/…T062003…-CMD-GM2.md (handled)
 records_next: BD-471.., round 312 — unwritten in DECISION_LOG/BASELINE §13: GA49 r2 SEND_BACK, GA49 r3 ACCEPT+integrate, GA50 r1 SEND_BACK, GA51 dispatch, TKG11 mail+ACCEPT (verdicts.jsonl has GA49 r3, GA50 r1, TKG11 r1).
 
@@ -67,7 +67,7 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 
 ## In flight (handoff 10-06 18:22 KST from session_01ERe9em…, ctx 194k)
 - GA49 r3 3d142ae ACCEPTED and integrated (ga-sdk integration head 3d142ae, 0.17.1; push approved by the user in the integrator session). Worker 01EPcQJa… finished (archive when the user agrees).
-- GA50 rev 2 f3abeea: ACCEPT 18:03 (suite 1388 OK, g1-g6 killed); INTEGRATE sent 18:03 to ga-sdk integrator — it is BLOCKED waiting for the user's push approval in its session (told the user 18:22). Integrators + GA51/GA52 workers told 'hub is now session_01J4GYxF…'. Then: tell GA51 worker to merge integration + re-run, then VERDICT GA51.
+- GA50 r2 f3abeea INTEGRATED 18:47 (ff by ga-sdk integrator, user-approved; ls-remote verified). 18:48 GA51 worker told: merge f3abeea, bump 0.18.1, re-run, notify → then VERDICT GA51.
 - CMD-GA51 DONE 17:55: claude/CMD-GA51 0077a28 (code 3f26b2d, 0.17.2; 1315 pass, own mutations 4/4; check_served kept for resolved model). Worker told new hub id + stand by for merge after GA50. Was: worker session_01A4XZDgCfueMHW6rBGSWLuA (Opus), branch claude/CMD-GA51 from 3d142ae, dispatched 17:36; it notifies the hub id it was given (session_01ThMJnk…) — the outgoing hub forwards. After GA50 lands, GA51 must merge the integration branch before verdict. Then mutations on: auto ignores served; check_served skipped for auto; migration rewrites a user value; migration skips a ga default.
 - TKG11: report/2 in to/baseline 17:39 (ga-mailbox a12962d), agv/CMD-TKG11-r1 4720d5f, gemini flash 2 turns 3.9k tok; diff reviewed OK (test file identical to baseline's). VERDICT ACCEPT (suite 261/0, t1-t3 killed; verdicts.jsonl). Integrated: Token 4720d5f (ff, fe 105 / be 313 OK).
 - CMD-GA52 DONE 18:33: claude/CMD-GA52 91468e3 (code 0d2b99d, from 3d142ae, 0.17.2 → re-bump at merge; 1374 run/0 fail, own mut 5/5). Waits: GA50 push → GA51 → merge integration into GA52 → VERDICT.
