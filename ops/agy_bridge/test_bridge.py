@@ -129,6 +129,20 @@ class BridgeTest(unittest.TestCase):
             bridge.os.execv, bridge.STAMP = orig, old
         self.assertEqual(len(calls), 1)
 
+    def test_new_code_restarts_before_any_message_is_handled(self):  # BD-451: not one pass late
+        self.w.hub.send("AGY", form(DIRECTIVE), "baseline")
+        calls, old_stamp, old_restart, old_run = [], bridge.STAMP, bridge.restart, bridge.subprocess.run
+        try:
+            bridge.STAMP = "stale"
+            bridge.restart = lambda log=print: calls.append("restart")
+            bridge.subprocess.run = lambda *a, **k: subprocess.CompletedProcess(a, 0, "", "")
+            n = bridge.one_pass({**self.w.cfg, "pull": True}, box=self.w.mac, runner=fake_runner(), log=lambda s: None)
+        finally:
+            bridge.STAMP, bridge.restart, bridge.subprocess.run = old_stamp, old_restart, old_run
+        self.assertEqual((n, calls), (0, ["restart"]))
+        self.assertEqual(self.replies(), [])  # nothing answered with the old code
+        self.assertEqual(len(list(self.w.mac.unread("AGY"))), 1)  # still unread for the new code
+
     def test_failed_run_is_unmet(self):
         self.w.hub.send("AGY", form(DIRECTIVE), "baseline")
         self.pass_(fake_runner(out="[ga supervise] agy refused 1 action(s) in T1.m1: command\n", code=1))

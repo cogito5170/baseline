@@ -169,11 +169,18 @@ def _code_stamp() -> str:
 STAMP = _code_stamp()
 
 
+def _execv_self(log: Callable[[str], None] = print) -> None:
+    log("bridge: new bridge code pulled; restarting with it")
+    os.execv(sys.executable, [sys.executable, *sys.argv])
+
+
+restart: Callable[..., None] = _execv_self  # replaced in tests
+
+
 def restart_if_updated(log: Callable[[str], None] = print) -> None:
     """After `git pull` brings new bridge code, run it: replace this process with a fresh one, same argv (BD-402)."""
     if _code_stamp() != STAMP:
-        log("bridge: new bridge code pulled; restarting with it")
-        os.execv(sys.executable, [sys.executable, *sys.argv])
+        restart(log)
 
 
 def declined(cfg: dict[str, Any], form: str, why: str) -> str:
@@ -195,6 +202,9 @@ def one_pass(cfg: dict[str, Any], box: Mailbox | None = None,
         p = subprocess.run(["git", "-C", cfg["mailbox_repo"], "pull", "--ff-only", "-q"], capture_output=True, text=True)
         if p.returncode:
             log(f"bridge: git pull failed (continuing with the tools on disk): {p.stderr.strip()[:200]}")
+        elif _code_stamp() != STAMP:  # BD-451: new bridge code arrived — restart before handling, not one pass late
+            restart(log)
+            return 0
     box = box or Mailbox(cfg["mailbox_repo"])
     handled = 0
     for m in box.unread(cfg["name"]):
