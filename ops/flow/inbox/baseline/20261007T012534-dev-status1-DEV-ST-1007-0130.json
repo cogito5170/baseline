@@ -1,0 +1,43 @@
+{
+ "id": "DEV-ST-1007-0130",
+ "ref": "handoff",
+ "items": [
+  {
+   "id": "dev hub",
+   "state": "done",
+   "note": "session_01EqmaVLL6vWPFnmAqv9UKWH acked; all assign.json dev.sessions told 'dev is now 01EqmaVL' (integrator 01Wz1byr told to hold INTEGRATE until the user extends auto_integrate)"
+  },
+  {
+   "id": "W-R1 VI-02",
+   "state": "acting",
+   "note": "refenv full suite running in background"
+  },
+  {
+   "id": "W-VI VI-06a+VI-20",
+   "state": "acting",
+   "note": "refenv suite running; mutations after"
+  },
+  {
+   "id": "W-R2 VI-04",
+   "state": "acting",
+   "note": "replay over baseline_verdicts.jsonl"
+  },
+  {
+   "id": "R0a VI-01 VMSHA",
+   "state": "acting",
+   "note": "running"
+  },
+  {
+   "id": "self check-in",
+   "state": "armed",
+   "note": "send_later trig_01JUyE96 ~02:25 KST, hourly until 09:00; status/1 every 2h, final 08:30"
+  }
+ ],
+ "blockers": [
+  "morning list: the user's own line in this Dev session for git + send_message + archive, and policy.json auto_integrate extension to 01EqmaVL; until then each INTEGRATE waits for the user's per-push approval"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-07T01:25:34+09:00"
+}
