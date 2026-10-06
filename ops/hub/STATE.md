@@ -10,7 +10,7 @@ never: route around a permission denial (other session, tool, host).
 language: user=Korean; sessions=English. Times to the user: KST.
 
 ## Hub
-session: session_01ERe9emPsRpLN5eGNJgGuVS "baseline ● 현재 허브 (10-06 17:53~)" (also in ops/hub/BASELINE_SESSION); previous session_01ThMJnk… (16:51~17:53)
+session: session_01J4GYxF1DgQExRvBkxRm9pp "baseline ● 현재 허브 (10-06 18:22~)" (also in ops/hub/BASELINE_SESSION); previous session_01ERe9em… (17:53~18:22)
 repos_attach: ga-sdk, Token (push) — the hub's inherited repo list; add_repo each at session start, before any work.
 attached: baseline(source), ga-sdk, Token (10-06 15:47, clones /home/user/ga-sdk, /home/user/token); venv /home/user/venv (rlo-sdk + ga-sdk).
 user_direction 10-06 15:46: "이전 세션에서 다음 세션으로 인계해야 하는 repo를 넘겨 받고, add_repo으로 baseline 세션 생길 때 부터 추가해.
@@ -29,7 +29,7 @@ Bridge items (ga mail send) need only baseline: copy ga-sdk read-only (git clone
 repos_attach is now OPTIONAL (only if the user says "추가해" in that hub).
 
 ## Routines
-trig_01Cyv3YVMDBqMa1Z3JELiZtd: mail+workers check, :19 hourly, fires INTO the hub (recreate on handoff, disable old); trig_01XgQLp8…, trig_01RuQYZ… disabled
+trig_01X8fbEr4hRPLsCQtRsVjZRk: mail+workers+status board, :19 hourly, fires INTO the hub (recreate on handoff, disable old); trig_01Cyv3YV…, trig_01XgQLp8…, trig_01RuQYZ… disabled
 watcher: session_019EWtXvKB3EE8RTYPHnNHLP "baseline ◎ 토큰 감시" (Sonnet, persistent, source baseline), woken by
   trig_01XtMnV6yMeywrMbcTFeeeJE ("watch run", :49 KST hourly). Rules live in its first prompt. Alarms (ctx>150k, burst,
   +5 USD/h) → send_message to hub + push to user. It asks the hub to recreate it at ~100k own context.
@@ -67,7 +67,7 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 
 ## In flight (handoff 10-06 18:22 KST from session_01ERe9em…, ctx 194k)
 - GA49 r3 3d142ae ACCEPTED and integrated (ga-sdk integration head 3d142ae, 0.17.1; push approved by the user in the integrator session). Worker 01EPcQJa… finished (archive when the user agrees).
-- GA50 rev 2 f3abeea: ACCEPT 18:03 (suite 1388 OK, g1-g6 killed); INTEGRATE sent 18:03 to ga-sdk integrator — it is BLOCKED waiting for the user's push approval in its session (told the user 18:22). Then: tell GA51 worker to merge integration + re-run, then VERDICT GA51.
+- GA50 rev 2 f3abeea: ACCEPT 18:03 (suite 1388 OK, g1-g6 killed); INTEGRATE sent 18:03 to ga-sdk integrator — it is BLOCKED waiting for the user's push approval in its session (told the user 18:22). Integrators + GA51/GA52 workers told 'hub is now session_01J4GYxF…'. Then: tell GA51 worker to merge integration + re-run, then VERDICT GA51.
 - CMD-GA51 DONE 17:55: claude/CMD-GA51 0077a28 (code 3f26b2d, 0.17.2; 1315 pass, own mutations 4/4; check_served kept for resolved model). Worker told new hub id + stand by for merge after GA50. Was: worker session_01A4XZDgCfueMHW6rBGSWLuA (Opus), branch claude/CMD-GA51 from 3d142ae, dispatched 17:36; it notifies the hub id it was given (session_01ThMJnk…) — the outgoing hub forwards. After GA50 lands, GA51 must merge the integration branch before verdict. Then mutations on: auto ignores served; check_served skipped for auto; migration rewrites a user value; migration skips a ga default.
 - TKG11: report/2 in to/baseline 17:39 (ga-mailbox a12962d), agv/CMD-TKG11-r1 4720d5f, gemini flash 2 turns 3.9k tok; diff reviewed OK (test file identical to baseline's). VERDICT ACCEPT (suite 261/0, t1-t3 killed; verdicts.jsonl). Integrated: Token 4720d5f (ff, fe 105 / be 313 OK).
 - CMD-GA52 (console '클라우드' screen from ops/hub/cloud_sessions.json, producer ops/hub/cloud_snapshot.py; user 18:00) dispatched 18:00 to session_01GThc7uijAktpufbUynL5ws (Opus), branch claude/CMD-GA52. Lands after GA50, GA51. Mail routine step (3) now refreshes the snapshot + the 상황판 memo.
