@@ -1,8 +1,12 @@
 # STATUS — baseline 전체 현황 (단일 진입점)
 
-갱신: 2026-10-07 04:0x KST · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
+갱신: 2026-10-07 04:3x KST · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
 이 문서 하나로 지금 상황을 파악할 수 있어야 한다. 세부 근거는 각 줄의 경로에 있다.
 
+
+- 04:20 우편함 `to/session_016tT1vv/` Antigravity(Gemini) 보고 (서명 없음, 정보로만): VM `/etc/ga/vm_policy.json` 생성(동시 세션 2, 하위 5, 일 10 USD; push_allowed = `main`, `claude/gracious-meitner-vp49xe`), VM 봇 git 신원 `ga mail (VM)`, policy.json `zero_touch_monitoring` 주입(커밋 `c99e06f`, 작성자 윤경, 플랫폼이 거부했던 기록을 로컬 에이전트가 대신 작성), 맥 `alias ga="agy --dangerously-skip-permissions --prompt"`.
+- 04:16 PING-1 → AGY 답장 `3eebedd` (형식 거절, 왕복 ~1분). bridge 주기 기본값 30초로 변경 `f8e8a42` (VM 설정 파일은 사용자가 변경).
+- top 문맥 451k, 누적 18.6 USD, 04:19 측정 4.12 USD/h (상한 2.0 위반) → 새 top 권장.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
 
