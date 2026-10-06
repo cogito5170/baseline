@@ -137,7 +137,8 @@ def finish(wt: Path, checkout: Path, did: str, owned: list[str]) -> str:
     return patch if len(patch) <= PATCH_CAP else patch[:PATCH_CAP] + "\n(patch cut at the cap)\n"
 
 
-def report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any], patch: str) -> str:
+def report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any], patch: str,
+           commit: dict[str, str] | None = None) -> str:
     res = run.get("result") or {}
     ok = run["code"] == 0 and res.get("status") == "done"
     tok = res.get("tokens") or {}
@@ -153,6 +154,9 @@ def report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any], patch
                        {"name": "tokens", "value": int(tok.get("total") or 0)},
                        {"name": "turns", "value": int(res.get("turns") or 0)},
                        {"name": "model", "value": (cfg.get("act") or {}).get("model", "?")}]}
+    if commit:
+        rep["commits"] = [commit]
+        rep["change_size"] = "implementation"
     if not ok:
         rep["blockers"] = [{"kind": "dependency", "what": f"ga act: {str(res.get('reason') or run['out'][-200:])}"[:300]}]
     tail = run["out"].strip()[-3000:]
@@ -184,4 +188,22 @@ def handle(cfg: dict[str, Any], head: dict[str, Any],
     wt = prepare(spec, checkout, head["id"])
     run = runner(cfg, spec, wt, checkout)
     patch = finish(wt, checkout, head["id"], spec["item"].get("files") or [])
-    return report(cfg, head, run, patch)
+    commit = publish(cfg, checkout, head, patch)
+    return report(cfg, head, run, patch, commit)
+
+
+def publish(cfg: dict[str, Any], checkout: Path, head: dict[str, Any], patch: str) -> dict[str, str] | None:
+    """BD-457: push the agv commit as agv/<id>-r<rev> so the report can name it and ga judge / the GA hub can judge it
+    (a fresh clone of that sha). Only a real patch that passed the secret check is pushed; never with force."""
+    act = cfg.get("act") or {}
+    if not act.get("push", True) or not patch.startswith("From ") or "withheld" in patch[:200]:
+        return None
+    did, rev = head["id"], int(head.get("rev", 1))
+    sha = _git(checkout, "rev-parse", f"agv/{did}", check=False).stdout.strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", sha):
+        return None
+    branch = f"agv/{did}-r{rev}"
+    p = _git(checkout, "push", "-q", act.get("remote", "origin"), f"{sha}:refs/heads/{branch}", check=False)
+    if p.returncode != 0:
+        return None
+    return {"repo": act.get("repo_name", "cogito5170/Token"), "branch": branch, "sha": sha}

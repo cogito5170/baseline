@@ -74,6 +74,26 @@ class ActRunnerTest(unittest.TestCase):
         self.assertFalse(run.seen["wt"].exists())  # worktree removed
         self.assertIn("agv/CMD-AGA9", git("-C", str(self.checkout), "branch"))
 
+    def test_the_agv_commit_is_pushed_and_named_in_the_report(self):
+        text = act_runner.handle(self.cfg, HEAD, runner=self.fake_act(), spec=self.spec)
+        head, _ = parse_text(text)
+        self.assertEqual(hard(validate(head)), [])
+        c = head["commits"][0]
+        self.assertEqual((c["repo"], c["branch"]), ("cogito5170/Token", "agv/CMD-AGA9-r1"))
+        remote = git("-C", str(self.tmp / "origin.git"), "rev-parse", "refs/heads/agv/CMD-AGA9-r1").strip()
+        self.assertEqual(c["sha"], remote)
+        self.assertNotIn("+    return 2", git("-C", str(self.tmp / "origin.git"), "show", "main:app.py"))  # base untouched
+
+    def test_no_push_for_a_withheld_patch_or_when_push_is_off(self):
+        def secret(cfg, spec, wt, checkout):
+            (wt / "app.py").write_text("KEY = '" + "sk-" + "ant-api03-" + "C" * 40 + "'\n")
+            return {"code": 0, "out": "", "result": {"status": "done", "turns": 1, "tokens": {}, "changed": ["app.py"]}}
+        for cfg, run in ((self.cfg, secret), (dict(self.cfg, act=dict(self.cfg["act"], push=False)), self.fake_act())):
+            head, _ = parse_text(act_runner.handle(cfg, HEAD, runner=run, spec=self.spec))
+            self.assertNotIn("commits", head)
+        refs = git("-C", str(self.tmp / "origin.git"), "for-each-ref", "--format=%(refname)")
+        self.assertNotIn("agv/", refs)
+
     def test_not_done_is_unmet_with_blocker(self):
         text = act_runner.handle(self.cfg, HEAD, runner=self.fake_act(edit=False, status="blocked"), spec=self.spec)
         head, _ = parse_text(text)
