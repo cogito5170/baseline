@@ -24,3 +24,5 @@
 {"id":"CMD-GA48","rev":1,"sha":"e364817","decision":"ACCEPT","bd":"BD-461"}
 {"id":"CMD-GM1","rev":1,"sha":"36b7a72","decision":"ACCEPT","bd":"BD-466"}
 {"id":"CMD-GM2","rev":1,"sha":"7e36193","decision":"ACCEPT","bd":"BD-466","note":"accepted with baseline fact corrections"}
+{"id":"CMD-TKG1","rev":1,"sha":"6c2460b","decision":"ACCEPT","bd":"BD-467"}
+{"id":"CMD-TKG2","rev":1,"sha":"32ccca0","decision":"ACCEPT","bd":"BD-467"}
