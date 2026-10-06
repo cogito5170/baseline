@@ -25,5 +25,5 @@ integration: ga-sdk claude/gracious-meitner-vp49xe head 318b22a (evidence docs/R
 ## Rules / gotchas
 - send only via ops/flow/flow.py + doorbell {"flow":"<path>"}; status ids must be unique (use DEV-ST-<MMDD-HHMM>)
 - platform classifier refuses: relaying the user's words from another session to a worker (Instruction Poisoning) — ask the user to type in that session; archive needs explicit user OK in Dev session (given 00:5x)
-- the user allowed git + send_message + archive in Dev 01EqmaVL (10-07 01:3x KST, own line); a successor must get its own user line; auto_integrate extension to 01EqmaVL NOT yet given
+- the user allowed git + send_message + archive in Dev 01EqmaVL (10-07 01:3x KST, own line); a successor must get its own user line; auto_integrate.dev_hub = 01EqmaVL since policy 8c01da6 (user words in top baseline)
 - suite 15-20 min: workers/integrator run it in background with nohup + done marker
