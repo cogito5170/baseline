@@ -21,24 +21,24 @@
    "usd": 12.67
   },
   "session_01A4XZDgCfueMHW6rBGSWLuA": {
-   "cache_read": 7256000,
-   "cache_write": 84321,
-   "ctx": 137727,
+   "cache_read": 10651177,
+   "cache_write": 101282,
+   "ctx": 154691,
    "id": "session_01A4XZDgCfueMHW6rBGSWLuA",
-   "output": 23499,
+   "output": 29260,
    "status": "",
    "title": "",
-   "usd": 2.6
+   "usd": 3.56
   },
   "session_01DWVfRidtP9ENpP7jnhodSu": {
-   "cache_read": 3881652,
-   "cache_write": 72559,
-   "ctx": 116753,
+   "cache_read": 4246646,
+   "cache_write": 81810,
+   "ctx": 126158,
    "id": "session_01DWVfRidtP9ENpP7jnhodSu",
-   "output": 10353,
+   "output": 10787,
    "status": "",
    "title": "",
-   "usd": 1.18
+   "usd": 1.29
   },
   "session_01EPcQJaVSEzjV7LAhb1enSb": {
    "cache_read": 6017554,
@@ -50,15 +50,25 @@
    "title": "",
    "usd": 1.77
   },
-  "session_01GThc7uijAktpufbUynL5ws": {
-   "cache_read": 8063133,
-   "cache_write": 185705,
-   "ctx": 203958,
-   "id": "session_01GThc7uijAktpufbUynL5ws",
-   "output": 43756,
+  "session_01Eu6SdhSHCCwkL8BoAsULXr": {
+   "cache_read": 2468780,
+   "cache_write": 65316,
+   "ctx": 119717,
+   "id": "session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "output": 8378,
    "status": "",
    "title": "",
-   "usd": 3.97
+   "usd": 1.19
+  },
+  "session_01GThc7uijAktpufbUynL5ws": {
+   "cache_read": 8693163,
+   "cache_write": 194275,
+   "ctx": 213539,
+   "id": "session_01GThc7uijAktpufbUynL5ws",
+   "output": 44152,
+   "status": "",
+   "title": "",
+   "usd": 4.18
   },
   "session_01J4GYxF1DgQExRvBkxRm9pp": {
    "cache_read": 2305568,
@@ -71,14 +81,14 @@
    "usd": 1.12
   },
   "session_01JaqBjV1w4EXWE4Yc7YgGDz": {
-   "cache_read": 8800353,
-   "cache_write": 142527,
-   "ctx": 156840,
+   "cache_read": 12802015,
+   "cache_write": 170972,
+   "ctx": 185639,
    "id": "session_01JaqBjV1w4EXWE4Yc7YgGDz",
-   "output": 22154,
+   "output": 27057,
    "status": "",
    "title": "",
-   "usd": 2.57
+   "usd": 3.54
   },
   "session_01ThMJnkXYNSMWt4BtSiVDGx": {
    "cache_read": 11024254,
@@ -91,5 +101,5 @@
    "usd": 4.04
   }
  },
- "t": "2026-10-06T09:50:24Z"
+ "t": "2026-10-06T10:50:23Z"
 }
