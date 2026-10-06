@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG19",
+  "goal": "In backend/app/domains/report/service.py: report generate must raise ReportError (422) when period is not a dict with from/to, instead of TypeError.",
+  "files": [
+   "backend/app/domains/report/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/report/tests/test_tkg19_period_shape.py": "\"\"\"Acceptance test for CMD-TKG19 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nfrom app.domains.report.service import MemoryStore, ReportError, ReportService\n\n\nclass T(unittest.TestCase):\n    def test_non_dict_period_rejected(self):\n        svc = ReportService(MemoryStore(), lambda *a: {}, lambda *a: [], lambda ws: [], lambda ws, b: {})\n        for p in (None, [], \"2026-01-01\", 5):\n            with self.assertRaises(ReportError, msg=repr(p)):\n                svc.generate(\"w\", p)\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/report",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg*_*.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG12",
+  "goal": "In backend/app/domains/quota/service.py: quota create() must reject non-int thresholds with QuotaError (422), not crash with TypeError in sorted().",
+  "files": [
+   "backend/app/domains/quota/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/quota/tests/test_tkg12_thresholds_types.py": "\"\"\"Acceptance test for CMD-TKG12 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nfrom app.domains.quota.service import MemoryStore, QuotaError, QuotaService\n\n\nclass T(unittest.TestCase):\n    def test_mixed_type_thresholds_rejected(self):\n        svc = QuotaService(MemoryStore(), summary=lambda *a: {})\n        for th in ([50, \"80\"], [[1]], [None, 5]):\n            with self.assertRaises(QuotaError, msg=repr(th)):\n                svc.create(\"w\", None, \"workspace\", \"month\", \"list\", 1000, thresholds=th)\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/quota",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg*_*.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

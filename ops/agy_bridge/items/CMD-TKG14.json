@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG14",
+  "goal": "In backend/app/domains/quota/service.py: quota check() must validate cost_cli as a non-negative int (not bool) and raise QuotaError otherwise; a negative cost_cli currently lowers 'after' and lets a proposal bypass a cli budget.",
+  "files": [
+   "backend/app/domains/quota/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/quota/tests/test_tkg14_check_cost_cli.py": "\"\"\"Acceptance test for CMD-TKG14 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nfrom datetime import datetime, timezone\n\nfrom app.domains.quota.service import MemoryStore, QuotaError, QuotaService\n\n\nclass T(unittest.TestCase):\n    def test_negative_cost_cli_rejected(self):\n        s = {\"tiles\": {\"cost_list\": {\"value\": 0}, \"cost_cli\": {\"value\": 100, \"coverage_permille\": 1000}},\n             \"trend\": {\"series\": []}}\n        svc = QuotaService(MemoryStore(), summary=lambda *a: s, now=lambda: datetime(2026, 10, 6, tzinfo=timezone.utc))\n        svc.create(\"w\", None, \"workspace\", \"month\", \"cli\", 150)\n        for bad in (-1000, \"5\", True):\n            with self.assertRaises(QuotaError, msg=repr(bad)):\n                svc.check(\"w\", \"workspace\", 200, cost_cli=bad)\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/quota",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg*_*.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

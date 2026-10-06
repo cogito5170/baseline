@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG18",
+  "goal": "In backend/app/domains/source/service.py: source clean_filename must never return '.' or '..' (e.g. basename of 'a/..'); fall back to 'upload'.",
+  "files": [
+   "backend/app/domains/source/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/source/tests/test_tkg18_clean_filename_dots.py": "\"\"\"Acceptance test for CMD-TKG18 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nfrom app.domains.source.service import clean_filename\n\n\nclass T(unittest.TestCase):\n    def test_dot_names_fall_back(self):\n        for n in (\"..\", \".\", \"a/..\", \"a/.\", \" .. \"):\n            self.assertEqual(clean_filename(n), \"upload\", n)\n        self.assertEqual(clean_filename(\"x/log.jsonl\"), \"log.jsonl\")\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/source",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg*_*.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

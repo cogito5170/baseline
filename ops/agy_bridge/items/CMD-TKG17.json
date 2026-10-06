@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG17",
+  "goal": "In backend/app/domains/workspace/service.py: workspace create_project must reject a repo_size_loc that is not a non-negative int (str, float, bool) with WorkspaceError (422), not TypeError.",
+  "files": [
+   "backend/app/domains/workspace/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/workspace/tests/test_tkg17_repo_size_type.py": "\"\"\"Acceptance test for CMD-TKG17 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nimport uuid\n\nfrom app.domains.workspace.service import MemoryStore, WorkspaceError, WorkspaceService\n\n\nclass T(unittest.TestCase):\n    def test_non_int_repo_size_loc_rejected(self):\n        svc = WorkspaceService(MemoryStore())\n        u = str(uuid.uuid4())\n        w, _ = svc.create_workspace(u, \"Acme\")\n        for bad in (\"big\", 1.5, True):\n            with self.assertRaises(WorkspaceError, msg=repr(bad)):\n                svc.create_project(w.id, u, \"p\", repo_size_loc=bad)\n        svc.create_project(w.id, u, \"ok\", repo_size_loc=0)\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/workspace",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg*_*.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

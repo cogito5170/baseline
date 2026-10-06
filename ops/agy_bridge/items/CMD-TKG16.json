@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG16",
+  "goal": "In backend/app/domains/integration/crypto.py: integration crypto KEK id validation must reject ids with a trailing newline (use fullmatch), in both kek_env_name and EnvKeyring.current_id.",
+  "files": [
+   "backend/app/domains/integration/crypto.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/integration/tests/test_tkg16_kek_id_newline.py": "\"\"\"Acceptance test for CMD-TKG16 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nfrom app.domains.integration import crypto\n\n\nclass T(unittest.TestCase):\n    def test_trailing_newline_kek_id_rejected(self):\n        for kid in (\"k1\\n\", \"k1\\n\\n\"):\n            with self.assertRaises(crypto.KeyUnavailable, msg=repr(kid)):\n                crypto.kek_env_name(kid)\n            with self.assertRaises(crypto.KeyUnavailable, msg=repr(kid)):\n                crypto.EnvKeyring({\"GC_KEK_ID\": kid}).current_id()\n        self.assertEqual(crypto.kek_env_name(\"k1\"), \"GC_KEK_k1\")\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/integration",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg*_*.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

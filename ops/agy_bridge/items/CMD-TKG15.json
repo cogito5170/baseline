@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG15",
+  "goal": "In backend/app/domains/identity/tokens.py: identity tokens.decode_access must raise TokenError (not AttributeError) when a correctly signed token's body is not a JSON object.",
+  "files": [
+   "backend/app/domains/identity/tokens.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/identity/tests/test_tkg15_jwt_body_shape.py": "\"\"\"Acceptance test for CMD-TKG15 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nimport base64\n\nfrom app.domains.identity import tokens\n\n\nclass T(unittest.TestCase):\n    def test_non_object_body_is_token_error(self):\n        b = lambda x: base64.urlsafe_b64encode(x).rstrip(b\"=\").decode()\n        head = b(b'{\"alg\":\"HS256\",\"typ\":\"JWT\"}')\n        for raw in (b'[\"x\"]', b'\"x\"', b'5'):\n            body = b(raw)\n            tok = f\"{head}.{body}.{tokens._sign('s', head + '.' + body)}\"\n            with self.assertRaises(tokens.TokenError, msg=raw):\n                tokens.decode_access(\"s\", tok, now=1)\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/identity",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg*_*.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}

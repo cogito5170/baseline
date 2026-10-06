@@ -1,0 +1,3 @@
+```ga
+{"schema": "directive/2", "id": "CMD-TKG18", "rev": 1, "to": "AGY", "after": [], "goal": "agv fixes a small real Token defect through ga act against baseline's acceptance test: source clean_filename must never return '.' or '..' (e.g. basename of 'a/..'); fall back to 'upload'.", "why": "Red-checked on Token 4720d5f by the Token integrator (10-06 20:07 KST): source/service.py:134-136 returns basename unfiltered.", "scope": [{"id": "S1", "text": "only backend/app/domains/source/service.py; the tests are baseline's"}], "done_when": [{"id": "D1", "text": "ga act ends done: the acceptance test (and the other tkg tests of the domain, same command) passes in the worktree"}], "budget": {"claude_p_runs": 0}}
+```

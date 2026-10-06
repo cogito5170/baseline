@@ -1,0 +1,32 @@
+{
+ "item": {
+  "id": "CMD-TKG20",
+  "goal": "In backend/app/domains/identity/service.py: identity normalize_email must reject addresses with more than one '@' or with whitespace inside (after the outer strip).",
+  "files": [
+   "backend/app/domains/identity/service.py"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "backend/app/domains/identity/tests/test_tkg20_email_shape.py": "\"\"\"Acceptance test for CMD-TKG20 (written by baseline; the executor may not edit it).\"\"\"\nimport unittest\nfrom app.domains.identity.service import AuthError, normalize_email\n\n\nclass T(unittest.TestCase):\n    def test_malformed_emails_rejected(self):\n        for e in (\"a@@b.com\", \"a@b@c.com\", \"a b@c.com\", \"a@b .com\"):\n            with self.assertRaises(AuthError, msg=e):\n                normalize_email(e)\n        self.assertEqual(normalize_email(\" a@b.com \"), \"a@b.com\")\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/app/domains/identity",
+    "-t",
+    "backend",
+    "-p",
+    "test_tkg*_*.py"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "repo": "token"
+}
