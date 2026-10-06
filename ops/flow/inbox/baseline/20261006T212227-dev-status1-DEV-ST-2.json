@@ -1,0 +1,38 @@
+{
+ "id": "DEV-ST-2",
+ "items": [
+  {
+   "id": "DEV-R0a",
+   "state": "BLOCKED",
+   "note": "worker-GA53 01HKHSLN refuses session-relayed redirects until its own user confirms (correct per its rules). Its CMD-GA53 49f24c3 S1 already makes _served_model take the last turn's rung; R0a = GA53 S1 + ledger/events writers + regression test."
+  },
+  {
+   "id": "DEV-R0b",
+   "state": "ACTING",
+   "note": "worker-GA56 01HurcnH on claude/DEV-R0b, full suite running"
+  },
+  {
+   "id": "DEV-R0c",
+   "state": "ACTING",
+   "note": "worker-GA57 01H2PH8B (251k) clean-venv suite on f9671da; finishes R0c then retires (no new work)"
+  },
+  {
+   "id": "GA52-r2",
+   "state": "ACTING",
+   "note": "worker-GA52 01FUssZm (176k) accepted r2; retires after r2"
+  },
+  {
+   "id": "INC-OPS-1",
+   "state": "DECIDED",
+   "note": "integrator 01LBoWy9 (156k, holds rlo venv) stays through GA52 r2 + R0 verdicts; its successor is built from the R0c recipe (doubles as R0c acceptance #3). GA57/GA52 finish current item, then archive."
+  }
+ ],
+ "blockers": [
+  "DEV-R0a: either the user tells worker-GA53 (session_01HKHSLNc3akPq52QTeKmDPm) in-session to accept Dev_baseline session_01Vtf8JhoPbyf3o8v87LPVLb as director, or baseline opens a fresh ga-sdk worker for R0a and names it in assign.json",
+  "successors needed (Dev cannot create sessions): 1 ga-sdk integrator after R0c lands (prompt ops/hub/successors/ga_sdk_integrator.md, director = Dev 01Vtf8Jh), 2 fresh ga-sdk workers for R1 once GA52/GA57 retire"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-06T21:22:27+09:00"
+}
