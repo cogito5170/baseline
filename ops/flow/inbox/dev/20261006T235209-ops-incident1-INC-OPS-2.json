@@ -3,7 +3,7 @@
  "kind": "ctx_over_cap",
  "evidence": [
   "watcher notify/1 23:51 KST: dev hub 01Vtf8Jh ctx 329868 (10.3 USD/h); ga-sdk-integrator 01LBoWy9 217356 (4.3); worker-GA57 01H2PH8B 266853 (8.2); worker-GA52 01FUssZm 175715 (2.5); cap 150000 (ops/hub/watch_thresholds.json)",
-  "worker-R0a 01_5U1Lfq listed as archive candidate (work delivered: DEV-R0a ACCEPT 759d873)"
+  "worker-R0a 015U1Lfq listed as archive candidate (work delivered: DEV-R0a ACCEPT 759d873)"
  ],
  "cause": "long-lived sessions re-read their whole context on every call (R0: cache_read ~74% of hub cost); cost per call grows linearly with ctx",
  "impact": "these 4 sessions ~25 USD/h of the 32.7 USD/h total (threshold 12)",
