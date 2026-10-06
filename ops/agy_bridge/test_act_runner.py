@@ -94,6 +94,23 @@ class ActRunnerTest(unittest.TestCase):
         self.assertNotIn("ant-api03", text)
         self.assertIn("withheld", text)
 
+    def test_rewrite_removes_the_owned_file_in_the_worktree_only(self):
+        seen = {}
+
+        def run(cfg, spec, wt, checkout):
+            seen["gone"] = not (wt / "app.py").exists()
+            (wt / "app.py").write_text("def f():\n    return 2\n")
+            return {"code": 0, "out": "", "result": {"status": "done", "turns": 1, "tokens": {}, "changed": ["app.py"]}}
+        text = act_runner.handle(self.cfg, HEAD, runner=run, spec=dict(self.spec, rewrite=["app.py"]))
+        self.assertTrue(seen["gone"])
+        self.assertIn("+    return 2", text)
+        self.assertEqual((self.checkout / "app.py").read_text(), "user's own uncommitted edit\n")
+
+    def test_rewrite_only_for_the_items_files(self):
+        for bad in ("tests/test_app.py", "../x.py", "/etc/passwd", "frontend/x.txt"):
+            with self.assertRaises(ValueError):
+                act_runner.prepare(dict(self.spec, rewrite=[bad]), self.checkout, "CMD-AGA9")
+
     def test_placeholders_expand(self):
         self.assertEqual(act_runner._expand(["{venv_python}", "-m", "x"], {"venv_python": "/v/bin/python"}),
                          ["/v/bin/python", "-m", "x"])

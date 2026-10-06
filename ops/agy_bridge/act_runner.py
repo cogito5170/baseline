@@ -5,12 +5,14 @@ baseline writes `items/<directive id>.json` in this folder (it reaches the Mac b
     {"item":     {"id": "CMD-AGA1", "goal": "...", "files": ["backend/app/worker/__main__.py"], "done_when": "test"},
      "tests":    {"backend/tests/test_worker_banner.py": "<file text>"},   # acceptance tests baseline wrote
      "commands": {"commands": {"test": ["{venv_python}", "-m", "unittest", ...]}, "timeout_s": 600},
-     "base":     "claude/gracious-meitner-vp49xe"}                          # the branch to start from
+     "base":     "claude/gracious-meitner-vp49xe",                          # the branch to start from
+     "rewrite":  ["backend/app/worker/__main__.py"]}                       # optional: removed in the worktree first
 
 One run, all in a separate git worktree next to the user's checkout (their running servers and edits are untouched):
   1. `git fetch origin <base>`, `git worktree add -B agv/<id> <dir> origin/<base>`;
   2. node_modules of the checkout's frontend/ is linked in, so test commands run;
-  3. baseline's tests are written; the model may not edit them (they are not in the item's files);
+  3. baseline's tests are written; the model may not edit them (they are not in the item's files); files listed in
+     "rewrite" (each one of the item's files) are removed so the model writes them whole with NEW (BD-450);
   4. `python -m ga act --item ... --repo <worktree> --backend/--model/--options from the bridge config`;
   5. the change is committed on agv/<id> (local only) and returned as a patch (capped; withheld if secret-looking).
 Placeholders in command argv: {venv_python} = the checkout's .venv python, {checkout} = the user's checkout.
@@ -58,6 +60,10 @@ def prepare(spec: dict[str, Any], checkout: Path, did: str) -> Path:
     for rel in spec.get("tests") or {}:
         if not SAFE_PATH.match(rel) or rel.split("/")[0] in (".git", ".ga") or rel.startswith(".env"):
             raise ValueError(f"bad test path: {rel}")
+    owned = list((spec.get("item") or {}).get("files") or [])
+    for rel in spec.get("rewrite") or []:
+        if not SAFE_PATH.match(rel) or rel not in owned:
+            raise ValueError(f"bad rewrite path (must be one of the item's files): {rel}")
     _git(checkout, "fetch", "-q", "origin", base)
     wt = checkout.parent / f"{checkout.name}-agv-{did}"
     if wt.exists():
@@ -70,6 +76,10 @@ def prepare(spec: dict[str, Any], checkout: Path, did: str) -> Path:
         p = wt / rel
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(text, encoding="utf-8")
+    for rel in spec.get("rewrite") or []:  # BD-450: a small model writes the whole file (NEW) instead of exact EDIT blocks
+        p = wt / rel
+        if p.is_file() and not p.is_symlink():
+            p.unlink()
     return wt
 
 

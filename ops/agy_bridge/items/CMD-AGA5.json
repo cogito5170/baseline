@@ -1,7 +1,7 @@
 {
  "item": {
   "id": "CMD-AGA5",
-  "goal": "Restyle the Token report screen to the other screens' grammar. Edit only frontend/src/app/(app)/reports/ReportsView.tsx; keep its props, TITLE = \"리포트\", <h1>{TITLE}</h1> exactly, the form's name=\"from\"/name=\"to\" date inputs, the submit button text 생성, the empty text 리포트가 없다., and every button's data-report-id / data-export attributes (existing tests check them).\nExact markup to produce:\n1) root: <main className=\"gc-screen\" data-screen=\"reports\"> (replace the outer <div>).\n2) form: <form className=\"gc-form\" ...> with <label>시작<input type=\"date\" name=\"from\" required /></label> and <label>끝<input type=\"date\" name=\"to\" required /></label> — the label text directly before the input, no 'From:'/'To:'.\n3) empty: <p className=\"gc-empty\">리포트가 없다.</p>.\n4) table: <table className=\"gc-table num\" aria-label=\"리포트 목록\">, header row exactly <th>기간</th><th>만든 때</th><th>내보내기</th>.\n5) created time cell: r.created_at is an ISO string like \"2026-10-05T13:58:16.003067+00:00\" or missing; show r.created_at ? r.created_at.slice(0, 16).replace(\"T\", \" \") : \"—\" (so \"2026-10-05 13:58\").\n6) each export button: type=\"button\" and aria-label=`CSV 내려받기 ${r.period.from} ~ ${r.period.to}` / `JSON 내려받기 ...` (the period is NESTED: r.period.from).\nNo `as any`; the frontend must type-check.",
+  "goal": "Rev 2: the file frontend/src/app/(app)/reports/ReportsView.tsx has been REMOVED in your worktree. Write it whole with one NEW action (NEW frontend/src/app/(app)/reports/ReportsView.tsx then <<<<<<< CONTENT ... >>>>>>> END). Do not use EDIT. It must start with: import { FC, FormEvent, MouseEvent } from \"react\"; import { Schemas } from \"../../../lib/api\"; and export const TITLE = \"리포트\"; and export const ReportsView: FC<{ reports: Schemas[\"Report\"][]; onGenerate: (range: { from: string; to: string }) => void; onExport: (id: string, format: \"csv\" | \"json\") => void }>.\nonGenerate reads the form's elements named from and to (HTMLInputElement .value); onExport reads e.currentTarget.dataset.reportId and .dataset.export.\nRestyle the Token report screen to the other screens' grammar. Edit only frontend/src/app/(app)/reports/ReportsView.tsx; keep its props, TITLE = \"리포트\", <h1>{TITLE}</h1> exactly, the form's name=\"from\"/name=\"to\" date inputs, the submit button text 생성, the empty text 리포트가 없다., and every button's data-report-id / data-export attributes (existing tests check them).\nExact markup to produce:\n1) root: <main className=\"gc-screen\" data-screen=\"reports\"> (replace the outer <div>).\n2) form: <form className=\"gc-form\" ...> with <label>시작<input type=\"date\" name=\"from\" required /></label> and <label>끝<input type=\"date\" name=\"to\" required /></label> — the label text directly before the input, no 'From:'/'To:'.\n3) empty: <p className=\"gc-empty\">리포트가 없다.</p>.\n4) table: <table className=\"gc-table num\" aria-label=\"리포트 목록\">, header row exactly <th>기간</th><th>만든 때</th><th>내보내기</th>.\n5) created time cell: r.created_at is an ISO string like \"2026-10-05T13:58:16.003067+00:00\" or missing; show r.created_at ? r.created_at.slice(0, 16).replace(\"T\", \" \") : \"—\" (so \"2026-10-05 13:58\").\n6) each export button: type=\"button\" and aria-label=`CSV 내려받기 ${r.period.from} ~ ${r.period.to}` / `JSON 내려받기 ...` (the period is NESTED: r.period.from).\nNo `as any`; the frontend must type-check.",
   "files": [
    "frontend/src/app/(app)/reports/ReportsView.tsx"
   ],
@@ -23,5 +23,8 @@
   },
   "timeout_s": 300
  },
- "base": "claude/gracious-meitner-vp49xe"
+ "base": "claude/gracious-meitner-vp49xe",
+ "rewrite": [
+  "frontend/src/app/(app)/reports/ReportsView.tsx"
+ ]
 }
