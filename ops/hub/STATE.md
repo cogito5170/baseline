@@ -38,7 +38,7 @@ trig_01Egfbe1CAGL6bXNu6NK9H2M: disabled (old fresh-session watcher)
 trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 
 ## Heads (10-06 15:40)
-ga-sdk: e364817 (0.17.0) | Token: 9c28c85 (TKG1-10; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
+ga-sdk: 3d142ae (0.17.1, GA49 10-06 17:30) | Token: 9c28c85 (TKG1-10; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
 mail_newest: to/baseline-shadow/…T062003…-CMD-GM2.md (handled)
 records_next: BD-471, round 312 (BD-471 = GA49 r2 send-back + GA50 dispatch, not yet written in DECISION_LOG)
 
