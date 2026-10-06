@@ -1,44 +1,33 @@
-# Ops_baseline notes (fixed size; overwrite, do not append history) — handoff 10-06 23:3x KST
-Ops: session_01M4vGeVjHtivZ5nKLDSmdED (prev 01Qhj1TX). baseline: session_016tT1vvrTFehVFzWzfgxcCV (prev 01Ltsebb, child of it). Dev: session_01VMbRhMjtfPAALfLjAWJ1tT (prev 01Vtf8Jh).
-Ops sessions/routines (assign.json): token watcher session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku, wake trig_01EFFxRB :49 KST, alarms come as notify/1);
-  hourly Ops routine trig_018jUnT6xNGK5xNszk1o3EDn (old trig_01GvC312 disabled) (prompt includes shadow digest + snapshot steps).
-inbox seen up to: ops 20261007T011653 (VM interior design). Last sent: dev INC-OPS-2 23:52 (ctx over cap); baseline ST-OPS-8 23:52.
-
-## Done
-- OPS-R0: ops/flow/measure/R0.json via ops/hub/measure_r0.py (static, no ga code). 10.2 USD/wall-h (hub 6.08, worker 4.57, integrator 1.15, watcher 0.51 USD/h).
-  Shadow gate 0/10 (0/25 agree, 0 false accepts, all shadow = ASK_HUMAN, no model call O2; VM daily_turns 40 cap, resumes 00:00Z).
-  62 env fails = rlo missing; per-test list owed by DEV-R0c release (11 test files import rlo).
-- OPS-SH1: ops/hub/shadow_digest.py (stage dev|ops|vm row -> pending; digest -> ONE shadow/1 when oldest >=60 min or blocks_chain). 0 rows so far.
-- OPS-WATCH (in progress): ops/hub/watch_thresholds.json (ctx 150000, 5 USD/h session, 12 USD/h total, snapshot 2 h).
-- B-TKG13: Dev verdict ACCEPT acf7352; waits for user 'TKG13 push' in Token integrator 01FynfJT.
+# Ops_baseline notes (fixed size; overwrite, do not append history) — handoff 10-07 01:2x KST
+Ops: session_01M4vGeVjHtivZ5nKLDSmdED (prev 01Qhj1TX) — ctx 217k, successor_needed sent (ST-OPS-14).
+baseline: session_016tT1vvrTFehVFzWzfgxcCV (prev 01Ltsebb). Dev: session_01VMbRhMjtfPAALfLjAWJ1tT (ctx 283k).
+Watcher: session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku; wake trig_01EFFxRB :49 KST; alarms as notify/1).
+Routines owned by Ops (rebind both to the successor; record in assign.json):
+  trig_018jUnT6xNGK5xNszk1o3EDn hourly :19 (prompt has the full tick; old trig_01GvC312 disabled)
+  trig_017Lm4aTso73qxZ9Ud1AaQvU one-shot 10-07 08:30 KST final OPS-OVERNIGHT status/1
+inbox seen up to: ops 20261007T011653. Last sent: baseline ST-OPS-14 (01:21). Pushes: user 10-07 00:4x "push는 앞으로도 바로 해도 돼" -> push directly.
 
 ## Open
-- R0: DEV-R0a 759d873 + R0b b891bea ACCEPT, not integrated (Dev's INTEGRATE denied by its permission check; user unblock). R0c 78d8c69 built (1400 passed, REFENV.md). No release/1 reached Ops yet -> verify each on arrival.
-- B-R1W-R3D: DEV-WATCH + OPS-LIMITS-WATCH || DEV-R3-DET. On DEV-WATCH release: verify on VM (notify-1 version), start 24 h side-by-side vs Claude watcher; every Claude alarm must also come from VM; then status/1 so baseline retires the Claude watcher + routine.
-- OPS-R1 values (budgets, batch cap, SLOs) -> spec inside batch/1 with DEV-R1. OPS-R2..R5 later.
-- INC-OPS-1 (Dev ctx caps) decided by Dev (integrator stays through R0). INC-OPS-3 00:5x: integrator 230k, GA52 227k, total 12.5 USD/h; proposed archive GA57+01Vtf8Jh, integrator swap after R0-baseline.
-- OPS-VMHUB (R4) rev3 (00:52): plan ops/hub/OPS_VMHUB.md updated; HELD until VMAUTO solved + R0-baseline.
-- OPS-VMAUTO (R1): accepted; on DEV-VMAUTO release verify deploy, then hourly per-class measurement (R0 units) + calls per item + 0-call share; opinion/1 "solved" criteria after 24 h.
-- WATCH-METRIC: watcher usd_per_h is lifetime average (idle/archived sessions inflate total); VM watcher must rate on snapshot deltas.
+- OPS-OVERNIGHT (until 09:00 KST, policy.json overnight_delegation): baseline approves Dev designs after Ops opinion/1.
+  Ops: opinion per design within 1 round; verify/1 or incident/1 per release/1 within 1 round; hourly stalled list -> status/1;
+  final status/1 08:30 (what landed, budget vs caps from measure/hourly.jsonl, MORNING_OPS.md). User-only items -> ops/flow/MORNING_OPS.md.
+- Opinions sent: OP-OPS-VMHUB-R3 (01:04), OP-OPS-R1R2 (01:07), OP-OPS-VMINT (01:18, research/VM_INTERIOR_DESIGN.md). Dev took VMHUB points in.
+- OPS-R0FREEZE (R0): ga-sdk integration 318b22a; R0-baseline candidate 8ead789 (docs/R0_BASELINE.md: 1411/0/1 refenv, 0.18.1); tag pending user line.
+  VM silent since 10-06 20:26 KST (notice per version only). DEV-VMSHA = VI-01. On Dev release: confirm VM SHA, fill measure/VM_BASELINE.json
+  (vm_confirmed_sha, vm_r0_tests); mismatch or >2 h silence after release -> incident/1.
+- OPS-VMBUDGET (R1): measure_hourly rows carry budget{cap: value/limit/breach}, breaches, vm_baseline. VM caps null until VI-07 hourly
+  gateway summary (-> measure/vm_spend.json). ctx_max now ignores completed sessions (fixed 01:2x).
+- INC-OPS-3 (ctx/cost): integrator replaced (new 01Wz1byr); old 01LBoWy9, GA52, GA57, 01Vtf8Jh etc. await archive (user words, Dev session).
+  Over cap now: Dev hub 283k (8.1 USD/h = 66% of burn), top baseline 250k, Ops 217k. Don't re-file per tick; re-file only new sessions.
+- OPS-VMHUB rev3 (R4): plan ops/hub/OPS_VMHUB.md; build HELD until VMAUTO solved (user) + R0-baseline.
+- OPS-VMAUTO (R1) / OPS-BASEAUTO (R5) / OPS-FORMATS (R4): accepted; wait on Dev releases (VI-02/03/07, DEV-BASEAUTO, VI-06a/06 registry).
+  Formats: notify/1 ack+alert across the boundary is the Ops position (Q7 is Dev+Ops, not user).
+- B-R1W-R3D / OPS-WATCH: on DEV-WATCH (VI-05) release, 24 h side-by-side vs Claude watcher; then status/1 to retire it + its routine.
+- Handoffs to record (measure_hourly.py handoff ...): ops 01Qhj1TX->01M4vGeV (ack 00:19 KST); this one when the successor acks.
+- Token: B-TKG13 ACCEPT acf7352 waits user 'TKG13 push' in Token integrator 01FynfJT.
 
-- OPS-BASEAUTO (R5): accepted. ops/hub/measure_hourly.py (delta-based, classes baseline/dev_hub/ops_hub/integrator/worker/watcher/vm_auto); first tick 10-06 23:57 KST stored in ops/flow/measure/last.json (rows start next tick -> hourly.jsonl). Handoffs: `measure_hourly.py handoff <role> <old> <new> <crossed_at> <ack_at> [lost] [dup]` -> handoffs.jsonl. Before/after vs DEV-BASEAUTO release.
-- Handoff latencies to record: ops 01MuXcCL->01Qhj1TX (ack 23:31 KST); dev 01Vtf8Jh->01VMbRhM (~23:55).; ops 01Qhj1TX->01M4vGeV (ack 00:19 KST 10-07)
-- OPS-FORMATS (R4): accepted; waits on DEV-FORMATS registry. Then per channel/hour: seen, conforming, rejected, unregistered (code, 0 model calls) -> status/1; unregistered -> incident/1 to Dev with sample. Note: Ops's own doorbells/notices/acks are ad-hoc today and must move to registry forms.
-
-- OPS-R0FREEZE (R0): accepted 00:44. Needs Dev R0-baseline (DEV-R0FREEZE) + DEV-VMSHA (batch B-R0FREEZE-VM: VM reports SHA on change/on request; today only per version). Then fill ops/flow/measure/VM_BASELINE.json (sha, vm_confirmed_sha, vm_r0_tests); mismatch or VM silence >2 h after release -> incident/1. measure rows carry vm_baseline.
-
-- DEV-ST-OPS-1 00:54: R0FREEZE acting (integrator merges R0c, docs/R0_BASELINE.md, tag R0-baseline needs a user line); DEV-VMSHA acting (worker 015U1Lfq); GA57/01Vtf8Jh archive waits for user words in Dev session; integrator swap after R0-baseline.
-
-- OPS-VMBUDGET (R1) 01:00: caps in policy.json vm_budget (user 01:0x). measure rows carry budget/breaches; routine files incident on breach w/o refusal (ctx-cap breach = INC-OPS-3, don't re-file). opinion/1 OP-OPS-VMHUB-R3 sent 01:0x (VM-local root-owned policy, 3-layer kill switch, post-call reconciliation, hourly VM boundary report).
-
-- OPS-OVERNIGHT (R1) until 09:00 KST: baseline approves Dev designs after Ops opinion. Ops: opinion per design within 1 round; verify/1 or incident/1 per release within 1 round; hourly stalled-session list to baseline; final status/1 08:30 (send_later armed 23:30Z). User-only items -> ops/flow/MORNING_OPS.md.
-
-- OP-OPS-R1R2 sent 01:1x on research/R1R2_DESIGN.md (agree; policy path config + hash in ledger, purpose->cap map in policy, cache key incl sha/model/policy, hourly gateway summary, halt key, day window key, cache pricing+reconciliation, version bump or VMSHA first). ga-sdk head 318b22a; R0-baseline candidate 8ead789 (1411/0/1 refenv), tag pending user line.
-
-- OP-OPS-VMINT sent 01:2x on research/VM_INTERIOR_DESIGN.md (Q7 = Dev+Ops: notify/1 ack+alert allowed; D4 multi-sha attribution, infra not in CFR; D6 max_stabilize_s + data gap = unknown; thresholds via boundary copy+hash; default values for Q2/Q4).
-
-## Hourly (every fire)
-1 inbox ops; 2 git fetch ga-mailbox (to/baseline, -ops, -shadow) -> scoring/incident if lag unexplained; 3 python3 ops/hub/shadow_digest.py digest;
-3b python3 ops/hub/measure_hourly.py tick <sessions.json> (subagent writes sessions.json from list_sessions 30, see measure_hourly doc) -> commit row;
-4 snapshot EVERY hour (VM stale alarm at 2 h): subagent list_sessions 12 -> ops/hub/cloud_snapshot.py -> commit; 5 ops_rules.py on get_session obs when ctx matters.
-Limits: Ops may not run ga-sdk code in-container (auto-mode denial); measure statically. Pushes: user 10-07 00:4x KST in Ops 01M4vGeV: "push는 앞으로도 바로 해도 돼" -> Ops commits are pushed to the integration branch directly (overrides "user handles pushes").
+## Hourly (trig_018jUnT6 prompt is authoritative)
+0 inbox ops; 1 sessions (subagent: list_sessions 30 -> scratchpad sessions.json) + ops_rules.py; stalled list -> status/1;
+2 ga-mailbox to/baseline-ops/-shadow (SHA notices, alerts); 3 shadow_digest.py digest; 3b measure_hourly.py tick sessions.json -> commit;
+4 cloud_snapshot.py < sessions.json -> commit on change; 5 own ctx > 150k -> overwrite this file + successor_needed.
+Limits: Ops may not run ga-sdk code in-container; measure statically. Never archive/redirect sessions without the user's words.

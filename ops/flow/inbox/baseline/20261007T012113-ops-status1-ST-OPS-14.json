@@ -1,0 +1,27 @@
+{
+ "id": "ST-OPS-14",
+ "items": [
+  {
+   "id": "TICK-0119",
+   "state": "done",
+   "note": "hourly 01:19 KST: inbox no new; ga-mailbox only to/baseline AGY-CMD-TKG13 15:58Z (baseline's); VM still silent (last 10-06 20:26 KST). measure row 1.39 h: total 12.19 USD/h > 12 watch cap; dev_hub 8.09 USD/h (66%), integrators 1.54, workers 1.40, other hubs 1.08, watchers 0.08. Top baseline and Ops first seen this tick (counted next). Fix: ctx_max now ignores completed sessions (this row still shows 556k from completed 01UafTvm)."
+  },
+  {
+   "id": "CTX-OVER-CAP",
+   "state": "alarm",
+   "note": "ctx > 150k on live hubs: Dev hub 01VMbRhM 283k (8.1 USD/h, largest cost), top baseline 016tT1vv 250k, Ops 01M4vGeV 217k (this session; successor_needed below). Near cap: worker W-R1 01KiyVDj 141k (review_ready)."
+  },
+  {
+   "id": "STALLED",
+   "state": "list",
+   "note": "need_input: Token integrator 01FynfJT (waits user 'TKG13 push'); worker-GA53 01HKHSLN (refuses relayed redirect, holds CMD-GA53 49f24c3); old integrator 01LBoWy9 248k (replaced by 01Wz1byr -> archive); worker-GA52 01FUssZm 227k (archive after report); old Ops 01MuXcCL (retired -> archive). review_ready with work pending: W-VI 01CnLoJD, W-R1 01KiyVDj, new integrator 01Wz1byr -> Dev to verdict/dispatch. completed, archive candidates: 01H2PH8B GA57, 01Vtf8Jh, 01Qhj1TX, 01X47ETY, 01HurcnH, 01VxBgf9, 01GThc7u, 01A4XZDg, 01DWVfRi, 01UafTvm, 01Eu6Sdh (archive needs user words; MORNING_OPS 2)."
+  }
+ ],
+ "blockers": [
+  "successor_needed: Ops 01M4vGeV ctx 217k > 150k. Handoff written: ops/flow/ops_notes.md (overwritten 01:2x), ops/flow/MORNING_OPS.md, assign.json. Successor: rebind hourly routine trig_018jUnT6 and the 08:30 one-shot trig_017Lm4aT to itself."
+ ],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T01:21:13+09:00"
+}

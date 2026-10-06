@@ -1,59 +1,327 @@
 {
  "schema": "cloud-sessions/1",
- "at": "2026-10-06T23:26:10+09:00",
+ "at": "2026-10-07T01:20:52+09:00",
  "plan": {
   "kind": "five_hour",
   "status": "allowed",
   "overage": false,
-  "resets_at": "2026-10-07T04:20+09:00"
+  "resets_at": "2026-10-07T05:00+09:00"
  },
  "sessions": [
+  {
+   "id": "session_01CnLoJDKJJZ8bZ93tbGHmiN",
+   "title": "baseline ◇ worker W-VI (VI-06a + VI-20) (10-07 01:2x~)",
+   "status": "idle",
+   "bucket": "review_ready",
+   "detail": "branch claude/DEV-VI-06a-20 created; ack sent to Dev hub",
+   "repo": "ga-sdk",
+   "branch": "claude/DEV-VI-06a-20",
+   "model": "claude-sonnet-5-5",
+   "ctx": 65949,
+   "cost_usd": 0.09,
+   "tags": [
+    "baseline-worker",
+    "branch:claude/DEV-VI-06a-20",
+    "role:worker-W-VI"
+   ],
+   "updated_at": "2026-10-06T16:19:56.607348Z",
+   "url": "https://claude.ai/code/session_01CnLoJDKJJZ8bZ93tbGHmiN",
+   "parent": "session_016tT1vvrTFehVFzWzfgxcCV",
+   "tokens": {
+    "input": 6,
+    "output": 393,
+    "cache_read": 182660,
+    "cache_write": 12596
+   }
+  },
+  {
+   "id": "session_01QEjaAWsA1RhPRCjpWza1iZ",
+   "title": "baseline ◇ worker W-R2 verdict dry-run (10-07 01:2x~)",
+   "status": "running",
+   "bucket": "working",
+   "detail": "",
+   "repo": "ga-sdk",
+   "branch": "claude/DEV-R2-DRY",
+   "model": "claude-sonnet-5-5",
+   "ctx": 68019,
+   "cost_usd": 0.2,
+   "tags": [
+    "baseline-worker",
+    "branch:claude/DEV-R2-DRY",
+    "role:worker-W-R2"
+   ],
+   "updated_at": "2026-10-06T16:19:39.431760Z",
+   "url": "https://claude.ai/code/session_01QEjaAWsA1RhPRCjpWza1iZ",
+   "parent": "session_016tT1vvrTFehVFzWzfgxcCV",
+   "tokens": {
+    "input": 6,
+    "output": 909,
+    "cache_read": 142962,
+    "cache_write": 39663
+   }
+  },
+  {
+   "id": "session_01KiyVDjXGVzKdLAEjC9T7Du",
+   "title": "baseline ◇ worker W-R1 gateway (10-07 01:2x~)",
+   "status": "idle",
+   "bucket": "review_ready",
+   "detail": "gateway/ledger/cache/report done; writing tests; full-suite running",
+   "repo": "ga-sdk",
+   "branch": "claude/DEV-R1-GW",
+   "model": "claude-sonnet-5-5",
+   "ctx": 140543,
+   "cost_usd": 1.54,
+   "tags": [
+    "baseline-worker",
+    "branch:claude/DEV-R1-GW",
+    "role:worker-W-R1"
+   ],
+   "updated_at": "2026-10-06T16:17:06.462032Z",
+   "url": "https://claude.ai/code/session_01KiyVDjXGVzKdLAEjC9T7Du",
+   "parent": "session_016tT1vvrTFehVFzWzfgxcCV",
+   "tokens": {
+    "input": 1084,
+    "output": 42382,
+    "cache_read": 3824268,
+    "cache_write": 87218
+   }
+  },
+  {
+   "id": "session_01Wz1byrS7ZeUJegQupssgr4",
+   "title": "baseline ◇ ga-sdk 통합 (10-07 01:2x~) [replaces 01LBoWy9]",
+   "status": "idle",
+   "bucket": "review_ready",
+   "detail": "I'll create no tag and push nothing unless the Dev hub sends an INTEGRATE that meets the `auto_integrate` conditions.",
+   "repo": "ga-sdk",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-sonnet-5-5",
+   "ctx": 75012,
+   "cost_usd": 0.39,
+   "tags": [
+    "baseline-integrator",
+    "branch:claude/gracious-meitner-vp49xe",
+    "replaces:session_01LBoWy9AXfEwQsHqMcumAuC",
+    "role:ga-sdk-integrator"
+   ],
+   "updated_at": "2026-10-06T16:10:51.646465Z",
+   "url": "https://claude.ai/code/session_01Wz1byrS7ZeUJegQupssgr4",
+   "parent": "session_016tT1vvrTFehVFzWzfgxcCV",
+   "tokens": {
+    "input": 528,
+    "output": 1597,
+    "cache_read": 710952,
+    "cache_write": 56916
+   }
+  },
+  {
+   "id": "session_016tT1vvrTFehVFzWzfgxcCV",
+   "title": "baseline ● top (10-07 00:2x~) [replaces 01Ltsebb]",
+   "status": "idle",
+   "bucket": "review_ready",
+   "detail": "5 build items active; next check 02:04 KST",
+   "repo": "baseline",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-opus-5-5",
+   "ctx": 250264,
+   "cost_usd": 7.3,
+   "tags": [
+    "baseline-hub",
+    "branch:claude/gracious-meitner-vp49xe",
+    "opened_by:session_01LtsebbxyWz4BAggiGcG1WF",
+    "replaces:session_01LtsebbxyWz4BAggiGcG1WF",
+    "role:baseline"
+   ],
+   "updated_at": "2026-10-06T16:19:58.230588Z",
+   "url": "https://claude.ai/code/session_016tT1vvrTFehVFzWzfgxcCV",
+   "parent": "session_01LtsebbxyWz4BAggiGcG1WF",
+   "tokens": {
+    "input": 20317,
+    "output": 66782,
+    "cache_read": 21310648,
+    "cache_write": 203434
+   }
+  },
+  {
+   "id": "session_01M4vGeVjHtivZ5nKLDSmdED",
+   "title": "baseline ▼ Ops_baseline (10-07 00:2x~)",
+   "status": "running",
+   "bucket": "working",
+   "detail": "",
+   "repo": "baseline",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-opus-5-5",
+   "ctx": 217526,
+   "cost_usd": 5.17,
+   "tags": [
+    "baseline-hub",
+    "branch:claude/gracious-meitner-vp49xe",
+    "ops",
+    "replaces:session_01Qhj1TXTH414PdvL1n2JCRy",
+    "role:ops"
+   ],
+   "updated_at": "2026-10-06T16:19:51.970932Z",
+   "url": "https://claude.ai/code/session_01M4vGeVjHtivZ5nKLDSmdED",
+   "parent": "session_01LtsebbxyWz4BAggiGcG1WF",
+   "tokens": {
+    "input": 3737,
+    "output": 50669,
+    "cache_read": 13217644,
+    "cache_write": 186882
+   }
+  },
+  {
+   "id": "session_01LM8RAduWduzRFDRQe63WD1",
+   "title": "세션 간 정책 일관성 가이드",
+   "status": "idle",
+   "bucket": "blocked",
+   "detail": "VM bridge implementation complete; awaiting policy.json decision",
+   "repo": "baseline",
+   "branch": "claude/cross-session-policy-consistency-6bkcbv",
+   "model": "claude-opus-5-5",
+   "ctx": 201732,
+   "cost_usd": 3.93,
+   "tags": [],
+   "updated_at": "2026-10-06T15:23:25.437173Z",
+   "url": "https://claude.ai/code/session_01LM8RAduWduzRFDRQe63WD1",
+   "parent": null,
+   "tokens": {
+    "input": 1096,
+    "output": 77576,
+    "cache_read": 5554713,
+    "cache_write": 158225
+   }
+  },
+  {
+   "id": "session_01VMbRhMjtfPAALfLjAWJ1tT",
+   "title": "baseline ▲ Dev_baseline (10-07 00:0x~)",
+   "status": "running",
+   "bucket": "working",
+   "detail": "",
+   "repo": "baseline",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-opus-5-5",
+   "ctx": 283282,
+   "cost_usd": 11.28,
+   "tags": [
+    "baseline-hub",
+    "branch:claude/gracious-meitner-vp49xe",
+    "dev",
+    "replaces:session_01Vtf8JhoPbyf3o8v87LPVLb",
+    "role:dev"
+   ],
+   "updated_at": "2026-10-06T16:19:54.622593Z",
+   "url": "https://claude.ai/code/session_01VMbRhMjtfPAALfLjAWJ1tT",
+   "parent": "session_01LtsebbxyWz4BAggiGcG1WF",
+   "tokens": {
+    "input": 9872,
+    "output": 113105,
+    "cache_read": 29273696,
+    "cache_write": 472088
+   }
+  },
+  {
+   "id": "session_01Qhj1TXTH414PdvL1n2JCRy",
+   "title": "baseline ▼ Ops_baseline (10-06 23:4x~)",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "Ops successor created; handoff ready in ops_notes.md",
+   "repo": "baseline",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-opus-5-5",
+   "ctx": 157329,
+   "cost_usd": 3.22,
+   "tags": [
+    "baseline-hub",
+    "branch:claude/gracious-meitner-vp49xe",
+    "ops",
+    "replaced_by:session_01M4vGeVjHtivZ5nKLDSmdED",
+    "replaces:session_01MuXcCLZm3KXYyDj9v8HqyB",
+    "role:ops"
+   ],
+   "updated_at": "2026-10-06T15:18:58.146449Z",
+   "url": "https://claude.ai/code/session_01Qhj1TXTH414PdvL1n2JCRy",
+   "parent": "session_01LtsebbxyWz4BAggiGcG1WF",
+   "tokens": {
+    "input": 7057,
+    "output": 31710,
+    "cache_read": 7444557,
+    "cache_write": 184675
+   }
+  },
+  {
+   "id": "session_01LtsebbxyWz4BAggiGcG1WF",
+   "title": "Baseline DevOps hub setup",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "",
+   "repo": "baseline",
+   "branch": null,
+   "model": "claude-opus-5-5",
+   "ctx": 271239,
+   "cost_usd": 9.02,
+   "tags": [
+    "branch:claude/gracious-meitner-vp49xe",
+    "outcome_branch:claude/baseline-devops-hub-wkac1q",
+    "replaced_by:session_016tT1vvrTFehVFzWzfgxcCV",
+    "replaces:session_01UafTvmJjZiza4ctSfoeV8V",
+    "role:baseline"
+   ],
+   "updated_at": "2026-10-06T15:26:14.145460Z",
+   "url": "https://claude.ai/code/session_01LtsebbxyWz4BAggiGcG1WF",
+   "parent": null,
+   "tokens": {
+    "input": 9367,
+    "output": 94215,
+    "cache_read": 22667219,
+    "cache_write": 362252
+   }
+  },
   {
    "id": "session_01TBHcmu5ar3uwnjL7m6NhYg",
    "title": "baseline ◎ 토큰 감시 (10-06 22:5x~)",
    "status": "idle",
    "bucket": "review_ready",
-   "detail": "baseline token watcher armed; awaiting :49 KST signal",
+   "detail": "baseline token watcher standing by; last run 15:49 UTC (2 context alarms, $12.5/h)",
    "repo": "baseline",
    "branch": null,
    "model": "claude-haiku-4-5-20251001",
-   "ctx": 53178,
-   "cost_usd": 0.03,
+   "ctx": 102922,
+   "cost_usd": 0.35,
    "tags": [
     "baseline-watcher"
    ],
-   "updated_at": "2026-10-06T13:51:56.215159Z",
+   "updated_at": "2026-10-06T15:50:09.215512Z",
    "url": "https://claude.ai/code/session_01TBHcmu5ar3uwnjL7m6NhYg",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 10,
-    "output": 461,
-    "cache_read": 39070,
-    "cache_write": 14098
+    "input": 542,
+    "output": 10344,
+    "cache_read": 1745984,
+    "cache_write": 63174
    }
   },
   {
    "id": "session_015U1LfqNoymrTP9Wduzmh31",
    "title": "ga-sdk DEV-R0a · 실제 응답 모델 기록 (10-06 21:2x~)",
    "status": "idle",
-   "bucket": "completed",
-   "detail": "DEV-R0a pushed; all writers name answering model",
+   "bucket": "review_ready",
+   "detail": "refenv full suite running (build + tests)",
    "repo": "ga-sdk",
-   "branch": "claude/DEV-R0a",
+   "branch": "claude/DEV-VMSHA",
    "model": "claude-sonnet-5-5",
-   "ctx": 112240,
-   "cost_usd": 1.34,
+   "ctx": 176107,
+   "cost_usd": 2.85,
    "tags": [
     "baseline-worker"
    ],
-   "updated_at": "2026-10-06T12:45:02.399325Z",
+   "updated_at": "2026-10-06T15:54:38.123967Z",
    "url": "https://claude.ai/code/session_015U1LfqNoymrTP9Wduzmh31",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 596,
-    "output": 13689,
-    "cache_read": 4159991,
-    "cache_write": 92643
+    "input": 1655,
+    "output": 29193,
+    "cache_read": 7988825,
+    "cache_write": 240038
    }
   },
   {
@@ -83,75 +351,81 @@
   {
    "id": "session_01MuXcCLZm3KXYyDj9v8HqyB",
    "title": "baseline ▼ Ops_baseline (10-06 21:2x~)",
-   "status": "running",
-   "bucket": "working",
-   "detail": "",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "handoff ready; awaiting two unblocks from user",
    "repo": "baseline",
    "branch": "claude/gracious-meitner-vp49xe",
    "model": "claude-opus-5-5",
-   "ctx": 230840,
-   "cost_usd": 4.74,
+   "ctx": 243965,
+   "cost_usd": 6.16,
    "tags": [
     "baseline-hub",
-    "ops"
+    "branch:claude/gracious-meitner-vp49xe",
+    "ops",
+    "replaced_by:session_01Qhj1TXTH414PdvL1n2JCRy",
+    "role:ops"
    ],
-   "updated_at": "2026-10-06T14:25:21.426067Z",
+   "updated_at": "2026-10-06T14:30:17.540353Z",
    "url": "https://claude.ai/code/session_01MuXcCLZm3KXYyDj9v8HqyB",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 7512,
-    "output": 38741,
-    "cache_read": 12638995,
-    "cache_write": 175484
+    "input": 8555,
+    "output": 52548,
+    "cache_read": 16065357,
+    "cache_write": 259721
    }
   },
   {
    "id": "session_01Vtf8JhoPbyf3o8v87LPVLb",
    "title": "baseline ▲ Dev_baseline (10-06 21:2x~)",
-   "status": "running",
-   "bucket": "working",
-   "detail": "",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "handoff complete; successor session_01VMbRhMjtfPAALfLjAWJ1tT",
    "repo": "baseline",
    "branch": "claude/gracious-meitner-vp49xe",
    "model": "claude-opus-5-5",
-   "ctx": 296316,
-   "cost_usd": 7.68,
+   "ctx": 345390,
+   "cost_usd": 11.35,
    "tags": [
     "baseline-hub",
-    "dev"
+    "branch:claude/gracious-meitner-vp49xe",
+    "dev",
+    "replaced_by:session_01VMbRhMjtfPAALfLjAWJ1tT",
+    "role:dev"
    ],
-   "updated_at": "2026-10-06T14:25:12.614222Z",
+   "updated_at": "2026-10-06T14:55:13.295866Z",
    "url": "https://claude.ai/code/session_01Vtf8JhoPbyf3o8v87LPVLb",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 15382,
-    "output": 54918,
-    "cache_read": 21350696,
-    "cache_write": 281097
+    "input": 19031,
+    "output": 71405,
+    "cache_read": 36023808,
+    "cache_write": 329795
    }
   },
   {
    "id": "session_01H2PH8BwPn3e3ut6Qjoaed3",
    "title": "ga-sdk CMD-GA57 · ga ops 자율 고리 (10-06 20:5x~)",
-   "status": "idle",
-   "bucket": "blocked",
-   "detail": "pushed DEV-R0c branch; awaiting hub go-ahead to integrate",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "handoff confirmed; reports resent to session_01VMbRhM",
    "repo": "ga-sdk",
    "branch": "claude/CMD-GA57",
    "model": "claude-opus-5-5",
-   "ctx": 266853,
-   "cost_usd": 8.21,
+   "ctx": 283051,
+   "cost_usd": 10.52,
    "tags": [
     "baseline-worker"
    ],
-   "updated_at": "2026-10-06T12:54:54.864852Z",
+   "updated_at": "2026-10-06T14:56:21.519131Z",
    "url": "https://claude.ai/code/session_01H2PH8BwPn3e3ut6Qjoaed3",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 3282,
-    "output": 93225,
-    "cache_read": 22751549,
-    "cache_write": 223289
+    "input": 3802,
+    "output": 95369,
+    "cache_read": 24468057,
+    "cache_write": 462776
    }
   },
   {
@@ -183,45 +457,49 @@
    "title": "baseline ◇ Token 통합 (10-06 20:27~)",
    "status": "idle",
    "bucket": "blocked",
-   "detail": "CMD-TKG13 accepted at acf7352; awaiting push approval",
+   "detail": "awaiting explicit push line (e.g., \"TKG13 push\") or directive on INTEGRATE request handling",
    "repo": "Token",
    "branch": null,
    "model": "claude-sonnet-5-5",
-   "ctx": 108933,
-   "cost_usd": 0.69,
+   "ctx": 127329,
+   "cost_usd": 1.29,
    "tags": [
     "baseline-integrator"
    ],
-   "updated_at": "2026-10-06T12:25:22.327831Z",
+   "updated_at": "2026-10-06T15:49:43.366883Z",
    "url": "https://claude.ai/code/session_01FynfJTJBM1D3itToGCjyM1",
    "parent": "session_01UafTvmJjZiza4ctSfoeV8V",
    "tokens": {
-    "input": 1059,
-    "output": 6935,
-    "cache_read": 2011680,
-    "cache_write": 54706
+    "input": 2092,
+    "output": 8384,
+    "cache_read": 3235637,
+    "cache_write": 138150
    }
   },
   {
    "id": "session_01UafTvmJjZiza4ctSfoeV8V",
    "title": "baseline ● 현재 허브 (10-06 20:23~)",
    "status": "idle",
-   "bucket": "blocked",
-   "detail": "sent watch & dev requests; awaiting 2 user inputs to proceed",
+   "bucket": "completed",
+   "detail": "R0a·R0b merged to ga-sdk; R0c validated; handoff to new Dev complete",
    "repo": "baseline",
    "branch": "claude/gracious-meitner-vp49xe",
    "model": "claude-opus-5-5",
-   "ctx": 521573,
-   "cost_usd": 26.5,
-   "tags": [],
-   "updated_at": "2026-10-06T14:25:14.418172Z",
+   "ctx": 556051,
+   "cost_usd": 28.7,
+   "tags": [
+    "branch:claude/gracious-meitner-vp49xe",
+    "replaced_by:session_01LtsebbxyWz4BAggiGcG1WF",
+    "role:baseline"
+   ],
+   "updated_at": "2026-10-06T15:21:07.089516Z",
    "url": "https://claude.ai/code/session_01UafTvmJjZiza4ctSfoeV8V",
    "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
    "tokens": {
-    "input": 29199,
-    "output": 213725,
-    "cache_read": 91909891,
-    "cache_write": 466123
+    "input": 30245,
+    "output": 219501,
+    "cache_read": 100973470,
+    "cache_write": 499469
    }
   },
   {
@@ -292,6 +570,195 @@
     "output": 12614,
     "cache_read": 2819267,
     "cache_write": 71499
+   }
+  },
+  {
+   "id": "session_01LBoWy9AXfEwQsHqMcumAuC",
+   "title": "baseline ◇ ga-sdk 통합 (10-06 19:58~)",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "branch pushed, suite 1411/1411 green; awaiting tag decision",
+   "repo": "ga-sdk",
+   "branch": null,
+   "model": "claude-sonnet-5-5",
+   "ctx": 248222,
+   "cost_usd": 6.27,
+   "tags": [
+    "baseline-integrator",
+    "branch:claude/gracious-meitner-vp49xe",
+    "replaced_by:session_01Wz1byrS7ZeUJegQupssgr4",
+    "role:ga-sdk-integrator"
+   ],
+   "updated_at": "2026-10-06T16:03:47.141976Z",
+   "url": "https://claude.ai/code/session_01LBoWy9AXfEwQsHqMcumAuC",
+   "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "tokens": {
+    "input": 20051,
+    "output": 45966,
+    "cache_read": 24557390,
+    "cache_write": 214199
+   }
+  },
+  {
+   "id": "session_01FUssZmVMp6rDvZ7GFTEpuK",
+   "title": "baseline ◆ CMD-GA52 merge (Sonnet)",
+   "status": "idle",
+   "bucket": "blocked",
+   "detail": "rev-2 work ready; awaiting go-ahead in this chat",
+   "repo": "ga-sdk",
+   "branch": "claude/CMD-GA52",
+   "model": "claude-sonnet-5-5",
+   "ctx": 226911,
+   "cost_usd": 4.65,
+   "tags": [
+    "baseline-worker"
+   ],
+   "updated_at": "2026-10-06T15:02:38.033205Z",
+   "url": "https://claude.ai/code/session_01FUssZmVMp6rDvZ7GFTEpuK",
+   "parent": "session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "tokens": {
+    "input": 1101,
+    "output": 10608,
+    "cache_read": 3779792,
+    "cache_write": 946849
+   }
+  },
+  {
+   "id": "session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "title": "baseline ○ 이전 허브 (10-06 19:22~20:23, 인계 완료)",
+   "status": "idle",
+   "bucket": "completed",
+   "detail": "context limit reached; handoff to new hub complete",
+   "repo": "baseline",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-opus-5-5",
+   "ctx": 287156,
+   "cost_usd": 7.35,
+   "tags": [],
+   "updated_at": "2026-10-06T11:44:41.947222Z",
+   "url": "https://claude.ai/code/session_01Eu6SdhSHCCwkL8BoAsULXr",
+   "parent": "session_01J4GYxF1DgQExRvBkxRm9pp",
+   "tokens": {
+    "input": 73411,
+    "output": 66617,
+    "cache_read": 20175758,
+    "cache_write": 232160
+   }
+  },
+  {
+   "id": "session_01J4GYxF1DgQExRvBkxRm9pp",
+   "title": "baseline ○ 이전 허브 (10-06 18:22~19:22, 인계 완료)",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "migrated to new hub (19:22); GA51 awaiting test addition + integration approval",
+   "repo": "baseline",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-opus-5-5",
+   "ctx": 191875,
+   "cost_usd": 3.02,
+   "tags": [],
+   "updated_at": "2026-10-06T10:21:48.493163Z",
+   "url": "https://claude.ai/code/session_01J4GYxF1DgQExRvBkxRm9pp",
+   "parent": "session_01ERe9emPsRpLN5eGNJgGuVS",
+   "tokens": {
+    "input": 1127,
+    "output": 20740,
+    "cache_read": 7471826,
+    "cache_write": 138013
+   }
+  },
+  {
+   "id": "session_01GThc7uijAktpufbUynL5ws",
+   "title": "ga-sdk CMD-GA52 · 콘솔 클라우드 화면 (10-06 18:05~)",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "GA52 cloud feature complete; tests green, report pushed",
+   "repo": "ga-sdk",
+   "branch": "claude/CMD-GA52",
+   "model": "claude-opus-5-5",
+   "ctx": 213539,
+   "cost_usd": 4.18,
+   "tags": [
+    "baseline-worker"
+   ],
+   "updated_at": "2026-10-06T10:21:37.560300Z",
+   "url": "https://claude.ai/code/session_01GThc7uijAktpufbUynL5ws",
+   "parent": "session_01ERe9emPsRpLN5eGNJgGuVS",
+   "tokens": {
+    "input": 107,
+    "output": 44152,
+    "cache_read": 8693163,
+    "cache_write": 194275
+   }
+  },
+  {
+   "id": "session_01ERe9emPsRpLN5eGNJgGuVS",
+   "title": "baseline ○ 이전 허브 (10-06 17:53~18:22, 인계 완료)",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "GA50 passed; awaiting ga-sdk push approval; handed off to new hub",
+   "repo": "baseline",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-opus-5-5",
+   "ctx": 229356,
+   "cost_usd": 4.13,
+   "tags": [],
+   "updated_at": "2026-10-06T09:21:19.946739Z",
+   "url": "https://claude.ai/code/session_01ERe9emPsRpLN5eGNJgGuVS",
+   "parent": "session_01ThMJnkXYNSMWt4BtSiVDGx",
+   "tokens": {
+    "input": 3622,
+    "output": 40071,
+    "cache_read": 9542934,
+    "cache_write": 175954
+   }
+  },
+  {
+   "id": "session_01A4XZDgCfueMHW6rBGSWLuA",
+   "title": "ga-sdk CMD-GA51 · 허브 모델 auto (10-06 17:45~)",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "CMD-GA51: test added, m6 caught, 1344 passed, notified hub",
+   "repo": "ga-sdk",
+   "branch": "claude/CMD-GA51",
+   "model": "claude-opus-5-5",
+   "ctx": 154691,
+   "cost_usd": 3.56,
+   "tags": [
+    "baseline-worker"
+   ],
+   "updated_at": "2026-10-06T10:34:38.491165Z",
+   "url": "https://claude.ai/code/session_01A4XZDgCfueMHW6rBGSWLuA",
+   "parent": "session_01ThMJnkXYNSMWt4BtSiVDGx",
+   "tokens": {
+    "input": 7939,
+    "output": 29260,
+    "cache_read": 10651177,
+    "cache_write": 101282
+   }
+  },
+  {
+   "id": "session_01DWVfRidtP9ENpP7jnhodSu",
+   "title": "baseline ◇ Token 통합 (10-06 17:00~)",
+   "status": "archived",
+   "bucket": "completed",
+   "detail": "merged TKG12-20 into claude/gracious-meitner-vp49xe; tests green (105 frontend, 321 backend)",
+   "repo": "Token",
+   "branch": "claude/gracious-meitner-vp49xe",
+   "model": "claude-sonnet-5-5",
+   "ctx": 238179,
+   "cost_usd": 3.77,
+   "tags": [
+    "baseline-integrator"
+   ],
+   "updated_at": "2026-10-06T11:26:19.720855Z",
+   "url": "https://claude.ai/code/session_01DWVfRidtP9ENpP7jnhodSu",
+   "parent": "session_018XDm17bNkdU75huKaxKmkf",
+   "tokens": {
+    "input": 8967,
+    "output": 43649,
+    "cache_read": 12712596,
+    "cache_write": 194257
    }
   }
  ]

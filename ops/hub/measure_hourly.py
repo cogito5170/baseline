@@ -69,7 +69,7 @@ def tick(raw: dict, last: dict, assign: dict, now: datetime) -> tuple[dict, dict
         d = {f: max(u[f] - p[f], 0) for f in FIELDS} if p else None  # new session: baseline only, counted next tick
         c = cls.setdefault(k, {"n": 0, "active": 0, **{f: 0 for f in FIELDS}, "ctx_max": 0})
         c["n"] += 1
-        if u["ctx"] and "ARCHIVED" not in str(s.get("session_status") or s.get("status") or ""):
+        if u["ctx"] and not any(x in str(s.get("session_status") or s.get("status") or "") + str(s.get("status_bucket") or "") for x in ("ARCHIVED", "COMPLETED", "completed")):
             c["ctx_max"] = max(c["ctx_max"], u["ctx"])
         if d and any(d.values()):
             c["active"] += 1
