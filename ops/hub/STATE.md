@@ -19,6 +19,15 @@ integration_branch: claude/gracious-meitner-vp49xe (all repos)
 repos: baseline, ga-sdk, Token(token), Sensor, DC, MS, Telemetry, action, health, guard, rlo-sdk, amp, ga_rlo
 artifacts: ga-SDK 최종 보고 https://claude.ai/artifact/MZdSkCP57fDTWQpsZvf6Fp ; ga Console UI https://claude.ai/artifact/JgFn8ddLQPpzMrtbyQ9vZQ
 
+## Integrators (the user, 10-06 17:00 KST: "이전 세션에서 만들어놓고, 이후 세션에서 연결해")
+A hub only has baseline (create_session takes one source; add_repo in a new hub needs the user's own words). So the
+hub does NOT attach ga-sdk/Token: it sends work by send_message to persistent integrator sessions that hold those repos.
+ga-sdk: session_01JaqBjV1w4EXWE4Yc7YgGDz "baseline ◇ ga-sdk 통합" — VERDICT <branch> + mutations [{id,file,find,replace,tests}] → one JSON line; INTEGRATE <branch> <sha> → ff push only.
+Token: session_01DWVfRidtP9ENpP7jnhodSu "baseline ◇ Token 통합" — VERDICT agv/<id>-r<n> + tests/command/allowed files/mutations [{file,old,new}]; INTEGRATE <branch> <sha> → ff or merge commit, suites green, push.
+They accept only the hub id in their prompt; on every handoff the outgoing hub sends each: "hub is now <new id>".
+Bridge items (ga mail send) need only baseline: copy ga-sdk read-only (git clone of public ga-sdk if allowed) or write mail per ga's format; ask the ga-sdk integrator to send if needed.
+repos_attach is now OPTIONAL (only if the user says "추가해" in that hub).
+
 ## Routines
 trig_01XgQLp8ZMCe7xEmDJiTWcFF: mail+workers check, :19 hourly, fires INTO the hub (recreate on handoff, disable old); trig_01RuQYZ… disabled
 watcher: session_019EWtXvKB3EE8RTYPHnNHLP "baseline ◎ 토큰 감시" (Sonnet, persistent, source baseline), woken by
@@ -81,7 +90,7 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
    prompt "read ops/hub/STATE.md; first add_repo (push) every repos_attach entry — the user's standing direction of 10-06 15:46
    is quoted in STATE; then <next_action>". If add_repo is still denied, ask the user once in Korean to say "추가해" in that session.
 3. Outgoing renames itself "baseline ○ 이전 허브 (start~end, 인계 완료)", writes new id to ops/hub/BASELINE_SESSION,
-   moves the mail routine, tells the user the link in one line, stops.
-4. Incoming (constructor): add_repo push for every repos_attach entry citing user_direction above, clone, venv (rlo-sdk + ga-sdk), audit this file, add one `audit:` line below, work.
+   moves the mail routine, sends each integrator + each worker "hub is now <new id>", tells the user the link in one line, stops.
+4. Incoming: do NOT add_repo; use the Integrators (above). Venv/npm only if needed locally (rlo-sdk + ga-sdk), audit this file, add one `audit:` line below, work.
 audit 10-06 15:40 (session_018XDm17…): heads OK; stale "access settled" (add_repo + pip denied here);
   BASELINE_SESSION was old id (fixed); mail routine moved. STATE rewritten to KST key:value (12.9 KB → 5.6 KB, ~57% fewer tokens).
