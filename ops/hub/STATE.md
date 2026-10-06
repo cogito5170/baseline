@@ -23,7 +23,7 @@ artifacts: 상황판(phone/PC; live sessions via Claude Code Remote list_session
 A hub only has baseline (create_session takes one source; add_repo in a new hub needs the user's own words). So the
 hub does NOT attach ga-sdk/Token: it sends work by send_message to persistent integrator sessions that hold those repos.
 ga-sdk: session_01LBoWy9AXfEwQsHqMcumAuC "baseline ◇ ga-sdk 통합 (10-06 19:58~)" (Sonnet; replaced 01JaqBjV… at 186k; its successor prompt is its first message) — VERDICT <branch> + mutations [{id,file,find,replace,tests}] → one JSON line; INTEGRATE <branch> <sha> → ff push only.
-Token: session_01DWVfRidtP9ENpP7jnhodSu "baseline ◇ Token 통합" (203k → replace after TKG12-20 batch) — VERDICT agv/<id>-r<n> + tests/command/allowed files/mutations [{file,old,new}]; INTEGRATE <branch> <sha> → ff or merge commit, suites green, push.
+Token: session_01FynfJTJBM1D3itToGCjyM1 "baseline ◇ Token 통합 (10-06 20:27~)" (Sonnet; replaced 01DWVfRi… at 238k, archived; prompt ops/hub/successors/token_integrator.md) — VERDICT agv/<id>-r<n> + tests/command/allowed files/mutations [{file,old,new}]; INTEGRATE <branch> <sha> → ff or merge commit, suites green, push.
 They accept only the hub id in their prompt; on every handoff the outgoing hub sends each: "hub is now <new id>".
 Bridge items (ga mail send) need only baseline: copy ga-sdk read-only (git clone of public ga-sdk if allowed) or write mail per ga's format; ask the ga-sdk integrator to send if needed.
 repos_attach is now OPTIONAL (only if the user says "추가해" in that hub).
@@ -38,7 +38,7 @@ trig_01Egfbe1CAGL6bXNu6NK9H2M: disabled (old fresh-session watcher)
 trig_01QDkY2th2C19fSzj62MTdZ8: disabled (old hub's mail routine)
 
 ## Heads (10-06 19:20)
-ga-sdk: f9671da (0.18.1, GA51 10-06 19:56) | Token: 4720d5f (TKG1-11, 10-06 17:53; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
+ga-sdk: f9671da (0.18.1, GA51 10-06 19:56) | Token: 12600f8 (TKG1-12,14-20, 10-06 20:26; main 0e19043) | rlo-sdk: 0d92a3d | baseline: git log
 mail_newest: to/baseline-ops/…T1003…-vm-notify-1 (VM runs ga 0.18.0, handled 19:20)
 records_next: BD-471.., round 312 — unwritten in DECISION_LOG/BASELINE §13: GA49 r2 SEND_BACK, GA49 r3 ACCEPT+integrate, GA50 r1 SEND_BACK, GA51 dispatch, TKG11 mail+ACCEPT (verdicts.jsonl has GA49 r3, GA50 r1, TKG11 r1, GA51 r2 SEND_BACK; also unwritten: GA50 r2 ACCEPT+integrate).
 
@@ -70,8 +70,7 @@ fixes_queued: GA39 survivors (rest → CMD-GA53).
 - CMD-GA53 (4 engine fixes) worker session_01HKHSLN… done 20:23: 49f24c3, 0.18.2, 4/4 mutations killed; 10 failures (test_judge x6, ga32 x2, ga39 x2) that it says fail on base too, but the integrator ran f9671da 1401 OK, so likely its environment. After GA52 lands: tell the worker to merge the new head + bump 0.18.3 → VERDICT (D1 mutations; the integrator's suite decides on the 10).
 - CMD-GA54 `ga project` (user chose (가); generic — user: no example content) worker session_01VxBgf9gyDktXz8Ke7T6NiY (Opus, claude/CMD-GA54) drafting core.
 - CMD-GA55 usage panel (user OK 20:3x): directives/CMD-GA55.md ready; dispatch AFTER GA54 lands. Producer done: cloud_snapshot.py emits `plan` + per-session parent/tokens.
-- TKG12,14-20: integrator batch VERDICT OK 20:23 (all ancestor 4720d5f, suites OK, revert killed). Hub reviewed the 8 diffs (no issue) 20:3x; sent hub mutations M1-M6 + ACCEPT/INTEGRATE (merge commits, order 12,14..20) + ask for successor prompt. Await JSON → verdicts.jsonl + rescore gate. Then mail TKG13 (ops/agy_bridge/held/CMD-TKG13.md; re-red-check: TKG12 already rejects bool thresholds).
-- Token integrator 01DWVfRi… 203k: INTEGRATE TKG12-20 sent 20:25 (M1/M2 survived, accepted). Successor prompt saved ops/hub/successors/token_integrator.md → create it after the batch lands, archive the old one.
+- TKG12,14-20 INTEGRATED 20:26 (Token 12600f8, 8 merge commits, fe 105 / be 321 OK; verdicts.jsonl written). Still to do: rescore gate (`ga hub shadow-compare`). Next: TKG13 red re-check on 12600f8 by new integrator, then mail TKG13 to AGY (base 12600f8).
 - Push question (user 20:4x): told the user that a one-line standing approval typed in each integrator session ("ACCEPT + suites green + all mutations killed + ff/merge to integration → push without asking; no force") would remove manual pushes; no answer yet. Relayed approvals still don't count.
 - Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on ga-mailbox (git worktree), commit "ga mail: baseline -> AGY <id>".
 - Status board: cloud_sessions.json 20:21 (6 live). Build it from list_sessions by writing a trimmed JSON (raw result ~30k tokens); archived sessions excluded.
