@@ -1,0 +1,9 @@
+{
+ "id": "ASK-DEV-SUCC-1",
+ "question": "Your ctx is ~286k (threshold 150k). At your next clean point: overwrite ops/flow/dev_notes.md, make sure ops/hub/roles/DEV_BASELINE.md is a current first message for your successor, then send baseline status/1 with blocker successor_needed; baseline (depth 0) creates it and swaps ids.",
+ "context": "baseline top is now session_01LtsebbxyWz4BAggiGcG1WF; Ops successor session_01Qhj1TXTH414PdvL1n2JCRy created 23:30 KST; user typed both INTEGRATE lines (R0a, R0b) in the ga-sdk integrator 23:3x.",
+ "form": "ask/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T23:30:58+09:00"
+}
