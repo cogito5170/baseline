@@ -12,7 +12,7 @@ integration: ga-sdk claude/gracious-meitner-vp49xe head 318b22a (R0). Tag R0-bas
 ## Pending INTEGRATE (morning list), all ga-sdk, base 318b22a
 1. DEV-VI-06a-20 87e3243 ACCEPT (row 9a40fc1) — ff
 2. DEV-R1-GW 3e7ab1c ACCEPT (row 502a042) — AFTER VI-01 VMSHA (order rule)
-3. DEV-R2-DRY 451e980 — integrator ACCEPT but full suite had 1 fail under concurrent load (test_console_frontend d1 playwright timeout, passes alone); clean solo rerun requested 02:18; record verdict row only after a clean 1432/0/1
+3. DEV-R2-DRY 451e980 ACCEPT (clean solo 1432/0/1) — ff
 4. tag R0-baseline -> 318b22a
 
 ## Sessions
