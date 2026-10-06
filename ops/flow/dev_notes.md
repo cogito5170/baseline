@@ -8,7 +8,7 @@ integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 - DEV-R0c reference env, full suite green       -> worker-GA57 01H2PH8B, branch claude/DEV-R0c   ACTING (251k: retire after)
 - in-flight GA52 r2                             -> worker-GA52 01FUssZm (finish r2)              ACTING
 - VERDICT queue -> ga-sdk-integrator 01LBoWy9: GA52 r2, then R0 in Ops B-R0 order R0c > R0a > R0b (all parallel); each landed -> release/1 to Ops
-- DEV-TKG13: ACCEPT acf7352 (row written); INTEGRATE waits user push line in token-integrator; then release/1 to Ops. Follow-up TKG13-f1: non-int limit test (M3 gap)
+- DEV-TKG13: ACCEPT acf7352; INTEGRATE blocked (relayed approval denied by my permission check) -> user types push line in token-integrator
 - R1..R5: PLANNED, start after R0 lands (R1 thin gateway+budgets first)
 
 ## Rules in force
@@ -22,3 +22,4 @@ integration: ga-sdk claude/gracious-meitner-vp49xe (f9671da 0.18.1 at 21:1x)
 - integrator 01LBoWy9 ack: head f9671da, venv rlo 0.11.1.
 - INC-OPS-1: integrator stays through R0; successor built from R0c recipe. GA52/GA57 archive after current item.
 - successors (integrator after R0c, 2 R1 workers): send baseline status/1 kind successor_needed when due
+- DEV-SH1 (R4 shadow-on-rejection): PLANNED after R1 gateway

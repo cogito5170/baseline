@@ -1,0 +1,23 @@
+{
+ "id": "DEV-ST-4",
+ "items": [
+  {
+   "id": "DEV-TKG13",
+   "state": "VERDICT",
+   "note": "ACCEPT recorded; INTEGRATE not sent: my own permission check denied relaying a push order that rests on session-relayed user approval. Not routed around."
+  },
+  {
+   "id": "DEV-SH1",
+   "state": "PLANNED",
+   "note": "R4 shadow-on-rejection: queued behind R0/R1 (needs gateway + policy hooks); no free ga-sdk worker now"
+  }
+ ],
+ "blockers": [
+  "TKG13 (and every later INTEGRATE): the user must type the push line directly in the integrator session (Token integrator session_01FynfJTJBM1D3itToGCjyM1: 'TKG13 push acf7352'), or add a permission rule allowing this Dev session to send INTEGRATE orders; relayed approval is not accepted here",
+  "DEV-SH1 needs a ga-sdk worker when R0 frees one"
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-06T21:36:05+09:00"
+}
