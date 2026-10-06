@@ -22,3 +22,5 @@
 {"id":"CMD-GA46","rev":1,"sha":"49d1c84","decision":"ACCEPT","bd":"BD-459"}
 {"id":"CMD-GA47","rev":1,"sha":"2bc2f5f","decision":"ACCEPT","bd":"BD-460"}
 {"id":"CMD-GA48","rev":1,"sha":"e364817","decision":"ACCEPT","bd":"BD-461"}
+{"id":"CMD-GM1","rev":1,"sha":"36b7a72","decision":"ACCEPT","bd":"BD-466"}
+{"id":"CMD-GM2","rev":1,"sha":"7e36193","decision":"ACCEPT","bd":"BD-466","note":"accepted with baseline fact corrections"}

@@ -20,4 +20,4 @@
 - D2 (프로그래밍 언어: C++ 및 Python): Python은 Future Artifact에서 센서, 상태 추정, 결정 제어 시스템을 구축한 명확한 근거가 있으나, C++은 facts.md에 개발 근거 없음 (공백). 다음 단계 학습 계획으로 보완.
 - D3 (제어 경력: 모션 제어 / 1년 이상 경력): Telemetry → Sensor → State → DC → MS 제어 파이프라인 및 ga judge / router를 통한 결정/행동 제어 루프 설계 경험은 있으나, 물리 로봇 하드웨어에 대한 1년 이상의 상용 제어 경력은 facts.md에 근거 없음 (공백).
 - D4 (시뮬레이션: Isaac Sim / Isaac Lab): facts.md에 Isaac Sim 및 Isaac Lab 사용 근거 없음 (공백). Isaac 시뮬레이션 프레임워크 학습 계획으로 격차 보완.
-- D5 (센서 및 상태 추정): llmsensor 및 5계층 아키텍처를 활용한 관측 데이터 압축, 노이즈 필터링, 시스템 상태 추정 경험 보유 (근거: facts.md).
+- D5 (센서 및 상태 추정): llmsensor(센서 판독값 → 잠재 상태 P(success | 증거) 추정 → 결정론적 판정) 및 계층 구조 설계 경험 보유. 물리 센서 경험은 공백 (근거: facts.md).

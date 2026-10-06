@@ -11,8 +11,8 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
 - One directive = one fresh worker session (create_session, source ga-sdk, branch claude/<id>). Sonnet for narrow work,
   Opus for design or security. Put the whole directive/2 JSON inline in the prompt (workers cannot clone baseline).
   Worker context cap ~150k. Workers notify you with notify/1 via send_message.
-- Records for every verdict: BD row inserted before the line starting `| BD-60 |` in DECISION_LOG.md (next is **BD-466**),
-  a `- <n> 회차:` line after the last one in BASELINE.md §13 (next round **307**), ops/hub/baseline_verdicts.jsonl row,
+- Records for every verdict: BD row inserted before the line starting `| BD-60 |` in DECISION_LOG.md (next is **BD-467**),
+  a `- <n> 회차:` line after the last one in BASELINE.md §13 (next round **308**), ops/hub/baseline_verdicts.jsonl row,
   ops/tokmon/sessions.txt (add on dispatch, remove on verdict), archive the worker session.
 - Verdict = `python3 ops/verdict.py <branch> --mut <mut.json> --venv <python with rlo-sdk>` (fresh clone, ff, ga check,
   full suite, baseline mutations → one JSON line), then fast-forward push to the integration branch only if all green.
@@ -46,14 +46,9 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
   baseline audits.
 
 ## In flight
-1. **User task: Gentle Monster applications** (BD-463). Sources/facts/checker in deliverables/gentlemonster/.
-   - CMD-GM1 done on the VM: branch agv/CMD-GM1-r1 (36b7a72) in baseline, gemini-3.8-flash-high, 2 turns, 9,265 tokens,
-     checker ok, fact audit clean. Not merged yet.
-   - CMD-GM2 (robot software) sent 06:08 UTC, reply not yet in to/baseline. When it lands: fetch agv/CMD-GM2-r1, run
-     `python3 deliverables/gentlemonster/test_job2.py`, run the number/claim audit (numbers not in source/*.md, lines
-     with 학사/석사/졸업/재직/경력 outside [placeholders]), merge both agv branches into the integration branch, record a
-     BD row with tokens/turns/models, and give the user the six documents (job1/2 × interpretation, application,
-     portfolio) — publish as an artifact or give paths — plus the token totals and the 확인 필요 lists.
+1. Gentle Monster task done (BD-466): both agv branches merged, GM2 facts corrected, user told. Waits on user feedback
+   on the six documents / [확인 필요] items. add_repo for ga-sdk/Token was denied by the permission classifier in this
+   session — ask the user before retrying.
 2. ops/verdict.py was being self-tested on claude/ga48 (work dir in the old session's scratchpad; just rerun it once on
    any landed branch to confirm it prints one JSON line).
 3. Baseline token plan (research/BASELINE_TOKENS.md): user approved 1 (this handoff), 2 (hourly check in a small fresh
