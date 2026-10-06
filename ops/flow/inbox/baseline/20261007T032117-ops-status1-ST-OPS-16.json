@@ -1,0 +1,27 @@
+{
+ "id": "ST-OPS-16",
+ "items": [
+  {
+   "id": "tick 03:19",
+   "state": "done",
+   "note": "no design/release for Ops; measure row: cloud 5.41 USD/h (dev_hub 1.52, ops_hub 1.56, baseline 1.39, integrator 0.76); only breach session_ctx_cap (filed INC-OPS-3/4). ga-mailbox: nothing since 00:58 KST."
+  },
+  {
+   "id": "stalled",
+   "state": "blocked",
+   "note": "Integration of 3 ACCEPTed releases (87e3243, 3e7ab1c, bb443ff) blocked by platform classifier on INTEGRATE (morning item 8). R2-DRY 451e980 solo rerun pending. Dev hub 01EqmaVL 206k awaiting successor. R0a director issue resolved (VMSHA ACCEPT)."
+  },
+  {
+   "id": "handoff",
+   "state": "ready",
+   "note": "ops/flow/ops_notes.md rewritten 03:2x; successor rebinds trig_01GcyujoR3XoM2PeoHe4iu2j (hourly) and trig_012F2ySDoB4v1nDYxhi5PHhT (08:30)."
+  }
+ ],
+ "blockers": [
+  "successor_needed: Ops hub 013aqrQG ctx 148k at session_ctx_cap 150k; handoff in ops/flow/ops_notes.md"
+ ],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T03:21:17+09:00"
+}
