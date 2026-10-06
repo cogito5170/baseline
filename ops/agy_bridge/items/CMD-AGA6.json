@@ -1,0 +1,31 @@
+{
+ "item": {
+  "id": "CMD-AGA6",
+  "goal": "Write frontend/src/styles/screens.css whole with one NEW action (it has been removed in your worktree; do not use EDIT). It styles the gc-* classes the Token screens use. Use ONLY these tokens from tokens.css (no hex, rgb or hsl colours): --gc-space-0..8, --gc-color-{bg,surface,text,muted,border,accent,warm,focus}, --gc-radius-{sm,md,lg}, --gc-text-{xs,sm,md,lg,xl,title,kpi}, --gc-weight-{regular,medium,semibold}, --gc-leading-{tight,normal}. Write exactly these rules (selector: declarations):\n/* Screen styles for the gc-* classes the screens use. Tokens only. */\n.gc-screen { display: grid; gap: var(--gc-space-4); }\n.gc-screen h1 { margin: 0; font-size: var(--gc-text-title); line-height: var(--gc-leading-tight); }\n.gc-form { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--gc-space-3); }\n.gc-form label { display: flex; flex-direction: column; gap: var(--gc-space-1); font-size: var(--gc-text-sm); color: var(--gc-color-muted); }\n.gc-form input, .gc-form select { padding: var(--gc-space-2); font: inherit; color: var(--gc-color-text); background: var(--gc-color-bg); border: 1px solid var(--gc-color-border); border-radius: var(--gc-radius-md); }\n.gc-form button { padding: var(--gc-space-2) var(--gc-space-4); font: inherit; font-weight: var(--gc-weight-medium); color: var(--gc-color-surface); background: var(--gc-color-accent); border: 0; border-radius: var(--gc-radius-md); cursor: pointer; }\n.gc-table { width: 100%; border-collapse: collapse; font-size: var(--gc-text-sm); }\n.gc-table th { text-align: left; font-weight: var(--gc-weight-semibold); color: var(--gc-color-muted); padding: var(--gc-space-2) var(--gc-space-3); border-bottom: 1px solid var(--gc-color-border); }\n.gc-table td { padding: var(--gc-space-2) var(--gc-space-3); border-bottom: 1px solid var(--gc-color-border); }\n.gc-table button { margin-right: var(--gc-space-1); padding: var(--gc-space-1) var(--gc-space-2); font: inherit; color: var(--gc-color-text); background: var(--gc-color-surface); border: 1px solid var(--gc-color-border); border-radius: var(--gc-radius-sm); cursor: pointer; }\n.gc-empty { padding: var(--gc-space-5); color: var(--gc-color-muted); background: var(--gc-color-surface); border-radius: var(--gc-radius-md); }\n.gc-error { padding: var(--gc-space-3); color: var(--gc-color-text); background: var(--gc-color-surface); border-left: 3px solid var(--gc-color-warm); border-radius: var(--gc-radius-sm); }\n.gc-kpi { font-size: var(--gc-text-kpi); font-weight: var(--gc-weight-semibold); line-height: var(--gc-leading-tight); }\n.gc-kpi-label { font-size: var(--gc-text-xs); color: var(--gc-color-muted); }\n.gc-legend { display: flex; flex-wrap: wrap; gap: var(--gc-space-3); padding: 0; list-style: none; font-size: var(--gc-text-sm); color: var(--gc-color-muted); }\n",
+  "files": [
+   "frontend/src/styles/screens.css"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "frontend/tests/styles/screens-css.test.ts": "// Acceptance test for CMD-AGA6 (written by baseline; the executor may not edit it).\nimport { describe, expect, it } from \"vitest\";\nimport { readFileSync } from \"node:fs\";\nimport { resolve } from \"node:path\";\n\nconst css = readFileSync(resolve(__dirname, \"../../src/styles/screens.css\"), \"utf8\");\nconst tokens = readFileSync(resolve(__dirname, \"../../src/styles/tokens.css\"), \"utf8\");\nconst body = css.replace(/\\/\\*[\\s\\S]*?\\*\\//g, \"\");\nconst rules = [...body.matchAll(/([^{}]+)\\{([^{}]*)\\}/g)].map((m) => ({ sel: m[1].split(\",\").map((s) => s.trim()), decl: m[2].trim() }));\nconst has = (sel: string) => rules.some((r) => r.sel.includes(sel) && /[a-z-]+\\s*:\\s*[^;]+/.test(r.decl));\n\ndescribe(\"screens.css styles the gc-* classes the screens use\", () => {\n  for (const sel of [\".gc-screen\", \".gc-screen h1\", \".gc-form\", \".gc-form label\", \".gc-form input\", \".gc-form button\",\n    \".gc-table\", \".gc-table th\", \".gc-table td\", \".gc-table button\", \".gc-empty\", \".gc-error\", \".gc-kpi\", \".gc-kpi-label\", \".gc-legend\"]) {\n    it(`has a rule for ${sel}`, () => expect(has(sel)).toBe(true));\n  }\n  it(\"uses tokens only: no hex, rgb() or hsl() colours\", () => {\n    expect(body).not.toMatch(/#[0-9a-fA-F]{3,8}\\b/);\n    expect(body).not.toMatch(/\\b(rgb|rgba|hsl|hsla)\\(/);\n  });\n  it(\"every var(--…) it uses is defined in tokens.css (an undefined var draws nothing)\", () => {\n    const defined = new Set([...tokens.matchAll(/(--[a-z0-9-]+)\\s*:/g)].map((m) => m[1]));\n    const used = [...new Set([...body.matchAll(/var\\((--[a-z0-9-]+)/g)].map((m) => m[1]))];\n    expect(used.length).toBeGreaterThan(5);\n    expect(used.filter((v) => !defined.has(v))).toEqual([]);\n  });\n});\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "node",
+    "frontend/node_modules/vitest/vitest.mjs",
+    "run",
+    "--root",
+    "frontend",
+    "tests/styles/",
+    "tests/reports/"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe",
+ "rewrite": [
+  "frontend/src/styles/screens.css"
+ ]
+}
