@@ -71,7 +71,7 @@ fixes_queued: GA39 survivors (rest → CMD-GA53).
 - CMD-GA54 `ga project` (user chose (가); generic — user: no example content) worker session_01VxBgf9gyDktXz8Ke7T6NiY (Opus, claude/CMD-GA54) drafting core.
 - CMD-GA55 usage panel (user OK 20:3x): directives/CMD-GA55.md ready; dispatch AFTER GA54 lands. Producer done: cloud_snapshot.py emits `plan` + per-session parent/tokens.
 - TKG12,14-20: integrator batch VERDICT OK 20:23 (all ancestor 4720d5f, suites OK, revert killed). Hub reviewed the 8 diffs (no issue) 20:3x; sent hub mutations M1-M6 + ACCEPT/INTEGRATE (merge commits, order 12,14..20) + ask for successor prompt. Await JSON → verdicts.jsonl + rescore gate. Then mail TKG13 (ops/agy_bridge/held/CMD-TKG13.md; re-red-check: TKG12 already rejects bool thresholds).
-- Token integrator 01DWVfRi… is at 203k → replace it after this batch (ask it for a successor prompt first, like the ga-sdk one 19:57).
+- Token integrator 01DWVfRi… 203k: INTEGRATE TKG12-20 sent 20:25 (M1/M2 survived, accepted). Successor prompt saved ops/hub/successors/token_integrator.md → create it after the batch lands, archive the old one.
 - Push question (user 20:4x): told the user that a one-line standing approval typed in each integrator session ("ACCEPT + suites green + all mutations killed + ff/merge to integration → push without asking; no force") would remove manual pushes; no answer yet. Relayed approvals still don't count.
 - Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on ga-mailbox (git worktree), commit "ga mail: baseline -> AGY <id>".
 - Status board: cloud_sessions.json 20:21 (6 live). Build it from list_sessions by writing a trimmed JSON (raw result ~30k tokens); archived sessions excluded.
