@@ -26,7 +26,7 @@
    "model ids in commits"
   ],
   "change": "only the user, by their own words to the top baseline hub",
-  "dev_hub": "session_01VMbRhMjtfPAALfLjAWJ1tT",
+  "dev_hub": "session_01EqmaVLL6vWPFnmAqv9UKWH",
   "extensions": [
    {
     "at": "2026-10-07 00:5x KST",
@@ -49,6 +49,12 @@
      "any tag name other than R<n>-baseline",
      "any other ref"
     ]
+   },
+   {
+    "at": "2026-10-07 01:3x KST",
+    "in": "top baseline session_016tT1vvrTFehVFzWzfgxcCV",
+    "user_words": "상시 통합 승인을 새 Dev 허브로 확장해",
+    "meaning": "the standing approval (and the R<n>-baseline tag extension) applies to INTEGRATE sent by Dev hub session_01EqmaVLL6vWPFnmAqv9UKWH (replaces 01VMbRhM); conditions and never-list unchanged"
    }
   ]
  },
