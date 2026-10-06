@@ -1,6 +1,6 @@
 # STATUS — baseline 전체 현황 (단일 진입점)
 
-갱신: 2026-10-07 01:5x KST · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
+갱신: 2026-10-07 02:0x KST · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
 이 문서 하나로 지금 상황을 파악할 수 있어야 한다. 세부 근거는 각 줄의 경로에 있다.
 
 ## 1. 목표와 원칙
@@ -22,10 +22,10 @@
 | Dev 허브 | `01EqmaVL` | 01:2x 교체 (이전 `01VMbRhM` 보관) |
 | Ops 허브 | `013aqrQG` | 01:2x 교체 (이전 `01M4vGeV` 보관) |
 | ga-sdk 통합 | `01Wz1byr` | 준비 완료 (이전 `01LBoWy9` 보관) |
-| Token 통합 | `01FynfJT` | 사용자 'TKG13 push' 대기 |
+| Token 통합 | `01FynfJT` | TKG13 push 완료 (사용자 맥 AGY, 01:5x) |
 | W-R1 (VI-02 R1 관문) | `01KiyVDj` | 시험 중 |
-| W-R2 (VI-04 R2 판정 dry-run) | `01QEjaAW` | 결과 보고 대기 |
-| W-VI (VI-06a + VI-20) | `01CnLoJD` | 시험 중 |
+| W-R2 (VI-04 R2 판정 dry-run) | `01QEjaAW` | `451e980` 판정 대기 |
+| W-VI (VI-06a + VI-20) | `01CnLoJD` | ACCEPT `87e3243` (1412 OK, 변이 2/2), 통합 대기 |
 | worker-R0a (VI-01 VM SHA 보고) | `015U1Lfq` | 진행 중 |
 | GA52 / GA53 작업자 | `01FUssZm` / `01HKHSLN` | GA52 보고 후 보관 예정 / GA53 대기 |
 | 토큰 감시 | `01TBHcmu` | 상시 |
@@ -38,9 +38,9 @@
 |---|---|---|
 | 운영 기록 전부 (이 문서, 규칙, 정책, 메시지, 설계, 측정) | `cogito5170/baseline` · `claude/gracious-meitner-vp49xe` | — |
 | VM ↔ 클라우드 우편함 | `cogito5170/baseline` · `ga-mailbox` | VM 마지막 알림 10-06 20:26 KST (ga 0.18.1, `f9671da`) |
-| GA engine 통합 코드 | `cogito5170/ga-sdk` · `claude/gracious-meitner-vp49xe` | `318b22a` = R0 기준선 (R0a+b+c, 시험 1411 OK) |
-| GA engine 진행 중 | ga-sdk `claude/DEV-R1-GW` `3e7ab1c`, `claude/DEV-VMSHA` `bb443ff`, `claude/DEV-VI-06a-20` `87e3243`, `claude/DEV-R2-DRY` (미push) | — |
-| Token 앱 | `cogito5170/Token` · `claude/gracious-meitner-vp49xe` | `12600f8` |
+| GA engine 통합 코드 | `cogito5170/ga-sdk` · `claude/gracious-meitner-vp49xe` | `318b22a` = 이름표 `R0-baseline` (01:5x 생성, 사용자 맥 AGY) |
+| GA engine 진행 중 | ga-sdk `claude/DEV-R1-GW` `3e7ab1c`, `claude/DEV-VMSHA` `bb443ff`, `claude/DEV-VI-06a-20` `87e3243`, `claude/DEV-R2-DRY` `451e980` | — |
+| Token 앱 | `cogito5170/Token` · `claude/gracious-meitner-vp49xe` | `7536819` (TKG13 포함) |
 | VM 이식 대상 | `cogito5170/Dev`, `cogito5170/Ops` · `main` | 저장소만 있음, 이식 전 |
 
 ## 4. 사용자 결정 기록 (`ops/flow/policy.json`)
@@ -59,7 +59,7 @@
 
 | 단계 | 요청 | 상태 |
 |---|---|---|
-| R0 | DEV/OPS-R0a·b·c, R0FREEZE | 완료. 기준선 `318b22a`. 이름표는 플랫폼 거부로 미생성 (§8) |
+| R0 | DEV/OPS-R0a·b·c, R0FREEZE | 완료. `R0-baseline` = `318b22a` (사용자 맥 AGY가 생성) |
 | R1 | DEV/OPS-VMAUTO, VMBUDGET (LLM 관문 + 예산) | 설계 확정 `R1R2_DESIGN.md` r3 → VI-02 빌드 중 |
 | R2 | DEV-R3-DET (판정 dry-run) | 설계 확정 → VI-04 빌드 중 |
 | R4 | DEV/OPS-VMHUB rev3 (VM 실행 도메인: 세션 관리자, commit gate, push gate) | 설계 확정 `VMHUB_DESIGN.md` r2 · **빌드 보류** (토큰 문제 해결 측정 확인 전) |
@@ -91,12 +91,13 @@ VM 내부 빌드 순서 (`VM_INTERIOR_DESIGN.md` §12): VI-01, 02, 04, 06a, 20 �
 | 10-06 | 정책 판정기를 하위 에이전트로 | Auto-Mode Bypass |
 | 10-07 01:1x | Dev가 사용자 이름표 승인 문장을 통합 세션에 전달 | Instruction Poisoning |
 | 10-07 01:4x | Dev가 통합 세션에 R0-baseline 이름표 요청 | Modify Shared Resources |
+| 10-07 02:0x | Dev가 통합 세션에 INTEGRATE DEV-VI-06a-20 `87e3243` 요청 | 서버 분류기 '위험' (설명 없음) |
 
 ## 9. 사용자가 할 일 (아침 목록)
 
-1. `R0-baseline` 이름표: 통합 세션 `01Wz1byr`에 직접 "R0-baseline 이름표를 318b22a에 만들어" — 또는 Dev `01EqmaVL` 설정에 send_message 허용.
+1. 통합 push: Dev → 통합 세션 INTEGRATE 메시지가 플랫폼에 거부됨. 대기: VI-06a-20 `87e3243` (ACCEPT), 이어서 VI-04, VI-02. 통합 세션 `01Wz1byr`에 직접 입력하거나 Dev `01EqmaVL` 설정에 send_message 허용. (이름표·TKG13은 01:5x 사용자 맥 AGY로 완료)
 2. Dev 세션 `01EqmaVL`에서 git·send_message·세션 보관 허용 한 줄.
-3. Token 통합 세션 `01FynfJT`에서 TKG13 push 승인.
+3. (완료) TKG13 push.
 4. VM: 사용자 소유 정책 파일 `/etc/ga/vm_policy.json`(SSH), VM API 키 지출 한도, 인스턴스 정지·자격 증명 폐기 경로, VM 모델 자격 증명.
 5. 값 결정 (`VM_INTERIOR_DESIGN.md` §13, Ops 기본값 있음): Q1 전환 시점·통합 ref, Q2 단계 기한, Q3 사다리 값, Q4 SLO, Q5 세션 상한·push 허용 ref, Q6 Dev/Ops 저장소·VM push 자격 증명, Q8 하루 30 USD 기준(달력일/24시간), Q9 끄는 스위치.
 6. 보관 후보 세션 동의.
@@ -121,3 +122,5 @@ VM 내부 빌드 순서 (`VM_INTERIOR_DESIGN.md` §12): VI-01, 02, 04, 06a, 20 �
 - 01:0x~01:2x VMHUB r2, R1R2 r3, VM 내부 전체 설계 r2 승인 (모두 Ops 의견 반영 조건).
 - 01:1x~01:2x 세션 생성: 통합 후임, W-R1, W-R2, W-VI, Ops·Dev 허브 후임. 이전 통합·Dev·Ops 허브 보관.
 - 01:4x R0-baseline 이름표 요청 플랫폼 거부.
+- 01:5x 사용자 맥의 AGY가 R0-baseline 이름표(318b22a)와 Token TKG13 push 실행 (baseline 커밋 9252287, 작성자 사용자).
+- 02:0x VI-06a-20 ACCEPT; INTEGRATE 요청 플랫폼 거부 → 통합 대기.
