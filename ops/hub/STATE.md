@@ -49,8 +49,7 @@ commit STATE, create the new session, write its id to ops/hub/BASELINE_SESSION, 
 1. Gentle Monster task done (BD-466): both agv branches merged, GM2 facts corrected, user told. Waits on user feedback
    on the six documents / [확인 필요] items. add_repo for ga-sdk/Token was denied by the permission classifier in this
    session — ask the user before retrying.
-2. ops/verdict.py was being self-tested on claude/ga48 (work dir in the old session's scratchpad; just rerun it once on
-   any landed branch to confirm it prints one JSON line).
+2. ops/verdict.py self-test done (old session, claude/ga48): one JSON line, ff true, 1347 OK, mutation killed; works.
 3. Baseline token plan (research/BASELINE_TOKENS.md): user approved 1 (this handoff), 2 (hourly check: routine
    trig_01QDkY2th2C19fSzj62MTdZ8 fires into THIS hub session; recreate it for the next one on handoff), 3 (verdict.py), 5 (short reads).
    4 (stage 3) waits for the shadow gate.
