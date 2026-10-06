@@ -1,0 +1,38 @@
+{
+ "id": "OP-OPS-VMINT",
+ "question": "Ops review of research/VM_INTERIOR_DESIGN.md (whole planned VM), focus D6, D4/D5, Q7, VI-06a",
+ "agree": [
+  "Ops points from OP-OPS-VMHUB-R3 / OP-OPS-R1R2 are taken in: root-owned /etc/ga/vm_policy.json with hash-compared mirror, halt, hourly gateway summary (VI-07), SHA reporting per change (VI-01, D3), reconciliation",
+  "state machine T1-T11: every transition journaled before effect, deterministic guards, deadlines as user keys, shadow meaning pre-cutover (T8 to vm-shadow refs, T9/T10 track the cloud-integrated sha, VM verdicts scored vs cloud)",
+  "D6 error-budget rule with hysteresis and min_events; STABILIZE never cancels feature items; pure-code items continue when a cap window is exhausted",
+  "D5: change-failure rate and send-back rate kept as separate metrics",
+  "VI-06a: add notify/1 kind alert as the minimal first registry change; VI-05 watcher 0-model with dedup; retirement of the Claude watcher and ga-hub.timer only after Ops' 24 h side-by-side",
+  "build order: VI-01, VI-02, VI-04, VI-06a, VI-20 first in parallel; VI-15..19 held"
+ ],
+ "disagree": [
+  "Q7 is not a user question. Forms are a Dev+Ops contract (contracts change when both agree; registry change through a release). Ops answer: YES, the boundary carries notify/1 VM->cloud with exactly two registered kinds, ack (SHA report, ask/1 'sha' answer) and alert (watcher/rules), because they are low-latency, per-event and deduped, while status/1 stays the hourly summary. Remove Q7 from the user list; Ops records the agreement in the registry change (VI-06a/VI-06).",
+  "D4 attribution only to the latest DEPLOYED sha touching a file in the evidence: (a) with two deploys in the window touching the same file it blames one arbitrarily; (b) cost/ctx/stale/infra alarms carry no file evidence and are always unattributed. Proposal: attribute to every DEPLOYED sha within observe_window_s whose diff touches an evidence file (CFR counts each item at most once); alarms of kind environment/infra/budget never count toward CFR but do count toward the SLO they belong to; a revert or fix item later PLANNED for a sha counts that sha as failed even if the alarm had no file evidence.",
+  "D6 can hold STABILIZE indefinitely when no stabilize item can move a time-based SLO (e.g. lead time). Add vm_policy.scheduler.max_stabilize_s: on expiry status/1 blocker to baseline (user decides), feature items still not cancelled. Missing data (no events, VM down) must never count as good: an SLO with a data gap > its window/4 is reported as unknown, not as remaining=1.",
+  "§0: watch_thresholds.json mirror lives in cogito5170/Ops (VI-18, HELD) but VI-05 (not held) needs it now and D1 forbids reading the baseline repo. Until VI-18, deliver thresholds through the boundary (the adapter copies ops/hub/watch_thresholds.json with its sha256 into the VM inbox) and log the hash in every alert."
+ ],
+ "missing": [
+  "Ops proposals for user values (so the morning list has defaults, not blanks): Q2 deadlines plan_s 900, dispatch_ack_s 600, verdict_s 1800, integrate_s 1800, deploy_s 7200, observe_window_s 3600, boundary.fetch_s 300. Q4: Ops owns slo.json as operating limits (initial values recorded once to the user, changes announced in status/1): verdict latency p90 < 30 min target 0.9 / 24 h; lead time median < 2 h target 0.8 / 7 d; change failure < 20 % / 7 d; time to restore < 1 h target 0.9 / 7 d; min_events 5; resume_fraction 0.5; stabilize_kinds [deploy_mismatch, boundary_violation, budget_overrun, two_primaries].",
+  "alert dedup per kind per session per UTC day: use the KST day, the user's reporting day (consistent with Q8 proposal).",
+  "a test that a VM alert and the cloud Ops alarm for the same condition both appear during the 24 h side-by-side (Ops scores agreement; that report retires the Claude watcher)."
+ ],
+ "facts": [
+  "ga-sdk integration 318b22a; R0-baseline candidate 8ead789 (tag pending user line)",
+  "VM silent since 10-06 20:26 KST (per-version notice)",
+  "Ops hourly measurement already records every vm_budget cap; VM values null until VI-07"
+ ],
+ "risk": [
+  "mis-attributed failures steer the scheduler into STABILIZE wrongly (medium; D4 fix)",
+  "STABILIZE deadlock on a time SLO (medium; max_stabilize_s)",
+  "watcher thresholds read from an unverified path (low; boundary copy + hash)"
+ ],
+ "first_step": "Approve with the D4/D6/§0 changes; build VI-01 + VI-06a first (they unblock Ops: SHA verification for OPS-R0FREEZE and alert kind for the side-by-side), with VI-02/VI-04/VI-20 in parallel.",
+ "form": "opinion/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T01:18:07+09:00"
+}

@@ -2,7 +2,7 @@
 Ops: session_01M4vGeVjHtivZ5nKLDSmdED (prev 01Qhj1TX). baseline: session_016tT1vvrTFehVFzWzfgxcCV (prev 01Ltsebb, child of it). Dev: session_01VMbRhMjtfPAALfLjAWJ1tT (prev 01Vtf8Jh).
 Ops sessions/routines (assign.json): token watcher session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku, wake trig_01EFFxRB :49 KST, alarms come as notify/1);
   hourly Ops routine trig_018jUnT6xNGK5xNszk1o3EDn (old trig_01GvC312 disabled) (prompt includes shadow digest + snapshot steps).
-inbox seen up to: ops 20261007T010550 (DEV-ST R1R2 design). Last sent: dev INC-OPS-2 23:52 (ctx over cap); baseline ST-OPS-8 23:52.
+inbox seen up to: ops 20261007T011653 (VM interior design). Last sent: dev INC-OPS-2 23:52 (ctx over cap); baseline ST-OPS-8 23:52.
 
 ## Done
 - OPS-R0: ops/flow/measure/R0.json via ops/hub/measure_r0.py (static, no ga code). 10.2 USD/wall-h (hub 6.08, worker 4.57, integrator 1.15, watcher 0.51 USD/h).
@@ -34,6 +34,8 @@ inbox seen up to: ops 20261007T010550 (DEV-ST R1R2 design). Last sent: dev INC-O
 - OPS-OVERNIGHT (R1) until 09:00 KST: baseline approves Dev designs after Ops opinion. Ops: opinion per design within 1 round; verify/1 or incident/1 per release within 1 round; hourly stalled-session list to baseline; final status/1 08:30 (send_later armed 23:30Z). User-only items -> ops/flow/MORNING_OPS.md.
 
 - OP-OPS-R1R2 sent 01:1x on research/R1R2_DESIGN.md (agree; policy path config + hash in ledger, purpose->cap map in policy, cache key incl sha/model/policy, hourly gateway summary, halt key, day window key, cache pricing+reconciliation, version bump or VMSHA first). ga-sdk head 318b22a; R0-baseline candidate 8ead789 (1411/0/1 refenv), tag pending user line.
+
+- OP-OPS-VMINT sent 01:2x on research/VM_INTERIOR_DESIGN.md (Q7 = Dev+Ops: notify/1 ack+alert allowed; D4 multi-sha attribution, infra not in CFR; D6 max_stabilize_s + data gap = unknown; thresholds via boundary copy+hash; default values for Q2/Q4).
 
 ## Hourly (every fire)
 1 inbox ops; 2 git fetch ga-mailbox (to/baseline, -ops, -shadow) -> scoring/incident if lag unexplained; 3 python3 ops/hub/shadow_digest.py digest;
