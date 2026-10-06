@@ -83,6 +83,17 @@ def prepare(spec: dict[str, Any], checkout: Path, did: str) -> Path:
     return wt
 
 
+MODEL_SLUG = re.compile(r"^[a-z0-9][a-z0-9.-]{1,60}$")  # agent names
+# the slugs `agy models` lists on the user's account (VM, 2026-10-06); an item may name only one of these
+MODELS = frozenset({
+    "gemini-3.8-flash-high", "gemini-3.8-flash-medium", "gemini-3.8-flash-low",
+    "gemini-3.7-flash-high", "gemini-3.7-flash-medium", "gemini-3.7-flash-low",
+    "gemini-3.6-flash-high", "gemini-3.6-flash-medium", "gemini-3.6-flash-low",
+    "gemini-3.1-pro-high", "gemini-3.1-pro-low",
+    "claude-opus-5-5-low", "claude-opus-5-5-medium", "claude-opus-5-5-high",
+    "claude-sonnet-5-5-low", "claude-sonnet-5-5-medium", "claude-sonnet-5-5-high",
+    "gpt-oss-120b-medium"})
+
 def run_act(cfg: dict[str, Any], spec: dict[str, Any], wt: Path, checkout: Path) -> dict[str, Any]:
     """`ga act` in the worktree; returns {code, out, result (act/1 dict or None)}."""
     act = cfg.get("act") or {}
@@ -157,6 +168,16 @@ def report(cfg: dict[str, Any], head: dict[str, Any], run: dict[str, Any], patch
 def handle(cfg: dict[str, Any], head: dict[str, Any],
            runner: Callable[[dict, dict, Path, Path], dict] = run_act, spec: dict[str, Any] | None = None) -> str:
     spec = spec or json.loads(item_file(head["id"]).read_text(encoding="utf-8"))
+    if spec.get("model"):  # BD-455: baseline picks the model per item (agy slugs: gpt-oss, gemini, claude)
+        if spec["model"] not in MODELS:
+            raise ValueError(f"unknown model (not in `agy models`): {spec['model']!r}")
+        cfg = {**cfg, "act": {**(cfg.get("act") or {}), "model": spec["model"]}}
+    if "agent" in spec:  # the agy plugin agent for this item ("" = agy's default agent)
+        if spec["agent"] and not MODEL_SLUG.match(str(spec["agent"])):
+            raise ValueError(f"bad agent name: {spec['agent']!r}")
+        act = cfg.get("act") or {}
+        opts = {k: v for k, v in (act.get("options") or {}).items() if k != "agent"}
+        cfg = {**cfg, "act": {**act, "options": {**opts, **({"agent": spec["agent"]} if spec["agent"] else {})}}}
     checkout = Path((cfg.get("act") or {}).get("repo") or "").expanduser().resolve()
     if not (checkout / ".git").exists():
         raise ValueError(f"act.repo is not a git checkout: {checkout}")

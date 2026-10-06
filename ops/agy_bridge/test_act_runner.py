@@ -111,6 +111,33 @@ class ActRunnerTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 act_runner.prepare(dict(self.spec, rewrite=[bad]), self.checkout, "CMD-AGA9")
 
+    def test_item_model_overrides_the_bridge_model(self):
+        seen = {}
+
+        def run(cfg, spec, wt, checkout):
+            seen["model"] = cfg["act"]["model"]
+            return {"code": 0, "out": "", "result": {"status": "done", "turns": 1, "tokens": {}, "changed": []}}
+        text = act_runner.handle(self.cfg, HEAD, runner=run, spec=dict(self.spec, model="gemini-3.8-flash-high"))
+        self.assertEqual(seen["model"], "gemini-3.8-flash-high")
+        self.assertIn("gemini-3.8-flash-high", text)
+        self.assertEqual(self.cfg["act"]["model"], "gpt-oss-120b-medium")  # the bridge config itself is not changed
+        for bad in ("--dangerously-skip-permissions", "a b", "../x", "gemini-9-ultra", "claude-opus-5-5"):
+            with self.assertRaises(ValueError):
+                act_runner.handle(self.cfg, HEAD, runner=run, spec=dict(self.spec, model=bad))
+
+    def test_item_agent_overrides_or_drops_the_bridge_agent(self):
+        seen = []
+
+        def run(cfg, spec, wt, checkout):
+            seen.append(cfg["act"].get("options"))
+            return {"code": 0, "out": "", "result": {"status": "done", "turns": 1, "tokens": {}, "changed": []}}
+        cfg = dict(self.cfg, act=dict(self.cfg["act"], options={"agent": "ga-act", "x": 1}))
+        act_runner.handle(cfg, HEAD, runner=run, spec=dict(self.spec, agent="minimal"))
+        act_runner.handle(cfg, HEAD, runner=run, spec=dict(self.spec, agent=""))
+        self.assertEqual(seen, [{"agent": "minimal", "x": 1}, {"x": 1}])
+        with self.assertRaises(ValueError):
+            act_runner.handle(cfg, HEAD, runner=run, spec=dict(self.spec, agent="a;b"))
+
     def test_placeholders_expand(self):
         self.assertEqual(act_runner._expand(["{venv_python}", "-m", "x"], {"venv_python": "/v/bin/python"}),
                          ["/v/bin/python", "-m", "x"])
