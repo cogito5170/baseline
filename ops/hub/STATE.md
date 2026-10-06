@@ -51,7 +51,7 @@ done: stage 4 verifier, stage 5 planner(shadow), verdict.py self-test
 now: stage 2 shadow gate = 10 consecutive shadow verdicts on ga-sdk/Token reports, 0 false accepts, scored by
   `ga hub shadow-compare --mailbox <baseline> --name baseline-shadow` vs baseline_verdicts.jsonl.
   score 10-06 15:4x: 31 rows all ASK_HUMAN, 0 false accepts, gate 0/10 (only Token bridge items count).
-next_action: wait GA49 rev 2 (worker session_01EPcQJa…, must start from e364817) → verdict.py → ff ga-sdk → VM self-update ≤30 min → send TKG11 (audit _tokens numeric only) + new small Token items → rescore gate (need 10 consecutive agreements). TKG1-10 all integrated; shadow said ASK_HUMAN for all (served_model_mismatch).
+next_action: GA49 rev 2 e8730f4 verdict running (verdict.py); then ff ga-sdk, VM hub config model = bridge rung (S4 finding), TKG11 + new items, rescore gate. CMD-GA50 (live screen, worker session_018CgEgH…, Opus) dispatched 16:45; watch its remote branch, nudge if silent.
 then: stage 3 directive (hub judges+integrates on VM, baseline audits, roll back on quality drop) — user said go.
 fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 results.model shows gpt-oss while rung was
   gemini; ledger learns only upward; console 'starting' timeout; GA39 survivors.
