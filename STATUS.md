@@ -1,6 +1,6 @@
 # STATUS — baseline 전체 현황 (단일 진입점)
 
-갱신: 2026-10-07 03:2x KST · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
+갱신: 2026-10-07 03:5x KST · 작성: top baseline `session_016tT1vvrTFehVFzWzfgxcCV` · 갱신 주기: 매시 :04 (top 점검 루틴), 그리고 상황이 바뀔 때마다.
 이 문서 하나로 지금 상황을 파악할 수 있어야 한다. 세부 근거는 각 줄의 경로에 있다.
 
 ## 1. 목표와 원칙
@@ -73,7 +73,8 @@ VM 내부 빌드 순서 (`VM_INTERIOR_DESIGN.md` §12): VI-01, 02, 04, 06a, 20 �
 
 - 기계: Oracle VM, Ubuntu 24.04, x86_64, 2코어/11 GB, GPU 없음.
 - 지금 도는 것: ga-bridge(agv, to/AGY), shadow 허브(하루 40턴 상한, UTC 0시 초기화), console(127.0.0.1:8765), ga-update.timer(30분).
-- 실행 SHA: 미확인 (VI-01 SHA 보고 착지 후 확인). VM 기준선 후보 = `318b22a`.
+- 실행 SHA: **ga-sdk `318b22a` = R0-baseline** (VM notify/1 ack 10-07 03:29 KST, ga 0.18.1 표기; baseline `fa4d9fd`, token `7536819`). VM-baseline = R0-baseline 확인.
+- 03:47 KST 우편함 `to/session_016tT1vv/`에 'VM' 명의 시험 메시지: "Zero-Touch Dev/Ops pipeline connected (VI-03 verified)", ref=example.com. 우리 파이프라인이 VI-03을 배정한 적 없음 → 출처 미확인 자료로만 기록, 조치 없음.
 - VM 모델 호출: 없음 (자격 증명 미제공).
 - 진행 중 지시: CMD-TKG13 rev 2 재전송됨 (10-06 15:57Z), AGY 보고 대기.
 
