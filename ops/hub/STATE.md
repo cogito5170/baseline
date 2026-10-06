@@ -113,3 +113,19 @@ Access is settled (2026-10-06 06:37): the user added an allow rule for add_repo;
 - Follow-ups: ledger only learns upward (try a cheaper rung occasionally); console 'starting' timeout; GA39 survivors;
   the user mentioned a "very hard task" after the baseline-into-GA work (content not handed over — ask the user when
   stage 3 lands). Found 2026-10-06: report/2 results.model shows gpt-oss-120b-medium while the rung was gemini (bridge).
+
+## Handoff 2026-10-06 ~06:45 UTC (outgoing: session_01TjZRibBAVr2dVKyyc5GU43, ctx ~145k, cost ~3 USD)
+- User directions since BD-465: "4번을 진행하여라" (stage 3 via the shadow gate: 10 consecutive, 0 false accepts, then
+  hub judges, baseline audits, roll back if quality drops); "사용자 개입을 최소화하고, 토큰을 아끼며, 자율적으로";
+  fix the handoff procedure; handoff info must be sufficient; intuitive session names (done: ●현재 / ○이전); answer who
+  watches baseline's tokens (done: independent watcher routine).
+- Open promises to the user: fill the shadow gate with ~10 small real Token items through the VM bridge, verdict each,
+  then the stage-3 directive (ga-sdk push now available). Report gate progress in Korean.
+- In flight: none dispatched yet. Next action: pick ~10 small real Token items (e.g. from Token open TODOs / the
+  ga Console UI artifact), write items under ops/agy_bridge/items/, send to AGY; plus a ga-sdk fix for shadow-compare
+  gate_ok:true with 0 agreements and for report/2 results.model (bridge reports the wrong model).
+- Heads verified: ga-sdk e364817, Token integration 95fe935 (main 0e19043), baseline 45f4838+; newest mail
+  to/baseline-shadow/20261006T062003…-CMD-GM2.md (all handled).
+- Access: baseline (source) + Token + ga-sdk push via add_repo. Routines: trig_01QDkY… (mail, into hub — move it),
+  trig_01Egfbe… (independent watcher, fresh sessions). Records: next BD-467, round 308.
+- Session names: old first hub "baseline ○ 이전 허브 (10-02~10-06 06:18…)".
