@@ -1,0 +1,92 @@
+[
+{
+"id": "d1",
+"file": "ga/console/cloud.py",
+"find": "            text = git(repo, \"show\", f\"{sha}:{self.s['path']}\") if sha else None\n",
+"replace": "            text = None\n",
+"tests": [
+"tests.test_ga52_cloud"
+]
+},
+{
+"id": "d2",
+"file": "ga/console/cloud.py",
+"find": "\"stale\": age > STALE_S,",
+"replace": "\"stale\": False,",
+"tests": [
+"tests.test_ga52_cloud"
+]
+},
+{
+"id": "d3",
+"file": "ga/console/cloud.py",
+"find": "    return {k: out[k] for k in FIELDS}\n",
+"replace": "    return {**raw, **out}\n",
+"tests": [
+"tests.test_ga52_cloud"
+]
+},
+{
+"id": "d4",
+"file": "ga/console/server.py",
+"find": "        if fp[\"cloud\"] != old[\"cloud\"]:",
+"replace": "        if True:",
+"tests": [
+"tests.test_ga52_cloud"
+]
+},
+{
+"id": "d5",
+"file": "ga/console/static/app.js",
+"find": "s.detail ? h(\"p\", { class: \"say\" }, s.detail) : null,",
+"replace": "s.detail ? h(\"p\", { class: \"say\", prop: { innerHTML: s.detail } }) : null,",
+"tests": [
+"tests.test_ga52_cloud"
+]
+},
+{
+"id": "h1",
+"file": "ga/console/cloud.py",
+"find": "out[\"url\"] = URL + raw[\"id\"]",
+"replace": "out[\"url\"] = raw.get(\"url\") or URL + raw[\"id\"]",
+"tests": [
+"tests.test_ga52_cloud"
+]
+},
+{
+"id": "h2",
+"file": "ga/console/cloud.py",
+"find": "or not ID.match(raw[\"id\"]):",
+"replace": "or not raw[\"id\"]:",
+"tests": [
+"tests.test_ga52_cloud"
+]
+},
+{
+"id": "h3",
+"file": "ga/console/cloud.py",
+"find": "if s is not None][:MAX_SESSIONS]",
+"replace": "if s is not None]",
+"tests": [
+"tests.test_ga52_cloud"
+]
+},
+{
+"id": "h4",
+"file": "ga/console/cloud.py",
+"find": "        if self.clock() - self._fetched_at < self.s[\"fetch_every_s\"]:\n            return\n",
+"replace": "        pass\n",
+"tests": [
+"tests.test_ga52_cloud"
+]
+},
+{
+"id": "h5",
+"file": "ga/console/cloud.py",
+"find": "or v != v or v < 0:",
+"replace": "or v != v:",
+"tests": [
+"tests.test_ga52_cloud"
+]
+}
+]
