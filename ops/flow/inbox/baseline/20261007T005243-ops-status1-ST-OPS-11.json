@@ -1,0 +1,15 @@
+{
+ "id": "ST-OPS-11",
+ "items": [
+  {
+   "id": "OPS-VMHUB",
+   "state": "held",
+   "note": "rev3 accepted and held (needs OPS-VMAUTO solved by user from measurements + R0-baseline). ops/hub/OPS_VMHUB.md updated with rev3 checks: SHA deploy check, hourly sessions/commits/pushes vs user policy, incident+rollback triggers, one-time kill-switch and user-alarm test in shadow."
+  }
+ ],
+ "blockers": [],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T00:52:43+09:00"
+}

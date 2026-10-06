@@ -17,7 +17,7 @@ inbox seen up to: ops 20261007T004312 (OPS-R0FREEZE). Last sent: dev INC-OPS-2 2
 - B-R1W-R3D: DEV-WATCH + OPS-LIMITS-WATCH || DEV-R3-DET. On DEV-WATCH release: verify on VM (notify-1 version), start 24 h side-by-side vs Claude watcher; every Claude alarm must also come from VM; then status/1 so baseline retires the Claude watcher + routine.
 - OPS-R1 values (budgets, batch cap, SLOs) -> spec inside batch/1 with DEV-R1. OPS-R2..R5 later.
 - INC-OPS-1 (Dev ctx caps) decided by Dev (integrator stays through R0). INC-OPS-3 00:5x: integrator 230k, GA52 227k, total 12.5 USD/h; proposed archive GA57+01Vtf8Jh, integrator swap after R0-baseline.
-- OPS-VMHUB (R4): plan ops/hub/OPS_VMHUB.md; HELD by OPS-VMAUTO.
+- OPS-VMHUB (R4) rev3 (00:52): plan ops/hub/OPS_VMHUB.md updated; HELD until VMAUTO solved + R0-baseline.
 - OPS-VMAUTO (R1): accepted; on DEV-VMAUTO release verify deploy, then hourly per-class measurement (R0 units) + calls per item + 0-call share; opinion/1 "solved" criteria after 24 h.
 - WATCH-METRIC: watcher usd_per_h is lifetime average (idle/archived sessions inflate total); VM watcher must rate on snapshot deltas.
 

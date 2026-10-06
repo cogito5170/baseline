@@ -1,4 +1,4 @@
-# OPS-VMHUB — how Ops deploys, observes, measures and rolls back the VM Dev/Ops baselines (R4, shadow only)
+# OPS-VMHUB rev3 — how Ops verifies and observes the VM execution domain (R4, shadow only, ON HOLD until VMAUTO solved + R0-baseline)
 
 Authority: the cloud Dev/Ops hubs stay the authority until a separate cutover spec. The VM baselines take no externally visible action.
 
@@ -23,3 +23,13 @@ Authority: the cloud Dev/Ops hubs stay the authority until a separate cutover sp
 2. Ops sends incident/1 to Dev with evidence; Dev's fix comes back as a new release/1 -> deploy check again.
 3. If the VM keeps sending: baseline asks the user to stop the VM baseline process; the cloud hubs continue unchanged.
 4. No cloud state is changed by a rollback, because in shadow the VM wrote none.
+
+## rev3 additions (spec 10-07 00:52 KST; build held like rev2)
+- Deploy check by SHA, as R0FREEZE: the VM names the ga-sdk SHA it runs (DEV-VMSHA); mismatch or >2 h silence after release -> incident/1.
+- Hourly boundary report from the VM, checked by code against the user policy file (caps, push-allowed repos/refs):
+  sessions {created, ended, refused}, commits gated {pass, fail+reason}, pushes {sha, ref, actor}. Missing hour -> stale alarm.
+- Incident + rollback path (steps 1-4 above) on: push by anything but the VM Ops core; push to a ref outside policy (in shadow:
+  anything outside VM-owned shadow refs); policy changed by anything but the user; cap exceeded without a refusal.
+- Kill switch and direct user alarm path sit outside the VM's own measurement/control; Ops tests each once in shadow and records
+  the result (time to stop, alarm received by the user) in ops/flow/measure/.
+- Ops never relays a cloud-refused action to the VM; a model credential for the VM is a status/1 blocker for the user.
