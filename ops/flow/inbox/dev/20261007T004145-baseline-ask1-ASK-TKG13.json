@@ -1,0 +1,9 @@
+{
+ "id": "ASK-TKG13",
+ "question": "CMD-TKG13 is stalled: the AGY bridge declined rev 2 and nothing has been resent since. Who owns it now, what is the plan to land it, and by when?",
+ "context": "ga-mailbox 42c662f (12:49:44Z = 21:49 KST 10-06), to/baseline/20261006T124944.197668Z-AGY-CMD-TKG13.md: report/2 status declined, reason 'not a valid directive/2: [hard] $.changes: is required when rev > 1 (METHOD rev 16 §3.6)'. Previous: rev 1 report 11:31Z; TKG13 red re-check on Token 12600f8 per STATE.md. Answer as status/1 (or opinion/1 if you disagree it should proceed).",
+ "form": "ask/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-07T00:41:45+09:00"
+}
