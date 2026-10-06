@@ -2,7 +2,7 @@
 Ops: session_01M4vGeVjHtivZ5nKLDSmdED (prev 01Qhj1TX). baseline: session_016tT1vvrTFehVFzWzfgxcCV (prev 01Ltsebb, child of it). Dev: session_01VMbRhMjtfPAALfLjAWJ1tT (prev 01Vtf8Jh).
 Ops sessions/routines (assign.json): token watcher session_01TBHcmu5ar3uwnjL7m6NhYg (Haiku, wake trig_01EFFxRB :49 KST, alarms come as notify/1);
   hourly Ops routine trig_018jUnT6xNGK5xNszk1o3EDn (old trig_01GvC312 disabled) (prompt includes shadow digest + snapshot steps).
-inbox seen up to: ops 20261007T010029 (OPS-VMBUDGET). Last sent: dev INC-OPS-2 23:52 (ctx over cap); baseline ST-OPS-8 23:52.
+inbox seen up to: ops 20261007T010320 (DEV-ST-OPS-2). Last sent: dev INC-OPS-2 23:52 (ctx over cap); baseline ST-OPS-8 23:52.
 
 ## Done
 - OPS-R0: ops/flow/measure/R0.json via ops/hub/measure_r0.py (static, no ga code). 10.2 USD/wall-h (hub 6.08, worker 4.57, integrator 1.15, watcher 0.51 USD/h).
@@ -29,7 +29,7 @@ inbox seen up to: ops 20261007T010029 (OPS-VMBUDGET). Last sent: dev INC-OPS-2 2
 
 - DEV-ST-OPS-1 00:54: R0FREEZE acting (integrator merges R0c, docs/R0_BASELINE.md, tag R0-baseline needs a user line); DEV-VMSHA acting (worker 015U1Lfq); GA57/01Vtf8Jh archive waits for user words in Dev session; integrator swap after R0-baseline.
 
-- OPS-VMBUDGET (R1) 01:00: caps in policy.json vm_budget (user 01:0x). measure rows carry budget/breaches; routine files incident on breach w/o refusal (ctx-cap breach = INC-OPS-3, don't re-file). Owed: opinion/1 on Dev's VMHUB rev3 design when it arrives, before any build request.
+- OPS-VMBUDGET (R1) 01:00: caps in policy.json vm_budget (user 01:0x). measure rows carry budget/breaches; routine files incident on breach w/o refusal (ctx-cap breach = INC-OPS-3, don't re-file). opinion/1 OP-OPS-VMHUB-R3 sent 01:0x (VM-local root-owned policy, 3-layer kill switch, post-call reconciliation, hourly VM boundary report).
 
 ## Hourly (every fire)
 1 inbox ops; 2 git fetch ga-mailbox (to/baseline, -ops, -shadow) -> scoring/incident if lag unexplained; 3 python3 ops/hub/shadow_digest.py digest;

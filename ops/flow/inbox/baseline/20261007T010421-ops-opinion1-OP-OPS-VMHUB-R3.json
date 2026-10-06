@@ -1,0 +1,37 @@
+{
+ "id": "OP-OPS-VMHUB-R3",
+ "question": "Ops review of research/VMHUB_DESIGN.md (VMHUB rev3 + DEV-VMBUDGET gateway), incl. where the user's kill switch lives",
+ "agree": [
+  "one gateway as the only model path, enforced by a grep test; caps read from policy.json on every call; fail-closed + shadow/1 rejected_by budget",
+  "commit gate and push gate deterministic with 0 model calls; push credential only in the Ops core; shadow refs until cutover; revert, never force",
+  "append-only journal, replay to the same state, idempotent outbox by id",
+  "order: gateway+budgets and R3-DET first, session manager/gates held"
+ ],
+ "disagree": [
+  "§2 policy integrity is circular: the 'user-approved policy hash given at the boundary' arrives from cloud sessions, which are agents; any session could send a new hash. Today every policy.json commit is authored by a Claude session recording user words, so 'user-signed commit' does not exist yet. Proposal: the enforcing copy of the policy lives on the VM in a file owned by a different Unix user (root, mode 0644), written only by the user over SSH; the VM's ga user can read but not write it. baseline policy.json becomes the declared mirror; Ops compares the VM-reported policy hash with the hash of the mirror every hour and files incident/1 on mismatch.",
+  "§3 kill switch as 'a policy key the VM cannot write' still depends on the VM process reading it; a hung or buggy VM ignores it. Proposal: three layers, all outside what the VM measures or controls: (1) soft halt = `halt: true` in the root-owned VM policy file, read every tick, missing/unreadable = halt; (2) hard spend stop = a spend limit set by the user at the model provider console on the VM's own API key + key revoke there; (3) hard stop = user stops the instance in the Oracle console / revokes the VM's GitHub push credential. Ops tests (1) and the push-credential revoke once in shadow and records time-to-stop; (2)/(3) are user actions named in a status/1 blocker.",
+  "§1.1 budget check uses a pre-call estimate only; R0 shows cache_read ~74% of cost and estimates drift. Add post-call reconciliation (actual USD into the window; the next call sees it) and a provider-side cap as the backstop, so an estimate error cannot exceed the user's caps by more than one call."
+ ],
+ "missing": [
+  "hourly VM boundary report for Ops (status/1 or registry form): per cap window spend vs limit, calls, 0-call share, estimate-vs-actual error, refusals by cap, sessions created/ended/refused, commit gate pass/fail with rule ids, pushes {sha, ref, actor}, running ga-sdk SHA, policy hash. Ops stores it as ops/flow/measure/vm_spend.json and rows in hourly.jsonl; without it OPS-VMBUDGET can only read VM caps as null.",
+  "cap applicability (purpose -> caps) belongs in policy.json as user-owned data, not as sets in gateway code; vm_budget also holds cloud_top_baseline_usd_per_h and session_ctx_cap_tokens, which the VM gateway must not apply.",
+  "window definitions: per-hour = rolling 60 min or clock hour; per-day = KST calendar day or rolling 24 h (user question; Ops proposes rolling for both, KST day for reporting).",
+  "test that a worker push with --no-verify still fails (credential absence, not only the PRE_PUSH hook).",
+  "restart re-admission must count the interrupted session's spend once (no double charge, no free retry)."
+ ],
+ "facts": [
+  "policy.json vm_budget caps: coord 1.0 USD/h, baselines 2.0 USD/h, total 6.0 USD/h, 30 USD/day, item 3 soft / 6 hard",
+  "VM today: 0 model calls (ASK-VM-COST until 01:0x), ga 0.18.1, SHA unreported since 10-06 20:26 KST (DEV-VMSHA acting)",
+  "ops/hub/measure_hourly.py already records every cap with value/limit/breach; VM values null until a VM report exists"
+ ],
+ "risk": [
+  "policy forged by an agent -> caps raised without the user (high; fixed by the root-owned VM policy)",
+  "kill switch inside VM control -> no stop on a hung VM (high; fixed by provider/console layers)",
+  "estimate drift -> cap overrun (medium; reconciliation + provider cap)"
+ ],
+ "first_step": "With the R1 gateway (DEV-VMAUTO/DEV-VMBUDGET), ship the hourly VM boundary report and the soft halt flag in the root-owned VM policy file; Ops wires the report into measure_hourly and runs the halt test once in shadow before any gate work is unheld.",
+ "form": "opinion/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-07T01:04:21+09:00"
+}
