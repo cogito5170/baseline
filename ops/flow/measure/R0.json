@@ -1,0 +1,697 @@
+{
+ "schema": "ops-measure/1",
+ "stage": "R0",
+ "at": "2026-10-06T21:17:03+09:00",
+ "cost": {
+  "day_utc": "2026-10-06",
+  "classes": {
+   "hub": {
+    "n": 10,
+    "hours": 8.87,
+    "input": 118700,
+    "output": 492428,
+    "cache_read": 144138839,
+    "cache_write": 1930069,
+    "usd": 53.9,
+    "per_hour": {
+     "output": 55516.0,
+     "cache_read": 16250151.0,
+     "cache_write": 217595.0,
+     "usd": 6.08
+    }
+   },
+   "worker": {
+    "n": 14,
+    "hours": 9.67,
+    "input": 20683,
+    "output": 538364,
+    "cache_read": 108898400,
+    "cache_write": 2016866,
+    "usd": 44.24,
+    "per_hour": {
+     "output": 55674.0,
+     "cache_read": 11261468.0,
+     "cache_write": 208569.0,
+     "usd": 4.57
+    }
+   },
+   "integrator": {
+    "n": 4,
+    "hours": 8.67,
+    "input": 37423,
+    "output": 95200,
+    "cache_read": 34372842,
+    "cache_write": 520231,
+    "usd": 9.97,
+    "per_hour": {
+     "output": 10980.0,
+     "cache_read": 3964572.0,
+     "cache_write": 60004.0,
+     "usd": 1.15
+    }
+   },
+   "watcher": {
+    "n": 1,
+    "hours": 5.22,
+    "input": 2154,
+    "output": 22377,
+    "cache_read": 8553559,
+    "cache_write": 181518,
+    "usd": 2.66,
+    "per_hour": {
+     "output": 4287.0,
+     "cache_read": 1638613.0,
+     "cache_write": 34774.0,
+     "usd": 0.51
+    }
+   }
+  },
+  "total_usd": 110.77,
+  "wall_hours": 10.88,
+  "usd_per_wall_hour": 10.18,
+  "sessions": [
+   {
+    "id": "session_01MuXcCLZm3KXYyDj9v8HqyB",
+    "class": "hub",
+    "title": "baseline ▼ Ops_baseline (10-06 21:2x~)",
+    "hours": 0.02,
+    "model": "claude-opus-5-5",
+    "input": 0,
+    "output": 0,
+    "cache_read": 0,
+    "cache_write": 0,
+    "usd": 0.0
+   },
+   {
+    "id": "session_01Vtf8JhoPbyf3o8v87LPVLb",
+    "class": "hub",
+    "title": "baseline ▲ Dev_baseline (10-06 21:2x~)",
+    "hours": 0.02,
+    "model": "claude-opus-5-5",
+    "input": 0,
+    "output": 0,
+    "cache_read": 0,
+    "cache_write": 0,
+    "usd": 0.0
+   },
+   {
+    "id": "session_01H2PH8BwPn3e3ut6Qjoaed3",
+    "class": "worker",
+    "title": "ga-sdk CMD-GA57 · ga ops 자율 고리 (10-06 20:5x~)",
+    "hours": 0.52,
+    "model": "claude-opus-5-5",
+    "input": 1194,
+    "output": 78422,
+    "cache_read": 14785643,
+    "cache_write": 188263,
+    "usd": 6.04
+   },
+   {
+    "id": "session_01HurcnHXjzVhZjQ6vYSYwkc",
+    "class": "worker",
+    "title": "ga-sdk CMD-GA56 · hub 한도 정지 알림 (10-06 20:4x~)",
+    "hours": 0.5,
+    "model": "claude-sonnet-5-5",
+    "input": 572,
+    "output": 14608,
+    "cache_read": 3000134,
+    "cache_write": 68379,
+    "usd": 1.02
+   },
+   {
+    "id": "session_01FynfJTJBM1D3itToGCjyM1",
+    "class": "integrator",
+    "title": "baseline ◇ Token 통합 (10-06 20:27~)",
+    "hours": 0.8,
+    "model": "claude-sonnet-5-5",
+    "input": 531,
+    "output": 3391,
+    "cache_read": 904067,
+    "cache_write": 31066,
+    "usd": 0.34
+   },
+   {
+    "id": "session_01UafTvmJjZiza4ctSfoeV8V",
+    "class": "hub",
+    "title": "baseline ● 현재 허브 (10-06 20:23~)",
+    "hours": 0.88,
+    "model": "claude-opus-5-5",
+    "input": 8823,
+    "output": 116556,
+    "cache_read": 29566603,
+    "cache_write": 273397,
+    "usd": 10.46
+   },
+   {
+    "id": "session_01VxBgf9gyDktXz8Ke7T6NiY",
+    "class": "worker",
+    "title": "ga-sdk CMD-GA54 · ga project (10-06 20:25~)",
+    "hours": 0.53,
+    "model": "claude-opus-5-5",
+    "input": 664,
+    "output": 66918,
+    "cache_read": 11779510,
+    "cache_write": 171729,
+    "usd": 5.07
+   },
+   {
+    "id": "session_01HKHSLNc3akPq52QTeKmDPm",
+    "class": "worker",
+    "title": "ga-sdk CMD-GA53 · 엔진 결함 4건 (10-06 20:08~)",
+    "hours": 1.15,
+    "model": "claude-sonnet-5-5",
+    "input": 55,
+    "output": 11870,
+    "cache_read": 2258773,
+    "cache_write": 61293,
+    "usd": 0.82
+   },
+   {
+    "id": "session_01LBoWy9AXfEwQsHqMcumAuC",
+    "class": "integrator",
+    "title": "baseline ◇ ga-sdk 통합 (10-06 19:58~)",
+    "hours": 1.29,
+    "model": "claude-sonnet-5-5",
+    "input": 14313,
+    "output": 18718,
+    "cache_read": 6607159,
+    "cache_write": 111467,
+    "usd": 1.98
+   },
+   {
+    "id": "session_01FUssZmVMp6rDvZ7GFTEpuK",
+    "class": "worker",
+    "title": "baseline ◆ CMD-GA52 merge (Sonnet)",
+    "hours": 1.3,
+    "model": "claude-sonnet-5-5",
+    "input": 1086,
+    "output": 8770,
+    "cache_read": 2938550,
+    "cache_write": 287353,
+    "usd": 1.83
+   },
+   {
+    "id": "session_01Eu6SdhSHCCwkL8BoAsULXr",
+    "class": "hub",
+    "title": "baseline ○ 이전 허브 (10-06 19:22~20:23, 인계 완료)",
+    "hours": 1.4,
+    "model": "claude-opus-5-5",
+    "input": 73411,
+    "output": 66617,
+    "cache_read": 20175758,
+    "cache_write": 232160,
+    "usd": 7.35
+   },
+   {
+    "id": "session_01J4GYxF1DgQExRvBkxRm9pp",
+    "class": "hub",
+    "title": "baseline ○ 이전 허브 (10-06 18:22~19:22, 인계 완료)",
+    "hours": 1.02,
+    "model": "claude-opus-5-5",
+    "input": 1127,
+    "output": 20740,
+    "cache_read": 7471826,
+    "cache_write": 138013,
+    "usd": 3.02
+   },
+   {
+    "id": "session_01GThc7uijAktpufbUynL5ws",
+    "class": "worker",
+    "title": "ga-sdk CMD-GA52 · 콘솔 클라우드 화면 (10-06 18:05~)",
+    "hours": 1.35,
+    "model": "claude-opus-5-5",
+    "input": 107,
+    "output": 44152,
+    "cache_read": 8693163,
+    "cache_write": 194275,
+    "usd": 4.18
+   },
+   {
+    "id": "session_01ERe9emPsRpLN5eGNJgGuVS",
+    "class": "hub",
+    "title": "baseline ○ 이전 허브 (10-06 17:53~18:22, 인계 완료)",
+    "hours": 0.51,
+    "model": "claude-opus-5-5",
+    "input": 3622,
+    "output": 40071,
+    "cache_read": 9542934,
+    "cache_write": 175954,
+    "usd": 4.13
+   },
+   {
+    "id": "session_01A4XZDgCfueMHW6rBGSWLuA",
+    "class": "hub",
+    "title": "ga-sdk CMD-GA51 · 허브 모델 auto (10-06 17:45~)",
+    "hours": 1.97,
+    "model": "claude-opus-5-5",
+    "input": 7939,
+    "output": 29260,
+    "cache_read": 10651177,
+    "cache_write": 101282,
+    "usd": 3.56
+   },
+   {
+    "id": "session_01DWVfRidtP9ENpP7jnhodSu",
+    "class": "integrator",
+    "title": "baseline ◇ Token 통합 (10-06 17:00~)",
+    "hours": 3.53,
+    "model": "claude-sonnet-5-5",
+    "input": 8967,
+    "output": 43649,
+    "cache_read": 12712596,
+    "cache_write": 194257,
+    "usd": 3.77
+   },
+   {
+    "id": "session_01JaqBjV1w4EXWE4Yc7YgGDz",
+    "class": "integrator",
+    "title": "baseline ◇ ga-sdk 통합 (10-06 17:00~)",
+    "hours": 3.05,
+    "model": "claude-sonnet-5-5",
+    "input": 13612,
+    "output": 29442,
+    "cache_read": 14149020,
+    "cache_write": 183441,
+    "usd": 3.88
+   },
+   {
+    "id": "session_01ThMJnkXYNSMWt4BtSiVDGx",
+    "class": "hub",
+    "title": "baseline ○ 이전 허브 (10-06 16:51~17:53, 인계 완료)",
+    "hours": 1.08,
+    "model": "claude-opus-5-5",
+    "input": 9211,
+    "output": 46047,
+    "cache_read": 14116676,
+    "cache_write": 151979,
+    "usd": 4.99
+   },
+   {
+    "id": "session_018CgEgHQN6sJn6teqNEnWz2",
+    "class": "worker",
+    "title": "ga-sdk CMD-GA50 · 실시간 화면 (10-06 16:45~)",
+    "hours": 1.06,
+    "model": "claude-opus-5-5",
+    "input": 8076,
+    "output": 104834,
+    "cache_read": 28061219,
+    "cache_write": 254798,
+    "usd": 9.78
+   },
+   {
+    "id": "session_01EPcQJaVSEzjV7LAhb1enSb",
+    "class": "worker",
+    "title": "ga-sdk CMD-GA49 · shadow gate 가시화 (10-06 16:10~)",
+    "hours": 0.94,
+    "model": "claude-sonnet-5-5",
+    "input": 1655,
+    "output": 24770,
+    "cache_read": 7292576,
+    "cache_write": 102783,
+    "usd": 2.12
+   },
+   {
+    "id": "session_019EWtXvKB3EE8RTYPHnNHLP",
+    "class": "watcher",
+    "title": "baseline ◎ 토큰 감시 (10-06 16:00~)",
+    "hours": 5.22,
+    "model": "claude-sonnet-5-5",
+    "input": 2154,
+    "output": 22377,
+    "cache_read": 8553559,
+    "cache_write": 181518,
+    "usd": 2.66
+   },
+   {
+    "id": "session_018XDm17bNkdU75huKaxKmkf",
+    "class": "hub",
+    "title": "baseline ○ 이전 허브 (10-06 15:45~16:55, 인계 완료 → 현재 허브)",
+    "hours": 1.63,
+    "model": "claude-opus-5-5",
+    "input": 10095,
+    "output": 133472,
+    "cache_read": 44006627,
+    "cache_write": 739456,
+    "usd": 16.92
+   },
+   {
+    "id": "session_01TjZRibBAVr2dVKyyc5GU43",
+    "class": "hub",
+    "title": "baseline ○ 이전 허브 (10-06 06:18~06:39, 인계 완료 → 현재 허브)",
+    "hours": 0.34,
+    "model": "claude-opus-5-5",
+    "input": 4472,
+    "output": 39665,
+    "cache_read": 8607238,
+    "cache_write": 117828,
+    "usd": 3.47
+   },
+   {
+    "id": "session_01XCJ8SAwHZt6MWo3VFGAA9V",
+    "class": "worker",
+    "title": "CMD-GA48 VM self-update",
+    "hours": 0.32,
+    "model": "claude-sonnet-5-5",
+    "input": 68,
+    "output": 22235,
+    "cache_read": 3358963,
+    "cache_write": 98101,
+    "usd": 1.29
+   },
+   {
+    "id": "session_01XD9EtkPcqwuxsCuBu6xmmJ",
+    "class": "worker",
+    "title": "CMD-GA47 ga act model router",
+    "hours": 0.24,
+    "model": "claude-opus-5-5",
+    "input": 74,
+    "output": 34890,
+    "cache_read": 4156970,
+    "cache_write": 123332,
+    "usd": 2.52
+   },
+   {
+    "id": "session_01FzzoU8Nz9b82FKUDZcPqHd",
+    "class": "worker",
+    "title": "CMD-GA46 ga act wasted turns",
+    "hours": 0.19,
+    "model": "claude-sonnet-5-5",
+    "input": 6308,
+    "output": 15451,
+    "cache_read": 3646935,
+    "cache_write": 89675,
+    "usd": 1.26
+   },
+   {
+    "id": "session_01HZ8fpTxW2z2PJQvW3XjXXU",
+    "class": "worker",
+    "title": "CMD-GA45 VM hub config + shadow mail + act model ladder",
+    "hours": 0.22,
+    "model": "claude-opus-5-5",
+    "input": 104,
+    "output": 33559,
+    "cache_read": 6244155,
+    "cache_write": 130988,
+    "usd": 2.97
+   },
+   {
+    "id": "session_01XcAaafUKUsXEVyjgST9N7u",
+    "class": "worker",
+    "title": "CMD-OPS2 ga vm install --full",
+    "hours": 0.41,
+    "model": "claude-opus-5-5",
+    "input": 100,
+    "output": 46755,
+    "cache_read": 6318055,
+    "cache_write": 142893,
+    "usd": 3.34
+   },
+   {
+    "id": "session_01CfU7QX7Yqy7eyh5cHm8Gqt",
+    "class": "worker",
+    "title": "GA — ga-sdk CMD-GA44: ga ask tool-less agent, setup facts by code (fresh)",
+    "hours": 0.94,
+    "model": "claude-sonnet-5-5",
+    "input": 620,
+    "output": 31130,
+    "cache_read": 6363754,
+    "cache_write": 103004,
+    "usd": 2.0
+   }
+  ]
+ },
+ "shadow_gate": {
+  "compared": 25,
+  "agree": 0,
+  "false_accepts": [],
+  "extra_send_backs": [],
+  "missing_in_shadow": [
+   "CMD-GA41 rev 1",
+   "CMD-CON1 rev 1",
+   "CMD-CON1 rev 1",
+   "CMD-GA42 rev 1",
+   "CMD-GA44 rev 1",
+   "CMD-OPS2 rev 1",
+   "CMD-GA45 rev 1",
+   "CMD-GA46 rev 1",
+   "CMD-GA47 rev 1",
+   "CMD-GA48 rev 1",
+   "CMD-TKG10 rev 1",
+   "CMD-TKG5 rev 2",
+   "CMD-GA49 rev 1",
+   "CMD-TKG9 rev 2",
+   "CMD-TKG10 rev 2",
+   "CMD-GA49 rev 2",
+   "CMD-GA49 rev 3",
+   "CMD-GA50 rev 1",
+   "CMD-TKG11 rev 1",
+   "CMD-GA50 rev 2",
+   "CMD-GA51 rev 2",
+   "CMD-GA51 rev 3",
+   "CMD-GA51 rev 3",
+   "CMD-TKG12 rev 1",
+   "CMD-TKG12 rev 1",
+   "CMD-TKG14 rev 1",
+   "CMD-TKG14 rev 1",
+   "CMD-TKG15 rev 1",
+   "CMD-TKG15 rev 1",
+   "CMD-TKG16 rev 1",
+   "CMD-TKG16 rev 1",
+   "CMD-TKG17 rev 1",
+   "CMD-TKG17 rev 1",
+   "CMD-TKG18 rev 1",
+   "CMD-TKG18 rev 1",
+   "CMD-TKG19 rev 1",
+   "CMD-TKG19 rev 1",
+   "CMD-TKG20 rev 1",
+   "CMD-TKG20 rev 1",
+   "CMD-GA52 rev 1"
+  ],
+  "gate": "0/10",
+  "gate_ok": false,
+  "shadow_rows": 40,
+  "newest_shadow": "20261006T071828.417621",
+  "rows": [
+   {
+    "id": "CMD-AGA4",
+    "rev": "1",
+    "baseline": "SEND_BACK",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061411.739745"
+   },
+   {
+    "id": "CMD-AGA4",
+    "rev": "2",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061413.552926"
+   },
+   {
+    "id": "CMD-CON2",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061420.312169"
+   },
+   {
+    "id": "CMD-GA39",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061422.007326"
+   },
+   {
+    "id": "CMD-GA40",
+    "rev": "1",
+    "baseline": "SEND_BACK",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061423.788046"
+   },
+   {
+    "id": "CMD-GA40",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061423.788046"
+   },
+   {
+    "id": "CMD-OPS1",
+    "rev": "1",
+    "baseline": "SEND_BACK",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061425.439957"
+   },
+   {
+    "id": "CMD-OPS1",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061425.439957"
+   },
+   {
+    "id": "CMD-GA42",
+    "rev": "2",
+    "baseline": "SEND_BACK",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061427.177011"
+   },
+   {
+    "id": "CMD-GA42",
+    "rev": "2",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061427.177011"
+   },
+   {
+    "id": "CMD-CON1",
+    "rev": "2",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061428.848512"
+   },
+   {
+    "id": "CMD-CON3",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061430.430629"
+   },
+   {
+    "id": "CMD-GA43",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061432.038194"
+   },
+   {
+    "id": "CMD-AGA6",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061433.673887"
+   },
+   {
+    "id": "CMD-GM1",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T061507.521579"
+   },
+   {
+    "id": "CMD-GM2",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T062003.255993"
+   },
+   {
+    "id": "CMD-TKG1",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T065654.137109"
+   },
+   {
+    "id": "CMD-TKG2",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T065829.893413"
+   },
+   {
+    "id": "CMD-TKG3",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T070703.336015"
+   },
+   {
+    "id": "CMD-TKG4",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T070705.142334"
+   },
+   {
+    "id": "CMD-TKG5",
+    "rev": "1",
+    "baseline": "SEND_BACK",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T070736.752309"
+   },
+   {
+    "id": "CMD-TKG6",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T070932.142711"
+   },
+   {
+    "id": "CMD-TKG7",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T071331.605576"
+   },
+   {
+    "id": "CMD-TKG8",
+    "rev": "1",
+    "baseline": "ACCEPT",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T071644.769644"
+   },
+   {
+    "id": "CMD-TKG9",
+    "rev": "1",
+    "baseline": "SEND_BACK",
+    "hub": "ASK_HUMAN",
+    "agree": false,
+    "at": "20261006T071828.417621"
+   }
+  ]
+ },
+ "env_failures": {
+  "count": 62,
+  "cause": "rlo-sdk not installed in worker containers (pin in pyproject: rlo-sdk[sensor] @ rlo-SDK 0d92a3d)",
+  "base": "ga-sdk 3d142ae (claude/CMD-GA49, integrated head)",
+  "with_rlo": "1426 OK (hub preview verdict 21:00)",
+  "test_files_importing_rlo": [
+   "tests/test_ga28.py",
+   "tests/test_ga29.py",
+   "tests/test_ga31.py",
+   "tests/test_gemini.py",
+   "tests/test_pspec_prompts.py",
+   "tests/test_rlo/test_gr3.py",
+   "tests/test_rlo/test_gr4.py",
+   "tests/test_rlo/test_gr9.py",
+   "tests/test_rlo/test_no_shadow.py",
+   "tests/test_rlo/test_units.py",
+   "tests/test_wire.py"
+  ],
+  "per_test_list": "owed by DEV-R0c run; not yet listed"
+ }
+}

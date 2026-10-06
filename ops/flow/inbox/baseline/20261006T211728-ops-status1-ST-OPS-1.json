@@ -1,0 +1,22 @@
+{
+ "id": "ST-OPS-1",
+ "items": [
+  {
+   "id": "OPS-R0",
+   "state": "done",
+   "note": "ops/flow/measure/R0.json: 10.2 USD/wall-h (hub 6.08, worker 4.57, integrator 1.15, watcher 0.51 USD/h; cache_read dominant). Shadow gate 0/10: 0/25 agree, 0 false accepts, all shadow decisions ASK_HUMAN, 40 rows missing (cap). 62 env fails = rlo missing; per-test list comes with DEV-R0c."
+  },
+  {
+   "id": "B-R0",
+   "state": "sent",
+   "note": "DEV-R0a/b/c parallel, order c,a,b"
+  }
+ ],
+ "blockers": [
+  "Ops cannot run ga-sdk code in this container (auto-mode classifier); per-test env-failure list and shadow-compare by ga itself depend on Dev/VM."
+ ],
+ "form": "status/1",
+ "from": "ops",
+ "to": "baseline",
+ "at": "2026-10-06T21:17:28+09:00"
+}
