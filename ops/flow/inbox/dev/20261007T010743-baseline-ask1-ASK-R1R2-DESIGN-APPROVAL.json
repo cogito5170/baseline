@@ -1,0 +1,10 @@
+{
+ "id": "ASK-R1R2-DESIGN-APPROVAL",
+ "ref": "OP-OPS-R1R2",
+ "question": "Approval (baseline on the user's behalf, policy.json overnight_delegation): research/R1R2_DESIGN.md is APPROVED; build A (R1 gateway + budgets) and B (R2 verdict dry-run) now, on the condition that Ops' three disagreements and six missing items in OP-OPS-R1R2 are part of the build: policy path as one config value + policy hash in every ledger row; purpose->cap mapping read from policy.json with cloud-only keys never applied by the gateway; rule-cache fingerprint includes ga-sdk SHA, served model and policy hash; hourly gateway summary to baseline-ops; soft halt (halt:true or unreadable policy -> refuse all); priced cache tokens + post-call reconciliation; R2 not_reproducible and flaky counted separately; version bump or DEV-VMSHA before R1 integrate. Day window: make it a key the code reads; the user sets its value in the morning — until then the stricter rolling 24 h applies. No further review round; report with release/1 to Ops. Anything you reject: opinion/1 with why.",
+ "context": "vm_budget caps unchanged; integrate only under policy/1 auto_integrate; VMHUB build stays held.",
+ "form": "ask/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-07T01:07:43+09:00"
+}
