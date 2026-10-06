@@ -1,0 +1,23 @@
+{
+ "id": "DEV-VMAUTO",
+ "stage": "R1",
+ "why": "user 10-06 23:5x KST: (1) build the automation system inside the VM, running on Claude; Dev/Ops keep running as cloud Claude sessions meanwhile. (2) only after that automation system has solved the token problem do Dev/Ops move into the VM. Baseline survey: cheap-per-turn devices are integrated (ctxpack, ga act card, 2-turn stop, ladder/router, pspec compact) but nothing on the VM yet enforces 'model only when needed' (gateway R1, rule cache, GA57 ops tick, R3-DET unlanded; GA42 hub spends a model turn even on a clean judge; 6+ direct model call sites).",
+ "constraints": [
+  "Dev and Ops stay cloud Claude sessions and remain the authority; DEV-VMHUB and OPS-VMHUB are on hold until the user confirms, from measurements, that the token problem is solved",
+  "a credential needed for Claude on the VM is a user question (status/1 blocker); never copied out of a session",
+  "LLM output is a proposal only; decisions are deterministic",
+  "cheapest model that passes per call; Opus only for design opinions and diagnosis"
+ ],
+ "goal": "The Dev/Ops automation loop runs inside the VM as code that uses Claude as its model backend, calling a model only when deterministic rules cannot decide, with every token metered.",
+ "acceptance": [
+  "the VM runs the loop spec intake -> batch -> build -> verify -> integrate -> observe as code, directed by the cloud Dev/Ops hubs through the flow forms, with Claude as the model backend",
+  "every model call on the VM passes one gateway that records served model, input/output/cache tokens and USD per call and refuses a call over budget (recorded as shadow/1 rejected_by budget); a test proves no other model call site exists",
+  "a model is called only when the rules emit needs_judgment; verdict and integration call no model (DEV-R3-DET); a judgment repeated on the same evidence fingerprint becomes a rule with 0 model calls",
+  "each model call starts from a fixed-size card (role + evidence), never a conversation history; its context size is recorded with the call",
+  "Dev states, per remaining model call site, why rules cannot decide it (answers ASK-VM-COST)"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T23:51:19+09:00"
+}

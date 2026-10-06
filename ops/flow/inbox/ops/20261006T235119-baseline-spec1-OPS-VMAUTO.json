@@ -1,0 +1,23 @@
+{
+ "id": "OPS-VMAUTO",
+ "stage": "R1",
+ "why": "user 10-06 23:5x KST: (1) build the automation system inside the VM, running on Claude; Dev/Ops keep running as cloud Claude sessions meanwhile. (2) only after that automation system has solved the token problem do Dev/Ops move into the VM. Baseline survey: cheap-per-turn devices are integrated (ctxpack, ga act card, 2-turn stop, ladder/router, pspec compact) but nothing on the VM yet enforces 'model only when needed' (gateway R1, rule cache, GA57 ops tick, R3-DET unlanded; GA42 hub spends a model turn even on a clean judge; 6+ direct model call sites).",
+ "constraints": [
+  "Dev and Ops stay cloud Claude sessions and remain the authority; DEV-VMHUB and OPS-VMHUB are on hold until the user confirms, from measurements, that the token problem is solved",
+  "a credential needed for Claude on the VM is a user question (status/1 blocker); never copied out of a session",
+  "LLM output is a proposal only; decisions are deterministic",
+  "cheapest model that passes per call; Opus only for design opinions and diagnosis"
+ ],
+ "goal": "Ops deploys and operates the VM automation system built under DEV-VMAUTO and measures whether it solves the token problem, so the user can decide when Dev/Ops move into the VM.",
+ "acceptance": [
+  "each VM automation release is verified deployed (VM version == released sha) before it counts",
+  "tokens and USD per hour are measured hourly per class (VM automation, cloud hubs, workers, integrators, watcher) in the units of ops/flow/measure/R0.json and reported in status/1 next to R0",
+  "model calls per finished item and share of items decided with 0 model calls are reported",
+  "after at least 24 h of measurement Ops sends opinion/1 proposing 'token problem solved' criteria with the measured numbers; the user decides",
+  "watch_thresholds.json alarms apply to VM model calls"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "ops",
+ "at": "2026-10-06T23:51:19+09:00"
+}
