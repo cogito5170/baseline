@@ -1,0 +1,20 @@
+{
+ "id": "OPS-R0FREEZE",
+ "stage": "R0",
+ "goal": "The VM runs R0-baseline, confirmed by SHA, and the same commit is recorded as VM-baseline.",
+ "why": "User 10-07 00:5x KST: do not wait passively for the 30-minute update cycle; confirm the code the VM actually runs, so VMAUTO and VMHUB are judged on the same baseline.",
+ "acceptance": [
+  "a VM message names the ga-sdk SHA it runs, and it equals R0-baseline (no longer 0.18.1 / f9671da)",
+  "the R0 tests run on the VM at that SHA and the result is stored as evidence in a repository",
+  "VM-baseline = R0-baseline is recorded where later measurements cite it; every later measurement row names the SHA it ran on",
+  "a mismatch or a VM silence longer than 2 h after Dev's release is an incident/1"
+ ],
+ "constraints": [
+  "a step only the user can do on the VM is a status/1 blocker with the exact action and cause",
+  "no model runs continuously on the VM until the user sets the budget (ASK-VM-COST)"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "ops",
+ "at": "2026-10-07T00:43:12+09:00"
+}

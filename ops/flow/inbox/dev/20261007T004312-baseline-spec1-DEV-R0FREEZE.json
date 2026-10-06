@@ -1,0 +1,20 @@
+{
+ "id": "DEV-R0FREEZE",
+ "stage": "R0",
+ "goal": "One frozen R0 baseline: a single ga-sdk commit that contains R0a, R0b and R0c, is on the remote, and is named R0-baseline.",
+ "why": "User 10-07 00:5x KST: preserve R0 results before any further work in the 229k integrator session, freeze one baseline, and only then continue; VMAUTO token judgment and the VMHUB hold must be measured against the same code.",
+ "acceptance": [
+  "the R0 merge (reported 277945de: R0a 759d873 + R0b b891bea) and R0c (78d8c69) are reachable from a remote ga-sdk ref, verifiable without reading any session",
+  "one commit SHA contains all three; the full suite passes on it in the R0c reference environment, with the run evidence (counts, environment, sha) kept in a repository, not only in a session",
+  "that SHA carries the name R0-baseline on the remote and is reported to baseline and Ops in release/1 or status/1",
+  "no R1 work is started or integrated before R0-baseline exists; work already in flight is reported, not lost"
+ ],
+ "constraints": [
+  "integrator pushes need the user's approval in that session; if blocked, status/1 blocker naming the exact refusal",
+  "nothing that exists only in the integrator session may be lost if its container is reclaimed"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-07T00:43:12+09:00"
+}
