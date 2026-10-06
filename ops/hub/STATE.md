@@ -10,7 +10,7 @@ never: route around a permission denial (other session, tool, host).
 language: user=Korean; sessions=English. Times to the user: KST.
 
 ## Hub
-session: session_01Eu6SdhSHCCwkL8BoAsULXr "baseline ● 현재 허브 (10-06 19:22~)" (also in ops/hub/BASELINE_SESSION); previous session_01J4GYxF… (18:22~19:22)
+session: <NEW> "baseline ● 현재 허브 (10-06 20:23~)" (also in ops/hub/BASELINE_SESSION); previous session_01Eu6Sdh… (19:22~20:23)
 repos_attach: ga-sdk, Token (push) — the hub's inherited repo list; add_repo each at session start, before any work.
 attached: baseline(source), ga-sdk, Token (10-06 15:47, clones /home/user/ga-sdk, /home/user/token); venv /home/user/venv (rlo-sdk + ga-sdk).
 user_direction 10-06 15:46: "이전 세션에서 다음 세션으로 인계해야 하는 repo를 넘겨 받고, add_repo으로 baseline 세션 생길 때 부터 추가해.
@@ -23,7 +23,7 @@ artifacts: 상황판(phone/PC; live sessions via Claude Code Remote list_session
 A hub only has baseline (create_session takes one source; add_repo in a new hub needs the user's own words). So the
 hub does NOT attach ga-sdk/Token: it sends work by send_message to persistent integrator sessions that hold those repos.
 ga-sdk: session_01LBoWy9AXfEwQsHqMcumAuC "baseline ◇ ga-sdk 통합 (10-06 19:58~)" (Sonnet; replaced 01JaqBjV… at 186k; its successor prompt is its first message) — VERDICT <branch> + mutations [{id,file,find,replace,tests}] → one JSON line; INTEGRATE <branch> <sha> → ff push only.
-Token: session_01DWVfRidtP9ENpP7jnhodSu "baseline ◇ Token 통합" — VERDICT agv/<id>-r<n> + tests/command/allowed files/mutations [{file,old,new}]; INTEGRATE <branch> <sha> → ff or merge commit, suites green, push.
+Token: session_01DWVfRidtP9ENpP7jnhodSu "baseline ◇ Token 통합" (203k → replace after TKG12-20 batch) — VERDICT agv/<id>-r<n> + tests/command/allowed files/mutations [{file,old,new}]; INTEGRATE <branch> <sha> → ff or merge commit, suites green, push.
 They accept only the hub id in their prompt; on every handoff the outgoing hub sends each: "hub is now <new id>".
 Bridge items (ga mail send) need only baseline: copy ga-sdk read-only (git clone of public ga-sdk if allowed) or write mail per ga's format; ask the ga-sdk integrator to send if needed.
 repos_attach is now OPTIONAL (only if the user says "추가해" in that hub).
@@ -64,25 +64,20 @@ next_action: GA49 integrated (ga-sdk 3d142ae). GA50 rev 2 (merge of GA49 + tests
 then: stage 3 directive (hub judges+integrates on VM, baseline audits, roll back on quality drop) — user said go.
 fixes_queued: GA39 survivors (rest → CMD-GA53).
 
-## In flight (handoff 10-06 19:22 KST from session_01J4GYxF…, ctx 151k)
-- GA49 r3 3d142ae ACCEPTED and integrated (ga-sdk integration head 3d142ae, 0.17.1; push approved by the user in the integrator session). Worker 01EPcQJa… finished (archive when the user agrees).
-- GA50 r2 f3abeea INTEGRATED 18:47 (ff by ga-sdk integrator, user-approved; ls-remote verified). 18:48 GA51 worker told: merge f3abeea, bump 0.18.1, re-run, notify → then VERDICT GA51.
-- CMD-GA51 rev 3 f9671da (test ba52088, m6 test added) notify 19:34 → VERDICT 19:48 ACCEPT (1401 OK, mut 6/6, 0.18.1) → INTEGRATED 19:56 (ga-sdk f9671da, 0.18.1, ff, ls-remote OK) → next GA52 merge + VERDICT. Was: rev 2 b034373 SEND_BACK 19:19 (suite 1400 OK, m1-m5 killed, m6 survived: served-chain last element unpinned). Worker asked for one test → rev 3 → re-VERDICT (m6 only + suite) → INTEGRATE (user's push OK in integrator) → GA52 merge + VERDICT.
-- TKG11: report/2 in to/baseline 17:39 (ga-mailbox a12962d), agv/CMD-TKG11-r1 4720d5f, gemini flash 2 turns 3.9k tok; diff reviewed OK (test file identical to baseline's). VERDICT ACCEPT (suite 261/0, t1-t3 killed; verdicts.jsonl). Integrated: Token 4720d5f (ff, fe 105 / be 313 OK).
-- CMD-GA52 merge worker session_01FUssZmVMp6rDvZ7GFTEpuK (Sonnet, 19:57): merge f9671da into 91468e3, 0.18.2, suite, push claude/CMD-GA52, notify → VERDICT via integrator. Old GA52 worker 01GThc… (214k) and GA51 worker 01A4XZ… dropped from tokmon (archive on user OK).
-- ga-sdk integrator replaced 19:58 → session_01LBoWy9…, ack 20:04 (venv ready, head f9671da).
-- Was: CMD-GA52 DONE 18:33: claude/CMD-GA52 91468e3 (code 0d2b99d, from 3d142ae, 0.17.2 → re-bump at merge; 1374 run/0 fail, own mut 5/5). Waits: GA50 push → GA51 → merge integration into GA52 → VERDICT.
-  Was: CMD-GA52 (console '클라우드' screen from ops/hub/cloud_sessions.json, producer ops/hub/cloud_snapshot.py; user 18:00) dispatched 18:00 to session_01GThc7uijAktpufbUynL5ws (Opus), branch claude/CMD-GA52. Lands after GA50, GA51. Mail routine step (3) now refreshes the snapshot + the 상황판 memo.
-- Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on branch ga-mailbox, commit "ga mail: baseline -> AGY <id>" (git worktree; no ga needed).
-- Token alarm 19:50: ga-sdk integrator 186k (recreate right after GA51 INTEGRATE lands); GA51 worker 155k done (archive on user OK); GA52 worker 214k → GA52 merge goes to a fresh Sonnet worker from 91468e3, not that one.
-- CMD-GA54 `ga project` (user chose (가) 20:2x: project/1 file binding repos/env/instructions/routines/threads; init proposes from existing state, writes only on human approval; apply ff-only/no sudo; console 프로젝트 screen; generic — user: no example content) dispatched 20:25 to session_01VxBgf9gyDktXz8Ke7T6NiY (Opus, claude/CMD-GA54, from f9671da). Landing order GA52 → GA53 → GA54, each re-merges + re-bumps.
-- CMD-GA55 usage panel (user 20:3x "그렇게 해라"): directive written (directives/CMD-GA55.md), dispatch AFTER GA54 lands (needs GA52 collector + GA54 project). Producer side done now: cloud_snapshot.py adds `plan` (from rate_limit_info, no percent) + per-session parent/tokens (additive; GA52 whitelist drops them until GA55).
-- Archived 20:0x (user "끝난 세션들 보관해"): GA49 01EPcQJa, GA50 018CgEgH, GA51 01A4XZDg, old GA52 01GThc7u, old ga-sdk integrator 01JaqBjV, old hub 01J4GYxF.
-- Was: token alarm 18:50: GA50 worker 292k (done; dropped from tokmon, archive when the user agrees); GA52 worker 204k idle (only a merge+rerun left; if it stalls, fresh Sonnet worker from 91468e3); ga-sdk integrator 157k idle (no new work there until GA51 VERDICT; recreate only if it grows); GA51 138k (finish merge only).
-- 20:05 user "놀고 있는 세션들 계속 일 시켜": Token integrator returned 9 red-checked items 20:07. TKG12,14-20 bridge items+directives (baseline 3ea5549) mailed to AGY 20:08 (ga-mailbox 28fd908) → await agv/CMD-TKGn-r1 reports in to/baseline → VERDICT each via Token integrator (tests inline) → rescore gate. TKG13 (bool limit/threshold, quota/service.py:121-122, adjacent to TKG12) held until TKG12 integrated; test saved in ops/agy_bridge/held/CMD-TKG13.md. ga-sdk integrator answered Q1-Q4 20:05 (Q1 not reproduced; Q2 _served_model first turn; Q3 from_ledger max over all wins; Q4 no starting timeout) → CMD-GA53 dispatched 20:08 to session_01HKHSLNc3akPq52QTeKmDPm (Sonnet, branch claude/CMD-GA53, from f9671da; both GA52 and GA53 bump 0.18.2 → second to land re-merges + bumps).
-- Watcher session status says 'cron modified to 20m' but trig_01XtMnV6… is still hourly :49 — likely a session-local cron; verify, not approved by the user.
-- cloud_sessions.json first written 19:20 (8 live sessions; built from list_sessions by hand-trimmed JSON — the raw tool result is ~30k tokens, keep it trimmed).
-- Open user question: token watcher every 20 min — (a) 3 hourly routines :09/:29/:49 only with the user's OK, (b) project setting, (c) keep hourly. No answer yet.
+## In flight (handoff 10-06 20:23 KST from session_01Eu6Sdh…, ctx 215k)
+- ga-sdk integration head f9671da (0.18.1, GA51 integrated 19:56). Landing order GA52 → GA53 → GA54 → GA55; each later one merges the new head and bumps the next patch (0.18.2, .3, .4 …).
+- CMD-GA52 merge worker session_01FUssZmVMp6rDvZ7GFTEpuK (Sonnet): merging f9671da into claude/CMD-GA52 (91468e3), 0.18.2, suite running → notify/1 → VERDICT via ga-sdk integrator (mutations: write 4-5 on the D1 list: worktree read instead of ref; stale threshold; whitelist; SSE without change; text as HTML) → INTEGRATE.
+- CMD-GA53 (4 engine fixes; directives/CMD-GA53.md) worker session_01HKHSLNc3akPq52QTeKmDPm (Sonnet, claude/CMD-GA53 from f9671da), suite running → notify → VERDICT (D1 mutations) after GA52 lands (worker re-merges + bumps).
+- CMD-GA54 `ga project` (user chose (가); generic — user: no example content) worker session_01VxBgf9gyDktXz8Ke7T6NiY (Opus, claude/CMD-GA54) drafting core.
+- CMD-GA55 usage panel (user OK 20:3x): directives/CMD-GA55.md ready; dispatch AFTER GA54 lands. Producer done: cloud_snapshot.py emits `plan` + per-session parent/tokens.
+- TKG12,14-20: AGY reports all 'done' 20:09-20:17 (gemini flash, 1-6 turns, 1.1k-14.8k tok; ga-mailbox be2fe21). Batch VERDICT sent 20:22 to Token integrator (ancestor 4720d5f, files only allowed+test, test identical, cmd + full suites, revert-killed, diff ≤25 lines, concern). Review each diff yourself, then ACCEPT → INTEGRATE (merge commits; user's push OK in the integrator) → verdicts.jsonl + rescore gate (`ga hub shadow-compare`, these count as Token bridge items). Then mail TKG13 (ops/agy_bridge/held/CMD-TKG13.md; base after TKG12).
+- Token integrator 01DWVfRi… is at 203k → replace it after this batch (ask it for a successor prompt first, like the ga-sdk one 19:57).
+- Push question (user 20:4x): told the user that a one-line standing approval typed in each integrator session ("ACCEPT + suites green + all mutations killed + ff/merge to integration → push without asking; no force") would remove manual pushes; no answer yet. Relayed approvals still don't count.
+- Mail to AGY = copy directives/<id>.md to to/AGY/<UTC %Y%m%dT%H%M%S.%fZ>-baseline-<id>.md on ga-mailbox (git worktree), commit "ga mail: baseline -> AGY <id>".
+- Status board: cloud_sessions.json 20:21 (6 live). Build it from list_sessions by writing a trimmed JSON (raw result ~30k tokens); archived sessions excluded.
+- Archived (user "끝난 세션들 보관해"): GA49, GA50, GA51, old GA52, old ga-sdk integrator 01JaqBjV, old hubs 01J4GYxF, 01ERe9em. se_new session 01CqwD2E… is the user's own, not ours.
+- Records still unwritten in DECISION_LOG/BASELINE §13 (see Heads records_next) + GA51 r3 ACCEPT/integrate, GA52-55 dispatch, TKG12-20.
+- Watcher: trig_01XtMnV6… hourly :49 (user never approved 20 min). Open user question on 20-min cadence still unanswered.
 
 ## Open with the user
 - Gentle Monster (BD-466) done; waits on user feedback on six documents / [확인 필요].
