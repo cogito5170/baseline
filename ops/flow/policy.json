@@ -55,6 +55,12 @@
     "in": "top baseline session_016tT1vvrTFehVFzWzfgxcCV",
     "user_words": "상시 통합 승인을 새 Dev 허브로 확장해",
     "meaning": "the standing approval (and the R<n>-baseline tag extension) applies to INTEGRATE sent by Dev hub session_01EqmaVLL6vWPFnmAqv9UKWH (replaces 01VMbRhM); conditions and never-list unchanged"
+   },
+   {
+    "at": "2026-10-07 01:4x KST",
+    "in": "top baseline session_016tT1vvrTFehVFzWzfgxcCV",
+    "user_words": "R0-baseline 이름표는 318b22a에 붙여",
+    "meaning": "the R0-baseline tag on cogito5170/ga-sdk points at 318b22a1eb167b02c6a37ef3c96be68f455feffa; created under the R<n>-baseline tag extension (create only, never moved)"
    }
   ]
  },
