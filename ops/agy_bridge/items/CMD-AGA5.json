@@ -1,0 +1,27 @@
+{
+ "item": {
+  "id": "CMD-AGA5",
+  "goal": "Restyle the Token report screen to the other screens' grammar. Edit only frontend/src/app/(app)/reports/ReportsView.tsx; keep its props, TITLE = \"리포트\", <h1>{TITLE}</h1> exactly, the form's name=\"from\"/name=\"to\" date inputs, the submit button text 생성, the empty text 리포트가 없다., and every button's data-report-id / data-export attributes (existing tests check them).\nExact markup to produce:\n1) root: <main className=\"gc-screen\" data-screen=\"reports\"> (replace the outer <div>).\n2) form: <form className=\"gc-form\" ...> with <label>시작<input type=\"date\" name=\"from\" required /></label> and <label>끝<input type=\"date\" name=\"to\" required /></label> — the label text directly before the input, no 'From:'/'To:'.\n3) empty: <p className=\"gc-empty\">리포트가 없다.</p>.\n4) table: <table className=\"gc-table num\" aria-label=\"리포트 목록\">, header row exactly <th>기간</th><th>만든 때</th><th>내보내기</th>.\n5) created time cell: r.created_at is an ISO string like \"2026-10-05T13:58:16.003067+00:00\" or missing; show r.created_at ? r.created_at.slice(0, 16).replace(\"T\", \" \") : \"—\" (so \"2026-10-05 13:58\").\n6) each export button: type=\"button\" and aria-label=`CSV 내려받기 ${r.period.from} ~ ${r.period.to}` / `JSON 내려받기 ...` (the period is NESTED: r.period.from).\nNo `as any`; the frontend must type-check.",
+  "files": [
+   "frontend/src/app/(app)/reports/ReportsView.tsx"
+  ],
+  "done_when": "test"
+ },
+ "tests": {
+  "frontend/tests/reports/reports-style.test.ts": "// Acceptance test for CMD-AGA5 (written by baseline; the executor may not edit it).\nimport { beforeAll, describe, expect, it } from \"vitest\";\nimport * as React from \"react\";\nimport { renderToStaticMarkup } from \"react-dom/server\";\nimport { execFileSync } from \"node:child_process\";\nimport { resolve } from \"node:path\";\n\nconst h = React.createElement;\nlet m: any;\nbeforeAll(async () => {\n  (globalThis as { React?: unknown }).React = React;\n  m = await import(\"../../src/app/(app)/reports/ReportsView\");\n});\nconst rep = (id: string, from: string, to: string, created_at?: string) => ({ id, period: { from, to }, body: {}, created_at });\nconst html = (reports: unknown[]) => renderToStaticMarkup(h(m.ReportsView, { reports, onGenerate() {}, onExport() {} })).replace(/<!-- -->/g, \"\");\n\ndescribe(\"ReportsView follows the screens' grammar\", () => {\n  it(\"is a gc-screen main with data-screen=reports\", () => {\n    expect(html([])).toMatch(/^<main class=\"gc-screen\" data-screen=\"reports\">/);\n  });\n  it(\"labels the period inputs 시작 and 끝 (no English labels)\", () => {\n    const out = html([]);\n    expect(out).toContain('<form class=\"gc-form\"');\n    expect(out).toMatch(/<label>시작<input[^>]*name=\"from\"/);\n    expect(out).toMatch(/<label>끝<input[^>]*name=\"to\"/);\n    expect(out).not.toMatch(/From:|To:/);\n  });\n  it(\"shows the empty state as gc-empty\", () => {\n    expect(html([])).toContain('<p class=\"gc-empty\">리포트가 없다.</p>');\n  });\n  it(\"uses a gc-table with Korean headers and a readable created time\", () => {\n    const out = html([rep(\"a1\", \"2026-09-01\", \"2026-09-30\", \"2026-10-05T13:58:16.003067+00:00\"), rep(\"b2\", \"2026-10-01\", \"2026-10-05\")]);\n    expect(out).toContain('<table class=\"gc-table num\" aria-label=\"리포트 목록\">');\n    expect(out).toContain(\"<th>기간</th><th>만든 때</th><th>내보내기</th>\");\n    expect(out).toContain(\"<td>2026-10-05 13:58</td>\");\n    expect(out).toContain(\"<td>—</td>\");\n    expect(out).not.toContain(\"T13:58:16\");\n  });\n  it(\"names each export button by its format and period\", () => {\n    const out = html([rep(\"a1\", \"2026-09-01\", \"2026-09-30\")]);\n    expect(out).toContain('aria-label=\"CSV 내려받기 2026-09-01 ~ 2026-09-30\"');\n    expect(out).toContain('aria-label=\"JSON 내려받기 2026-09-01 ~ 2026-09-30\"');\n  });\n  it(\"type-checks (the page must build)\", () => {\n    const root = resolve(__dirname, \"../..\");\n    let out = \"\";\n    try { execFileSync(process.execPath, [resolve(root, \"node_modules/typescript/bin/tsc\"), \"--noEmit\", \"-p\", root], { encoding: \"utf8\" }); }\n    catch (e: any) { out = String(e.stdout || e.message); }\n    expect(out).toBe(\"\");\n  }, 120_000);\n});\n"
+ },
+ "commands": {
+  "commands": {
+   "test": [
+    "node",
+    "frontend/node_modules/vitest/vitest.mjs",
+    "run",
+    "--root",
+    "frontend",
+    "tests/reports/"
+   ]
+  },
+  "timeout_s": 300
+ },
+ "base": "claude/gracious-meitner-vp49xe"
+}
