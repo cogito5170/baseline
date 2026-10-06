@@ -1,0 +1,15 @@
+{
+ "id": "OPS-R3",
+ "stage": "R3",
+ "goal": "Automatic integration observed safe in operation.",
+ "why": "Removing the human gate is irreversible in effect.",
+ "acceptance": [
+  "a revert drill succeeds on the integration ref",
+  "the VM deploys each integrated sha and reports its version",
+  "change failure rate stays under its SLO for the first 10 integrations"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ]
+}

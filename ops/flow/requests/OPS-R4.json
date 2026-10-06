@@ -1,0 +1,15 @@
+{
+ "id": "OPS-R4",
+ "stage": "R4",
+ "goal": "The state machine deployed and operated on the VM with alerts on stuck items.",
+ "why": "Runtime first.",
+ "acceptance": [
+  "every item's state and deadline visible on the console",
+  "a missed deadline raises one alert with cause",
+  "DORA metrics (deploy frequency, lead time, change failure rate, MTTR) computed by code and shown"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ]
+}

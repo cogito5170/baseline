@@ -1,0 +1,15 @@
+{
+ "id": "OPS-R1",
+ "stage": "R1",
+ "goal": "Budgets, SLOs and batch limits that the gateway enforces, and verification that it does.",
+ "why": "The gateway needs values; Ops owns operating limits.",
+ "acceptance": [
+  "values set: per-session and per-day token/USD budgets, batch size cap, SLOs (shadow decision lag, integration lead time, change failure rate)",
+  "after DEV-R1 lands: measured tokens per item before vs after",
+  "an alert reaches the user when a budget fails closed"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ]
+}

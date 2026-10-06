@@ -1,0 +1,14 @@
+{
+ "id": "DEV-R0a",
+ "stage": "R0",
+ "goal": "The model recorded for a task (report, ledger, events) is the model that actually answered the final turn.",
+ "why": "Measurement and re-optimization rely on it; today the first rung is recorded after a climb (POLL-RUNTIME).",
+ "acceptance": [
+  "after a climb from rung A to B the report, ledger and events all name B",
+  "a regression test fails if the recorded model differs from the answering one"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ]
+}

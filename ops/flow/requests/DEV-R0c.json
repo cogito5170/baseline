@@ -1,0 +1,15 @@
+{
+ "id": "DEV-R0c",
+ "stage": "R0",
+ "goal": "A reproducible reference environment in which the full ga-sdk suite is green (rlo included).",
+ "why": "62 tests fail only for environment reasons; guard tests need a green base.",
+ "acceptance": [
+  "one documented recipe builds the environment from nothing",
+  "full suite: 0 failures, 0 errors in that environment",
+  "the recipe is used by every verdict"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ]
+}

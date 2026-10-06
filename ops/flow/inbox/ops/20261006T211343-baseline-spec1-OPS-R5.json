@@ -1,0 +1,19 @@
+{
+ "id": "OPS-R5",
+ "stage": "R5",
+ "goal": "Retirement of routines and sessions that R1-R4 replaced, without losing coverage.",
+ "why": "Less always-on model context.",
+ "acceptance": [
+  "a checklist of each retired piece and what replaces it",
+  "the token watcher remains",
+  "no alert class is lost"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "ops",
+ "at": "2026-10-06T21:13:43+09:00"
+}

@@ -1,0 +1,19 @@
+{
+ "id": "DEV-R5",
+ "stage": "R5",
+ "goal": "Session lifecycle is automatic: handoff, archive of finished sessions, retirement of what R1-R4 replaced.",
+ "why": "Hubs pass 150k about hourly; finished sessions re-alarm.",
+ "acceptance": [
+  "a session over the context cap gets a successor without a human message",
+  "finished sessions are archived",
+  "the token watcher stays as an independent kill-switch"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T21:13:43+09:00"
+}

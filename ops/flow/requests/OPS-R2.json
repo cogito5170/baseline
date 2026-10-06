@@ -1,0 +1,14 @@
+{
+ "id": "OPS-R2",
+ "stage": "R2",
+ "goal": "The runtime verdict proven equal to the integrator sessions before they retire.",
+ "why": "Retire only on evidence.",
+ "acceptance": [
+  "10 consecutive matching decisions, 0 false accepts, scored by code",
+  "mismatches reported to Dev as incidents with evidence"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ]
+}

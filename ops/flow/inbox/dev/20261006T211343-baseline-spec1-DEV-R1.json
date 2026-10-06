@@ -1,0 +1,21 @@
+{
+ "id": "DEV-R1",
+ "stage": "R1",
+ "goal": "Every model call in ga-sdk passes through one gateway that meters it and enforces budgets.",
+ "why": "LLM-minimum and token-loop principles must hold by structure, not by prompts.",
+ "acceptance": [
+  "a test fails if any module calls a backend outside the gateway",
+  "each call appends one ledger row: input, output, cache_read, cache_write, usd, rung, n_items, caller",
+  "one definition of a paid call is used by every cap, budget and ledger",
+  "per-session and per-day token/USD budgets fail closed and emit an alert",
+  "items that arrive in the same tick can be sent as one call with one fixed template; batch size is capped by a value Ops sets"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T21:13:43+09:00"
+}

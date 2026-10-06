@@ -1,0 +1,17 @@
+{
+ "id": "DEV-R3",
+ "stage": "R3",
+ "goal": "Integration happens automatically when a verdict passes under a policy that only a human can change.",
+ "why": "The per-push human approval is the last manual step.",
+ "acceptance": [
+  "integrates only with zero surviving mutations and a green suite",
+  "only fast-forward or merge commit to the one integration ref; never force",
+  "dry-run mode shows what would be pushed",
+  "the policy cannot be changed by an agent (protected or signed)",
+  "an automatic revert of an integrated change is proven before enabling"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ]
+}

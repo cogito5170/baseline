@@ -1,0 +1,14 @@
+{
+ "id": "DEV-R0b",
+ "stage": "R0",
+ "goal": "The router can choose a cheaper starting rung again when cheaper rungs keep winning.",
+ "why": "Re-optimization needs a way down; today the ledger only climbs.",
+ "acceptance": [
+  "given recent wins on a cheaper rung the next task starts there",
+  "never below the lowest or above the highest rung of the ladder"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ]
+}

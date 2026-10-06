@@ -1,0 +1,19 @@
+{
+ "id": "OPS-R0",
+ "stage": "R0",
+ "goal": "Measured baseline of today's costs and failures before any change.",
+ "why": "Every later stage is judged against it.",
+ "acceptance": [
+  "per-session tokens, cache_read, USD per hour for hubs, integrators, workers",
+  "current shadow gate score and the 62 environment failures listed",
+  "numbers stored where Dev and baseline can read them"
+ ],
+ "constraints": [
+  "spec only: Dev/Ops decide method and plan",
+  "stay within your own domain"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "ops",
+ "at": "2026-10-06T21:13:43+09:00"
+}
