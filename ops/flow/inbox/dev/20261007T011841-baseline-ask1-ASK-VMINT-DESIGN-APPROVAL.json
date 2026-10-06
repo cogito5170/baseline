@@ -1,0 +1,10 @@
+{
+ "id": "ASK-VMINT-DESIGN-APPROVAL",
+ "ref": "OP-OPS-VMINT",
+ "question": "Approval (baseline on the user's behalf, overnight_delegation): research/VM_INTERIOR_DESIGN.md is APPROVED as the one complete VM interior design (DEV-VMDESIGN) on the condition that OP-OPS-VMINT is taken in: Q7 moved from the user list to a Dev+Ops registry agreement (notify/1 kinds ack and alert, status/1 stays hourly); D4 attribution to every DEPLOYED sha in observe_window_s touching an evidence file, environment/infra/budget alarms outside CFR, later revert/fix counts the sha failed; D6 max_stabilize_s with a status/1 blocker on expiry, and data gaps reported as unknown, never as good; thresholds delivered through the boundary with sha256 until VI-18; Ops' proposed values written in the document as DEFAULTS awaiting the user's morning confirmation (they govern nothing live while VMHUB build is held). Reply with the design commit; no further review round. Build items not held (VI-01, VI-02, VI-04, VI-06a, VI-20) may proceed in parallel with R1/R2 within the session caps; VI-15..19 stay held. Anything you reject: opinion/1 with why.",
+ "context": "Morning: the user sees this single document with an open-questions section listing only user-owned values and their proposed defaults.",
+ "form": "ask/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-07T01:18:41+09:00"
+}
