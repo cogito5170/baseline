@@ -84,3 +84,19 @@ VERIFY ── 창(window_ms) 안에 사후조건 확인: 예) "다음 tick 에 s
 4. **평가 → 재최적화:** 측정 뒤 코드가 평가한다 — 항목당 토큰이 기준보다 크면 (a) 증거 카드 축소 (b) 더 싼 rung
    (c) 묶음 크기 증가 (d) 반복되는 결정은 규칙으로 승격(모델 제거). 바꾼 뒤 다시 재고, 나빠지면 되돌린다.
 5. 이 고리 자체도 rlo 의 VERIFY 로 닫는다: "최적화 뒤 항목당 토큰이 줄었다"가 사후조건.
+
+## 6. DevOps 방법론에 맞춘 대응 (사용자 10-06 21:0x: "우리가 하는 일은 DevOps 이다")
+
+| DevOps 관행 | 지금 우리 구조 | 빈 곳 → 할 일 |
+|---|---|---|
+| CI (매 변경 자동 시험) | 작업자 suite + 통합 세션 VERDICT + 변이 | 통합 세션 환경이 기준. 작업자 환경 차이(O3)는 기준 대비 차집합만 |
+| CD (자동 배포) | 통합 브랜치 ff → VM ga-update.timer 30분 | push 의 사람 승인(O10)이 유일한 수동 단계 → 상시 승인 규칙 |
+| 작은 배치 · 트렁크 기반 | directive 1개 = 브랜치 1개, ff/merge | 지시 크기 상한(diff 줄 수)을 directive 에 명시 |
+| IaC (구성의 코드화) | VM unit · hub.json 을 ga/vm/core.py 가 생성 | 런타임 값(daily_turns 등)도 코드/설정 파일에서만 바꿈, 손 수정 금지 |
+| 관측성 (로그 · 지표 · 추적) | ga.events/1, L0, ledger, shadow, cloud snapshot, 상황판 | 토큰 원장(§5)과 운영 경보(alert/1)를 같은 이벤트 흐름에 |
+| SLO + 오류 예산 | 없음 | 예: shadow 판정 지연 < 30분, 통합 리드타임 < 2h, 변경 실패율 < 20%. 예산 소진 시 새 기능 멈추고 안정화 directive 우선 |
+| 사고 대응 (탐지 → 분류 → 완화 → 복구 → 회고) | 탐지 일부, 나머지 손 | ga ops tick(GA57) = 탐지 · 완화 자동, 회고는 BD 행 1줄(원인 · 고친 것 · 재발 방지 규칙) |
+| 비난 없는 회고 → 규칙화 | DECISION_LOG | 사고마다 rule/1 하나 추가가 완료 조건 (이번: O1 cap, O2 decide, O8 relay) |
+| DORA 지표 | 측정 안 함 | 우리 기록에서 계산: 배포 빈도(INTEGRATED 행/일), 리드타임(dispatch → INTEGRATED), 변경 실패율(SEND_BACK/전체 판정), MTTR(alert → 해소) — baseline_verdicts.jsonl · ops_state.json 으로 코드 계산, 상황판 표시 |
+
+다음 directive 후보: CMD-OPS3 `ops/hub/dora.py` (DORA 4 지표 + SLO 판정, 상황판 연결), GA57 의 alert/1 에 사고 번호 · 회고 링크.
