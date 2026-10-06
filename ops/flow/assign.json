@@ -13,9 +13,9 @@
    "worker-GA53": "session_01HKHSLNc3akPq52QTeKmDPm (refuses relayed redirect; holds CMD-GA53 49f24c3)"
   },
   "previous": "session_01Vtf8JhoPbyf3o8v87LPVLb",
-  "retiring": {
-   "ga-sdk-integrator": "session_01LBoWy9AXfEwQsHqMcumAuC (230k; archive after successor acks)"
-  }
+  "archived": [
+   "session_01LBoWy9AXfEwQsHqMcumAuC (ga-sdk integrator, archived 10-07 01:1x KST after successor 01Wz1byr acked)"
+  ]
  },
  "ops": {
   "hub": "session_01M4vGeVjHtivZ5nKLDSmdED",
