@@ -94,3 +94,5 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 4. Incoming: do NOT add_repo; use the Integrators (above). Venv/npm only if needed locally (rlo-sdk + ga-sdk), audit this file, add one `audit:` line below, work.
 audit 10-06 15:40 (session_018XDm17…): heads OK; stale "access settled" (add_repo + pip denied here);
   BASELINE_SESSION was old id (fixed); mail routine moved. STATE rewritten to KST key:value (12.9 KB → 5.6 KB, ~57% fewer tokens).
+audit 10-06 17:0x (session_01ThMJnk…): add_repo push ga-sdk/Token denied by classifier; user chose "통합세션으로 진행해" → integrators told hub id;
+  VERDICT claude/CMD-GA49 3d142ae sent to ga-sdk integrator (mut ops/hub/mut/CMD-GA49.json); no clone/venv in this hub.
