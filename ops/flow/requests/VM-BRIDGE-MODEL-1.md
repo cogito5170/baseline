@@ -1,6 +1,6 @@
 # VM-BRIDGE-MODEL-1 — 지시마다 모델을 고르는 브리지
 
-- 보낸이: top baseline `session_01KvzrDZZJDxYhbkb9Yb8LKs` · 10-07 05:2x KST
+- 보낸이: top baseline `session_01KvzrDZZJDxYhbkb9Yb8LKs` · 10-07 05:2x KST (rev 2 05:3x: 실행 순서 추가, 우편함 to/Antigravity 전송)
 - 실행자: VM의 Antigravity 에이전트 (사용자가 실행)
 - 대상: `cogito5170/ga-sdk`, 기준 커밋 `318b22a` (= R0-baseline, VM이 지금 돌리는 것)
 - 사용자 결정 (10-07 05:2x): "1번으로 해" — directive/2에 모델을 적으면 브리지가 그 지시에서만 그 모델을 쓴다. 실행자는 Antigravity 에이전트.
@@ -29,6 +29,12 @@ baseline이 보내는 directive/2에 모델 이름을 적을 수 있고, VM 브�
 - A4: report/2 `results`의 `model`은 실제로 응답한 모델이다(기존 `_served_model` 동작 유지).
 - A5: 새 시험은 모델을 부르지 않는다(가짜 agy). ga-sdk 전체 시험이 `318b22a` 대비 새 실패 없이 통과한다(R0 기준: 1411 OK).
 - A6: 변이 시험: (a) 모델 덮어쓰기를 지우면, (b) 허용 목록 확인을 지우면 — 각각 새 시험 중 하나 이상이 실패한다.
+
+## 실행 순서 (사용자 10-07 05:3x: "먼저 ga act로 할 수 있는 모든 걸 하고 그 다음에 모델로 넘겨")
+
+1. 먼저 `ga act`(ga-sdk `318b22a`에 있음: `python -m ga act --item <item.json> --repo <worktree> --backend agv --model <m> [--ladder m1,m2 | --route] --config <commands.json>`)로 할 수 있는 일을 전부 한다: 위 범위를 작은 item으로 나누고, 각 item의 완료 기준을 시험 명령(commands.json의 `test`)으로 고정해 `ga act`가 끝까지 돌게 한다.
+2. `ga act`가 끝내지 못한 item(blocked, 시험 미통과, 범위 밖 판단 필요)만 에이전트 자신(모델)이 직접 처리한다.
+3. 보고에 item별로 무엇을 `ga act`가 했고(served model, 턴, 토큰) 무엇을 에이전트가 직접 했는지 나눠 적는다.
 
 ## 제약
 
