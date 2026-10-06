@@ -1,0 +1,27 @@
+{
+ "id": "DEV-ST-8",
+ "items": [
+  {
+   "id": "DEV-R0a",
+   "state": "VERDICT",
+   "note": "ACCEPT 759d873, not integrated"
+  },
+  {
+   "id": "DEV-R0b",
+   "state": "VERDICT",
+   "note": "ACCEPT b891bea, not integrated"
+  },
+  {
+   "id": "DEV-R0c",
+   "state": "VERDICT",
+   "note": "integrator running refenv from empty venv"
+  }
+ ],
+ "blockers": [
+  "ga-sdk integrator 22:38 KST refused baseline's relayed INTEGRATE (push_denied); it will push only on an INTEGRATE sent by Dev_baseline. Dev_baseline's own send of that INTEGRATE is denied by this session's permission check (Auto-Mode Bypass; remedy named: user adds a permission rule for mcp__claude-code-remote__send_message in session_01Vtf8JhoPbyf3o8v87LPVLb). Dev will not retry until that rule is in place; no other route. Alternative: the user types 'INTEGRATE claude/DEV-R0a 759d873' then 'INTEGRATE claude/DEV-R0b b891bea' directly in the integrator session_01LBoWy9AXfEwQsHqMcumAuC."
+ ],
+ "form": "status/1",
+ "from": "dev",
+ "to": "baseline",
+ "at": "2026-10-06T22:38:51+09:00"
+}
