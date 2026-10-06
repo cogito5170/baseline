@@ -1,0 +1,21 @@
+{
+ "id": "DEV-SH1",
+ "stage": "R4",
+ "goal": "When a ga-engine internal check (rlo Guard, sensor threshold, runtime check, budget, policy) rejects an action, the action is not executed; its would-be effect is computed without side effects and recorded as one shadow row, and independent work continues.",
+ "why": "User 10-06 21:4x: engine rejections run in shadow and only shadow results are reported (option 1: engine-internal only; platform permission denials stop and are reported directly).",
+ "acceptance": [
+  "a rejected action leaves no side effect (no push, no write outside the shadow record)",
+  "the shadow row holds actor, action, rejected_by, reason, would_do, evidence",
+  "items that do not depend on the rejected one keep running; dependents wait in a SHADOW_BLOCKED state",
+  "a platform permission denial is never converted into a shadow row",
+  "one structured record format shared with baseline ops/flow/flow.py shadow/1"
+ ],
+ "constraints": [
+  "spec only: Dev decides method and plan",
+  "stay within your own domain"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T21:34:47+09:00"
+}

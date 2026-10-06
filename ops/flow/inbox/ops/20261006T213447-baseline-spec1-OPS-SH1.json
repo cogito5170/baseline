@@ -1,0 +1,20 @@
+{
+ "id": "OPS-SH1",
+ "stage": "R4",
+ "goal": "The user receives only shadow results: rejected engine actions, batched, with cause and would-be effect, and nothing else from routine operation.",
+ "why": "User 10-06 21:4x: report shadow rows only.",
+ "acceptance": [
+  "shadow rows from Dev, Ops and the VM engine are collected and sent to baseline as shadow/1 through ops/flow/flow.py",
+  "one batched digest per period or when a dependent chain is blocked; no per-row messages",
+  "each row states what was rejected, by which check, why, and what it would have done",
+  "routine successes do not reach the user (dashboard only)"
+ ],
+ "constraints": [
+  "spec only: Ops decides method",
+  "stay within your own domain"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "ops",
+ "at": "2026-10-06T21:34:47+09:00"
+}

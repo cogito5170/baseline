@@ -18,6 +18,11 @@ Forms (all carry id, from, to, at):
   opinion/1 {id, question, agree, disagree, missing, facts, risk, first_step} dev|ops->baseline ; any session->dev|ops
   ask/1     {id, question, context}                                          baseline->dev|ops ; dev|ops->their sessions
   status/1  {id, items:[{id,state,note}], blockers}                          dev|ops->baseline
+  shadow/1  {id, actor, action, rejected_by, reason, would_do, evidence}     dev|ops->baseline. Scope (user 10-06 21:4x,
+            option 1): ONLY a ga-engine internal rejection (rejected_by in SHADOW_SOURCES: guard, sensor, runtime, budget,
+            policy) — the action is not executed, its would-be effect is recorded, independent work continues, and the
+            user gets only these rows (batched). A Claude Code / platform permission denial is NOT a shadow case: the
+            session stops that action and reports it to the user directly.
 """
 from __future__ import annotations
 
@@ -33,7 +38,7 @@ ROLES = ("baseline", "dev", "ops", "session")
 EDGES = {  # (from, to): forms allowed
     ("baseline", "dev"): {"spec/1", "ask/1"}, ("baseline", "ops"): {"spec/1", "ask/1"},
     ("ops", "dev"): {"batch/1", "verify/1", "incident/1"}, ("dev", "ops"): {"release/1", "opinion/1", "status/1"},
-    ("dev", "baseline"): {"opinion/1", "status/1"}, ("ops", "baseline"): {"opinion/1", "status/1", "incident/1"},
+    ("dev", "baseline"): {"opinion/1", "status/1", "shadow/1"}, ("ops", "baseline"): {"opinion/1", "status/1", "incident/1", "shadow/1"},
     ("dev", "session"): {"ask/1"}, ("ops", "session"): {"ask/1"},
     ("session", "dev"): {"opinion/1"}, ("session", "ops"): {"opinion/1"},
 }
@@ -42,12 +47,14 @@ REQUIRED = {
     "release/1": ("specs", "repo", "branch", "sha", "tests"), "verify/1": ("release", "result", "evidence"),
     "incident/1": ("kind", "evidence", "cause"), "opinion/1": ("question", "agree", "disagree", "missing"),
     "ask/1": ("question",), "status/1": ("items",),
+    "shadow/1": ("actor", "action", "rejected_by", "reason", "would_do"),
 }
 # a spec is WHAT, never HOW: these fields or phrases mean the sender is planning someone else's work
 METHOD_FIELDS = {"steps", "plan", "how", "implementation", "files", "code", "patch", "approach", "method"}
 METHOD_WORDS = re.compile(r"\b(implement by|step \d|first,? (write|edit|change)|edit the file|use the function|"
                           r"call [a-z_.]+\(|in [a-z_/]+\.py:\d+ (change|replace))", re.I)
 STAGES = {"R0", "R1", "R2", "R3", "R4", "R5"}
+SHADOW_SOURCES = {"guard", "sensor", "runtime", "budget", "policy"}  # ga-engine internal only; never a platform denial
 
 
 class FlowError(ValueError):
@@ -78,6 +85,8 @@ def check(frm: str, to: str, form: str, msg: dict) -> None:
             raise FlowError(f"spec {sp.get('id')}: stage must be one of {sorted(STAGES)}")
         if not isinstance(sp.get("acceptance"), list) or not sp["acceptance"]:
             raise FlowError(f"spec {sp.get('id')}: acceptance must be a non-empty list of checkable criteria")
+    if form == "shadow/1" and msg.get("rejected_by") not in SHADOW_SOURCES:
+        raise FlowError(f"shadow/1: rejected_by must be a ga-engine source {sorted(SHADOW_SOURCES)}; a platform permission denial is reported directly, not shadowed")
     if form == "batch/1":
         ids = {s["id"] for s in msg["specs"]}
         flat = [i for g in msg["parallel"] for i in g]
@@ -117,6 +126,12 @@ def _self_test() -> None:
         raise AssertionError(f"not rejected: {why}")
     send("ops", "dev", "batch/1", {"id": "B1", "specs": [sp], "parallel": [["S1"]], "order": ["S1"], "why": "w"}, r)
     assert len(inbox("dev", root=r)) == 2
+    send("ops", "baseline", "shadow/1", {"id": "SH1", "actor": "ops", "action": "x", "rejected_by": "guard", "reason": "r", "would_do": "w"}, r)
+    try:
+        send("ops", "baseline", "shadow/1", {"id": "SH2", "actor": "ops", "action": "x", "rejected_by": "platform", "reason": "r", "would_do": "w"}, r)
+        raise AssertionError("platform denial accepted as shadow")
+    except FlowError:
+        pass
     print("self-test ok")
 
 
