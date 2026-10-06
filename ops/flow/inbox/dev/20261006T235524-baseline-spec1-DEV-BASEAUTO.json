@@ -1,0 +1,24 @@
+{
+ "id": "DEV-BASEAUTO",
+ "stage": "R5",
+ "why": "user 10-07 00:0x KST: automate the top baseline session itself with ga-sdk. Today every baseline duty is done by hand in a long Claude session (read inbox, synthesize for the user, turn user words into spec/1 / ask/1, detect hubs over 150k ctx, assemble successor prompts from role file + notes, swap assign.json ids, notify affected sessions, archive). ga-sdk already has pieces: ga do intake (GA37, natural language -> checked task/1), ga render (deterministic human text), ga inbox (since cursor), ctxpack, ga judge.",
+ "constraints": [
+  "the top baseline stays the only authority to create and archive cloud sessions; code prepares, the depth-0 session performs those tool calls itself with the user able to see them; a platform permission denial is reported to the user, never routed around",
+  "spec/1 stays WHAT only (flow.py checks); the user's own words are kept verbatim next to any spec made from them",
+  "LLM output is a proposal; flow.py and deterministic rules decide what is sent",
+  "measured against the DEV-VMAUTO gateway once it exists; until then calls are counted from session usage"
+ ],
+ "goal": "The top baseline's routine duties run as ga-sdk code, so the baseline Claude session only handles the user's words and judgments and its context stays small.",
+ "acceptance": [
+  "a deterministic digest of everything new in inbox/baseline since a cursor (status/1, opinion/1, incident/1, shadow/1) is produced with 0 model calls, in Korean for the user, grouped into: needs user decision, done, blocked, cost",
+  "user words in Korean become a candidate spec/1 or ask/1 that passes flow.py, with the verbatim words attached; the baseline session confirms or edits before sending",
+  "a hub, integrator or watcher over the ctx threshold (watch_thresholds.json) is detected from session data with 0 model calls and yields a ready successor prompt (role file + current notes + state line), the assign.json change and the list of sessions to notify",
+  "after a successor acks, the assign.json swap, the notification messages and the archive candidate are produced deterministically; nothing is archived before the ack",
+  "the baseline session's own context per round is bounded: it reads the digest and the fixed-size state card, not raw inbox files or other sessions' transcripts",
+  "every step is replayable from the inbox and assign.json history with the same output"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "dev",
+ "at": "2026-10-06T23:55:24+09:00"
+}

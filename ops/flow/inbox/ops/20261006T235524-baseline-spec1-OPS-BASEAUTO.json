@@ -1,0 +1,21 @@
+{
+ "id": "OPS-BASEAUTO",
+ "stage": "R5",
+ "why": "user 10-07 00:0x KST: automate the top baseline session itself with ga-sdk. Today every baseline duty is done by hand in a long Claude session (read inbox, synthesize for the user, turn user words into spec/1 / ask/1, detect hubs over 150k ctx, assemble successor prompts from role file + notes, swap assign.json ids, notify affected sessions, archive). ga-sdk already has pieces: ga do intake (GA37, natural language -> checked task/1), ga render (deterministic human text), ga inbox (since cursor), ctxpack, ga judge.",
+ "constraints": [
+  "the top baseline stays the only authority to create and archive cloud sessions; code prepares, the depth-0 session performs those tool calls itself with the user able to see them; a platform permission denial is reported to the user, never routed around",
+  "spec/1 stays WHAT only (flow.py checks); the user's own words are kept verbatim next to any spec made from them",
+  "LLM output is a proposal; flow.py and deterministic rules decide what is sent",
+  "measured against the DEV-VMAUTO gateway once it exists; until then calls are counted from session usage"
+ ],
+ "goal": "Ops measures the top baseline session's cost and handoff latency before and after DEV-BASEAUTO and alarms when it drifts.",
+ "acceptance": [
+  "top baseline USD/h and ctx are in the hourly per-class measurement (R0.json units) as their own class",
+  "for each successor handoff: time from threshold crossing to successor ack, and messages lost or duplicated (target 0)",
+  "a before/after comparison is reported in status/1 once DEV-BASEAUTO is released and verified"
+ ],
+ "form": "spec/1",
+ "from": "baseline",
+ "to": "ops",
+ "at": "2026-10-06T23:55:24+09:00"
+}
