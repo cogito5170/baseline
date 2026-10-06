@@ -88,9 +88,8 @@ fixes_queued: shadow-compare prints gate_ok:true with 0 agreements; report/2 res
 
 ## Handoff
 1. Outgoing: re-verify every line above against reality, commit, push.
-2. create_session: source baseline @ integration branch (+ ga-sdk, Token if the API allows), title "baseline ● 현재 허브 (MM-DD HH:MM~)",
-   prompt "read ops/hub/STATE.md; first add_repo (push) every repos_attach entry — the user's standing direction of 10-06 15:46
-   is quoted in STATE; then <next_action>". If add_repo is still denied, ask the user once in Korean to say "추가해" in that session.
+2. create_session: source baseline @ integration branch, title "baseline ● 현재 허브 (MM-DD HH:MM~)", prompt "read ops/hub/STATE.md
+   and follow Handoff step 4 (no add_repo; ga-sdk/Token work goes through the Integrators); then the In flight section".
 3. Outgoing renames itself "baseline ○ 이전 허브 (start~end, 인계 완료)", writes new id to ops/hub/BASELINE_SESSION,
    moves the mail routine, sends each integrator + each worker "hub is now <new id>", tells the user the link in one line, stops.
 4. Incoming: do NOT add_repo; use the Integrators (above). Venv/npm only if needed locally (rlo-sdk + ga-sdk), audit this file, add one `audit:` line below, work.
