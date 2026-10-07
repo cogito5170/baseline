@@ -30,6 +30,7 @@ STATE (written by top session_015Lg6TuBTEyJ2nMvFqvCNve at 10-07 17:2x KST, ctx 1
   full 1514 passed/56 skipped/0 failed. Deploy request ops/vm/DEPLOY_G4_INT.md, mailbox to/VM/REQ-DEPLOY-G4.md (2ef6de3), push
   sent 16:5x. Note: G4 code came from Opus edit lists (the method the user rejected); told the user, they did not ask to
   hold it. After deploy: confirm VM pushed claude/gracious-meitner-vp49xe = c6f3f97, then 2 post-deploy checks (read-only).
+- USER 17:5x (top 01HCJQVp): ga act design goes to an EXTERNAL model (user arranges it); baseline does NOT resend ACT1 rev 2 / stronger model. Only connect later (verify, integrate, deploy request) when the user hands over the result. ACT1 rev 1 both unmet (10 turns, no change). G4 deployed on VM (c6f3f97); VM tests 6 failed (1 known test_ga38, 5 unexplained). ga-sdk add_repo refused by platform [Permission Grant] — needs the user.
 - IN FLIGHT (sent 17:19 KST, mailbox 7c0a7b5, base vm/G4-INT c6f3f97, gemini-3.7-flash-medium, VM turn cap still 10):
   CMD-ACTR1 (ga/act/loop.py, retrieve.py, card.py: kept NEED reads across turns, outline for long files, act/1 trace) and
   CMD-ACTB1 (ga/bridge/act.py: per-directive max_turns 1-30 default 20, "## turns" report section). Specs + tests in

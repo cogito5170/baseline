@@ -49,6 +49,7 @@
 - **17:1x~17:2x 사용자 규칙: baseline은 코드를 주지 않는다** (policy `spec_split.no_code_from_baseline`, "기록해, 진행해", "기록도 하고 코드적으로 막아주라"): 그룹 3 rev 2·그룹 4는 Opus가 편집 목록(코드)을 써서 VM은 붙여 넣기만 했음 → 금지. 강제: `ops/flow/nocode.py`(편집 목록·코드 줄·코드 블록·시험 외 파일·긴 goal 거부; 지난 G3/G4 메일 전부 거부 확인), flow.py spec 검사, git pre-commit hook(`ops/flow/install_hooks.sh`, 우편함 worktree 포함).
 - **17:19 ga act 수정 발송** (`7c0a7b5`, 사용자 "ga act 고치는 것부터"): 산문 스펙 + 수용 시험만. CMD-ACTR1 (NEED 결과를 이후 턴에도 유지, 긴 파일은 개요(이름+줄번호), act/1 턴별 trace) · CMD-ACTB1 (지시별 max_turns 1-30·기본 20, 보고에 `## turns`). 원인 진단: NEED 결과가 다음 카드 한 번만 보임(loop.py), 긴 파일 NEED는 앞 150줄, 턴 상한 10 고정, 보고에 턴 기록 없음. baseline 비용 ~30k 토큰.
 - 17:2x top `015Lg6Tu` 문맥 158k → 후임 top 생성 (depth 3).
+- **17:4x top `01HCJQVp` (depth 3) 인계 완료** (assign `289dd5a`, 허용 목록 `.claude/settings.json`). 우편함 확인: 그룹 4 VM 배포됨 (VM ga-sdk `c6f3f97`, 17:11), VM 자체 시험 6 실패/1501 통과 (클라우드 0 실패; 1건은 기존 test_ga38, 5건 미확인). ACT1 두 건 unmet: CMD-ACTR1 10턴 36,389 토큰·출력 243, CMD-ACTB1 10턴 23,985·출력 102, 둘 다 변경 없음 (읽기만 반복, 읽은 내용이 한 턴만 유지되는 결함이 원인으로 추정). **사용자 결정 (17:5x): ga act 설계는 외부 모델에 맡김. baseline은 ACT1 재발송하지 않고, 결과가 오면 연결(통합·배포 요청)만 한다.** ga-sdk 저장소 접근은 이 세션에서 플랫폼 거부(Permission Grant), 사용자 허락 필요.
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
