@@ -50,8 +50,27 @@ def c4():
             + json.dumps(spec, ensure_ascii=False) + "\n```\n")
 
 
+def c5():
+    """10-07 16:1x: is tests/test_ga38.py::Loop::test_ts_fixture_seeded_bug_fixed red on the VM before ISO-1?"""
+    probe = "tests/test_g3ck_probe.py"
+    goal = "Pre-existing check: no code change. Run the test command once; answer DONE when it passes. Edit nothing."
+    head = {"schema": "directive/2", "id": "CMD-GCK5", "rev": 1, "to": "AGY", "after": [], "goal": goal,
+            "why": "CMD-ISO1 rev 1 failed only on this node-gated test on the VM; check it on the unchanged base 222ca6a.",
+            "scope": [{"id": "S1", "text": "no file edits in a ga-sdk worktree"}],
+            "done_when": [{"id": "D1", "text": "the ts fixture test passes on the VM base"}],
+            "budget": {"claude_p_runs": 0}, "model": "gemini-3.7-flash-low"}
+    spec = {"item": {"id": "CMD-GCK5", "goal": goal, "files": [probe], "done_when": "test"},
+            "tests": {probe: PROBE},
+            "commands": {"commands": {"test": ["{python}", "-m", "pytest", "-q", "-p", "no:cacheprovider",
+                                               "tests/test_ga38.py::Loop::test_ts_fixture_seeded_bug_fixed"]},
+                         "timeout_s": 600},
+            "base": "claude/gracious-meitner-vp49xe", "repo": "ga-sdk"}
+    return ("```ga\n" + json.dumps(head, ensure_ascii=False) + "\n```\n\n```ga-act\n"
+            + json.dumps(spec, ensure_ascii=False) + "\n```\n")
+
+
 if __name__ == "__main__":
-    out = (("CMD-GCK3", c3()), ("CMD-GCK4", c4()))
+    out = (("CMD-GCK5", c5()),) if sys.argv[2:] == ["5"] else (("CMD-GCK3", c3()), ("CMD-GCK4", c4()))
     for _, t in out:
         assert re.match(r"^CMD-([A-Z]+)(\d+)$", json.loads(t.split("\n")[1])["id"])
     box = Path(sys.argv[1])
