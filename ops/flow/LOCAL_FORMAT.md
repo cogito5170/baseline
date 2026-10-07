@@ -28,5 +28,7 @@ Rules (checked by `python3 ops/flow/mailcheck.py --report <file>`; baseline igno
   (you will not; say why in `reason`). There is no `paused`: a question goes in `blockers` with kind `question`.
 - `items[]`: one per `done_when` id of the directive (D1, D2, ...). `state` is `met`, `unmet` or `na`.
   `met`/`unmet` need `evidence`: the commands you ran and what they printed (tails, not whole logs).
+- `results`: for every directive, `model`, `input_tokens`, `output_tokens`, `cached_tokens`, `turns`, `seconds`
+  (null when not exposed). baseline sums them in `ops/flow/measure/tokens.jsonl` (`mailbox_tick.py report`).
 - `blockers[].kind`: `dependency`, `permission`, `question` or `other`.
 - After the block, free text is allowed (`## details`, command output tails). Never paste secrets or tokens.

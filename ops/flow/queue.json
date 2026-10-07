@@ -1,0 +1,42 @@
+[
+ {
+  "info": {
+   "id": "CMD-LOC5",
+   "to": "LOCAL",
+   "read_only": true,
+   "title": "Token economy on the VM side",
+   "goal": "From now on, for every directive: (1) start a fresh agy/agv session per directive, with no chat history carried over from earlier directives; (2) build each prompt with the stable part first (your role, the report/2 rules, repo facts) and the directive last, so the provider's prompt cache is reused between directives; (3) choose Pro or Flash by a rule (no model call just to classify); if you keep a model classifier, report its tokens per tick. In every report/2 from now on, results carry model, input_tokens, output_tokens, cached_tokens, turns and seconds for that directive (null when the CLI does not expose a number; then say in evidence where you looked).",
+   "why": "policy direct_pipeline_1007 (user 10-08 06:0x KST: 둘이서 교신하면서 토큰 최적화, 세션을 갈아줘, 사용 토큰량을 계산해). Reply in report/2 as LOCAL (ops/flow/LOCAL_FORMAT.md).",
+   "done_when": [
+    {
+     "id": "D1",
+     "text": "evidence shows a fresh session per directive (the lines or config that start it)"
+    },
+    {
+     "id": "D2",
+     "text": "evidence shows the prompt order (stable prefix first) and the routing rule"
+    },
+    {
+     "id": "D3",
+     "text": "this reply's results carry the six token fields for this directive"
+    }
+   ]
+  },
+  "after_met": []
+ },
+ {
+  "info": {
+   "id": "CMD-LOC6",
+   "to": "LOCAL",
+   "read_only": true,
+   "title": "Deploy vm/ACT1-INT",
+   "goal": "placeholder until the user decides",
+   "why": "policy direct_pipeline_1007 (user 10-08 06:0x KST: 둘이서 교신하면서 토큰 최적화, 세션을 갈아줘, 사용 토큰량을 계산해). Reply in report/2 as LOCAL (ops/flow/LOCAL_FORMAT.md)."
+  },
+  "after_met": [
+   "CMD-LOC3"
+  ],
+  "needs_user": true,
+  "what": "deploy ga-sdk vm/ACT1-INT (G4 + ACTB1 + ACTR1) on the VM: user decides; then baseline writes the directive"
+ }
+]

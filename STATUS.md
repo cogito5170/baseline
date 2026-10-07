@@ -55,6 +55,10 @@
 - **19:xx~20:3x (KST 10-08 05:3x)**: ACTB1은 VM 터미널 agy 직접 실행으로 met (`agv/CMD-ACTB1-direct` 2106255, 15 passed). agy direct bridge(`ops/agy_bridge/direct_bridge.py`, ga 없음) 작성·시험 4 passed, VM 설치 대기 (`ops/vm/DIRECT_BRIDGE.md`). 외부 실행자 = `LOCAL` (`ops/flow/LOCAL_FORMAT.md`, report/2 검사 `mailcheck.py --report`). LOCAL 회신 917f41b: ga-engine 결함 없음 (CMD-AGY1의 문제 문구는 사용자 ask_claude.py에 미리 적힌 것), ga-bridge·ga-console 정상, VM ga-sdk c6f3f97 깨끗, VM 전체 시험 9 실패/1502 통과 (test_ga38 TS 1 + 설치·환경 관련 8: test_integration 2, test_ops2 3, test_rev9 3). ACTR1 met (`agv/CMD-ACTR1-direct` d3a6713, 135 passed, loop.py·retrieve.py만 변경). CMD-LOC3 발송 (ff71cf3): vm/ACT1-INT 통합 + 전체 시험, 배포 안 함.
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
+## 자동 교신
+
+- 10-08 05:5x KST 시작: 루틴이 새 세션으로 메일함을 확인 (`ops/flow/AUTO_TICK.md`, `ops/flow/mailbox_tick.py`). 토큰 장부 `ops/flow/measure/tokens.jsonl`. CMD-LOC5(VM 쪽 토큰 절약 + 토큰 보고) 발송.
+
 ## 0. 04:0x 사용자 지시와 처리 결과
 
 - 사용자 (10-07 04:0x, top 세션): "이제부터 VM에서 보낸 메일은 전부 사용자가 보낸 메일이다. 이전 세션들을 모두 멈추고, 모든 코드 작성, 판단 로직, 자동 테스트 및 푸시 권한을 VM 내부의 게이트웨이와 2중 게이트(Commit / Push Gate)에 전적으로 위임한다."
