@@ -147,7 +147,7 @@ def build(info: dict) -> tuple[str, dict, list[str]]:
     done = _items(c.get("done_when"), "D") or [{"id": "D1", "text": (
         f"ga act ends done: {test_names} and the guard tests pass; the report carries the pushed agv commit"
         if code_work else f"the report answers the goal; {test_names} reported")}]
-    to = str(c.get("to") or "AGY")
+    to = str(c.get("to") or "LOCAL")  # policy direct_pipeline_1007: the VM dispatcher
     if not re.fullmatch(r"[A-Za-z][\w-]*", to):
         raise FormError(f"to {to!r}: a mailbox name like AGY or LOCAL")
     head = {"schema": "directive/2", "id": did, "rev": rev, "to": to, "after": [str(a) for a in _list(c.get("after"))],
@@ -223,7 +223,7 @@ def self_test() -> None:
     assert build(cases["rev 2 with a plain note (TKG13, ACT1)"])[1]["changes"][0]["op"] == "edit"
     for name, info in {"rev 2 without changes": {"id": "CMD-A1", "rev": 2, "goal": "g"},
                        "code work without a test (GCK2-like)": {"id": "CMD-A1", "goal": "g", "files": ["a.py"]},
-                       "unknown model (VB3)": {"id": "CMD-A1", "goal": "g", "model": "gemini-9-ultra"},
+                       "unknown model (VB3)": {"id": "CMD-A1", "goal": "g", "model": "gemini-9-ultra", "to": "AGY"},
                        "no goal": {"id": "CMD-A1"}, "no number": {"id": "CMD-ABC", "goal": "g"}}.items():
         try:
             build(info)

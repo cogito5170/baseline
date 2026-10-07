@@ -7,7 +7,7 @@ root=$(git -C "$(dirname "$0")" rev-parse --show-toplevel)
 hooks=$(cd "$root" && cd "$(git rev-parse --git-common-dir)" && pwd)/hooks
 cat > "$hooks/pre-commit" <<HOOK
 #!/bin/sh
-files=\$(git diff --cached --name-only --diff-filter=AM -- 'to/AGY/*.md')
+files=\$(git diff --cached --name-only --diff-filter=AM -- 'to/AGY/*.md' 'to/LOCAL/*.md')
 [ -z "\$files" ] && exit 0
 tmp=\$(mktemp -d); rc=0
 for f in \$files; do git show ":\$f" > "\$tmp/\$(basename "\$f")"; done

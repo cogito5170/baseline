@@ -3,8 +3,8 @@
 | name in mail | who | where | role |
 |---|---|---|---|
 | `baseline` | Claude (cloud top session) | claude.ai cloud | planner: writes prose specs + acceptance tests, verifies, integrates. Writes no code. |
-| `LOCAL` | the external model the user runs locally (it called itself "AGY" in CMD-AGY1) | user's machine, can reach the VM | executor: carries out baseline's directives on the VM / repos |
-| `AGY` | the VM's own agy bridge (`ga bridge`, and the new `agy-direct` bridge) | Oracle VM | automatic worker: ga act / agy on directives in `to/AGY/` and `to/AGY-direct/` |
+| `LOCAL` | the VM dispatcher daemon (polls every 3 min, routes Pro/Flash through agv/agy; set up by the user's external model) | Oracle VM | executor: carries out baseline's directives. **The only path baseline uses** (policy `direct_pipeline_1007`) |
+| `AGY` | the VM's old ga bridge (`ga bridge` / ga act) | Oracle VM | not used by baseline any more; it reads `to/AGY/` only, so the dispatcher must not |
 
 Mailbox: branch `ga-mailbox` of cogito5170/baseline.
 - baseline -> LOCAL: `to/LOCAL/<ts>-baseline-<ID>.md`
