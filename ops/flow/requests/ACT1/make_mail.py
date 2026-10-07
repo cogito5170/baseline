@@ -17,7 +17,8 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 import nocode  # noqa: E402
 
-MODEL = "gemini-3.7-flash-medium"
+MODEL = "gemini-3.1-pro-high"  # rev 2: policy spec_split.strong_vm_worker_1007 (rev 1 flash: both unmet, 10 turns)
+REV = 2
 BASE = "vm/G4-INT"  # ga-sdk c6f3f97 (ISO-1 + group 4)
 WHY = ("user 10-07 17:1x-17:3x: baseline sends no code (policy spec_split.no_code_from_baseline); first fix ga act so "
        "a cheap model can work inside large files and failures are visible. The acceptance test may not be edited.")
@@ -59,7 +60,7 @@ def pytest_cmd(it):
 
 
 def directive(it):
-    head = {"schema": "directive/2", "id": it["id"], "rev": 1, "to": "AGY", "after": [],
+    head = {"schema": "directive/2", "id": it["id"], "rev": REV, "to": "AGY", "after": [],
             "goal": f"{it['title']}: {it['goal']}"[:1800], "why": WHY,
             "scope": [{"id": "S1", "text": "only " + ", ".join(it["files"]) + " in a ga-sdk worktree; the tests are baseline's"}],
             "done_when": [{"id": "D1", "text": "ga act ends done: tests/" + it["test"] + " and the guard tests pass; "
@@ -72,12 +73,15 @@ def directive(it):
 
 
 def check(it, head, text):
-    sys.path.insert(0, "/home/user/ga-sdk")
-    from ga.forms import hard, parse_text, validate
     assert ID_RE.match(it["id"]), it["id"]
-    parsed, _ = parse_text(text)
-    assert parsed == head, it["id"]
-    assert hard(validate(parsed)) == [], it["id"]
+    if Path("/home/user/ga-sdk/ga/forms.py").exists() or Path("/home/user/ga-sdk/ga/forms").exists():
+        sys.path.insert(0, "/home/user/ga-sdk")
+        from ga.forms import hard, parse_text, validate
+        parsed, _ = parse_text(text)
+        assert parsed == head, it["id"]
+        assert hard(validate(parsed)) == [], it["id"]
+    else:  # no ga-sdk clone in this container: the head must still round-trip as JSON
+        assert json.loads(text.split("```ga\n", 1)[1].split("\n```", 1)[0]) == head, it["id"]
     nocode.check_mail(text)
 
 
