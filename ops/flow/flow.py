@@ -32,6 +32,9 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import nocode  # noqa: E402  (policy spec_split.no_code_from_baseline)
+
 HERE = Path(__file__).resolve().parent
 KST = timezone(timedelta(hours=9))
 ROLES = ("baseline", "dev", "ops", "session")
@@ -73,6 +76,10 @@ def check(frm: str, to: str, form: str, msg: dict) -> None:
         raise FlowError(f"{form}: missing {miss}")
     specs = [msg] if form == "spec/1" else (msg.get("specs") if form == "batch/1" else [])
     for sp in specs:
+        try:
+            nocode.check_spec(sp) if isinstance(sp, dict) else None
+        except nocode.CodeFound as e:
+            raise FlowError(f"spec {sp.get('id')}: {e}") from None
         if not isinstance(sp, dict):
             raise FlowError("batch/1: specs must be spec/1 objects")
         bad = METHOD_FIELDS & set(sp)
