@@ -19,8 +19,8 @@
   ]
  },
  "baseline": {
-  "hub": "session_019388b1XGeFcqrYiks8S8SY",
-  "previous": "session_01KvzrDZZJDxYhbkb9Yb8LKs"
+  "hub": "session_015Lg6TuBTEyJ2nMvFqvCNve",
+  "previous": "session_019388b1XGeFcqrYiks8S8SY"
  },
- "note": "User 10-07 04:5x KST (policy.json cloud_top_only): cloud = top baseline only (instructions + user reports). Dev/Ops work runs on the VM. Top baseline: session_01KvzrDZZJDxYhbkb9Yb8LKs (depth 0). Top baseline is now session_019388b1XGeFcqrYiks8S8SY (lineage depth 1, created 10-07 11:5x KST by top 01KvzrDZ per policy top_succession)."
+ "note": "User 10-07 04:5x KST (policy.json cloud_top_only): cloud = top baseline only (instructions + user reports). Dev/Ops work runs on the VM. Top baseline: session_01KvzrDZZJDxYhbkb9Yb8LKs (depth 0). Top baseline is now session_019388b1XGeFcqrYiks8S8SY (lineage depth 1, created 10-07 11:5x KST by top 01KvzrDZ per policy top_succession). Top baseline is now session_015Lg6TuBTEyJ2nMvFqvCNve (lineage depth 2, created 10-07 16:1x KST by top 019388b1 per policy top_succession)."
 }
