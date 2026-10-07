@@ -25,11 +25,13 @@ def c2():
     test = "test_g2c2_live_status.py"
     goal = ("Post-deploy check of VI-07: no code change is needed. The given test runs `ga llm report --status` on the "
             "VM's own policy and ledger. Run the test command once; when it passes, answer DONE. Do not edit any file.")
-    head = {"schema": "directive/2", "id": "CMD-GCK2", "rev": 1, "to": "AGY", "after": [], "goal": goal, "why": WHY,
+    head = {"schema": "directive/2", "id": "CMD-GCK2", "rev": 2, "to": "AGY", "after": [], "goal": goal, "why": WHY,
             "scope": [{"id": "S1", "text": "no file edits in a ga-sdk worktree; the test is baseline's"}],
             "done_when": [{"id": "D1", "text": "ga act ends done: tests/" + test + " passes on the VM"}],
-            "budget": {"claude_p_runs": 0}, "model": "gemini-3.7-flash-low"}
-    spec = {"item": {"id": "CMD-GCK2", "goal": goal, "files": [], "done_when": "test"},
+            "budget": {"claude_p_runs": 0}, "model": "gemini-3.7-flash-low",
+            "changes": [{"item": "D1", "op": "edit", "text": "ga act ends done: tests/" + test + " passes on the VM "
+                         "(rev 2: rev 1 declined by ga act, an item needs files; files = the given test only)"}]}
+    spec = {"item": {"id": "CMD-GCK2", "goal": goal, "files": [f"tests/{test}"], "done_when": "test"},
             "tests": {f"tests/{test}": (HERE / "tests" / test).read_text(encoding="utf-8")},
             "commands": {"commands": {"test": ["{python}", "-m", "pytest", "-q", "-s", "-p", "no:cacheprovider",
                                                f"tests/{test}"]}, "timeout_s": 300},
