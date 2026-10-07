@@ -4,7 +4,7 @@
   T2 = CMD-VI5 rev 2   (G2; rules in prose, the model writes the code)      base vm/BENCH-B2 = 19dc227
 Ids CMD-BENCHA<k> (T1) and CMD-BENCHB<k> (T2), k = model below. Reference runs: T1 gemini-3.7-flash-medium 3 turns
 8,756 tokens; T2 claude-sonnet-5-5-medium 3 turns 24,099 tokens. The agv branches these push are bench output only.
-    python3 make_mail.py <mailbox worktree>
+    python3 make_mail.py <mailbox worktree> [C]   (C = T2 rev 2 only, with the import-origin probe)
 """
 import importlib.util
 import json
@@ -36,6 +36,28 @@ def _rewrite(text, new_id, model, base):
     return "```ga\n" + json.dumps(head, ensure_ascii=False) + "\n```" + rest
 
 
+PROBE = ('"""Bench guard: the module under test must come from this worktree, not from the editable install of the '
+         'deployed ga-sdk (10-07 15:3x: T2 rev 1 passed with no work because ga.watch resolved to ~/ga-sdk)."""\n'
+         'from pathlib import Path\n\n\ndef test_watch_comes_from_the_worktree():\n'
+         '    import ga.watch as W\n    assert Path(W.__file__).resolve().is_relative_to(Path.cwd().resolve()), W.__file__\n')
+
+
+def _guard(text):
+    """T2 rev 2 (ids CMD-BENCHC<k>): add the import-origin probe as a given test and to the test command."""
+    pre, act = text.split("```ga-act\n", 1)
+    spec_s, post = act.split("\n```", 1)
+    spec = json.loads(spec_s)
+    spec["tests"]["tests/test_bench_origin.py"] = PROBE
+    spec["commands"]["commands"]["test"].append("tests/test_bench_origin.py")
+    return pre + "```ga-act\n" + json.dumps(spec, ensure_ascii=False) + "\n```" + post
+
+
+def items_c():
+    g2 = _load("G2")
+    t2 = g2.directive(next(i for i in g2.ITEMS if i["id"] == "CMD-VI5"))
+    return [(f"CMD-BENCHC{k}", _guard(_rewrite(t2, f"CMD-BENCHC{k}", m, "vm/BENCH-B2"))) for k, m in MODELS.items()]
+
+
 def items():
     g2, g3 = _load("G2"), _load("G3")
     t1 = g3.directive(next(i for i in g3.ITEMS if i["id"] == "CMD-VIJ10"))[1]
@@ -49,7 +71,7 @@ def items():
 
 if __name__ == "__main__":
     box = Path(sys.argv[1])
-    for i, text in items():
+    for i, text in (items_c() if sys.argv[2:] == ["C"] else items()):
         assert re.match(r"^CMD-([A-Z]+)(\d+)$", i), i
         ts = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%fZ")
         (box / "to" / "AGY" / f"{ts}-baseline-{i}.md").write_text(text, encoding="utf-8")
