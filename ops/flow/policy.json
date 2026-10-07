@@ -212,7 +212,20 @@
     "ops/flow/install_hooks.sh: git pre-commit hook shared by all worktrees (incl. ga-mailbox) refuses to/AGY/*.md carrying code",
     "planned: VM bridge refuses ga-act mail carrying actions/code (ga-sdk, built by a VM worker from a prose spec)"
    ]
-  }
+  },
+  "strong_vm_worker_1007": {
+   "at": "2026-10-07 18:0x KST",
+   "in": "top baseline session_01HCJQVpQNkaHospDTayEnyP",
+   "user_words": [
+    "어디까지 설계가 가장 적절했는가",
+    "10:4x ~ 구조에 VM 강한 모델로 간다"
+   ],
+   "meaning": "Keep the 10:4x-16:5x pipeline (top writes prose spec + acceptance test -> mailbox -> VM bridge -> ga act -> top verifies/integrates -> deploy request). Code is written by a STRONG agy model inside the VM (default gemini-3.1-pro), not by Opus (no_code_from_baseline stays) and not by the cheap flash models. Cheap models stay for read-only/check directives.",
+   "supersedes": [
+    "bench_1007.decision default code worker = gemini-3.7-flash-medium (now read-only/check work only)"
+   ]
+  },
+  "default_worker_models_note": "code: gemini-3.1-pro (strong_vm_worker_1007); checks/read-only: gemini-3.7-flash-medium"
  },
  "away_mode": {
   "at": "2026-10-07 12:4x KST",

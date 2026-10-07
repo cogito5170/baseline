@@ -50,6 +50,7 @@
 - **17:19 ga act 수정 발송** (`7c0a7b5`, 사용자 "ga act 고치는 것부터"): 산문 스펙 + 수용 시험만. CMD-ACTR1 (NEED 결과를 이후 턴에도 유지, 긴 파일은 개요(이름+줄번호), act/1 턴별 trace) · CMD-ACTB1 (지시별 max_turns 1-30·기본 20, 보고에 `## turns`). 원인 진단: NEED 결과가 다음 카드 한 번만 보임(loop.py), 긴 파일 NEED는 앞 150줄, 턴 상한 10 고정, 보고에 턴 기록 없음. baseline 비용 ~30k 토큰.
 - 17:2x top `015Lg6Tu` 문맥 158k → 후임 top 생성 (depth 3).
 - **17:4x top `01HCJQVp` (depth 3) 인계 완료** (assign `289dd5a`, 허용 목록 `.claude/settings.json`). 우편함 확인: 그룹 4 VM 배포됨 (VM ga-sdk `c6f3f97`, 17:11), VM 자체 시험 6 실패/1501 통과 (클라우드 0 실패; 1건은 기존 test_ga38, 5건 미확인). ACT1 두 건 unmet: CMD-ACTR1 10턴 36,389 토큰·출력 243, CMD-ACTB1 10턴 23,985·출력 102, 둘 다 변경 없음 (읽기만 반복, 읽은 내용이 한 턴만 유지되는 결함이 원인으로 추정). **사용자 결정 (17:5x): ga act 설계는 외부 모델에 맡김. baseline은 ACT1 재발송하지 않고, 결과가 오면 연결(통합·배포 요청)만 한다.** ga-sdk 저장소 접근은 이 세션에서 플랫폼 거부(Permission Grant), 사용자 허락 필요.
+- **18:0x 사용자 결정**: "10:4x ~ 구조에 VM 강한 모델로 간다" → policy `spec_split.strong_vm_worker_1007`: 10:4x~16:5x 파이프라인 유지, 코드 작성은 VM 안 강한 모델(기본 gemini-3.1-pro), baseline 코드 금지 유지, flash 모델은 읽기·확인 지시만.
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
