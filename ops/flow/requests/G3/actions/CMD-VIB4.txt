@@ -1,0 +1,58 @@
+EDIT ga/hub.py
+<<<<<<< SEARCH
+                 today: Callable[[], str] = lambda: date.today().isoformat(), shadow: bool | None = None):
+        from . import judge as J
+=======
+                 today: Callable[[], str] = lambda: date.today().isoformat(), shadow: bool | None = None,
+                 verdict_fn: Callable[..., Any] | None = None):
+        from . import judge as J
+        from . import verdict as V
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+        self.apply_fn = apply_fn or J.apply
+=======
+        self.apply_fn = apply_fn or J.apply
+        self.verdict_fn = verdict_fn or V.dry_run
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+        outside = [f for f in changed if owned and not any(fnmatch(f, g) for g in owned)]
+=======
+        outside = [f for f in changed if owned and not any(fnmatch(f, g) for g in owned)]
+        if self.shadow:  # VI-04b: the shadow decision is ga verdict (0 model calls)
+            decision, lines, err = self._verdict_decision(rp, rc, did, j.sha or commit.get("sha", ""), owned,
+                                                          list(getattr(j, "needs", None) or []))
+            self._usage, self._error, self._served = None, err, None
+            self._shadow(m, did, head, directive, j, decision, lines)
+            res.plan.append(f"shadow {decision} {did}")
+            return
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+    def _decide(self, card: str, did: str) -> tuple[str, list[str], str]:
+=======
+    def _verdict_decision(self, rp: Path, rc: dict[str, Any], did: str, sha: str, owned: list[str],
+                          needs: list[str]) -> tuple[str, list[str], str]:
+        """VI-04b: (decision, lines, err) from ga verdict; no model, no gateway."""
+        from . import verdict as V
+        spec = (self.conf.get("specs") or {}).get(did)
+        if not spec and sha:
+            base = V._rev(rp, rc["base"])
+            added = [p for st, p in V._changed(rp, base, sha)
+                     if st == "A" and V._is_test(p) and Path(p).name.startswith("test_")] if base else []
+            spec = added[0] if added else None
+        if not spec:
+            return "SHADOW", [f"no acceptance test for {did}"], ""
+        try:
+            v = self.verdict_fn(rp, branch=sha, sha=sha, base=rc["base"], spec=spec, allowed=owned or None,
+                                nonexec=needs or None, scope=str(self.conf.get("verdict_scope", "full")),
+                                config=rc.get("config"))
+        except Exception as e:
+            return "SHADOW", [f"ga verdict failed: {type(e).__name__}"], f"verdict:{type(e).__name__}"
+        return str(v["decision"]), [str(v["reason"])[:300]], ""
+
+    def _decide(self, card: str, did: str) -> tuple[str, list[str], str]:
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+         "REFINE": "SEND_BACK", "ASK_HUMAN": "ASK_HUMAN", "ASK_USER": "ASK_HUMAN"}
+=======
+         "REFINE": "SEND_BACK", "ASK_HUMAN": "ASK_HUMAN", "ASK_USER": "ASK_HUMAN", "SHADOW": "ASK_HUMAN"}
+>>>>>>> REPLACE
