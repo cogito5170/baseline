@@ -1,0 +1,26 @@
+EDIT ga/act/commands.py
+<<<<<<< SEARCH
+        env["PYTHONDONTWRITEBYTECODE"] = "1"  # an edit of the same size in the same second must not hit a stale .pyc
+=======
+        env["PYTHONDONTWRITEBYTECODE"] = "1"  # an edit of the same size in the same second must not hit a stale .pyc
+        env["GA_ACT_ISOLATE"] = str(cwd)  # ga/__init__ drops the editable-install finder: only the worktree's code runs
+>>>>>>> REPLACE
+EDIT ga/__init__.py
+<<<<<<< SEARCH
+__version__ = "0.18.1"
+=======
+__version__ = "0.18.1"
+
+import os as _os
+import sys as _sys
+
+if _os.environ.get("GA_ACT_ISOLATE"):
+    # ga act runs a worktree's commands with GA_ACT_ISOLATE set. An editable install of the deployed ga-sdk adds a
+    # meta-path finder that resolves any ga.* module missing from the worktree to the deployed tree, so a test of a new
+    # module could pass on deployed code. Drop those finders so ga.* comes only from this package's own directory.
+    _sys.meta_path[:] = [f for f in _sys.meta_path
+                         if not (getattr(f, "__module__", "") or "").startswith("__editable__")]
+    _sys.path_hooks[:] = [h for h in _sys.path_hooks
+                          if not (getattr(h, "__module__", "") or "").startswith("__editable__")]
+    _sys.path_importer_cache.clear()
+>>>>>>> REPLACE
