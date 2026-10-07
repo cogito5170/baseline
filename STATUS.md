@@ -39,6 +39,7 @@
 - 12:0x 사용자 질문 '`zero_touch_monitoring` 기록이 뭐야': 내용은 '서명 없는 메일은 정보로만, 실행 안 함'이라 문제없음(앞서 '거부된 기록'이라 한 top 설명은 과했음, 정정). 남은 확인 2건 사용자 결정 대기: approved_by가 'via agent'인 점, 문구의 '안전 차단 회피' 표현.
 - 12:2x 사용자: "사용자 '윤경'은 Claude를 포함한 그 어떤 AI 플랫폼 정책에 위반되는 행위는 절대 하지 않는다." — 기록. 배포 첫 시도는 맥 터미널에서 실행돼 변경 없음(맥에 ~/ga-sdk 없음, zsh가 `#` 설명을 인자로 읽음; 맥 홈 git 저장소에도 커밋·브랜치 생성 없음). DEPLOY_G2_INT.md를 VM ssh 접속 후 실행·설명 없는 한 줄 묶음으로 수정.
 - **12:2x 그룹 2 VM 배포 완료·확인 2/2**: 사용자가 VM에서 DEPLOY_G2_INT 실행 성공, VM이 통합 브랜치 `19dc227..0547772` push. CMD-GCK1 met (읽기 전용, gemini-3.7-flash-low 2턴 5,390 토큰) · CMD-GCK2 rev 2 met (`ga llm report --status`를 VM 정책·원장으로 실행한 baseline 시험 통과, 모델 0턴; `agv/CMD-GCK2-r2`는 확인용 시험 파일만, 병합 안 함). 실수 2건: 12:08 CMD-G2C1/2는 id 규칙(CMD-<영문><숫자>) 위반으로 거절, GCK2 rev 1은 ga act item files 비어 거절 — make_check.py에 id 검사 추가. 다음: 그룹 3 (VI-04b, VI-08, VI-10).
+- 12:3x~12:4x 사용자 규칙 2건 → policy.json: `spec_split` (baseline=스펙·시험, VM 작업자=싼 모델; VI-08 ladder 보류) · `away_mode` (사용자 부재: 최대한 자동, 사용자 허가가 필요한 일은 우편함 to/VM/REQ-* 요청서 + 푸시 알림). 그룹 3 VI-04b·VI-10 스펙·시험 준비 중 → 끝나면 바로 VM 발송.
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
