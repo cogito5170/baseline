@@ -66,6 +66,9 @@ NEXT = {
         "rejected, then a colon and the actions joined by semicolon-space, then ' dropped' and the count when the "
         "dropped list is not empty). Same spec and test; start again from the base.")},
 }
+NEXT["CMD-ACTB1"] = {"rev": 4, "changes": NEXT["CMD-ACTB1"]["changes"] + (
+    " (rev 4 = rev 3 unchanged: rev 3 stopped after 4 turns on backend:agy_status_error with no change; one retry)")
+}
 
 
 if __name__ == "__main__":
