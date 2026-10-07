@@ -7,7 +7,7 @@
   - VI-12 `310bd04` (CMD-VID12): `ga/vm/dora.py` journal에서 DORA 지표 + slo.json 검사(파일 없으면 생략)
   - VI-11c `c6f3f97` (CMD-VIT11): `ga ops tick` (그림자: 관찰 → 규칙 → Guard → VERIFY → 알림 파일; 메일 없음, 모델 0, 세션 없음)
 - 작업 모델 전부 gemini-3.7-flash-medium, 각 1턴 (1,707~4,434 토큰). baseline 시험 5개는 원본과 바이트 동일, VIT11 결과는 baseline 증명 트리와 동일.
-- 시험 (클라우드, 10-07 KST, pytest): 전체 __SUITE__. 의존성 핀 변경 없음.
+- 시험 (클라우드, 10-07 KST, pytest): 전체 1514 passed / 56 skipped / 실패 0 (그룹 3 1484 + ISO-1·그룹 4 30), 15분 29초. 의존성 핀 변경 없음.
 - 아직 어떤 서비스에도 연결 안 됨: `ga ops tick`은 수동 실행 명령만 추가(타이머 없음).
 
 ## VM에서 (VM에 ssh 접속한 뒤)
