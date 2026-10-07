@@ -58,6 +58,7 @@
 ## 자동 교신
 
 - 10-08 05:5x KST 시작: 루틴이 새 세션으로 메일함을 확인 (`ops/flow/AUTO_TICK.md`, `ops/flow/mailbox_tick.py`). 토큰 장부 `ops/flow/measure/tokens.jsonl`. CMD-LOC5(VM 쪽 토큰 절약 + 토큰 보고) 발송. 06:1x 변경: 매시 루틴은 끄고(trig_017w5zim, 예비), top 세션이 `ops/flow/mail_watch.sh`로 30초마다 git만으로 확인하다 새 메일이 올 때만 깨어남(대기 중 토큰 0).
+- 06:0x LOC4·LOC5 met (디스패처 = VM task-207, to/LOCAL만 읽음, 지시마다 새 agy -p, Pro/Flash 휴리스틱; agy -p는 토큰 수를 안 줌) → CMD-LOC7 발송(VM 토큰 수 측정 + 근거). top 01HCJQVp 문맥 419k·누적 19.17 USD → 후임 top 생성.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
 

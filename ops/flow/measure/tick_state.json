@@ -113,7 +113,9 @@
   "20261007T194923.628464Z-AGY-CMD-AGY1.md",
   "20261007T201927.761228Z-AGY-CMD-AGY1.md",
   "20261007T203335.771126Z-LOCAL-CMD-LOC1.md",
-  "20261007T204459.459149Z-AGY-report-2.md"
+  "20261007T204459.459149Z-AGY-report-2.md",
+  "20261007T210645.034502Z-LOCAL-CMD-LOC4.md",
+  "20261007T210646.955412Z-LOCAL-CMD-LOC5.md"
  ],
  "outcomes": {
   "CMD-LOC1": {
@@ -125,6 +127,16 @@
    "state": "met",
    "rev": 1,
    "mail": "20261007T203335.771126Z-LOCAL-CMD-LOC1.md"
+  },
+  "CMD-LOC4": {
+   "state": "met",
+   "rev": 1,
+   "mail": "20261007T210645.034502Z-LOCAL-CMD-LOC4.md"
+  },
+  "CMD-LOC5": {
+   "state": "met",
+   "rev": 1,
+   "mail": "20261007T210646.955412Z-LOCAL-CMD-LOC5.md"
   }
  },
  "sent": [
@@ -132,6 +144,7 @@
   "CMD-LOC2",
   "CMD-LOC3",
   "CMD-LOC4",
-  "CMD-LOC5"
+  "CMD-LOC5",
+  "CMD-LOC7"
  ]
 }

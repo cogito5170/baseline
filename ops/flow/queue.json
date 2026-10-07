@@ -38,5 +38,28 @@
   ],
   "needs_user": true,
   "what": "deploy ga-sdk vm/ACT1-INT (G4 + ACTB1 + ACTR1) on the VM: user decides; then baseline writes the directive"
+ },
+ {
+  "info": {
+   "id": "CMD-LOC7",
+   "to": "LOCAL",
+   "read_only": true,
+   "title": "Measure VM tokens; show dispatcher evidence",
+   "goal": "Two things left open by your LOC4/LOC5 replies. (1) Token numbers: agy -p prints none, but the VM already measured tokens before: the ga bridge reports carried input_tokens and tokens per directive from the agv backend. Find where agy or agv exposes usage (agy --help for a JSON or stats output option, the agv backend that ga used, or agy's own log or session files under the home directory) and make the dispatcher record model, input, output and cached tokens per directive. If no source exists, say exactly what you checked. (2) Evidence: give the dispatcher's file path and the line numbers that set the inbox path to/LOCAL/, the reply path to/baseline/, the fresh agy process per directive, the prompt order and the Pro/Flash rule, plus the exact stop command for task-207.",
+   "why": "report/2 evidence must be the command or file and what it showed (ops/flow/LOCAL_FORMAT.md); LOC4/LOC5 gave one-line claims and all token fields null, so baseline cannot verify or count VM tokens. Numbers go in results as numbers, not the string null.",
+   "done_when": [
+    {
+     "id": "D1",
+     "text": "results of this reply carry numeric input_tokens and output_tokens for this directive, or evidence lists every place checked"
+    },
+    {
+     "id": "D2",
+     "text": "evidence quotes file path and line numbers for the five dispatcher settings and the stop command"
+    }
+   ]
+  },
+  "after_met": [
+   "CMD-LOC5"
+  ]
  }
 ]

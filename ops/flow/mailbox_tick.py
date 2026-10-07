@@ -152,7 +152,7 @@ def claude_usage(path: str, label: str) -> dict:
     row = {"schema": "tokens/1", "at": now(), "side": "claude", "run": label, "session": s.get("id"),
            "model": em.get("last_served_model") or (s.get("session_context") or {}).get("model"),
            "input_tokens": u.get("input_tokens"), "output_tokens": u.get("output_tokens"),
-           "cached_tokens": u.get("cache_read_tokens"), "cache_write_tokens": u.get("cache_creation_tokens"),
+           "cached_tokens": u.get("cache_read_tokens"), "cache_write_tokens": u.get("cache_write_tokens", u.get("cache_creation_tokens")),
            "usd": u.get("cost_usd"), "context": (em.get("context_usage") or {}).get("used_tokens")}
     append(row)
     return row
