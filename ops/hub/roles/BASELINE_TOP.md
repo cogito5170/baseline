@@ -17,32 +17,32 @@ tell the user in one line; if your depth is >= 5, do not create one: send the us
 and a STATUS.md line asking them to open a new top (depth 0). Successor first message:
   ops/hub/roles/BASELINE_TOP.md 를 읽고 그대로 시작해. 현재 상황은 STATUS.md.
 
-STATE (written by top session_019388b1XGeFcqrYiks8S8SY at 10-07 16:1x KST, ctx 420k, lineage depth 1, ~35 USD):
-- READ FIRST: STATUS.md lines from "11:4x 새 top `019388b1`" down to "15:4x 모델 비교"; policy.json keys spec_split (+bench_1007),
-  away_mode, vm_budget.suspended (caps null during development, user 12:5x). Cloud = this top only; no Dev/Ops hubs, no routines.
-- HOW WORK GOES TO THE VM (proven today): ops/flow/requests/G<n>/make_mail.py writes directive/2 + ```ga-act to ga-mailbox
-  to/AGY/ (mailbox worktree: git worktree of origin/ga-mailbox in your scratchpad). Each goal carries an exact ga act edit
-  list (actions/<ID>.txt: EDIT with verbatim SEARCH anchors from the base, NEW whole files, RUN cmd) because ga act gives the
-  worker a ~6k-token card without file contents. Prove every edit list first: apply it with ga.act.fmt.parse + ga.act.apply.apply
-  in a git worktree of the base, run the item's exact test command, then the full suite; remove the worktree. IDs must match
-  ^CMD-[A-Z]+\d+$; item files must be non-empty. Worker model gemini-3.7-flash-medium (bench: fastest/cheapest; gpt-oss fails
-  prose coding). On unmet: enrich the spec, resend same model; a 2nd unmet -> stronger model. Verify each report: the given tests
-  in the agv branch are byte-identical to ours, then merge agv branches into vm/G<n>-INT, run the FULL suite (pytest, ~20 min,
-  run_in_background), push vm/G<n>-INT, write ops/vm/DEPLOY_G<n>_INT.md (comment-free && chain, VM over ssh, see DEPLOY_G3_INT.md),
-  mail to/VM/REQ-DEPLOY-G<n>.md and PushNotification (deploy = user permission, policy away_mode). After the user deploys:
-  confirm VM pushed the integration branch, then 2 post-deploy checks (G3/make_check.py pattern).
-- ga-sdk local editable install in the cloud: a worktree test can import a missing ga.* module from /home/user/ga-sdk.
-  ISO-1 (agv/CMD-ISO1-r2 cec66f2) fixes ga act runs (GA_ACT_ISOLATE); for your own local proofs set GA_ACT_ISOLATE=<worktree>.
-- IN FLIGHT (group 4, research/VM_INTERIOR_DESIGN.md §12): base ga-sdk vm/G4-INT = cec66f2 (222ca6a deployed + ISO-1, full suite
-  1487 passed). Sent 16:13 KST (mailbox 344530e): CMD-VIR11 (VI-11a ga/vm/ops_rules.py), CMD-VIV11 (VI-11b ga/vm/ops_verify.py),
-  CMD-VID12 (VI-12 ga/vm/dora.py, slo.json optional). NEXT: verify the 3 reports, merge into vm/G4-INT, push, then send CMD-VIT11
-  (VI-11c ga/vm/ops.py + `ga ops tick`, after VIR11+VIV11): `python3 G4/make_mail.py <box> CMD-VIT11`. Then merge, full suite
-  (subagent proof: 1510 passed with all 4), deploy request (ISO-1 + group 4 together) + push notification.
-- KNOWN VM env issue: tests/test_ga38.py::Loop::test_ts_fixture_seeded_bug_fixed is red on the VM base (node-gated; passes in the
-  cloud). Deselect it in guard lists; ask the VM to diagnose (node/tsc) when convenient.
-- HELD: VI-08/VI-09 (spec_split replaces the ladder), VI-15..19. User-owned values (optional, skipped when absent): §13 Q2
-  deadlines, Q4 slo.json, Q5 max_concurrent, sendback_cap, window_ms. Open with the user: zero_touch_monitoring approved_by
-  "via agent" + wording (user said 12:2x they never break any AI platform policy; content itself is fine).
-- The user also asked career questions today (decided direction: DevOps / cloud / infra entry, LG CNS & 메가존 공채, 5-month plan).
-  Answer such questions directly; they are not part of the build.
-- Cost/ctx: keep the successor small; check get_session context_usage after each user request; hand over at ~150k.
+STATE (written by top session_015Lg6TuBTEyJ2nMvFqvCNve at 10-07 17:2x KST, ctx 158k, lineage depth 2, ~3.2 USD):
+- READ FIRST: policy.json spec_split.no_code_from_baseline (user 17:1x-17:3x "기록해, 진행해", "기록도 하고 코드적으로 막아주라"):
+  baseline writes NO code / edit lists / cloud reference implementations. Spec = WHAT + rules + file/function names +
+  baseline's acceptance test only. Enforced: ops/flow/nocode.py (mail + spec/1), flow.py check, git pre-commit hook
+  (run ops/flow/install_hooks.sh at start; it also guards the ga-mailbox worktree). Unmet -> enrich the PROSE spec, then a
+  stronger agy model inside the VM; never Opus code. Old G3/G4 make_mail.py (actions/*.txt) are retired (nocode rejects them).
+- Mailbox worktree: git worktree of origin/ga-mailbox in your scratchpad; ga-sdk: add_repo cogito5170/ga-sdk, clone to
+  /home/user/ga-sdk, pip install -e . pytest. Verify a report: given tests byte-identical, run them + guards, merge into the
+  integration branch, full suite in background (-p no:warnings, keep the log; ~16 min, 1514 passed at c6f3f97).
+- DONE: group 4 + ISO-1 integrated: ga-sdk vm/G4-INT = c6f3f97 (VIR11 eaf5c67, VIV11 256566d, VID12 310bd04, VIT11 c6f3f97),
+  full 1514 passed/56 skipped/0 failed. Deploy request ops/vm/DEPLOY_G4_INT.md, mailbox to/VM/REQ-DEPLOY-G4.md (2ef6de3), push
+  sent 16:5x. Note: G4 code came from Opus edit lists (the method the user rejected); told the user, they did not ask to
+  hold it. After deploy: confirm VM pushed claude/gracious-meitner-vp49xe = c6f3f97, then 2 post-deploy checks (read-only).
+- IN FLIGHT (sent 17:19 KST, mailbox 7c0a7b5, base vm/G4-INT c6f3f97, gemini-3.7-flash-medium, VM turn cap still 10):
+  CMD-ACTR1 (ga/act/loop.py, retrieve.py, card.py: kept NEED reads across turns, outline for long files, act/1 trace) and
+  CMD-ACTB1 (ga/bridge/act.py: per-directive max_turns 1-30 default 20, "## turns" report section). Specs + tests in
+  ops/flow/requests/ACT1/ (prose only). Verified locally: tests fail on c6f3f97 as intended (ACTR1 6 fail/2 pass,
+  ACTB1 4 fail/2 pass). Baseline cost of the ACT1 spec: ~30k context tokens (diagnosis + 2 tests + mail).
+  NEXT: verify reports -> merge into a new vm/ACT1-INT (from c6f3f97) -> full suite -> deploy request + push. On unmet: read
+  the failing evidence, enrich the prose goal (rev 2), resend; 2nd unmet -> stronger agy model (e.g. gemini-3.1-pro).
+- THEN (user 17:1x item 3): token bench, no code from baseline, same model: arm A via ga act (after ACT1 deployed) vs arm B
+  agy default agent editing in a worktree (needs a new bridge mode, built by a VM worker from a prose spec). Tasks: an edit
+  inside ga/hub.py (VI-04b from 0547772) and a new module (VI-05 from 19dc227, import-origin probe). Report turns/tokens/met
+  per arm + baseline spec tokens. Told the user the theory: ga act (fixed) should win 3-10x on tokens.
+- ALSO: VM bridge should refuse code-carrying ga-act mail (prose spec to a VM worker, later). VI-13/VI-14 may start (shadow);
+  VI-15..19 HELD until the user releases VMHUB. KNOWN VM issue: tests/test_ga38.py::Loop::test_ts_fixture_seeded_bug_fixed red
+  on the VM (node) -> deselect in guards. ga-sdk repo moved to cogito5170/ga-SDK (old URL still works).
+- User-owned values still open: §13 Q2 deadlines, Q4 slo.json, Q5 max_concurrent, sendback_cap, window_ms.
+- Career questions: answer directly (direction decided earlier: DevOps / cloud / infra entry, LG CNS & 메가존, 5-month plan).
