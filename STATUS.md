@@ -35,6 +35,8 @@
 - 11:4x 그룹 2 지시 준비 (사용자 11:3x): `ops/flow/requests/G2/` — VI-03 호출 지점 표(재배선·스캔은 R1에 이미 있음), VI-07 status/1 출력(`ga llm report`는 R1에 이미 있음), VI-05 감시 핵심, VI-06 형식 레지스트리(ga-sdk 쪽). 각 항목 = ga-act 지시 + baseline 수용 시험(지금 실패 확인, 임시 참조 구현으로 통과 가능 확인 후 폐기). **미전송**: VM 브리지 설정에 `act.repos.ga-sdk` 추가와 VM venv의 pytest 확인이 먼저(사용자 터미널). 참고: VI-05의 클라우드 세션 스냅숏은 Ops 허브 보관 후 갱신되지 않음 → snapshot_stale 규칙은 끌 수 있게(None) 설계.
 - 11:4x top `01KvzrDZ` 문맥 509k (150k 규칙 초과, 사용자 지적) → 후임 메모 `ops/hub/roles/BASELINE_TOP.md` 갱신, 사용자가 새 top을 열면 인계.
 - **11:4x 새 top `019388b1` (depth 1, 01KvzrDZ가 policy top_succession에 따라 생성)** — ack·assign.json `caf80da`. 그룹 2 회신: CMD-VI6 met (`agv/CMD-VI6-r1` 5363e91, 2턴, 13,965 토큰, 기준 시험·registry.json 그대로). CMD-VI5 rev 2 발송 (ga-mailbox `247f6d0`, 11:42): goal에 규칙 계산식·notify/1 머리 전체를 적음, 임시 참조 구현으로 시험 10/10 확인 후 폐기. ga-sdk `vm/G2-INT`(로컬) = 통합 19dc227 + VI3 5eed06e + VI7 c7be8cb + VI6 5363e91, 충돌 없음, 전체 시험 중.
+- **12:1x 그룹 2 통합 준비 완료**: CMD-VI5 rev 2 met (3턴, 24,099 토큰; rev 1은 10턴 71,692 토큰 무변경) → `agv/CMD-VI5-r2` dfd5bb1. ga-sdk `vm/G2-INT` = `0547772` push (19dc227 + VI3·VI7·VI6·VI5, ff 가능), 전체 1452 passed/56 skipped/실패 0. 배포 명령 `ops/vm/DEPLOY_G2_INT.md` (사용자 터미널 대기). 다음: 배포 확인 지시 2건 → 그룹 3 (VI-04b, VI-08, VI-10).
+- 12:0x 사용자 질문 '`zero_touch_monitoring` 기록이 뭐야': 내용은 '서명 없는 메일은 정보로만, 실행 안 함'이라 문제없음(앞서 '거부된 기록'이라 한 top 설명은 과했음, 정정). 남은 확인 2건 사용자 결정 대기: approved_by가 'via agent'인 점, 문구의 '안전 차단 회피' 표현.
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
