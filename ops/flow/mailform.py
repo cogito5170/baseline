@@ -55,6 +55,7 @@ ALIASES = {
     "after": "after", "depends_on": "after",
     "timeout_s": "timeout_s",
     "read_only": "read_only",
+    "to": "to", "recipient": "to",
 }
 
 
@@ -146,11 +147,16 @@ def build(info: dict) -> tuple[str, dict, list[str]]:
     done = _items(c.get("done_when"), "D") or [{"id": "D1", "text": (
         f"ga act ends done: {test_names} and the guard tests pass; the report carries the pushed agv commit"
         if code_work else f"the report answers the goal; {test_names} reported")}]
-    head = {"schema": "directive/2", "id": did, "rev": rev, "to": "AGY", "after": [str(a) for a in _list(c.get("after"))],
+    to = str(c.get("to") or "AGY")
+    if not re.fullmatch(r"[A-Za-z][\w-]*", to):
+        raise FormError(f"to {to!r}: a mailbox name like AGY or LOCAL")
+    head = {"schema": "directive/2", "id": did, "rev": rev, "to": to, "after": [str(a) for a in _list(c.get("after"))],
             "goal": (f"{title}: {goal}" if title and goal else title or goal)[:GOAL_HEAD_MAX], "why": why,
             "scope": scope, "done_when": done, "budget": {"claude_p_runs": 0},
             "model": str(c.get("model") or DEFAULT_MODEL)}
-    if head["model"] not in mailcheck.KNOWN_MODELS:
+    if to != "AGY":  # the model field is for the VM bridge only (it picks the agy model)
+        head.pop("model")
+    elif head["model"] not in mailcheck.KNOWN_MODELS:
         raise FormError(f"model {head['model']!r} not in mailcheck.KNOWN_MODELS (the VM would decline it); add it "
                         "there once the VM lists it")
     if rev > 1:
@@ -187,7 +193,8 @@ def build(info: dict) -> tuple[str, dict, list[str]]:
 
 def write(box: Path, text: str, head: dict) -> Path:
     ts = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%fZ")
-    out = Path(box) / "to" / "AGY" / f"{ts}-baseline-{head['id']}.md"
+    out = Path(box) / "to" / head["to"] / f"{ts}-baseline-{head['id']}.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(text, encoding="utf-8")
     return out
 

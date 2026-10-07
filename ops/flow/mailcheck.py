@@ -105,6 +105,48 @@ def problems(text: str) -> tuple[list[str], list[str]]:
     return hard, warn
 
 
+REPORT_STATUS = {"done", "declined"}
+ITEM_STATE = {"met", "unmet", "na"}
+BLOCKER_KIND = {"dependency", "permission", "question", "other"}
+
+
+def report_problems(text: str) -> list[str]:
+    """Hard problems of a report/2 sent back to baseline (by the VM bridge or the LOCAL executor)."""
+    blocks = {k: v for k, v in BLOCK.findall(text)}
+    if "ga" not in blocks:
+        return ["no ```ga head block"]
+    try:
+        h = json.loads(blocks["ga"])
+    except ValueError as e:
+        return [f"head is not JSON: {e}"]
+    out = []
+    if h.get("schema") != "report/2":
+        out.append("$.schema must be report/2")
+    if not h.get("from"):
+        out.append("$.from: is required (AGY = VM bridge, LOCAL = local executor)")
+    hd = h.get("handled")
+    if not isinstance(hd, list) or not hd:
+        out.append("$.handled: is required (one entry per directive answered)")
+    for i, x in enumerate(hd or []):
+        if not (isinstance(x, dict) and ID_RE.match(str(x.get("id", ""))) and isinstance(x.get("rev_seen"), int)):
+            out.append(f"$.handled[{i}]: needs id (CMD-<LETTERS><number>, the directive's id) and rev_seen (int)")
+        elif x.get("status") not in REPORT_STATUS:
+            out.append(f"$.handled[{i}].status must be done or declined (got {x.get('status')!r}); "
+                       "a question goes in blockers with kind question")
+    its = h.get("items")
+    if not isinstance(its, list) or not its:
+        out.append("$.items: is required (one per done_when id)")
+    for i, x in enumerate(its or []):
+        if not (isinstance(x, dict) and x.get("id") and x.get("state") in ITEM_STATE):
+            out.append(f"$.items[{i}]: needs id (the done_when id, e.g. D1) and state met/unmet/na")
+        elif x["state"] in ("met", "unmet") and not x.get("evidence"):
+            out.append(f"$.items[{i}].evidence: required for met/unmet (commands run and what they printed)")
+    for i, b in enumerate(h.get("blockers") or []):
+        if not (isinstance(b, dict) and b.get("kind") in BLOCKER_KIND and b.get("what")):
+            out.append(f"$.blockers[{i}]: needs kind ({'/'.join(sorted(BLOCKER_KIND))}) and what")
+    return out
+
+
 def check_mail(text: str) -> list[str]:
     hard, warn = problems(text)
     if hard:
@@ -139,6 +181,16 @@ def self_test() -> None:
 
 
 def main(argv: list[str]) -> int:
+    if argv[:1] == ["--report"]:
+        rc = 0
+        for p in argv[1:]:
+            bad = report_problems(Path(p).read_text(encoding="utf-8"))
+            if bad:
+                rc = 1
+                print(f"{p}: " + "; ".join(bad), file=sys.stderr)
+            else:
+                print(f"{p}: report/2 OK")
+        return rc
     if argv == ["--self-test"]:
         self_test()
         return 0
