@@ -72,7 +72,7 @@ ITEMS = [
                         "open('docs/FORMS.md', 'w', encoding='utf-8').write(R.render_doc(R.load()))"]},
          goal=VIJ10_GOAL,
          title="VI-10a journal/1 form in the registry + fold(journal)"),
-    dict(id="CMD-VIM10", vi="VI-10b", model="gemini-3.7-flash-medium", test="test_vi10b_machine.py", after=["CMD-VIJ10"],
+    dict(base="vm/G3-INT", id="CMD-VIM10", vi="VI-10b", model="gemini-3.7-flash-medium", test="test_vi10b_machine.py", after=["CMD-VIJ10"],
          files=["ga/vm/machine.py"],
          guards=["tests/test_vi10a_journal.py", "tests/test_vi06_registry.py"],
          goal=VIM10_GOAL,
@@ -97,7 +97,7 @@ def directive(it):
             "tests": given,
             "commands": {"commands": {"test": pytest_cmd(f"tests/{it['test']}", *it["guards"]),
                                       **it.get("extra_commands", {})}, "timeout_s": 900},
-            "base": BASE, "repo": "ga-sdk"}
+            "base": it.get("base", BASE), "repo": "ga-sdk"}
     return head, "```ga\n" + json.dumps(head, ensure_ascii=False) + "\n```\n\n```ga-act\n" + json.dumps(spec, ensure_ascii=False) + "\n```\n"
 
 
