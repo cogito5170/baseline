@@ -1,4 +1,10 @@
-# Auto tick — prompt of the recurring routine (fresh session each run)
+# Auto tick — what baseline does when new mail arrives
+
+Trigger (user 10-08 06:1x KST, same design as the VM dispatcher): `ops/flow/mail_watch.sh` runs in the background of
+the top session, polls ga-mailbox every 60 s with git only (0 tokens) and exits when a new LOCAL report lands; that
+wakes the session, which runs the steps below and re-arms the watcher. Context stays small by the top-session rule
+(successor at ~150k, BASELINE_TOP.md). The hourly routine trig_017w5zimFFxCeVfMk6rhMLUy is DISABLED (two processors on
+one mailbox would double-send); it remains as a fallback if no top session is running.
 
 User 10-08 06:0x KST: "너도 자동으로 메일함 확인해서 교신해. ga에서 쓰던 통신 semantic 포맷은 그대로 유지해. 둘이서
 교신하면서 토큰 최적화를 해 ... context가 많이 쌓이지 않도록 계속 세션을 갈아줘 ... 사용 토큰량을 계산해".
