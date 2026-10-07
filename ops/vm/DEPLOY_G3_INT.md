@@ -5,7 +5,7 @@
   - VI-10a `8a4eac4` (CMD-VIJ10 rev 2): journal/1 형식(레지스트리) + `ga/vm/journal.py` fold
   - VI-10b `222ca6a` (CMD-VIM10): `ga/vm/machine.py` 상태 기계 T1-T11 (그림자, 세션 없음, T2-T4는 would_do)
 - 작업 모델 전부 gemini-3.7-flash-medium (policy spec_split). baseline 시험·기존 시험 수정본 5개·registry.json은 원본과 바이트 동일.
-- 시험 (클라우드, pytest): RESULT
+- 시험 (클라우드, 10-07 14:1x KST, pytest): 전체 1484 passed / 56 skipped / 실패 0 (그룹 2 1452 + 그룹 3 32). 의존성 핀 변경 없음.
 - 아직 어떤 서비스에도 연결 안 됨: journal/machine은 코드만, 그림자 허브는 다음 tick부터 모델 대신 ga verdict로 판단.
 
 ## VM에서 (VM에 ssh 접속한 뒤)

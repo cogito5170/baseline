@@ -41,6 +41,7 @@
 - **12:2x 그룹 2 VM 배포 완료·확인 2/2**: 사용자가 VM에서 DEPLOY_G2_INT 실행 성공, VM이 통합 브랜치 `19dc227..0547772` push. CMD-GCK1 met (읽기 전용, gemini-3.7-flash-low 2턴 5,390 토큰) · CMD-GCK2 rev 2 met (`ga llm report --status`를 VM 정책·원장으로 실행한 baseline 시험 통과, 모델 0턴; `agv/CMD-GCK2-r2`는 확인용 시험 파일만, 병합 안 함). 실수 2건: 12:08 CMD-G2C1/2는 id 규칙(CMD-<영문><숫자>) 위반으로 거절, GCK2 rev 1은 ga act item files 비어 거절 — make_check.py에 id 검사 추가. 다음: 그룹 3 (VI-04b, VI-08, VI-10).
 - 12:3x~12:4x 사용자 규칙 2건 → policy.json: `spec_split` (baseline=스펙·시험, VM 작업자=싼 모델; VI-08 ladder 보류) · `away_mode` (사용자 부재: 최대한 자동, 사용자 허가가 필요한 일은 우편함 to/VM/REQ-* 요청서 + 푸시 알림). 그룹 3 VI-04b·VI-10 스펙·시험 준비 중 → 끝나면 바로 VM 발송.
 - 12:5x 사용자: "개발 과정에서는 정해진 예산은 없애라." → policy.json `vm_budget.caps` 전부 null (게이트웨이는 숫자 아닌 상한을 건너뜀, 정책은 유효, 원장 기록은 계속), 이전 값은 `vm_budget.suspended.previous_caps`. VM은 ~/baseline 갱신 때 반영. 참고: 이제 `ga llm report --status`는 상한 항목이 없어 items가 빔(정상).
+- **14:1x 그룹 3 통합 준비 완료, 배포는 사용자 허가 대기**: CMD-VIB4 rev 2 met (1턴 2,344 토큰; rev 1 10턴 26,876 미완) · CMD-VIJ10 rev 2 met (3턴 8,756; rev 1 10턴 32,725 무변경) · CMD-VIM10 met (1턴 3,726). 전부 gemini-3.7-flash-medium. rev 2 교훈: ga act 카드(~6000 토큰)에 파일 내용이 없으므로 goal에 정확한 앵커와 넣을 코드(편집 목록)를 넣어야 싼 모델이 끝낸다. ga-sdk `vm/G3-INT` = `222ca6a` push, 전체 1484 passed/56 skipped/실패 0. 배포 명령 `ops/vm/DEPLOY_G3_INT.md`, 요청서 우편함 `to/VM/REQ-DEPLOY-G3.md` (`048ae18`) + 푸시 알림. 미정 사용자 값: max_concurrent(Q5)·sendback_cap (없으면 검사 생략).
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
