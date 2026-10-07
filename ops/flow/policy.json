@@ -163,9 +163,9 @@
   ],
   "meaning": "baseline (strong model) does short judgments, design, specs and acceptance tests only; VM worker nodes implement on a cheap model chosen per directive ('model'). On unmet: first enrich the spec and resend on the same model; only after a second unmet with evidence does baseline move that one directive to a stronger model. Once the VM can change its own code end to end, baseline sends specs only and keeps its own verification to reading reports (no local reimplementation).",
   "default_worker_models": [
-   "gemini-3.7-flash-low",
    "gemini-3.7-flash-medium",
-   "gpt-oss-120b-medium"
+   "gemini-3.6-flash-medium",
+   "gpt-oss-120b-medium (read-only only)"
   ],
   "spec_must_carry": [
    "files to edit",
@@ -176,7 +176,22 @@
    "'do not explore'"
   ],
   "supersedes": "VI-08 automatic ladder: held; §13 Q3 values not needed while this holds",
-  "change": "only the user, by their own words to the top baseline hub"
+  "change": "only the user, by their own words to the top baseline hub",
+  "bench_1007": {
+   "at": "2026-10-07 15:4x KST",
+   "by": "top 019388b1 (user 15:1x asked for the bench)",
+   "T1_edit_list (VIJ10 rev 2)": {
+    "gemini-3.7-flash-medium": "met 3 turns 8,758 tokens",
+    "gemini-3.6-flash-medium": "met 3 turns 11,344",
+    "gpt-oss-120b-medium": "met 2 turns 13,451"
+   },
+   "T2_prose_rules (VI5 rev 2, with import-origin probe)": {
+    "gemini-3.7-flash-medium": "met 1 turn 2,991",
+    "gemini-3.6-flash-medium": "met 1 turn 3,043",
+    "gpt-oss-120b-medium": "unmet 10 turns 60,026 (asked for the source instead of writing it)"
+   },
+   "decision": "default code worker = gemini-3.7-flash-medium; gemini-3.6-flash-medium is an equal fallback; gpt-oss-120b-medium only for read-only turns"
+  }
  },
  "away_mode": {
   "at": "2026-10-07 12:4x KST",
