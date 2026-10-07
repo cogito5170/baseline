@@ -69,16 +69,13 @@
   "user_words": "Dev 안(지휘 1 USD/h, 전체 6 USD/h)과 Ops 안(2 USD/h, 하루 30 USD) 를 모두 사용하자. 설계는 계속해서 진행해.",
   "meaning": "both proposals apply at once; every cap is enforced and the tightest one that applies wins",
   "caps": {
-   "vm_coordination_dev_plus_ops_usd_per_h": 1.0,
-   "vm_baselines_usd_per_h": 2.0,
-   "vm_total_usd_per_h": 6.0,
-   "vm_total_usd_per_day": 30.0,
-   "build_per_item_usd": {
-    "default": 3,
-    "hard": 6
-   },
-   "cloud_top_baseline_usd_per_h": 2.0,
-   "session_ctx_cap_tokens": 150000
+   "vm_coordination_dev_plus_ops_usd_per_h": null,
+   "vm_baselines_usd_per_h": null,
+   "vm_total_usd_per_h": null,
+   "vm_total_usd_per_day": null,
+   "build_per_item_usd": null,
+   "cloud_top_baseline_usd_per_h": null,
+   "session_ctx_cap_tokens": null
   },
   "model": "cheapest that passes; Opus only for design opinions and diagnosis",
   "on_exceed": "refuse the call (fail-closed), record shadow/1 rejected_by budget, report to baseline",
@@ -86,7 +83,25 @@
    "ops/flow/inbox/baseline/20261007T005411-dev-opinion1-OP-DEV-VM-COST.json",
    "ops/flow/inbox/baseline/20261006T234209-ops-opinion1-OP-VM-COST.json"
   ],
-  "change": "only the user, by their own words to the top baseline hub"
+  "change": "only the user, by their own words to the top baseline hub",
+  "suspended": {
+   "at": "2026-10-07 12:5x KST",
+   "in": "top baseline session_019388b1XGeFcqrYiks8S8SY",
+   "user_words": "개발 과정에서는 정해진 예산은 없애라.",
+   "meaning": "during development no cap is enforced: every cap value is null, so ga.llm gateway skips it (non-numeric limit = no check) while the policy stays valid (policy_ok true) and every call is still recorded in the ledger. The previous values are kept in previous_caps; restoring them is the user's call.",
+   "previous_caps": {
+    "vm_coordination_dev_plus_ops_usd_per_h": 1.0,
+    "vm_baselines_usd_per_h": 2.0,
+    "vm_total_usd_per_h": 6.0,
+    "vm_total_usd_per_day": 30.0,
+    "build_per_item_usd": {
+     "default": 3,
+     "hard": 6
+    },
+    "cloud_top_baseline_usd_per_h": 2.0,
+    "session_ctx_cap_tokens": 150000
+   }
+  }
  },
  "overnight_delegation": {
   "approved_by": "user, in top baseline session_016tT1vvrTFehVFzWzfgxcCV, 10-07 01:1x KST (chose option 'baseline이 대신 승인 (권장)')",
