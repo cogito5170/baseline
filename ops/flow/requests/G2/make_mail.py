@@ -42,7 +42,8 @@ ITEMS = [
                "report at>', items:[{id: cap, state: ok|near|over, note}], blockers:[{kind:'budget', what}]} — one item "
                "per cap that has a numeric limit and a spend (near = spend >= 80 % of limit, over = spend > limit); a "
                "blocker per over cap and one when policy_ok is false. Add --status to `ga llm report` to print it. "
-               "Keep build() and the plain report unchanged."),
+               "Keep build() and the plain report unchanged. In main(): add p.add_argument('--status', "
+               "action='store_true') and print status(rep) instead of rep when it is set."),
          title="VI-07 hourly gateway summary as status/1"),
     dict(id="CMD-VI5", vi="VI-05", model="claude-sonnet-5-5-medium", test="test_vi05_watch.py",
          files=["ga/watch.py"], guards=[],
@@ -53,16 +54,23 @@ ITEMS = [
                "(off when snapshot_max_age_s is None), vm_spend_rate (ledger usd in the last hour); tick(alerts, "
                "state_path, now, send) mails each (kind, key) once per UTC day as a valid notify/1 kind alert "
                "(ref = an https URL, note <= 280 chars) to baseline-ops, snapshot_stale also to baseline. No import "
-               "of model code (llm, backends, adapters, gemini). All rules are in the test's docstring."),
+               "of model code (llm, backends, adapters, gemini). All rules are in the test's docstring. Build the notify/1 "
+               "text with ga.forms.dump_text(head). Write the whole file with one NEW action."),
          title="VI-05 watcher core (rules, thresholds, once-a-day alerts; 0 model calls)"),
     dict(id="CMD-VI6", vi="VI-06", model="claude-sonnet-5-5-medium", test="test_vi06_registry.py",
-         files=["ga/forms/registry.json", "ga/forms/registry.py", "ga/forms/kinds.py", "docs/FORMS.md"],
+         files=["ga/forms/registry.py", "ga/forms/kinds.py", "docs/FORMS.md"],
          guards=["tests/test_forms.py", "tests/test_wire.py", "tests/test_mailbox.py"],
-         goal=("Make ga/forms/registry.json (schema forms-registry/1: enums {NOTIFY_KINDS, HANDLED_STATUS, "
-               "BLOCKER_KINDS, CHANGE_SIZES, NEEDS, VERDICT_CLASSES, CAUSES, NEXT_CHOICES: values}, forms {every form "
-               "in ga.forms.kinds.SCHEMAS: {fields: {name: {required}}}}) the single source: ga/forms/registry.py with "
-               "load() and render_doc(reg) -> markdown; kinds.py reads those enums from the registry (no hand-written "
-               "tuples left); docs/FORMS.md = render_doc(load()). Same values as today: nothing valid becomes invalid."),
+         goal=("ga/forms/registry.json is given (baseline wrote it from today's kinds.py; do not edit it). "
+               "(1) NEW ga/forms/registry.py: FILE = Path(__file__).with_name('registry.json'); load() -> the parsed "
+               "JSON; render_doc(reg) -> a markdown string that names every form and every enum value (any stable "
+               "layout). (2) EDIT ga/forms/kinds.py: replace the 8 hand-written tuples VERDICT_CLASSES, CAUSES, "
+               "NEXT_CHOICES, HANDLED_STATUS, CHANGE_SIZES, NEEDS (lines 33-38), BLOCKER_KINDS (124) and NOTIFY_KINDS "
+               "(126) with NAME = tuple(_REG['enums']['NAME']), where _REG = load() is imported from .registry above "
+               "line 33 (from .registry import load as _load_registry; _REG = _load_registry()). (3) RUN gendoc (after your edits) to "
+               "write docs/FORMS.md from the registry, then DONE. Values stay the same, so nothing valid becomes invalid."),
+         provided={"ga/forms/registry.json": "registry.json"}, extra_commands={
+             "gendoc": ["{python}", "-c", "from ga.forms import registry as R; "
+                        "open('docs/FORMS.md', 'w', encoding='utf-8').write(R.render_doc(R.load()))"]},
          title="VI-06 forms registry, ga-sdk side (baseline flow.py vendored copy is a separate item)"),
 ]
 
@@ -77,9 +85,12 @@ def directive(it):
             "budget": {"claude_p_runs": 0}, "model": it["model"]}
     if rev > 1:
         head["changes"] = [{"item": "D1", "op": "edit", "text": head["done_when"][0]["text"] + f" (rev {rev}: goal names the sites)"}]
+    given = {f"tests/{it['test']}": (HERE / "tests" / it["test"]).read_text(encoding="utf-8")}
+    given.update({dst: (HERE / src).read_text(encoding="utf-8") for dst, src in it.get("provided", {}).items()})
     spec = {"item": {"id": it["id"], "goal": it["goal"], "files": it["files"], "done_when": "test"},
-            "tests": {f"tests/{it['test']}": (HERE / "tests" / it["test"]).read_text(encoding="utf-8")},
-            "commands": {"commands": {"test": pytest_cmd(f"tests/{it['test']}", *it["guards"])}, "timeout_s": 900},
+            "tests": given,
+            "commands": {"commands": {"test": pytest_cmd(f"tests/{it['test']}", *it["guards"]),
+                                      **it.get("extra_commands", {})}, "timeout_s": 900},
             "base": BASE, "repo": "ga-sdk"}
     return "```ga\n" + json.dumps(head, ensure_ascii=False) + "\n```\n\n```ga-act\n" + json.dumps(spec, ensure_ascii=False) + "\n```\n"
 
