@@ -51,6 +51,7 @@
 - 17:2x top `015Lg6Tu` 문맥 158k → 후임 top 생성 (depth 3).
 - **17:4x top `01HCJQVp` (depth 3) 인계 완료** (assign `289dd5a`, 허용 목록 `.claude/settings.json`). 우편함 확인: 그룹 4 VM 배포됨 (VM ga-sdk `c6f3f97`, 17:11), VM 자체 시험 6 실패/1501 통과 (클라우드 0 실패; 1건은 기존 test_ga38, 5건 미확인). ACT1 두 건 unmet: CMD-ACTR1 10턴 36,389 토큰·출력 243, CMD-ACTB1 10턴 23,985·출력 102, 둘 다 변경 없음 (읽기만 반복, 읽은 내용이 한 턴만 유지되는 결함이 원인으로 추정). **사용자 결정 (17:5x): ga act 설계는 외부 모델에 맡김. baseline은 ACT1 재발송하지 않고, 결과가 오면 연결(통합·배포 요청)만 한다.** ga-sdk 저장소 접근은 이 세션에서 플랫폼 거부(Permission Grant), 사용자 허락 필요.
 - **18:0x 사용자 결정**: "10:4x ~ 구조에 VM 강한 모델로 간다" → policy `spec_split.strong_vm_worker_1007`: 10:4x~16:5x 파이프라인 유지, 코드 작성은 VM 안 강한 모델(기본 gemini-3.1-pro), baseline 코드 금지 유지, flash 모델은 읽기·확인 지시만.
+- **18:0x~18:3x ACT1 on gemini-3.1-pro-high (VM)**: ACTR1 rev 2 unmet (10턴 cap, 33,334 토큰, loop.py·retrieve.py 수정, 수용 4/6 실패 + test_ga38 카드 크기 시험 새로 깸). ACTB1 rev 2 unmet이나 5/6 통과 (10턴, 24,289; ## turns 줄 형식만 틀림) → rev 3 `backend:agy_status_error` 4턴 무변경 → rev 4 재시도 `no progress after 2 turns` 5턴 무변경. 판단: ga act 하네스(10턴 상한, 읽기 1턴 유지, 무진척 정지)가 병목 → ga act로 ga act를 고치는 경로 중단. 형식 거절 재발 방지: `ops/flow/mailcheck.py`(검사, pre-commit) + `ops/flow/mailform.py`(baseline측 분류기, 모든 to/AGY 메일 생성).
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
