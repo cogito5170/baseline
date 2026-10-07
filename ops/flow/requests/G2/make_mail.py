@@ -18,13 +18,23 @@ def pytest_cmd(*files):
 
 
 ITEMS = [
-    dict(id="CMD-VI3", vi="VI-03", model="gemini-3.7-flash-medium", test="test_vi03_sites.py",
+    dict(id="CMD-VI3", rev=2, vi="VI-03", model="gemini-3.7-flash-medium", test="test_vi03_sites.py",
          files=["ga/llm/sites.json"], guards=["tests/test_r1_scan.py"],
          goal=("Write ga/llm/sites.json: a JSON list with one row per gated model turn under ga/ (each L.run_turn / "
                "llm.run_turn call outside ga/llm), keyed '<path under ga/>::<enclosing function qualname>' exactly as "
                "tests/test_vi03_sites.py computes it. Row = {site, purpose, ladder_step (cheap|strong|either), "
                "why_no_rule (>= 20 chars: why a fixed rule cannot decide this turn)}. purpose = the literal purpose= "
-               "of that call when it has one. Read each call site to write an honest why_no_rule."),
+               "of that call when it has one. Read each call site to write an honest why_no_rule. "
+               "rev 2 (rev 1 hit the turn cap with no edit): the 8 sites today are — "
+               "act/loop.py::Act._call.turn (purpose build: the executor's edit turn on a work item), "
+               "act/route.py::triage (diagnosis: one triage turn that picks a start model and turn cap), "
+               "ask/model.py::one_turn (opinion: `ga ask` answers a person's free-text question), "
+               "gemini.py::Supervisor._one_turn (probe: a supervise plan turn), "
+               "hub.py::MailHub._decide (coordination: the shadow hub decides a mail's next step), "
+               "intake/engine.py::Intake.send (intake: turns a person's request into a task form), "
+               "net/node.py::Node._turn (build: a peer node's build turn), "
+               "plan/draft.py::turn (plan: drafts a directive from a request). "
+               "Write the whole file with one NEW action; no other file changes."),
          title="VI-03 per-site 'why no rule' table (the rewiring and the no-call-outside-gateway scan landed in R1)"),
     dict(id="CMD-VI7", vi="VI-07", model="gemini-3.7-flash-medium", test="test_vi07_status.py",
          files=["ga/llm/report.py"], guards=["tests/test_r1_gateway.py"],
@@ -58,12 +68,15 @@ ITEMS = [
 
 
 def directive(it):
-    head = {"schema": "directive/2", "id": it["id"], "rev": 1, "to": "AGY", "after": [],
+    rev = it.get("rev", 1)
+    head = {"schema": "directive/2", "id": it["id"], "rev": rev, "to": "AGY", "after": [],
             "goal": f"{it['title']}: {it['goal']}"[:1800], "why": WHY,
             "scope": [{"id": "S1", "text": "only " + ", ".join(it["files"]) + " in a ga-sdk worktree; the tests are baseline's"}],
             "done_when": [{"id": "D1", "text": "ga act ends done: tests/" + it["test"] + " and the guard tests pass; "
                                                "the report carries the pushed agv commit"}],
             "budget": {"claude_p_runs": 0}, "model": it["model"]}
+    if rev > 1:
+        head["changes"] = [{"item": "D1", "op": "edit", "text": head["done_when"][0]["text"] + f" (rev {rev}: goal names the sites)"}]
     spec = {"item": {"id": it["id"], "goal": it["goal"], "files": it["files"], "done_when": "test"},
             "tests": {f"tests/{it['test']}": (HERE / "tests" / it["test"]).read_text(encoding="utf-8")},
             "commands": {"commands": {"test": pytest_cmd(f"tests/{it['test']}", *it["guards"])}, "timeout_s": 900},
