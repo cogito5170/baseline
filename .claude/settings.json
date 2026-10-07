@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git log *)",
+      "Bash(git diff*)",
+      "Bash(git show *)",
+      "Bash(git fetch *)",
+      "Bash(git worktree *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push -u origin claude/gracious-meitner-vp49xe)",
+      "Bash(git push origin claude/gracious-meitner-vp49xe)",
+      "Bash(git push origin ga-mailbox)",
+      "Bash(git push origin HEAD:ga-mailbox)",
+      "Bash(git push -u origin ga-mailbox)",
+      "Bash(python3 ops/flow/*)",
+      "Bash(sh ops/flow/install_hooks.sh)",
+      "Bash(python3 -m pytest *)",
+      "Bash(pytest *)",
+      "mcp__claude-code-remote__get_session",
+      "mcp__claude-code-remote__list_sessions",
+      "mcp__claude-code-remote__list_events",
+      "mcp__claude-code-remote__send_message",
+      "mcp__claude-code-remote__create_session",
+      "mcp__claude-code-remote__archive_session",
+      "mcp__claude-code-remote__send_later"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f)"
+    ]
+  }
+}
