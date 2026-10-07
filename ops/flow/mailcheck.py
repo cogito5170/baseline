@@ -28,9 +28,23 @@ REQUIRED = ("schema", "id", "rev", "to", "goal", "why")
 EXPECTED = ("scope", "done_when")  # every accepted mail has them; the VM has not declined for their absence
 KNOWN = set(REQUIRED) | set(EXPECTED) | {"after", "budget", "model", "changes"}
 CHANGE_OPS = {"add", "edit", "drop"}
-# agy models seen on the VM (10-07 05:07 list + served names in reports); unknown names only warn
-KNOWN_MODELS = {"gemini-3.7-flash-low", "gemini-3.7-flash-medium", "gemini-3.6-flash-medium", "gpt-oss-120b-medium",
-                "gemini-3.1-pro-high", "gemini-3.1-pro-low", "claude-sonnet-5-5-medium"}
+# The model list is the VM's own `agy models` output (user 10-07 18:5x: "model은 agy models"), saved verbatim in
+# ops/vm/agy_models.txt; refresh it by pasting the output there. The set below is the fallback until it exists.
+AGY_MODELS_FILE = Path(__file__).resolve().parents[1] / "vm" / "agy_models.txt"
+_FALLBACK_MODELS = {"gemini-3.7-flash-low", "gemini-3.7-flash-medium", "gemini-3.6-flash-medium",
+                    "gpt-oss-120b-medium", "gemini-3.1-pro-high", "gemini-3.1-pro-low", "claude-sonnet-5-5-medium"}
+
+
+def _agy_models() -> set[str]:
+    try:
+        text = AGY_MODELS_FILE.read_text(encoding="utf-8")
+    except OSError:
+        return set(_FALLBACK_MODELS)
+    found = set(re.findall(r"\b([a-z][a-z0-9]*(?:[-.][a-z0-9]+)+)\b", text))
+    return found or set(_FALLBACK_MODELS)
+
+
+KNOWN_MODELS = _agy_models()
 
 
 def problems(text: str) -> tuple[list[str], list[str]]:
