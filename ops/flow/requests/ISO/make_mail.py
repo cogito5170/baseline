@@ -20,9 +20,10 @@ G3.WHY = ("10-07 15:3x model bench: on the VM the editable install of the deploy
           "away_mode: VM fixes what it can).")
 G3.PASTE = G3.PASTE.replace("ga-sdk 0547772", "ga-sdk 222ca6a")
 
-ITEM = dict(id="CMD-ISO1", vi="ISO-1", model="gemini-3.7-flash-medium", test="test_act_isolation.py",
+ITEM = dict(id="CMD-ISO1", rev=2, rev_note="rev 1 was blocked only by tests/test_ga38.py::Loop::test_ts_fixture_seeded_bug_fixed, which CMD-GCK5 showed is red on the VM base 222ca6a too (node-gated, VM environment); it is deselected for this item only", vi="ISO-1", model="gemini-3.7-flash-medium", test="test_act_isolation.py",
             files=["ga/act/commands.py", "ga/__init__.py"],
-            guards=["tests/test_ga38.py", "tests/test_ga41.py", "tests/test_ga42_actions.py", "tests/test_vm_bridge_act.py"],
+            guards=["tests/test_ga38.py", "tests/test_ga41.py", "tests/test_ga42_actions.py", "tests/test_vm_bridge_act.py",
+                    "--deselect", "tests/test_ga38.py::Loop::test_ts_fixture_seeded_bug_fixed"],
             goal=("ga act sets GA_ACT_ISOLATE in the command environment and ga/__init__ drops the editable-install "
                   "finders when it is set; rules: docstring of tests/test_act_isolation.py. " + G3.PASTE
                   + G3.actions("CMD-ISO1")),
