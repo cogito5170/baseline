@@ -31,6 +31,7 @@
 - VM 로컬 수정 내용 (사용자 붙여넣기 06:2x): `ga/llm/gateway.py`(4.3 KB, LLM 단일 관문 시도), `ga_patched/`(ga 패키지 전체 사본 436 KB, 18:32~18:33Z), `hello.md` = 03:47 KST 'VM' 명의 시험 메일 원문(notify/1, to 016tT1vv, ref example.com, "Zero-Touch ... VI-03 verified") → **그 메일의 출처는 VM 로컬 에이전트의 수작업**으로 확인. 키 패턴 grep(ga/llm, ga_patched, verdict.py): 출력 없음.
 - **10:4x 배포 확인 4/4 통과** (사용자가 VM에서 로컬 수정 보존 commit + vm/BRIDGE-ACT-1 병합, 39 OK, 브리지 재시작): VB1 일반 지시 met (gpt-oss-120b-medium, 4,818 토큰) · VB2 `model` 지정 met (served gemini-3.7-flash-low) · VB3 없는 모델 → 모델 호출 없이 declined "not in agy models" · VB4 코드 작업 → ga act 1턴 met, Token `agv/CMD-VB4-r1` = `de3bc1c` push (GitHub에서 확인). **브리지 메일만으로 VM 코드 작업 가능.** 남은 것: VM `agy-bridge.json` act에 `repo_name` 없음 → 회신 commits.repo가 "token"(shadow hub는 "cogito5170/Token"을 기대). `2c3a0fa`(to/baseline-shadow CMD-PING5 ASK_HUMAN)는 VM shadow hub의 자동 판정 메일.
 - 11:0x 그룹 1 통합 (사용자 10:5x 선택): ga-sdk `vm/R1-INT` = `19dc227` = 브리지(`d314c95`) + VI-06a/20 `87e3243` + VI-01 `bb443ff` + VI-02 `3e7ab1c` + VI-04 `451e980`, 충돌 없음, 전체 1431 passed/53 skipped/실패 0. VM 로컬 수정이 같은 파일 12개를 손댐 → 실행 코드는 vm/R1-INT로 교체, 로컬 수정은 이름표 보관. 배포 명령 `ops/vm/DEPLOY_R1_INT.md` (사용자 터미널 대기; ga act는 병합 불가).
+- **11:1x 그룹 1 VM 배포 완료**: VM `~/ga-sdk` = `19dc227`, origin 통합 브랜치 `318b22a..19dc227` push(VM이), 브리지·콘솔 재시작, 이전 상태는 `vm/deployed-before-r1int`. CMD-RI1(11:15) met — R1 게이트웨이를 거쳐 gemini-3.7-flash-low 2턴, 5,500 토큰 (정책 = VM `~/baseline/ops/flow/policy.json` vm_budget caps: 6 USD/h, 30 USD/일). VM unittest errors=1은 R1의 `tests/conftest.py`(시험용 정책)가 pytest에서만 읽히기 때문(클라우드 pytest 89/89 OK). VM notify 02:04Z의 ga-sdk 12a80ac는 배포 전 VM 로컬 병합 커밋.
 - 아래 §2·§10 표는 04:5x 이전 기록.
 
 ## 0. 04:0x 사용자 지시와 처리 결과
@@ -77,7 +78,7 @@
 |---|---|---|
 | 운영 기록 전부 (이 문서, 규칙, 정책, 메시지, 설계, 측정) | `cogito5170/baseline` · `claude/gracious-meitner-vp49xe` | — |
 | VM ↔ 클라우드 우편함 | `cogito5170/baseline` · `ga-mailbox` | VM 마지막 알림 10-06 20:26 KST (ga 0.18.1, `f9671da`) |
-| GA engine 통합 코드 | `cogito5170/ga-sdk` · `claude/gracious-meitner-vp49xe` | `318b22a` = 이름표 `R0-baseline` (01:5x 생성, 사용자 맥 AGY) |
+| GA engine 통합 코드 | `cogito5170/ga-sdk` · `claude/gracious-meitner-vp49xe` | `19dc227` (10-07 11:1x, 그룹 1 + 브리지; `R0-baseline` = `318b22a`) |
 | GA engine 진행 중 | ga-sdk `claude/DEV-R1-GW` `3e7ab1c`, `claude/DEV-VMSHA` `bb443ff`, `claude/DEV-VI-06a-20` `87e3243`, `claude/DEV-R2-DRY` `451e980` | — |
 | Token 앱 | `cogito5170/Token` · `claude/gracious-meitner-vp49xe` | `7536819` (TKG13 포함) |
 | VM 이식 대상 | `cogito5170/Dev`, `cogito5170/Ops` · `main` | 저장소만 있음, 이식 전 |
