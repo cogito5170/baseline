@@ -1,0 +1,9 @@
+{
+ "box": "~/agy-direct-box",
+ "origin_of": "~/baseline",
+ "repos": {"ga-sdk": "~/ga-sdk", "token": "~/token"},
+ "python": "~/ga-venv/bin/python",
+ "done_file": "~/.agy-direct-done",
+ "every_s": 30,
+ "agy_timeout_s": 3600
+}
