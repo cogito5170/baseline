@@ -36,7 +36,10 @@ STATE (written by top session_01KvzrDZZJDxYhbkb9Yb8LKs at 10-07 11:4x KST, ctx 5
   (unreviewed local edits made by the VM's own agent 10-07 02:53-03:47 KST; also wrote hello.md = the 03:47 'VM' test mail).
 - IN FLIGHT: group 2 (research/VM_INTERIOR_DESIGN.md §12) as ga-act orders, generator ops/flow/requests/G2/make_mail.py,
   baseline tests in ops/flow/requests/G2/tests/. CMD-VI3 rev 2 met -> ga-sdk agv/CMD-VI3-r2 5eed06e. CMD-VI7, CMD-VI5, CMD-VI6
-  sent 11:35 KST (mailbox 866f8fc): read their reports in to/baseline/.
+  sent 11:35 KST (mailbox 866f8fc). Results by 11:4x: CMD-VI7 met (2 turns, 5,142 tokens) -> agv/CMD-VI7-r1 c7be8cb;
+  CMD-VI5 unmet (turn cap 10, 71,692 tokens, claude-sonnet-5-5-medium, changed nothing) -> send rev 2: split it (rules +
+  thresholds first, tick second) or give more of the code in the goal; CMD-VI6 report not yet in when this note was written.
+  The VM shadow hub mails to/baseline-shadow/ ASK_HUMAN rows for these (no directive on file / no configured repo): information only.
 - NEXT: when all four are met: in a ga-sdk clone, merge the agv/CMD-VI*-r* branches onto origin/claude/gracious-meitner-vp49xe
   as branch vm/G2-INT, run the full suite with pytest (no PYTHONPATH; an editable install leaves ga_sdk.egg-info that breaks
   judge tests under PYTHONPATH), push, and give the user a deploy block like ops/vm/DEPLOY_R1_INT.md (fetch, checkout -B
