@@ -138,5 +138,29 @@
   "user_words": "새 세션은 깊이 5까지는 자동으로 가능하다고 아는데, 5까지는 자동으로 생성해주고, 그. 이후로는 나에게 알람을 보내줘.",
   "meaning": "when the top's context passes ~150k, the top writes its successor note (ops/hub/roles/BASELINE_TOP.md) and creates the successor top itself with create_session while the successor's lineage depth would be <= 5; when it would be deeper than 5, the top does not create one and alerts the user (push notification + STATUS.md) to open a new top (depth 0).",
   "max_auto_depth": 5
+ },
+ "spec_split": {
+  "at": "2026-10-07 12:3x KST",
+  "in": "top baseline session_019388b1XGeFcqrYiks8S8SY",
+  "user_words": [
+   "ladder 말고, baseline(claude)에서 지시를 하잖아. 그 때, claude에서 짧은 판단 및 어려운 테스크는 설계는 성능 좋은 모델로 스펙만 작성하고, 나머지 스펙을 받고 일하는 노드(세션)들은 낮은 모델로 돌리게 주는 건 어때?",
+   "맞아 baseline 도 VM이 자신 스스로를 고칠 수 있는 기능이 생기면 baseline에서도 스펙만 보내서 토큰을 아껴야해."
+  ],
+  "meaning": "baseline (strong model) does short judgments, design, specs and acceptance tests only; VM worker nodes implement on a cheap model chosen per directive ('model'). On unmet: first enrich the spec and resend on the same model; only after a second unmet with evidence does baseline move that one directive to a stronger model. Once the VM can change its own code end to end, baseline sends specs only and keeps its own verification to reading reports (no local reimplementation).",
+  "default_worker_models": [
+   "gemini-3.7-flash-low",
+   "gemini-3.7-flash-medium",
+   "gpt-oss-120b-medium"
+  ],
+  "spec_must_carry": [
+   "files to edit",
+   "function signatures",
+   "formulas / rules",
+   "wire-form fields",
+   "the acceptance test (baseline's, not editable)",
+   "'do not explore'"
+  ],
+  "supersedes": "VI-08 automatic ladder: held; §13 Q3 values not needed while this holds",
+  "change": "only the user, by their own words to the top baseline hub"
  }
 }
