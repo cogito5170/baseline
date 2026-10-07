@@ -50,13 +50,22 @@ ITEMS = [
 ]
 
 
-def info(it):
+def info(it):  # noqa: D401
     """What baseline knows about one item; ops/flow/mailform.py sorts it into the VM form."""
     return {"id": it["id"], "rev": REV, "title": it["title"], "goal": it["goal"], "why": WHY, "files": it["files"],
             "tests": HERE / "tests" / it["test"], "guards": it["guards"], "deselect": it["deselect"], "model": MODEL,
-            "base": BASE, "repo": "ga-sdk",
-            "changes": "same spec and test; model gemini-3.1-pro-high per policy spec_split.strong_vm_worker_1007; "
-                       "rev 1 on gemini-3.7-flash-medium hit the turn cap with no change"}
+            "base": BASE, "repo": "ga-sdk", **NEXT.get(it["id"], {})}
+
+
+# later revisions: what changed, from the VM's own report (prose only)
+NEXT = {
+    "CMD-ACTB1": {"rev": 3, "changes": (
+        "rev 2 (gemini-3.1-pro-high) got B1, B2 and the 4000-character cap right; 5 of 6 tests passed. Only "
+        "test_trace_becomes_a_turns_section failed: rev 2 wrote each trace row as a JSON object. B3 wants each row "
+        "rendered as one text line in the form shown in the test docstring (t, turn number, card tokens, applied, "
+        "rejected, then a colon and the actions joined by semicolon-space, then ' dropped' and the count when the "
+        "dropped list is not empty). Same spec and test; start again from the base.")},
+}
 
 
 if __name__ == "__main__":
