@@ -131,5 +131,12 @@
   "user_words": "이전 베이스 라인과 모든 ops dev hub 등 모든 세션을 중지한다. baseline오직 지시만. 나머지는 VM에서 전부 해결한다.",
   "meaning": "the cloud keeps only the top baseline; it gives instructions (to the VM via ga-mailbox) and reports to the user. Dev/Ops hubs, workers, integrators and the watcher are stopped; their work moves to the VM.",
   "done": "archived 016tT1vv, 013aqrQG, 01TBHcmu, 01CnLoJD, 015U1Lfq, 01FynfJT; routines trig_01GcyujoR3, trig_01EFFxRB disabled (trig_0148AQEj, trig_012F2ySD, trig_01JUyE96 already off). No enabled routines remain."
+ },
+ "top_succession": {
+  "at": "2026-10-07 11:4x KST",
+  "in": "top baseline session_01KvzrDZZJDxYhbkb9Yb8LKs",
+  "user_words": "새 세션은 깊이 5까지는 자동으로 가능하다고 아는데, 5까지는 자동으로 생성해주고, 그. 이후로는 나에게 알람을 보내줘.",
+  "meaning": "when the top's context passes ~150k, the top writes its successor note (ops/hub/roles/BASELINE_TOP.md) and creates the successor top itself with create_session while the successor's lineage depth would be <= 5; when it would be deeper than 5, the top does not create one and alerts the user (push notification + STATUS.md) to open a new top (depth 0).",
+  "max_auto_depth": 5
  }
 }

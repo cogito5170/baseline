@@ -9,7 +9,13 @@ the watcher or integrators send successor_needed — create from their prompt in
 swap ids in ops/flow/assign.json, tell the affected sessions, archive the old one.
 Start: get_session (your id); send the previous top session_01KvzrDZZJDxYhbkb9Yb8LKs {"flow":"ack","role":"baseline","session":"<id>"};
 update assign.json baseline.hub; tell Dev (dev.hub) and Ops (ops.hub) "baseline is now <id>". Then continue from STATE below.
-Keep your own context small: no history replay; at ~150k write your successor note here and ask the user in one line.
+Keep your own context small: no history replay. At ~150k (check get_session context_usage after each user request):
+write your successor note here (STATE below), then per policy.json top_succession (user 10-07 11:4x): if your lineage depth
+is < 5, create the successor yourself with create_session (repo cogito5170/baseline, revision claude/gracious-meitner-vp49xe,
+prompt = the line below, title 'baseline ● top (<time>) [replaces <your id>]', tags role:baseline, replaces:<your id>) and
+tell the user in one line; if your depth is >= 5, do not create one: send the user a push notification (PushNotification)
+and a STATUS.md line asking them to open a new top (depth 0). Successor first message:
+  ops/hub/roles/BASELINE_TOP.md 를 읽고 그대로 시작해. 현재 상황은 STATUS.md.
 
 STATE (written by top session_01KvzrDZZJDxYhbkb9Yb8LKs at 10-07 11:4x KST, ctx 509k — past the 150k rule; user asked):
 - READ FIRST: STATUS.md section "00" (newest lines first-ish; 04:5x onward) = everything since 04:5x.
