@@ -66,6 +66,10 @@ def directive(it):
             "done_when": [{"id": "D1", "text": "ga act ends done: tests/" + it["test"] + " and the guard tests pass; "
                                                "the report carries the pushed agv commit"}],
             "budget": {"claude_p_runs": 0}, "model": MODEL}
+    if REV > 1:  # directive/2: rev > 1 must say what changed (METHOD rev 16 3.6)
+        head["changes"] = [{"item": "D1", "op": "edit", "text": head["done_when"][0]["text"] + " (rev 2: same spec and "
+                            "test; model gemini-3.1-pro-high per policy spec_split.strong_vm_worker_1007; rev 1 on "
+                            "gemini-3.7-flash-medium hit the turn cap with no change)"}]
     spec = {"item": {"id": it["id"], "goal": it["goal"], "files": it["files"], "done_when": "test"},
             "tests": {f"tests/{it['test']}": (HERE / "tests" / it["test"]).read_text(encoding="utf-8")},
             "commands": {"commands": {"test": pytest_cmd(it)}, "timeout_s": 900}, "base": BASE, "repo": "ga-sdk"}
