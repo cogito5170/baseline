@@ -1,28 +1,24 @@
 """ACT-1 (user 10-07 17:3x "ga act 고치는 것부터 진행해"): ga act fixes as prose specs under policy
 spec_split.no_code_from_baseline — goal = WHAT + rules + file/function names, plus baseline's acceptance test.
-No edit lists, no code, no reference implementation. Every mail passes ops/flow/nocode.py before it is written.
+No edit lists, no code, no reference implementation. Mails are built by ops/flow/mailform.py (VM form + nocode).
 
     python3 make_mail.py <mailbox worktree> [ID ...]     (default: both; they are independent)
 
 CMD-ACTR1  kept reads, outline for long files, per-turn trace in act/1      ga/act/loop.py, ga/act/retrieve.py, ga/act/card.py
 CMD-ACTB1  per-directive max_turns (1-30, default 20), ## turns in report  ga/bridge/act.py
 """
-import json
-import re
 import sys
-from datetime import datetime, UTC
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
-import nocode  # noqa: E402
+import mailform  # noqa: E402
 
 MODEL = "gemini-3.1-pro-high"  # rev 2: policy spec_split.strong_vm_worker_1007 (rev 1 flash: both unmet, 10 turns)
 REV = 2
 BASE = "vm/G4-INT"  # ga-sdk c6f3f97 (ISO-1 + group 4)
 WHY = ("user 10-07 17:1x-17:3x: baseline sends no code (policy spec_split.no_code_from_baseline); first fix ga act so "
        "a cheap model can work inside large files and failures are visible. The acceptance test may not be edited.")
-ID_RE = re.compile(r"^CMD-[A-Z]+\d+$")
 HOW = (" Read what you need with NEED (symbol / file lines a-b / grep), then edit. Edit only the listed files; do not "
        "edit any test. Keep every existing test green.")
 
@@ -54,47 +50,20 @@ ITEMS = [
 ]
 
 
-def pytest_cmd(it):
-    return ["{python}", "-m", "pytest", "-q", "-p", "no:cacheprovider", f"tests/{it['test']}", *it["guards"],
-            *[x for d in it["deselect"] for x in ("--deselect", d)]]
-
-
-def directive(it):
-    head = {"schema": "directive/2", "id": it["id"], "rev": REV, "to": "AGY", "after": [],
-            "goal": f"{it['title']}: {it['goal']}"[:1800], "why": WHY,
-            "scope": [{"id": "S1", "text": "only " + ", ".join(it["files"]) + " in a ga-sdk worktree; the tests are baseline's"}],
-            "done_when": [{"id": "D1", "text": "ga act ends done: tests/" + it["test"] + " and the guard tests pass; "
-                                               "the report carries the pushed agv commit"}],
-            "budget": {"claude_p_runs": 0}, "model": MODEL}
-    if REV > 1:  # directive/2: rev > 1 must say what changed (METHOD rev 16 3.6)
-        head["changes"] = [{"item": "D1", "op": "edit", "text": head["done_when"][0]["text"] + " (rev 2: same spec and "
-                            "test; model gemini-3.1-pro-high per policy spec_split.strong_vm_worker_1007; rev 1 on "
-                            "gemini-3.7-flash-medium hit the turn cap with no change)"}]
-    spec = {"item": {"id": it["id"], "goal": it["goal"], "files": it["files"], "done_when": "test"},
-            "tests": {f"tests/{it['test']}": (HERE / "tests" / it["test"]).read_text(encoding="utf-8")},
-            "commands": {"commands": {"test": pytest_cmd(it)}, "timeout_s": 900}, "base": BASE, "repo": "ga-sdk"}
-    return head, "```ga\n" + json.dumps(head, ensure_ascii=False) + "\n```\n\n```ga-act\n" + json.dumps(spec, ensure_ascii=False) + "\n```\n"
-
-
-def check(it, head, text):
-    assert ID_RE.match(it["id"]), it["id"]
-    if Path("/home/user/ga-sdk/ga/forms.py").exists() or Path("/home/user/ga-sdk/ga/forms").exists():
-        sys.path.insert(0, "/home/user/ga-sdk")
-        from ga.forms import hard, parse_text, validate
-        parsed, _ = parse_text(text)
-        assert parsed == head, it["id"]
-        assert hard(validate(parsed)) == [], it["id"]
-    else:  # no ga-sdk clone in this container: the head must still round-trip as JSON
-        assert json.loads(text.split("```ga\n", 1)[1].split("\n```", 1)[0]) == head, it["id"]
-    nocode.check_mail(text)
+def info(it):
+    """What baseline knows about one item; ops/flow/mailform.py sorts it into the VM form."""
+    return {"id": it["id"], "rev": REV, "title": it["title"], "goal": it["goal"], "why": WHY, "files": it["files"],
+            "tests": HERE / "tests" / it["test"], "guards": it["guards"], "deselect": it["deselect"], "model": MODEL,
+            "base": BASE, "repo": "ga-sdk",
+            "changes": "same spec and test; model gemini-3.1-pro-high per policy spec_split.strong_vm_worker_1007; "
+                       "rev 1 on gemini-3.7-flash-medium hit the turn cap with no change"}
 
 
 if __name__ == "__main__":
     box, want = Path(sys.argv[1]), sys.argv[2:] or [x["id"] for x in ITEMS]
     for it in ITEMS:
         if it["id"] in want:
-            head, text = directive(it)
-            check(it, head, text)
-            ts = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%fZ")
-            (box / "to" / "AGY" / f"{ts}-baseline-{it['id']}.md").write_text(text, encoding="utf-8")
-            print(f"{ts}-baseline-{it['id']}.md")
+            text, head, notes = mailform.build(info(it))
+            for n in notes:
+                print(f"  {it['id']}: {n}", file=sys.stderr)
+            print(mailform.write(box, text, head).name)
