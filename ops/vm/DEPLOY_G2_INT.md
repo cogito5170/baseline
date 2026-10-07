@@ -9,20 +9,24 @@
 - 시험 (클라우드, 10-07 12:1x KST, pytest): 전체 1452 passed / 56 skipped / 실패 0 (그룹 1 1431 + 그룹 2 21). 의존성 핀 변경 없음.
 - `ga/watch.py`는 아직 어떤 서비스·타이머에도 연결되지 않음 (그룹 3 이후).
 
-## VM에서
+## VM에서 (맥 터미널이 아니라 VM에 ssh로 접속한 뒤)
+
+10-07 12:2x 첫 시도는 맥 터미널에서 실행되어 아무것도 바뀌지 않음(맥에는 ~/ga-sdk·systemctl 없음; zsh는 줄 끝 `#` 설명을 주석으로 읽지 않음). 아래 블록은 설명 없이, 앞 단계가 실패하면 멈추게 되어 있다.
 
 ```bash
-cd ~/ga-sdk
-git status --short                                    # 출력이 없어야 함 (있으면 멈추고 알려 주세요)
-git branch -f vm/deployed-before-g2int HEAD           # 지금 상태 보관 (19dc227 이어야 함)
-git fetch origin vm/G2-INT
-git checkout -B claude/gracious-meitner-vp49xe origin/vm/G2-INT
-git log -1 --oneline                                  # 0547772 Merge ... agv/CMD-VI5-r2 ...
-~/ga-venv/bin/python -m pytest -q -p no:cacheprovider tests/test_vi03_sites.py tests/test_vi05_watch.py tests/test_vi06_registry.py tests/test_vi07_status.py tests/test_forms.py tests/test_r1_gateway.py tests/test_vm_bridge_act.py 2>&1 | tail -3
-git push origin HEAD:claude/gracious-meitner-vp49xe   # ff. 거부되면 건너뛰고 알려 주세요
-systemctl --user restart ga-bridge ga-console
-systemctl --user status ga-bridge --no-pager | head -3
+cd ~/ga-sdk && test -z "$(git status --short)" && git log -1 --oneline \
+ && git branch -f vm/deployed-before-g2int HEAD \
+ && git fetch origin vm/G2-INT \
+ && git checkout -B claude/gracious-meitner-vp49xe origin/vm/G2-INT \
+ && git log -1 --oneline \
+ && ~/ga-venv/bin/python -m pytest -q -p no:cacheprovider tests/test_vi03_sites.py tests/test_vi05_watch.py tests/test_vi06_registry.py tests/test_vi07_status.py tests/test_forms.py tests/test_r1_gateway.py tests/test_vm_bridge_act.py \
+ && git push origin HEAD:claude/gracious-meitner-vp49xe \
+ && systemctl --user restart ga-bridge ga-console \
+ && systemctl --user status ga-bridge --no-pager | head -3 \
+ || echo "STOPPED: 위 마지막 출력을 붙여 주세요"
 ```
+
+기대: 첫 `git log`는 `19dc227`, 두 번째는 `0547772`, pytest는 실패 0.
 
 되돌리기: `git checkout -B claude/gracious-meitner-vp49xe vm/deployed-before-g2int && systemctl --user restart ga-bridge ga-console`
 
