@@ -37,10 +37,6 @@ def test_vm7():
     assert len(report_blocks) == 1, f"Expected exactly 1 report/2 block, got {len(report_blocks)}"
     assert "agy printed no valid report/2" not in reply, "Should not fallback"
 
-if __name__ == "__main__":
-    test_vm8()
-    test_vm7()
-    print("Parser tests passed!")
 
 import unittest.mock as mock
 
@@ -59,14 +55,19 @@ def test_vm8_repair_success():
     # first call is normal agy (returns vm8_out without report)
     # second call is repair agy (returns a valid report/2)
     process1 = mock.MagicMock()
-    process1.communicate.return_value = (vm8_out, "")
+    process1.communicate.return_value = (json.dumps({"response": vm8_out, "status": "SUCCESS", "usage": {}}), "")
     process1.returncode = 0
     
     process2 = mock.MagicMock()
-    valid_report = '''{
-  "response": "```ga\n{\n  \"schema\": \"report/2\",\n  \"from\": \"VM_LOCAL\",\n  \"handled\": [{\"id\": \"CMD-VM8\", \"rev_seen\": 1, \"status\": \"done\"}],\n  \"items\": [{\"id\": \"D1\", \"state\": \"met\", \"evidence\": \"ev\"}]\n}\n```",
-  "status": "SUCCESS"
-}'''
+    report_content = """```ga
+{
+  "schema": "report/2",
+  "from": "VM_LOCAL",
+  "handled": [{"id": "CMD-VM8", "rev_seen": 1, "status": "done"}],
+  "items": [{"id": "D1", "state": "met", "evidence": "ev"}]
+}
+```"""
+    valid_report = json.dumps({"response": report_content, "status": "SUCCESS", "usage": {}})
     process2.communicate.return_value = (valid_report, "")
     process2.returncode = 0
     
@@ -108,7 +109,7 @@ def test_vm8_repair_fail():
     
     popen_mock = mock.MagicMock()
     process1 = mock.MagicMock()
-    process1.communicate.return_value = (vm8_out, "")
+    process1.communicate.return_value = (json.dumps({"response": vm8_out, "status": "SUCCESS", "usage": {}}), "")
     process1.returncode = 0
     
     process2 = mock.MagicMock()
@@ -169,6 +170,16 @@ def test_read_only_prompt():
          assert "D1" in prompt_text
          assert "met" in prompt_text
 
+
+if __name__ == "__main__":
+    print("Running test_vm8...")
+    test_vm8()
+    print("Running test_vm7...")
+    test_vm7()
+    print("Running test_vm8_repair_success...")
     test_vm8_repair_success()
+    print("Running test_vm8_repair_fail...")
     test_vm8_repair_fail()
+    print("Running test_read_only_prompt...")
     test_read_only_prompt()
+    print("Parser tests passed!")
