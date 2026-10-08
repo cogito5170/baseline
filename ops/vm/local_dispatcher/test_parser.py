@@ -89,7 +89,7 @@ def test_vm8_repair_success():
          assert popen_mock.call_count == 2
          repair_cmd = popen_mock.call_args_list[1][0][0]
          assert "--model" in repair_cmd
-         assert "gemini-3.8-flash-low" in repair_cmd
+         assert "gemini-3.1-pro-high" in repair_cmd
          assert "--conversation" not in repair_cmd
          
          comment_body = comment_mock.call_args[0][1]
@@ -183,3 +183,133 @@ if __name__ == "__main__":
     print("Running test_read_only_prompt...")
     test_read_only_prompt()
     print("Parser tests passed!")
+
+def test_model_choice():
+    import dispatcher
+    # Test directive model choice
+    directive1 = {"id": "CMD-M1", "rev": 1}
+    with mock.patch("dispatcher.get_available_models", return_value={"gemini-3.1-pro-high", "claude-opus-5-5-high", "custom-model"}):
+        popen_mock = mock.MagicMock()
+        process1 = mock.MagicMock()
+        process1.communicate.return_value = ('{"response": "```ga\\n{\\"schema\\": \\"report/2\\"}\\n```", "status": "SUCCESS"}', "")
+        process1.returncode = 0
+        popen_mock.return_value = process1
+        run_mock = mock.MagicMock()
+        run_mock.return_value.returncode = 0
+        run_mock.return_value.stdout = ""
+        
+        with mock.patch("dispatcher.subprocess.Popen", popen_mock), \
+             mock.patch("dispatcher.subprocess.run", run_mock):
+            dispatcher.worker_task(1, directive1, "CMD-M1_1")
+            cmd = popen_mock.call_args[0][0]
+            assert cmd[cmd.index("--model") + 1] == "gemini-3.1-pro-high"
+            
+    directive2 = {"id": "CMD-M2", "rev": 1, "model": "custom-model"}
+    with mock.patch("dispatcher.get_available_models", return_value={"gemini-3.1-pro-high", "claude-opus-5-5-high", "custom-model"}):
+        popen_mock = mock.MagicMock()
+        popen_mock.return_value = process1
+        with mock.patch("dispatcher.subprocess.Popen", popen_mock), \
+             mock.patch("dispatcher.subprocess.run", run_mock):
+            dispatcher.worker_task(2, directive2, "CMD-M2_1")
+            cmd = popen_mock.call_args[0][0]
+            assert cmd[cmd.index("--model") + 1] == "custom-model"
+            
+    directive3 = {"id": "CMD-M3", "rev": 1, "model": "fake-model"}
+    with mock.patch("dispatcher.get_available_models", return_value={"gemini-3.1-pro-high", "claude-opus-5-5-high", "custom-model"}):
+        popen_mock = mock.MagicMock()
+        popen_mock.return_value = process1
+        with mock.patch("dispatcher.subprocess.Popen", popen_mock), \
+             mock.patch("dispatcher.subprocess.run", run_mock):
+            dispatcher.worker_task(3, directive3, "CMD-M3_1")
+            cmd = popen_mock.call_args[0][0]
+            assert cmd[cmd.index("--model") + 1] == "gemini-3.1-pro-high"
+
+def test_fallback_on_quota():
+    import dispatcher
+    directive = {"id": "CMD-F1", "rev": 1, "model": "gemini-3.1-pro-high"}
+    
+    popen_mock = mock.MagicMock()
+    process1 = mock.MagicMock()
+    process1.communicate.return_value = ('{"response": "failed: RESOURCE_EXHAUSTED", "status": "ERROR"}', "")
+    process1.returncode = 1
+    
+    process2 = mock.MagicMock()
+    report = """```ga\n{"schema": "report/2", "from": "VM_LOCAL", "handled": [{"id": "CMD-F1", "rev_seen": 1, "status": "done"}]}\n```"""
+    process2.communicate.return_value = (json.dumps({"response": report, "status": "SUCCESS"}), "")
+    process2.returncode = 0
+    
+    popen_mock.side_effect = [process1, process2]
+    run_mock = mock.MagicMock()
+    run_mock.return_value.returncode = 0
+    run_mock.return_value.stdout = ""
+    
+    with mock.patch("dispatcher.subprocess.Popen", popen_mock), \
+         mock.patch("dispatcher.subprocess.run", run_mock), \
+         mock.patch("dispatcher.gh_issue_comment") as comment_mock, \
+         mock.patch("dispatcher.gh_issue_edit"), \
+         mock.patch("dispatcher.get_available_models", return_value={"gemini-3.1-pro-high"}):
+         
+         dispatcher.worker_task(1, directive, "CMD-F1_1")
+         
+         assert popen_mock.call_count == 2
+         cmd1 = popen_mock.call_args_list[0][0][0]
+         cmd2 = popen_mock.call_args_list[1][0][0]
+         assert cmd1[cmd1.index("--model") + 1] == "gemini-3.1-pro-high"
+         assert cmd2[cmd2.index("--model") + 1] == "claude-opus-5-5-high"
+         
+         comment_body = comment_mock.call_args[0][1]
+         assert "fallback" in comment_body.lower()
+         assert "gemini-3.1-pro-high failed with quota error" in comment_body
+
+def test_fallback_reask():
+    import dispatcher
+    directive = {"id": "CMD-F2", "rev": 1, "model": "gemini-3.8-flash-low"}
+    
+    popen_mock = mock.MagicMock()
+    process1 = mock.MagicMock()
+    process1.communicate.return_value = ('{"response": "some output", "status": "SUCCESS"}', "")
+    process1.returncode = 0
+    
+    process2 = mock.MagicMock()
+    process2.communicate.return_value = ('{"response": "quota limit", "status": "HTTP 429"}', "")
+    process2.returncode = 1
+    
+    process3 = mock.MagicMock()
+    report = """```ga\n{"schema": "report/2", "from": "VM_LOCAL", "handled": [{"id": "CMD-F2", "rev_seen": 1, "status": "done"}]}\n```"""
+    process3.communicate.return_value = (json.dumps({"response": report, "status": "SUCCESS"}), "")
+    process3.returncode = 0
+    
+    popen_mock.side_effect = [process1, process2, process3]
+    run_mock = mock.MagicMock()
+    run_mock.return_value.returncode = 0
+    run_mock.return_value.stdout = ""
+    
+    with mock.patch("dispatcher.subprocess.Popen", popen_mock), \
+         mock.patch("dispatcher.subprocess.run", run_mock), \
+         mock.patch("dispatcher.gh_issue_comment") as comment_mock, \
+         mock.patch("dispatcher.gh_issue_edit"), \
+         mock.patch("dispatcher.get_available_models", return_value={"gemini-3.8-flash-low"}):
+         
+         dispatcher.worker_task(2, directive, "CMD-F2_1")
+         
+         assert popen_mock.call_count == 3
+         cmd1 = popen_mock.call_args_list[0][0][0]
+         cmd2 = popen_mock.call_args_list[1][0][0]
+         cmd3 = popen_mock.call_args_list[2][0][0]
+         
+         assert cmd1[cmd1.index("--model") + 1] == "gemini-3.8-flash-low"
+         assert cmd2[cmd2.index("--model") + 1] == "gemini-3.8-flash-low"
+         assert cmd3[cmd3.index("--model") + 1] == "claude-sonnet-5-5-low"
+         
+         comment_body = comment_mock.call_args[0][1]
+         assert "fallback" in comment_body.lower()
+         assert "gemini-3.8-flash-low failed with quota error" in comment_body
+
+if __name__ == "__main__":
+    print("Running test_model_choice...")
+    test_model_choice()
+    print("Running test_fallback_on_quota...")
+    test_fallback_on_quota()
+    print("Running test_fallback_reask...")
+    test_fallback_reask()
+    print("New tests passed!")

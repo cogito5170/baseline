@@ -215,6 +215,42 @@ def find_new_work(handled_record, active_keys):
                 
     return new_work
 
+
+_AVAILABLE_MODELS = None
+def get_available_models():
+    global _AVAILABLE_MODELS
+    if _AVAILABLE_MODELS is None:
+        if DRY_RUN:
+            return {"gemini-3.8-flash-low", "gemini-3.1-pro-high", "claude-opus-5-5-high", "claude-sonnet-5-5-low"}
+        try:
+            import subprocess
+            res = subprocess.run(["/home/ubuntu/.local/bin/agy", "models"], capture_output=True, text=True)
+            models = set()
+            for line in res.stdout.replace('\r', '\n').split('\n'):
+                if not line.startswith('Fetching') and line.strip():
+                    models.add(line.split()[0])
+            _AVAILABLE_MODELS = models
+        except Exception:
+            _AVAILABLE_MODELS = set()
+    return _AVAILABLE_MODELS
+
+def get_fallback_model(model):
+    if model == "gemini-3.1-pro-high": return "claude-opus-5-5-high"
+    if model == "claude-opus-5-5-high": return "gemini-3.1-pro-high"
+    if model == "gemini-3.8-flash-low": return "claude-sonnet-5-5-low"
+    if model == "claude-sonnet-5-5-low": return "gemini-3.8-flash-low"
+    
+    tier = model.split("-")[-1] if "-" in model else "low"
+    if "gemini-3.1-pro" in model: return f"claude-opus-5-5-{tier}"
+    if "claude-opus" in model: return f"gemini-3.1-pro-{tier}"
+    if "gemini" in model: return f"claude-sonnet-5-5-{tier}"
+    if "claude-sonnet" in model: return f"gemini-3.8-flash-{tier}"
+    return None
+
+def is_quota_error(text):
+    if not text: return False
+    return any(k in text for k in ["RESOURCE_EXHAUSTED", "HTTP 429", "quota"])
+
 def is_read_only(scope):
     if isinstance(scope, list) and len(scope) > 0 and isinstance(scope[0], dict):
         text = scope[0].get("text", "")
@@ -223,7 +259,7 @@ def is_read_only(scope):
         return scope.lower().startswith("read only")
     return False
 
-def write_fallback_reply(d_id, rev, reply_status, reason, done_whens, details, model=None, tokens_in=None, tokens_out=None, cached_tokens=None, turns=None, seconds=None):
+def write_fallback_reply(d_id, rev, reply_status, reason, done_whens, details, model=None, tokens_in=None, tokens_out=None, cached_tokens=None, turns=None, seconds=None, fallback_msg=None):
     ga_block = {
         "schema": "report/2",
         "from": "VM_LOCAL",
@@ -239,10 +275,12 @@ def write_fallback_reply(d_id, rev, reply_status, reason, done_whens, details, m
         ],
         "blockers": [{"kind": "other", "what": reason}]
     }
+    if fallback_msg:
+        ga_block["results"].append({"name": "fallback", "value": fallback_msg})
     content = f"```ga\n{json.dumps(ga_block, indent=2)}\n```\n## Details\n{details}\n"
     return content
 
-def prepare_reply(d_id, rev, stdout, done_whens, model, tokens_in, tokens_out, cached_tokens, turns, seconds, raw_stdout):
+def prepare_reply(d_id, rev, stdout, done_whens, model, tokens_in, tokens_out, cached_tokens, turns, seconds, raw_stdout, fallback_msg=None):
     blocks = extract_ga_blocks(stdout, "OWNER")
     valid_data = None
     for b in blocks:
@@ -252,7 +290,7 @@ def prepare_reply(d_id, rev, stdout, done_whens, model, tokens_in, tokens_out, c
             
     if not valid_data:
         details_content = f"agy printed no valid report/2\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
-        return write_fallback_reply(d_id, rev, "declined", "agy printed no valid report/2", done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, seconds)
+        return write_fallback_reply(d_id, rev, "declined", "agy printed no valid report/2", done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, seconds, fallback_msg)
 
     valid_data["from"] = "VM_LOCAL"
     results = valid_data.get("results", [])
@@ -269,6 +307,8 @@ def prepare_reply(d_id, rev, stdout, done_whens, model, tokens_in, tokens_out, c
         {"name": "turns", "value": turns},
         {"name": "seconds", "value": seconds}
     ])
+    if fallback_msg:
+        new_results.append({"name": "fallback", "value": fallback_msg})
     valid_data["results"] = new_results
     
     return f"```ga\n{json.dumps(valid_data, indent=2)}\n```\n" 
@@ -389,7 +429,7 @@ def worker_task(number, directive, key):
                 print(f"DRY RUN: Mailcheck output:\n{val_res.stdout}\n{val_res.stderr}")
                 update_record(key, {"status": "done"})
             else:
-                usage_comment = {"schema": "usage/1", "id": d_id, "rev": rev, "from": "VM_LOCAL", "conversation_id": "none", "input_tokens": 0, "output_tokens": 0, "cached_tokens": 0, "turns": 0, "seconds": 0}
+                usage_comment = {"schema": "usage/1", "id": d_id, "rev": rev, "from": "VM_LOCAL", "conversation_id": "none", "model": "none", "input_tokens": 0, "output_tokens": 0, "cached_tokens": 0, "turns": 0, "seconds": 0}
                 reply_content += f"\n```ga\n{json.dumps(usage_comment)}\n```\n"
                 gh_issue_comment(number, reply_content)
                 logging.info(f"event: report posted for {d_id} rev {rev}")
@@ -468,7 +508,12 @@ No markdown or text should appear after the ```ga block."""
         else:
             context = f"{vm_state_text}\n\n{instruction_text}\n\n---\n\n{notes_text}\n---\n\n{extra_rules}\n{handoff_text}\n```ga\n{json.dumps(directive, indent=2)}\n```"
             
-        model = "gemini-3.8-flash-low" if is_ro else "gemini-3.1-pro-high"
+        default_model = "gemini-3.8-flash-low" if is_ro else "gemini-3.1-pro-high"
+        d_model = directive.get("model")
+        if d_model and d_model in get_available_models():
+            model = d_model
+        else:
+            model = default_model
         
         cmd = ["/home/ubuntu/auto-agy-p.exp", "-p", context, "--model", model, "--output-format", "json", "--dangerously-skip-permissions"]
         if is_ro:
@@ -521,8 +566,21 @@ No markdown or text should appear after the ```ga block."""
             return parsed_stdout, t_in, t_out, c_tokens, turns_c, secs_c, st, c_id, denied
             
         stdout_text_parsed, tokens_in, tokens_out, cached_tokens, turns, secs, status, conv_id, denied_actions = parse_agy_output(stdout_text)
-        
         raw_stdout = stdout_text
+        
+        fallback_msg = None
+        
+        if status != "SUCCESS" and is_quota_error(raw_stdout):
+            fallback_m = get_fallback_model(model)
+            if fallback_m:
+                logging.info(f"event: agy run quota error on {model}, falling back to {fallback_m}")
+                fallback_msg = f"{model} failed with quota error"
+                model = fallback_m
+                cmd = cmd.copy(); cmd[cmd.index("--model") + 1] = model
+                stdout_text, retcode = run_agy(cmd)
+                stdout_text_parsed, tokens_in, tokens_out, cached_tokens, turns, secs, status, conv_id, denied_actions = parse_agy_output(stdout_text)
+                raw_stdout = stdout_text
+        
         logging.info(f"event: agy exit (status={status}, seconds={secs}, tokens_in={tokens_in}, tokens_out={tokens_out})")
         
         def has_valid_report(text):
@@ -554,9 +612,21 @@ Shape:
 `status` must be "done" or "declined".
 `items` must contain exactly the `done_when` ids requested (e.g. {items_ids_str}), with their state ("met", "unmet", "na") and text evidence."""
             reask_prompt = f"Please extract the evidence from the output below and format it into a report/2 block. Return ONLY the JSON block.\n\n{repair_shape}\n\nHere is the output:\n{stdout_text_parsed[-4000:]}"
-            reask_cmd = ["/home/ubuntu/auto-agy-p.exp", "-p", reask_prompt, "--model", "gemini-3.8-flash-low", "--effort", "low", "--output-format", "json", "--dangerously-skip-permissions"]
+            reask_model = model
+            reask_cmd = ["/home/ubuntu/auto-agy-p.exp", "-p", reask_prompt, "--model", reask_model, "--effort", "low", "--output-format", "json", "--dangerously-skip-permissions"]
             stdout_text2, retcode2 = run_agy(reask_cmd)
             stdout_text_parsed2, t_in2, t_out2, c_tokens2, turns2, secs2, status2, conv_id2, denied2 = parse_agy_output(stdout_text2)
+            
+            if status2 != "SUCCESS" and is_quota_error(stdout_text2):
+                fb_reask_m = get_fallback_model(reask_model)
+                if fb_reask_m:
+                    logging.info(f"event: agy re-ask quota error on {reask_model}, falling back to {fb_reask_m}")
+                    if not fallback_msg:
+                        fallback_msg = f"{reask_model} failed with quota error"
+                    reask_model = fb_reask_m
+                    reask_cmd = reask_cmd.copy(); reask_cmd[reask_cmd.index("--model") + 1] = reask_model
+                    stdout_text2, retcode2 = run_agy(reask_cmd)
+                    stdout_text_parsed2, t_in2, t_out2, c_tokens2, turns2, secs2, status2, conv_id2, denied2 = parse_agy_output(stdout_text2)
             
             raw_stdout += "\n--- RE-ASK ---\n" + stdout_text2
             stdout_text_parsed += "\n\n" + stdout_text_parsed2
@@ -587,16 +657,16 @@ Shape:
             if denied_actions: reason = f"agy denied actions: {denied_actions}"
                 
             details_content = f"status: {status}\nexit code: {retcode}\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
-            reply_content = write_fallback_reply(d_id, rev, "declined", reason, done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, secs)
+            reply_content = write_fallback_reply(d_id, rev, "declined", reason, done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, secs, fallback_msg)
         elif retcode != 0 and retcode != 124:
             details_content = f"crashed with exit code {retcode}\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
-            reply_content = write_fallback_reply(d_id, rev, "declined", "crashed", done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, secs)
+            reply_content = write_fallback_reply(d_id, rev, "declined", "crashed", done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, secs, fallback_msg)
         elif retcode == 124:
             details_content = f"timed out\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
-            reply_content = write_fallback_reply(d_id, rev, "declined", "timed out", done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, secs)
+            reply_content = write_fallback_reply(d_id, rev, "declined", "timed out", done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, secs, fallback_msg)
         else:
             if DRY_RUN: print(f"DEBUG: stdout_text is {repr(stdout_text)}")
-            reply_content = prepare_reply(d_id, rev, stdout_text, done_whens, model, tokens_in, tokens_out, cached_tokens, turns, secs, raw_stdout)
+            reply_content = prepare_reply(d_id, rev, stdout_text, done_whens, model, tokens_in, tokens_out, cached_tokens, turns, secs, raw_stdout, fallback_msg)
             
         # check mailcheck
         tmp_reply = f"/tmp/reply_{d_id}.md"
@@ -604,7 +674,7 @@ Shape:
         val_res = subprocess.run(["python3", "/tmp/mailcheck.py", "--report", tmp_reply], capture_output=True, text=True)
         if val_res.returncode != 0 and not DRY_RUN:
             details = f"mailcheck failed: {val_res.stdout}\nRaw reply:\n{reply_content}"
-            reply_content = write_fallback_reply(d_id, rev, "declined", "mailcheck failed", done_whens, details, model, tokens_in, tokens_out, cached_tokens, turns, secs)
+            reply_content = write_fallback_reply(d_id, rev, "declined", "mailcheck failed", done_whens, details, model, tokens_in, tokens_out, cached_tokens, turns, secs, fallback_msg)
             with open(tmp_reply, "w") as f: f.write(reply_content)
             
         if DRY_RUN:
@@ -612,7 +682,9 @@ Shape:
             print(f"DRY RUN: Mailcheck output:\n{val_res.stdout}\n{val_res.stderr}")
             update_record(key, {"status": "done"})
         else:
-            usage_comment = {"schema": "usage/1", "id": d_id, "rev": rev, "from": "VM_LOCAL", "conversation_id": conv_id, "input_tokens": tokens_in, "output_tokens": tokens_out, "cached_tokens": cached_tokens, "turns": turns, "seconds": secs}
+            usage_comment = {"schema": "usage/1", "id": d_id, "rev": rev, "from": "VM_LOCAL", "conversation_id": conv_id, "model": model, "input_tokens": tokens_in, "output_tokens": tokens_out, "cached_tokens": cached_tokens, "turns": turns, "seconds": secs}
+            if fallback_msg:
+                usage_comment["fallback"] = fallback_msg
             reply_content += f"\n```ga\n{json.dumps(usage_comment)}\n```\n"
             gh_issue_comment(number, reply_content)
             logging.info(f"event: report posted for {d_id} rev {rev}")
