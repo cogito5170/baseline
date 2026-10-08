@@ -175,3 +175,11 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   coverage gate 98.82 % >= 80 %, cppcheck passed; top probes scratchpad bmscheck/det.c + c30.c). PR #5 merged -> main
   46a0238. NEXT: trip week 5 (V5 perf budget, V8 Lighthouse, V9 start) + carried trip follow-ups; BMS week 5 (Simulink /
   Python plant + back-to-back) needs MATLAB -> ask the user via the VM channel. Study records owed: code/09 VM-26. Next VM id VM-27.
+- BMS DEFECTS ON MAIN 46a0238 (found by the code/09 subagent; SWR-019 reproduced by top with scratchpad bms26/fault_probe.c):
+  (1) SWR-019: a new protection fault on top of an active fault waits for the 100 ms period (OV at 330 ms, BMS_Fault with
+  the OV bit at 400 ms = 70 ms late; must be <= 10 ms whenever the fault set changes); (2) VCU_Cmd counter never resyncs
+  after one lost frame (every later frame rejected -> comm fault) - define recovery (e.g. accept the next frame as new
+  reference after the rejection) without breaking SWR-016/031; (3) mutations not caught by the 24 tests: removing the
+  15->0 wrap, removing the 3-in-a-row reset in SWR-030; (4) no D8 deviation record for the cppcheck suppressions; SOC
+  hard-coded 50 %. -> VM-28 BMS fix directive after VM-27 (agy quota), independent of ASK-1 (#52, user decisions
+  Q1 plant model / Q2 V9 users).
