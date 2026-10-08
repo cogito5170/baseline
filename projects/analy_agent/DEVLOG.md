@@ -197,3 +197,30 @@ verdict/1(수락이면 닫음, 아니면 rev 2로 다시 지시).
 ### 10-09 03:3x 사용자 결정, VM-25 trip 4주차 발송 (baseline issue #49)
 - 사용자 결정(10-09): ADR-5 = (a) 순수 JS 모듈 유지. 결정이 필요한 질문은 VM 채널로 묻는다. top 세션 `01GaDrpc`가 깊이 5까지 계속 진행.
 - VM-25 trip 4주차(가치 모드 F3 + 알려진 빈틈 수정, main `023ee43`에서 `vm/trip-wk4`) 발송. 결과 대기.
+
+### 10-09 03:4x VM-25 trip 4주차 rev 1 불합격 — 수정 항목 하나가 거꾸로 (baseline issue #49)
+- rev 1 `540a4ec` (03:44, PR #4): 가치 모드(F3: "1시간의 가치(원)" → `Math.round(값/60)`원/분, 칸 옆에 실제 분당값, 공유 링크에 `costPerHour`),
+  결과 비우기 `innerHTML` 제거, `model.test.mjs`의 catch가 `assert.fail`을 삼키지 않게, V7 비용 분해 항목 검사, F8 격차 보고(`docs/F8_gap_report.md`).
+  CI run 37826563835 success. 입력 326,813 + 캐시 2,996,189 토큰.
+- **top 판정: 불합격.** (a) 지시는 "요청이 없어도 워커 초기화 오류를 보여라"였는데, 3주차에 이미 그 일을 하던 `worker.onerror`의 `else` 가지를 **지웠다**
+  (거꾸로). 빈틈이던 `init`의 `'error'` 메시지는 그대로 버려짐. error_test가 최적화를 누른 뒤만 봐서 녹색. (b) V7 분해 검사가 시간값 0에서만 — 시간 가치가 0인 경우.
+  (c) 3주차 실제 주소에서 만든 공유 링크(`costPerMinute`)가 0원/분으로 조용히 다시 계산됨.
+
+### 10-09 03:5x VM-25 rev 2 수락, PR #4 병합 → main `704301c` — trip 4주차 닫힘 (baseline issue #49)
+- rev 2 `d1fdae0` (03:50): `showError`로 `onerror`와 `init` `'error'` 메시지 모두 요청이 없어도 표시; error_test 시험 2가 **최적화를 누르기 전** 오류를 확인;
+  `decodeState`가 옛 `costPerMinute`를 `costPerHour = × 60`으로 변환 + V6 시험; V7 분해 검사를 0과 12,000 둘 다에서.
+  CI(VM 보고서 대조): 시간값 0 → 1등 총액 1,065,000, 12,000(200원/분) → 1,171,000, 공유 링크도 1,171,000. → **수락.** 비용: 입력 236,251 + 캐시 2,024,401 토큰.
+- **이월:** V7이 더 이상 비용 분해 Sum을 `h4`의 엔진 Total과 비교하지 않는다(3주차에는 했음). 새 검사 `교통 + 숙박 + 시간가치 === Sum`은 모두 페이지가 직접
+  계산한 숫자라 화면이 엔진과 다른 분당값을 써도 통과한다. 또 V7의 두 값(0, 12,000)은 60의 배수라 반올림 차이를 드러내지 못한다 → 다음 trip 지시에 Sum == Total
+  복원 + 나누어떨어지지 않는 시간값(예: 10,000).
+- top이 PR #4 병합 → main `704301c`(03:54, 내용은 `d1fdae0`와 같음). main run 37827950321 engine·web·deploy success
+  (`Deploy to GitHub Pages`, `Run Smoke Test Against Deployed URL` 포함, 03:57). **trip 4주차 닫힘.**
+- 해설 작성 중 확인: `d1fdae0` 모델 시험 6/6, `540a4ec` 5/5. rev 2의 시험을 rev 1 모델에 돌리면 옛 링크 시험만 실패(`undefined` vs 12000).
+- 코드 해설: `code/08_VM-25.md`.
+- 배운 점: **수정 항목이 거꾸로 되지 않았는지 본다 — 더한 줄만이 아니라 지운 줄을 읽는다.** (a)는 `+` 줄만 보면 "오류 처리를 손봄"으로 보였다.
+  `-` 네 줄이 지시가 지키라고 한 동작이었다. diff의 `-` 줄마다 "의도한 삭제인가"를 지시 항목에 대응시킨다.
+
+### 10-09 03:5x VM-26 BMS 4주차 발송 (baseline issue #50)
+- 무엇: main `704301c`에서 `vm/bms-wk4`. CAN(VCU_Cmd 카운터·체크섬, 3회 거부 → 통신 고장, 300 ms 수신 타임아웃, 주기 송신, BMS_Fault 10 ms 내),
+  Unity 시험(SWR-015~019, SWR-031, 정상 상태에서 시간 진행), 이월 수정(SWR-010 시험 4251 mV, `bms_config.h` 가드, 이동 평균 정리), cppcheck와 문장 커버리지 관문
+  (cppcheck error 0, 커버리지 ≥ 80 %). 결과 대기.

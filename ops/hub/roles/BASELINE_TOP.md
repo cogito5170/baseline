@@ -162,3 +162,7 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   live smoke success (no separate VM live check: the deploy smoke on the live URL agreed with the VM check twice). F8 gap
   report in trip_optimizer/docs/F8_gap_report.md. CARRIED (must be in the next trip directive): V7 must again compare the
   breakdown Sum with the engine Total in h4 (dropped in VM-25). VM-26 (#50) BMS week 4 sent. Study records owed: code/08 VM-25.
+- Trip follow-ups (code/08): restoring V7 Sum==Total also needs an hour value not a multiple of 60 (e.g. 10,000) —
+  0 and 12,000 cannot catch a rounding bug; error_test never exercises the init 'error' message path; F8 gap report
+  measures the wrong objective (SPEC 3.3 = time-window orienteering) and has no sampling/seed design; negative hour
+  values (-90 -> -1/min) are accepted.
