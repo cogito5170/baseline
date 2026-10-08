@@ -56,6 +56,7 @@ ALIASES = {
     "timeout_s": "timeout_s",
     "read_only": "read_only",
     "to": "to", "recipient": "to",
+    "from": "from", "sender": "from",
 }
 
 
@@ -154,6 +155,8 @@ def build(info: dict) -> tuple[str, dict, list[str]]:
             "goal": (f"{title}: {goal}" if title and goal else title or goal)[:GOAL_HEAD_MAX], "why": why,
             "scope": scope, "done_when": done, "budget": {"claude_p_runs": 0},
             "model": str(c.get("model") or DEFAULT_MODEL)}
+    if c.get("from"):  # issue/1: the Claude side that sent it (baseline / QA)
+        head["from"] = str(c["from"])
     if to != "AGY":  # the model field is for the VM bridge only (it picks the agy model)
         head.pop("model")
     elif head["model"] not in mailcheck.KNOWN_MODELS:
