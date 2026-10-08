@@ -36,6 +36,12 @@ nobody else may direct an executor.
   report/2 whose items carry each probe's command and output tail, plus usage/1 with zero tokens. Unknown probe names →
   `declined`. Use it for status, versions, logs, service state; use a model directive only when judgment or code
   changes are needed.
+- Semantic handoff (user 10-08 20:5x): before every agy run the bridge writes a state card (≤3 KB, no model: service
+  state, running commit, path map, last 5 issue outcomes, known pitfalls) and passes it first in the prompt; agy ends
+  each run by writing a handoff note (≤1 KB: done, changed, open) that the next rev or related item gets instead of any
+  conversation history. agy must not re-check what the card states, and keeps command output short (tail/grep).
+  Probes are added from the patterns agy actually runs most (counted from its session files), parameterized only with
+  allow-listed values; an unknown probe is declined with the list of available probes.
 - Every rev starts a fresh agy session (no `--conversation` resume: VM-4 rev 2 cost 2.7M cached tokens that way); the
   bridge gives the new session the previous rev's report instead.
 - Current work = highest-rev directive (body or Claude-side comment). An executor never works a (id, rev) twice.
