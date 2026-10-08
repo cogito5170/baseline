@@ -116,3 +116,6 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   add an allow rule or merge PR #1 themselves; then live-URL check by the VM. Follow-up: results table innerHTML.
 - RULE (user 10-09 02:3x): analy_agent pushes go through the VM (directive to VM_LOCAL; the user pushes from the VM).
   Baseline-repo records (STATE, DEVLOG, code/NN) are still pushed by the top. PR #1 merged by top at c1cbeed (CI green).
+- WEEK-2 GATE CLOSED 10-09 02:4x: main c1cbeed deployed (run 37815686862: deploy + live smoke PASSED), VM-21 (#45) live
+  URL 200 x3 + commit hash. Live: https://cogito5170.github.io/analy_agent/. VM-22 (#46) week 3 sent (branch vm/trip-wk3,
+  PR, no merge). Follow-up: Node 20 deprecation warning (deploy-pages@v4, upload-artifact pin).
