@@ -68,6 +68,13 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   USER DECISIONS OPEN (ask first, one message): (a) which track first (proposal: trip_optimizer to a live Pages deploy, then BMS
   week 3); (b) Pages Source = "GitHub Actions" (owner sets it); (c) deploy on merge to main?; (d) UI plain JS or React+TS (ADR-5);
   (e) region / co-developer / live price API; (f) hours per week (estimates assume 20 h); (g) fold BMS 12-week plan into another?
+  FIRST DELIVERABLE (user 10-08 23:3x "어떻게 개발할지 보고하도록"): before any build directive, report to the user how you
+  will develop: track order, per-week milestones with gates (trip_optimizer SPEC §7: wk2 C API+WASM+Worker+min UI+CI+Pages,
+  gate V4 + live URL; wk3 input UX/timeline/share link V6-V7; wk4 value mode + ADR-5 UI; wk5 perf/Lighthouse V5,V8,V9),
+  who does what (top = WHAT + verify; VM_LOCAL agy = build/test/push on a work branch; CI = WASM/npm/Playwright truth;
+  user = Pages setting, merges to main, decisions), how each step is verified (top reruns tests/reads CI logs; gate list),
+  cost guard (flash-low for read-only, pro-high only for code; report usage/1 per VM item), and the open decisions (a)-(g).
+  Wait for the user's go before VM-15.
   ROUTE: you send WHAT-only directives to VM_LOCAL (issues label VM, next id VM-15); the VM needs a checkout of analy_agent and
   push to a work branch (check with a probe/directive first). Verify every report yourself (run the tests; VM-9 claimed 'passed'
   when the new tests never ran). VM disk: 75% after VM-13; VM-14 (#38) git gc on ~/SE in flight. HMAC: user said leave as is.
