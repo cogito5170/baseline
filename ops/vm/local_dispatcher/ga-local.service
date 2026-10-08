@@ -4,12 +4,9 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStartPre=/bin/sh -c 'echo "To stop: systemctl --user stop ga-local.service" >> %h/ga-local.log'
 ExecStart=/usr/bin/python3 /home/ubuntu/local_dispatcher/dispatcher.py
-Restart=on-failure
+Restart=always
 RestartSec=5
-StandardOutput=append:%h/ga-local.log
-StandardError=append:%h/ga-local.log
 KillMode=process
 
 [Install]

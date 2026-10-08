@@ -4,6 +4,11 @@
 
 set -e
 
+if [ "$USER" != "ubuntu" ]; then
+    echo "This script must only run on the VM (as user ubuntu)."
+    exit 1
+fi
+
 # Create directories
 mkdir -p /home/ubuntu/local_dispatcher
 mkdir -p ~/.config/systemd/user
