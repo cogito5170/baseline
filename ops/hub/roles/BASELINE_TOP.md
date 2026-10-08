@@ -45,4 +45,10 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
 - Discord: the user reaches the VM via their own Discord bot (discord_bot_server.py, run_shell). User wants baseline on
   it too; needs discord.com in the env network allow list + DISCORD_BOT_TOKEN/DISCORD_CHANNEL_ID secrets (not done).
 - Costs: a fresh agy run has ~11.8k fixed input; the rest scales with steps. Keep your own context small.
+- UPDATE 10-08 21:3x (top 01T9tr2K, depth 5): VM-8 (#32) accepted: 123,463 in / 68,942 cached vs VM-3 164,638 / 695,633
+  (agy printed a YAML report -> bridge declined; agy's own token numbers are invented, trust only usage/1). VM-9 (#33, 3 revs)
+  accepted at 9949695: report/2 shape in read-only prompt too, fresh flash-low repair run (no resume), one block posted,
+  5 tests pass (run them yourself: VM claimed 'passed' in rev 2 when the new tests never ran). NEXT: user restarts ga-local
+  onto 9949695 (needs XDG_RUNTIME_DIR=/run/user/1001), then VM-10 = 2-3 live read-only runs with no decline = stable
+  (user 10-08: stabilize items 1+2, then large-scale development; HMAC deferred). Depth 5: do NOT auto-create a successor.
 - Career questions: answer directly (direction decided earlier: DevOps / cloud / infra entry, LG CNS & 메가존, 5-month plan).
