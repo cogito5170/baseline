@@ -237,3 +237,4 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   depth < 5); (2) commits/tasks the user must do go to the VM channel as `[USER-TASK]` issues (ask/1 kind user_task,
   human_only) — top's own baseline record commits stay with the top; (3) when ALL development is finished, the top
   answers COMPLETE. TASK-1 (#58): user restarts ga-local for VM-29.
+- USER 10-09 07:3x (repeated): commits also go to the VM. The top no longer commits or pushes the baseline repo itself; it keeps pending record text in its scratchpad and sends it to VM_LOCAL, which appends it, commits and pushes to both claude/gracious-meitner-vp49xe and claude/adoring-shannon-ggskrh. User-only tasks go to [USER-TASK] issues. Change nothing else.
