@@ -262,11 +262,13 @@ def worker_task(number, directive, key):
         instruction_text = VM_LOCAL_PROMPT_MD.read_text() if VM_LOCAL_PROMPT_MD.exists() else ""
         notes_text = NOTES_FILE.read_text() if NOTES_FILE.exists() else ""
         
+        extra_rules = "RULES: run only the commands the directive names or that its done_when needs; do not open dispatcher.py, mailcheck.py, LOCAL_FORMAT.md or other repo files unless the directive names them; do not validate the report yourself (the dispatcher already runs mailcheck before posting, and on failure it posts the fallback); no manage_task."
+        
         is_ro = is_read_only(directive.get("scope", ""))
         if is_ro:
-            context = f"role VM_LOCAL. report/2 rules only.\n{json.dumps(directive)}"
+            context = f"role VM_LOCAL. report/2 rules only.\n{extra_rules}\n{json.dumps(directive)}"
         else:
-            context = f"{instruction_text}\n\n---\n\n{notes_text}\n---\n\n```ga\n{json.dumps(directive, indent=2)}\n```"
+            context = f"{instruction_text}\n\n---\n\n{notes_text}\n---\n\n{extra_rules}\n\n```ga\n{json.dumps(directive, indent=2)}\n```"
             
         model = "gemini-3.8-flash-low" if is_ro else "gemini-3.1-pro-high"
         
