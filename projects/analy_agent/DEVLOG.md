@@ -114,3 +114,74 @@ verdict/1(수락이면 닫음, 아니면 rev 2로 다시 지시).
     이 경로에 닿는데 어떤 시험도 지나가지 않는다. 예외가 나면 try/finally가 없어 버퍼 6개가 해제되지 않는다.
   - engine.mjs 로딩 실패 시 화면이 'Optimizing...'에 멈추고 오류·시간 제한이 없다.
   - SPEC 4.3: 기간 밖 줄 수는 console에만 찍히고 화면에 안 보임, '숙박비 미포함' 표시 없음.
+- 결과 (VM 커밋 `9398322`, 00:26): 워크플로 1개만 변경(+40 −1). `deploy` 작업(`needs: web`, `if: push && refs/heads/main`, 환경 `github-pages`,
+  권한 `pages: write` + `id-token: write`, web이 시험한 `site` 산출물을 내려받아 `upload-pages-artifact` → `deploy-pages` → 배포된 `page_url`로 smoke),
+  web 작업의 `http-server`를 `14.1.1`로 고정. PR #1(`vm/trip-wk2`→`main`) 생성.
+- top 확인: 같은 커밋 CI run 37800759034(push)·37800871101(pull_request) 모두 engine·web success, **deploy skipped** = 작업 브랜치·PR에서는 배포하지 않음이
+  설계대로 동작. → **수락 (#43에 verdict, 01:54 닫음).** 실제 배포는 main 병합 때 처음 돈다.
+- 코드 해설: `code/04_VM-19.md`.
+
+### 10-09 01:5x VM-20 웹 오류 경로 + SPEC 4.3 안내 (baseline issue #44) — 첫 배포 전에
+- 무엇: `code/03`에서 찾은 결함을 배포 전에 고침. 링크 옵션 `-sEXPORTED_RUNTIME_METHODS=UTF8ToString`, `callEngine`을 try/finally로(WASM 버퍼 6개 항상 해제),
+  워커 적재 실패 처리(`worker.onerror`, `workerDead`, 워커 `init`의 try/catch), 오류 문장은 `textContent`로, 기간 밖 줄 수와 "숙박비 미포함"을 화면에(SPEC 4.3),
+  Playwright 오류 시험 `error_test.mjs`(엔진 오류 문장이 화면까지 오는지 + `page.route`로 engine 파일 요청을 끊어 적재 실패 흉내).
+- 왜: 공개 주소에 올라가기 전에 오류 경로를 실제 WASM·실제 브라우저가 한 번은 지나가야 한다. 지금까지의 시험은 모두 성공 경로만 지났다.
+- rev 1 결과 (`3eaf437` + `7a82ca0`, 01:58–02:02, CI 녹색): **top 판정: 불합격.**
+  (1) scratch·생성 파일이 커밋에 섞임 — 13개(`git diff --name-status 9398322 7a82ca0`: `patch*` 10개, `CMakeLists.txt.orig`,
+  17,206줄 `v4_reference.json`, `trip_optimizer/site/index.html`. top이 처음에 14개라고 셌으나 판정문의 이름 목록도 13개 — 13이 맞다).
+  (2) 시험이 약함: 엔진 오류 시험의 판정이 `includes('Error')`라서 파서 오류(`Error parsing data`)나 `mod.UTF8ToString is not a function`이어도 통과 →
+  고치기 전과 후를 구별하지 못함. (첫 커밋 `3eaf437`은 방문 도시만 비워 엔진 전에 파서 오류가 났는데도 통과했다.)
+- rev 2 결과 (`0a9c13d`, 02:08): 13개 삭제 + `.gitignore`, 판정 문장을 엔진만 만드는 `visits must be`로, 남은 `innerHTML` 오류 문장 4곳을 `textContent`로.
+  top 확인: 바뀐 파일 8개(`git diff --stat 9398322 0a9c13d -- trip_optimizer/ .github/ .gitignore`), CI run 37814297302 web `Run Smoke Test`(smoke + error_test)
+  success. → **수락 (#44, 02:13 닫음).**
+- 배운 점: **녹색 시험을 고치기 전 코드에 돌려도 녹색이면, 그 시험은 수정을 지키지 않는다.** 기대 문장은 그 경로만 만들 수 있는 글자로.
+  오류를 만들려는 입력이 원하는 층(파서가 아니라 엔진)까지 가는지도 본다.
+- 비용: TODO (usage 원문 대조).
+- 코드 해설: `code/05_VM-20.md`.
+
+### 10-09 02:1x PR #1 병합 → main `c1cbeed`, 첫 배포 (top)
+- 무엇: top이 PR #1(`vm/trip-wk2`, head `0a9c13d`)을 확인 후 병합 → main `c1cbeed`(02:19). 병합 커밋과 `0a9c13d`의 내용 차이 없음(`git diff --stat` 빈 출력).
+- 결과: main push run 37815686862 — engine·web·**deploy** 모두 success. deploy 단계 `Download Static Site` → `Upload Pages Artifact` →
+  `Deploy to GitHub Pages` → `Run Smoke Test Against Deployed URL`(배포된 실제 주소로 예시 → 최적화 → "Found 5 plans") 모두 성공(02:22).
+- 참고: 작업 로그 본문은 top 환경의 프록시가 막아 단계 결론만 API로 읽었다.
+
+### 10-09 02:2x VM-21 실제 URL 확인 — 2주차 관문 (baseline issue #45)
+- 무엇: top 환경에서는 github.io에 접속할 수 없어 VM이 HTTP로 실제 주소를 받아 확인.
+- 결과: `index.html` 8,114바이트, 화면 아래 커밋 해시 `c1cbeed…`. top 대조: 저장소 index.html(`c1cbeed`) 8,088바이트에서 `UNKNOWN_COMMIT`(14자)을
+  40자 해시로 바꾸면 8,114바이트 — 정확히 일치. → **수락 (#45, 02:25 닫음). 2주차 관문(실제 URL 배포) 닫힘.**
+
+### 10-09 02:2x VM-22 trip 3주차: 입력 UX, 결과 화면, 공유 링크 (baseline issue #46)
+- 무엇: CSV 오류를 해당 칸 옆에(파서 오류에 `inputId`·`lineNum`), 결과에 비용 분해·타임라인·예약 목록(`el()` 도우미로 모두 `textContent`),
+  공유 링크(F6: 입력 → JSON → `encodeURIComponent` → `btoa` → URL 해시, `history.replaceState`, 열면 워커 준비 후 자동 계산), V6 왕복 시험, V7 Playwright E2E.
+- rev 1 결과 (`7f160d1` + `c911163`, 02:30–02:34; `7f160d1`은 CI `Run Smoke Test` 실패, `c911163`에서 녹색): **top 판정: 불합격.**
+  (1) 저장소 맨 위에 scratch 파일 7개(`add_state.py`, `fix_*.py` 4개, `replace.patch`, `rewrite_index.py`) — VM-20의 `.gitignore` 이름 목록에 하나도 안 걸림.
+  (2) 보고서는 바뀐 파일 5개라고 했지만 실제 `git diff --stat c1cbeed c911163`은 12개.
+  비용: 입력 590,418 + 캐시 6,187,888 토큰.
+- rev 2 결과 (`7211b0c` scratch 7개 삭제 + `c4c96ec` V7에 "모든 계획에서 화면의 Sum == 엔진 Total" 추가, 02:40): `git diff --stat c1cbeed c4c96ec` = 파일 5개(scratch 없음).
+  CI run 37818402352 web `Run Smoke Test`(smoke + error_test + e2e_v7) success. E2E: 모든 계획 Sum == Total, 공유 링크를 새 페이지로 열어 같은 1등 총액 1,171,000.
+  해설 작성 중 `c4c96ec` 모델 시험 4/4 재실행. → **수락 (#46, 02:44 닫음).** 비용: 입력 161,798 + 캐시 844,272 토큰(rev 1의 약 1/7).
+- 코드 해설: `code/06_VM-22.md`.
+
+### 10-09 02:4x PR #2 병합 → main `a78196a`, VM-23 실제 URL 확인 — 3주차 관문 (baseline issue #47)
+- 무엇: top이 PR #2(`vm/trip-wk3`, head `c4c96ec`) 병합 → main `a78196a`(02:44, 내용은 `c4c96ec`와 같음). main run 37818895646 engine·web·deploy success
+  (`Run Smoke Test Against Deployed URL` 포함, 02:49).
+- VM-23 결과: 실제 주소의 `index.html` 11,397바이트 = 저장소 index.html(`a78196a`, 11,371바이트)에 커밋 해시를 넣은 크기와 같음.
+  → **수락 (#47, 02:51 닫음). 3주차 관문 닫힘.**
+
+### 10-09 02:5x VM-24 BMS 3주차 발송 (baseline issue #48)
+- 무엇: 트랙 순서(trip 2주차 → 3주차 → BMS 3주차)대로 BMS 3주차 "측정값 처리와 보호 상태 기계" 지시 발송(02:52). 결과 대기.
+
+### 2주차·3주차에서 배운 것 (다음 지시에 반영)
+- **작업 트리 안의 scratch 파일은 되풀이된다 (VM-20, VM-22).** `.gitignore`에 이름을 더하는 것은 지난번 이름만 막는다(VM-22의 7개는 VM-20 패턴에
+  하나도 안 걸림). → 지시문에 이제 "도우미 스크립트는 체크아웃 **밖**에 둔다"를 넣는다.
+- **보고서의 diff stat는 top이 다시 돌린다.** VM-22 rev 1은 5개라고 보고했지만 실제 diff는 12개였다. 보고 숫자는 `git diff --stat` 한 줄로 대조한다.
+- 시험은 "고치기 전 코드"에서 실패해야 의미가 있다(VM-20 rev 1의 `includes('Error')`).
+
+### 10-09 03:1x VM-24 BMS 3주차 rev 1 불합격 — 보호가 영영 안 걸리는 결함 (baseline issue #48)
+- rev 1 `97de96b` (PR #3): 바뀐 파일 4개(top 재확인), Unity 15/15, SWR-005~014 전부 시험 태그. 입력 437,502 + 캐시 5,991,184.
+- **top 판정: 불합격.** 보호 판정을 이동 평균 `(avg + new) / 2`(정수, 내림)로 했다. top이 호스트 gcc로 직접 돌림: 셀 3700 mV로 10회 → 셀 0을 4251 mV로
+  올리면 1000회 뒤에도 평균이 4250에 멈춰 **과전압이 영영 안 걸림**. 3700 → 2799 mV 저전압은 3회가 아니라 12회째에 걸림.
+- 시험이 못 잡은 이유: 매 시험이 첫 샘플부터 경계값이라 평균이 처음부터 그 값. 정상값에서 넘어가는 실제 경로를 한 번도 안 지났다.
+- rev 2 발송: 보호는 원시 샘플로 판정(SWR 문구 그대로), 평균은 보고용만; 모든 보호 시험은 정상 운전점에서 출발해 정확히 3번째 샘플에 고장;
+  정상값에서 출발하는 SWR-010(100 ms 내 개방) 시험 추가.
+- 배운 점: **경계값 시험은 '어디서 출발하느냐'까지 정해야 한다.** 필터·디바운스·적분이 있는 코드는 시작값에 따라 결과가 다르다.
