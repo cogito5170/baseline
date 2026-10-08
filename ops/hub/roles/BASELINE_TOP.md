@@ -124,3 +124,7 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   11397 bytes = source. NEXT per plan: BMS week 3 (embedded_qa_portfolio), then trip week 4. Put "helper scripts outside the
   repo checkout" and "diff stat run after push, verbatim" into every code directive from the start (VM-20 and VM-22 both failed it).
   Study records owed: code/04 VM-19, 05 VM-20, 06 VM-22 + DEVLOG.
+- BMS WEEK-3 GATE CLOSED 10-09 03:2x: VM-24 (#48) rev 1 rejected (protection on (avg+new)/2 -> OV never trips from a
+  normal point, reproduced on host), rev 2 accepted at ab25915 (raw samples, tests from a normal point, repro trips at
+  sample 3). PR #3 merged by top -> main 023ee43. Study records code/04-06 committed (b790183). NEXT: trip week 4 (value
+  mode + ADR-5 UI decision), code/07 VM-24. Next VM id: VM-25.
