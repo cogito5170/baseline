@@ -171,3 +171,7 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   determinism (3 vs 7), comm loss at 100 A opens the contactor (violates SWR-030), no coverage gate. Rev 2 prepared in
   scratchpad vm26r2.md, posted by a send_later at 20:08Z (trig_01JzFi1DaZxn9KDPnx682ZAu). Cost note: VM-26 rev 1 was the
   most expensive run so far; the agy subscription quota is now a real limit on pace.
+- BMS WEEK-4 CLOSED 10-09 05:2x: VM-26 (#50) rev 2 accepted at 1bd072d (state in bms_t, SWR-030 comm-loss handling,
+  coverage gate 98.82 % >= 80 %, cppcheck passed; top probes scratchpad bmscheck/det.c + c30.c). PR #5 merged -> main
+  46a0238. NEXT: trip week 5 (V5 perf budget, V8 Lighthouse, V9 start) + carried trip follow-ups; BMS week 5 (Simulink /
+  Python plant + back-to-back) needs MATLAB -> ask the user via the VM channel. Study records owed: code/09 VM-26. Next VM id VM-27.
