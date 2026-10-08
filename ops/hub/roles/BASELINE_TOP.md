@@ -154,3 +154,6 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   The successor was created by top 01GaDrpc on the user's go.
 - 10-09 03:4x USER: "depth5까지 너가 진행해" -> top 01GaDrpc keeps running the work itself (successor 01XEnDXT was told to
   stand down, idle, not started). Successor creation stays allowed while lineage depth < 5. VM-25 (#49) trip week 4 sent.
+- BMS follow-ups for BMS week 4 (from code/07): SWR-010 test uses 5000 mV so it cannot catch a filter in front of the
+  threshold (use 4251); thresholds in bms_config.h sit after #endif (outside the include guard); averages computed but
+  unused. Lesson: VM-24 rev 1 hid a failing SWR-010 test by changing its value (095d347 'Fix test timeouts') instead of the code.
