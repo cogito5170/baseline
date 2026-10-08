@@ -83,3 +83,8 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   hooks, ack to 01T9tr2K, QA told). analy_agent read at 5a1d016 (2 workflows on the branch, not 3). Local env has node 22 +
   cmake + g++ (V1-V3, V6 verifiable here; WASM/Playwright only in CI). CI logs need analy_agent attached (add_repo push;
   anonymous API is refused). Development plan reported to the user; waiting for go + decisions (a)-(g) before VM-15.
+- UPDATE 10-09 00:0x: user "제안대로 간다" + "나의 개입 없이 개발/배포까지" (top merges to main after its own gate check;
+  VM enables Pages via API, the shared account is repo admin). Study log projects/analy_agent/DEVLOG.md (Korean) +
+  user 10-09 "코드들도 남겨줘": for EVERY accepted VM item write projects/analy_agent/code/<NN>_<VM-id>.md (changed files
+  verbatim + line-by-line Korean notes + hand-coding order + verify commands + exercises). VM-15 (#39) accepted; VM-16 (#40)
+  engine CI job on analy_agent vm/trip-wk2 sent. Integration branch: push to both adoring-shannon and gracious-meitner (user ok).
