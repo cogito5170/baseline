@@ -440,7 +440,31 @@ def worker_task(number, directive, key):
         is_ro = is_read_only(directive.get("scope", ""))
         
         if is_ro:
-            context = f"role VM_LOCAL. report/2 rules only.\n{extra_rules}\n{vm_state_text}\n{handoff_text}\n{json.dumps(directive)}"
+            done_when_ids = [dw.get("id") for dw in directive.get("done_when", []) if "id" in dw]
+            items_json = ',\n    '.join([f'{{"id": "{dw_id}", "state": "met", "evidence": "..."}}' for dw_id in done_when_ids])
+            items_ids_str = ", ".join(done_when_ids)
+            ro_shape = f"""You are the VM_LOCAL dispatcher running on the local machine. Your job is to execute the instructions given in the directive.
+When you are done, you MUST respond with a report/2 JSON block. 
+
+The report/2 block must be exactly one fenced code block with the 'ga' tag, holding a single JSON object. It MUST be the LAST thing you print.
+Shape:
+```ga
+{{
+  "schema": "report/2",
+  "from": "VM_LOCAL",
+  "handled": [{{"id": "{d_id}", "rev_seen": {rev}, "status": "done"}}],
+  "items": [
+    {items_json}
+  ],
+  "results": [],
+  "blockers": []
+}}
+```
+`status` must be "done" or "declined".
+`items` must contain exactly the `done_when` ids requested (e.g. {items_ids_str}), with their state ("met", "unmet", "na") and text evidence.
+No markdown or text should appear after the ```ga block."""
+
+            context = f"role VM_LOCAL. report/2 rules only.\n{ro_shape}\n{extra_rules}\n{vm_state_text}\n{handoff_text}\n{json.dumps(directive)}"
         else:
             context = f"{vm_state_text}\n\n{instruction_text}\n\n---\n\n{notes_text}\n---\n\n{extra_rules}\n{handoff_text}\n```ga\n{json.dumps(directive, indent=2)}\n```"
             
@@ -509,9 +533,28 @@ def worker_task(number, directive, key):
             return False
             
         if status == "SUCCESS" and retcode == 0 and not denied_actions and not has_valid_report(stdout_text_parsed):
-            logging.info(f"event: agy output missing report/2, re-asking once. conversation={conv_id}")
-            reask_prompt = "Your output failed to include a valid report/2 JSON block inside a ```ga block, or it was not valid JSON. Please output ONLY the report/2 JSON block now. It must be the last thing printed."
-            reask_cmd = ["/home/ubuntu/auto-agy-p.exp", "-p", reask_prompt, "--conversation", conv_id, "--output-format", "json"]
+            logging.info(f"event: agy output missing report/2, doing fresh repair run.")
+            done_when_ids = [dw.get("id") for dw in directive.get("done_when", []) if "id" in dw]
+            items_json = ',\n    '.join([f'{{"id": "{dw_id}", "state": "met", "evidence": "..."}}' for dw_id in done_when_ids])
+            items_ids_str = ", ".join(done_when_ids)
+            repair_shape = f"""The report/2 block must be exactly one fenced code block with the 'ga' tag, holding a single JSON object. It MUST be the LAST thing you print.
+Shape:
+```ga
+{{
+  "schema": "report/2",
+  "from": "VM_LOCAL",
+  "handled": [{{"id": "{d_id}", "rev_seen": {rev}, "status": "done"}}],
+  "items": [
+    {items_json}
+  ],
+  "results": [],
+  "blockers": []
+}}
+```
+`status` must be "done" or "declined".
+`items` must contain exactly the `done_when` ids requested (e.g. {items_ids_str}), with their state ("met", "unmet", "na") and text evidence."""
+            reask_prompt = f"Please extract the evidence from the output below and format it into a report/2 block. Return ONLY the JSON block.\n\n{repair_shape}\n\nHere is the output:\n{stdout_text_parsed[-4000:]}"
+            reask_cmd = ["/home/ubuntu/auto-agy-p.exp", "-p", reask_prompt, "--model", "gemini-3.8-flash-low", "--effort", "low", "--output-format", "json", "--dangerously-skip-permissions"]
             stdout_text2, retcode2 = run_agy(reask_cmd)
             stdout_text_parsed2, t_in2, t_out2, c_tokens2, turns2, secs2, status2, conv_id2, denied2 = parse_agy_output(stdout_text2)
             
