@@ -88,3 +88,24 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   user 10-09 "코드들도 남겨줘": for EVERY accepted VM item write projects/analy_agent/code/<NN>_<VM-id>.md (changed files
   verbatim + line-by-line Korean notes + hand-coding order + verify commands + exercises). VM-15 (#39) accepted; VM-16 (#40)
   engine CI job on analy_agent vm/trip-wk2 sent. Integration branch: push to both adoring-shannon and gracious-meitner (user ok).
+- SUCCESSOR NOTE (10-09 00:3x KST, top session_01V3q6t9 depth 0, ctx 246k, ~11 USD) — READ THIS FIRST:
+  USER MODE: "나의 개입 없이 개발/배포까지" + study log. Plan = trip_optimizer wk2 (live Pages URL) -> wk3 -> BMS wk3 -> trip wk4 -> alternate.
+  Decisions: deploy only on merge to main; plain JS UI (React+TS considered wk4); CSV/example data only (no live price API);
+  example region chosen by top (Seoul round trip, Tokyo/Osaka/Kyoto/Fukuoka, invented prices). Integration branch: push every
+  baseline commit to BOTH claude/adoring-shannon-ggskrh and claude/gracious-meitner-vp49xe (user ok).
+  analy_agent: attach with add_repo access push (needed for Actions logs via MCP; anonymous API is refused). Work branch vm/trip-wk2:
+  e081fb3 VM-16 engine CI · b3d8932 VM-17 WASM+V4 (1012 problems) · 79099ec VM-18 web UI + V6 + Playwright smoke. All accepted
+  (#40, #41 rev 2, #42 rev 2). IN FLIGHT: VM-19 (#43): VM enables Pages via API, adds main-only deploy job + post-deploy smoke,
+  pins http-server, opens PR vm/trip-wk2 -> main and must NOT merge. YOU: verify (PR diff, CI on PR, deploy job condition), then
+  merge the PR yourself (mcp__github__merge_pull_request, merge commit or ff), watch the main run (deploy + smoke on live URL),
+  have the VM curl the live URL (200 + commit hash in index.html) since github.io is unreachable from the cloud env -> week-2 gate.
+  Then VM-20+: week 3 (SPEC 7: CSV error UX, timeline, cost breakdown, booking list, share link; V6, V7 Playwright E2E).
+  Known follow-ups: tie-break not covered by any engine test (from code/00); seeded-bug tests (V3) not in repo; perf test comment says V4 (is V5).
+  VERIFY HABITS that caught real defects: run the generator/tests yourself and count case kinds (VM-17 rev 1 had no -1 case);
+  check tests use the page's code path (VM-18 rev 1); quote CI lines yourself (VM reported 'no Node 20 warning' falsely).
+  Read big CI logs through a haiku subagent that greps lines (a full log costs ~20k tokens).
+  STUDY RECORDS (user 10-09 "코드들도 남겨줘"): projects/analy_agent/DEVLOG.md (Korean, per item: what/why/how verified/cost/lesson) +
+  projects/analy_agent/code/<NN>_<VM-id>.md per accepted item (verbatim code via script + notes + exercises), written by a background
+  subagent from git show, checked by you byte-for-byte before commit. Done: 00 engine, 01 VM-16, 02 VM-17. 03 VM-18 is being written
+  by the old top's subagent; the old top commits it, then goes idle. Next: 04 VM-19.
+  Watcher: scratchpad watch.sh <issue> <rev> polls issue comments until usage/1 for that rev (re-create it in your container).
