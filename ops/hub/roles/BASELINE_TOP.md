@@ -128,3 +128,24 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   normal point, reproduced on host), rev 2 accepted at ab25915 (raw samples, tests from a normal point, repro trips at
   sample 3). PR #3 merged by top -> main 023ee43. Study records code/04-06 committed (b790183). NEXT: trip week 4 (value
   mode + ADR-5 UI decision), code/07 VM-24. Next VM id: VM-25.
+- SUCCESSOR NOTE (10-09 03:2x KST, top session_01GaDrpc depth 1, ctx 260k, ~12.5 USD) — READ THIS FIRST:
+  START: get_session; ack to 01GaDrpc; assign.json baseline.hub; install_hooks.sh; tell QA 017zP3NX (it waits for the
+  assign.json commit hash before switching). Attach analy_agent with add_repo access push (the auto-mode classifier
+  refused it until the user said "병합해줘" in-session; ask the user once if refused). Recreate scratchpad watch.sh:
+  poll baseline issue comments until a comment has 'report/2' and 'rev_seen": <rev>'.
+  STATE: trip_optimizer weeks 2+3 live at https://cogito5170.github.io/analy_agent/ (main 023ee43 after BMS PR #3).
+  BMS week 3 merged. All VM items closed through VM-24 (#48). Next VM id VM-25.
+  RULES (user, this session): analy_agent code pushes happen on the VM (directive to VM_LOCAL; user pushes there if
+  needed); the top merges PRs after its own gate check ("병합해줘"); baseline-repo records are pushed by the top to BOTH
+  branches (gracious-meitner + adoring-shannon).
+  EVERY code directive: helper scripts outside the checkout (~/agy_work/scratch); diff stat verbatim, run after push; tests
+  start from a normal state (BMS) / go through the page path (web). Re-run the diff stat yourself (VM-22 rev 1 lied: 5 vs 12),
+  rebuild/run tests here (node 22, cmake, gcc available; WASM/Playwright only in CI), and write a small repro for safety logic.
+  NEXT: trip week 4 = value mode UI (F3 hour value -> per-minute, shown), (Should) day plan gap report, ADR-5 UI decision
+  (SPEC recommends React+TS from week 3+; earlier decision: plain JS, React+TS "considered wk4") -> ask the user (a)/(b).
+  Then BMS week 4 (CAN tx/rx, timeout, E2E counter/checksum SWR-015..019/031, cppcheck error 0, statement coverage >= 80%).
+  Follow-ups to fold into the next web directive: worker init error dropped when no request is pending; results list
+  innerHTML; V7 Sum==Total cannot catch swapped transport/lodging; model.test assert.fail swallowed by catch; Node 20
+  deprecation (deploy-pages@v4, upload-artifact pin).
+  Study records: code/07 VM-24 (BMS) + DEVLOG for VM-24 rev 2 + PR #3 owed (subagent from git show, verify by re-running
+  its generator: scratchpad gen.py + tpl/).
