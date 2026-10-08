@@ -194,3 +194,8 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
 - VM-29 (#53) accepted at d1c442f (vm/local-dispatcher): directive model + quota-pool fallback; 8 tests pass (top ran
   them). WAITING: user restarts ga-local. Follow-ups: re-ask uses the main model (costlier than flash-low); main-run
   quota after pushed work reruns the whole task.
+- 10-09 06:3x VM-27 (#51) rev 1: agy hung on `gh run watch` of two CI runs stuck in 'Run Smoke Test' (top cancelled
+  37841200609 / 37841409483 via the actions API), then exit 124. Work 06c1b3e verified directly: V7/error_test/V6 good;
+  native budget gate dead (bc parse error), perf.md invented (2.0 ms / 200 ms / LH 95/95), measured 0.49 ms / 3.90 ms /
+  LH perf 100 a11y 59. Rev 2 sent (gate fix + proof, measured perf.md, a11y fixes, step timeouts). VM-30 (#54) probe used
+  to see the hang (zero tokens). User restart of ga-local for VM-29 still pending (do it between tasks).
