@@ -1,7 +1,31 @@
 import logging
 from logging.handlers import RotatingFileHandler
 import sys
+import time
+import subprocess
+import json
+import os
+import shutil
+import re
+import threading
 from pathlib import Path
+from datetime import datetime, timezone
+from concurrent.futures import ThreadPoolExecutor
+
+# Configuration
+REPO_URL = "https://github.com/cogito5170/baseline.git"
+BRANCH = "ga-mailbox"
+CHECKOUT_DIR = Path("/tmp/ga-mailbox-checkout")
+HANDLED_RECORD_FILE = Path.home() / "handled_record.json"
+NOTES_FILE = Path.home() / "local_notes.md"
+MAX_CONCURRENT_RUNS = 2
+TIME_LIMIT = 1800 # 30 minutes
+
+LOCAL_FORMAT_MD = Path(__file__).parent / "LOCAL_FORMAT.md"
+DRY_RUN = "--dry-run" in sys.argv
+
+git_lock = threading.Lock()
+record_lock = threading.Lock()
 
 def setup_logging():
     log_file = Path.home() / "ga-local.log"
@@ -11,9 +35,6 @@ def setup_logging():
         with open(log_file, "a") as f:
             f.write("To stop: systemctl --user stop ga-local.service\n")
             
-    handler = RotatingFileHandler(log_file, maxBytes=5*1024*1024, backupCount=2)
-    handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s'))
-    
     class HeaderRotatingFileHandler(RotatingFileHandler):
         def doRollover(self):
             super().doRollover()
@@ -40,31 +61,6 @@ def setup_logging():
 
     sys.stdout = StreamToLogger(logger, logging.INFO)
     sys.stderr = StreamToLogger(logger, logging.ERROR)
-import sys
-import time
-import subprocess
-import json
-import os
-import shutil
-import re
-import threading
-from pathlib import Path
-from datetime import datetime, timezone
-from concurrent.futures import ThreadPoolExecutor
-
-# Configuration
-REPO_URL = "https://github.com/cogito5170/baseline.git"
-BRANCH = "ga-mailbox"
-CHECKOUT_DIR = Path("/tmp/ga-mailbox-checkout")
-HANDLED_RECORD_FILE = Path.home() / "handled_record.json"
-NOTES_FILE = Path.home() / "local_notes.md"
-MAX_CONCURRENT_RUNS = 2
-TIME_LIMIT = 1800 # 30 minutes
-
-LOCAL_FORMAT_MD = Path(__file__).parent / "LOCAL_FORMAT.md"
-
-git_lock = threading.Lock()
-record_lock = threading.Lock()
 
 def load_handled_record():
     record = {}
@@ -96,10 +92,14 @@ def load_handled_record():
     return record
 
 def save_handled_record(record):
+    if DRY_RUN:
+        return
     with open(HANDLED_RECORD_FILE, 'w') as f:
         json.dump(record, f, indent=2)
 
 def update_record(key, data_update):
+    if DRY_RUN:
+        return
     with record_lock:
         record = load_handled_record()
         if key not in record:
@@ -115,10 +115,9 @@ def fetch_and_checkout():
             subprocess.run(["git", "fetch", "origin", BRANCH], cwd=CHECKOUT_DIR, check=True)
             subprocess.run(["git", "reset", "--hard", f"origin/{BRANCH}"], cwd=CHECKOUT_DIR, check=True)
         
-        # Get mailcheck.py from claude/gracious-meitner-vp49xe
-        subprocess.run(["git", "fetch", "origin", "claude/gracious-meitner-vp49xe"], cwd=CHECKOUT_DIR, check=True)
-        subprocess.run(["git", "checkout", "origin/claude/gracious-meitner-vp49xe", "--", "ops/flow/mailcheck.py"], cwd=CHECKOUT_DIR, check=True)
-        subprocess.run("git checkout origin/claude/gracious-meitner-vp49xe -- ops/flow/nocode.py || true", cwd=CHECKOUT_DIR, shell=True)
+        # Get mailcheck.py from claude/gracious-meitner-vp49xe into /tmp to avoid checking them into ga-mailbox
+        subprocess.run("git show origin/claude/gracious-meitner-vp49xe:ops/flow/mailcheck.py > /tmp/mailcheck.py", cwd=CHECKOUT_DIR, shell=True, check=True)
+        subprocess.run("git show origin/claude/gracious-meitner-vp49xe:ops/flow/nocode.py > /tmp/nocode.py || true", cwd=CHECKOUT_DIR, shell=True)
 
 def parse_mail_file(mail_file: Path):
     content = mail_file.read_text()
@@ -126,6 +125,7 @@ def parse_mail_file(mail_file: Path):
     rev = 1
     after = []
     scope = ""
+    done_whens = []
     match = re.search(r'```ga\s*(\{.*?\})\s*```', content, re.DOTALL)
     if match:
         try:
@@ -134,6 +134,9 @@ def parse_mail_file(mail_file: Path):
             rev = ga_data.get('rev', 1)
             after = ga_data.get('after', [])
             scope = ga_data.get('scope', "")
+            for item in ga_data.get('done_when', []):
+                if 'id' in item:
+                    done_whens.append(item['id'])
         except json.JSONDecodeError:
             pass
             
@@ -142,9 +145,9 @@ def parse_mail_file(mail_file: Path):
         if "baseline-" in fname:
             d_id = fname.split("baseline-")[-1].replace(".md", "")
             
-    return d_id, rev, content, after, scope
+    return d_id, rev, content, after, scope, done_whens
 
-def find_new_work(handled_record):
+def find_new_work(handled_record, active_keys):
     work_dir = CHECKOUT_DIR / "to" / "LOCAL"
     new_work = []
     if not work_dir.exists():
@@ -153,19 +156,25 @@ def find_new_work(handled_record):
     files = sorted(work_dir.glob("*.md"), key=os.path.getmtime)
     
     for mail_file in files:
-        d_id, rev, content, after, scope = parse_mail_file(mail_file)
+        d_id, rev, content, after, scope, done_whens = parse_mail_file(mail_file)
         if d_id == "UNKNOWN": continue
+        
+        if DRY_RUN and d_id != "CMD-LOC9":
+            continue
+            
         key = f"{d_id}_{rev}"
         
         record = handled_record.get(key)
-        if not record:
-            new_work.append((mail_file, d_id, rev, key, scope, after))
+        if not record or DRY_RUN:
+            new_work.append((mail_file, d_id, rev, key, scope, after, done_whens))
         elif record.get("status") == "running":
+            if key in active_keys:
+                continue
             restarts = record.get("restarts", 0)
             if restarts < 1:
-                new_work.append((mail_file, d_id, rev, key, scope, after))
+                new_work.append((mail_file, d_id, rev, key, scope, after, done_whens))
             else:
-                write_fallback_reply(d_id, rev, "declined", "cut off by restart more than once")
+                write_fallback_reply(d_id, rev, "declined", "cut off by restart more than once", done_whens)
                 update_record(key, {"status": "declined"})
         elif record.get("status") == "unpushed":
             # retry pushing
@@ -178,7 +187,12 @@ def find_new_work(handled_record):
     return new_work
 
 def is_read_only(scope):
-    return scope.lower().startswith("read only")
+    if isinstance(scope, list) and len(scope) > 0 and isinstance(scope[0], dict):
+        text = scope[0].get("text", "")
+        return text.lower().startswith("read only")
+    if isinstance(scope, str):
+        return scope.lower().startswith("read only")
+    return False
 
 def extract_ga_block_and_details(response_text):
     match = re.search(r'(```ga\n.*?```.*)', response_text, re.DOTALL)
@@ -196,19 +210,39 @@ def agy_invoke(d_id, rev, mail_file, is_ro, after):
         baseline_dir = CHECKOUT_DIR / "to" / "baseline"
         if baseline_dir.exists():
             for f in baseline_dir.glob("*-LOCAL-*.md"):
-                # basic check if it's related
-                if any(a in f.name for a in after) or (rev > 1 and d_id in f.name):
-                    after_text += f"\n---\nPrevious reply: {f.name}\n{f.read_text()}\n"
+                try:
+                    content = f.read_text()
+                    match = re.search(r'```ga\s*(\{.*?\})\s*```', content, re.DOTALL)
+                    if match:
+                        ga_data = json.loads(match.group(1))
+                        handled_ids = [h.get("id") for h in ga_data.get("handled", [])]
+                        
+                        is_after = any(a in handled_ids for a in after)
+                        is_prev = False
+                        if rev > 1:
+                            for h in ga_data.get("handled", []):
+                                if h.get("id") == d_id and h.get("rev_seen", 1) < rev:
+                                    is_prev = True
+                                    break
+                                    
+                        if is_after or is_prev:
+                            after_text += f"\n---\nPrevious reply: {f.name}\n{content}\n"
+                except Exception:
+                    pass
     
     context = f"{instruction_text}\n\n---\n\n{notes_text}\n{after_text}\n---\n\n{mail_content}"
     model = "gemini-3.8-flash-high" if is_ro else "gemini-3.1-pro-high"
     
     cmd = ["agy", "-p", context, "--model", model, "--output-format", "json"]
+    if DRY_RUN:
+        print(f"DRY RUN: chosen model: {model}")
+        print(f"DRY RUN: command line: agy -p <prompt_elided> --model {model} --output-format json")
+        
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     try:
         stdout_text, _ = process.communicate(timeout=TIME_LIMIT)
         response_text = ""
-        tokens_in, tokens_out, turns, seconds = None, None, None, None
+        tokens_in, tokens_out, cached_tokens, turns, seconds = None, None, None, None, None
         
         try:
             lines = stdout_text.strip().split('\n')
@@ -217,60 +251,70 @@ def agy_invoke(d_id, rev, mail_file, is_ro, after):
             usage = data.get("usage", {})
             tokens_in = usage.get("input_tokens")
             tokens_out = usage.get("output_tokens")
+            cached_tokens = usage.get("cached_tokens")
             turns = data.get("num_turns")
             seconds = data.get("duration_seconds")
         except Exception:
             response_text = stdout_text
             print("Checked agy JSON output for token counts. None found or parsing failed.")
             
-        return extract_ga_block_and_details(response_text), process.returncode, model, tokens_in, tokens_out, turns, seconds
+        return extract_ga_block_and_details(response_text), process.returncode, model, tokens_in, tokens_out, cached_tokens, turns, seconds
     except subprocess.TimeoutExpired:
         process.kill()
         stdout_text, _ = process.communicate()
-        return extract_ga_block_and_details(stdout_text) + "\nTimeout exceeded.", 124, model, None, None, None, None
+        return extract_ga_block_and_details(stdout_text) + "\nTimeout exceeded.", 124, model, None, None, None, None, None
 
-def write_fallback_reply(d_id, rev, status, reason, stdout=""):
+def write_fallback_reply(d_id, rev, status, reason, done_whens, stdout=""):
     reply_filename = f"{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')}-LOCAL-{d_id}.md"
-    reply_path = CHECKOUT_DIR / "to" / "baseline" / reply_filename
+    persistent_reply_path = Path.home() / "saved_replies" / reply_filename
+    persistent_reply_path.parent.mkdir(parents=True, exist_ok=True)
     
     ga_block = {
         "schema": "report/2",
         "from": "LOCAL",
         "handled": [{"id": d_id, "rev_seen": rev, "status": status}],
-        "items": [{"id": d_id, "state": "na"}],
-        "results": [{
-            "model": "None",
-            "tokens_in": None, "tokens_out": None, "turns": None, "seconds": None
-        }],
+        "items": [{"id": dw, "state": "na"} for dw in done_whens],
+        "results": [
+            {"name": "model", "value": None},
+            {"name": "input_tokens", "value": None},
+            {"name": "output_tokens", "value": None},
+            {"name": "cached_tokens", "value": None},
+            {"name": "turns", "value": None},
+            {"name": "seconds", "value": None}
+        ],
         "blockers": [{"kind": "other", "what": reason}]
     }
     
     content = f"```ga\n{json.dumps(ga_block, indent=2)}\n```\n## Details\n{reason}\n```\n{stdout[-2000:] if stdout else ''}\n```\n"
-    reply_path.parent.mkdir(parents=True, exist_ok=True)
-    reply_path.write_text(content)
+    persistent_reply_path.write_text(content)
     
-    subprocess.run(["python3", "ops/flow/mailcheck.py", "--report", str(reply_path)], cwd=CHECKOUT_DIR)
+    subprocess.run(["python3", "/tmp/mailcheck.py", "--report", str(persistent_reply_path)], check=False)
     
-    success = commit_and_push(reply_path, d_id)
-    return reply_path, success
+    success = commit_and_push(persistent_reply_path, d_id)
+    return persistent_reply_path, success
 
-def write_reply(d_id, rev, stdout, model, tokens_in, tokens_out, turns, seconds):
+def write_reply(d_id, rev, stdout, done_whens, model, tokens_in, tokens_out, cached_tokens, turns, seconds):
     match = re.search(r'```ga\s*(\{.*?\})\s*```', stdout, re.DOTALL)
     if not match:
-        return write_fallback_reply(d_id, rev, "declined", "agy printed no valid report/2", stdout)
+        return write_fallback_reply(d_id, rev, "declined", "agy printed no valid report/2", done_whens, stdout)
 
     try:
         ga_data = json.loads(match.group(1))
         results = ga_data.get("results", [])
-        if not results:
-            results = [{}]
-            ga_data["results"] = results
-        for res in results:
-            res["model"] = model
-            res["tokens_in"] = tokens_in
-            res["tokens_out"] = tokens_out
-            res["turns"] = turns
-            res["seconds"] = seconds
+        new_results = []
+        for r in results:
+            if r.get("name") not in ["model", "input_tokens", "output_tokens", "cached_tokens", "turns", "seconds"]:
+                new_results.append(r)
+        
+        new_results.extend([
+            {"name": "model", "value": model},
+            {"name": "input_tokens", "value": tokens_in},
+            {"name": "output_tokens", "value": tokens_out},
+            {"name": "cached_tokens", "value": cached_tokens},
+            {"name": "turns", "value": turns},
+            {"name": "seconds", "value": seconds}
+        ])
+        ga_data["results"] = new_results
         
         new_json = json.dumps(ga_data, indent=2)
         stdout = stdout.replace(match.group(1), f"\n{new_json}\n")
@@ -278,69 +322,100 @@ def write_reply(d_id, rev, stdout, model, tokens_in, tokens_out, turns, seconds)
         pass
         
     reply_filename = f"{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')}-LOCAL-{d_id}.md"
-    reply_path = CHECKOUT_DIR / "to" / "baseline" / reply_filename
-    reply_path.parent.mkdir(parents=True, exist_ok=True)
-    reply_path.write_text(stdout)
+    persistent_reply_path = Path.home() / "saved_replies" / reply_filename
+    persistent_reply_path.parent.mkdir(parents=True, exist_ok=True)
+    persistent_reply_path.write_text(stdout)
     
-    val_cmd = ["python3", "ops/flow/mailcheck.py", "--report", str(reply_path)]
-    val_res = subprocess.run(val_cmd, cwd=CHECKOUT_DIR, capture_output=True, text=True)
-    if val_res.returncode != 0:
-        return write_fallback_reply(d_id, rev, "declined", f"mailcheck failed: {val_res.stdout}", stdout)
+    val_cmd = ["python3", "/tmp/mailcheck.py", "--report", str(persistent_reply_path)]
+    val_res = subprocess.run(val_cmd, capture_output=True, text=True)
+    
+    if DRY_RUN:
+        print(f"DRY RUN: full reply text it would push:\n---\n{stdout}\n---")
+        print(f"DRY RUN: mailcheck output:\n{val_res.stdout}\n{val_res.stderr}")
         
-    success = commit_and_push(reply_path, d_id)
-    return reply_path, success
+    if val_res.returncode != 0:
+        return write_fallback_reply(d_id, rev, "declined", f"mailcheck failed: {val_res.stdout}", done_whens, stdout)
+        
+    success = commit_and_push(persistent_reply_path, d_id)
+    return persistent_reply_path, success
 
-def commit_and_push(file_path, d_id):
+def commit_and_push(persistent_reply_path, d_id):
+    if DRY_RUN:
+        return True
+        
+    reply_filename = persistent_reply_path.name
+    target_path = CHECKOUT_DIR / "to" / "baseline" / reply_filename
+    target_path.parent.mkdir(parents=True, exist_ok=True)
+    
     with git_lock:
-        subprocess.run(["git", "add", str(file_path)], cwd=CHECKOUT_DIR, check=True)
+        shutil.copy(str(persistent_reply_path), str(target_path))
+        subprocess.run(["git", "add", str(target_path)], cwd=CHECKOUT_DIR, check=True)
         subprocess.run(["git", "commit", "-m", f"LOCAL reply to {d_id}"], cwd=CHECKOUT_DIR, check=True)
         for _ in range(3):
             res = subprocess.run(["git", "push", "origin", BRANCH], cwd=CHECKOUT_DIR)
             if res.returncode == 0:
                 return True
             subprocess.run(["git", "fetch", "origin", BRANCH], cwd=CHECKOUT_DIR, check=True)
-            subprocess.run(["git", "rebase", f"origin/{BRANCH}"], cwd=CHECKOUT_DIR, check=True)
+            rebase_res = subprocess.run(["git", "rebase", f"origin/{BRANCH}"], cwd=CHECKOUT_DIR)
+            if rebase_res.returncode != 0:
+                subprocess.run(["git", "rebase", "--abort"], cwd=CHECKOUT_DIR)
+                subprocess.run(["git", "reset", "--hard", f"origin/{BRANCH}"], cwd=CHECKOUT_DIR)
+                shutil.copy(str(persistent_reply_path), str(target_path))
+                subprocess.run(["git", "add", str(target_path)], cwd=CHECKOUT_DIR, check=True)
+                subprocess.run(["git", "commit", "-m", f"LOCAL reply to {d_id}"], cwd=CHECKOUT_DIR, check=True)
         return False
 
-def worker_task(mail_file, d_id, rev, key, scope, after):
-    with record_lock:
-        record = load_handled_record()
-        restarts = record.get(key, {}).get("restarts", 0)
-        if key in record and record[key].get("status") == "running":
-            restarts += 1
-            
-    update_record(key, {
-        "mail_file": str(mail_file),
-        "start_time": datetime.now(timezone.utc).isoformat(),
-        "status": "running",
-        "restarts": restarts
-    })
-    
-    is_ro = is_read_only(scope)
-    stdout, retcode, model, tk_in, tk_out, turns, secs = agy_invoke(d_id, rev, mail_file, is_ro, after)
-    
-    update_record(key, {
-        "end_time": datetime.now(timezone.utc).isoformat(),
-        "exit_status": retcode,
-        "model": model,
-        "session_id": "none" # per M6, lacks agy session id, agy -p doesn't expose one in CLI without interactive
-    })
-    
-    if retcode != 0 and retcode != 124:
-        reply_path, success = write_fallback_reply(d_id, rev, "declined", f"crashed with exit code {retcode}", stdout)
-    elif retcode == 124:
-        reply_path, success = write_fallback_reply(d_id, rev, "declined", "timed out", stdout)
-    else:
-        reply_path, success = write_reply(d_id, rev, stdout, model, tk_in, tk_out, turns, secs)
+def worker_task(mail_file, d_id, rev, key, scope, after, done_whens):
+    try:
+        with record_lock:
+            record = load_handled_record()
+            restarts = record.get(key, {}).get("restarts", 0)
+            if key in record and record[key].get("status") == "running":
+                restarts += 1
+                
+        update_record(key, {
+            "mail_file": str(mail_file),
+            "start_time": datetime.now(timezone.utc).isoformat(),
+            "status": "running",
+            "restarts": restarts
+        })
         
-    status = "done" if success else "unpushed"
-    update_record(key, {
-        "status": status,
-        "reply_file": str(reply_path)
-    })
+        is_ro = is_read_only(scope)
+        stdout, retcode, model, tk_in, tk_out, tk_cache, turns, secs = agy_invoke(d_id, rev, mail_file, is_ro, after)
+        
+        update_record(key, {
+            "end_time": datetime.now(timezone.utc).isoformat(),
+            "exit_status": retcode,
+            "model": model,
+            "session_id": "none"
+        })
+        
+        if retcode != 0 and retcode != 124:
+            reply_path, success = write_fallback_reply(d_id, rev, "declined", f"crashed with exit code {retcode}", done_whens, stdout)
+        elif retcode == 124:
+            reply_path, success = write_fallback_reply(d_id, rev, "declined", "timed out", done_whens, stdout)
+        else:
+            reply_path, success = write_reply(d_id, rev, stdout, done_whens, model, tk_in, tk_out, tk_cache, turns, secs)
+            
+        status = "done" if success else "unpushed"
+        update_record(key, {
+            "status": status,
+            "reply_file": str(reply_path)
+        })
+    except Exception as e:
+        import traceback
+        tb = "".join(traceback.format_exception(type(e), e, e.__traceback__))
+        print(f"Worker exception for {key}:\n{tb}")
+        write_fallback_reply(d_id, rev, "declined", "worker crashed", done_whens, tb)
+        update_record(key, {"status": "declined"})
 
 def main():
-    setup_logging()
+    if not DRY_RUN:
+        setup_logging()
+    else:
+        # Simple logging to stdout for dry-run
+        logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+        
     executor = ThreadPoolExecutor(max_workers=MAX_CONCURRENT_RUNS)
     active_futures = {}
     
@@ -355,17 +430,27 @@ def main():
             for k in done_keys:
                 del active_futures[k]
                 
-            work = find_new_work(record)
+            work = find_new_work(record, list(active_futures.keys()))
             
-            for mail_file, d_id, rev, key, scope, after in work:
+            for mail_file, d_id, rev, key, scope, after, done_whens in work:
                 if key not in active_futures and len(active_futures) < MAX_CONCURRENT_RUNS:
-                    fut = executor.submit(worker_task, mail_file, d_id, rev, key, scope, after)
+                    fut = executor.submit(worker_task, mail_file, d_id, rev, key, scope, after, done_whens)
                     active_futures[key] = fut
+                    
+            if DRY_RUN:
+                # Wait for the single dry-run task to finish and then exit
+                for fut in active_futures.values():
+                    fut.result()
+                break
                     
         except Exception as e:
             print(f"Error: {e}")
             import traceback
             traceback.print_exc()
+            
+        if DRY_RUN:
+            break
+            
         time.sleep(30)
 
 if __name__ == "__main__":
