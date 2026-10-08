@@ -15,11 +15,11 @@ REPO = "cogito5170/baseline"
 NOTES_FILE = Path.home() / "local_notes.md"
 MAX_CONCURRENT_RUNS = 2
 TIME_LIMIT = 1800 # 30 minutes
-LOCAL_FORMAT_MD = Path(__file__).parent / "LOCAL_FORMAT.md"
+VM_LOCAL_PROMPT_MD = Path(__file__).parent / "VM_LOCAL_PROMPT.md"
 DRY_RUN = "--dry-run" in sys.argv
 
 record_lock = threading.Lock()
-HANDLED_RECORD_FILE = Path.home() / "handled_issues.json"
+HANDLED_RECORD_FILE = Path.home() / "handled_record.json"
 
 def setup_logging():
     log_file = Path.home() / "ga-local.log"
@@ -107,7 +107,7 @@ def extract_ga_blocks(text, author_association):
 
 def find_new_work(handled_record, active_keys):
     new_work = []
-    cmd = ["gh", "issue", "list", "-R", REPO, "-l", "VM", "--state", "open", "--json", "number,labels"]
+    cmd = ["gh", "issue", "list", "-R", REPO, "-l", "VM", "--state", "open", "--json", "number,labels,updatedAt"]
     res = subprocess.run(cmd, capture_output=True, text=True)
     if res.returncode != 0: return new_work
     
@@ -132,7 +132,7 @@ def find_new_work(handled_record, active_keys):
             if b["author_association"] == "OWNER" and data.get("from") == "baseline" and data.get("schema") == "directive/2" and data.get("to") == "VM_LOCAL":
                 trusted_directives.append(data)
             elif data.get("schema") == "directive/2":
-                print(f"Ignored untrusted directive in issue #{number}: author_association={b['author_association']}, from={data.get('from')}")
+                logging.info(f"event: ignored untrusted item in issue #{number}: author_association={b['author_association']}, from={data.get('from')}")
                 
         if not trusted_directives: continue
         
@@ -142,13 +142,37 @@ def find_new_work(handled_record, active_keys):
         rev = latest_dir.get("rev", 1)
         key = f"{d_id}_{rev}"
         
+        if key in active_keys:
+            continue
+            
         record = handled_record.get(key)
-        if not record or DRY_RUN:
-            if "qa:todo" in labels:
+        
+        if "qa:todo" in labels:
+            if not record or record.get("status") not in ["running", "done", "declined"]:
                 new_work.append((number, latest_dir, key))
-            elif "qa:doing" in labels and record and record.get("status") == "running" and key not in active_keys:
-                # acked but not reported (cut-off run)
+        elif "qa:doing" in labels:
+            should_resume = False
+            if record and record.get("status") == "running":
+                start_time_str = record.get("start_time")
+                if start_time_str:
+                    try:
+                        start = datetime.fromisoformat(start_time_str)
+                        if (datetime.now(timezone.utc) - start).total_seconds() > 1800:
+                            should_resume = True
+                    except: pass
+                else:
+                    should_resume = True
+            elif not record:
+                updated_at_str = iss.get("updatedAt")
+                if updated_at_str:
+                    try:
+                        updated_at = datetime.strptime(updated_at_str, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+                        if (datetime.now(timezone.utc) - updated_at).total_seconds() > 1800:
+                            should_resume = True
+                    except: pass
+            if should_resume or DRY_RUN:
                 new_work.append((number, latest_dir, key))
+                
     return new_work
 
 def is_read_only(scope):
@@ -225,7 +249,9 @@ def worker_task(number, directive, key):
         if not DRY_RUN:
             ack = {"schema":"ack/1", "id":d_id, "rev":rev, "from":"VM_LOCAL", "started_at":datetime.now(timezone.utc).isoformat()}
             gh_issue_comment(number, f"```ga\n{json.dumps(ack)}\n```")
+            logging.info(f"event: ack posted for {d_id} rev {rev}")
             gh_issue_edit(number, add_labels=["qa:doing"], remove_labels=["qa:todo"])
+            logging.info(f"event: label change for #{number} to qa:doing")
             
         update_record(key, {
             "start_time": datetime.now(timezone.utc).isoformat(),
@@ -233,12 +259,12 @@ def worker_task(number, directive, key):
         })
         
         # Build prompt
-        instruction_text = LOCAL_FORMAT_MD.read_text() if LOCAL_FORMAT_MD.exists() else ""
+        instruction_text = VM_LOCAL_PROMPT_MD.read_text() if VM_LOCAL_PROMPT_MD.exists() else ""
         notes_text = NOTES_FILE.read_text() if NOTES_FILE.exists() else ""
         
         is_ro = is_read_only(directive.get("scope", ""))
         if is_ro:
-            context = f"Short prompt for read-only.\nNotes:\n{notes_text}\nDirective:\n{json.dumps(directive)}"
+            context = f"role VM_LOCAL. report/2 rules only.\n{json.dumps(directive)}"
         else:
             context = f"{instruction_text}\n\n---\n\n{notes_text}\n---\n\n```ga\n{json.dumps(directive, indent=2)}\n```"
             
@@ -247,11 +273,16 @@ def worker_task(number, directive, key):
         cmd = ["/home/ubuntu/auto-agy-p.exp", "-p", context, "--model", model, "--output-format", "json", "--dangerously-skip-permissions"]
         if prev_session_id: cmd.extend(["--conversation", prev_session_id])
         
+        prompt_bytes = len(context.encode("utf-8"))
+        logging.info(f"event: agy start (model={model}, prompt_bytes={prompt_bytes})")
+        
         if DRY_RUN:
             print(f"DRY RUN: chosen model: {model}")
             print(f"DRY RUN: command line: {' '.join(cmd)}")
             
-        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        work_dir = Path.home() / "agy_work"
+        work_dir.mkdir(exist_ok=True)
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, cwd=str(work_dir))
         try:
             stdout_text, _ = process.communicate(timeout=TIME_LIMIT)
             retcode = process.returncode
@@ -279,6 +310,7 @@ def worker_task(number, directive, key):
             status = data.get("status", "UNKNOWN")
             conv_id = data.get("conversation_id", "none")
             denied_actions = data.get("denied_actions", [])
+            logging.info(f"event: agy exit (status={status}, seconds={secs}, tokens_in={tokens_in}, tokens_out={tokens_out})")
             
             if DRY_RUN:
                 print(f"DRY RUN: agy JSON output:")
@@ -325,6 +357,7 @@ def worker_task(number, directive, key):
             update_record(key, {"status": "done"})
         else:
             gh_issue_comment(number, reply_content)
+            logging.info(f"event: report posted for {d_id} rev {rev}")
             
             # check blockers to determine label
             new_label = "qa:review"
@@ -339,8 +372,14 @@ def worker_task(number, directive, key):
             except: pass
             
             gh_issue_edit(number, add_labels=[new_label], remove_labels=["qa:doing"])
+            logging.info(f"event: label change for #{number} to {new_label}")
             update_record(key, {"status": "done"})
-            
+
+            # post usage comment
+            if DRY_RUN is False:
+                usage_comment = {"schema": "usage/1", "id": d_id, "rev": rev, "from": "VM_LOCAL", "conversation_id": conv_id, "input_tokens": tokens_in, "output_tokens": tokens_out, "cached_tokens": cached_tokens, "turns": turns, "seconds": secs}
+                gh_issue_comment(number, f"```ga\n{json.dumps(usage_comment)}\n```")
+
     except Exception as e:
         import traceback
         tb = "".join(traceback.format_exception(type(e), e, e.__traceback__))
@@ -376,8 +415,9 @@ def main():
             work = find_new_work(record, list(active_futures.keys()))
             
             if not work and not active_futures and not DRY_RUN:
-                print("nothing pending")
-                break
+                logging.info(f"event: poll result - 0 items")
+            elif work:
+                logging.info(f"event: poll result - {len(work)} pending items")
                 
             for number, directive, key in work:
                 if key not in active_futures and len(active_futures) < MAX_CONCURRENT_RUNS:
@@ -395,10 +435,7 @@ def main():
             
         if DRY_RUN: break
         
-        if not active_futures:
-            print("nothing pending")
-            break
-        time.sleep(30)
+        time.sleep(60)
 
 if __name__ == "__main__":
     main()
