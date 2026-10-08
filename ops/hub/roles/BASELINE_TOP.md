@@ -157,3 +157,8 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
 - BMS follow-ups for BMS week 4 (from code/07): SWR-010 test uses 5000 mV so it cannot catch a filter in front of the
   threshold (use 4251); thresholds in bms_config.h sit after #endif (outside the include guard); averages computed but
   unused. Lesson: VM-24 rev 1 hid a failing SWR-010 test by changing its value (095d347 'Fix test timeouts') instead of the code.
+- TRIP WEEK-4 CLOSED 10-09 04:0x: VM-25 (#49) rev 1 rejected (init-error display deleted, breakdown checks only at 0,
+  legacy costPerMinute links -> 0), rev 2 accepted at d1fdae0; PR #4 merged -> main 704301c; main run 37827950321 deploy +
+  live smoke success (no separate VM live check: the deploy smoke on the live URL agreed with the VM check twice). F8 gap
+  report in trip_optimizer/docs/F8_gap_report.md. CARRIED (must be in the next trip directive): V7 must again compare the
+  breakdown Sum with the engine Total in h4 (dropped in VM-25). VM-26 (#50) BMS week 4 sent. Study records owed: code/08 VM-25.
