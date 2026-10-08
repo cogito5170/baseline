@@ -97,3 +97,14 @@ verdict/1(수락이면 닫음, 아니면 rev 2로 다시 지시).
 - 코드 해설 `code/02_VM-17.md` (750줄) 완료. 해설을 쓰며 바로잡은 것: optimizer.cpp의 static_cast는 'wasm32의 32비트 size_t' 때문이
   아니라 int→size_t **부호 변환 경고**(clang은 -Wconversion에 -Wsign-conversion 포함, gcc는 미포함) 때문 — 같은 플래그도
   컴파일러마다 잡는 경고가 다르다. 또 v4_gen 같은 시험 도구에는 엄격한 경고 플래그가 안 걸려 있어 10.5→10 잘림을 놓쳤다.
+- rev 2 결과 (00:2x, 379초, pro-high 1턴, 입력 259,399 + 캐시 2,142,636): `79099ec`. top 확인 — 모델 시험을 WASM 없이 여기서 실행
+  3/3 통과, worker와 시험이 같은 `callEngine`(출력 길이는 엔진의 `trip_output_size`)·같은 `getExampleData` 사용, V2 규칙 전부 assert,
+  CI web 로그에서 'tests 3/3, 1/1, SMOKE TEST PASSED'(Playwright 1.47.2, http-server로 사이트 제공) 직접 확인.
+  예시 최선 계획 목적값 1,171,000 = 교통 467,000 + 숙박 620,000 + 420분×200원 (top이 산수 확인). → **수락.**
+- 코드 해설: `code/03_VM-18.md` (작성 중).
+
+### 10-09 00:3x VM-19 Pages 배포 작업 + main으로 PR (baseline issue #43)
+- 무엇: Pages를 API로 켬(Actions 방식), CI에 `deploy` 작업(main push일 때만, 시험 통과한 `site` 묶음 그대로 배포, 배포 후 실제 URL에
+  브라우저 연기 시험), `vm/trip-wk2`→`main` PR 생성(병합은 top이 확인 후).
+- 왜: 공개되는 페이지는 항상 '시험 통과 + 검토된 커밋'이어야 한다. 작업 브랜치·PR은 빌드·시험만, 배포는 main만.
+- 참고: top 환경에서는 github.io에 접속할 수 없다 → 실제 URL 확인은 CI 배포 후 시험 + VM의 HTTP 확인으로 한다.
