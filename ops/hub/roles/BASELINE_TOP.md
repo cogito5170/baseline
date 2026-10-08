@@ -152,3 +152,5 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
 - USER DECISIONS 10-09 03:3x: ADR-5 = (a) plain JS modules for week 4 (no React+TS). From now on ask decisions through the
   VM channel (a GitHub issue labelled VM addressed to the user, the user answers there from the VM) instead of in this chat.
   The successor was created by top 01GaDrpc on the user's go.
+- 10-09 03:4x USER: "depth5까지 너가 진행해" -> top 01GaDrpc keeps running the work itself (successor 01XEnDXT was told to
+  stand down, idle, not started). Successor creation stays allowed while lineage depth < 5. VM-25 (#49) trip week 4 sent.
