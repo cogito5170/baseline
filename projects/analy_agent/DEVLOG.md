@@ -31,3 +31,13 @@ verdict/1(수락이면 닫음, 아니면 rev 2로 다시 지시).
 ### 10-08 23:5x VM-15 준비 상태 확인 (baseline issue #39)
 - 무엇: VM에 analy_agent가 있는지, push·관리 권한, Pages 상태, 도구 버전(cmake, node, emsdk 등), 네트워크, 디스크.
 - 왜: 이후 지시를 'VM이 직접 할 수 있는 것'에 맞추려고. 읽기 전용이라 싼 모델(flash-low)로 자동 선택된다.
+- 결과 (23:45, 45초, flash-low 1턴, 입력 76,861 중 캐시 73,125): VM 체크아웃 `~/agy_work/analy_agent`(main), 저장소
+  admin·push 권한 있음 → Pages를 API로 켤 수 있다. Pages 아직 꺼짐. VM에 cmake·docker·emsdk 없음, node 20·npm 10·g++ 13 있음.
+- top 확인: main = `c975362`(초기 커밋), 작업 브랜치는 main보다 8개 앞서고 0개 뒤 → main으로 fast-forward 병합 가능.
+  보고의 권한 값은 GitHub API로 직접 대조. 출발점 검증: top이 엔진을 여기서 빌드해 시험 10/10, 같은 커밋 CI 녹색. → 수락.
+- 배운 점: 읽기 전용 확인은 '사실만 인용하라'고 지시하면 1턴에 끝난다. 보고 수치는 그대로 믿지 않고 한 줄씩 원본과 대조한다.
+
+### 10-08 23:5x VM-16 엔진 CI 작업 (baseline issue #40)
+- 무엇: 작업 브랜치 `vm/trip-wk2`를 만들고, trip_optimizer용 GitHub Actions에 `engine` 작업(CMake Release, 경고=오류, 시험)을 추가.
+- 왜: WASM을 얹기 전에 엔진이 CI에서 항상 검사되게 한다. 이후 모든 관문의 '진실'은 CI 로그다.
+- 코드 작업이라 디스패처가 강한 모델(gemini-3.1-pro-high)을 고른다 (scope가 'read only'로 시작하지 않으면 자동).
