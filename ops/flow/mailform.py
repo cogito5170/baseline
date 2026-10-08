@@ -57,6 +57,7 @@ ALIASES = {
     "read_only": "read_only",
     "to": "to", "recipient": "to",
     "from": "from", "sender": "from",
+    "probe": "probe", "probes": "probe",
 }
 
 
@@ -157,6 +158,8 @@ def build(info: dict) -> tuple[str, dict, list[str]]:
             "model": str(c.get("model") or DEFAULT_MODEL)}
     if c.get("from"):  # issue/1: the Claude side that sent it (baseline / QA)
         head["from"] = str(c["from"])
+    if c.get("probe"):  # issue/1 fast path: named probes the bridge runs itself, no model
+        head["probe"] = [str(p) for p in _list(c["probe"])]
     if to != "AGY":  # the model field is for the VM bridge only (it picks the agy model)
         head.pop("model")
     elif head["model"] not in mailcheck.KNOWN_MODELS:

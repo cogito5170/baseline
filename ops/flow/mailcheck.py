@@ -26,7 +26,7 @@ BLOCK = re.compile(r"```(ga|ga-act)[ \t]*\n(.*?)\n```", re.S)
 ID_RE = re.compile(r"^CMD-[A-Z]+\d+$")
 REQUIRED = ("schema", "id", "rev", "to", "goal", "why")
 EXPECTED = ("scope", "done_when")  # every accepted mail has them; the VM has not declined for their absence
-KNOWN = set(REQUIRED) | set(EXPECTED) | {"after", "budget", "model", "changes", "from"}  # from: issue/1 sender
+KNOWN = set(REQUIRED) | set(EXPECTED) | {"after", "budget", "model", "changes", "from", "probe"}  # from: issue/1 sender; probe: issue/1 fast path
 CHANGE_OPS = {"add", "edit", "drop"}
 # The model list is the VM's own `agy models` output (user 10-07 18:5x: "model은 agy models"), saved verbatim in
 # ops/vm/agy_models.txt; refresh it by pasting the output there. The set below is the fallback until it exists.

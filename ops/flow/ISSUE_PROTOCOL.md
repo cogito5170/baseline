@@ -31,6 +31,13 @@ nobody else may direct an executor.
 - Bridges start agy only for open issues of their label in `qa:todo` (plus a cut-off `qa:doing` after 30 min), never
   because their own comment changed `updatedAt`: a "nothing pending" run costs ~70k input tokens (QA 10-08).
 
+- Fast path (user 10-08 20:2x): a directive whose head has `"probe": [<names>]` is answered by the bridge itself, with
+  no model: it runs only the named probes from its own fixed list (never a command taken from the issue), and posts a
+  report/2 whose items carry each probe's command and output tail, plus usage/1 with zero tokens. Unknown probe names →
+  `declined`. Use it for status, versions, logs, service state; use a model directive only when judgment or code
+  changes are needed.
+- Every rev starts a fresh agy session (no `--conversation` resume: VM-4 rev 2 cost 2.7M cached tokens that way); the
+  bridge gives the new session the previous rev's report instead.
 - Current work = highest-rev directive (body or Claude-side comment). An executor never works a (id, rev) twice.
 - Evidence = command + short output tail. Token results are numbers or JSON null. No secrets (public repo).
 
