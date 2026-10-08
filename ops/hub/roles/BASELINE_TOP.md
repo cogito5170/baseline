@@ -79,3 +79,7 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   push to a work branch (check with a probe/directive first). Verify every report yourself (run the tests; VM-9 claimed 'passed'
   when the new tests never ran). VM disk: 75% after VM-13; VM-14 (#38) git gc on ~/SE done: freed ~0 (already packed; fsck clean). HMAC: user said leave as is.
 - Career questions: answer directly (direction decided earlier: DevOps / cloud / infra entry, LG CNS & 메가존, 5-month plan).
+- UPDATE 10-08 23:4x (new depth-0 top session_01V3q6t9, branch claude/adoring-shannon-ggskrh): started (assign 5189d2e,
+  hooks, ack to 01T9tr2K, QA told). analy_agent read at 5a1d016 (2 workflows on the branch, not 3). Local env has node 22 +
+  cmake + g++ (V1-V3, V6 verifiable here; WASM/Playwright only in CI). CI logs need analy_agent attached (add_repo push;
+  anonymous API is refused). Development plan reported to the user; waiting for go + decisions (a)-(g) before VM-15.
