@@ -206,3 +206,9 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   controls), M3 joints + FK (Python ref vs JS cross-check) + drawing robot. Protocol sent to 015NoCK6: PR per milestone,
   doorbell {"flow":"pr",...}, diff stat + verbatim test output + PROVENANCE.md, CI workflow in M1. analy_agent/BMS/trip
   VM work continues at lower priority (VM-27 rev 2 running; VM-28 waits for ga-local restart).
+- USER 10-09 06:5x: (1) the VM co-develops World Platform to spread token load -> VM-31 (#55) Python kinematics reference
+  in Portfolio branch vm/wp-kinematics (kinematics/ only, model claude-opus-5-5-high); 015NoCK6 told to stay out of
+  kinematics/ and reuse its vectors for the JS FK cross-check. (2) APPROVAL RULE: ask the user first (VM channel issue);
+  if no human answer within 2 h, get the decision from the VM (read-only directive to VM_LOCAL asking for a decision with
+  reasons) and proceed — for routine project/design decisions only. Deletions, permission/settings changes, spending,
+  security and real-device control still wait for the human user.
