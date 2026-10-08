@@ -115,7 +115,6 @@ def fetch_and_checkout():
             subprocess.run(["git", "fetch", "origin", BRANCH], cwd=CHECKOUT_DIR, check=True)
             subprocess.run(["git", "reset", "--hard", f"origin/{BRANCH}"], cwd=CHECKOUT_DIR, check=True)
         
-        # Get mailcheck.py from claude/gracious-meitner-vp49xe into /tmp to avoid checking them into ga-mailbox
         subprocess.run("git show origin/claude/gracious-meitner-vp49xe:ops/flow/mailcheck.py > /tmp/mailcheck.py", cwd=CHECKOUT_DIR, shell=True, check=True)
         subprocess.run("git show origin/claude/gracious-meitner-vp49xe:ops/flow/nocode.py > /tmp/nocode.py || true", cwd=CHECKOUT_DIR, shell=True)
 
@@ -174,7 +173,7 @@ def find_new_work(handled_record, active_keys):
             if restarts < 1:
                 new_work.append((mail_file, d_id, rev, key, scope, after, done_whens))
             else:
-                write_fallback_reply(d_id, rev, "declined", "cut off by restart more than once", done_whens)
+                write_fallback_reply(d_id, rev, "declined", "cut off by restart more than once", done_whens, "cut off by restart")
                 update_record(key, {"status": "declined"})
         elif record.get("status") == "unpushed":
             # retry pushing
@@ -194,19 +193,13 @@ def is_read_only(scope):
         return scope.lower().startswith("read only")
     return False
 
-def extract_ga_block_and_details(response_text):
-    match = re.search(r'(```ga\n.*?```.*)', response_text, re.DOTALL)
-    if match:
-        return match.group(1).strip()
-    return response_text.strip()
-
-def agy_invoke(d_id, rev, mail_file, is_ro, after):
+def agy_invoke(d_id, rev, mail_file, is_ro, after, prev_session_id=None):
     instruction_text = LOCAL_FORMAT_MD.read_text() if LOCAL_FORMAT_MD.exists() else ""
     notes_text = NOTES_FILE.read_text() if NOTES_FILE.exists() else ""
     mail_content = mail_file.read_text()
     
     after_text = ""
-    if after or rev > 1:
+    if after or (rev > 1 and not prev_session_id):
         baseline_dir = CHECKOUT_DIR / "to" / "baseline"
         if baseline_dir.exists():
             for f in baseline_dir.glob("*-LOCAL-*.md"):
@@ -219,7 +212,7 @@ def agy_invoke(d_id, rev, mail_file, is_ro, after):
                         
                         is_after = any(a in handled_ids for a in after)
                         is_prev = False
-                        if rev > 1:
+                        if rev > 1 and not prev_session_id:
                             for h in ga_data.get("handled", []):
                                 if h.get("id") == d_id and h.get("rev_seen", 1) < rev:
                                     is_prev = True
@@ -233,16 +226,22 @@ def agy_invoke(d_id, rev, mail_file, is_ro, after):
     context = f"{instruction_text}\n\n---\n\n{notes_text}\n{after_text}\n---\n\n{mail_content}"
     model = "gemini-3.8-flash-high" if is_ro else "gemini-3.1-pro-high"
     
-    cmd = ["agy", "-p", context, "--model", model, "--output-format", "json"]
+    cmd = ["agy", "-p", context, "--model", model, "--output-format", "json", "--dangerously-skip-permissions"]
+    if prev_session_id:
+        cmd.extend(["--conversation", prev_session_id])
+        
     if DRY_RUN:
         print(f"DRY RUN: chosen model: {model}")
-        print(f"DRY RUN: command line: agy -p <prompt_elided> --model {model} --output-format json")
+        print(f"DRY RUN: command line: agy -p <prompt_elided> --model {model} --output-format json --dangerously-skip-permissions")
         
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     try:
         stdout_text, _ = process.communicate(timeout=TIME_LIMIT)
         response_text = ""
         tokens_in, tokens_out, cached_tokens, turns, seconds = None, None, None, None, None
+        conv_id = "none"
+        status = "UNKNOWN"
+        raw_stdout = stdout_text
         
         try:
             lines = stdout_text.strip().split('\n')
@@ -251,20 +250,32 @@ def agy_invoke(d_id, rev, mail_file, is_ro, after):
             usage = data.get("usage", {})
             tokens_in = usage.get("input_tokens")
             tokens_out = usage.get("output_tokens")
-            cached_tokens = usage.get("cached_tokens")
+            cached_tokens = usage.get("cache_read_tokens")
+            thinking_tokens = usage.get("thinking_tokens")
+            if thinking_tokens is not None:
+                print(f"Thinking tokens for {d_id}: {thinking_tokens}")
             turns = data.get("num_turns")
             seconds = data.get("duration_seconds")
+            status = data.get("status", "UNKNOWN")
+            conv_id = data.get("conversation_id", "none")
+            
+            if DRY_RUN:
+                print(f"DRY RUN: raw agy JSON (response cut to 800 chars):")
+                dry_data = data.copy()
+                if "response" in dry_data and len(dry_data["response"]) > 800:
+                    dry_data["response"] = dry_data["response"][:800] + "... [cut]"
+                print(json.dumps(dry_data, indent=2))
         except Exception:
             response_text = stdout_text
             print("Checked agy JSON output for token counts. None found or parsing failed.")
             
-        return extract_ga_block_and_details(response_text), process.returncode, model, tokens_in, tokens_out, cached_tokens, turns, seconds
+        return response_text, process.returncode, model, tokens_in, tokens_out, cached_tokens, turns, seconds, conv_id, status, raw_stdout
     except subprocess.TimeoutExpired:
         process.kill()
         stdout_text, _ = process.communicate()
-        return extract_ga_block_and_details(stdout_text) + "\nTimeout exceeded.", 124, model, None, None, None, None, None
+        return "", 124, model, None, None, None, None, None, "none", "TIMEOUT", stdout_text
 
-def write_fallback_reply(d_id, rev, status, reason, done_whens, stdout=""):
+def write_fallback_reply(d_id, rev, reply_status, reason, done_whens, details, model=None, tokens_in=None, tokens_out=None, cached_tokens=None, turns=None, seconds=None):
     reply_filename = f"{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')}-LOCAL-{d_id}.md"
     persistent_reply_path = Path.home() / "saved_replies" / reply_filename
     persistent_reply_path.parent.mkdir(parents=True, exist_ok=True)
@@ -272,31 +283,36 @@ def write_fallback_reply(d_id, rev, status, reason, done_whens, stdout=""):
     ga_block = {
         "schema": "report/2",
         "from": "LOCAL",
-        "handled": [{"id": d_id, "rev_seen": rev, "status": status}],
+        "handled": [{"id": d_id, "rev_seen": rev, "status": reply_status}],
         "items": [{"id": dw, "state": "na"} for dw in done_whens],
         "results": [
-            {"name": "model", "value": None},
-            {"name": "input_tokens", "value": None},
-            {"name": "output_tokens", "value": None},
-            {"name": "cached_tokens", "value": None},
-            {"name": "turns", "value": None},
-            {"name": "seconds", "value": None}
+            {"name": "model", "value": model},
+            {"name": "input_tokens", "value": tokens_in},
+            {"name": "output_tokens", "value": tokens_out},
+            {"name": "cached_tokens", "value": cached_tokens},
+            {"name": "turns", "value": turns},
+            {"name": "seconds", "value": seconds}
         ],
         "blockers": [{"kind": "other", "what": reason}]
     }
     
-    content = f"```ga\n{json.dumps(ga_block, indent=2)}\n```\n## Details\n{reason}\n```\n{stdout[-2000:] if stdout else ''}\n```\n"
+    content = f"```ga\n{json.dumps(ga_block, indent=2)}\n```\n## Details\n{details}\n"
     persistent_reply_path.write_text(content)
     
-    subprocess.run(["python3", "/tmp/mailcheck.py", "--report", str(persistent_reply_path)], check=False)
-    
+    val_cmd = ["python3", "/tmp/mailcheck.py", "--report", str(persistent_reply_path)]
+    val_res = subprocess.run(val_cmd, capture_output=True, text=True)
+    if DRY_RUN:
+        print(f"DRY RUN: full reply text it would push:\n---\n{content}\n---")
+        print(f"DRY RUN: mailcheck output:\n{val_res.stdout}\n{val_res.stderr}")
+        
     success = commit_and_push(persistent_reply_path, d_id)
     return persistent_reply_path, success
 
-def write_reply(d_id, rev, stdout, done_whens, model, tokens_in, tokens_out, cached_tokens, turns, seconds):
+def write_reply(d_id, rev, stdout, done_whens, model, tokens_in, tokens_out, cached_tokens, turns, seconds, raw_stdout):
     match = re.search(r'```ga\s*(\{.*?\})\s*```', stdout, re.DOTALL)
     if not match:
-        return write_fallback_reply(d_id, rev, "declined", "agy printed no valid report/2", done_whens, stdout)
+        details_content = f"agy printed no valid report/2\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
+        return write_fallback_reply(d_id, rev, "declined", "agy printed no valid report/2", done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, seconds)
 
     try:
         ga_data = json.loads(match.group(1))
@@ -334,7 +350,8 @@ def write_reply(d_id, rev, stdout, done_whens, model, tokens_in, tokens_out, cac
         print(f"DRY RUN: mailcheck output:\n{val_res.stdout}\n{val_res.stderr}")
         
     if val_res.returncode != 0:
-        return write_fallback_reply(d_id, rev, "declined", f"mailcheck failed: {val_res.stdout}", done_whens, stdout)
+        details = f"mailcheck failed: {val_res.stdout}\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
+        return write_fallback_reply(d_id, rev, "declined", f"mailcheck failed", done_whens, details, model, tokens_in, tokens_out, cached_tokens, turns, seconds)
         
     success = commit_and_push(persistent_reply_path, d_id)
     return persistent_reply_path, success
@@ -367,11 +384,17 @@ def commit_and_push(persistent_reply_path, d_id):
 
 def worker_task(mail_file, d_id, rev, key, scope, after, done_whens):
     try:
+        prev_session_id = None
         with record_lock:
             record = load_handled_record()
             restarts = record.get(key, {}).get("restarts", 0)
             if key in record and record[key].get("status") == "running":
                 restarts += 1
+            if rev > 1:
+                prev_key = f"{d_id}_{rev-1}"
+                prev_session_id = record.get(prev_key, {}).get("session_id")
+                if prev_session_id == "none":
+                    prev_session_id = None
                 
         update_record(key, {
             "mail_file": str(mail_file),
@@ -381,25 +404,41 @@ def worker_task(mail_file, d_id, rev, key, scope, after, done_whens):
         })
         
         is_ro = is_read_only(scope)
-        stdout, retcode, model, tk_in, tk_out, tk_cache, turns, secs = agy_invoke(d_id, rev, mail_file, is_ro, after)
+        stdout, retcode, model, tk_in, tk_out, tk_cache, turns, secs, conv_id, status, raw_stdout = agy_invoke(
+            d_id, rev, mail_file, is_ro, after, prev_session_id
+        )
         
         update_record(key, {
             "end_time": datetime.now(timezone.utc).isoformat(),
             "exit_status": retcode,
             "model": model,
-            "session_id": "none"
+            "session_id": conv_id
         })
         
-        if retcode != 0 and retcode != 124:
-            reply_path, success = write_fallback_reply(d_id, rev, "declined", f"crashed with exit code {retcode}", done_whens, stdout)
+        if status != "SUCCESS" or not stdout.strip():
+            reason = "agy printed no valid report/2"
+            if not stdout.strip():
+                reason = "agy response was empty"
+            if status != "SUCCESS":
+                reason = f"agy failed with status {status}"
+                
+            details_content = f"status: {status}\nexit code: {retcode}\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
+            reply_path, success = write_fallback_reply(
+                d_id, rev, "declined", reason, done_whens, details_content, 
+                model, tk_in, tk_out, tk_cache, turns, secs
+            )
+        elif retcode != 0 and retcode != 124:
+            details_content = f"crashed with exit code {retcode}\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
+            reply_path, success = write_fallback_reply(d_id, rev, "declined", "crashed", done_whens, details_content, model, tk_in, tk_out, tk_cache, turns, secs)
         elif retcode == 124:
-            reply_path, success = write_fallback_reply(d_id, rev, "declined", "timed out", done_whens, stdout)
+            details_content = f"timed out\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
+            reply_path, success = write_fallback_reply(d_id, rev, "declined", "timed out", done_whens, details_content, model, tk_in, tk_out, tk_cache, turns, secs)
         else:
-            reply_path, success = write_reply(d_id, rev, stdout, done_whens, model, tk_in, tk_out, tk_cache, turns, secs)
+            reply_path, success = write_reply(d_id, rev, stdout, done_whens, model, tk_in, tk_out, tk_cache, turns, secs, raw_stdout)
             
-        status = "done" if success else "unpushed"
+        record_status = "done" if success else "unpushed"
         update_record(key, {
-            "status": status,
+            "status": record_status,
             "reply_file": str(reply_path)
         })
     except Exception as e:
@@ -413,7 +452,6 @@ def main():
     if not DRY_RUN:
         setup_logging()
     else:
-        # Simple logging to stdout for dry-run
         logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
         
     executor = ThreadPoolExecutor(max_workers=MAX_CONCURRENT_RUNS)
@@ -425,7 +463,6 @@ def main():
             with record_lock:
                 record = load_handled_record()
             
-            # Clean up active futures
             done_keys = [k for k, fut in active_futures.items() if fut.done()]
             for k in done_keys:
                 del active_futures[k]
@@ -438,7 +475,6 @@ def main():
                     active_futures[key] = fut
                     
             if DRY_RUN:
-                # Wait for the single dry-run task to finish and then exit
                 for fut in active_futures.values():
                     fut.result()
                 break
