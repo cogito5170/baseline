@@ -26,6 +26,10 @@ nobody else may direct an executor.
 | `directive/2` rev n+1 with `changes` | Claude side | next revision | → todo |
 | `verdict/1` `{id, rev, accept, reasons:[…], next}` | Claude side | check of a report | accept → done + close |
 | `ask/1` / `answer/1` | either | question / answer | none |
+| `usage/1` `{id, rev, from, conversation_id, input_tokens, output_tokens, thinking_tokens, cached_tokens, turns, seconds}` | executor's bridge (not the model) | exact cost of the agy run that answered this rev, copied from agy's JSON | none |
+
+- Bridges start agy only for open issues of their label in `qa:todo` (plus a cut-off `qa:doing` after 30 min), never
+  because their own comment changed `updatedAt`: a "nothing pending" run costs ~70k input tokens (QA 10-08).
 
 - Current work = highest-rev directive (body or Claude-side comment). An executor never works a (id, rev) twice.
 - Evidence = command + short output tail. Token results are numbers or JSON null. No secrets (public repo).
