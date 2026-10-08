@@ -108,3 +108,9 @@ verdict/1(수락이면 닫음, 아니면 rev 2로 다시 지시).
   브라우저 연기 시험), `vm/trip-wk2`→`main` PR 생성(병합은 top이 확인 후).
 - 왜: 공개되는 페이지는 항상 '시험 통과 + 검토된 커밋'이어야 한다. 작업 브랜치·PR은 빌드·시험만, 배포는 main만.
 - 참고: top 환경에서는 github.io에 접속할 수 없다 → 실제 URL 확인은 CI 배포 후 시험 + VM의 HTTP 확인으로 한다.
+- 코드 해설 `code/03_VM-18.md` (1666줄) 완료. 해설을 쓰며 새로 찾은 결함 (다음 지시 후보, 후임 top에게 전달):
+  - 엔진 오류 경로가 화면에서 깨질 가능성: `callEngine`이 `mod.UTF8ToString`을 쓰지만 CMakeLists에 `EXPORTED_RUNTIME_METHODS`가
+    없다 (Emscripten 3.1.64 기본은 HEAP 뷰만 내보냄 — 소스를 읽어 본 추정, emcc 실행 확인은 아직). 방문 도시 목록을 비우는 것만으로
+    이 경로에 닿는데 어떤 시험도 지나가지 않는다. 예외가 나면 try/finally가 없어 버퍼 6개가 해제되지 않는다.
+  - engine.mjs 로딩 실패 시 화면이 'Optimizing...'에 멈추고 오류·시간 제한이 없다.
+  - SPEC 4.3: 기간 밖 줄 수는 console에만 찍히고 화면에 안 보임, '숙박비 미포함' 표시 없음.
