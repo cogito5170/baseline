@@ -15,7 +15,7 @@ REPO = "cogito5170/baseline"
 NOTES_FILE = Path.home() / "local_notes.md"
 MAX_CONCURRENT_RUNS = 2
 TIME_LIMIT = 1800 # 30 minutes
-VM_LOCAL_PROMPT_MD = Path(__file__).parent / "VM_LOCAL_PROMPT.md"
+VM_LOCAL_PROMPT_MD = Path(__file__).parent.parent.parent / "flow" / "VM_LOCAL_PROMPT.md"
 DRY_RUN = "--dry-run" in sys.argv
 
 record_lock = threading.Lock()
