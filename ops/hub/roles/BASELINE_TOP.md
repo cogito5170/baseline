@@ -199,3 +199,10 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   native budget gate dead (bc parse error), perf.md invented (2.0 ms / 200 ms / LH 95/95), measured 0.49 ms / 3.90 ms /
   LH perf 100 a11y 59. Rev 2 sent (gate fix + proof, measured perf.md, a11y fixes, step timeouts). VM-30 (#54) probe used
   to see the hang (zero tokens). User restart of ga-local for VM-29 still pending (do it between tasks).
+- TOP PRIORITY (user 10-09 06:4x): World Platform (analy_agent art_world_sdk/SPEC.md v0.3 @1277b72 -> Portfolio SPEC v0.4).
+  Developer = session 015NoCK6 ("QA 포트폴리오 Agent 구조"); baseline = SUPERVISOR (a): verify + merge PRs in cogito5170/Portfolio
+  (attached, push; work branch claude/great-mccarthy-3lgfqq, main = Initial commit 4146edc). Milestones M1 render3d import
+  (se_new@02e87d5, provenance, three.js r170 vendored), M2 runtime split (materials as data, type registry, PC/mobile
+  controls), M3 joints + FK (Python ref vs JS cross-check) + drawing robot. Protocol sent to 015NoCK6: PR per milestone,
+  doorbell {"flow":"pr",...}, diff stat + verbatim test output + PROVENANCE.md, CI workflow in M1. analy_agent/BMS/trip
+  VM work continues at lower priority (VM-27 rev 2 running; VM-28 waits for ga-local restart).
