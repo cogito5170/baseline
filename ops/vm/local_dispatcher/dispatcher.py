@@ -268,9 +268,11 @@ def worker_task(number, directive, key):
         else:
             context = f"{instruction_text}\n\n---\n\n{notes_text}\n---\n\n```ga\n{json.dumps(directive, indent=2)}\n```"
             
-        model = "gemini-3.8-flash-high" if is_ro else "gemini-3.1-pro-high"
+        model = "gemini-3.8-flash-low" if is_ro else "gemini-3.1-pro-high"
         
         cmd = ["/home/ubuntu/auto-agy-p.exp", "-p", context, "--model", model, "--output-format", "json", "--dangerously-skip-permissions"]
+        if is_ro:
+            cmd.extend(["--effort", "low"])
         if prev_session_id: cmd.extend(["--conversation", prev_session_id])
         
         prompt_bytes = len(context.encode("utf-8"))
