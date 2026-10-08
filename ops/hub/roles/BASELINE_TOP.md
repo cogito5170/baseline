@@ -233,3 +233,7 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   backgrounded watchers, or treat 'root agent idle' as done and re-ask for the report.
 - Now (07:1x): VM idle. Restart of ga-local (VM-29) can be done now. Next: VM-28 BMS fixes (claude-opus-5-5-high) after the
   restart; World Platform M1 PR from 015NoCK6 awaited.
+- USER 10-09 07:2x: (1) keep delegating sessions up to lineage depth 5 (create the successor at ~150k+ context while
+  depth < 5); (2) commits/tasks the user must do go to the VM channel as `[USER-TASK]` issues (ask/1 kind user_task,
+  human_only) — top's own baseline record commits stay with the top; (3) when ALL development is finished, the top
+  answers COMPLETE. TASK-1 (#58): user restarts ga-local for VM-29.
