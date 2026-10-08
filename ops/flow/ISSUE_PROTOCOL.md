@@ -58,3 +58,12 @@ MAC_LOCAL). Everything else is ignored and mentioned in the next report's detail
 - Claude side: creates issues, directives, verdicts, answers; sets qa:todo / qa:done; closes issues.
 - Executor: ack, report, ask; sets qa:doing / qa:review / qa:blocked; never closes issues.
 - baseline ↔ QA talk by send_message only (WHAT to do, one-line results).
+
+## Human-only questions (user 10-09 07:0x KST)
+- Routine decisions: baseline asks the user on a VM-labelled issue (`ask/1`, `"to": "USER"`); with no answer in 2 h,
+  baseline may take the decision from VM_LOCAL (read-only directive) and proceed.
+- Deletion, permission/settings changes, spending, security and real-device control are **human-only**: baseline posts
+  an issue titled `[USER-ONLY] ...` with `ask/1` carrying `"to": "USER", "human_only": true` and the line
+  "사용자가 직접 응답해야 합니다 (VM 에이전트 대리 응답 불가)". The user answers on that issue through the VM. No VM
+  agent answer, no timeout and no fallback applies; baseline waits. The dispatcher only acts on `directive/2`, so it
+  never picks these up.

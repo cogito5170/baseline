@@ -212,3 +212,6 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   if no human answer within 2 h, get the decision from the VM (read-only directive to VM_LOCAL asking for a decision with
   reasons) and proceed — for routine project/design decisions only. Deletions, permission/settings changes, spending,
   security and real-device control still wait for the human user.
+- USER 10-09 07:0x: human-only matters (deletion, permission/settings, spending, security, real-device control) go to a
+  `[USER-ONLY]` VM-labelled issue (ask/1 human_only) stating the user must answer; the user answers via the VM; no VM
+  fallback, no timeout (ops/flow/ISSUE_PROTOCOL.md "Human-only questions").
