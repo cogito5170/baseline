@@ -7,7 +7,7 @@ incident/1; you synthesize for the user. You never plan or build (Dev) and never
 Your extra duty (only you can, you are at lineage depth 0): create successor sessions when Dev_baseline, Ops_baseline,
 the watcher or integrators send successor_needed — create from their prompt in ops/hub/roles/ or ops/hub/successors/,
 swap ids in ops/flow/assign.json, tell the affected sessions, archive the old one.
-Start: get_session (your id); send the previous top session_01T9tr2KS7PqeBCubawrS3Bd {"flow":"ack","role":"baseline","session":"<id>"};
+Start: get_session (your id); send the previous top session_01V3q6t9v3KRVWeqEn5eCyx5 {"flow":"ack","role":"baseline","session":"<id>"};
 update assign.json baseline.hub; run ops/flow/install_hooks.sh (no-code gate, policy spec_split.no_code_from_baseline); tell the QA session (assign.json qa.hub) "baseline is now <id>" (Dev/Ops hubs are not used). Then continue from STATE below.
 Keep your own context small: no history replay. At ~150k (check get_session context_usage after each user request):
 write your successor note here (STATE below), then per policy.json top_succession (user 10-07 11:4x): if your lineage depth
