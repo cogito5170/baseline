@@ -19,12 +19,12 @@
   ]
  },
  "baseline": {
-  "hub": "session_01V3q6t9v3KRVWeqEn5eCyx5",
-  "previous": "session_01T9tr2KS7PqeBCubawrS3Bd",
+  "hub": "session_01GaDrpc69nLuanoa7idiUvt",
+  "previous": "session_01V3q6t9v3KRVWeqEn5eCyx5",
   "channel": "issues label VM (ops/flow/ISSUE_PROTOCOL.md)",
   "executor": "VM_LOCAL (agy on the Oracle VM, cron ~/check_qa_issues.sh)"
  },
- "note": "User 10-07 04:5x KST (policy.json cloud_top_only): cloud = top baseline only (instructions + user reports). Dev/Ops work runs on the VM. Top baseline: session_01KvzrDZZJDxYhbkb9Yb8LKs (depth 0). Top baseline is now session_019388b1XGeFcqrYiks8S8SY (lineage depth 1, created 10-07 11:5x KST by top 01KvzrDZ per policy top_succession). Top baseline is now session_015Lg6TuBTEyJ2nMvFqvCNve (lineage depth 2, created 10-07 16:1x KST by top 019388b1 per policy top_succession). Top baseline is now session_01HCJQVpQNkaHospDTayEnyP (lineage depth 3, created 10-07 17:2x KST by top 015Lg6Tu per policy top_succession; user confirmed in-session). Top baseline is now session_01BofKvzxrYc3FFoPqmMVJ5F (lineage depth 4, created 10-08 06:0x KST by top 01HCJQVp per policy top_succession; user approved 10-08). Top baseline is now session_01T9tr2KS7PqeBCubawrS3Bd (lineage depth 5, created 10-08 21:1x KST by top 01BofKvz per policy top_succession; user approved). Top baseline is now session_01V3q6t9v3KRVWeqEn5eCyx5 (lineage depth 0, opened by the user 10-08 23:3x KST for analy_agent large-scale development).",
+ "note": "User 10-07 04:5x KST (policy.json cloud_top_only): cloud = top baseline only (instructions + user reports). Dev/Ops work runs on the VM. Top baseline: session_01KvzrDZZJDxYhbkb9Yb8LKs (depth 0). Top baseline is now session_019388b1XGeFcqrYiks8S8SY (lineage depth 1, created 10-07 11:5x KST by top 01KvzrDZ per policy top_succession). Top baseline is now session_015Lg6TuBTEyJ2nMvFqvCNve (lineage depth 2, created 10-07 16:1x KST by top 019388b1 per policy top_succession). Top baseline is now session_01HCJQVpQNkaHospDTayEnyP (lineage depth 3, created 10-07 17:2x KST by top 015Lg6Tu per policy top_succession; user confirmed in-session). Top baseline is now session_01BofKvzxrYc3FFoPqmMVJ5F (lineage depth 4, created 10-08 06:0x KST by top 01HCJQVp per policy top_succession; user approved 10-08). Top baseline is now session_01T9tr2KS7PqeBCubawrS3Bd (lineage depth 5, created 10-08 21:1x KST by top 01BofKvz per policy top_succession; user approved). Top baseline is now session_01V3q6t9v3KRVWeqEn5eCyx5 (lineage depth 0, opened by the user 10-08 23:3x KST for analy_agent large-scale development). Top baseline is now session_01GaDrpc69nLuanoa7idiUvt (lineage depth 1, created 10-09 00:3x KST by top 01V3q6t9 per policy top_succession; user confirmed in-session).",
  "qa": {
   "hub": "session_017zP3NXpXGeAtJhGUXNHofb",
   "channel": "issues label QA (ops/flow/ISSUE_PROTOCOL.md)",
