@@ -215,3 +215,6 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
 - USER 10-09 07:0x: human-only matters (deletion, permission/settings, spending, security, real-device control) go to a
   `[USER-ONLY]` VM-labelled issue (ask/1 human_only) stating the user must answer; the user answers via the VM; no VM
   fallback, no timeout (ops/flow/ISSUE_PROTOCOL.md "Human-only questions").
+- ASK-2 (#56, USER-ONLY test) answered by the user 'Q1: a' 21:49Z -> successor candidate 01XEnDXT ARCHIVED.
+- VM-31 (#55) rev 1 rejected (IK(0,0) ZeroDivisionError, link lengths hard-coded 1,1,1, limit check pairs the fixed tip
+  joint); rev 2 sent. Portfolio PR #1 (b8f1fe0) open, not merged.
