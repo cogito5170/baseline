@@ -119,3 +119,8 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
 - WEEK-2 GATE CLOSED 10-09 02:4x: main c1cbeed deployed (run 37815686862: deploy + live smoke PASSED), VM-21 (#45) live
   URL 200 x3 + commit hash. Live: https://cogito5170.github.io/analy_agent/. VM-22 (#46) week 3 sent (branch vm/trip-wk3,
   PR, no merge). Follow-up: Node 20 deprecation warning (deploy-pages@v4, upload-artifact pin).
+- WEEK-3 GATE CLOSED 10-09 02:5x: VM-22 (#46) rev 1 rejected (7 scratch files + false diff stat), rev 2 accepted at c4c96ec;
+  PR #2 merged by top -> main a78196a, deploy + live smoke PASSED (run 37818895646); VM-23 (#47) live check, index.html
+  11397 bytes = source. NEXT per plan: BMS week 3 (embedded_qa_portfolio), then trip week 4. Put "helper scripts outside the
+  repo checkout" and "diff stat run after push, verbatim" into every code directive from the start (VM-20 and VM-22 both failed it).
+  Study records owed: code/04 VM-19, 05 VM-20, 06 VM-22 + DEVLOG.
