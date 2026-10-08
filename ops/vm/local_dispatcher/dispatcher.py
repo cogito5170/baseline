@@ -355,7 +355,7 @@ def worker_task(number, directive, key):
 
 def fetch_and_checkout():
     if not Path("/tmp/mailcheck.py").exists() or not DRY_RUN:
-        subprocess.run("git archive --remote=https://github.com/cogito5170/baseline.git claude/gracious-meitner-vp49xe ops/flow/mailcheck.py | tar -x -O ops/flow/mailcheck.py > /tmp/mailcheck.py", shell=True)
+        subprocess.run("cp /home/ubuntu/local_dispatcher/ops/flow/mailcheck.py /tmp/mailcheck.py", shell=True)
 
 def main():
     if not DRY_RUN:
