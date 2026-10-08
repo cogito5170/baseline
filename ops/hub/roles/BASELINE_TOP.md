@@ -218,3 +218,9 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
 - ASK-2 (#56, USER-ONLY test) answered by the user 'Q1: a' 21:49Z -> successor candidate 01XEnDXT ARCHIVED.
 - VM-31 (#55) rev 1 rejected (IK(0,0) ZeroDivisionError, link lengths hard-coded 1,1,1, limit check pairs the fixed tip
   joint); rev 2 sent. Portfolio PR #1 (b8f1fe0) open, not merged.
+- VM-31 rev 2 accepted (7587d3e); Portfolio PR #1 merged -> main 7c1daa3 (kinematics/ Python reference: URDF subset,
+  FK, planar IK incl. origin, limit check on active joints, test_vectors.json for the JS cross-check). Top check: 7 tests,
+  2,000 random targets per planar arm, max FK(IK) error 8.8e-14.
+- ASK-3 (#57 drill) answer was a blanket "동의하며 승인합니다 / 사용자 승인" with no option letters -> not usable as an
+  approval; proposed rule to the user (option letters required, blanket approvals re-asked, optional passphrase). Pending.
+- Note: running Python tests inside /home/user/portfolio leaves kinematics/__pycache__ (untracked) — delete it after.
