@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 BLOCK = re.compile(r"```(ga|ga-act)[ \t]*\n(.*?)\n```", re.S)
-ID_RE = re.compile(r"^CMD-[A-Z]+\d+$")
+ID_RE = re.compile(r"^CMD-[A-Z]+[0-9]*$")
 REQUIRED = ("schema", "id", "rev", "to", "goal", "why")
 EXPECTED = ("scope", "done_when")  # every accepted mail has them; the VM has not declined for their absence
 KNOWN = set(REQUIRED) | set(EXPECTED) | {"after", "budget", "model", "changes"}
