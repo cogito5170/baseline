@@ -250,18 +250,15 @@ def worker_task(number, directive, key):
         if DRY_RUN:
             print(f"DRY RUN: chosen model: {model}")
             print(f"DRY RUN: command line: {' '.join(cmd)}")
-            ga_block_str = f'```ga\n{{"schema":"report/2","from":"VM_LOCAL","handled":[{{"id":"{d_id}","rev_seen":{rev},"status":"done"}}],"items":[],"results":[]}}\n```'
-            stdout_text = json.dumps({"response": ga_block_str, "usage": {"input_tokens": 10}, "status": "SUCCESS"})
-            retcode = 0
-        else:
-            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-            try:
-                stdout_text, _ = process.communicate(timeout=TIME_LIMIT)
-                retcode = process.returncode
-            except subprocess.TimeoutExpired:
-                process.kill()
-                stdout_text, _ = process.communicate()
-                retcode = 124
+            
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        try:
+            stdout_text, _ = process.communicate(timeout=TIME_LIMIT)
+            retcode = process.returncode
+        except subprocess.TimeoutExpired:
+            process.kill()
+            stdout_text, _ = process.communicate()
+            retcode = 124
                 
         tokens_in, tokens_out, cached_tokens, turns, secs = None, None, None, None, None
         conv_id = "none"
