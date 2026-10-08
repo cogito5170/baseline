@@ -189,3 +189,5 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   needs a ga-local restart BY THE USER after it lands. Pool plan once live: BMS code work -> claude-opus-5-5-high,
   trip code work -> gemini-3.1-pro-high, read-only checks -> gemini-3.8-flash-low (fallback claude-sonnet-5-5-low).
   VM-28 (BMS fixes, scratchpad vm28.md) waits for the VM-27 verdict; send it with model claude-opus-5-5-high after the restart.
+- V9 (user 10-09 05:4x, answered in chat): the user tries trip_optimizer personally first; feedback as analy_agent issues
+  labelled V9 (only recorded real use goes into the portfolio). ASK-1 Q1 (BMS plant model) still open on #52.
