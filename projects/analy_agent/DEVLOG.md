@@ -48,3 +48,11 @@ verdict/1(수락이면 닫음, 아니면 rev 2로 다시 지시).
 - 무엇: 작업 브랜치 `vm/trip-wk2`를 만들고, trip_optimizer용 GitHub Actions에 `engine` 작업(CMake Release, 경고=오류, 시험)을 추가.
 - 왜: WASM을 얹기 전에 엔진이 CI에서 항상 검사되게 한다. 이후 모든 관문의 '진실'은 CI 로그다.
 - 코드 작업이라 디스패처가 강한 모델(gemini-3.1-pro-high)을 고른다 (scope가 'read only'로 시작하지 않으면 자동).
+- 결과 (23:50, 122초, pro-high 1턴, 입력 92,864 + 캐시 356,472): `vm/trip-wk2` = `e081fb3`, 워크플로 1개(33줄) 추가.
+  top 확인: CI 작업 로그에서 직접 `100% tests passed ... out of 10` 읽음, 바뀐 파일 1개 git으로 대조. → 수락.
+  코드 해설: `code/01_VM-16.md`.
+
+### 10-09 00:0x VM-17 WASM 빌드 + V4 (baseline issue #41)
+- 무엇: 엔진 C 인터페이스를 Emscripten 3.1.64로 WASM(engine.mjs + engine.wasm)으로 빌드. 네이티브가 무작위 문제와 정답 배열을
+  파일로 내보내고, Node가 같은 문제를 WASM으로 풀어 배열을 한 칸씩 비교(V4). CI에 `web` 작업 추가.
+- 왜: 화면을 만들기 전에 '브라우저 안의 엔진 = 시험을 통과한 네이티브 엔진'을 증명해야, 이후 화면 버그와 엔진 버그를 구분할 수 있다.
