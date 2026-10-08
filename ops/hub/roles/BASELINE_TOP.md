@@ -114,3 +114,5 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   (ctest 10/10 + model tests 3/3 rerun here). BLOCKED: add_repo analy_agent is refused by the auto-mode classifier even
   after the user's in-chat "허용" -> no API/CI/merge for analy_agent; public read-only clone works. Waiting for the user to
   add an allow rule or merge PR #1 themselves; then live-URL check by the VM. Follow-up: results table innerHTML.
+- RULE (user 10-09 02:3x): analy_agent pushes go through the VM (directive to VM_LOCAL; the user pushes from the VM).
+  Baseline-repo records (STATE, DEVLOG, code/NN) are still pushed by the top. PR #1 merged by top at c1cbeed (CI green).
