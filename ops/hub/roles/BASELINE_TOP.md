@@ -7,7 +7,7 @@ incident/1; you synthesize for the user. You never plan or build (Dev) and never
 Your extra duty (only you can, you are at lineage depth 0): create successor sessions when Dev_baseline, Ops_baseline,
 the watcher or integrators send successor_needed — create from their prompt in ops/hub/roles/ or ops/hub/successors/,
 swap ids in ops/flow/assign.json, tell the affected sessions, archive the old one.
-Start: get_session (your id); send the previous top session_01BofKvzxrYc3FFoPqmMVJ5F {"flow":"ack","role":"baseline","session":"<id>"};
+Start: get_session (your id); send the previous top session_01T9tr2KS7PqeBCubawrS3Bd {"flow":"ack","role":"baseline","session":"<id>"};
 update assign.json baseline.hub; run ops/flow/install_hooks.sh (no-code gate, policy spec_split.no_code_from_baseline); tell the QA session (assign.json qa.hub) "baseline is now <id>" (Dev/Ops hubs are not used). Then continue from STATE below.
 Keep your own context small: no history replay. At ~150k (check get_session context_usage after each user request):
 write your successor note here (STATE below), then per policy.json top_succession (user 10-07 11:4x): if your lineage depth
@@ -55,4 +55,20 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   passed 3/3 with no decline (53-100k in, 0 cached, 15-28 s). VM-13 (#37) disk cleanup: 79% -> 75% (12G free).
   Open for the user: proposal list (~/SE 7.5G incl .git 3.1G + .venv-torch 723M, ~/.local/lib 4.7G, ~/PandA-bambu 943M,
   ~/token 789M), HMAC decision, new depth-0 top before large-scale development. Next VM id: VM-14.
+- HANDOFF FOR THE NEW DEPTH-0 TOP (10-08 23:2x, top 01T9tr2K): the user opens you to start LARGE-SCALE DEVELOPMENT.
+  Spec source = "QA 포트폴리오 Agent 구조" session session_015NoCK6mD7C6mKw3XmTsp7N (handoff 10-08 23:2x; user asked it to send to
+  baseline). Repo cogito5170/analy_agent (public), branch claude/great-mccarthy-3lgfqq (head 5a1d016; main = Initial commit only).
+  Contents: qa_agents/ (8-role QA pipeline, JSON contracts, E2E on a seeded demo app); embedded_qa_portfolio/ (BMS, week 2 of 12:
+  SPEC v1.1, HARA-lite, 32 SW reqs, DBC v0.1, first C firmware slice + Unity, build container, ARM cross build, 3 checkers,
+  D1/D2 drafts); PRODUCTIVITY_ROLES_PROMPT.md; embedded_toolchain/SPEC.md v0.1 (not built); trip_optimizer/SPEC.md v0.2 +
+  engine/ (C++17 K-best DP, C API for WASM). Verified by top 01T9tr2K: cmake build + ctest 10/10 pass, 8 cities x 30 days 0.09 s.
+  Not done: engine CI job, WASM build, web UI, GitHub Pages deploy. 3 CI workflows on the branch were green (their report).
+  Cloud env cannot reach PyPI/npm/Emscripten -> WASM/npm/Playwright verify in CI or on the VM only.
+  Principles: no unmeasured numbers in the portfolio; ISO 26262/ASPICE only as "concept applied"; hardware facts stay TODO.
+  USER DECISIONS OPEN (ask first, one message): (a) which track first (proposal: trip_optimizer to a live Pages deploy, then BMS
+  week 3); (b) Pages Source = "GitHub Actions" (owner sets it); (c) deploy on merge to main?; (d) UI plain JS or React+TS (ADR-5);
+  (e) region / co-developer / live price API; (f) hours per week (estimates assume 20 h); (g) fold BMS 12-week plan into another?
+  ROUTE: you send WHAT-only directives to VM_LOCAL (issues label VM, next id VM-15); the VM needs a checkout of analy_agent and
+  push to a work branch (check with a probe/directive first). Verify every report yourself (run the tests; VM-9 claimed 'passed'
+  when the new tests never ran). VM disk: 75% after VM-13; VM-14 (#38) git gc on ~/SE in flight. HMAC: user said leave as is.
 - Career questions: answer directly (direction decided earlier: DevOps / cloud / infra entry, LG CNS & 메가존, 5-month plan).
