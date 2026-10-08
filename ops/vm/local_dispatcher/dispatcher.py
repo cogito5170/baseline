@@ -18,6 +18,17 @@ TIME_LIMIT = 1800 # 30 minutes
 VM_LOCAL_PROMPT_MD = Path(__file__).parent.parent.parent / "flow" / "VM_LOCAL_PROMPT.md"
 DRY_RUN = "--dry-run" in sys.argv
 
+PROBE_TABLE = {
+    "service_status": ["bash", "-c", "systemctl --user status ga-local | head -n 12"],
+    "dispatcher_head": ["git", "-C", f"{Path.home()}/local_dispatcher", "log", "--oneline", "-3"],
+    "dispatcher_log": ["bash", "-c", f"grep -v 'event: poll result' {Path.home()}/ga-local.log | tail -n 40"],
+    "handled_record": ["bash", "-c", f"tail -n 50 {Path.home()}/handled_record.json"],
+    "agy_version": ["agy", "--version"],
+    "disk": ["df", "-h", "/home"],
+    "crontab": ["crontab", "-l"],
+    "uptime": ["uptime"],
+}
+
 record_lock = threading.Lock()
 HANDLED_RECORD_FILE = Path.home() / "handled_record.json"
 
@@ -239,12 +250,73 @@ def worker_task(number, directive, key):
     rev = directive.get("rev", 1)
     done_whens = [dw.get("id") for dw in directive.get("done_when", []) if "id" in dw]
     try:
-        prev_session_id = None
-        with record_lock:
-            record = load_handled_record()
-            if rev > 1:
-                prev_key = f"{d_id}_{rev-1}"
-                prev_session_id = record.get(prev_key, {}).get("session_id")
+        probes = directive.get("probe")
+        if probes is not None:
+            # Fast path
+            evidence_text = []
+            unknown = []
+            for p in probes:
+                if p not in PROBE_TABLE:
+                    unknown.append(p)
+            
+            if unknown:
+                reply_content = write_fallback_reply(
+                    d_id, rev, "declined", f"unknown probe: {', '.join(unknown)}",
+                    done_whens, f"Unknown probes requested: {unknown}",
+                    model="none", tokens_in=0, tokens_out=0, cached_tokens=0, turns=0, seconds=0
+                )
+            else:
+                for p in probes:
+                    argv = PROBE_TABLE[p]
+                    try:
+                        res = subprocess.run(argv, capture_output=True, text=True, timeout=30)
+                        out = res.stdout + res.stderr
+                    except subprocess.TimeoutExpired as e:
+                        out = (e.stdout.decode('utf-8', 'replace') if e.stdout else '') + " [TIMEOUT]"
+                    except Exception as e:
+                        out = str(e)
+                    out = out[-3000:]
+                    evidence_text.append(f"Probe: {p}\nCommand: {' '.join(argv)}\nOutput:\n{out}")
+                
+                ev_str = "\n\n".join(evidence_text)
+                
+                ga_block = {
+                    "schema": "report/2",
+                    "from": "VM_LOCAL",
+                    "handled": [{"id": d_id, "rev_seen": rev, "status": "done"}],
+                    "items": [{"id": dw, "state": "met", "evidence": ev_str} for dw in done_whens],
+                    "results": [
+                        {"name": "model", "value": "none"},
+                        {"name": "input_tokens", "value": 0},
+                        {"name": "output_tokens", "value": 0},
+                        {"name": "cached_tokens", "value": 0},
+                        {"name": "turns", "value": 0},
+                        {"name": "seconds", "value": 0}
+                    ]
+                }
+                reply_content = f"```ga\n{json.dumps(ga_block, indent=2)}\n```\n"
+
+            tmp_reply = f"/tmp/reply_{d_id}.md"
+            with open(tmp_reply, "w") as f: f.write(reply_content)
+            val_res = subprocess.run(["python3", "/tmp/mailcheck.py", "--report", tmp_reply], capture_output=True, text=True)
+            if val_res.returncode != 0 and not DRY_RUN:
+                details = f"mailcheck failed: {val_res.stdout}\nRaw reply:\n{reply_content}"
+                reply_content = write_fallback_reply(d_id, rev, "declined", "mailcheck failed", done_whens, details, "none", 0, 0, 0, 0, 0)
+                with open(tmp_reply, "w") as f: f.write(reply_content)
+
+            if DRY_RUN:
+                print(f"DRY RUN: Reply content:\n{reply_content}")
+                print(f"DRY RUN: Mailcheck output:\n{val_res.stdout}\n{val_res.stderr}")
+                update_record(key, {"status": "done"})
+            else:
+                gh_issue_comment(number, reply_content)
+                logging.info(f"event: report posted for {d_id} rev {rev}")
+                gh_issue_edit(number, add_labels=["qa:review"], remove_labels=["qa:todo", "qa:doing"])
+                logging.info(f"event: label change for #{number} to qa:review")
+                update_record(key, {"status": "done"})
+                usage_comment = {"schema": "usage/1", "id": d_id, "rev": rev, "from": "VM_LOCAL", "conversation_id": "none", "input_tokens": 0, "output_tokens": 0, "cached_tokens": 0, "turns": 0, "seconds": 0}
+                gh_issue_comment(number, f"```ga\n{json.dumps(usage_comment)}\n```")
+            return
         
         if not DRY_RUN:
             ack = {"schema":"ack/1", "id":d_id, "rev":rev, "from":"VM_LOCAL", "started_at":datetime.now(timezone.utc).isoformat()}
@@ -258,6 +330,23 @@ def worker_task(number, directive, key):
             "status": "running"
         })
         
+        prev_report_text = ""
+        if rev > 1:
+            issue_data = gh_api(f"repos/{REPO}/issues/{number}")
+            comments_data = gh_api(f"repos/{REPO}/issues/{number}/comments") or []
+            texts = []
+            if issue_data: texts.append(issue_data.get("body", ""))
+            texts.extend([c.get("body", "") for c in comments_data])
+            for txt in texts:
+                for match in re.finditer(r'```ga\s*(\{.*?\})\s*```', txt, re.DOTALL):
+                    try:
+                        g_data = json.loads(match.group(1))
+                        if g_data.get("schema") == "report/2" and g_data.get("from") == "VM_LOCAL":
+                            handled = g_data.get("handled", [])
+                            if handled and handled[0].get("id") == d_id and handled[0].get("rev_seen") == rev - 1:
+                                prev_report_text = txt
+                    except: pass
+                    
         # Build prompt
         instruction_text = VM_LOCAL_PROMPT_MD.read_text() if VM_LOCAL_PROMPT_MD.exists() else ""
         notes_text = NOTES_FILE.read_text() if NOTES_FILE.exists() else ""
@@ -265,17 +354,23 @@ def worker_task(number, directive, key):
         extra_rules = "RULES: run only the commands the directive names or that its done_when needs; do not open dispatcher.py, mailcheck.py, LOCAL_FORMAT.md or other repo files unless the directive names them; do not validate the report yourself (the dispatcher already runs mailcheck before posting, and on failure it posts the fallback); no manage_task."
         
         is_ro = is_read_only(directive.get("scope", ""))
+        
+        prev_text_part = ""
+        if prev_report_text:
+            capped_prev = prev_report_text[:4000] # wait, "capped at 4,000 chars", I should just do prev_report_text[:4000]
+            prev_text_part = f"\nPrevious report (rev {rev-1}):\n{capped_prev}\n"
+
         if is_ro:
-            context = f"role VM_LOCAL. report/2 rules only.\n{extra_rules}\n{json.dumps(directive)}"
+            context = f"role VM_LOCAL. report/2 rules only.\n{extra_rules}\n{prev_text_part}{json.dumps(directive)}"
         else:
-            context = f"{instruction_text}\n\n---\n\n{notes_text}\n---\n\n{extra_rules}\n\n```ga\n{json.dumps(directive, indent=2)}\n```"
+            context = f"{instruction_text}\n\n---\n\n{notes_text}\n---\n\n{extra_rules}\n{prev_text_part}\n```ga\n{json.dumps(directive, indent=2)}\n```"
             
         model = "gemini-3.8-flash-low" if is_ro else "gemini-3.1-pro-high"
         
         cmd = ["/home/ubuntu/auto-agy-p.exp", "-p", context, "--model", model, "--output-format", "json", "--dangerously-skip-permissions"]
         if is_ro:
             cmd.extend(["--effort", "low"])
-        if prev_session_id: cmd.extend(["--conversation", prev_session_id])
+
         
         prompt_bytes = len(context.encode("utf-8"))
         logging.info(f"event: agy start (model={model}, prompt_bytes={prompt_bytes})")
