@@ -183,3 +183,9 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   15->0 wrap, removing the 3-in-a-row reset in SWR-030; (4) no D8 deviation record for the cppcheck suppressions; SOC
   hard-coded 50 %. -> VM-28 BMS fix directive after VM-27 (agy quota), independent of ASK-1 (#52, user decisions
   Q1 plant model / Q2 V9 users).
+- MODEL POOLS (user 10-09 05:3x): agy models split into two quota pools, Claude+GPT and Gemini; spread the load.
+  ops/vm/agy_models.txt has the list. mailform now keeps "model" for VM_LOCAL when baseline names one (validated).
+  VM-29 (#53) changes the dispatcher: honor directive model + fall back to the other pool on 429/quota (incl. the re-ask);
+  needs a ga-local restart BY THE USER after it lands. Pool plan once live: BMS code work -> claude-opus-5-5-high,
+  trip code work -> gemini-3.1-pro-high, read-only checks -> gemini-3.8-flash-low (fallback claude-sonnet-5-5-low).
+  VM-28 (BMS fixes, scratchpad vm28.md) waits for the VM-27 verdict; send it with model claude-opus-5-5-high after the restart.

@@ -1,4 +1,5 @@
 # `agy models` output, pasted by the user 10-07 18:5x KST (run on the Mac, same agy account as the VM; the VM listed 18 models at 05:07)
+# Quota pools (user 10-09 05:3x KST): Claude+GPT models share one session/quota, Gemini models another; spread load across both.
 gemini-3.8-flash-high     Gemini 3.8 Flash (High)
 gemini-3.8-flash-medium   Gemini 3.8 Flash (Medium)
 gemini-3.8-flash-low      Gemini 3.8 Flash (Low)

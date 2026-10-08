@@ -160,7 +160,7 @@ def build(info: dict) -> tuple[str, dict, list[str]]:
         head["from"] = str(c["from"])
     if c.get("probe"):  # issue/1 fast path: named probes the bridge runs itself, no model
         head["probe"] = [str(p) for p in _list(c["probe"])]
-    if to != "AGY":  # the model field is for the VM bridge only (it picks the agy model)
+    if to != "AGY" and not c.get("model"):  # VM_LOCAL picks its own model unless baseline names one (pool split, user 10-09)
         head.pop("model")
     elif head["model"] not in mailcheck.KNOWN_MODELS:
         raise FormError(f"model {head['model']!r} not in mailcheck.KNOWN_MODELS (the VM would decline it); add it "
