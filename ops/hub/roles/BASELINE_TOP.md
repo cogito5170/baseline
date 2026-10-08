@@ -51,4 +51,8 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   5 tests pass (run them yourself: VM claimed 'passed' in rev 2 when the new tests never ran). NEXT: user restarts ga-local
   onto 9949695 (needs XDG_RUNTIME_DIR=/run/user/1001), then VM-10 = 2-3 live read-only runs with no decline = stable
   (user 10-08: stabilize items 1+2, then large-scale development; HMAC deferred). Depth 5: do NOT auto-create a successor.
+- UPDATE 10-08 23:0x: STABLE. ga-local on 9949695 (restarted 13:50:02Z). VM-10/11/12 (#34-36) live read-only checks
+  passed 3/3 with no decline (53-100k in, 0 cached, 15-28 s). VM-13 (#37) disk cleanup: 79% -> 75% (12G free).
+  Open for the user: proposal list (~/SE 7.5G incl .git 3.1G + .venv-torch 723M, ~/.local/lib 4.7G, ~/PandA-bambu 943M,
+  ~/token 789M), HMAC decision, new depth-0 top before large-scale development. Next VM id: VM-14.
 - Career questions: answer directly (direction decided earlier: DevOps / cloud / infra entry, LG CNS & 메가존, 5-month plan).
