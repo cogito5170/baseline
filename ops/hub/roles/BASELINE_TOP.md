@@ -166,3 +166,8 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   0 and 12,000 cannot catch a rounding bug; error_test never exercises the init 'error' message path; F8 gap report
   measures the wrong objective (SPEC 3.3 = time-window orienteering) and has no sampling/seed design; negative hour
   values (-90 -> -1/min) are accepted.
+- 10-09 04:0x VM-26 (#50) rev 1: agy quota exhausted (720,342 in + 8,420,353 cached, then 'Individual quota reached',
+  resets ~20:04Z). Work was pushed (2bd9ab6, PR #5); top verified directly and rejected: static message counters break
+  determinism (3 vs 7), comm loss at 100 A opens the contactor (violates SWR-030), no coverage gate. Rev 2 prepared in
+  scratchpad vm26r2.md, posted by a send_later at 20:08Z (trig_01JzFi1DaZxn9KDPnx682ZAu). Cost note: VM-26 rev 1 was the
+  most expensive run so far; the agy subscription quota is now a real limit on pace.
