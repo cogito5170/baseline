@@ -250,7 +250,8 @@ def worker_task(number, directive, key):
         if DRY_RUN:
             print(f"DRY RUN: chosen model: {model}")
             print(f"DRY RUN: command line: {' '.join(cmd)}")
-            stdout_text = f"```ga\n{{\"schema\":\"report/2\",\"from\":\"VM_LOCAL\",\"handled\":[{{\"id\":\"{d_id}\",\"rev_seen\":{rev},\"status\":\"done\"}}],\"items\":[],\"results\":[]}}\n```\n{{\"response\":\"```ga...```\",\"usage\":{{\"input_tokens\":10}},\"status\":\"SUCCESS\"}}"
+            ga_block_str = f'```ga\n{{"schema":"report/2","from":"VM_LOCAL","handled":[{{"id":"{d_id}","rev_seen":{rev},"status":"done"}}],"items":[],"results":[]}}\n```'
+            stdout_text = json.dumps({"response": ga_block_str, "usage": {"input_tokens": 10}, "status": "SUCCESS"})
             retcode = 0
         else:
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
@@ -309,6 +310,7 @@ def worker_task(number, directive, key):
             details_content = f"timed out\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
             reply_content = write_fallback_reply(d_id, rev, "declined", "timed out", done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, secs)
         else:
+            if DRY_RUN: print(f"DEBUG: stdout_text is {repr(stdout_text)}")
             reply_content = prepare_reply(d_id, rev, stdout_text, done_whens, model, tokens_in, tokens_out, cached_tokens, turns, secs, raw_stdout)
             
         # check mailcheck
