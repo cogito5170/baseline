@@ -224,3 +224,12 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
 - ASK-3 (#57 drill) answer was a blanket "동의하며 승인합니다 / 사용자 승인" with no option letters -> not usable as an
   approval; proposed rule to the user (option letters required, blanket approvals re-asked, optional passphrase). Pending.
 - Note: running Python tests inside /home/user/portfolio leaves kinematics/__pycache__ (untracked) — delete it after.
+- TRIP WEEK 5 merged 10-09 07:1x: VM-27 rev 2 accepted (e35065e, verified from CI run 37847655801: native 0.53 ms / budget
+  5 ms, web 4.70 ms / 20 ms, Lighthouse 100 / a11y 87); PR #6 merged -> main 8ef9bba. Carried: the 'gate can fail' step
+  is tautological (run the real gate with a tight budget instead).
+- VM HANG PATTERN (VM-27 rev 1 and rev 2): agy ends its work then idles 'waiting up to 30m for 1 background task'
+  (e.g. a backgrounded `gh run watch`) until the dispatcher timeout (exit 124) -> declined report although the work was
+  pushed. Always verify the branch/CI directly on a declined report. Fix candidate for the dispatcher/prompt: forbid
+  backgrounded watchers, or treat 'root agent idle' as done and re-ask for the report.
+- Now (07:1x): VM idle. Restart of ga-local (VM-29) can be done now. Next: VM-28 BMS fixes (claude-opus-5-5-high) after the
+  restart; World Platform M1 PR from 015NoCK6 awaited.
