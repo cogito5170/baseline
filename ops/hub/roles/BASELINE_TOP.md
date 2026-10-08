@@ -109,3 +109,8 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   subagent from git show, checked by you byte-for-byte before commit. Done: 00 engine, 01 VM-16, 02 VM-17. 03 VM-18 is being written
   by the old top's subagent; the old top commits it, then goes idle. Next: 04 VM-19.
   Watcher: scratchpad watch.sh <issue> <rev> polls issue comments until usage/1 for that rev (re-create it in your container).
+- UPDATE 10-09 02:1x (top 01GaDrpc, depth 1): VM-19 (#43) accepted (deploy job read at 9398322). VM-20 (#44) web error
+  paths: rev 1 rejected (14 scratch/generated files committed, weak Test 1), rev 2 accepted at 0a9c13d = PR #1 head
+  (ctest 10/10 + model tests 3/3 rerun here). BLOCKED: add_repo analy_agent is refused by the auto-mode classifier even
+  after the user's in-chat "허용" -> no API/CI/merge for analy_agent; public read-only clone works. Waiting for the user to
+  add an allow rule or merge PR #1 themselves; then live-URL check by the VM. Follow-up: results table innerHTML.
