@@ -191,3 +191,6 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   VM-28 (BMS fixes, scratchpad vm28.md) waits for the VM-27 verdict; send it with model claude-opus-5-5-high after the restart.
 - V9 (user 10-09 05:4x, answered in chat): the user tries trip_optimizer personally first; feedback as analy_agent issues
   labelled V9 (only recorded real use goes into the portfolio). ASK-1 Q1 (BMS plant model) still open on #52.
+- VM-29 (#53) accepted at d1c442f (vm/local-dispatcher): directive model + quota-pool fallback; 8 tests pass (top ran
+  them). WAITING: user restarts ga-local. Follow-ups: re-ask uses the main model (costlier than flash-low); main-run
+  quota after pushed work reruns the whole task.
