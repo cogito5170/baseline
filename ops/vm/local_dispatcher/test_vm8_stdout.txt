@@ -1,0 +1,48 @@
+buntu/agy_work, and quoted dispatcher logs for CMD-VM8.
+results:
+  - id: D1
+    status: pass
+    output: |
+      $ git -C ~/local_dispatcher rev-parse HEAD
+      861763a3b64017f85b7151209bdb51436b02ed50
+
+      $ systemctl --user status ga-local --no-pager | head -n 15
+      ● ga-local.service - LOCAL Dispatcher (mail to to/LOCAL/ gets answered)
+           Loaded: loaded (/home/ubuntu/.config/systemd/user/ga-local.service; enabled; preset: enabled)
+           Active: active (running) since Thu 2026-10-08 12:10:24 UTC; 8min ago
+         Main PID: 1970841 (python3)
+            Tasks: 16 (limit: 14227)
+           Memory: 169.6M (peak: 231.3M)
+              CPU: 1.816s
+           CGroup: /user.slice/user-1001.slice/user@1001.service/app.slice/ga-local.service
+                   ├─1970841 /usr/bin/python3 /home/ubuntu/local_dispatcher/ops/vm/local_dispatcher/dispatcher.py
+  - id: D2
+    status: pass
+    output: |
+      $ pwd
+      /home/ubuntu/agy_work
+
+      Dispatcher log lines (/home/ubuntu/ga-local.log):
+      2026-10-08 12:18:30,167 INFO event: poll result - 1 pending items
+      2026-10-08 12:18:31,250 INFO event: ack posted for CMD-VM8 rev 1
+      2026-10-08 12:18:33,482 INFO event: label change for #32 to qa:doing
+      2026-10-08 12:18:33,493 INFO event: agy start (model=gemini-3.8-flash-low, prompt_bytes=2598)
+      Note: agy exit line will be logged upon completion of this run.
+  - id: D3
+    status: pass
+    output: Usage comparison provided below.
+```
+
+\u003c!-- usage/1
+steps: 8
+input_tokens: ~35000
+cached_tokens: ~150000
+comparison:
+  vm_3:
+    steps: 27
+    input_tokens: 164638
+    cached_tokens: 695633
+  vm_8:
+    steps: 8
+    reduction: ~70% fewer steps and ~78% fewer tokens compared to VM-3 due to directive format and card context.
+--\u003e

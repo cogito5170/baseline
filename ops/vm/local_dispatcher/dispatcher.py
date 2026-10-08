@@ -243,36 +243,35 @@ def write_fallback_reply(d_id, rev, reply_status, reason, done_whens, details, m
     return content
 
 def prepare_reply(d_id, rev, stdout, done_whens, model, tokens_in, tokens_out, cached_tokens, turns, seconds, raw_stdout):
-    match = re.search(r'```ga\s*(\{.*?\})\s*```', stdout, re.DOTALL)
-    if not match:
+    blocks = extract_ga_blocks(stdout, "OWNER")
+    valid_data = None
+    for b in blocks:
+        if b["data"].get("schema") == "report/2":
+            valid_data = b["data"]
+            break
+            
+    if not valid_data:
         details_content = f"agy printed no valid report/2\nRaw stdout (last 2000 chars):\n{raw_stdout[-2000:]}"
         return write_fallback_reply(d_id, rev, "declined", "agy printed no valid report/2", done_whens, details_content, model, tokens_in, tokens_out, cached_tokens, turns, seconds)
 
-    try:
-        ga_data = json.loads(match.group(1))
-        # Ensure it's from VM_LOCAL
-        ga_data["from"] = "VM_LOCAL"
-        results = ga_data.get("results", [])
-        new_results = []
-        for r in results:
-            if r.get("name") not in ["model", "input_tokens", "output_tokens", "cached_tokens", "turns", "seconds"]:
-                new_results.append(r)
-        
-        new_results.extend([
-            {"name": "model", "value": model},
-            {"name": "input_tokens", "value": tokens_in},
-            {"name": "output_tokens", "value": tokens_out},
-            {"name": "cached_tokens", "value": cached_tokens},
-            {"name": "turns", "value": turns},
-            {"name": "seconds", "value": seconds}
-        ])
-        ga_data["results"] = new_results
-        
-        new_json = json.dumps(ga_data, indent=2)
-        stdout = stdout.replace(match.group(1), f"\n{new_json}\n")
-    except Exception: pass
+    valid_data["from"] = "VM_LOCAL"
+    results = valid_data.get("results", [])
+    new_results = []
+    for r in results:
+        if r.get("name") not in ["model", "input_tokens", "output_tokens", "cached_tokens", "turns", "seconds"]:
+            new_results.append(r)
     
-    return stdout
+    new_results.extend([
+        {"name": "model", "value": model},
+        {"name": "input_tokens", "value": tokens_in},
+        {"name": "output_tokens", "value": tokens_out},
+        {"name": "cached_tokens", "value": cached_tokens},
+        {"name": "turns", "value": turns},
+        {"name": "seconds", "value": seconds}
+    ])
+    valid_data["results"] = new_results
+    
+    return f"```ga\n{json.dumps(valid_data, indent=2)}\n```\n" 
 
 def worker_task(number, directive, key):
     d_id = directive.get("id")
@@ -461,40 +460,75 @@ def worker_task(number, directive, key):
             
         work_dir = Path.home() / "agy_work"
         work_dir.mkdir(exist_ok=True)
-        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, cwd=str(work_dir))
-        try:
-            stdout_text, _ = process.communicate(timeout=TIME_LIMIT)
-            retcode = process.returncode
-        except subprocess.TimeoutExpired:
-            process.kill()
-            stdout_text, _ = process.communicate()
-            retcode = 124
-                
-        tokens_in, tokens_out, cached_tokens, turns, secs = None, None, None, None, None
-        conv_id = "none"
-        status = "UNKNOWN"
-        raw_stdout = stdout_text
-        denied_actions = []
         
-        try:
-            lines = stdout_text.strip().split('\n')
-            data = json.loads(lines[-1])
-            stdout_text = data.get("response", stdout_text)
-            usage = data.get("usage", {})
-            tokens_in = usage.get("input_tokens")
-            tokens_out = usage.get("output_tokens")
-            cached_tokens = usage.get("cache_read_tokens")
-            turns = data.get("num_turns")
-            secs = data.get("duration_seconds")
-            status = data.get("status", "UNKNOWN")
-            conv_id = data.get("conversation_id", "none")
-            denied_actions = data.get("denied_actions", [])
-            logging.info(f"event: agy exit (status={status}, seconds={secs}, tokens_in={tokens_in}, tokens_out={tokens_out})")
+        def run_agy(cmd_args):
+            process = subprocess.Popen(cmd_args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, cwd=str(work_dir))
+            try:
+                out, _ = process.communicate(timeout=TIME_LIMIT)
+                ret = process.returncode
+            except subprocess.TimeoutExpired:
+                process.kill()
+                out, _ = process.communicate()
+                ret = 124
+            return out, ret
             
-            if DRY_RUN:
-                print(f"DRY RUN: agy JSON output:")
-                print(json.dumps(data))
-        except: pass
+        stdout_text, retcode = run_agy(cmd)
+        
+        def parse_agy_output(out_text):
+            t_in, t_out, c_tokens, turns_c, secs_c = None, None, None, None, None
+            c_id = "none"
+            st = "UNKNOWN"
+            denied = []
+            parsed_stdout = out_text
+            try:
+                lines = out_text.strip().split('\n')
+                data = json.loads(lines[-1])
+                parsed_stdout = data.get("response", out_text)
+                usage = data.get("usage", {})
+                t_in = usage.get("input_tokens")
+                t_out = usage.get("output_tokens")
+                c_tokens = usage.get("cache_read_tokens")
+                turns_c = data.get("num_turns")
+                secs_c = data.get("duration_seconds")
+                st = data.get("status", "UNKNOWN")
+                c_id = data.get("conversation_id", "none")
+                denied = data.get("denied_actions", [])
+            except: pass
+            return parsed_stdout, t_in, t_out, c_tokens, turns_c, secs_c, st, c_id, denied
+            
+        stdout_text_parsed, tokens_in, tokens_out, cached_tokens, turns, secs, status, conv_id, denied_actions = parse_agy_output(stdout_text)
+        
+        raw_stdout = stdout_text
+        logging.info(f"event: agy exit (status={status}, seconds={secs}, tokens_in={tokens_in}, tokens_out={tokens_out})")
+        
+        def has_valid_report(text):
+            blocks = extract_ga_blocks(text, "OWNER")
+            for b in blocks:
+                if b["data"].get("schema") == "report/2":
+                    return True
+            return False
+            
+        if status == "SUCCESS" and retcode == 0 and not denied_actions and not has_valid_report(stdout_text_parsed):
+            logging.info(f"event: agy output missing report/2, re-asking once. conversation={conv_id}")
+            reask_prompt = "Your output failed to include a valid report/2 JSON block inside a ```ga block, or it was not valid JSON. Please output ONLY the report/2 JSON block now. It must be the last thing printed."
+            reask_cmd = ["/home/ubuntu/auto-agy-p.exp", "-p", reask_prompt, "--conversation", conv_id, "--output-format", "json"]
+            stdout_text2, retcode2 = run_agy(reask_cmd)
+            stdout_text_parsed2, t_in2, t_out2, c_tokens2, turns2, secs2, status2, conv_id2, denied2 = parse_agy_output(stdout_text2)
+            
+            raw_stdout += "\n--- RE-ASK ---\n" + stdout_text2
+            stdout_text_parsed += "\n\n" + stdout_text_parsed2
+            retcode = retcode2
+            status = status2
+            denied_actions = denied2
+            if t_in2: tokens_in = (tokens_in or 0) + t_in2
+            if t_out2: tokens_out = (tokens_out or 0) + t_out2
+            if c_tokens2: cached_tokens = (cached_tokens or 0) + c_tokens2
+            if turns2: turns = (turns or 0) + turns2
+            if secs2: secs = (secs or 0) + secs2
+            
+            logging.info(f"event: agy re-ask exit (status={status}, seconds={secs2})")
+
+        stdout_text = stdout_text_parsed
         
         update_record(key, {
             "end_time": datetime.now(timezone.utc).isoformat(),

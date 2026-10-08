@@ -1,0 +1,115 @@
+```ga
+
+{
+  "schema": "report/2",
+  "from": "VM_LOCAL",
+  "handled": [
+    {
+      "id": "CMD-VM7",
+      "rev_seen": 1,
+      "status": "done"
+    }
+  ],
+  "items": [
+    {
+      "id": "D1",
+      "state": "met",
+      "evidence": "Pushed sha: 861763a\nvm_state.md writing code (under 3KB limit enforced via `[:3000]`):\n```python\n        state_content = f\"ga-local: {active_line} | {start_line}\\nRunning commit: {commit}\\n\\n{path_map}\\n\\nLast 5 VM issues:\\n{last_5}\\n\\nPitfalls: never restart ga-local; short outputs.\\n\"\n        with open(work_dir / \"vm_state.md\", \"w\") as f:\n            f.write(state_content[:3000])\n```\nShown first in prompt:\n```python\n        context = f\"{vm_state_text}\\n\\n{instruction_text}...\"\n```"
+    },
+    {
+      "id": "D2",
+      "state": "met",
+      "evidence": "Prompt rule:\n```python\n        extra_rules += f\"; end by writing ~/agy_work/handoff/{d_id}.md, max 1 KB (done/changed/open); do not re-check card facts; pipe long output through tail/grep (~50 lines); open only files the directive names.\"\n```\nPassing the note instead of previous report:\n```python\n        handoff_text = \"\"\n        if rev > 1:\n            h_file = handoff_dir / f\"{d_id}.md\"\n            if h_file.exists():\n                handoff_text += f\"\\nHandoff note for {d_id}:\\n{h_file.read_text()[:1024]}\\n\"\n        for aft in directive.get(\"after\", []):\n            h_file = handoff_dir / f\"{aft}.md\"\n            if h_file.exists():\n                handoff_text += f\"\\nHandoff note for dependency {aft}:\\n{h_file.read_text()[:1024]}\\n\"\n```"
+    },
+    {
+      "id": "D3",
+      "state": "met",
+      "evidence": "| Count | Command |\n|---|---|\n| 10 | `ps aux | grep agy` |\n| 8 | `crontab -l` |\n| 8 | `jq -c 'select(.type == \"PLANNER_RESPONSE\")' ~/.gemini/antigravity-cli/brain/<UUID>/.system_generated/logs/transcript.jsonl | wc -l` |\n| 7 | `agy --help` |\n| 5 | `ls -la` |\n| 4 | `cat /tmp/dry_run_output.txt` |\n| 4 | `cat /home/ubuntu/.gemini/antigravity-cli/brain/<UUID>/.system_generated/tasks/task-44.log` |\n| 4 | `systemctl --user status ga-local` |\n| 3 | `ls -la /home/ubuntu` |\n| 3 | `tail -n 30 /home/ubuntu/ga-local.log` |\n| 3 | `cat ~/.config/systemd/user/ga-local.service` |\n| 3 | `gh issue list --repo cogito5170/baseline --label QA --state open --json number,labels | jq '[.[] | select((.labels | map(.name) | contains([\"qa:todo\"]) or contains([\"qa:doing\"])))]'` |\n| 3 | `agy models` |\n| 3 | `ls -la /home/ubuntu/local_dispatcher/ops/vm/local_dispatcher/` |\n| 3 | `cat /home/ubuntu/.gemini/antigravity-cli/brain/<UUID>/.system_generated/tasks/task-85.log` |"
+    },
+    {
+      "id": "D4",
+      "state": "met",
+      "evidence": "Allow lists logic quoted:\n```python\n            allowed_logs = {\"ga-local.log\": f\"{Path.home()}/ga-local.log\", \"local_agent.log\": f\"{Path.home()}/local_agent.log\"}\n            allowed_units = [\"ga-local.service\"]\n            allowed_repos = {\"local_dispatcher\": f\"{Path.home()}/local_dispatcher\", \"baseline\": f\"{Path.home()}/baseline\"}\n```\nDry run output of declined unknown probe:\n`DRY RUN: Mailcheck output: /tmp/reply_CMD-TEST1.md: report/2 OK`\n```json\n  \"blockers\": [\n    {\n      \"kind\": \"other\",\n      \"what\": \"unknown probe/value: ['unknown_probe value']\"\n    }\n  ]\n```\nAnd details:\n```\nUnknown probes requested: ['unknown_probe value']\nAvailable parameterized probes:\n- log_tail <ga-local.log|local_agent.log> <1-500>\n- unit_status <ga-local.service>\n- git_log <local_dispatcher|baseline>\n- git_status <local_dispatcher|baseline>\n- file_tail <~/handled_record.json> <1-500>\n```"
+    },
+    {
+      "id": "D5",
+      "state": "met",
+      "evidence": "Fixed usage/1 being appended to `reply_content` so only one comment is issued per response:\n```python\n            else:\n                usage_comment = {\"schema\": \"usage/1\", \"id\": d_id, \"rev\": rev, \"from\": \"VM_LOCAL\", \"conversation_id\": \"none\", \"input_tokens\": 0, \"output_tokens\": 0, \"cached_tokens\": 0, \"turns\": 0, \"seconds\": 0}\n                reply_content += f\"\\n```ga\\n{json.dumps(usage_comment)}\\n```\\n\"\n                gh_issue_comment(number, reply_content)\n```\nFor agy runs:\n```python\n            else:\n                usage_comment = {\"schema\": \"usage/1\", \"id\": d_id, \"rev\": rev, \"from\": \"VM_LOCAL\", \"conversation_id\": conv_id, \"input_tokens\": tokens_in, \"output_tokens\": tokens_out, \"cached_tokens\": cached_tokens, \"turns\": turns, \"seconds\": secs}\n                reply_content += f\"\\n```ga\\n{json.dumps(usage_comment)}\\n```\\n\"\n                gh_issue_comment(number, reply_content)\n```"
+    }
+  ],
+  "results": [
+    {
+      "name": "model",
+      "value": "gemini-3.1-pro-high"
+    },
+    {
+      "name": "input_tokens",
+      "value": 315711
+    },
+    {
+      "name": "output_tokens",
+      "value": 48939
+    },
+    {
+      "name": "cached_tokens",
+      "value": 3779393
+    },
+    {
+      "name": "turns",
+      "value": 1
+    },
+    {
+      "name": "seconds",
+      "value": 685.802508381
+    }
+  ],
+  "blockers": []
+}
+
+```
+I have completed the task and pushed the changes to `vm/local-dispatcher` (`861763a`).
+
+Here is the report containing the requested evidence for all the requirements:
+
+```ga
+{
+  "schema": "report/2",
+  "from": "VM_LOCAL",
+  "handled": [
+    {
+      "id": "CMD-VM7",
+      "rev_seen": 1,
+      "status": "done"
+    }
+  ],
+  "items": [
+    {
+      "id": "D1",
+      "state": "met",
+      "evidence": "Pushed sha: 861763a\nvm_state.md writing code (under 3KB limit enforced via `[:3000]`):\n```python\n        state_content = f\"ga-local: {active_line} | {start_line}\\nRunning commit: {commit}\\n\\n{path_map}\\n\\nLast 5 VM issues:\\n{last_5}\\n\\nPitfalls: never restart ga-local; short outputs.\\n\"\n        with open(work_dir / \"vm_state.md\", \"w\") as f:\n            f.write(state_content[:3000])\n```\nShown first in prompt:\n```python\n        context = f\"{vm_state_text}\\n\\n{instruction_text}...\"\n```"
+    },
+    {
+      "id": "D2",
+      "state": "met",
+      "evidence": "Prompt rule:\n```python\n        extra_rules += f\"; end by writing ~/agy_work/handoff/{d_id}.md, max 1 KB (done/changed/open); do not re-check card facts; pipe long output through tail/grep (~50 lines); open only files the directive names.\"\n```\nPassing the note instead of previous report:\n```python\n        handoff_text = \"\"\n        if rev > 1:\n            h_file = handoff_dir / f\"{d_id}.md\"\n            if h_file.exists():\n                handoff_text += f\"\\nHandoff note for {d_id}:\\n{h_file.read_text()[:1024]}\\n\"\n        for aft in directive.get(\"after\", []):\n            h_file = handoff_dir / f\"{aft}.md\"\n            if h_file.exists():\n                handoff_text += f\"\\nHandoff note for dependency {aft}:\\n{h_file.read_text()[:1024]}\\n\"\n```"
+    },
+    {
+      "id": "D3",
+      "state": "met",
+      "evidence": "| Count | Command |\n|---|---|\n| 10 | `ps aux | grep agy` |\n| 8 | `crontab -l` |\n| 8 | `jq -c 'select(.type == \"PLANNER_RESPONSE\")' ~/.gemini/antigravity-cli/brain/<UUID>/.system_generated/logs/transcript.jsonl | wc -l` |\n| 7 | `agy --help` |\n| 5 | `ls -la` |\n| 4 | `cat /tmp/dry_run_output.txt` |\n| 4 | `cat /home/ubuntu/.gemini/antigravity-cli/brain/<UUID>/.system_generated/tasks/task-44.log` |\n| 4 | `systemctl --user status ga-local` |\n| 3 | `ls -la /home/ubuntu` |\n| 3 | `tail -n 30 /home/ubuntu/ga-local.log` |\n| 3 | `cat ~/.config/systemd/user/ga-local.service` |\n| 3 | `gh issue list --repo cogito5170/baseline --label QA --state open --json number,labels | jq '[.[] | select((.labels | map(.name) | contains([\"qa:todo\"]) or contains([\"qa:doing\"])))]'` |\n| 3 | `agy models` |\n| 3 | `ls -la /home/ubuntu/local_dispatcher/ops/vm/local_dispatcher/` |\n| 3 | `cat /home/ubuntu/.gemini/antigravity-cli/brain/<UUID>/.system_generated/tasks/task-85.log` |"
+    },
+    {
+      "id": "D4",
+      "state": "met",
+      "evidence": "Allow lists logic quoted:\n```python\n            allowed_logs = {\"ga-local.log\": f\"{Path.home()}/ga-local.log\", \"local_agent.log\": f\"{Path.home()}/local_agent.log\"}\n            allowed_units = [\"ga-local.service\"]\n            allowed_repos = {\"local_dispatcher\": f\"{Path.home()}/local_dispatcher\", \"baseline\": f\"{Path.home()}/baseline\"}\n```\nDry run output of declined unknown probe:\n`DRY RUN: Mailcheck output: /tmp/reply_CMD-TEST1.md: report/2 OK`\n```json\n  \"blockers\": [\n    {\n      \"kind\": \"other\",\n      \"what\": \"unknown probe/value: ['unknown_probe value']\"\n    }\n  ]\n```\nAnd details:\n```\nUnknown probes requested: ['unknown_probe value']\nAvailable parameterized probes:\n- log_tail <ga-local.log|local_agent.log> <1-500>\n- unit_status <ga-local.service>\n- git_log <local_dispatcher|baseline>\n- git_status <local_dispatcher|baseline>\n- file_tail <~/handled_record.json> <1-500>\n```"
+    },
+    {
+      "id": "D5",
+      "state": "met",
+      "evidence": "Fixed usage/1 being appended to `reply_content` so only one comment is issued per response:\n```python\n            else:\n                usage_comment = {\"schema\": \"usage/1\", \"id\": d_id, \"rev\": rev, \"from\": \"VM_LOCAL\", \"conversation_id\": \"none\", \"input_tokens\": 0, \"output_tokens\": 0, \"cached_tokens\": 0, \"turns\": 0, \"seconds\": 0}\n                reply_content += f\"\\n```ga\\n{json.dumps(usage_comment)}\\n```\\n\"\n                gh_issue_comment(number, reply_content)\n```\nFor agy runs:\n```python\n        else:\n            usage_comment = {\"schema\": \"usage/1\", \"id\": d_id, \"rev\": rev, \"from\": \"VM_LOCAL\", \"conversation_id\": conv_id, \"input_tokens\": tokens_in, \"output_tokens\": tokens_out, \"cached_tokens\": cached_tokens, \"turns\": turns, \"seconds\": secs}\n            reply_content += f\"\\n```ga\\n{json.dumps(usage_comment)}\\n```\\n\"\n            gh_issue_comment(number, reply_content)\n```"
+    }
+  ],
+  "results": [],
+  "blockers": []
+}
+```
