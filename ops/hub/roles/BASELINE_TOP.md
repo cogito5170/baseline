@@ -149,3 +149,6 @@ STATE (written by top session_01BofKvzxrYc3FFoPqmMVJ5F at 10-08 21:1x KST, ctx 4
   deprecation (deploy-pages@v4, upload-artifact pin).
   Study records: code/07 VM-24 (BMS) + DEVLOG for VM-24 rev 2 + PR #3 owed (subagent from git show, verify by re-running
   its generator: scratchpad gen.py + tpl/).
+- USER DECISIONS 10-09 03:3x: ADR-5 = (a) plain JS modules for week 4 (no React+TS). From now on ask decisions through the
+  VM channel (a GitHub issue labelled VM addressed to the user, the user answers there from the VM) instead of in this chat.
+  The successor was created by top 01GaDrpc on the user's go.
