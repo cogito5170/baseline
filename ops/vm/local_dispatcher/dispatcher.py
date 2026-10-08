@@ -86,6 +86,35 @@ def update_record(key, data_update):
         record[key].update(data_update)
         save_handled_record(record)
 
+
+def write_vm_state(work_dir):
+    try:
+        res = subprocess.run(["systemctl", "--user", "status", "ga-local"], capture_output=True, text=True)
+        active_line = ""
+        start_line = ""
+        for line in res.stdout.split('\n'):
+            if "Active:" in line: active_line = line.strip()
+            if "Started" in line and not start_line: start_line = line.strip()
+            
+        commit = subprocess.run(["git", "-C", "/home/ubuntu/local_dispatcher", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+        
+        path_map = "Path map:\n- dispatcher: /home/ubuntu/local_dispatcher/ops/vm/local_dispatcher/dispatcher.py\n- ga-local.log: /home/ubuntu/ga-local.log\n- handled_record.json: /home/ubuntu/handled_record.json\n- agy_work: /home/ubuntu/agy_work\n- ga-sdk/baseline: /home/ubuntu/agy_work/ga-sdk, /home/ubuntu/agy_work/baseline checkouts"
+
+        record = load_handled_record()
+        vm_records = []
+        for k, v in record.items():
+            if "VM" in k:
+                vm_records.append((k, v))
+        vm_records.sort(key=lambda x: x[1].get("end_time", ""), reverse=True)
+        last_5 = "\n".join([f"{k}: {v.get('status')} {v.get('exit_status', '')}" for k, v in vm_records[:5]])
+        
+        state_content = f"ga-local: {active_line} | {start_line}\nRunning commit: {commit}\n\n{path_map}\n\nLast 5 VM issues:\n{last_5}\n\nPitfalls: never restart ga-local; short outputs.\n"
+        with open(work_dir / "vm_state.md", "w") as f:
+            f.write(state_content[:3000])
+    except Exception as e:
+        with open(work_dir / "vm_state.md", "w") as f:
+            f.write(f"Error generating vm_state: {e}")
+
 def gh_api(endpoint, method="GET", body=None):
     cmd = ["gh", "api", endpoint, "-X", method]
     if body:
@@ -255,28 +284,80 @@ def worker_task(number, directive, key):
             # Fast path
             evidence_text = []
             unknown = []
-            for p in probes:
-                if p not in PROBE_TABLE:
-                    unknown.append(p)
             
+            allowed_logs = {"ga-local.log": f"{Path.home()}/ga-local.log", "local_agent.log": f"{Path.home()}/local_agent.log"}
+            allowed_units = ["ga-local.service"]
+            allowed_repos = {"local_dispatcher": f"{Path.home()}/local_dispatcher", "baseline": f"{Path.home()}/baseline"}
+            
+            for p in probes:
+                argv = None
+                p_str = p
+                if isinstance(p, dict):
+                    cmd_name = p.get("name")
+                    if cmd_name == "log_tail":
+                        p_str = f"log_tail {p.get('log')} {p.get('lines', 50)}"
+                    elif cmd_name == "unit_status":
+                        p_str = f"unit_status {p.get('unit')}"
+                    elif cmd_name == "git_log":
+                        p_str = f"git_log {p.get('repo')}"
+                    elif cmd_name == "git_status":
+                        p_str = f"git_status {p.get('repo')}"
+                    elif cmd_name == "file_tail":
+                        p_str = f"file_tail {p.get('path')} {p.get('lines', 50)}"
+                    else:
+                        unknown.append(str(p))
+                        continue
+
+                if isinstance(p_str, str):
+                    if p_str in PROBE_TABLE:
+                        argv = PROBE_TABLE[p_str]
+                    else:
+                        parts = p_str.split()
+                        cmd_name = parts[0]
+                        if cmd_name == "log_tail" and len(parts) == 3:
+                            log_name, lines = parts[1], parts[2]
+                            if log_name in allowed_logs and lines.isdigit() and 1 <= int(lines) <= 500:
+                                argv = ["tail", "-n", lines, allowed_logs[log_name]]
+                        elif cmd_name == "unit_status" and len(parts) == 2:
+                            unit = parts[1]
+                            if unit in allowed_units:
+                                argv = ["systemctl", "--user", "status", unit]
+                        elif cmd_name == "git_log" and len(parts) == 2:
+                            repo = parts[1]
+                            if repo in allowed_repos:
+                                argv = ["git", "-C", allowed_repos[repo], "log", "-n", "10", "--oneline"]
+                        elif cmd_name == "git_status" and len(parts) == 2:
+                            repo = parts[1]
+                            if repo in allowed_repos:
+                                argv = ["git", "-C", allowed_repos[repo], "status"]
+                        elif cmd_name == "file_tail" and len(parts) == 3:
+                            fpath, lines = parts[1], parts[2]
+                            allowed_paths = [f"{Path.home()}/handled_record.json"]
+                            if fpath in allowed_paths and lines.isdigit() and 1 <= int(lines) <= 500:
+                                argv = ["tail", "-n", lines, fpath]
+
+                if argv is None:
+                    unknown.append(str(p))
+                    continue
+
+                try:
+                    res = subprocess.run(argv, capture_output=True, text=True, timeout=30)
+                    out = res.stdout + res.stderr
+                except subprocess.TimeoutExpired as e:
+                    out = (e.stdout.decode('utf-8', 'replace') if e.stdout else '') + " [TIMEOUT]"
+                except Exception as e:
+                    out = str(e)
+                out = out[-3000:]
+                evidence_text.append(f"Probe: {p}\nCommand: {' '.join(argv)}\nOutput:\n{out}")
+
             if unknown:
+                avail = "Available parameterized probes:\n- log_tail <ga-local.log|local_agent.log> <1-500>\n- unit_status <ga-local.service>\n- git_log <local_dispatcher|baseline>\n- git_status <local_dispatcher|baseline>\n- file_tail <~/handled_record.json> <1-500>"
                 reply_content = write_fallback_reply(
-                    d_id, rev, "declined", f"unknown probe: {', '.join(unknown)}",
-                    done_whens, f"Unknown probes requested: {unknown}",
+                    d_id, rev, "declined", f"unknown probe/value: {unknown}",
+                    done_whens, f"Unknown probes requested: {unknown}\n{avail}",
                     model="none", tokens_in=0, tokens_out=0, cached_tokens=0, turns=0, seconds=0
                 )
             else:
-                for p in probes:
-                    argv = PROBE_TABLE[p]
-                    try:
-                        res = subprocess.run(argv, capture_output=True, text=True, timeout=30)
-                        out = res.stdout + res.stderr
-                    except subprocess.TimeoutExpired as e:
-                        out = (e.stdout.decode('utf-8', 'replace') if e.stdout else '') + " [TIMEOUT]"
-                    except Exception as e:
-                        out = str(e)
-                    out = out[-3000:]
-                    evidence_text.append(f"Probe: {p}\nCommand: {' '.join(argv)}\nOutput:\n{out}")
                 
                 ev_str = "\n\n".join(evidence_text)
                 
@@ -309,13 +390,13 @@ def worker_task(number, directive, key):
                 print(f"DRY RUN: Mailcheck output:\n{val_res.stdout}\n{val_res.stderr}")
                 update_record(key, {"status": "done"})
             else:
+                usage_comment = {"schema": "usage/1", "id": d_id, "rev": rev, "from": "VM_LOCAL", "conversation_id": "none", "input_tokens": 0, "output_tokens": 0, "cached_tokens": 0, "turns": 0, "seconds": 0}
+                reply_content += f"\n```ga\n{json.dumps(usage_comment)}\n```\n"
                 gh_issue_comment(number, reply_content)
                 logging.info(f"event: report posted for {d_id} rev {rev}")
                 gh_issue_edit(number, add_labels=["qa:review"], remove_labels=["qa:todo", "qa:doing"])
                 logging.info(f"event: label change for #{number} to qa:review")
                 update_record(key, {"status": "done"})
-                usage_comment = {"schema": "usage/1", "id": d_id, "rev": rev, "from": "VM_LOCAL", "conversation_id": "none", "input_tokens": 0, "output_tokens": 0, "cached_tokens": 0, "turns": 0, "seconds": 0}
-                gh_issue_comment(number, f"```ga\n{json.dumps(usage_comment)}\n```")
             return
         
         if not DRY_RUN:
@@ -330,40 +411,39 @@ def worker_task(number, directive, key):
             "status": "running"
         })
         
-        prev_report_text = ""
+        
+        work_dir = Path.home() / "agy_work"; work_dir.mkdir(exist_ok=True); write_vm_state(work_dir)
+        vm_state_text = ""
+        if (work_dir / "vm_state.md").exists():
+            vm_state_text = (work_dir / "vm_state.md").read_text()
+
+        handoff_dir = work_dir / "handoff"
+        handoff_dir.mkdir(exist_ok=True)
+        
+        handoff_text = ""
         if rev > 1:
-            issue_data = gh_api(f"repos/{REPO}/issues/{number}")
-            comments_data = gh_api(f"repos/{REPO}/issues/{number}/comments") or []
-            texts = []
-            if issue_data: texts.append(issue_data.get("body", ""))
-            texts.extend([c.get("body", "") for c in comments_data])
-            for txt in texts:
-                for match in re.finditer(r'```ga\s*(\{.*?\})\s*```', txt, re.DOTALL):
-                    try:
-                        g_data = json.loads(match.group(1))
-                        if g_data.get("schema") == "report/2" and g_data.get("from") == "VM_LOCAL":
-                            handled = g_data.get("handled", [])
-                            if handled and handled[0].get("id") == d_id and handled[0].get("rev_seen") == rev - 1:
-                                prev_report_text = txt
-                    except: pass
-                    
+            h_file = handoff_dir / f"{d_id}.md"
+            if h_file.exists():
+                handoff_text += f"\nHandoff note for {d_id}:\n{h_file.read_text()[:1024]}\n"
+        
+        for aft in directive.get("after", []):
+            h_file = handoff_dir / f"{aft}.md"
+            if h_file.exists():
+                handoff_text += f"\nHandoff note for dependency {aft}:\n{h_file.read_text()[:1024]}\n"
+
         # Build prompt
         instruction_text = VM_LOCAL_PROMPT_MD.read_text() if VM_LOCAL_PROMPT_MD.exists() else ""
         notes_text = NOTES_FILE.read_text() if NOTES_FILE.exists() else ""
         
         extra_rules = "RULES: run only the commands the directive names or that its done_when needs; do not open dispatcher.py, mailcheck.py, LOCAL_FORMAT.md or other repo files unless the directive names them; do not validate the report yourself (the dispatcher already runs mailcheck before posting, and on failure it posts the fallback); no manage_task."
+        extra_rules += f"; end by writing ~/agy_work/handoff/{d_id}.md, max 1 KB (done/changed/open); do not re-check card facts; pipe long output through tail/grep (~50 lines); open only files the directive names."
         
         is_ro = is_read_only(directive.get("scope", ""))
         
-        prev_text_part = ""
-        if prev_report_text:
-            capped_prev = prev_report_text[:4000] # wait, "capped at 4,000 chars", I should just do prev_report_text[:4000]
-            prev_text_part = f"\nPrevious report (rev {rev-1}):\n{capped_prev}\n"
-
         if is_ro:
-            context = f"role VM_LOCAL. report/2 rules only.\n{extra_rules}\n{prev_text_part}{json.dumps(directive)}"
+            context = f"role VM_LOCAL. report/2 rules only.\n{extra_rules}\n{vm_state_text}\n{handoff_text}\n{json.dumps(directive)}"
         else:
-            context = f"{instruction_text}\n\n---\n\n{notes_text}\n---\n\n{extra_rules}\n{prev_text_part}\n```ga\n{json.dumps(directive, indent=2)}\n```"
+            context = f"{vm_state_text}\n\n{instruction_text}\n\n---\n\n{notes_text}\n---\n\n{extra_rules}\n{handoff_text}\n```ga\n{json.dumps(directive, indent=2)}\n```"
             
         model = "gemini-3.8-flash-low" if is_ro else "gemini-3.1-pro-high"
         
@@ -455,6 +535,8 @@ def worker_task(number, directive, key):
             print(f"DRY RUN: Mailcheck output:\n{val_res.stdout}\n{val_res.stderr}")
             update_record(key, {"status": "done"})
         else:
+            usage_comment = {"schema": "usage/1", "id": d_id, "rev": rev, "from": "VM_LOCAL", "conversation_id": conv_id, "input_tokens": tokens_in, "output_tokens": tokens_out, "cached_tokens": cached_tokens, "turns": turns, "seconds": secs}
+            reply_content += f"\n```ga\n{json.dumps(usage_comment)}\n```\n"
             gh_issue_comment(number, reply_content)
             logging.info(f"event: report posted for {d_id} rev {rev}")
             
@@ -473,11 +555,6 @@ def worker_task(number, directive, key):
             gh_issue_edit(number, add_labels=[new_label], remove_labels=["qa:doing"])
             logging.info(f"event: label change for #{number} to {new_label}")
             update_record(key, {"status": "done"})
-
-            # post usage comment
-            if DRY_RUN is False:
-                usage_comment = {"schema": "usage/1", "id": d_id, "rev": rev, "from": "VM_LOCAL", "conversation_id": conv_id, "input_tokens": tokens_in, "output_tokens": tokens_out, "cached_tokens": cached_tokens, "turns": turns, "seconds": secs}
-                gh_issue_comment(number, f"```ga\n{json.dumps(usage_comment)}\n```")
 
     except Exception as e:
         import traceback
