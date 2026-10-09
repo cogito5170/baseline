@@ -1,0 +1,24 @@
+{
+  "$id": "urn:ids:indesign_revision_plan:1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "round": { "type": "integer", "maximum": 3 },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "op_id": { "type": "string" },
+          "op": { "type": "string" },
+          "fixes": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["op_id", "op", "fixes"]
+      }
+    }
+  },
+  "required": ["round", "operations"]
+}

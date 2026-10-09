@@ -1,0 +1,30 @@
+{
+  "create_text_frame": {
+    "tool_name": "placeholder_create_text_frame",
+    "status": "unverified"
+  },
+  "inspect": {
+    "tool_name": "placeholder_inspect",
+    "status": "unverified"
+  },
+  "add_page": {
+    "tool_name": "placeholder_add_page",
+    "status": "unverified"
+  },
+  "place_image": {
+    "tool_name": "placeholder_place_image",
+    "status": "unverified"
+  },
+  "set_text": {
+    "tool_name": "placeholder_set_text",
+    "status": "unverified"
+  },
+  "apply_style": {
+    "tool_name": "placeholder_apply_style",
+    "status": "unverified"
+  },
+  "move_item": {
+    "tool_name": "placeholder_move_item",
+    "status": "unverified"
+  }
+}

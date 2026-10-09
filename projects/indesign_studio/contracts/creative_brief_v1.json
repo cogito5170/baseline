@@ -1,0 +1,11 @@
+{
+  "$id": "urn:ids:creative_brief:1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "title": { "type": "string" },
+    "target_feature_profile": { "type": "string" },
+    "style_direction": { "type": "string" }
+  },
+  "required": ["title", "target_feature_profile", "style_direction"]
+}

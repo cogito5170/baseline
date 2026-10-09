@@ -1,0 +1,18 @@
+{
+  "id": "com.adobe.indesign.aistudio",
+  "name": "AI Magazine Studio",
+  "version": "1.0.0",
+  "main": "index.html",
+  "host": [
+    {
+      "app": "IDSN",
+      "minVersion": "18.0"
+    }
+  ],
+  "requiredPermissions": {
+    "network": {
+      "domains": ["http://localhost"]
+    },
+    "localFileSystem": "plugin"
+  }
+}
