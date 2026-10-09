@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magorch:qa_report:1",
+  "title": "qa_report/1 — findings on an assembled artifact, each traceable to the artifact and agent that must fix it",
+  "type": "object",
+  "required": ["schema", "report_id", "project_id", "artifact_id", "version", "inspected", "status", "checks", "summary",
+               "publication_decision"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "qa_report/1"},
+    "report_id": {"type": "string", "pattern": "^QA-[0-9]{3,}$"},
+    "project_id": {"$ref": "urn:magorch:common:1#/$defs/project_id"},
+    "artifact_id": {"$ref": "urn:magorch:common:1#/$defs/artifact_id", "description": "the assembled artifact inspected"},
+    "version": {"$ref": "urn:magorch:common:1#/$defs/version"},
+    "inspected": {
+      "type": "object",
+      "required": ["kind", "inputs"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {"enum": ["proof", "final"]},
+        "inputs": {"type": "array", "items": {"$ref": "urn:magorch:common:1#/$defs/bound_ref"}}
+      }
+    },
+    "status": {"enum": ["passed", "failed"]},
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["check_id", "category", "status", "severity", "message"],
+        "additionalProperties": false,
+        "properties": {
+          "check_id": {"type": "string", "pattern": "^QA-[A-Z]+-[0-9]{3,}$"},
+          "category": {"enum": ["contract_validity", "factual_integrity", "labelling", "editorial_coherence",
+                                "style_consistency", "spelling", "typography", "layout_integrity", "page_order",
+                                "asset_references", "output_validity"]},
+          "status": {"enum": ["passed", "failed", "skipped"]},
+          "severity": {"$ref": "urn:magorch:common:1#/$defs/severity"},
+          "message": {"type": "string", "minLength": 1},
+          "evidence": {"type": "string"},
+          "affected_artifact_id": {"$ref": "urn:magorch:common:1#/$defs/artifact_id"},
+          "affected_page": {"type": "integer", "minimum": 1},
+          "recommended_agent": {"$ref": "urn:magorch:common:1#/$defs/agent_role"},
+          "recommended_action": {"type": "string", "minLength": 1}
+        },
+        "allOf": [
+          {"if": {"properties": {"status": {"const": "failed"}}},
+           "then": {"properties": {"severity": {"enum": ["blocking", "major", "minor", "info"]}}}},
+          {"if": {"properties": {"status": {"const": "failed"}, "severity": {"enum": ["blocking", "major"]}}, "required": ["status", "severity"]},
+           "then": {"required": ["affected_artifact_id", "recommended_agent", "recommended_action", "evidence"]}},
+          {"if": {"properties": {"status": {"const": "passed"}}},
+           "then": {"properties": {"severity": {"const": "none"}}}}
+        ]
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["blocking_issues", "major_issues", "minor_issues"],
+      "additionalProperties": false,
+      "properties": {
+        "blocking_issues": {"type": "integer", "minimum": 0},
+        "major_issues": {"type": "integer", "minimum": 0},
+        "minor_issues": {"type": "integer", "minimum": 0}
+      }
+    },
+    "publication_decision": {"enum": ["approved", "blocked"]}
+  },
+  "allOf": [
+    {"if": {"properties": {"publication_decision": {"const": "approved"}}},
+     "then": {"properties": {"status": {"const": "passed"}, "summary": {"properties": {"blocking_issues": {"const": 0}}}}}},
+    {"if": {"properties": {"status": {"const": "passed"}}},
+     "then": {"properties": {"summary": {"properties": {"blocking_issues": {"const": 0}}}}}}
+  ]
+}

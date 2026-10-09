@@ -1,0 +1,35 @@
+{
+  "schema": "agent_result/1",
+  "task_id": "TASK-STYLE-001",
+  "status": "completed",
+  "outputs": [
+    {
+      "artifact_id": "ART-STYLE-001",
+      "version": 1,
+      "schema": "style_specification/1",
+      "validation_status": "passed",
+      "review_status": "not_reviewed",
+      "approval_status": "pending"
+    }
+  ],
+  "issues": [],
+  "unresolved_questions": [],
+  "provenance": {
+    "agent_role": "style_taxonomist",
+    "model_provider": null,
+    "model_id": null,
+    "prompt_id": "style_taxonomist",
+    "prompt_version": "1.0.0",
+    "prompt_sha256": null,
+    "input_versions": [
+      {
+        "artifact_id": "ART-BRIEF-001",
+        "version": 1
+      }
+    ],
+    "attempts": 1,
+    "started_at": "2026-10-09T06:00:00Z",
+    "finished_at": "2026-10-09T06:00:00Z",
+    "tokens": null
+  }
+}

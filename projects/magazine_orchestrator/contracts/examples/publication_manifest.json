@@ -1,0 +1,43 @@
+{
+  "schema": "publication_manifest/1",
+  "publication_id": "PUB-001",
+  "project_id": "MAG-2026-001",
+  "status": "published",
+  "format": "pdf",
+  "outputs": [
+    {
+      "artifact_id": "ART-MAGAZINE-PDF",
+      "version": 1,
+      "path": "artifacts/ART-MAGAZINE-PDF/v1.pdf",
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "media_type": "application/pdf",
+      "pages": 16
+    }
+  ],
+  "qa_report": {
+    "report_id": "QA-002",
+    "publication_decision": "approved"
+  },
+  "inputs": [
+    {
+      "artifact_id": "ART-LAYOUT-001",
+      "version": 2
+    }
+  ],
+  "renderer": {
+    "name": "chromium-print-to-pdf",
+    "version": null
+  },
+  "providers": [
+    {
+      "agent_role": "article_writer_editor",
+      "provider": "scripted_fixture",
+      "model_id": null,
+      "verified": false
+    }
+  ],
+  "created_at": "2026-10-09T06:00:00Z",
+  "reproduce": {
+    "command": "python3 -m magorch reproduce projects/MAG-2026-001"
+  }
+}

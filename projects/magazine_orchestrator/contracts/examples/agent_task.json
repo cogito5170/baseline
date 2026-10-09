@@ -1,0 +1,48 @@
+{
+  "schema": "agent_task/1",
+  "task_id": "TASK-STYLE-001",
+  "project_id": "MAG-2026-001",
+  "agent_role": "style_taxonomist",
+  "objective": "사용자의 창작 의도를 실행 가능한 매거진 스타일 명세로 변환한다.",
+  "inputs": [
+    {
+      "artifact_id": "ART-BRIEF-001",
+      "version": 1,
+      "role": "approved_creative_brief"
+    }
+  ],
+  "instructions": {
+    "required_actions": [
+      "주요 스타일을 분류한다.",
+      "독립적인 시각 속성을 정의한다.",
+      "필수 규칙과 선택 규칙을 구분한다.",
+      "스타일 간 충돌을 식별한다."
+    ],
+    "forbidden_actions": [
+      "승인된 사용자 요구사항을 임의로 변경하지 않는다.",
+      "존재하지 않는 디자인 레퍼런스를 사실처럼 제시하지 않는다."
+    ]
+  },
+  "output_contract": {
+    "schema": "style_specification/1",
+    "artifact_type": "style_specification",
+    "artifact_ids": [
+      "ART-STYLE-001"
+    ]
+  },
+  "dependencies": [
+    "TASK-BRIEF-001"
+  ],
+  "acceptance_criteria": [
+    "모든 필수 시각 속성이 정의되어 있다.",
+    "디자인 에이전트가 추가 해석 없이 작업을 시작할 수 있다.",
+    "모든 필수 필드가 스키마를 통과한다."
+  ],
+  "constraints": {
+    "max_attempts": 3,
+    "timeout_seconds": 300,
+    "revision_limit": 2,
+    "on_upstream_change": "rerun"
+  },
+  "status": "pending"
+}

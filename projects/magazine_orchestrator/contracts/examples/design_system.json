@@ -1,0 +1,160 @@
+{
+  "schema": "design_system/1",
+  "artifact_id": "ART-DESIGN-001",
+  "version": 1,
+  "derived_from": {
+    "artifact_id": "ART-STYLE-001",
+    "version": 1
+  },
+  "page": {
+    "size": "A4",
+    "width_mm": 210,
+    "height_mm": 297,
+    "bleed_mm": 3
+  },
+  "grid": {
+    "columns": 12,
+    "gutter_mm": 4,
+    "margins_mm": {
+      "top": 18,
+      "bottom": 20,
+      "inner": 20,
+      "outer": 16
+    },
+    "baseline_pt": 14
+  },
+  "typography": {
+    "masthead": {
+      "family": [
+        "Pretendard",
+        "Noto Sans KR",
+        "sans-serif"
+      ],
+      "size_pt": 72,
+      "line_height": 0.9,
+      "weight": 800
+    },
+    "headline": {
+      "family": [
+        "Pretendard",
+        "Noto Sans KR",
+        "sans-serif"
+      ],
+      "size_pt": 34,
+      "line_height": 1.1,
+      "weight": 700
+    },
+    "standfirst": {
+      "family": [
+        "Pretendard",
+        "Noto Sans KR",
+        "sans-serif"
+      ],
+      "size_pt": 13,
+      "line_height": 1.4,
+      "weight": 500
+    },
+    "body": {
+      "family": [
+        "Pretendard",
+        "Noto Sans KR",
+        "sans-serif"
+      ],
+      "size_pt": 9.5,
+      "line_height": 1.6,
+      "weight": 400
+    },
+    "caption": {
+      "family": [
+        "Pretendard",
+        "Noto Sans KR",
+        "sans-serif"
+      ],
+      "size_pt": 7.5,
+      "line_height": 1.35,
+      "weight": 400
+    },
+    "folio": {
+      "family": [
+        "JetBrains Mono",
+        "monospace"
+      ],
+      "size_pt": 7,
+      "line_height": 1.2,
+      "weight": 400
+    },
+    "pull_quote": {
+      "family": [
+        "Pretendard",
+        "Noto Sans KR",
+        "sans-serif"
+      ],
+      "size_pt": 18,
+      "line_height": 1.3,
+      "weight": 600
+    },
+    "data": {
+      "family": [
+        "JetBrains Mono",
+        "monospace"
+      ],
+      "size_pt": 8,
+      "line_height": 1.3,
+      "weight": 400
+    }
+  },
+  "color_tokens": {
+    "background": "#F4F1EA",
+    "text": "#101820",
+    "accent": "#00C2D1",
+    "muted": "#5B6770",
+    "inverse_bg": "#101820",
+    "inverse_text": "#F4F1EA"
+  },
+  "spacing_scale_mm": [
+    2,
+    4,
+    8,
+    12,
+    16,
+    24
+  ],
+  "image_ratios": [
+    "3:2",
+    "4:5",
+    "16:9",
+    "1:1"
+  ],
+  "templates": [
+    {
+      "template_id": "body_two_col",
+      "purpose": "article body pages",
+      "slots": [
+        {
+          "slot_id": "body",
+          "kind": "text",
+          "required": true,
+          "columns": 2,
+          "capacity_chars": 2600
+        },
+        {
+          "slot_id": "folio",
+          "kind": "folio",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "max_font_families": 3,
+    "min_body_size_pt": 8.5,
+    "min_contrast_ratio": 4.5,
+    "folio_on_body_pages": true,
+    "chart_source_line_required": true
+  },
+  "approval": {
+    "status": "not_required",
+    "approved_by": null,
+    "at": null
+  }
+}

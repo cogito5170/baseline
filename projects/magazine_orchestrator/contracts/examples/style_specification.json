@@ -1,0 +1,94 @@
+{
+  "schema": "style_specification/1",
+  "artifact_id": "ART-STYLE-001",
+  "version": 1,
+  "derived_from": {
+    "artifact_id": "ART-BRIEF-001",
+    "version": 1
+  },
+  "classification": {
+    "primary_archetype": "editorial_futurism",
+    "secondary_influences": [
+      "minimal_editorial",
+      "data_journalism"
+    ],
+    "confidence": null,
+    "confidence_method": null,
+    "rationale": "미래 기술을 지적인 편집 디자인과 명료한 데이터 시각화로 전달한다."
+  },
+  "visual_attributes": {
+    "mood": [
+      "futuristic",
+      "precise",
+      "sophisticated"
+    ],
+    "layout": {
+      "type": "modular_grid",
+      "symmetry": "mixed",
+      "whitespace": "generous",
+      "image_usage": "selective_full_bleed"
+    },
+    "typography": {
+      "headline": "bold_sans_serif",
+      "body": "high_legibility_sans_serif",
+      "data": "monospace",
+      "max_font_families": 3
+    },
+    "color": {
+      "base": [
+        "#101820",
+        "#F4F1EA"
+      ],
+      "accent": [
+        "#00C2D1"
+      ],
+      "usage": "accent_for_emphasis"
+    },
+    "imagery": {
+      "preferred": [
+        "scientific_visualization",
+        "editorial_photography",
+        "technical_diagrams"
+      ],
+      "avoid": [
+        "generic_stock_collages",
+        "unlabeled_decorative_charts"
+      ]
+    },
+    "information_density": "balanced",
+    "motifs": [
+      "thin_rules",
+      "coordinate_marks"
+    ]
+  },
+  "design_constraints": {
+    "mandatory": [
+      "일관된 그리드",
+      "명확한 제목과 본문 위계",
+      "데이터 시각화의 출처 표시"
+    ],
+    "preferred": [
+      "넓은 여백",
+      "제한적인 강조색 사용"
+    ],
+    "prohibited": [
+      "가독성을 해치는 텍스트 배치",
+      "출처가 없는 사실형 인포그래픽"
+    ]
+  },
+  "conflicts": [
+    {
+      "between": [
+        "generous whitespace",
+        "16-page limit"
+      ],
+      "resolution": "본문 밀도는 balanced, 여백은 오프너 페이지에 집중"
+    }
+  ],
+  "reference_publications": [],
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "at": null
+  }
+}

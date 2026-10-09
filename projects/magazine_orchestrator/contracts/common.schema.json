@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magorch:common:1",
+  "title": "Shared definitions for magorch contracts",
+  "$defs": {
+    "project_id": {"type": "string", "pattern": "^MAG-[0-9]{4}-[0-9]{3}$"},
+    "artifact_id": {"type": "string", "pattern": "^ART-[A-Z0-9][A-Z0-9-]*$"},
+    "task_id": {"type": "string", "pattern": "^TASK-[A-Z0-9][A-Z0-9-]*$"},
+    "version": {"type": "integer", "minimum": 1},
+    "schema_name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*/[0-9]+$"},
+    "timestamp": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "hex_color": {"type": "string", "pattern": "^#[0-9A-Fa-f]{6}$"},
+    "artifact_ref": {
+      "description": "Reference to a canonical artifact. version null = bind to the latest stored version at dispatch time.",
+      "type": "object",
+      "required": ["artifact_id", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {"$ref": "#/$defs/artifact_id"},
+        "version": {"oneOf": [{"$ref": "#/$defs/version"}, {"type": "null"}]},
+        "role": {"type": "string", "minLength": 1}
+      }
+    },
+    "bound_ref": {
+      "type": "object",
+      "required": ["artifact_id", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {"$ref": "#/$defs/artifact_id"},
+        "version": {"$ref": "#/$defs/version"}
+      }
+    },
+    "agent_role": {
+      "enum": [
+        "orchestrator", "creative_brief_analyst", "editorial_director", "style_taxonomist",
+        "design_system_architect", "research_fact_checker", "article_writer_editor",
+        "visual_asset_producer", "layout_composer", "quality_assurance_editor", "final_renderer"
+      ]
+    },
+    "approval_status": {"enum": ["pending", "approved", "rejected", "not_required"]},
+    "approval": {
+      "type": "object",
+      "required": ["status", "approved_by"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {"$ref": "#/$defs/approval_status"},
+        "approved_by": {"type": ["string", "null"]},
+        "at": {"oneOf": [{"$ref": "#/$defs/timestamp"}, {"type": "null"}]},
+        "note": {"type": "string"}
+      }
+    },
+    "severity": {"enum": ["blocking", "major", "minor", "info", "none"]},
+    "issue": {
+      "type": "object",
+      "required": ["severity", "message"],
+      "additionalProperties": false,
+      "properties": {
+        "severity": {"$ref": "#/$defs/severity"},
+        "message": {"type": "string", "minLength": 1},
+        "artifact_id": {"$ref": "#/$defs/artifact_id"},
+        "code": {"type": "string"}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["agent_role", "model_provider", "model_id", "input_versions"],
+      "additionalProperties": false,
+      "properties": {
+        "agent_role": {"$ref": "#/$defs/agent_role"},
+        "model_provider": {"type": ["string", "null"], "description": "null when no model was used or it is unknown; never guessed"},
+        "model_id": {"type": ["string", "null"]},
+        "prompt_id": {"type": ["string", "null"]},
+        "prompt_version": {"type": ["string", "null"]},
+        "prompt_sha256": {"oneOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+        "input_versions": {"type": "array", "items": {"$ref": "#/$defs/bound_ref"}},
+        "attempts": {"type": "integer", "minimum": 1},
+        "started_at": {"oneOf": [{"$ref": "#/$defs/timestamp"}, {"type": "null"}]},
+        "finished_at": {"oneOf": [{"$ref": "#/$defs/timestamp"}, {"type": "null"}]},
+        "tokens": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "required": ["input", "output"],
+              "additionalProperties": false,
+              "properties": {"input": {"type": ["integer", "null"], "minimum": 0}, "output": {"type": ["integer", "null"], "minimum": 0}}
+            }
+          ]
+        },
+        "note": {"type": "string"}
+      }
+    }
+  }
+}

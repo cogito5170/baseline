@@ -1,0 +1,26 @@
+{
+  "schema": "artifact_manifest/1",
+  "project_id": "MAG-2026-001",
+  "generated_at": "2026-10-09T06:00:00Z",
+  "artifacts": [
+    {
+      "artifact_id": "ART-STYLE-001",
+      "version": 1,
+      "artifact_type": "style_specification",
+      "schema": "style_specification/1",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "path": "artifacts/ART-STYLE-001/v1.json",
+      "media_type": "application/json",
+      "produced_by": "TASK-STYLE-001",
+      "inputs": [
+        {
+          "artifact_id": "ART-BRIEF-001",
+          "version": 1
+        }
+      ],
+      "validation_status": "passed",
+      "approval_status": "pending",
+      "created_at": "2026-10-09T06:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "orchestration_plan/1",
+  "project_id": "MAG-2026-001",
+  "tasks": [
+    {
+      "task_id": "TASK-BRIEF-001",
+      "agent_role": "creative_brief_analyst",
+      "depends_on": []
+    },
+    {
+      "task_id": "TASK-EDITORIAL-001",
+      "agent_role": "editorial_director",
+      "depends_on": [
+        "TASK-BRIEF-001"
+      ]
+    },
+    {
+      "task_id": "TASK-STYLE-001",
+      "agent_role": "style_taxonomist",
+      "depends_on": [
+        "TASK-BRIEF-001"
+      ]
+    },
+    {
+      "task_id": "TASK-DESIGN-001",
+      "agent_role": "design_system_architect",
+      "depends_on": [
+        "TASK-STYLE-001"
+      ]
+    },
+    {
+      "task_id": "TASK-RESEARCH-001",
+      "agent_role": "research_fact_checker",
+      "depends_on": [
+        "TASK-EDITORIAL-001"
+      ]
+    },
+    {
+      "task_id": "TASK-WRITE-001",
+      "agent_role": "article_writer_editor",
+      "depends_on": [
+        "TASK-EDITORIAL-001",
+        "TASK-RESEARCH-001",
+        "TASK-DESIGN-001"
+      ]
+    },
+    {
+      "task_id": "TASK-ASSET-001",
+      "agent_role": "visual_asset_producer",
+      "depends_on": [
+        "TASK-EDITORIAL-001",
+        "TASK-DESIGN-001"
+      ]
+    },
+    {
+      "task_id": "TASK-LAYOUT-001",
+      "agent_role": "layout_composer",
+      "depends_on": [
+        "TASK-DESIGN-001",
+        "TASK-WRITE-001",
+        "TASK-ASSET-001"
+      ]
+    },
+    {
+      "task_id": "TASK-QA-001",
+      "agent_role": "quality_assurance_editor",
+      "depends_on": [
+        "TASK-LAYOUT-001"
+      ]
+    },
+    {
+      "task_id": "TASK-RENDER-001",
+      "agent_role": "final_renderer",
+      "depends_on": [
+        "TASK-QA-001"
+      ]
+    }
+  ],
+  "execution_policy": {
+    "parallel_execution": true,
+    "require_dependency_success": true,
+    "max_concurrent_tasks": 4,
+    "max_revision_cycles": 2,
+    "publish_only_after_final_validation": true
+  }
+}

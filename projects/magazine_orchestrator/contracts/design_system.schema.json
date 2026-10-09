@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magorch:design_system:1",
+  "title": "design_system/1 — concrete tokens, grid and page templates derived from one style_specification version",
+  "type": "object",
+  "required": ["schema", "artifact_id", "version", "derived_from", "page", "grid", "typography", "color_tokens",
+               "spacing_scale_mm", "image_ratios", "templates", "rules", "approval"],
+  "additionalProperties": false,
+  "$defs": {
+    "type_role": {
+      "type": "object",
+      "required": ["family", "size_pt", "line_height", "weight"],
+      "additionalProperties": false,
+      "properties": {
+        "family": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "size_pt": {"type": "number", "minimum": 5, "maximum": 200},
+        "line_height": {"type": "number", "minimum": 0.8, "maximum": 2.5},
+        "weight": {"type": "integer", "minimum": 100, "maximum": 900},
+        "tracking_em": {"type": "number"},
+        "color_token": {"type": "string"}
+      }
+    }
+  },
+  "properties": {
+    "schema": {"const": "design_system/1"},
+    "artifact_id": {"$ref": "urn:magorch:common:1#/$defs/artifact_id"},
+    "version": {"$ref": "urn:magorch:common:1#/$defs/version"},
+    "derived_from": {"$ref": "urn:magorch:common:1#/$defs/bound_ref", "description": "the style_specification version used"},
+    "page": {
+      "type": "object",
+      "required": ["size", "width_mm", "height_mm", "bleed_mm"],
+      "additionalProperties": false,
+      "properties": {
+        "size": {"enum": ["A4", "Letter", "B5", "tabloid", "custom"]},
+        "width_mm": {"type": "number", "exclusiveMinimum": 0},
+        "height_mm": {"type": "number", "exclusiveMinimum": 0},
+        "bleed_mm": {"type": "number", "minimum": 0}
+      }
+    },
+    "grid": {
+      "type": "object",
+      "required": ["columns", "gutter_mm", "margins_mm", "baseline_pt"],
+      "additionalProperties": false,
+      "properties": {
+        "columns": {"type": "integer", "minimum": 1, "maximum": 24},
+        "gutter_mm": {"type": "number", "minimum": 0},
+        "margins_mm": {
+          "type": "object",
+          "required": ["top", "bottom", "inner", "outer"],
+          "additionalProperties": false,
+          "properties": {"top": {"type": "number", "minimum": 0}, "bottom": {"type": "number", "minimum": 0},
+                         "inner": {"type": "number", "minimum": 0}, "outer": {"type": "number", "minimum": 0}}
+        },
+        "baseline_pt": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "typography": {
+      "type": "object",
+      "required": ["masthead", "headline", "standfirst", "body", "caption", "folio", "pull_quote", "data"],
+      "additionalProperties": {"$ref": "#/$defs/type_role"},
+      "properties": {
+        "masthead": {"$ref": "#/$defs/type_role"}, "headline": {"$ref": "#/$defs/type_role"},
+        "standfirst": {"$ref": "#/$defs/type_role"}, "body": {"$ref": "#/$defs/type_role"},
+        "caption": {"$ref": "#/$defs/type_role"}, "folio": {"$ref": "#/$defs/type_role"},
+        "pull_quote": {"$ref": "#/$defs/type_role"}, "data": {"$ref": "#/$defs/type_role"}
+      }
+    },
+    "color_tokens": {
+      "type": "object",
+      "required": ["background", "text", "accent"],
+      "propertyNames": {"pattern": "^[a-z][a-z0-9_.-]*$"},
+      "additionalProperties": {"$ref": "urn:magorch:common:1#/$defs/hex_color"}
+    },
+    "spacing_scale_mm": {"type": "array", "minItems": 3, "items": {"type": "number", "minimum": 0}},
+    "image_ratios": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[0-9]+:[0-9]+$"}},
+    "templates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["template_id", "purpose", "slots"],
+        "additionalProperties": false,
+        "properties": {
+          "template_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "purpose": {"type": "string"},
+          "slots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["slot_id", "kind", "required"],
+              "additionalProperties": false,
+              "properties": {
+                "slot_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+                "kind": {"enum": ["text", "image", "chart", "caption", "folio", "label", "toc"]},
+                "required": {"type": "boolean"},
+                "columns": {"type": "integer", "minimum": 1},
+                "capacity_chars": {"type": "integer", "minimum": 1},
+                "ratio": {"type": "string", "pattern": "^[0-9]+:[0-9]+$"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "type": "object",
+      "required": ["max_font_families", "min_body_size_pt", "min_contrast_ratio"],
+      "additionalProperties": false,
+      "properties": {
+        "max_font_families": {"type": "integer", "minimum": 1},
+        "min_body_size_pt": {"type": "number", "minimum": 5},
+        "min_contrast_ratio": {"type": "number", "minimum": 1},
+        "folio_on_body_pages": {"type": "boolean", "default": true},
+        "chart_source_line_required": {"type": "boolean", "default": true}
+      }
+    },
+    "approval": {"$ref": "urn:magorch:common:1#/$defs/approval"}
+  }
+}

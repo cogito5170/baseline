@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magorch:artifact_manifest:1",
+  "title": "artifact_manifest/1 — every stored artifact version with hash, producer and input lineage",
+  "type": "object",
+  "required": ["schema", "project_id", "generated_at", "artifacts"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "artifact_manifest/1"},
+    "project_id": {"$ref": "urn:magorch:common:1#/$defs/project_id"},
+    "generated_at": {"$ref": "urn:magorch:common:1#/$defs/timestamp"},
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["artifact_id", "version", "artifact_type", "schema", "sha256", "path", "produced_by",
+                     "inputs", "validation_status", "approval_status", "created_at"],
+        "additionalProperties": false,
+        "properties": {
+          "artifact_id": {"$ref": "urn:magorch:common:1#/$defs/artifact_id"},
+          "version": {"$ref": "urn:magorch:common:1#/$defs/version"},
+          "artifact_type": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "schema": {"oneOf": [{"$ref": "urn:magorch:common:1#/$defs/schema_name"}, {"type": "null"}]},
+          "sha256": {"$ref": "urn:magorch:common:1#/$defs/sha256"},
+          "path": {"type": "string", "minLength": 1, "description": "relative to the project directory"},
+          "media_type": {"type": "string"},
+          "produced_by": {"type": "string", "minLength": 1, "description": "task_id, or 'orchestrator:<reason>' / 'user:<reason>'"},
+          "inputs": {"type": "array", "items": {"$ref": "urn:magorch:common:1#/$defs/bound_ref"}},
+          "validation_status": {"enum": ["passed", "failed", "not_applicable"]},
+          "approval_status": {"$ref": "urn:magorch:common:1#/$defs/approval_status"},
+          "created_at": {"$ref": "urn:magorch:common:1#/$defs/timestamp"}
+        }
+      }
+    }
+  }
+}

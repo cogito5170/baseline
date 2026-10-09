@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magorch:orchestration_plan:1",
+  "title": "orchestration_plan/1 — the explicit task dependency graph and execution policy",
+  "type": "object",
+  "required": ["schema", "project_id", "tasks", "execution_policy"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "orchestration_plan/1"},
+    "project_id": {"$ref": "urn:magorch:common:1#/$defs/project_id"},
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["task_id", "agent_role", "depends_on"],
+        "additionalProperties": false,
+        "properties": {
+          "task_id": {"$ref": "urn:magorch:common:1#/$defs/task_id"},
+          "agent_role": {"$ref": "urn:magorch:common:1#/$defs/agent_role"},
+          "depends_on": {"type": "array", "uniqueItems": true, "items": {"$ref": "urn:magorch:common:1#/$defs/task_id"}},
+          "article_id": {"$ref": "urn:magorch:common:1#/$defs/artifact_id"}
+        }
+      }
+    },
+    "execution_policy": {
+      "type": "object",
+      "required": ["parallel_execution", "require_dependency_success", "max_concurrent_tasks", "max_revision_cycles",
+                   "publish_only_after_final_validation"],
+      "additionalProperties": false,
+      "properties": {
+        "parallel_execution": {"type": "boolean"},
+        "require_dependency_success": {"const": true},
+        "max_concurrent_tasks": {"type": "integer", "minimum": 1, "maximum": 32},
+        "max_revision_cycles": {"type": "integer", "minimum": 0},
+        "publish_only_after_final_validation": {"const": true}
+      }
+    }
+  }
+}

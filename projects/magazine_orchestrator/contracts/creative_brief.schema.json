@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magorch:creative_brief:1",
+  "title": "creative_brief/1 — the normalized user intent",
+  "type": "object",
+  "required": ["schema", "artifact_id", "version", "source_request", "topic", "purpose", "target_audience", "language",
+               "tone", "publication_format", "issue_length_pages", "constraints", "ambiguities",
+               "requires_factual_research", "approval"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "creative_brief/1"},
+    "artifact_id": {"$ref": "urn:magorch:common:1#/$defs/artifact_id"},
+    "version": {"$ref": "urn:magorch:common:1#/$defs/version"},
+    "source_request": {"type": "string", "minLength": 1, "description": "the user's words, verbatim"},
+    "topic": {"type": "string", "minLength": 1},
+    "purpose": {"type": "string", "minLength": 1},
+    "target_audience": {"type": "string", "minLength": 1},
+    "language": {"type": "string", "pattern": "^[a-z]{2}(-[A-Z]{2})?$"},
+    "tone": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "publication_format": {"enum": ["pdf", "html"]},
+    "page_size": {"enum": ["A4", "Letter", "B5", "tabloid"], "default": "A4"},
+    "issue_length_pages": {"type": "integer", "minimum": 4, "maximum": 64, "multipleOf": 2},
+    "visual_direction": {"type": "string", "description": "the user's own words about look and feel, if any"},
+    "constraints": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "ambiguities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "material", "default_assumption"],
+        "additionalProperties": false,
+        "properties": {
+          "question": {"type": "string", "minLength": 1},
+          "material": {"type": "boolean", "description": "true = changes the result enough to ask the user"},
+          "default_assumption": {"type": "string", "minLength": 1},
+          "answer": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "requires_factual_research": {"type": "boolean"},
+    "approval": {"$ref": "urn:magorch:common:1#/$defs/approval"}
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magorch:magazine_project:1",
+  "title": "magazine_project/1 — the canonical project manifest (single source of truth). Holds references and statuses, never full articles or images.",
+  "type": "object",
+  "required": ["schema", "project_id", "status", "revision", "user_request", "creative_brief", "editorial_plan",
+               "style_specification", "design_system", "layout", "tasks", "artifacts", "quality", "publication",
+               "revision_cycles", "awaiting_approval"],
+  "additionalProperties": false,
+  "$defs": {
+    "slot": {
+      "type": "object",
+      "required": ["artifact_id", "version", "status", "approval_status"],
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {"oneOf": [{"$ref": "urn:magorch:common:1#/$defs/artifact_id"}, {"type": "null"}]},
+        "version": {"oneOf": [{"$ref": "urn:magorch:common:1#/$defs/version"}, {"type": "null"}]},
+        "status": {"enum": ["not_started", "in_progress", "produced", "failed", "stale"]},
+        "approval_status": {"$ref": "urn:magorch:common:1#/$defs/approval_status"}
+      }
+    }
+  },
+  "properties": {
+    "schema": {"const": "magazine_project/1"},
+    "project_id": {"$ref": "urn:magorch:common:1#/$defs/project_id"},
+    "status": {"enum": ["intake", "brief_normalization", "editorial_planning", "style_specification", "design_system",
+                        "content_and_asset_production", "layout_assembly", "qa", "revision", "final_render",
+                        "published", "failed", "cancelled"]},
+    "revision": {"type": "integer", "minimum": 1, "description": "manifest revision, +1 on every write"},
+    "user_request": {
+      "type": "object",
+      "required": ["raw", "language", "output_format", "autonomy"],
+      "additionalProperties": false,
+      "properties": {
+        "raw": {"type": "string", "minLength": 1},
+        "language": {"type": "string", "pattern": "^[a-z]{2}(-[A-Z]{2})?$"},
+        "output_format": {"enum": ["pdf", "html"]},
+        "autonomy": {"enum": ["approval_gated", "autonomous"]}
+      }
+    },
+    "creative_brief": {"$ref": "#/$defs/slot"},
+    "editorial_plan": {"$ref": "#/$defs/slot"},
+    "style_specification": {"$ref": "#/$defs/slot"},
+    "design_system": {"$ref": "#/$defs/slot"},
+    "layout": {"$ref": "#/$defs/slot"},
+    "awaiting_approval": {"enum": [null, "creative_brief", "editorial_plan", "style_specification", "publication"]},
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["task_id", "agent_role", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "task_id": {"$ref": "urn:magorch:common:1#/$defs/task_id"},
+          "agent_role": {"$ref": "urn:magorch:common:1#/$defs/agent_role"},
+          "status": {"type": "string"}
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["artifact_id", "version", "artifact_type"],
+        "additionalProperties": false,
+        "properties": {
+          "artifact_id": {"$ref": "urn:magorch:common:1#/$defs/artifact_id"},
+          "version": {"$ref": "urn:magorch:common:1#/$defs/version"},
+          "artifact_type": {"type": "string"}
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": ["blocking_issues", "last_report_id", "publication_approved"],
+      "additionalProperties": false,
+      "properties": {
+        "blocking_issues": {"type": "integer", "minimum": 0},
+        "last_report_id": {"type": ["string", "null"]},
+        "publication_approved": {"type": "boolean"}
+      }
+    },
+    "publication": {
+      "type": "object",
+      "required": ["status", "output_artifact_id"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {"enum": ["not_started", "rendering", "rendered", "failed", "published"]},
+        "output_artifact_id": {"oneOf": [{"$ref": "urn:magorch:common:1#/$defs/artifact_id"}, {"type": "null"}]},
+        "manifest_id": {"type": ["string", "null"]}
+      }
+    },
+    "revision_cycles": {
+      "type": "object",
+      "required": ["count", "max"],
+      "additionalProperties": false,
+      "properties": {"count": {"type": "integer", "minimum": 0}, "max": {"type": "integer", "minimum": 0}}
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "at"],
+        "additionalProperties": false,
+        "properties": {"from": {"type": "string"}, "to": {"type": "string"},
+                       "at": {"$ref": "urn:magorch:common:1#/$defs/timestamp"}, "reason": {"type": "string"}}
+      }
+    }
+  }
+}

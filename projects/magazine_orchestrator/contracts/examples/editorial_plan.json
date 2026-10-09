@@ -1,0 +1,96 @@
+{
+  "schema": "editorial_plan/1",
+  "artifact_id": "ART-EDITORIAL-001",
+  "version": 1,
+  "derived_from": {
+    "artifact_id": "ART-BRIEF-001",
+    "version": 1
+  },
+  "issue_title": "기계와 함께 생각하기",
+  "masthead": "NEURAL",
+  "concept": "AI를 도구가 아닌 사고의 환경으로 읽는다.",
+  "angle": "기술의 역사적 사실과 상상력을 분리해 보여 준다.",
+  "sections": [
+    {
+      "section_id": "SEC-FRONT",
+      "name": "Front",
+      "purpose": "표지와 목차"
+    },
+    {
+      "section_id": "SEC-FEATURE",
+      "name": "Feature",
+      "purpose": "사실 기반 장편 기사"
+    }
+  ],
+  "articles": [
+    {
+      "article_id": "ART-ARTICLE-COVER",
+      "type": "cover",
+      "section_id": "SEC-FRONT",
+      "working_title": "표지",
+      "brief": "마스트헤드, 호 제목, 커버 라인",
+      "content_nature": "editorial",
+      "fiction_label": null,
+      "needs_research": false,
+      "pages": 1,
+      "word_target": null,
+      "visual_needs": [
+        {
+          "need_id": "VN-COVER",
+          "kind": "image",
+          "description": "추상적 신경망 시각화"
+        }
+      ]
+    },
+    {
+      "article_id": "ART-ARTICLE-FEATURE",
+      "type": "feature",
+      "section_id": "SEC-FEATURE",
+      "working_title": "주의의 발명",
+      "brief": "트랜스포머 이후의 변화",
+      "content_nature": "factual",
+      "fiction_label": null,
+      "needs_research": true,
+      "pages": 3,
+      "word_target": 1400,
+      "visual_needs": []
+    },
+    {
+      "article_id": "ART-ARTICLE-FICTION",
+      "type": "fiction",
+      "section_id": "SEC-FEATURE",
+      "working_title": "마지막 프롬프트",
+      "brief": "짧은 소설",
+      "content_nature": "creative",
+      "fiction_label": "이 글은 창작 소설입니다.",
+      "needs_research": false,
+      "pages": 2,
+      "word_target": 900,
+      "visual_needs": []
+    }
+  ],
+  "page_plan": [
+    {
+      "page": 1,
+      "article_id": "ART-ARTICLE-COVER",
+      "template_hint": "cover"
+    },
+    {
+      "page": 2,
+      "article_id": "ART-ARTICLE-FEATURE",
+      "template_hint": "feature_opener"
+    }
+  ],
+  "toc": [
+    {
+      "title": "주의의 발명",
+      "page": 2,
+      "article_id": "ART-ARTICLE-FEATURE"
+    }
+  ],
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "at": null
+  }
+}

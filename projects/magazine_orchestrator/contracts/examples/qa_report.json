@@ -1,0 +1,44 @@
+{
+  "schema": "qa_report/1",
+  "report_id": "QA-001",
+  "project_id": "MAG-2026-001",
+  "artifact_id": "ART-MAGAZINE-PROOF",
+  "version": 1,
+  "inspected": {
+    "kind": "proof",
+    "inputs": [
+      {
+        "artifact_id": "ART-LAYOUT-001",
+        "version": 1
+      }
+    ]
+  },
+  "status": "failed",
+  "checks": [
+    {
+      "check_id": "QA-CONTENT-001",
+      "category": "factual_integrity",
+      "status": "passed",
+      "severity": "none",
+      "message": "검증 대상 사실 주장에 대해 출처 연결이 확인되었다."
+    },
+    {
+      "check_id": "QA-LAYOUT-001",
+      "category": "layout_integrity",
+      "status": "failed",
+      "severity": "blocking",
+      "message": "7페이지 본문 텍스트가 콘텐츠 영역을 벗어난다.",
+      "evidence": "page 7 .body scrollHeight 1180px > clientHeight 1012px",
+      "affected_artifact_id": "ART-PAGE-007",
+      "affected_page": 7,
+      "recommended_agent": "layout_composer",
+      "recommended_action": "해당 페이지를 재배치하고 다시 렌더링한다."
+    }
+  ],
+  "summary": {
+    "blocking_issues": 1,
+    "major_issues": 0,
+    "minor_issues": 0
+  },
+  "publication_decision": "blocked"
+}

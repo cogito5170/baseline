@@ -1,0 +1,89 @@
+{
+  "schema": "magazine_project/1",
+  "project_id": "MAG-2026-001",
+  "status": "editorial_planning",
+  "revision": 3,
+  "user_request": {
+    "raw": "미래적이고 세련된 AI 기술 매거진을 만들어 줘.",
+    "language": "ko",
+    "output_format": "pdf",
+    "autonomy": "approval_gated"
+  },
+  "creative_brief": {
+    "artifact_id": "ART-BRIEF-001",
+    "version": 1,
+    "status": "produced",
+    "approval_status": "approved"
+  },
+  "editorial_plan": {
+    "artifact_id": "ART-EDITORIAL-001",
+    "version": 1,
+    "status": "in_progress",
+    "approval_status": "pending"
+  },
+  "style_specification": {
+    "artifact_id": "ART-STYLE-001",
+    "version": 1,
+    "status": "in_progress",
+    "approval_status": "pending"
+  },
+  "design_system": {
+    "artifact_id": null,
+    "version": null,
+    "status": "not_started",
+    "approval_status": "pending"
+  },
+  "layout": {
+    "artifact_id": null,
+    "version": null,
+    "status": "not_started",
+    "approval_status": "pending"
+  },
+  "awaiting_approval": null,
+  "tasks": [
+    {
+      "task_id": "TASK-BRIEF-001",
+      "agent_role": "creative_brief_analyst",
+      "status": "succeeded"
+    },
+    {
+      "task_id": "TASK-STYLE-001",
+      "agent_role": "style_taxonomist",
+      "status": "running"
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "ART-BRIEF-001",
+      "version": 1,
+      "artifact_type": "creative_brief"
+    }
+  ],
+  "quality": {
+    "blocking_issues": 0,
+    "last_report_id": null,
+    "publication_approved": false
+  },
+  "publication": {
+    "status": "not_started",
+    "output_artifact_id": null,
+    "manifest_id": null
+  },
+  "revision_cycles": {
+    "count": 0,
+    "max": 2
+  },
+  "history": [
+    {
+      "from": "intake",
+      "to": "brief_normalization",
+      "at": "2026-10-09T06:00:00Z"
+    },
+    {
+      "from": "brief_normalization",
+      "to": "editorial_planning",
+      "at": "2026-10-09T06:00:00Z",
+      "reason": "brief approved"
+    }
+  ]
+}
