@@ -1,0 +1,425 @@
+{
+ "schema_note": "user's 7 magazine candidates (10-09), structured; each creative_brief validates as creative_brief/1",
+ "replaces": "MAG-CANDIDATES-001.json (Claude's first set, kept for reference)",
+ "font_note": "named fonts are commercial and have no Hangul glyphs: each needs a licence (Adobe Fonts or purchase) and a Korean pair in an InDesign composite font; availability unverified",
+ "candidates": [
+  {
+   "candidate_id": "CAND-U1",
+   "name": "SYNTAX",
+   "tagline": "인공지능 아키텍처와 컴퓨테이셔널 미학을 탐구하는 테크 저널",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-U1",
+    "version": 1,
+    "source_request": "user 10-09 candidate 1: SYNTAX — 인공지능 아키텍처와 컴퓨테이셔널 미학을 탐구하는 테크 저널",
+    "topic": "AI 시스템 아키텍처, 알고리즘 디자인, 생성형 아트",
+    "purpose": "inform_and_inspire",
+    "target_audience": "테크 리드, 인터랙션 디자이너, AI 연구원",
+    "language": "ko",
+    "tone": [
+     "precise",
+     "technical",
+     "aesthetic"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "인공지능 아키텍처와 컴퓨테이셔널 미학을 탐구하는 테크 저널",
+    "constraints": [
+     "본문 좌측 고정 메타데이터 열 (code block, prompt, parameter 캡션)",
+     "코드 블록·다이어그램 자동 인입"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": true,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "indesign": {
+    "grid": {
+     "columns": 12,
+     "type": "baseline modular",
+     "metadata_rail": "left, fixed width 3 columns"
+    },
+    "fonts": {
+     "primary": "PP Neue Haas Grotesk",
+     "secondary": "JetBrains Mono"
+    },
+    "korean_pair": "Pretendard (Hangul) in a composite font",
+    "composition": [
+     "본문 좌측 고정 메타데이터 열 (code block, prompt, parameter 캡션)",
+     "코드 블록·다이어그램 자동 인입"
+    ],
+    "content_mapping": {
+     "code_block": "object style CodeBlock + paragraph style Code",
+     "yaml_frontmatter": "metadata rail key-value table",
+     "key_value": "paragraph style MetaKey / MetaValue"
+    }
+   },
+   "spec_notes": []
+  },
+  {
+   "candidate_id": "CAND-U2",
+   "name": "EMPTY",
+   "tagline": "사물의 물성과 공간의 여백을 기록하는 하이엔드 미니멀 라이프스타일 매거진",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-U2",
+    "version": 1,
+    "source_request": "user 10-09 candidate 2: EMPTY — 사물의 물성과 공간의 여백을 기록하는 하이엔드 미니멀 라이프스타일 매거진",
+    "topic": "공간, 정물 미학, 미니멀 라이프",
+    "purpose": "inform_and_inspire",
+    "target_audience": "2030 건축가, 인테리어 디자이너, 정적 라이프스타일 향유층",
+    "language": "ko",
+    "tone": [
+     "quiet",
+     "refined",
+     "tactile"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "사물의 물성과 공간의 여백을 기록하는 하이엔드 미니멀 라이프스타일 매거진",
+    "constraints": [
+     "한 면 1텍스트 블록",
+     "행간 180% 이상",
+     "텍스트·이미지 프레임 간결한 비대칭"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": false,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "indesign": {
+    "grid": {
+     "columns": 4,
+     "type": "wide margin",
+     "min_whitespace_ratio": 0.65,
+     "whitespace_ratio_definition": "1 - (union area of text and image frames inside the trim) / trim area, per page"
+    },
+    "fonts": {
+     "primary": "Minion Pro",
+     "display": "Freight Display"
+    },
+    "korean_pair": "Noto Serif KR or 본명조 in a composite font",
+    "composition": [
+     "한 면 1텍스트 블록",
+     "행간 180% 이상",
+     "텍스트·이미지 프레임 간결한 비대칭"
+    ],
+    "content_mapping": {
+     "quote": "paragraph style PullQuote",
+     "essay_body": "single text frame, leading >= 1.8 x size",
+     "single_image": "one image frame per spread side"
+    }
+   },
+   "spec_notes": []
+  },
+  {
+   "candidate_id": "CAND-U3",
+   "name": "STRATUM",
+   "tagline": "도시의 지층과 건축 단면을 아카이빙하는 어반 지오그래피 매거진",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-U3",
+    "version": 1,
+    "source_request": "user 10-09 candidate 3: STRATUM — 도시의 지층과 건축 단면을 아카이빙하는 어반 지오그래피 매거진",
+    "topic": "도시 재생, 건축 비평, 인프라 분석",
+    "purpose": "inform_and_inspire",
+    "target_audience": "도시공학자, 지리학 연구자, 다큐멘터리 사진가",
+    "language": "ko",
+    "tone": [
+     "documentary",
+     "analytical",
+     "layered"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "도시의 지층과 건축 단면을 아카이빙하는 어반 지오그래피 매거진",
+    "constraints": [
+     "단면도·위성 지도·필드 노트 교차 배치",
+     "각주와 좌표 핀 전용 사이드바 레일"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": true,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "indesign": {
+    "grid": {
+     "columns": 6,
+     "type": "compound (infographic + map layers)",
+     "sidebar_rail": "footnotes and coordinate pins"
+    },
+    "fonts": {
+     "primary": "DIN 2014",
+     "alternate": "Univers"
+    },
+    "korean_pair": "Pretendard or 본고딕 in a composite font",
+    "composition": [
+     "단면도·위성 지도·필드 노트 교차 배치",
+     "각주와 좌표 핀 전용 사이드바 레일"
+    ],
+    "content_mapping": {
+     "lat_lon": "anchored object CoordPin in the rail",
+     "scale": "caption field",
+     "records": "Data Merge source (CSV)"
+    }
+   },
+   "spec_notes": [
+    "satellite imagery needs a licensed source; coordinates need a cited source"
+   ]
+  },
+  {
+   "candidate_id": "CAND-U4",
+   "name": "NEO-AVANT",
+   "tagline": "해체주의 패션과 실험적 디지털 서브컬처를 다루는 비주얼 아방가르드 북",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-U4",
+    "version": 1,
+    "source_request": "user 10-09 candidate 4: NEO-AVANT — 해체주의 패션과 실험적 디지털 서브컬처를 다루는 비주얼 아방가르드 북",
+    "topic": "아방가르드 패션, 버추얼 휴먼, 서브컬처",
+    "purpose": "inform_and_inspire",
+    "target_audience": "패션 디렉터, 3D 아티스트, 비주얼 크리에이터",
+    "language": "ko",
+    "tone": [
+     "provocative",
+     "raw",
+     "experimental"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "해체주의 패션과 실험적 디지털 서브컬처를 다루는 비주얼 아방가르드 북",
+    "constraints": [
+     "풀블리드 이미지 위 텍스트 랩",
+     "투명도·블렌딩 모드",
+     "거친 대비"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": false,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "indesign": {
+    "grid": {
+     "columns": null,
+     "type": "broken grid with overlap layers"
+    },
+    "fonts": {
+     "primary": "experimental variable serif (to be chosen)"
+    },
+    "korean_pair": "a Hangul display face to be chosen",
+    "composition": [
+     "풀블리드 이미지 위 텍스트 랩",
+     "투명도·블렌딩 모드",
+     "거친 대비"
+    ],
+    "content_mapping": {
+     "generated_image": "image frame + text wrap from the subject bounding box",
+     "headline": "paragraph style with distortion only via allowed transforms"
+    }
+   },
+   "spec_notes": [
+    "brand names (Gentle Monster, Balenciaga) are mood references only, never printed as affiliation",
+    "generated images need provider, prompt and licence recorded in the asset manifest; no image provider is connected yet"
+   ]
+  },
+  {
+   "candidate_id": "CAND-U5",
+   "name": "METRIC",
+   "tagline": "글로벌 딥테크 산업과 벤처 팩트를 시각화하는 데이터 저널",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-U5",
+    "version": 1,
+    "source_request": "user 10-09 candidate 5: METRIC — 글로벌 딥테크 산업과 벤처 팩트를 시각화하는 데이터 저널",
+    "topic": "정량 비즈니스 분석, 반도체·에너지 공급망",
+    "purpose": "inform_and_inspire",
+    "target_audience": "VC 심사역, 하드웨어 엔지니어, 산업 전략 기획자",
+    "language": "ko",
+    "tone": [
+     "factual",
+     "dense",
+     "authoritative"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "글로벌 딥테크 산업과 벤처 팩트를 시각화하는 데이터 저널",
+    "constraints": [
+     "단단한 컬럼 분할",
+     "대형 스탯 콜아웃",
+     "데이터 테이블·차트 셀 자동 정렬"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": true,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "indesign": {
+    "grid": {
+     "columns": [
+      3,
+      5
+     ],
+     "type": "high-density editorial"
+    },
+    "fonts": {
+     "primary": "Georgia Pro",
+     "caption": "Franklin Gothic"
+    },
+    "korean_pair": "Noto Serif KR + Pretendard in composite fonts",
+    "composition": [
+     "단단한 컬럼 분할",
+     "대형 스탯 콜아웃",
+     "데이터 테이블·차트 셀 자동 정렬"
+    ],
+    "content_mapping": {
+     "table_data": "InDesign table + table style DataTable",
+     "chart_metrics": "chart image from data, source line required"
+    }
+   },
+   "spec_notes": [
+    "every figure needs a source; no number is printed without one"
+   ]
+  },
+  {
+   "candidate_id": "CAND-U6",
+   "name": "TERRAFORM",
+   "tagline": "바이오 신소재와 포스트휴먼 지속가능성을 탐색하는 생태 혁신지",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-U6",
+    "version": 1,
+    "source_request": "user 10-09 candidate 6: TERRAFORM — 바이오 신소재와 포스트휴먼 지속가능성을 탐색하는 생태 혁신지",
+    "topic": "바이오 테크, 균사체·해조류 신소재, 순환경제",
+    "purpose": "inform_and_inspire",
+    "target_audience": "소재 연구원, 지속가능성 컨설턴트, 프로덕트 디자이너",
+    "language": "ko",
+    "tone": [
+     "hopeful",
+     "scientific",
+     "organic"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "바이오 신소재와 포스트휴먼 지속가능성을 탐색하는 생태 혁신지",
+    "constraints": [
+     "어스톤 스와치 시스템",
+     "현미경 확대 캡션",
+     "2단/3단 유동 단락"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": true,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "indesign": {
+    "grid": {
+     "columns": null,
+     "type": "golden-ratio modular (0.618 / 0.382 splits)"
+    },
+    "fonts": {
+     "primary": "Gill Sans",
+     "secondary": "Plantin"
+    },
+    "korean_pair": "Pretendard + Noto Serif KR in composite fonts",
+    "composition": [
+     "어스톤 스와치 시스템",
+     "현미경 확대 캡션",
+     "2단/3단 유동 단락"
+    ],
+    "content_mapping": {
+     "formula": "character style ChemFormula (subscripts)",
+     "spec_sheet": "infobox object style SpecBox",
+     "certification": "tag object style CertTag"
+    }
+   },
+   "spec_notes": [
+    "Plantin is an old-style serif, not a humanist sans; kept as the secondary serif",
+    "certification marks only when the certificate is cited"
+   ]
+  },
+  {
+   "candidate_id": "CAND-U7",
+   "name": "KERNING",
+   "tagline": "활자의 형태학과 마이크로 타이포그래피를 비평하는 에디토리얼 전문지",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-U7",
+    "version": 1,
+    "source_request": "user 10-09 candidate 7: KERNING — 활자의 형태학과 마이크로 타이포그래피를 비평하는 에디토리얼 전문지",
+    "topic": "글꼴 디자인, 조판 역사, 제책·종이 비평",
+    "purpose": "inform_and_inspire",
+    "target_audience": "북 디자이너, 타입 디자이너, 출판 편집자",
+    "language": "ko",
+    "tone": [
+     "exacting",
+     "scholarly",
+     "playful"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "활자의 형태학과 마이크로 타이포그래피를 비평하는 에디토리얼 전문지",
+    "constraints": [
+     "커닝·자간·트래킹 수치 노출",
+     "하이픈·양끝맞춤 규칙 시각화",
+     "교정 부호 디자인"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": true,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "indesign": {
+    "grid": {
+     "columns": 6,
+     "type": "8 pt baseline grid",
+     "baseline_lock": "all body text aligned to the baseline grid"
+    },
+    "fonts": {
+     "primary": "Garamond",
+     "contrast": "Baskerville"
+    },
+    "korean_pair": "Noto Serif KR in a composite font",
+    "composition": [
+     "커닝·자간·트래킹 수치 노출",
+     "하이픈·양끝맞춤 규칙 시각화",
+     "교정 부호 디자인"
+    ],
+    "content_mapping": {
+     "specimen": "character styles with explicit tracking/kerning values",
+     "opentype": "small caps, ligatures via character style OpenType features"
+    }
+   },
+   "spec_notes": [
+    "benchmark for character/paragraph style and OpenType control through the bridge"
+   ]
+  }
+ ]
+}

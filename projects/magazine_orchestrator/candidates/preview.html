@@ -1,21 +1,21 @@
 <title>매거진 후보 7종 지면</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gaegu:wght@700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@300;400;600;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Barlow:wght@400;500;600&family=Cabin:wght@400;600&family=Cormorant:ital,wght@0,300;1,300&family=Crimson+Pro:wght@300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Fraunces:opsz,wght@9..144,300;9..144,900&family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&family=Libre+Baskerville:wght@400;700&family=Libre+Franklin:wght@400;600;800&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@300;400;600;900&display=swap">
 <style>
 /* Layout: a contact sheet of seven printed pages on a light-table; each page keeps its own fixed print palette, the sheet follows the viewer's theme. */
 :root {
-  --bg: #e9e7e3; --fg: #1d1f22; --muted: #5d6166; --line: #c9c6c0; --sheet: #f6f5f2;
+  --bg: #e9e7e3; --fg: #1d1f22; --muted: #5d6166; --line: #c9c6c0;
   --sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --serif: "Noto Serif KR", "AppleMyungjo", "Batang", serif;
-  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #1b1c1e; --fg: #e8e6e2; --muted: #a2a5aa; --line: #393b3f; --sheet: #242528; color-scheme: dark } }
-:root[data-theme="dark"] { --bg: #1b1c1e; --fg: #e8e6e2; --muted: #a2a5aa; --line: #393b3f; --sheet: #242528; color-scheme: dark }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #1b1c1e; --fg: #e8e6e2; --muted: #a2a5aa; --line: #393b3f; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #1b1c1e; --fg: #e8e6e2; --muted: #a2a5aa; --line: #393b3f; color-scheme: dark }
 * { box-sizing: border-box }
 body { background: var(--bg); color: var(--fg); font-family: var(--sans); margin: 0; padding-inline: 16px; padding-block: 32px 64px }
 .wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 28px }
-header { display: grid; gap: 8px; max-width: 68ch }
+header { display: grid; gap: 8px; max-width: 72ch }
 header h1 { font-size: clamp(22px, 3vw, 30px); margin: 0; font-weight: 700; text-wrap: balance }
 header p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 14px }
 .sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 36px 28px; align-items: start }
@@ -25,117 +25,130 @@ figcaption b { font-size: 15px }
 figcaption span { color: var(--muted) }
 .chips { display: flex; gap: 6px; align-items: center; flex-wrap: wrap }
 .sw { width: 14px; height: 14px; border-radius: 3px; border: 1px solid var(--line) }
-.tag { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px }
+.tag { font-family: var(--mono); font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px }
 
-/* a printed page: proportions and type scale come from its own width */
 .page { position: relative; width: 100%; max-width: 100%; aspect-ratio: 210 / 297; container-type: inline-size; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 10px 28px rgba(0,0,0,.14) }
-.page.b5 { aspect-ratio: 182 / 257 }
-.fill { position: absolute; inset: 0 }
-.ph { font-family: var(--mono); font-size: 2.3cqw; letter-spacing: .06em; opacity: .7 }
+.ph { font-family: var(--mono); font-size: 2cqw; letter-spacing: .05em }
 
-/* 1 NEURAL — cover */
-.neural { background: #101820; color: #F4F1EA; font-family: var(--sans) }
-.neural canvas { position: absolute; inset: 22% 0 26% 0; width: 100%; height: 52% }
-.neural .mast { position: absolute; top: 5cqw; left: 6cqw; right: 6cqw; display: flex; justify-content: space-between; align-items: baseline }
-.neural .mast h2 { margin: 0; font-weight: 900; font-size: 19cqw; letter-spacing: -.04em; line-height: .8 }
-.neural .mast small { font-family: var(--mono); font-size: 2.2cqw; color: #00C2D1; text-align: right; line-height: 1.5 }
-.neural .rule { position: absolute; left: 6cqw; right: 6cqw; top: 23cqw; border-top: .25cqw solid #00C2D1 }
-.neural .issue { position: absolute; top: 25cqw; left: 6cqw; font-family: var(--mono); font-size: 2.2cqw; letter-spacing: .08em }
-.neural .lead { position: absolute; left: 6cqw; right: 30cqw; bottom: 30cqw; }
-.neural .lead h3 { margin: 0; font-size: 8.6cqw; font-weight: 700; line-height: 1.12; letter-spacing: -.02em; text-wrap: balance }
-.neural .lead p { margin: 2cqw 0 0; font-size: 2.8cqw; line-height: 1.55; color: #c9c6bd }
-.neural .lines { position: absolute; left: 6cqw; right: 6cqw; bottom: 6cqw; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3cqw; border-top: .15cqw solid #3a4650; padding-top: 2.5cqw }
-.neural .lines div { font-size: 2.5cqw; line-height: 1.45 }
-.neural .lines em { display: block; font-style: normal; font-family: var(--mono); font-size: 1.9cqw; color: #00C2D1; margin-bottom: .8cqw }
-.neural .xy { position: absolute; right: 6cqw; bottom: 33cqw; font-family: var(--mono); font-size: 1.9cqw; color: #6f7c86; text-align: right; line-height: 1.6 }
+/* 1 SYNTAX — 12 columns, fixed metadata rail on the left */
+.syntax { background: #F7F7F5; color: #0E0E10; font-family: "Inter Tight", var(--sans); display: grid; grid-template-columns: 30cqw 1fr; }
+.syntax .rail { background: #0E0E10; color: #D7D7D2; padding: 6cqw 3.5cqw; font-family: var(--mono); font-size: 1.85cqw; line-height: 1.6; display: grid; align-content: start; gap: 4cqw }
+.syntax .rail h4 { margin: 0 0 1cqw; font-size: 1.6cqw; color: #7CFF9B; font-weight: 500; letter-spacing: .1em }
+.syntax .rail pre { margin: 0; white-space: pre-wrap; font: inherit }
+.syntax .rail .k { color: #8a8a86 }
+.syntax .main { padding: 6cqw 5cqw 6cqw 4.5cqw; position: relative; background-image: repeating-linear-gradient(90deg, transparent 0 calc(100%/8 - .1cqw), rgba(14,14,16,.06) calc(100%/8 - .1cqw) calc(100%/8)) }
+.syntax .eyebrow { font-family: var(--mono); font-size: 1.8cqw; letter-spacing: .12em }
+.syntax h3 { font-size: 8cqw; font-weight: 800; letter-spacing: -.04em; line-height: .98; margin: 3cqw 0 3cqw; font-family: "Inter Tight", var(--sans) }
+.syntax p { font-family: "Inter Tight", var(--sans); font-size: 2.35cqw; line-height: 1.6; margin: 0 0 2cqw }
+.syntax svg { display: block; width: 100%; height: auto; margin: 3cqw 0 }
+.syntax .folio { position: absolute; bottom: 4cqw; left: 4.5cqw; right: 5cqw; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 1.7cqw }
 
-/* 2 SIGNAL/NOISE — chart page */
-.signal { background: #fff; color: #111; font-family: var(--sans); padding: 6cqw }
-.signal .top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 2.1cqw; border-bottom: .3cqw solid #111; padding-bottom: 1.5cqw }
-.signal .top b { color: #FF4F00; font-weight: 500 }
-.signal h3 { font-size: 7.4cqw; line-height: 1.1; margin: 5cqw 0 2cqw; font-weight: 900; letter-spacing: -.03em; width: 80% }
-.signal .dek { font-size: 2.8cqw; line-height: 1.55; width: 75%; margin: 0 0 4cqw; color: #333 }
-.signal .chart { border-top: .15cqw solid #111; padding-top: 2cqw }
-.signal .chart .cap { font-family: var(--mono); font-size: 1.9cqw; display: flex; justify-content: space-between; color: #555 }
-.signal .bars { display: grid; gap: 1.6cqw; margin: 2.5cqw 0 }
-.signal .bar { display: grid; grid-template-columns: 22cqw 1fr 8cqw; align-items: center; gap: 2cqw; font-size: 2.3cqw }
-.signal .bar i { display: block; height: 3cqw; background: #111 }
-.signal .bar.hot i { background: #FF4F00 }
-.signal .bar span:last-child { font-family: var(--mono); text-align: right; font-variant-numeric: tabular-nums }
-.signal .src { font-family: var(--mono); font-size: 1.8cqw; color: #FF4F00; border-top: .15cqw solid #ddd; padding-top: 1.2cqw }
-.signal .cols { columns: 2; column-gap: 4cqw; font-size: 2.3cqw; line-height: 1.6; margin-top: 4cqw; color: #222 }
-.signal .cols p { margin: 0 0 1.6cqw }
-.signal .folio { position: absolute; bottom: 4cqw; left: 6cqw; right: 6cqw; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 1.9cqw }
+/* 2 EMPTY — one text block, leading 190 %; image 42x46 % + text 40x20 % of the page = 27 % framed, plus mast and folio lines */
+.empty { background: #F4F2EE; color: #262523; font-family: "Crimson Pro", var(--serif) }
+.empty .img { position: absolute; left: 46%; top: 12%; width: 42%; height: 46%; background: radial-gradient(ellipse 30% 9% at 50% 82%, rgba(0,0,0,.18), transparent 70%), linear-gradient(180deg, #dcd7cf 0 70%, #cfc8bd 70%) }
+.empty .img::after { content: ""; position: absolute; left: 38%; bottom: 18%; width: 24%; height: 34%; border-radius: 48% 48% 10% 10% / 30% 30% 8% 8%; background: linear-gradient(90deg, #a79d8f, #c7bfb3 60%, #b2a89a) }
+.empty .img span { position: absolute; left: 3cqw; top: 3cqw; color: #8c857a }
+.empty .txt { position: absolute; left: 12%; top: 66%; width: 40%; height: 20%; font-size: 2.45cqw; line-height: 1.9; font-weight: 300 }
+.empty .txt q { display: block; font-family: "Cormorant", var(--serif); font-style: italic; font-size: 3.6cqw; line-height: 1.5; margin-bottom: 2cqw; quotes: none }
+.empty .mast { position: absolute; left: 12%; top: 12%; font-family: "Cormorant", var(--serif); font-weight: 300; font-size: 3cqw; letter-spacing: .5em }
+.empty .meta { position: absolute; left: 12%; bottom: 5%; right: 12%; display: flex; justify-content: space-between; font-family: var(--sans); font-size: 1.6cqw; letter-spacing: .2em; color: #8c857a }
 
-/* 3 여백 — photo essay (B5) */
-.yeobaek { background: #F2EFE9; color: #2B2B2B; font-family: var(--serif) }
-.yeobaek .photo { position: absolute; top: 14cqw; left: 14cqw; right: 14cqw; height: 74cqw;
-  background:
-    linear-gradient(105deg, rgba(255,250,238,.0) 38%, rgba(255,250,238,.55) 46%, rgba(255,250,238,.0) 58%),
-    linear-gradient(180deg, #cfc6b8 0 62%, #b7a994 62% 100%);
-  display: grid; place-items: end start; padding: 2cqw }
-.yeobaek .photo::after { content: ""; position: absolute; left: 30%; bottom: 18%; width: 22%; height: 26%; background: #8d7a63; border-radius: 1cqw 1cqw 0 0; opacity: .55 }
-.yeobaek .cap { position: absolute; top: 90cqw; left: 14cqw; font-family: var(--sans); font-size: 2cqw; color: #7d766b; letter-spacing: .02em }
-.yeobaek .no { position: absolute; top: 108cqw; left: 14cqw; font-family: var(--sans); font-size: 2cqw; letter-spacing: .3em; color: #A47148 }
-.yeobaek h3 { position: absolute; top: 113cqw; left: 14cqw; right: 30cqw; margin: 0; font-weight: 300; font-size: 6.2cqw; line-height: 1.3; text-wrap: balance }
-.yeobaek p { position: absolute; top: 124cqw; left: 40cqw; right: 14cqw; margin: 0; font-size: 2.45cqw; line-height: 1.9; font-weight: 300 }
-.yeobaek .folio { position: absolute; bottom: 7cqw; left: 14cqw; right: 14cqw; display: flex; justify-content: space-between; font-family: var(--sans); font-size: 1.8cqw; color: #8a8378; letter-spacing: .1em }
+/* 3 STRATUM — 6 columns, section + map + coordinate rail */
+.stratum { background: #EEF0EE; color: #15191C; font-family: "Barlow", var(--sans); display: grid; grid-template-columns: 1fr 24cqw; }
+.stratum .body { padding: 5cqw 3cqw 5cqw 5cqw; display: grid; gap: 2.5cqw; align-content: start }
+.stratum .eyebrow { font-family: "Barlow Condensed", var(--sans); font-weight: 700; font-size: 2.2cqw; letter-spacing: .2em; color: #E2541B }
+.stratum h3 { margin: 0; font-family: "Barlow Condensed", var(--sans); font-weight: 700; font-size: 9cqw; line-height: .95; letter-spacing: -.01em; text-transform: uppercase }
+.stratum h3 small { display: block; font-family: var(--sans); font-weight: 500; font-size: 3.6cqw; letter-spacing: 0; text-transform: none; margin-top: 1.2cqw }
+.stratum .map { position: relative; height: 40cqw; background:
+  repeating-linear-gradient(0deg, transparent 0 5cqw, rgba(21,25,28,.08) 5cqw calc(5cqw + 1px)),
+  repeating-linear-gradient(90deg, transparent 0 5cqw, rgba(21,25,28,.08) 5cqw calc(5cqw + 1px)),
+  radial-gradient(ellipse 60% 40% at 30% 60%, #c9d2c8, transparent 70%),
+  linear-gradient(160deg, #d6dbd3, #bfc8c2) }
+.stratum .map .river { position: absolute; left: -5%; right: -5%; top: 62%; height: 4cqw; background: #8fb3c4; transform: rotate(-8deg); border-radius: 2cqw }
+.stratum .pin { position: absolute; width: 2.6cqw; height: 2.6cqw; border-radius: 50%; background: #E2541B; border: .5cqw solid #fff; font-family: "Barlow Condensed", var(--sans); }
+.stratum .pin b { position: absolute; left: 3.2cqw; top: -.6cqw; font-size: 2.2cqw; font-weight: 700; color: #15191C }
+.stratum .map .ph { position: absolute; right: 2cqw; bottom: 1.5cqw; color: #4b5459 }
+.stratum svg { display: block; width: 100%; height: auto }
+.stratum p { margin: 0; font-size: 2.2cqw; line-height: 1.6 }
+.stratum p sup { color: #E2541B; font-weight: 600 }
+.stratum .rail { border-left: .25cqw solid #15191C; padding: 5cqw 3cqw; font-size: 1.85cqw; line-height: 1.5; display: grid; gap: 3cqw; align-content: start; background: #E4E7E4 }
+.stratum .rail h4 { margin: 0; font-family: "Barlow Condensed", var(--sans); font-size: 2.2cqw; letter-spacing: .15em }
+.stratum .rail .c { font-family: var(--mono); font-size: 1.7cqw; font-variant-numeric: tabular-nums }
+.stratum .rail .c b { color: #E2541B }
+.stratum .folio { position: absolute; bottom: 3.5cqw; left: 5cqw; font-family: "Barlow Condensed", var(--sans); font-size: 2cqw; letter-spacing: .2em }
 
-/* 4 도시의 결 — feature opener */
-.city { background: #D9D6CF; color: #1E1E1E; font-family: var(--sans) }
-.city .facade { position: absolute; top: 0; right: 0; width: 58%; height: 64%; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(8, 1fr); gap: 1.2cqw; padding: 1.2cqw; background: #1E1E1E }
-.city .facade i { background: #8f8b84 }
-.city .facade i:nth-child(3n) { background: #b6b2aa }
-.city .facade i:nth-child(7) { background: #C8102E }
-.city .kicker { position: absolute; top: 7cqw; left: 6cqw; font-family: var(--mono); font-size: 2.1cqw; letter-spacing: .08em; width: 34%; line-height: 1.6 }
-.city h3 { position: absolute; left: 5cqw; bottom: 30cqw; margin: 0; font-family: "Black Han Sans", var(--sans); font-weight: 400; font-size: 17cqw; line-height: .92; letter-spacing: -.02em }
-.city h3 span { color: #C8102E }
-.city p { position: absolute; left: 6cqw; width: 52%; bottom: 10cqw; margin: 0; font-size: 2.5cqw; line-height: 1.6 }
-.city .sec { position: absolute; right: 6cqw; bottom: 8cqw; width: 30%; font-family: var(--mono); font-size: 1.8cqw }
-.city .sec svg { width: 100%; height: auto; display: block }
-.city .folio { position: absolute; top: 66cqw; right: 6cqw; font-family: var(--mono); font-size: 1.9cqw }
+/* 4 NEO-AVANT — broken grid over a full-bleed image, wrap and blend */
+.avant { background: #0A0A0A; color: #F2F2F2; font-family: "Fraunces", var(--serif) }
+.avant .bleed { position: absolute; inset: 0; background:
+  radial-gradient(circle at 62% 40%, #cfd3d6 0 9%, #6d7378 18%, transparent 34%),
+  radial-gradient(ellipse 22% 48% at 64% 74%, #2a2d30 0 60%, transparent 62%),
+  conic-gradient(from 200deg at 70% 30%, #1a1a1a, #3c3f42, #121212, #5a5e62, #1a1a1a);
+  filter: contrast(1.3) }
+.avant .bleed .ph { position: absolute; right: 4cqw; top: 4cqw; color: #9aa0a5 }
+.avant h3 { position: absolute; left: -2cqw; top: 8cqw; margin: 0; font-weight: 900; font-size: 21cqw; line-height: .8; letter-spacing: -.06em; transform: scaleX(.78) scaleY(1.25); transform-origin: left top; mix-blend-mode: difference; color: #fff; font-variation-settings: "opsz" 144 }
+.avant .ko { position: absolute; left: 6cqw; top: 66cqw; font-family: var(--serif); font-weight: 900; font-size: 6cqw; writing-mode: vertical-rl; letter-spacing: .1em; mix-blend-mode: difference; color: #fff }
+.avant .wrap-text { position: absolute; left: 16cqw; right: 6cqw; bottom: 8cqw; font-family: var(--sans); font-size: 2.3cqw; line-height: 1.6; color: #e9e9e9 }
+.avant .wrap-text .float { float: right; width: 34cqw; height: 34cqw; shape-outside: circle(50%); border-radius: 50%; margin: 0 0 1cqw 3cqw; border: .3cqw dashed rgba(255,255,255,.5) }
+.avant .wrap-text p { margin: 0 0 1.4cqw }
+.avant .box { position: absolute; left: 44cqw; top: 46cqw; background: #E6FF00; color: #0A0A0A; font-family: var(--mono); font-size: 1.8cqw; padding: 1.5cqw 2.5cqw; transform: rotate(-4deg) }
 
-/* 5 한 그릇 — recipe page (B5) */
-.bowl { background: #FFF8EE; color: #3B2416; font-family: var(--sans); padding: 8cqw }
-.bowl .eyebrow { font-family: var(--mono); font-size: 2cqw; letter-spacing: .1em; color: #E07A2E }
-.bowl h3 { font-family: var(--serif); font-weight: 900; font-size: 9cqw; margin: 2cqw 0 1cqw; line-height: 1.1 }
-.bowl .sub { font-size: 2.8cqw; margin: 0; color: #6b5040 }
-.bowl .plate { position: absolute; top: 44cqw; right: -10cqw; width: 62cqw; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #f3e6cf 0 44%, #e9d6b6 45% 48%, #fffdf8 49% 70%, #e8dccb 71% 72%, transparent 73%) }
-.bowl .plate::before { content: ""; position: absolute; inset: 27%; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #fbf3e3 0 30%, #f0dcb8 31% 60%, #d9b98a 61%) }
-.bowl .note { position: absolute; top: 40cqw; right: 8cqw; font-family: "Gaegu", var(--sans); font-weight: 700; font-size: 4cqw; color: #E07A2E; transform: rotate(-6deg) }
-.bowl .box { position: absolute; left: 8cqw; top: 50cqw; width: 46cqw; background: #fff; border: .3cqw solid #3B2416; padding: 3.5cqw }
-.bowl .box h4 { margin: 0 0 1.5cqw; font-size: 3cqw }
-.bowl .box ul, .bowl .box ol { margin: 0; padding-left: 4cqw; font-size: 2.35cqw; line-height: 1.65 }
-.bowl .box ol { margin-top: 2cqw }
-.bowl .meta { display: flex; gap: 3cqw; font-family: var(--mono); font-size: 1.9cqw; color: #6b5040; margin-top: 2cqw; border-top: .15cqw dashed #c7b39f; padding-top: 1.5cqw }
-.bowl .folio { position: absolute; bottom: 6cqw; left: 8cqw; right: 8cqw; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 1.9cqw; color: #8a6d58 }
+/* 5 METRIC — 5 columns, stat callouts, table */
+.metric { background: #FBFAF7; color: #1B1B1B; font-family: Georgia, "Noto Serif KR", serif; padding: 5cqw }
+.metric .top { display: flex; justify-content: space-between; align-items: baseline; border-bottom: .5cqw solid #1B1B1B; padding-bottom: 1.2cqw; font-family: "Libre Franklin", var(--sans) }
+.metric .top b { font-weight: 800; font-size: 5cqw; letter-spacing: -.02em }
+.metric .top span { font-size: 1.8cqw; letter-spacing: .1em }
+.metric h3 { margin: 3cqw 0 1cqw; font-size: 6.2cqw; line-height: 1.1; font-weight: 400 }
+.metric .dek { margin: 0 0 3cqw; font-size: 2.5cqw; line-height: 1.5; font-style: italic; color: #444 }
+.metric .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: .15cqw solid #1B1B1B; border-bottom: .15cqw solid #1B1B1B }
+.metric .stat { padding: 2.5cqw 2cqw; border-right: .15cqw solid #ccc; font-family: "Libre Franklin", var(--sans); font-size: 1.9cqw; line-height: 1.4 }
+.metric .stat:last-child { border-right: 0 }
+.metric .stat b { display: block; font-family: Georgia, serif; font-weight: 400; font-size: 8cqw; line-height: 1; color: #0F5C4D; font-variant-numeric: tabular-nums }
+.metric .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2.4cqw; margin-top: 3cqw }
+.metric .cols p { grid-column: span 2; margin: 0; font-size: 2.15cqw; line-height: 1.55 }
+.metric table { grid-column: span 3; border-collapse: collapse; width: 100%; font-family: "Libre Franklin", var(--sans); font-size: 1.95cqw; font-variant-numeric: tabular-nums }
+.metric th { text-align: left; border-bottom: .2cqw solid #1B1B1B; padding: .8cqw .4cqw; font-weight: 600 }
+.metric td { border-bottom: .1cqw solid #ddd; padding: .8cqw .4cqw }
+.metric td:not(:first-child), .metric th:not(:first-child) { text-align: right }
+.metric .src { margin-top: 2cqw; font-family: "Libre Franklin", var(--sans); font-size: 1.7cqw; color: #B23A2E }
 
-/* 6 ORBIT — infographic */
-.orbit { background: #0B1D3A; color: #F5F5F5; font-family: var(--sans); padding: 6cqw }
-.orbit .eyebrow { display: inline-block; font-family: "Do Hyeon", var(--sans); font-size: 3cqw; background: #FFC83D; color: #0B1D3A; padding: .6cqw 2cqw; border-radius: 1cqw }
-.orbit h3 { font-family: "Do Hyeon", var(--sans); font-weight: 400; font-size: 11cqw; margin: 3cqw 0 1cqw; line-height: 1 }
-.orbit h3 b { color: #FFC83D; font-weight: 400 }
-.orbit .dek { font-size: 2.8cqw; margin: 0; line-height: 1.55; color: #c9d3e6; width: 80% }
-.orbit svg.map { display: block; width: 100%; height: auto; margin-top: 5cqw }
-.orbit .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 3cqw; margin-top: 4cqw }
-.orbit .fact { border: .25cqw solid #FFC83D; border-radius: 2cqw; padding: 2.5cqw; font-size: 2.4cqw; line-height: 1.5 }
-.orbit .fact b { display: block; font-family: "Do Hyeon", var(--sans); font-weight: 400; font-size: 5.4cqw; color: #FFC83D; font-variant-numeric: tabular-nums }
-.orbit .src { position: absolute; left: 6cqw; right: 6cqw; bottom: 4.5cqw; font-family: var(--mono); font-size: 1.8cqw; color: #8ea0bf; display: flex; justify-content: space-between }
+/* 6 TERRAFORM — golden-ratio modules, earth swatches, micro caption */
+.terra { background: #F1EBDD; color: #2F2A22; font-family: "Cabin", var(--sans); display: grid; grid-template-columns: 61.8% 38.2%; grid-template-rows: 61.8% 38.2% }
+.terra .hero { position: relative; background: radial-gradient(circle at 35% 40%, #e8dfcc 0 6%, transparent 7%), radial-gradient(circle at 60% 55%, #d9cdb4 0 4%, transparent 5%), repeating-radial-gradient(circle at 45% 50%, #b9a682 0 .6cqw, #c8b893 .6cqw 1.4cqw, #a8946d 1.4cqw 1.8cqw); }
+.terra .hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 55%, #2F2A22 56%) }
+.terra .hero .ph { position: absolute; left: 3cqw; bottom: 3cqw; color: #F1EBDD; z-index: 1 }
+.terra .hero .mag { position: absolute; right: 3cqw; top: 3cqw; z-index: 1; font-family: var(--mono); font-size: 1.8cqw; color: #F1EBDD; text-align: right; line-height: 1.5 }
+.terra .side { padding: 5cqw 4cqw; display: grid; align-content: start; gap: 2cqw }
+.terra .eyebrow { font-size: 1.9cqw; letter-spacing: .2em; color: #6E7D4F; font-weight: 600 }
+.terra h3 { margin: 0; font-family: "Libre Baskerville", var(--serif); font-weight: 400; font-size: 5.4cqw; line-height: 1.15 }
+.terra .side p { margin: 0; font-size: 2.1cqw; line-height: 1.6 }
+.terra .low { grid-column: 1 / -1; display: grid; grid-template-columns: 61.8% 38.2% }
+.terra .low .text { padding: 4cqw 4cqw 4cqw 5cqw; columns: 2; column-gap: 3cqw; font-size: 2.05cqw; line-height: 1.6 }
+.terra .low .text p { margin: 0 0 1.4cqw }
+.terra .spec { background: #E3D8C1; padding: 4cqw; font-size: 1.9cqw; line-height: 1.6; display: grid; gap: 1.6cqw; align-content: start }
+.terra .spec h4 { margin: 0; font-size: 2.1cqw; letter-spacing: .12em }
+.terra .spec dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .4cqw 2cqw }
+.terra .spec dt { color: #6b5f4c }
+.terra .spec dd { margin: 0; font-variant-numeric: tabular-nums }
+.terra .sws { display: flex; gap: 1cqw }
+.terra .sws i { width: 5cqw; height: 5cqw; border-radius: 50% }
+.terra .tag2 { display: inline-block; border: .2cqw solid #6E7D4F; color: #6E7D4F; border-radius: 4cqw; padding: .2cqw 1.6cqw; font-size: 1.7cqw }
 
-/* 7 MONO — lookbook cover */
-.mono { background: #fff; color: #000; font-family: var(--serif) }
-.mono .shot { position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 13% 9% at 52% 20%, #000 98%, transparent 100%),
-    linear-gradient(100deg, transparent 0 40%, #000 40% 63%, transparent 63%) 0 25% / 100% 75% no-repeat,
-    linear-gradient(180deg, #fff 0 60%, #B5B5B5 60% 100%) }
-.mono .shot::after { content: ""; position: absolute; left: 63%; top: 25%; width: 26%; bottom: 0; background: linear-gradient(100deg, rgba(0,0,0,.25), transparent) }
-.mono h2 { position: absolute; top: 4cqw; left: 6cqw; margin: 0; font-weight: 300; font-size: 24cqw; letter-spacing: .06em; line-height: .9; mix-blend-mode: difference; color: #fff }
-.mono .vert { position: absolute; right: 5cqw; top: 34cqw; writing-mode: vertical-rl; font-size: 4.4cqw; font-weight: 600; letter-spacing: .3em; mix-blend-mode: difference; color: #fff }
-.mono .issue { position: absolute; top: 29cqw; left: 6.5cqw; font-family: var(--mono); font-size: 2cqw; letter-spacing: .12em }
-.mono .lines { position: absolute; left: 6cqw; bottom: 7cqw; font-size: 2.7cqw; line-height: 1.7; color: #000 }
-.mono .lines b { font-weight: 600 }
-.mono .bar { position: absolute; right: 6cqw; bottom: 7cqw; font-family: var(--mono); font-size: 1.8cqw; text-align: right; line-height: 1.6 }
+/* 7 KERNING — 8 pt baseline grid shown, kerning and tracking values exposed */
+.kern { background: #FFFDF7; color: #1A1712; font-family: "EB Garamond", var(--serif); padding: 6cqw 6cqw 0;
+  background-image: repeating-linear-gradient(180deg, transparent 0 calc(2.6cqw - 1px), rgba(0,120,200,.16) calc(2.6cqw - 1px) 2.6cqw) }
+.kern .top { display: flex; justify-content: space-between; font-family: "EB Garamond", serif; font-variant: small-caps; letter-spacing: .12em; font-size: 2.4cqw; border-bottom: .15cqw solid #1A1712; padding-bottom: 1cqw }
+.kern .spec { display: grid; grid-template-columns: 1fr 1fr; gap: 4cqw; margin-top: 5cqw; align-items: end }
+.kern .pair { font-size: 24cqw; line-height: .9; position: relative }
+.kern .pair.tight { letter-spacing: -.08em }
+.kern .pair small { position: absolute; left: 0; bottom: -4cqw; font-family: var(--mono); font-size: 1.8cqw; color: #C0392B; letter-spacing: 0 }
+.kern .pair.bask { font-family: "Libre Baskerville", serif }
+.kern h3 { font-size: 6.6cqw; font-weight: 400; line-height: 1.15; margin: 8cqw 0 2cqw; text-wrap: balance }
+.kern h3 em { font-variant-ligatures: discretionary-ligatures }
+.kern p { font-size: 2.6cqw; line-height: 5.2cqw; margin: 0; text-align: justify; hyphens: auto; columns: 2; column-gap: 4cqw }
+.kern p .sc { font-variant: small-caps; letter-spacing: .05em }
+.kern p .lig { color: #C0392B }
+.kern .proof { position: absolute; right: 2cqw; top: 58cqw; width: 14cqw; font-family: var(--mono); font-size: 1.6cqw; color: #C0392B; line-height: 1.5; border-left: .2cqw solid #C0392B; padding-left: 1.2cqw }
+.kern .meter { position: absolute; left: 6cqw; right: 6cqw; bottom: 4cqw; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 1.7cqw; color: #6a6052 }
 
 @media (prefers-reduced-motion: no-preference) { .page { transition: transform .25s ease } figure:hover .page { transform: translateY(-3px) } }
 </style>
@@ -143,181 +156,171 @@ figcaption span { color: var(--muted) }
 <div class="wrap">
   <header>
     <h1>매거진 후보 7종, 한 페이지씩</h1>
-    <p>느낌을 보기 위한 목업입니다. 실제 InDesign 출력이 아니며, 사진은 도형으로 만든 자리표시, 차트 2번의 수치는 예시입니다. 본문 글꼴은 후보 명세의 Pretendard 대신 Noto Sans KR로 보여 줍니다. 각 후보의 대표 지면 하나를 골랐습니다.</p>
+    <p>보내 주신 후보로 다시 만든 느낌 확인용 목업입니다. 실제 InDesign 출력이 아니고, 사진과 지도는 도형으로 만든 자리표시입니다. 5번 METRIC의 수치와 3번 STRATUM의 좌표는 예시입니다. 명세의 상용 글꼴은 이 페이지에서 비슷한 무료 글꼴로 대신했습니다(각 캡션에 적음).</p>
   </header>
 
   <div class="sheet">
 
     <figure>
-      <div class="page neural" aria-label="NEURAL 표지 목업">
-        <canvas id="net" aria-hidden="true"></canvas>
-        <div class="mast"><h2>NEURAL</h2><small>계간 · AI와 사회<br>KRW 18,000</small></div>
-        <div class="rule"></div>
-        <div class="issue">VOL. 01 — 2026 겨울 — 기계와 함께 생각하기</div>
-        <div class="xy">N 37.5665<br>E 126.9780<br>LAYER 12 / 96</div>
-        <div class="lead">
-          <h3>주의의 발명, 그 후 9년</h3>
-          <p>2017년 논문 한 편이 바꾼 것과 바꾸지 못한 것.</p>
-        </div>
-        <div class="lines">
-          <div><em>DATA</em>숫자로 보는 AI 2012–2024</div>
-          <div><em>FICTION · 가상 인터뷰</em>2035년의 큐레이터</div>
-          <div><em>ESSAY</em>도구인가 동료인가</div>
+      <div class="page syntax" aria-label="SYNTAX 기사 지면 목업">
+        <aside class="rail">
+          <div><h4>FRONTMATTER</h4><pre><span class="k">id:</span> SYN-0112
+<span class="k">model:</span> diffusion-u-net
+<span class="k">params:</span> 860M
+<span class="k">steps:</span> 30</pre></div>
+          <div><h4>PROMPT</h4><pre>"a lattice of light
+folding into itself,
+isometric, 35mm"</pre></div>
+          <div><h4>CODE</h4><pre><span class="k">for</span> t <span class="k">in</span> steps:
+  x = denoise(x, t)
+<span class="k">return</span> decode(x)</pre></div>
+        </aside>
+        <div class="main">
+          <div class="eyebrow">ARCHITECTURE / 03</div>
+          <h3>노이즈에서 형태로</h3>
+          <p>확산 모델은 그림을 그리지 않는다. 잡음을 조금씩 걷어 내며, 남은 것이 형태가 될 때까지 같은 계산을 되풀이한다.</p>
+          <svg viewBox="0 0 200 70" role="img" aria-label="파이프라인 다이어그램">
+            <rect x="2" y="20" width="40" height="30" fill="none" stroke="#0E0E10" stroke-width="1"/>
+            <rect x="80" y="20" width="40" height="30" fill="#0E0E10"/>
+            <rect x="158" y="20" width="40" height="30" fill="none" stroke="#0E0E10" stroke-width="1"/>
+            <line x1="42" y1="35" x2="80" y2="35" stroke="#0E0E10" stroke-width="1"/>
+            <line x1="120" y1="35" x2="158" y2="35" stroke="#0E0E10" stroke-width="1"/>
+            <text x="22" y="38" text-anchor="middle" font-size="7" fill="#0E0E10" font-family="JetBrains Mono, monospace">noise</text>
+            <text x="100" y="38" text-anchor="middle" font-size="7" fill="#7CFF9B" font-family="JetBrains Mono, monospace">U-Net ×30</text>
+            <text x="178" y="38" text-anchor="middle" font-size="7" fill="#0E0E10" font-family="JetBrains Mono, monospace">image</text>
+          </svg>
+          <p>왼쪽 열의 값은 본문과 따로 흐른다. 원고의 frontmatter와 코드 블록이 그대로 이 열의 오브젝트 스타일로 들어간다.</p>
+          <div class="folio"><span>SYNTAX · VOL. 01</span><span>22</span></div>
         </div>
       </div>
-      <figcaption><b>1 · NEURAL</b><span>표지 · 에디토리얼 퓨처리즘 · 16p A4</span>
-        <div class="chips"><i class="sw" style="background:#101820"></i><i class="sw" style="background:#F4F1EA"></i><i class="sw" style="background:#00C2D1"></i><span class="tag">COVER_STORY</span><span class="tag">ANALYTICAL</span></div></figcaption>
+      <figcaption><b>1 · SYNTAX</b><span>기사 지면 · 12컬럼, 좌측 메타데이터 열 · Inter Tight(대신: Neue Haas) + JetBrains Mono</span>
+        <div class="chips"><i class="sw" style="background:#F7F7F5"></i><i class="sw" style="background:#0E0E10"></i><i class="sw" style="background:#7CFF9B"></i><span class="tag">code_block → 오브젝트 스타일</span></div></figcaption>
     </figure>
 
     <figure>
-      <div class="page signal" aria-label="SIGNAL/NOISE 차트 지면 목업">
-        <div class="top"><span>SIGNAL/NOISE · 2026.11</span><span><b>CHART 03</b> / 공급망</span></div>
-        <h3>공급망은 어디서 끊기나</h3>
-        <p class="dek">한 단계가 멈추면 몇 주의 재고가 버티는가. 공정별 대체 가능 기간을 나란히 놓았다.</p>
-        <div class="chart">
-          <div class="cap"><span>공정별 대체 가능 기간 (주)</span><span>예시 데이터</span></div>
-          <div class="bars">
-            <div class="bar"><span>설계 IP</span><i style="width:30%"></i><span>3</span></div>
-            <div class="bar"><span>웨이퍼</span><i style="width:55%"></i><span>6</span></div>
-            <div class="bar hot"><span>노광 장비</span><i style="width:100%"></i><span>11</span></div>
-            <div class="bar"><span>후공정</span><i style="width:42%"></i><span>5</span></div>
-            <div class="bar"><span>기판</span><i style="width:66%"></i><span>7</span></div>
+      <div class="page empty" aria-label="EMPTY 에세이 지면 목업">
+        <div class="mast">EMPTY</div>
+        <div class="img"><span class="ph">이미지 자리 · 백자 한 점</span></div>
+        <div class="txt"><q>그릇은 비어 있을 때 가장 정확하다.</q>유약이 고이지 않은 굽의 맨살에서, 흙이 불을 견딘 시간을 읽는다. 놓인 자리 말고는 아무것도 말하지 않는 사물이다.</div>
+        <div class="meta"><span>STILL LIFE · 04</span><span>여백 약 72% · 행간 190%</span><span>31</span></div>
+      </div>
+      <figcaption><b>2 · EMPTY</b><span>에세이 지면 · 4컬럼 와이드 마진, 한 면 한 텍스트 · Crimson Pro / Cormorant(대신: Minion, Freight)</span>
+        <div class="chips"><i class="sw" style="background:#F4F2EE"></i><i class="sw" style="background:#262523"></i><i class="sw" style="background:#cfc8bd"></i><span class="tag">여백 ≥ 65%</span></div></figcaption>
+    </figure>
+
+    <figure>
+      <div class="page stratum" aria-label="STRATUM 아카이브 지면 목업">
+        <div class="body">
+          <div class="eyebrow">LAYER 04 · 하천 복개 구간</div>
+          <h3>덮인 물길<small>콘크리트 아래 흐르는 50년</small></h3>
+          <div class="map">
+            <div class="river"></div>
+            <div class="pin" style="left:22%;top:30%"><b>A</b></div>
+            <div class="pin" style="left:55%;top:48%"><b>B</b></div>
+            <div class="pin" style="left:78%;top:22%"><b>C</b></div>
+            <span class="ph">지도 자리 · 1:5,000</span>
           </div>
-          <div class="src">출처: 목업용 예시 수치 · 실제 데이터 아님</div>
+          <svg viewBox="0 0 220 50" role="img" aria-label="단면도 예시">
+            <rect x="0" y="0" width="220" height="14" fill="#c9cdc8"/>
+            <rect x="0" y="14" width="220" height="10" fill="#9aa09b"/>
+            <rect x="70" y="24" width="80" height="16" fill="#8fb3c4"/>
+            <rect x="0" y="24" width="70" height="26" fill="#6f756f"/>
+            <rect x="150" y="24" width="70" height="26" fill="#6f756f"/>
+            <text x="2" y="10" font-size="6" fill="#15191C" font-family="Barlow, sans-serif">도로면</text>
+            <text x="110" y="35" text-anchor="middle" font-size="6" fill="#15191C" font-family="Barlow, sans-serif">복개 하천</text>
+          </svg>
+          <p>1970년대 복개 이후 이 구간의 물길은 지도에서 사라졌다.<sup>1</sup> 단면 B에서 도로면 아래 약 3 m에 수로가 남아 있다.<sup>2</sup></p>
+        </div>
+        <aside class="rail">
+          <h4>COORDINATES</h4>
+          <div class="c"><b>A</b> 37.5700 N<br>126.9920 E</div>
+          <div class="c"><b>B</b> 37.5688 N<br>127.0012 E</div>
+          <div class="c"><b>C</b> 37.5715 N<br>127.0081 E</div>
+          <h4>NOTES</h4>
+          <div>1 복개 시기는 구간마다 다름. 출처 확인 필요.</div>
+          <div>2 현장 노트 예시. 실측값 아님.</div>
+          <div class="c">좌표: 예시값</div>
+        </aside>
+        <div class="folio">STRATUM 47</div>
+      </div>
+      <figcaption><b>3 · STRATUM</b><span>아카이브 지면 · 6컬럼 복합, 좌표·각주 레일 · Barlow(대신: DIN 2014)</span>
+        <div class="chips"><i class="sw" style="background:#EEF0EE"></i><i class="sw" style="background:#15191C"></i><i class="sw" style="background:#E2541B"></i><span class="tag">좌표 → 앵커드 오브젝트</span></div></figcaption>
+    </figure>
+
+    <figure>
+      <div class="page avant" aria-label="NEO-AVANT 화보 지면 목업">
+        <div class="bleed"><span class="ph">생성 이미지 자리 · 풀블리드</span></div>
+        <h3>SKIN<br>/ERROR</h3>
+        <div class="ko">버추얼 살갗</div>
+        <div class="box">BBOX 412×688 → 텍스트 회피</div>
+        <div class="wrap-text"><span class="float" aria-hidden="true"></span><p>얼굴은 렌더링이 끝나지 않은 채로 런웨이에 섰다. 매끈함이 깨지는 지점에서만 이 옷은 몸을 가진다.</p><p>본문은 이미지 속 인물의 경계 상자를 피해 흐른다. 점선 원이 그 경계다.</p></div>
+      </div>
+      <figcaption><b>4 · NEO-AVANT</b><span>화보 지면 · 브로큰 그리드, 텍스트 랩, 블렌딩 · Fraunces(대신: 실험적 가변 세리프)</span>
+        <div class="chips"><i class="sw" style="background:#0A0A0A"></i><i class="sw" style="background:#F2F2F2"></i><i class="sw" style="background:#E6FF00"></i><span class="tag">bbox → 텍스트 랩</span></div></figcaption>
+    </figure>
+
+    <figure>
+      <div class="page metric" aria-label="METRIC 데이터 지면 목업">
+        <div class="top"><b>METRIC</b><span>DEEP TECH · 2026 Q4</span></div>
+        <h3>전력이 칩을 따라잡지 못한다</h3>
+        <p class="dek">데이터센터 증설 계획과 송전망 확충 일정 사이의 간격.</p>
+        <div class="stats">
+          <div class="stat"><b>3.2×</b>계획 대비 전력 수요</div>
+          <div class="stat"><b>41%</b>지연된 접속 신청</div>
+          <div class="stat"><b>18개월</b>평균 대기 기간</div>
         </div>
         <div class="cols">
-          <p>가장 긴 막대가 가장 약한 고리다. 노광 장비는 대체 공급처가 적어 한 번 멈추면 복구가 가장 오래 걸린다.</p>
-          <p>반대로 설계 IP는 계약만 바꾸면 되는 경우가 많다. 다음 쪽에서 지역별 분포를 본다.</p>
+          <p>증설 발표가 늘수록 접속 대기 줄이 길어진다. 칩 공급보다 전력이 먼저 병목이 되는 구간이다.</p>
+          <table>
+            <thead><tr><th>지역</th><th>신청 GW</th><th>승인 GW</th><th>비율</th></tr></thead>
+            <tbody>
+              <tr><td>A권역</td><td>12.4</td><td>5.1</td><td>41%</td></tr>
+              <tr><td>B권역</td><td>8.7</td><td>4.9</td><td>56%</td></tr>
+              <tr><td>C권역</td><td>5.2</td><td>3.8</td><td>73%</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="folio"><span>14</span><span>SIGNAL/NOISE</span></div>
+        <div class="src">출처: 목업용 예시 수치 · 실제 데이터 아님</div>
       </div>
-      <figcaption><b>2 · SIGNAL/NOISE</b><span>차트 지면 · 스위스 데이터 저널리즘 · 12p A4</span>
-        <div class="chips"><i class="sw" style="background:#fff"></i><i class="sw" style="background:#111"></i><i class="sw" style="background:#FF4F00"></i><span class="tag">DEEP_DIVE</span><span class="tag">B2B</span></div></figcaption>
+      <figcaption><b>5 · METRIC</b><span>데이터 지면 · 5컬럼 고밀도, 스탯 콜아웃, 표 · Georgia + Libre Franklin(대신: Franklin Gothic)</span>
+        <div class="chips"><i class="sw" style="background:#FBFAF7"></i><i class="sw" style="background:#1B1B1B"></i><i class="sw" style="background:#0F5C4D"></i><span class="tag">table_data → 표 스타일</span></div></figcaption>
     </figure>
 
     <figure>
-      <div class="page b5 yeobaek" aria-label="여백 사진 에세이 지면 목업">
-        <div class="photo"><span class="ph">이미지 자리 · 오후 3시의 창</span></div>
-        <div class="cap">두 번째 방. 서향 창, 오후 3시.</div>
-        <div class="no">ROOM 02</div>
-        <h3>빛이 머무는 자리만 남겨 두었다</h3>
-        <p>가구를 세 개로 줄인 뒤 방이 넓어진 것은 아니었다. 대신 오후의 빛이 바닥을 건너가는 시간이 보이기 시작했다. 집주인은 그 시간을 하루의 시계로 쓴다고 했다.</p>
-        <div class="folio"><span>24</span><span>여백 · 느린 방의 기록</span></div>
-      </div>
-      <figcaption><b>3 · 여백</b><span>사진 에세이 · 미니멀, 이미지 중심 · 16p B5</span>
-        <div class="chips"><i class="sw" style="background:#F2EFE9"></i><i class="sw" style="background:#2B2B2B"></i><i class="sw" style="background:#A47148"></i><span class="tag">LOOKBOOK</span><span class="tag">SOPHISTICATED</span></div></figcaption>
-    </figure>
-
-    <figure>
-      <div class="page city" aria-label="도시의 결 특집 오프너 목업">
-        <div class="facade" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="kicker">FEATURE 01<br>서울, 1970년대 건물 일곱 채</div>
-        <div class="folio">08 — 도시의 결</div>
-        <h3>콘크<br>리트<br><span>산책</span></h3>
-        <p>철거 목록에 오른 건물들은 대부분 같은 격자를 가졌다. 창 하나의 폭이 그 시대의 시공 단위를 말해 준다.</p>
-        <div class="sec">
-          <svg viewBox="0 0 120 80" role="img" aria-label="단면 다이어그램 예시">
-            <rect x="10" y="10" width="100" height="60" fill="none" stroke="#1E1E1E" stroke-width="1.2"/>
-            <line x1="10" y1="30" x2="110" y2="30" stroke="#1E1E1E" stroke-width=".6"/>
-            <line x1="10" y1="50" x2="110" y2="50" stroke="#1E1E1E" stroke-width=".6"/>
-            <line x1="43" y1="10" x2="43" y2="70" stroke="#1E1E1E" stroke-width=".6"/>
-            <line x1="77" y1="10" x2="77" y2="70" stroke="#1E1E1E" stroke-width=".6"/>
-            <rect x="77" y="30" width="33" height="20" fill="#C8102E"/>
-            <text x="10" y="79" font-size="6" fill="#1E1E1E" font-family="IBM Plex Mono, monospace">단면 A–A′ · 1:200</text>
-          </svg>
+      <div class="page terra" aria-label="TERRAFORM 소재 지면 목업">
+        <div class="hero"><span class="ph">현미경 이미지 자리</span><div class="mag">균사체 단면<br>×400</div></div>
+        <div class="side">
+          <div class="eyebrow">MATERIAL 07</div>
+          <h3>버섯이 자라 벽돌이 된다</h3>
+          <p>톱밥과 균사체를 틀에 넣고 닷새를 기다린다. 굽지 않은 벽돌은 다 쓰고 나면 흙으로 돌아간다.</p>
+          <div class="sws"><i style="background:#6E7D4F"></i><i style="background:#A8946D"></i><i style="background:#C4703F"></i><i style="background:#2F2A22"></i></div>
+        </div>
+        <div class="low">
+          <div class="text"><p>균사는 먹이를 찾아 뻗으며 톱밥 알갱이를 서로 묶는다. 열을 가해 성장을 멈추면 가볍고 단단한 덩어리가 남는다.</p><p>세포벽의 키틴이 이 강도를 만든다. 키틴은 게 껍데기와 같은 계열의 다당류다.</p></div>
+          <div class="spec"><h4>SPEC SHEET</h4>
+            <dl><dt>주성분</dt><dd>키틴 (C₈H₁₃O₅N)ₙ</dd><dt>기질</dt><dd>톱밥, 왕겨</dd><dt>배양</dt><dd>5일 (예시)</dd></dl>
+            <span class="tag2">인증 태그 자리</span></div>
         </div>
       </div>
-      <figcaption><b>4 · 도시의 결</b><span>특집 오프너 · 브루탈리즘, 비대칭 그리드 · 16p A4</span>
-        <div class="chips"><i class="sw" style="background:#D9D6CF"></i><i class="sw" style="background:#1E1E1E"></i><i class="sw" style="background:#C8102E"></i><span class="tag">DEEP_DIVE</span><span class="tag">NICHE</span></div></figcaption>
+      <figcaption><b>6 · TERRAFORM</b><span>소재 지면 · 황금비 모듈(61.8 / 38.2), 어스톤 스와치 · Cabin(대신: Gill Sans) + Libre Baskerville</span>
+        <div class="chips"><i class="sw" style="background:#F1EBDD"></i><i class="sw" style="background:#6E7D4F"></i><i class="sw" style="background:#C4703F"></i><span class="tag">spec_sheet → 인포박스</span></div></figcaption>
     </figure>
 
     <figure>
-      <div class="page b5 bowl" aria-label="한 그릇 레시피 지면 목업">
-        <div class="eyebrow">이달의 재료 · 11월</div>
-        <h3>늦가을 무</h3>
-        <p class="sub">서리 맞은 무는 단맛이 오른다. 맑은 국 한 그릇으로.</p>
-        <div class="plate" aria-hidden="true"></div>
-        <div class="note">국물은 끓기 직전에서 멈춰요!</div>
-        <div class="box">
-          <h4>소고기 뭇국 · 2인분</h4>
-          <ul><li>무 300 g</li><li>소고기 양지 150 g</li><li>국간장 1큰술, 다진 마늘 1작은술</li><li>대파 ½대</li></ul>
-          <ol><li>무를 나박하게 썬다.</li><li>고기와 무를 참기름에 볶는다.</li><li>물 800 ml를 붓고 20분 끓인다.</li><li>간장으로 간하고 대파를 올린다.</li></ol>
-          <div class="meta"><span>30분</span><span>쉬움</span><span>가을</span></div>
+      <div class="page kern" aria-label="KERNING 비평 지면 목업">
+        <div class="top"><span>Kerning</span><span>Issue One · Specimen</span></div>
+        <div class="spec">
+          <div class="pair">AV<small>kern 0</small></div>
+          <div class="pair tight">AV<small>kern −80</small></div>
         </div>
-        <div class="folio"><span>06</span><span>한 그릇 · 제철의 식탁</span></div>
+        <h3>한 쌍의 글자 사이, <em>1/1000 em</em>의 판단</h3>
+        <p><span class="sc">Garamond</span>의 소문자는 넓은 속공간으로 숨을 쉰다. 같은 크기의 <span class="sc">Baskerville</span>은 획 대비가 커서 더 촘촘해 보인다. 이 단락은 8 pt 기준선 격자에 모두 맞춰 흐르며, 영문 합자 <span class="lig">ﬁ ﬂ</span>과 작은 대문자를 문자 스타일로 켰다. 양끝맞춤에서 생기는 단어 사이 간격의 흔들림도 그대로 보이게 두었다.</p>
+        <div class="proof">교정 ⟂<br>자간 +10<br>→ 행 2</div>
+        <div class="meter"><span>baseline 8 pt · lock 100%</span><span>tracking −10 / kern optical</span><span>09</span></div>
       </div>
-      <figcaption><b>5 · 한 그릇</b><span>레시피 지면 · 따뜻한 사진, 레시피 박스 · 12p B5</span>
-        <div class="chips"><i class="sw" style="background:#FFF8EE"></i><i class="sw" style="background:#3B2416"></i><i class="sw" style="background:#E07A2E"></i><span class="tag">ROUNDUP</span><span class="tag">INTIMATE</span></div></figcaption>
-    </figure>
-
-    <figure>
-      <div class="page orbit" aria-label="ORBIT 인포그래픽 지면 목업">
-        <span class="eyebrow">그림으로 보는 우주</span>
-        <h3>달까지 <b>38만 km</b></h3>
-        <p class="dek">지구와 달 사이에 지구가 30개쯤 들어간다. 빛은 이 거리를 1초 남짓에 건넌다.</p>
-        <svg class="map" viewBox="0 0 300 120" role="img" aria-label="지구와 달 거리 다이어그램">
-          <circle cx="24" cy="60" r="20" fill="#2f6fd6"/>
-          <circle cx="24" cy="60" r="20" fill="none" stroke="#F5F5F5" stroke-width="1"/>
-          <circle cx="282" cy="60" r="5.5" fill="#d9d9d9"/>
-          <line x1="46" y1="60" x2="274" y2="60" stroke="#FFC83D" stroke-width="1.4" stroke-dasharray="4 4"/>
-          <text x="24" y="98" text-anchor="middle" font-size="9" fill="#F5F5F5" font-family="Noto Sans KR, sans-serif">지구</text>
-          <text x="282" y="98" text-anchor="middle" font-size="9" fill="#F5F5F5" font-family="Noto Sans KR, sans-serif">달</text>
-          <text x="160" y="50" text-anchor="middle" font-size="9" fill="#FFC83D" font-family="IBM Plex Mono, monospace">평균 384,400 km · 빛으로 약 1.3초</text>
-        </svg>
-        <div class="facts">
-          <div class="fact"><b>3,474 km</b>달의 지름. 지구의 약 4분의 1.</div>
-          <div class="fact"><b>약 27.3일</b>달이 지구를 한 바퀴 도는 시간.</div>
-        </div>
-        <div class="src"><span>출처: NASA Moon Fact Sheet</span><span>ORBIT · 11</span></div>
-      </div>
-      <figcaption><b>6 · ORBIT</b><span>인포그래픽 · 청소년 과학, 다이어그램 · 16p A4</span>
-        <div class="chips"><i class="sw" style="background:#0B1D3A"></i><i class="sw" style="background:#F5F5F5"></i><i class="sw" style="background:#FFC83D"></i><span class="tag">DEEP_DIVE</span><span class="tag">INTIMATE</span></div></figcaption>
-    </figure>
-
-    <figure>
-      <div class="page mono" aria-label="MONO 룩북 표지 목업">
-        <div class="shot" aria-hidden="true"></div>
-        <h2>MONO</h2>
-        <div class="issue">NO. 01 · 2026 WINTER</div>
-        <div class="vert">흑과 백 사이</div>
-        <div class="lines"><b>그림자의 실루엣</b> — 화보 12컷<br>작가 인터뷰 · 색을 빼는 일</div>
-        <div class="bar">이미지 자리<br>FASHION / ART</div>
-      </div>
-      <figcaption><b>7 · MONO</b><span>표지 · 고대비 흑백 룩북 · 16p A4</span>
-        <div class="chips"><i class="sw" style="background:#000"></i><i class="sw" style="background:#fff"></i><i class="sw" style="background:#B5B5B5"></i><span class="tag">LOOKBOOK</span><span class="tag">LUXURY</span></div></figcaption>
+      <figcaption><b>7 · KERNING</b><span>비평 지면 · 8 pt 기준선 격자 노출, 커닝 수치 · EB Garamond + Libre Baskerville</span>
+        <div class="chips"><i class="sw" style="background:#FFFDF7"></i><i class="sw" style="background:#1A1712"></i><i class="sw" style="background:#C0392B"></i><span class="tag">OpenType 피처 벤치마크</span></div></figcaption>
     </figure>
 
   </div>
 </div>
-
-<script>
-(function () {
-  var c = document.getElementById("net");
-  if (!c) return;
-  function draw() {
-    var r = c.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
-    c.width = Math.max(1, r.width * dpr); c.height = Math.max(1, r.height * dpr);
-    var g = c.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, r.width, r.height);
-    var s = 7; function rnd() { s = (s * 16807) % 2147483647; return s / 2147483647; }
-    var layers = [5, 8, 11, 8, 4], pts = [];
-    layers.forEach(function (n, li) {
-      var x = r.width * (0.1 + 0.8 * li / (layers.length - 1)), col = [];
-      for (var i = 0; i < n; i++) col.push([x + (rnd() - .5) * 10, r.height * (0.08 + 0.84 * (i + .5) / n) + (rnd() - .5) * 6]);
-      pts.push(col);
-    });
-    for (var l = 0; l < pts.length - 1; l++) pts[l].forEach(function (a) {
-      pts[l + 1].forEach(function (b) {
-        var w = rnd(); if (w < .55) return;
-        g.strokeStyle = "rgba(0,194,209," + (0.08 + (w - .55) * .9).toFixed(3) + ")"; g.lineWidth = .7;
-        g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke();
-      });
-    });
-    pts.forEach(function (col, li) { col.forEach(function (p, i) {
-      var hot = li === 2 && i === 5;
-      g.fillStyle = hot ? "#00C2D1" : "#F4F1EA"; g.beginPath(); g.arc(p[0], p[1], hot ? 4 : 1.8, 0, Math.PI * 2); g.fill();
-    }); });
-  }
-  draw();
-  if (window.ResizeObserver) new ResizeObserver(draw).observe(c);
-})();
-</script>
