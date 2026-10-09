@@ -1,0 +1,1308 @@
+{
+ "schema_note": "magazine candidates for user request 10-09 (7); each creative_brief validates as creative_brief/1",
+ "generated_by": "spec session 01LvistP (Claude), not a model run inside magorch; approval pending for all",
+ "candidates": [
+  {
+   "candidate_id": "CAND-1",
+   "name": "NEURAL",
+   "issue_title": "기계와 함께 생각하기",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-C1",
+    "version": 1,
+    "source_request": "미래적이고 세련된 AI 기술 매거진을 만들어 줘.",
+    "topic": "AI 기술과 사회",
+    "purpose": "inform_and_inspire",
+    "target_audience": "기술에 관심 있는 일반 독자",
+    "language": "ko",
+    "tone": [
+     "intelligent",
+     "forward_looking",
+     "accessible"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "미래적이고 세련된",
+    "constraints": [
+     "창작·가상 콘텐츠는 지면에 표시",
+     "사실 주장에는 출처"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": true,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "target_feature_profile": {
+    "vertical": "TECH_SCIENCE",
+    "target_audience": "B2C_GENERAL",
+    "cadence": "QUARTERLY",
+    "media_format": "PRINT_MIRROR",
+    "layout_archetypes": [
+     "COVER_STORY",
+     "FEATURE_DEEP_DIVE",
+     "INTERVIEW_QA",
+     "EDITORIAL_ESSAY"
+    ],
+    "voice": "OBJECTIVE_ANALYTICAL",
+    "visual_density_target": 0.35,
+    "commercial_intent": "EDITORIAL_PURE",
+    "note": "targets for the made magazine, measured later with magorch.reference; not facts about any existing title"
+   },
+   "style_direction": {
+    "primary_archetype": "editorial_futurism",
+    "secondary_influences": [
+     "minimal_editorial",
+     "data_journalism"
+    ],
+    "layout": "modular_grid, generous whitespace, selective full bleed",
+    "color": {
+     "base": [
+      "#101820",
+      "#F4F1EA"
+     ],
+     "accent": [
+      "#00C2D1"
+     ]
+    },
+    "typography": {
+     "headline": "Pretendard",
+     "body": "Pretendard"
+    }
+   },
+   "indesign_setup": {
+    "page": {
+     "size": "A4",
+     "width_mm": 210,
+     "height_mm": 297,
+     "bleed_mm": 3,
+     "facing_pages": true
+    },
+    "grid": {
+     "columns": 12,
+     "gutter_mm": 4,
+     "margins_mm": {
+      "top": 18,
+      "bottom": 20,
+      "inner": 20,
+      "outer": 16
+     },
+     "baseline_pt": 13
+    },
+    "paragraph_styles": [
+     {
+      "name": "Masthead",
+      "font": "Pretendard",
+      "size_pt": 64,
+      "leading_pt": 60,
+      "weight": "Black"
+     },
+     {
+      "name": "Headline",
+      "font": "Pretendard",
+      "size_pt": 30,
+      "leading_pt": 34,
+      "weight": "Bold"
+     },
+     {
+      "name": "Standfirst",
+      "font": "Pretendard",
+      "size_pt": 12,
+      "leading_pt": 18,
+      "weight": "Medium"
+     },
+     {
+      "name": "Body",
+      "font": "Pretendard",
+      "size_pt": 9.5,
+      "leading_pt": 15,
+      "weight": "Regular"
+     },
+     {
+      "name": "Caption",
+      "font": "Pretendard",
+      "size_pt": 7.5,
+      "leading_pt": 10,
+      "weight": "Regular"
+     },
+     {
+      "name": "Folio",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Regular"
+     },
+     {
+      "name": "Label (fiction/sponsored)",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Bold"
+     }
+    ],
+    "parent_pages": [
+     "A-Body",
+     "B-Opener",
+     "C-FullBleed"
+    ],
+    "fonts_to_check": [
+     "Pretendard",
+     "Pretendard"
+    ],
+    "status": "unverified: fonts and styles are created on the user's InDesign via route A/B"
+   },
+   "issue_1_lineup": [
+    {
+     "item": "표지",
+     "pages": 1
+    },
+    {
+     "item": "목차",
+     "pages": 1
+    },
+    {
+     "item": "에디터의 글",
+     "pages": 1
+    },
+    {
+     "item": "특집: 주의의 발명",
+     "pages": 3
+    },
+    {
+     "item": "숫자로 보는 AI (타임라인)",
+     "pages": 2
+    },
+    {
+     "item": "가상 인터뷰: 2035년의 큐레이터",
+     "pages": 2
+    },
+    {
+     "item": "에세이: 도구인가 동료인가",
+     "pages": 1
+    },
+    {
+     "item": "화보: 합성된 풍경",
+     "pages": 2
+    },
+    {
+     "item": "짧은 소설: 마지막 프롬프트",
+     "pages": 2
+    },
+    {
+     "item": "콜로폰",
+     "pages": 1
+    }
+   ],
+   "why_this_candidate": "사용자의 원래 요청 그대로. 사실 기사와 창작을 분리 표시하는 원칙을 가장 잘 시험한다."
+  },
+  {
+   "candidate_id": "CAND-2",
+   "name": "SIGNAL/NOISE",
+   "issue_title": "신호를 고르는 법",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-C2",
+    "version": 1,
+    "source_request": "magazine candidate 2 generated for the user's request of 10-09 (7 candidates)",
+    "topic": "데이터로 읽는 기술 산업과 경제",
+    "purpose": "inform",
+    "target_audience": "기술·금융 실무자",
+    "language": "ko",
+    "tone": [
+     "precise",
+     "analytical",
+     "concise"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 12,
+    "visual_direction": "스위스 스타일 데이터 저널리즘",
+    "constraints": [
+     "창작·가상 콘텐츠는 지면에 표시",
+     "사실 주장에는 출처"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": true,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "target_feature_profile": {
+    "vertical": "BUSINESS_FINANCE",
+    "target_audience": "B2B_PROFESSIONAL",
+    "cadence": "MONTHLY",
+    "media_format": "DIGITAL_FIRST",
+    "layout_archetypes": [
+     "FEATURE_DEEP_DIVE",
+     "CURATION_ROUNDUP"
+    ],
+    "voice": "OBJECTIVE_ANALYTICAL",
+    "visual_density_target": 0.3,
+    "commercial_intent": "EDITORIAL_PURE",
+    "note": "targets for the made magazine, measured later with magorch.reference; not facts about any existing title"
+   },
+   "style_direction": {
+    "primary_archetype": "swiss_data_journalism",
+    "secondary_influences": [
+     "minimal_editorial"
+    ],
+    "layout": "strict column grid, dense information",
+    "color": {
+     "base": [
+      "#FFFFFF",
+      "#111111"
+     ],
+     "accent": [
+      "#FF4F00"
+     ]
+    },
+    "typography": {
+     "headline": "Pretendard",
+     "body": "Noto Serif KR"
+    }
+   },
+   "indesign_setup": {
+    "page": {
+     "size": "A4",
+     "width_mm": 210,
+     "height_mm": 297,
+     "bleed_mm": 3,
+     "facing_pages": true
+    },
+    "grid": {
+     "columns": 6,
+     "gutter_mm": 5,
+     "margins_mm": {
+      "top": 18,
+      "bottom": 20,
+      "inner": 20,
+      "outer": 16
+     },
+     "baseline_pt": 13
+    },
+    "paragraph_styles": [
+     {
+      "name": "Masthead",
+      "font": "Pretendard",
+      "size_pt": 64,
+      "leading_pt": 60,
+      "weight": "Black"
+     },
+     {
+      "name": "Headline",
+      "font": "Pretendard",
+      "size_pt": 30,
+      "leading_pt": 34,
+      "weight": "Bold"
+     },
+     {
+      "name": "Standfirst",
+      "font": "Noto Serif KR",
+      "size_pt": 12,
+      "leading_pt": 18,
+      "weight": "Medium"
+     },
+     {
+      "name": "Body",
+      "font": "Noto Serif KR",
+      "size_pt": 9.5,
+      "leading_pt": 15,
+      "weight": "Regular"
+     },
+     {
+      "name": "Caption",
+      "font": "Noto Serif KR",
+      "size_pt": 7.5,
+      "leading_pt": 10,
+      "weight": "Regular"
+     },
+     {
+      "name": "Folio",
+      "font": "Noto Serif KR",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Regular"
+     },
+     {
+      "name": "Label (fiction/sponsored)",
+      "font": "Noto Serif KR",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Bold"
+     }
+    ],
+    "parent_pages": [
+     "A-Body",
+     "B-Opener",
+     "C-FullBleed"
+    ],
+    "fonts_to_check": [
+     "Pretendard",
+     "Noto Serif KR"
+    ],
+    "status": "unverified: fonts and styles are created on the user's InDesign via route A/B"
+   },
+   "issue_1_lineup": [
+    {
+     "item": "표지",
+     "pages": 1
+    },
+    {
+     "item": "목차·요약",
+     "pages": 1
+    },
+    {
+     "item": "커버 스토리: 반도체 공급망 지도",
+     "pages": 4
+    },
+    {
+     "item": "차트 페이지 5선",
+     "pages": 2
+    },
+    {
+     "item": "현업 Q&A",
+     "pages": 2
+    },
+    {
+     "item": "다음 달 지표",
+     "pages": 1
+    },
+    {
+     "item": "콜로폰",
+     "pages": 1
+    }
+   ],
+   "why_this_candidate": "차트·출처 표시 규칙(QA)을 가장 엄격하게 시험한다."
+  },
+  {
+   "candidate_id": "CAND-3",
+   "name": "여백",
+   "issue_title": "느린 방의 기록",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-C3",
+    "version": 1,
+    "source_request": "magazine candidate 3 generated for the user's request of 10-09 (7 candidates)",
+    "topic": "슬로 라이프와 주거 공간",
+    "purpose": "inspire",
+    "target_audience": "공간과 생활에 관심 있는 독자",
+    "language": "ko",
+    "tone": [
+     "calm",
+     "warm",
+     "considered"
+    ],
+    "publication_format": "pdf",
+    "page_size": "B5",
+    "issue_length_pages": 16,
+    "visual_direction": "미니멀, 넓은 여백, 자연광 사진",
+    "constraints": [
+     "창작·가상 콘텐츠는 지면에 표시",
+     "사실 주장에는 출처"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": false,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "target_feature_profile": {
+    "vertical": "LIFESTYLE_LIVING",
+    "target_audience": "ENTHUSIAST_NICHE",
+    "cadence": "QUARTERLY",
+    "media_format": "PRINT_MIRROR",
+    "layout_archetypes": [
+     "PICTORIAL_LOOKBOOK",
+     "EDITORIAL_ESSAY",
+     "INTERVIEW_QA"
+    ],
+    "voice": "CURATED_SOPHISTICATED",
+    "visual_density_target": 0.6,
+    "commercial_intent": "EDITORIAL_PURE",
+    "note": "targets for the made magazine, measured later with magorch.reference; not facts about any existing title"
+   },
+   "style_direction": {
+    "primary_archetype": "minimal_editorial",
+    "secondary_influences": [
+     "japandi_interior"
+    ],
+    "layout": "manuscript grid, very generous whitespace, image led",
+    "color": {
+     "base": [
+      "#F2EFE9",
+      "#2B2B2B"
+     ],
+     "accent": [
+      "#A47148"
+     ]
+    },
+    "typography": {
+     "headline": "Noto Serif KR",
+     "body": "Pretendard"
+    }
+   },
+   "indesign_setup": {
+    "page": {
+     "size": "B5",
+     "width_mm": 182,
+     "height_mm": 257,
+     "bleed_mm": 3,
+     "facing_pages": true
+    },
+    "grid": {
+     "columns": 6,
+     "gutter_mm": 4,
+     "margins_mm": {
+      "top": 22,
+      "bottom": 24,
+      "inner": 22,
+      "outer": 18
+     },
+     "baseline_pt": 13
+    },
+    "paragraph_styles": [
+     {
+      "name": "Masthead",
+      "font": "Noto Serif KR",
+      "size_pt": 64,
+      "leading_pt": 60,
+      "weight": "Black"
+     },
+     {
+      "name": "Headline",
+      "font": "Noto Serif KR",
+      "size_pt": 30,
+      "leading_pt": 34,
+      "weight": "Bold"
+     },
+     {
+      "name": "Standfirst",
+      "font": "Pretendard",
+      "size_pt": 12,
+      "leading_pt": 18,
+      "weight": "Medium"
+     },
+     {
+      "name": "Body",
+      "font": "Pretendard",
+      "size_pt": 9.5,
+      "leading_pt": 15,
+      "weight": "Regular"
+     },
+     {
+      "name": "Caption",
+      "font": "Pretendard",
+      "size_pt": 7.5,
+      "leading_pt": 10,
+      "weight": "Regular"
+     },
+     {
+      "name": "Folio",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Regular"
+     },
+     {
+      "name": "Label (fiction/sponsored)",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Bold"
+     }
+    ],
+    "parent_pages": [
+     "A-Body",
+     "B-Opener",
+     "C-FullBleed"
+    ],
+    "fonts_to_check": [
+     "Noto Serif KR",
+     "Pretendard"
+    ],
+    "status": "unverified: fonts and styles are created on the user's InDesign via route A/B"
+   },
+   "issue_1_lineup": [
+    {
+     "item": "표지",
+     "pages": 1
+    },
+    {
+     "item": "목차",
+     "pages": 1
+    },
+    {
+     "item": "여는 글",
+     "pages": 1
+    },
+    {
+     "item": "화보: 다섯 개의 방",
+     "pages": 5
+    },
+    {
+     "item": "인터뷰: 목수와 빛",
+     "pages": 3
+    },
+    {
+     "item": "에세이: 비워 두는 일",
+     "pages": 2
+    },
+    {
+     "item": "사물 목록",
+     "pages": 2
+    },
+    {
+     "item": "콜로폰",
+     "pages": 1
+    }
+   ],
+   "why_this_candidate": "이미지 비중이 높은 레이아웃(이미지 배치·캡션·여백)을 시험한다."
+  },
+  {
+   "candidate_id": "CAND-4",
+   "name": "도시의 결",
+   "issue_title": "콘크리트 산책",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-C4",
+    "version": 1,
+    "source_request": "magazine candidate 4 generated for the user's request of 10-09 (7 candidates)",
+    "topic": "건축과 도시 구조",
+    "purpose": "inform_and_inspire",
+    "target_audience": "건축·디자인 애호가",
+    "language": "ko",
+    "tone": [
+     "bold",
+     "observant",
+     "structural"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "브루탈리즘, 강한 대비, 큰 타이포",
+    "constraints": [
+     "창작·가상 콘텐츠는 지면에 표시",
+     "사실 주장에는 출처"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": true,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "target_feature_profile": {
+    "vertical": "ARCHITECTURE_DESIGN",
+    "target_audience": "ENTHUSIAST_NICHE",
+    "cadence": "BIMONTHLY",
+    "media_format": "PRINT_MIRROR",
+    "layout_archetypes": [
+     "PICTORIAL_LOOKBOOK",
+     "FEATURE_DEEP_DIVE"
+    ],
+    "voice": "CURATED_SOPHISTICATED",
+    "visual_density_target": 0.55,
+    "commercial_intent": "EDITORIAL_PURE",
+    "note": "targets for the made magazine, measured later with magorch.reference; not facts about any existing title"
+   },
+   "style_direction": {
+    "primary_archetype": "brutalist_architectural",
+    "secondary_influences": [
+     "swiss_grid"
+    ],
+    "layout": "asymmetric modular grid, oversized type",
+    "color": {
+     "base": [
+      "#D9D6CF",
+      "#1E1E1E"
+     ],
+     "accent": [
+      "#C8102E"
+     ]
+    },
+    "typography": {
+     "headline": "Pretendard",
+     "body": "Pretendard"
+    }
+   },
+   "indesign_setup": {
+    "page": {
+     "size": "A4",
+     "width_mm": 210,
+     "height_mm": 297,
+     "bleed_mm": 3,
+     "facing_pages": true
+    },
+    "grid": {
+     "columns": 12,
+     "gutter_mm": 4,
+     "margins_mm": {
+      "top": 18,
+      "bottom": 20,
+      "inner": 20,
+      "outer": 16
+     },
+     "baseline_pt": 13
+    },
+    "paragraph_styles": [
+     {
+      "name": "Masthead",
+      "font": "Pretendard",
+      "size_pt": 64,
+      "leading_pt": 60,
+      "weight": "Black"
+     },
+     {
+      "name": "Headline",
+      "font": "Pretendard",
+      "size_pt": 30,
+      "leading_pt": 34,
+      "weight": "Bold"
+     },
+     {
+      "name": "Standfirst",
+      "font": "Pretendard",
+      "size_pt": 12,
+      "leading_pt": 18,
+      "weight": "Medium"
+     },
+     {
+      "name": "Body",
+      "font": "Pretendard",
+      "size_pt": 9.5,
+      "leading_pt": 15,
+      "weight": "Regular"
+     },
+     {
+      "name": "Caption",
+      "font": "Pretendard",
+      "size_pt": 7.5,
+      "leading_pt": 10,
+      "weight": "Regular"
+     },
+     {
+      "name": "Folio",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Regular"
+     },
+     {
+      "name": "Label (fiction/sponsored)",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Bold"
+     }
+    ],
+    "parent_pages": [
+     "A-Body",
+     "B-Opener",
+     "C-FullBleed"
+    ],
+    "fonts_to_check": [
+     "Pretendard",
+     "Pretendard"
+    ],
+    "status": "unverified: fonts and styles are created on the user's InDesign via route A/B"
+   },
+   "issue_1_lineup": [
+    {
+     "item": "표지",
+     "pages": 1
+    },
+    {
+     "item": "목차",
+     "pages": 1
+    },
+    {
+     "item": "특집: 서울의 1970년대 건물",
+     "pages": 4
+    },
+    {
+     "item": "도면으로 읽기 (다이어그램)",
+     "pages": 2
+    },
+    {
+     "item": "화보: 계단",
+     "pages": 4
+    },
+    {
+     "item": "인터뷰: 건축가",
+     "pages": 2
+    },
+    {
+     "item": "지도: 걷는 길",
+     "pages": 1
+    },
+    {
+     "item": "콜로폰",
+     "pages": 1
+    }
+   ],
+   "why_this_candidate": "도면·다이어그램 자산과 비대칭 그리드를 시험한다."
+  },
+  {
+   "candidate_id": "CAND-5",
+   "name": "한 그릇",
+   "issue_title": "제철의 식탁",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-C5",
+    "version": 1,
+    "source_request": "magazine candidate 5 generated for the user's request of 10-09 (7 candidates)",
+    "topic": "제철 음식과 식문화",
+    "purpose": "entertain_and_inform",
+    "target_audience": "요리와 식문화에 관심 있는 일반 독자",
+    "language": "ko",
+    "tone": [
+     "warm",
+     "friendly",
+     "sensory"
+    ],
+    "publication_format": "pdf",
+    "page_size": "B5",
+    "issue_length_pages": 12,
+    "visual_direction": "따뜻한 음식 사진, 손글씨 느낌의 포인트",
+    "constraints": [
+     "창작·가상 콘텐츠는 지면에 표시",
+     "사실 주장에는 출처"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": false,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "target_feature_profile": {
+    "vertical": "FOOD_BEVERAGE",
+    "target_audience": "B2C_GENERAL",
+    "cadence": "MONTHLY",
+    "media_format": "DIGITAL_FIRST",
+    "layout_archetypes": [
+     "CURATION_ROUNDUP",
+     "INTERVIEW_QA",
+     "EDITORIAL_ESSAY"
+    ],
+    "voice": "CONVERSATIONAL_INTIMATE",
+    "visual_density_target": 0.5,
+    "commercial_intent": "EDITORIAL_PURE",
+    "note": "targets for the made magazine, measured later with magorch.reference; not facts about any existing title"
+   },
+   "style_direction": {
+    "primary_archetype": "warm_editorial_photography",
+    "secondary_influences": [
+     "recipe_card"
+    ],
+    "layout": "two-column with recipe boxes",
+    "color": {
+     "base": [
+      "#FFF8EE",
+      "#3B2416"
+     ],
+     "accent": [
+      "#E07A2E"
+     ]
+    },
+    "typography": {
+     "headline": "Noto Serif KR",
+     "body": "Pretendard"
+    }
+   },
+   "indesign_setup": {
+    "page": {
+     "size": "B5",
+     "width_mm": 182,
+     "height_mm": 257,
+     "bleed_mm": 3,
+     "facing_pages": true
+    },
+    "grid": {
+     "columns": 6,
+     "gutter_mm": 4,
+     "margins_mm": {
+      "top": 18,
+      "bottom": 20,
+      "inner": 18,
+      "outer": 15
+     },
+     "baseline_pt": 13
+    },
+    "paragraph_styles": [
+     {
+      "name": "Masthead",
+      "font": "Noto Serif KR",
+      "size_pt": 64,
+      "leading_pt": 60,
+      "weight": "Black"
+     },
+     {
+      "name": "Headline",
+      "font": "Noto Serif KR",
+      "size_pt": 30,
+      "leading_pt": 34,
+      "weight": "Bold"
+     },
+     {
+      "name": "Standfirst",
+      "font": "Pretendard",
+      "size_pt": 12,
+      "leading_pt": 18,
+      "weight": "Medium"
+     },
+     {
+      "name": "Body",
+      "font": "Pretendard",
+      "size_pt": 9.5,
+      "leading_pt": 15,
+      "weight": "Regular"
+     },
+     {
+      "name": "Caption",
+      "font": "Pretendard",
+      "size_pt": 7.5,
+      "leading_pt": 10,
+      "weight": "Regular"
+     },
+     {
+      "name": "Folio",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Regular"
+     },
+     {
+      "name": "Label (fiction/sponsored)",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Bold"
+     }
+    ],
+    "parent_pages": [
+     "A-Body",
+     "B-Opener",
+     "C-FullBleed"
+    ],
+    "fonts_to_check": [
+     "Noto Serif KR",
+     "Pretendard"
+    ],
+    "status": "unverified: fonts and styles are created on the user's InDesign via route A/B"
+   },
+   "issue_1_lineup": [
+    {
+     "item": "표지",
+     "pages": 1
+    },
+    {
+     "item": "목차",
+     "pages": 1
+    },
+    {
+     "item": "이달의 재료 6가지",
+     "pages": 3
+    },
+    {
+     "item": "레시피 3선",
+     "pages": 3
+    },
+    {
+     "item": "인터뷰: 시장 상인",
+     "pages": 2
+    },
+    {
+     "item": "에세이: 할머니의 장독",
+     "pages": 1
+    },
+    {
+     "item": "콜로폰",
+     "pages": 1
+    }
+   ],
+   "why_this_candidate": "목록·레시피 박스 같은 반복 컴포넌트와 협찬 표시 규칙을 시험한다."
+  },
+  {
+   "candidate_id": "CAND-6",
+   "name": "ORBIT",
+   "issue_title": "우리 집 창밖의 우주",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-C6",
+    "version": 1,
+    "source_request": "magazine candidate 6 generated for the user's request of 10-09 (7 candidates)",
+    "topic": "우주와 과학 (청소년)",
+    "purpose": "educate",
+    "target_audience": "중고등학생",
+    "language": "ko",
+    "tone": [
+     "curious",
+     "playful",
+     "clear"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "선명한 색, 다이어그램 중심",
+    "constraints": [
+     "창작·가상 콘텐츠는 지면에 표시",
+     "사실 주장에는 출처"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": true,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "target_feature_profile": {
+    "vertical": "TECH_SCIENCE",
+    "target_audience": "B2C_GENERAL",
+    "cadence": "BIMONTHLY",
+    "media_format": "PRINT_MIRROR",
+    "layout_archetypes": [
+     "FEATURE_DEEP_DIVE",
+     "CURATION_ROUNDUP",
+     "INTERVIEW_QA"
+    ],
+    "voice": "CONVERSATIONAL_INTIMATE",
+    "visual_density_target": 0.45,
+    "commercial_intent": "EDITORIAL_PURE",
+    "note": "targets for the made magazine, measured later with magorch.reference; not facts about any existing title"
+   },
+   "style_direction": {
+    "primary_archetype": "playful_scientific",
+    "secondary_influences": [
+     "infographic"
+    ],
+    "layout": "modular grid with sidebars and callouts",
+    "color": {
+     "base": [
+      "#0B1D3A",
+      "#F5F5F5"
+     ],
+     "accent": [
+      "#FFC83D"
+     ]
+    },
+    "typography": {
+     "headline": "Pretendard",
+     "body": "Pretendard"
+    }
+   },
+   "indesign_setup": {
+    "page": {
+     "size": "A4",
+     "width_mm": 210,
+     "height_mm": 297,
+     "bleed_mm": 3,
+     "facing_pages": true
+    },
+    "grid": {
+     "columns": 12,
+     "gutter_mm": 4,
+     "margins_mm": {
+      "top": 18,
+      "bottom": 20,
+      "inner": 20,
+      "outer": 16
+     },
+     "baseline_pt": 13
+    },
+    "paragraph_styles": [
+     {
+      "name": "Masthead",
+      "font": "Pretendard",
+      "size_pt": 64,
+      "leading_pt": 60,
+      "weight": "Black"
+     },
+     {
+      "name": "Headline",
+      "font": "Pretendard",
+      "size_pt": 30,
+      "leading_pt": 34,
+      "weight": "Bold"
+     },
+     {
+      "name": "Standfirst",
+      "font": "Pretendard",
+      "size_pt": 12,
+      "leading_pt": 18,
+      "weight": "Medium"
+     },
+     {
+      "name": "Body",
+      "font": "Pretendard",
+      "size_pt": 9.5,
+      "leading_pt": 15,
+      "weight": "Regular"
+     },
+     {
+      "name": "Caption",
+      "font": "Pretendard",
+      "size_pt": 7.5,
+      "leading_pt": 10,
+      "weight": "Regular"
+     },
+     {
+      "name": "Folio",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Regular"
+     },
+     {
+      "name": "Label (fiction/sponsored)",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Bold"
+     }
+    ],
+    "parent_pages": [
+     "A-Body",
+     "B-Opener",
+     "C-FullBleed"
+    ],
+    "fonts_to_check": [
+     "Pretendard",
+     "Pretendard"
+    ],
+    "status": "unverified: fonts and styles are created on the user's InDesign via route A/B"
+   },
+   "issue_1_lineup": [
+    {
+     "item": "표지",
+     "pages": 1
+    },
+    {
+     "item": "목차",
+     "pages": 1
+    },
+    {
+     "item": "특집: 달까지 가는 길",
+     "pages": 4
+    },
+    {
+     "item": "그림으로 보는 태양계",
+     "pages": 2
+    },
+    {
+     "item": "관측 가이드",
+     "pages": 2
+    },
+    {
+     "item": "과학자 Q&A",
+     "pages": 2
+    },
+    {
+     "item": "퀴즈·실험",
+     "pages": 2
+    },
+    {
+     "item": "독자 페이지",
+     "pages": 1
+    },
+    {
+     "item": "콜로폰",
+     "pages": 1
+    }
+   ],
+   "why_this_candidate": "다이어그램·사이드바·사실 확인(청소년 대상) 규칙을 시험한다."
+  },
+  {
+   "candidate_id": "CAND-7",
+   "name": "MONO",
+   "issue_title": "흑과 백 사이",
+   "creative_brief": {
+    "schema": "creative_brief/1",
+    "artifact_id": "ART-BRIEF-C7",
+    "version": 1,
+    "source_request": "magazine candidate 7 generated for the user's request of 10-09 (7 candidates)",
+    "topic": "패션과 현대 미술",
+    "purpose": "inspire",
+    "target_audience": "패션·예술 애호가",
+    "language": "ko",
+    "tone": [
+     "refined",
+     "austere",
+     "dramatic"
+    ],
+    "publication_format": "pdf",
+    "page_size": "A4",
+    "issue_length_pages": 16,
+    "visual_direction": "고대비 흑백, 대형 화보",
+    "constraints": [
+     "창작·가상 콘텐츠는 지면에 표시",
+     "사실 주장에는 출처"
+    ],
+    "ambiguities": [],
+    "requires_factual_research": false,
+    "approval": {
+     "status": "pending",
+     "approved_by": null,
+     "at": null
+    }
+   },
+   "target_feature_profile": {
+    "vertical": "FASHION_BEAUTY",
+    "target_audience": "AFFLUENT_LUXURY",
+    "cadence": "QUARTERLY",
+    "media_format": "PRINT_MIRROR",
+    "layout_archetypes": [
+     "PICTORIAL_LOOKBOOK",
+     "INTERVIEW_QA",
+     "EDITORIAL_ESSAY"
+    ],
+    "voice": "CURATED_SOPHISTICATED",
+    "visual_density_target": 0.75,
+    "commercial_intent": "EDITORIAL_PURE",
+    "note": "targets for the made magazine, measured later with magorch.reference; not facts about any existing title"
+   },
+   "style_direction": {
+    "primary_archetype": "high_contrast_monochrome",
+    "secondary_influences": [
+     "gallery_catalog"
+    ],
+    "layout": "full-bleed image led, minimal text",
+    "color": {
+     "base": [
+      "#000000",
+      "#FFFFFF"
+     ],
+     "accent": [
+      "#B5B5B5"
+     ]
+    },
+    "typography": {
+     "headline": "Noto Serif KR",
+     "body": "Pretendard"
+    }
+   },
+   "indesign_setup": {
+    "page": {
+     "size": "A4",
+     "width_mm": 210,
+     "height_mm": 297,
+     "bleed_mm": 3,
+     "facing_pages": true
+    },
+    "grid": {
+     "columns": 12,
+     "gutter_mm": 4,
+     "margins_mm": {
+      "top": 18,
+      "bottom": 20,
+      "inner": 20,
+      "outer": 16
+     },
+     "baseline_pt": 13
+    },
+    "paragraph_styles": [
+     {
+      "name": "Masthead",
+      "font": "Noto Serif KR",
+      "size_pt": 64,
+      "leading_pt": 60,
+      "weight": "Black"
+     },
+     {
+      "name": "Headline",
+      "font": "Noto Serif KR",
+      "size_pt": 30,
+      "leading_pt": 34,
+      "weight": "Bold"
+     },
+     {
+      "name": "Standfirst",
+      "font": "Pretendard",
+      "size_pt": 12,
+      "leading_pt": 18,
+      "weight": "Medium"
+     },
+     {
+      "name": "Body",
+      "font": "Pretendard",
+      "size_pt": 9.5,
+      "leading_pt": 15,
+      "weight": "Regular"
+     },
+     {
+      "name": "Caption",
+      "font": "Pretendard",
+      "size_pt": 7.5,
+      "leading_pt": 10,
+      "weight": "Regular"
+     },
+     {
+      "name": "Folio",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Regular"
+     },
+     {
+      "name": "Label (fiction/sponsored)",
+      "font": "Pretendard",
+      "size_pt": 7,
+      "leading_pt": 9,
+      "weight": "Bold"
+     }
+    ],
+    "parent_pages": [
+     "A-Body",
+     "B-Opener",
+     "C-FullBleed"
+    ],
+    "fonts_to_check": [
+     "Noto Serif KR",
+     "Pretendard"
+    ],
+    "status": "unverified: fonts and styles are created on the user's InDesign via route A/B"
+   },
+   "issue_1_lineup": [
+    {
+     "item": "표지",
+     "pages": 1
+    },
+    {
+     "item": "목차",
+     "pages": 1
+    },
+    {
+     "item": "화보: 그림자의 실루엣",
+     "pages": 6
+    },
+    {
+     "item": "작가 인터뷰",
+     "pages": 3
+    },
+    {
+     "item": "에세이: 색을 빼는 일",
+     "pages": 2
+    },
+    {
+     "item": "전시 소개",
+     "pages": 2
+    },
+    {
+     "item": "콜로폰",
+     "pages": 1
+    }
+   ],
+   "why_this_candidate": "PICTORIAL_LOOKBOOK(시각 밀도 0.65 이상) 기준과 풀블리드 이미지 처리를 시험한다."
+  }
+ ]
+}

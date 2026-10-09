@@ -50,3 +50,37 @@ adapter keeps in a document label (verify the label API in the docs first; if un
   op delivery, network failure retry, overflow on the mock, approval gating, export failure.
 - IDS-2 images + multi-page + revision loop + export; IDS-3 real InDesign run by the user (USER-TASK), then regression
   tests on the user's existing documents.
+
+## Integration routes (user 10-09 07:0x KST; sources found by the user's `dig` run)
+
+The studio does not drive InDesign itself in the first release. It plugs into one of two existing bridges on the
+user's machine and keeps its own role: brief -> candidates -> `indesign_edit_spec/1` -> validation -> report -> approval.
+None of the sources below could be opened from the cloud (proxy policy blocks sidekick.eastpole.nl and
+helpx.adobe.com; github.com web 403), so every claim about them is **unverified** until checked on the user's machine.
+
+| Route | Bridge (as reported) | Use | Status |
+|---|---|---|---|
+| A (default) | Sidekick for InDesign: UXP panel (InDesign 2024+) + MCP server `indesign-sidekick` (npx, Node 20+), local only | interactive layout, styles, overset check, screenshots for review | unverified |
+| B (batch) | Claude Code + `indd` skill (mindboard/indesign-extendscript-plugins), ExtendScript | many documents from content.md + layout image + todo.md | unverified; conflicts with the no-generated-code rule |
+| C (reference) | InDesign built-in AI Assistant (reported as beta, June 2026) | none; not scriptable from outside as far as reported | unverified |
+
+Rules for route A:
+- The orchestrator runs as a Claude Code (or Claude Desktop) session with the Sidekick MCP server attached. The
+  `sidekick adapter` maps each allowed op of `indesign_edit_spec/1` to exactly one Sidekick MCP tool. The mapping table
+  is filled from the server's real `tools/list` output, captured on the user's machine (USER-TASK), never from memory.
+- Any Sidekick tool that runs arbitrary script text is excluded from the allow-list.
+- After each op batch: inspect (page count, frames, overset text, missing links) -> `indesign_validation_report/1`;
+  at most 3 revision rounds; export only after the user approves in the panel or chat.
+- Work on a copy of the user's document (`<name>.studio.indd`); the original is never written.
+
+Rules for route B: the `indd` skill makes the model write ExtendScript, which this spec forbids (Hard limits). Default:
+route B uses a fixed, reviewed `.jsx` library (one function per allowed op, JSON parameters, run through InDesign's
+script runner) instead of the skill. The skill can run as-is only if the user waives the rule for batch mode in
+writing, and then only on document copies.
+
+Model ids: the `claude --model claude-3-7-sonnet` line in the source material is out of date; use the current model
+chosen in the session (no model id hard-coded in the studio).
+
+Candidates: `../magazine_orchestrator/candidates/MAG-CANDIDATES-001.json` holds 7 magazine candidates, each with a
+valid `creative_brief/1`, a target feature profile (SPEC_DIG taxonomy), a style direction and the InDesign document setup
+(page, grid, paragraph styles, parent pages) that route A or B creates first.
