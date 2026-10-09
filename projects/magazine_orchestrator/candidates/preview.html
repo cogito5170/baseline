@@ -1,0 +1,323 @@
+<title>매거진 후보 7종 지면</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gaegu:wght@700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@300;400;600;900&display=swap">
+<style>
+/* Layout: a contact sheet of seven printed pages on a light-table; each page keeps its own fixed print palette, the sheet follows the viewer's theme. */
+:root {
+  --bg: #e9e7e3; --fg: #1d1f22; --muted: #5d6166; --line: #c9c6c0; --sheet: #f6f5f2;
+  --sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --serif: "Noto Serif KR", "AppleMyungjo", "Batang", serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #1b1c1e; --fg: #e8e6e2; --muted: #a2a5aa; --line: #393b3f; --sheet: #242528; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #1b1c1e; --fg: #e8e6e2; --muted: #a2a5aa; --line: #393b3f; --sheet: #242528; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); margin: 0; padding-inline: 16px; padding-block: 32px 64px }
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 28px }
+header { display: grid; gap: 8px; max-width: 68ch }
+header h1 { font-size: clamp(22px, 3vw, 30px); margin: 0; font-weight: 700; text-wrap: balance }
+header p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 14px }
+.sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 36px 28px; align-items: start }
+figure { margin: 0; display: grid; gap: 12px; min-width: 0 }
+figcaption { display: grid; gap: 4px; font-size: 13px; line-height: 1.5 }
+figcaption b { font-size: 15px }
+figcaption span { color: var(--muted) }
+.chips { display: flex; gap: 6px; align-items: center; flex-wrap: wrap }
+.sw { width: 14px; height: 14px; border-radius: 3px; border: 1px solid var(--line) }
+.tag { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px }
+
+/* a printed page: proportions and type scale come from its own width */
+.page { position: relative; width: 100%; max-width: 100%; aspect-ratio: 210 / 297; container-type: inline-size; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 10px 28px rgba(0,0,0,.14) }
+.page.b5 { aspect-ratio: 182 / 257 }
+.fill { position: absolute; inset: 0 }
+.ph { font-family: var(--mono); font-size: 2.3cqw; letter-spacing: .06em; opacity: .7 }
+
+/* 1 NEURAL — cover */
+.neural { background: #101820; color: #F4F1EA; font-family: var(--sans) }
+.neural canvas { position: absolute; inset: 22% 0 26% 0; width: 100%; height: 52% }
+.neural .mast { position: absolute; top: 5cqw; left: 6cqw; right: 6cqw; display: flex; justify-content: space-between; align-items: baseline }
+.neural .mast h2 { margin: 0; font-weight: 900; font-size: 19cqw; letter-spacing: -.04em; line-height: .8 }
+.neural .mast small { font-family: var(--mono); font-size: 2.2cqw; color: #00C2D1; text-align: right; line-height: 1.5 }
+.neural .rule { position: absolute; left: 6cqw; right: 6cqw; top: 23cqw; border-top: .25cqw solid #00C2D1 }
+.neural .issue { position: absolute; top: 25cqw; left: 6cqw; font-family: var(--mono); font-size: 2.2cqw; letter-spacing: .08em }
+.neural .lead { position: absolute; left: 6cqw; right: 30cqw; bottom: 30cqw; }
+.neural .lead h3 { margin: 0; font-size: 8.6cqw; font-weight: 700; line-height: 1.12; letter-spacing: -.02em; text-wrap: balance }
+.neural .lead p { margin: 2cqw 0 0; font-size: 2.8cqw; line-height: 1.55; color: #c9c6bd }
+.neural .lines { position: absolute; left: 6cqw; right: 6cqw; bottom: 6cqw; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3cqw; border-top: .15cqw solid #3a4650; padding-top: 2.5cqw }
+.neural .lines div { font-size: 2.5cqw; line-height: 1.45 }
+.neural .lines em { display: block; font-style: normal; font-family: var(--mono); font-size: 1.9cqw; color: #00C2D1; margin-bottom: .8cqw }
+.neural .xy { position: absolute; right: 6cqw; bottom: 33cqw; font-family: var(--mono); font-size: 1.9cqw; color: #6f7c86; text-align: right; line-height: 1.6 }
+
+/* 2 SIGNAL/NOISE — chart page */
+.signal { background: #fff; color: #111; font-family: var(--sans); padding: 6cqw }
+.signal .top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 2.1cqw; border-bottom: .3cqw solid #111; padding-bottom: 1.5cqw }
+.signal .top b { color: #FF4F00; font-weight: 500 }
+.signal h3 { font-size: 7.4cqw; line-height: 1.1; margin: 5cqw 0 2cqw; font-weight: 900; letter-spacing: -.03em; width: 80% }
+.signal .dek { font-size: 2.8cqw; line-height: 1.55; width: 75%; margin: 0 0 4cqw; color: #333 }
+.signal .chart { border-top: .15cqw solid #111; padding-top: 2cqw }
+.signal .chart .cap { font-family: var(--mono); font-size: 1.9cqw; display: flex; justify-content: space-between; color: #555 }
+.signal .bars { display: grid; gap: 1.6cqw; margin: 2.5cqw 0 }
+.signal .bar { display: grid; grid-template-columns: 22cqw 1fr 8cqw; align-items: center; gap: 2cqw; font-size: 2.3cqw }
+.signal .bar i { display: block; height: 3cqw; background: #111 }
+.signal .bar.hot i { background: #FF4F00 }
+.signal .bar span:last-child { font-family: var(--mono); text-align: right; font-variant-numeric: tabular-nums }
+.signal .src { font-family: var(--mono); font-size: 1.8cqw; color: #FF4F00; border-top: .15cqw solid #ddd; padding-top: 1.2cqw }
+.signal .cols { columns: 2; column-gap: 4cqw; font-size: 2.3cqw; line-height: 1.6; margin-top: 4cqw; color: #222 }
+.signal .cols p { margin: 0 0 1.6cqw }
+.signal .folio { position: absolute; bottom: 4cqw; left: 6cqw; right: 6cqw; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 1.9cqw }
+
+/* 3 여백 — photo essay (B5) */
+.yeobaek { background: #F2EFE9; color: #2B2B2B; font-family: var(--serif) }
+.yeobaek .photo { position: absolute; top: 14cqw; left: 14cqw; right: 14cqw; height: 74cqw;
+  background:
+    linear-gradient(105deg, rgba(255,250,238,.0) 38%, rgba(255,250,238,.55) 46%, rgba(255,250,238,.0) 58%),
+    linear-gradient(180deg, #cfc6b8 0 62%, #b7a994 62% 100%);
+  display: grid; place-items: end start; padding: 2cqw }
+.yeobaek .photo::after { content: ""; position: absolute; left: 30%; bottom: 18%; width: 22%; height: 26%; background: #8d7a63; border-radius: 1cqw 1cqw 0 0; opacity: .55 }
+.yeobaek .cap { position: absolute; top: 90cqw; left: 14cqw; font-family: var(--sans); font-size: 2cqw; color: #7d766b; letter-spacing: .02em }
+.yeobaek .no { position: absolute; top: 108cqw; left: 14cqw; font-family: var(--sans); font-size: 2cqw; letter-spacing: .3em; color: #A47148 }
+.yeobaek h3 { position: absolute; top: 113cqw; left: 14cqw; right: 30cqw; margin: 0; font-weight: 300; font-size: 6.2cqw; line-height: 1.3; text-wrap: balance }
+.yeobaek p { position: absolute; top: 124cqw; left: 40cqw; right: 14cqw; margin: 0; font-size: 2.45cqw; line-height: 1.9; font-weight: 300 }
+.yeobaek .folio { position: absolute; bottom: 7cqw; left: 14cqw; right: 14cqw; display: flex; justify-content: space-between; font-family: var(--sans); font-size: 1.8cqw; color: #8a8378; letter-spacing: .1em }
+
+/* 4 도시의 결 — feature opener */
+.city { background: #D9D6CF; color: #1E1E1E; font-family: var(--sans) }
+.city .facade { position: absolute; top: 0; right: 0; width: 58%; height: 64%; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(8, 1fr); gap: 1.2cqw; padding: 1.2cqw; background: #1E1E1E }
+.city .facade i { background: #8f8b84 }
+.city .facade i:nth-child(3n) { background: #b6b2aa }
+.city .facade i:nth-child(7) { background: #C8102E }
+.city .kicker { position: absolute; top: 7cqw; left: 6cqw; font-family: var(--mono); font-size: 2.1cqw; letter-spacing: .08em; width: 34%; line-height: 1.6 }
+.city h3 { position: absolute; left: 5cqw; bottom: 30cqw; margin: 0; font-family: "Black Han Sans", var(--sans); font-weight: 400; font-size: 17cqw; line-height: .92; letter-spacing: -.02em }
+.city h3 span { color: #C8102E }
+.city p { position: absolute; left: 6cqw; width: 52%; bottom: 10cqw; margin: 0; font-size: 2.5cqw; line-height: 1.6 }
+.city .sec { position: absolute; right: 6cqw; bottom: 8cqw; width: 30%; font-family: var(--mono); font-size: 1.8cqw }
+.city .sec svg { width: 100%; height: auto; display: block }
+.city .folio { position: absolute; top: 66cqw; right: 6cqw; font-family: var(--mono); font-size: 1.9cqw }
+
+/* 5 한 그릇 — recipe page (B5) */
+.bowl { background: #FFF8EE; color: #3B2416; font-family: var(--sans); padding: 8cqw }
+.bowl .eyebrow { font-family: var(--mono); font-size: 2cqw; letter-spacing: .1em; color: #E07A2E }
+.bowl h3 { font-family: var(--serif); font-weight: 900; font-size: 9cqw; margin: 2cqw 0 1cqw; line-height: 1.1 }
+.bowl .sub { font-size: 2.8cqw; margin: 0; color: #6b5040 }
+.bowl .plate { position: absolute; top: 44cqw; right: -10cqw; width: 62cqw; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #f3e6cf 0 44%, #e9d6b6 45% 48%, #fffdf8 49% 70%, #e8dccb 71% 72%, transparent 73%) }
+.bowl .plate::before { content: ""; position: absolute; inset: 27%; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #fbf3e3 0 30%, #f0dcb8 31% 60%, #d9b98a 61%) }
+.bowl .note { position: absolute; top: 40cqw; right: 8cqw; font-family: "Gaegu", var(--sans); font-weight: 700; font-size: 4cqw; color: #E07A2E; transform: rotate(-6deg) }
+.bowl .box { position: absolute; left: 8cqw; top: 50cqw; width: 46cqw; background: #fff; border: .3cqw solid #3B2416; padding: 3.5cqw }
+.bowl .box h4 { margin: 0 0 1.5cqw; font-size: 3cqw }
+.bowl .box ul, .bowl .box ol { margin: 0; padding-left: 4cqw; font-size: 2.35cqw; line-height: 1.65 }
+.bowl .box ol { margin-top: 2cqw }
+.bowl .meta { display: flex; gap: 3cqw; font-family: var(--mono); font-size: 1.9cqw; color: #6b5040; margin-top: 2cqw; border-top: .15cqw dashed #c7b39f; padding-top: 1.5cqw }
+.bowl .folio { position: absolute; bottom: 6cqw; left: 8cqw; right: 8cqw; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 1.9cqw; color: #8a6d58 }
+
+/* 6 ORBIT — infographic */
+.orbit { background: #0B1D3A; color: #F5F5F5; font-family: var(--sans); padding: 6cqw }
+.orbit .eyebrow { display: inline-block; font-family: "Do Hyeon", var(--sans); font-size: 3cqw; background: #FFC83D; color: #0B1D3A; padding: .6cqw 2cqw; border-radius: 1cqw }
+.orbit h3 { font-family: "Do Hyeon", var(--sans); font-weight: 400; font-size: 11cqw; margin: 3cqw 0 1cqw; line-height: 1 }
+.orbit h3 b { color: #FFC83D; font-weight: 400 }
+.orbit .dek { font-size: 2.8cqw; margin: 0; line-height: 1.55; color: #c9d3e6; width: 80% }
+.orbit svg.map { display: block; width: 100%; height: auto; margin-top: 5cqw }
+.orbit .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 3cqw; margin-top: 4cqw }
+.orbit .fact { border: .25cqw solid #FFC83D; border-radius: 2cqw; padding: 2.5cqw; font-size: 2.4cqw; line-height: 1.5 }
+.orbit .fact b { display: block; font-family: "Do Hyeon", var(--sans); font-weight: 400; font-size: 5.4cqw; color: #FFC83D; font-variant-numeric: tabular-nums }
+.orbit .src { position: absolute; left: 6cqw; right: 6cqw; bottom: 4.5cqw; font-family: var(--mono); font-size: 1.8cqw; color: #8ea0bf; display: flex; justify-content: space-between }
+
+/* 7 MONO — lookbook cover */
+.mono { background: #fff; color: #000; font-family: var(--serif) }
+.mono .shot { position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 13% 9% at 52% 20%, #000 98%, transparent 100%),
+    linear-gradient(100deg, transparent 0 40%, #000 40% 63%, transparent 63%) 0 25% / 100% 75% no-repeat,
+    linear-gradient(180deg, #fff 0 60%, #B5B5B5 60% 100%) }
+.mono .shot::after { content: ""; position: absolute; left: 63%; top: 25%; width: 26%; bottom: 0; background: linear-gradient(100deg, rgba(0,0,0,.25), transparent) }
+.mono h2 { position: absolute; top: 4cqw; left: 6cqw; margin: 0; font-weight: 300; font-size: 24cqw; letter-spacing: .06em; line-height: .9; mix-blend-mode: difference; color: #fff }
+.mono .vert { position: absolute; right: 5cqw; top: 34cqw; writing-mode: vertical-rl; font-size: 4.4cqw; font-weight: 600; letter-spacing: .3em; mix-blend-mode: difference; color: #fff }
+.mono .issue { position: absolute; top: 29cqw; left: 6.5cqw; font-family: var(--mono); font-size: 2cqw; letter-spacing: .12em }
+.mono .lines { position: absolute; left: 6cqw; bottom: 7cqw; font-size: 2.7cqw; line-height: 1.7; color: #000 }
+.mono .lines b { font-weight: 600 }
+.mono .bar { position: absolute; right: 6cqw; bottom: 7cqw; font-family: var(--mono); font-size: 1.8cqw; text-align: right; line-height: 1.6 }
+
+@media (prefers-reduced-motion: no-preference) { .page { transition: transform .25s ease } figure:hover .page { transform: translateY(-3px) } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>매거진 후보 7종, 한 페이지씩</h1>
+    <p>느낌을 보기 위한 목업입니다. 실제 InDesign 출력이 아니며, 사진은 도형으로 만든 자리표시, 차트 2번의 수치는 예시입니다. 본문 글꼴은 후보 명세의 Pretendard 대신 Noto Sans KR로 보여 줍니다. 각 후보의 대표 지면 하나를 골랐습니다.</p>
+  </header>
+
+  <div class="sheet">
+
+    <figure>
+      <div class="page neural" aria-label="NEURAL 표지 목업">
+        <canvas id="net" aria-hidden="true"></canvas>
+        <div class="mast"><h2>NEURAL</h2><small>계간 · AI와 사회<br>KRW 18,000</small></div>
+        <div class="rule"></div>
+        <div class="issue">VOL. 01 — 2026 겨울 — 기계와 함께 생각하기</div>
+        <div class="xy">N 37.5665<br>E 126.9780<br>LAYER 12 / 96</div>
+        <div class="lead">
+          <h3>주의의 발명, 그 후 9년</h3>
+          <p>2017년 논문 한 편이 바꾼 것과 바꾸지 못한 것.</p>
+        </div>
+        <div class="lines">
+          <div><em>DATA</em>숫자로 보는 AI 2012–2024</div>
+          <div><em>FICTION · 가상 인터뷰</em>2035년의 큐레이터</div>
+          <div><em>ESSAY</em>도구인가 동료인가</div>
+        </div>
+      </div>
+      <figcaption><b>1 · NEURAL</b><span>표지 · 에디토리얼 퓨처리즘 · 16p A4</span>
+        <div class="chips"><i class="sw" style="background:#101820"></i><i class="sw" style="background:#F4F1EA"></i><i class="sw" style="background:#00C2D1"></i><span class="tag">COVER_STORY</span><span class="tag">ANALYTICAL</span></div></figcaption>
+    </figure>
+
+    <figure>
+      <div class="page signal" aria-label="SIGNAL/NOISE 차트 지면 목업">
+        <div class="top"><span>SIGNAL/NOISE · 2026.11</span><span><b>CHART 03</b> / 공급망</span></div>
+        <h3>공급망은 어디서 끊기나</h3>
+        <p class="dek">한 단계가 멈추면 몇 주의 재고가 버티는가. 공정별 대체 가능 기간을 나란히 놓았다.</p>
+        <div class="chart">
+          <div class="cap"><span>공정별 대체 가능 기간 (주)</span><span>예시 데이터</span></div>
+          <div class="bars">
+            <div class="bar"><span>설계 IP</span><i style="width:30%"></i><span>3</span></div>
+            <div class="bar"><span>웨이퍼</span><i style="width:55%"></i><span>6</span></div>
+            <div class="bar hot"><span>노광 장비</span><i style="width:100%"></i><span>11</span></div>
+            <div class="bar"><span>후공정</span><i style="width:42%"></i><span>5</span></div>
+            <div class="bar"><span>기판</span><i style="width:66%"></i><span>7</span></div>
+          </div>
+          <div class="src">출처: 목업용 예시 수치 · 실제 데이터 아님</div>
+        </div>
+        <div class="cols">
+          <p>가장 긴 막대가 가장 약한 고리다. 노광 장비는 대체 공급처가 적어 한 번 멈추면 복구가 가장 오래 걸린다.</p>
+          <p>반대로 설계 IP는 계약만 바꾸면 되는 경우가 많다. 다음 쪽에서 지역별 분포를 본다.</p>
+        </div>
+        <div class="folio"><span>14</span><span>SIGNAL/NOISE</span></div>
+      </div>
+      <figcaption><b>2 · SIGNAL/NOISE</b><span>차트 지면 · 스위스 데이터 저널리즘 · 12p A4</span>
+        <div class="chips"><i class="sw" style="background:#fff"></i><i class="sw" style="background:#111"></i><i class="sw" style="background:#FF4F00"></i><span class="tag">DEEP_DIVE</span><span class="tag">B2B</span></div></figcaption>
+    </figure>
+
+    <figure>
+      <div class="page b5 yeobaek" aria-label="여백 사진 에세이 지면 목업">
+        <div class="photo"><span class="ph">이미지 자리 · 오후 3시의 창</span></div>
+        <div class="cap">두 번째 방. 서향 창, 오후 3시.</div>
+        <div class="no">ROOM 02</div>
+        <h3>빛이 머무는 자리만 남겨 두었다</h3>
+        <p>가구를 세 개로 줄인 뒤 방이 넓어진 것은 아니었다. 대신 오후의 빛이 바닥을 건너가는 시간이 보이기 시작했다. 집주인은 그 시간을 하루의 시계로 쓴다고 했다.</p>
+        <div class="folio"><span>24</span><span>여백 · 느린 방의 기록</span></div>
+      </div>
+      <figcaption><b>3 · 여백</b><span>사진 에세이 · 미니멀, 이미지 중심 · 16p B5</span>
+        <div class="chips"><i class="sw" style="background:#F2EFE9"></i><i class="sw" style="background:#2B2B2B"></i><i class="sw" style="background:#A47148"></i><span class="tag">LOOKBOOK</span><span class="tag">SOPHISTICATED</span></div></figcaption>
+    </figure>
+
+    <figure>
+      <div class="page city" aria-label="도시의 결 특집 오프너 목업">
+        <div class="facade" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="kicker">FEATURE 01<br>서울, 1970년대 건물 일곱 채</div>
+        <div class="folio">08 — 도시의 결</div>
+        <h3>콘크<br>리트<br><span>산책</span></h3>
+        <p>철거 목록에 오른 건물들은 대부분 같은 격자를 가졌다. 창 하나의 폭이 그 시대의 시공 단위를 말해 준다.</p>
+        <div class="sec">
+          <svg viewBox="0 0 120 80" role="img" aria-label="단면 다이어그램 예시">
+            <rect x="10" y="10" width="100" height="60" fill="none" stroke="#1E1E1E" stroke-width="1.2"/>
+            <line x1="10" y1="30" x2="110" y2="30" stroke="#1E1E1E" stroke-width=".6"/>
+            <line x1="10" y1="50" x2="110" y2="50" stroke="#1E1E1E" stroke-width=".6"/>
+            <line x1="43" y1="10" x2="43" y2="70" stroke="#1E1E1E" stroke-width=".6"/>
+            <line x1="77" y1="10" x2="77" y2="70" stroke="#1E1E1E" stroke-width=".6"/>
+            <rect x="77" y="30" width="33" height="20" fill="#C8102E"/>
+            <text x="10" y="79" font-size="6" fill="#1E1E1E" font-family="IBM Plex Mono, monospace">단면 A–A′ · 1:200</text>
+          </svg>
+        </div>
+      </div>
+      <figcaption><b>4 · 도시의 결</b><span>특집 오프너 · 브루탈리즘, 비대칭 그리드 · 16p A4</span>
+        <div class="chips"><i class="sw" style="background:#D9D6CF"></i><i class="sw" style="background:#1E1E1E"></i><i class="sw" style="background:#C8102E"></i><span class="tag">DEEP_DIVE</span><span class="tag">NICHE</span></div></figcaption>
+    </figure>
+
+    <figure>
+      <div class="page b5 bowl" aria-label="한 그릇 레시피 지면 목업">
+        <div class="eyebrow">이달의 재료 · 11월</div>
+        <h3>늦가을 무</h3>
+        <p class="sub">서리 맞은 무는 단맛이 오른다. 맑은 국 한 그릇으로.</p>
+        <div class="plate" aria-hidden="true"></div>
+        <div class="note">국물은 끓기 직전에서 멈춰요!</div>
+        <div class="box">
+          <h4>소고기 뭇국 · 2인분</h4>
+          <ul><li>무 300 g</li><li>소고기 양지 150 g</li><li>국간장 1큰술, 다진 마늘 1작은술</li><li>대파 ½대</li></ul>
+          <ol><li>무를 나박하게 썬다.</li><li>고기와 무를 참기름에 볶는다.</li><li>물 800 ml를 붓고 20분 끓인다.</li><li>간장으로 간하고 대파를 올린다.</li></ol>
+          <div class="meta"><span>30분</span><span>쉬움</span><span>가을</span></div>
+        </div>
+        <div class="folio"><span>06</span><span>한 그릇 · 제철의 식탁</span></div>
+      </div>
+      <figcaption><b>5 · 한 그릇</b><span>레시피 지면 · 따뜻한 사진, 레시피 박스 · 12p B5</span>
+        <div class="chips"><i class="sw" style="background:#FFF8EE"></i><i class="sw" style="background:#3B2416"></i><i class="sw" style="background:#E07A2E"></i><span class="tag">ROUNDUP</span><span class="tag">INTIMATE</span></div></figcaption>
+    </figure>
+
+    <figure>
+      <div class="page orbit" aria-label="ORBIT 인포그래픽 지면 목업">
+        <span class="eyebrow">그림으로 보는 우주</span>
+        <h3>달까지 <b>38만 km</b></h3>
+        <p class="dek">지구와 달 사이에 지구가 30개쯤 들어간다. 빛은 이 거리를 1초 남짓에 건넌다.</p>
+        <svg class="map" viewBox="0 0 300 120" role="img" aria-label="지구와 달 거리 다이어그램">
+          <circle cx="24" cy="60" r="20" fill="#2f6fd6"/>
+          <circle cx="24" cy="60" r="20" fill="none" stroke="#F5F5F5" stroke-width="1"/>
+          <circle cx="282" cy="60" r="5.5" fill="#d9d9d9"/>
+          <line x1="46" y1="60" x2="274" y2="60" stroke="#FFC83D" stroke-width="1.4" stroke-dasharray="4 4"/>
+          <text x="24" y="98" text-anchor="middle" font-size="9" fill="#F5F5F5" font-family="Noto Sans KR, sans-serif">지구</text>
+          <text x="282" y="98" text-anchor="middle" font-size="9" fill="#F5F5F5" font-family="Noto Sans KR, sans-serif">달</text>
+          <text x="160" y="50" text-anchor="middle" font-size="9" fill="#FFC83D" font-family="IBM Plex Mono, monospace">평균 384,400 km · 빛으로 약 1.3초</text>
+        </svg>
+        <div class="facts">
+          <div class="fact"><b>3,474 km</b>달의 지름. 지구의 약 4분의 1.</div>
+          <div class="fact"><b>약 27.3일</b>달이 지구를 한 바퀴 도는 시간.</div>
+        </div>
+        <div class="src"><span>출처: NASA Moon Fact Sheet</span><span>ORBIT · 11</span></div>
+      </div>
+      <figcaption><b>6 · ORBIT</b><span>인포그래픽 · 청소년 과학, 다이어그램 · 16p A4</span>
+        <div class="chips"><i class="sw" style="background:#0B1D3A"></i><i class="sw" style="background:#F5F5F5"></i><i class="sw" style="background:#FFC83D"></i><span class="tag">DEEP_DIVE</span><span class="tag">INTIMATE</span></div></figcaption>
+    </figure>
+
+    <figure>
+      <div class="page mono" aria-label="MONO 룩북 표지 목업">
+        <div class="shot" aria-hidden="true"></div>
+        <h2>MONO</h2>
+        <div class="issue">NO. 01 · 2026 WINTER</div>
+        <div class="vert">흑과 백 사이</div>
+        <div class="lines"><b>그림자의 실루엣</b> — 화보 12컷<br>작가 인터뷰 · 색을 빼는 일</div>
+        <div class="bar">이미지 자리<br>FASHION / ART</div>
+      </div>
+      <figcaption><b>7 · MONO</b><span>표지 · 고대비 흑백 룩북 · 16p A4</span>
+        <div class="chips"><i class="sw" style="background:#000"></i><i class="sw" style="background:#fff"></i><i class="sw" style="background:#B5B5B5"></i><span class="tag">LOOKBOOK</span><span class="tag">LUXURY</span></div></figcaption>
+    </figure>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var c = document.getElementById("net");
+  if (!c) return;
+  function draw() {
+    var r = c.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    c.width = Math.max(1, r.width * dpr); c.height = Math.max(1, r.height * dpr);
+    var g = c.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, r.width, r.height);
+    var s = 7; function rnd() { s = (s * 16807) % 2147483647; return s / 2147483647; }
+    var layers = [5, 8, 11, 8, 4], pts = [];
+    layers.forEach(function (n, li) {
+      var x = r.width * (0.1 + 0.8 * li / (layers.length - 1)), col = [];
+      for (var i = 0; i < n; i++) col.push([x + (rnd() - .5) * 10, r.height * (0.08 + 0.84 * (i + .5) / n) + (rnd() - .5) * 6]);
+      pts.push(col);
+    });
+    for (var l = 0; l < pts.length - 1; l++) pts[l].forEach(function (a) {
+      pts[l + 1].forEach(function (b) {
+        var w = rnd(); if (w < .55) return;
+        g.strokeStyle = "rgba(0,194,209," + (0.08 + (w - .55) * .9).toFixed(3) + ")"; g.lineWidth = .7;
+        g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke();
+      });
+    });
+    pts.forEach(function (col, li) { col.forEach(function (p, i) {
+      var hot = li === 2 && i === 5;
+      g.fillStyle = hot ? "#00C2D1" : "#F4F1EA"; g.beginPath(); g.arc(p[0], p[1], hot ? 4 : 1.8, 0, Math.PI * 2); g.fill();
+    }); });
+  }
+  draw();
+  if (window.ResizeObserver) new ResizeObserver(draw).observe(c);
+})();
+</script>
