@@ -19,8 +19,8 @@
   ]
  },
  "baseline": {
-  "hub": "session_01GaDrpc69nLuanoa7idiUvt",
-  "previous": "session_01V3q6t9v3KRVWeqEn5eCyx5",
+  "hub": "session_01B4CJucsVqkCdwRKpmgJX6r",
+  "previous": "session_01GaDrpc69nLuanoa7idiUvt",
   "channel": "issues label VM (ops/flow/ISSUE_PROTOCOL.md)",
   "executor": "VM_LOCAL (agy on the Oracle VM, cron ~/check_qa_issues.sh)"
  },
